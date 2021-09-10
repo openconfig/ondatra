@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package ondatra;
+
+option go_package = "github.com/openconfig/ondatra/proto";
+
+// A testbed.
+message Testbed {
+  repeated Device duts = 1;
+  repeated Device ates = 2;
+  repeated Link links = 3;
+}
+
+// A device.
+message Device {
+  string id = 1;
+
+  enum Vendor {
+    UNKNOWN = 0;
+    ARISTA = 1;
+    CISCO = 2;
+    IXIA = 3;
+    JUNIPER = 4;
+    CIENA = 5;
+  }
+  Vendor vendor = 2;
+  // Hardware model of the device. Optional.
+  //
+  // If the value starts with "regex:" then the suffix is interpreted as a RE2
+  // regular expression. The model will be restricted to models matching the
+  // regular expression.
+  string hardware_model = 4;
+  // Software version of the device. Optional.
+  //
+  // If the value starts with "regex:" then the suffix is interpreted as a RE2
+  // regular expression. The version will be restricted to versions matching the
+  // regular expression.
+  string software_version = 5;
+  repeated Port ports = 3;
+
+  // Map of additional device filters. Optional.
+  //
+  // In addition to the above fields, the extra dimensions field can be used to
+  // further restrict matching devices, e.g. {"label": "foo"}.
+  map<string, string> extra_dimensions = 6;
+}
+
+// A port.
+message Port {
+  string id = 1;
+
+  // Speed enum values are the port speed in Gbps.
+  enum Speed {
+    S_UNKNOWN = 0;
+    S_10GB = 10;
+    S_100GB = 100;
+  }
+  Speed speed = 2;
+}
+
+// A physical link between ports on DUTs or ATEs.
+// The order does not matter: links are symmetrical.
+// A given port may be specified in at most one link (typically in exactly one
+// link, because un-connected ports are not very interesting for testing).
+message Link {
+  string a = 1;  // First port in the format "<device-id>:<port-id>".
+  string b = 2;  // Second port in the format "<device-id>:<port-id>".
+}

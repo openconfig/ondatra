@@ -1,0 +1,1441 @@
+package telemetry
+
+// This file contains generated telemetry method augmentations for the
+// generated path structs, which makes use of their gNMI paths for making
+// ONDATRA telemetry calls.
+
+import (
+	"fmt"
+	"reflect"
+	"sort"
+	"strconv"
+	"testing"
+	"time"
+
+	"google.golang.org/protobuf/proto"
+	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ygot/ytypes"
+	"github.com/openconfig/ondatra/telemgen/telemgo"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+)
+
+// WithReplica adds the replica number to the context metadata of the gNMI
+// server query.
+func (n *RootPath) WithReplica(replica int) *RootPath {
+	telemgo.PutReplica(n, replica)
+	return n
+}
+
+// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
+// subscribe.
+func (n *RootPath) WithSubscriptionMode(mode gpb.SubscriptionMode) *RootPath {
+	telemgo.PutSubscriptionMode(n, mode)
+	return n
+}
+
+// WithClient allows the user to provide a gNMI client. This allows for creation
+// of tests for multiple gNMI clients to a single DUT.
+func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
+	telemgo.PutClient(n, c)
+	return n
+}
+
+func binarySliceToFloat32(in []Binary) []float32 {
+	converted := make([]float32, 0, len(in))
+	for _, binary := range in {
+		converted = append(converted, ygot.BinaryToFloat32(binary))
+	}
+	return converted
+}
+
+// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
+	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
+	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return qv
+}
+
+// getSchema return the generated ytypes schema used for unmarshaling datapoints.
+func getSchema() *ytypes.Schema {
+	return &ytypes.Schema{
+		Root:       &Root{},
+		SchemaTree: SchemaTree,
+		Unmarshal:  Unmarshal,
+	}
+}
+
+// QualifiedParent is a *Parent with a corresponding timestamp.
+type QualifiedParent struct {
+	*telemgo.QualifiedType
+	val *Parent // val is the sample value.
+}
+
+func (q *QualifiedParent) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the *Parent sample, erroring out if not present.
+func (q *QualifiedParent) Val(t testing.TB) *Parent {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Parent sample.
+func (q *QualifiedParent) SetVal(v *Parent) *QualifiedParent {
+	q.val = v
+	return q
+}
+
+
+// QualifiedParent_Child is a *Parent_Child with a corresponding timestamp.
+type QualifiedParent_Child struct {
+	*telemgo.QualifiedType
+	val *Parent_Child // val is the sample value.
+}
+
+func (q *QualifiedParent_Child) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the *Parent_Child sample, erroring out if not present.
+func (q *QualifiedParent_Child) Val(t testing.TB) *Parent_Child {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Parent_Child sample.
+func (q *QualifiedParent_Child) SetVal(v *Parent_Child) *QualifiedParent_Child {
+	q.val = v
+	return q
+}
+
+
+// QualifiedRemoteContainer is a *RemoteContainer with a corresponding timestamp.
+type QualifiedRemoteContainer struct {
+	*telemgo.QualifiedType
+	val *RemoteContainer // val is the sample value.
+}
+
+func (q *QualifiedRemoteContainer) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the *RemoteContainer sample, erroring out if not present.
+func (q *QualifiedRemoteContainer) Val(t testing.TB) *RemoteContainer {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *RemoteContainer sample.
+func (q *QualifiedRemoteContainer) SetVal(v *RemoteContainer) *QualifiedRemoteContainer {
+	q.val = v
+	return q
+}
+
+
+// QualifiedRoot is a *Root with a corresponding timestamp.
+type QualifiedRoot struct {
+	*telemgo.QualifiedType
+	val *Root // val is the sample value.
+}
+
+func (q *QualifiedRoot) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the *Root sample, erroring out if not present.
+func (q *QualifiedRoot) Val(t testing.TB) *Root {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Root sample.
+func (q *QualifiedRoot) SetVal(v *Root) *QualifiedRoot {
+	q.val = v
+	return q
+}
+
+
+// QualifiedBinary is a Binary with a corresponding timestamp.
+type QualifiedBinary struct {
+	*telemgo.QualifiedType
+	val Binary // val is the sample value.
+}
+
+func (q *QualifiedBinary) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the Binary sample, erroring out if not present.
+func (q *QualifiedBinary) Val(t testing.TB) Binary {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the Binary sample.
+func (q *QualifiedBinary) SetVal(v Binary) *QualifiedBinary {
+	q.val = v
+	return q
+}
+
+
+// CollectionBinary is a telemetry Collection whose Await method returns a slice of Binary samples.
+type CollectionBinary struct {
+	c *CollectionUntilBinary
+}
+
+// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
+func (u *CollectionBinary) Await(t testing.TB) []*QualifiedBinary {
+	t.Helper()
+	data, _ := u.c.Await(t)
+	return data
+}
+
+// CollectionUntilBinary is a telemetry Collection whose Await method returns a slice of Binary samples.
+type CollectionUntilBinary struct {
+	c *telemgo.Collection
+}
+
+// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
+// The received data and the status of the predicate are returned.
+func (u *CollectionUntilBinary) Await(t testing.TB) ([]*QualifiedBinary, bool) {
+	t.Helper()
+	var ret []*QualifiedBinary
+	updates, predTrue := u.c.Await(t)
+	for _, upd := range updates {
+		ret = append(ret, upd.(*QualifiedBinary))
+	}
+	return ret, predTrue
+}
+
+// QualifiedE_Child_Three is a E_Child_Three with a corresponding timestamp.
+type QualifiedE_Child_Three struct {
+	*telemgo.QualifiedType
+	val E_Child_Three // val is the sample value.
+}
+
+func (q *QualifiedE_Child_Three) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the E_Child_Three sample, erroring out if not present.
+func (q *QualifiedE_Child_Three) Val(t testing.TB) E_Child_Three {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Child_Three sample.
+func (q *QualifiedE_Child_Three) SetVal(v E_Child_Three) *QualifiedE_Child_Three {
+	q.val = v
+	return q
+}
+
+
+// CollectionE_Child_Three is a telemetry Collection whose Await method returns a slice of E_Child_Three samples.
+type CollectionE_Child_Three struct {
+	c *CollectionUntilE_Child_Three
+}
+
+// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
+func (u *CollectionE_Child_Three) Await(t testing.TB) []*QualifiedE_Child_Three {
+	t.Helper()
+	data, _ := u.c.Await(t)
+	return data
+}
+
+// CollectionUntilE_Child_Three is a telemetry Collection whose Await method returns a slice of E_Child_Three samples.
+type CollectionUntilE_Child_Three struct {
+	c *telemgo.Collection
+}
+
+// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
+// The received data and the status of the predicate are returned.
+func (u *CollectionUntilE_Child_Three) Await(t testing.TB) ([]*QualifiedE_Child_Three, bool) {
+	t.Helper()
+	var ret []*QualifiedE_Child_Three
+	updates, predTrue := u.c.Await(t)
+	for _, upd := range updates {
+		ret = append(ret, upd.(*QualifiedE_Child_Three))
+	}
+	return ret, predTrue
+}
+
+// QualifiedFloat32 is a float32 with a corresponding timestamp.
+type QualifiedFloat32 struct {
+	*telemgo.QualifiedType
+	val float32 // val is the sample value.
+}
+
+func (q *QualifiedFloat32) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the float32 sample, erroring out if not present.
+func (q *QualifiedFloat32) Val(t testing.TB) float32 {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the float32 sample.
+func (q *QualifiedFloat32) SetVal(v float32) *QualifiedFloat32 {
+	q.val = v
+	return q
+}
+
+
+// CollectionFloat32 is a telemetry Collection whose Await method returns a slice of float32 samples.
+type CollectionFloat32 struct {
+	c *CollectionUntilFloat32
+}
+
+// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
+func (u *CollectionFloat32) Await(t testing.TB) []*QualifiedFloat32 {
+	t.Helper()
+	data, _ := u.c.Await(t)
+	return data
+}
+
+// CollectionUntilFloat32 is a telemetry Collection whose Await method returns a slice of float32 samples.
+type CollectionUntilFloat32 struct {
+	c *telemgo.Collection
+}
+
+// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
+// The received data and the status of the predicate are returned.
+func (u *CollectionUntilFloat32) Await(t testing.TB) ([]*QualifiedFloat32, bool) {
+	t.Helper()
+	var ret []*QualifiedFloat32
+	updates, predTrue := u.c.Await(t)
+	for _, upd := range updates {
+		ret = append(ret, upd.(*QualifiedFloat32))
+	}
+	return ret, predTrue
+}
+
+// QualifiedString is a string with a corresponding timestamp.
+type QualifiedString struct {
+	*telemgo.QualifiedType
+	val string // val is the sample value.
+}
+
+func (q *QualifiedString) String() string {
+	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+}
+
+// Val returns the value of the string sample, erroring out if not present.
+func (q *QualifiedString) Val(t testing.TB) string {
+	t.Helper()
+	if !q.Present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the string sample.
+func (q *QualifiedString) SetVal(v string) *QualifiedString {
+	q.val = v
+	return q
+}
+
+
+// CollectionString is a telemetry Collection whose Await method returns a slice of string samples.
+type CollectionString struct {
+	c *CollectionUntilString
+}
+
+// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
+func (u *CollectionString) Await(t testing.TB) []*QualifiedString {
+	t.Helper()
+	data, _ := u.c.Await(t)
+	return data
+}
+
+// CollectionUntilString is a telemetry Collection whose Await method returns a slice of string samples.
+type CollectionUntilString struct {
+	c *telemgo.Collection
+}
+
+// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
+// The received data and the status of the predicate are returned.
+func (u *CollectionUntilString) Await(t testing.TB) ([]*QualifiedString, bool) {
+	t.Helper()
+	var ret []*QualifiedString
+	updates, predTrue := u.c.Await(t)
+	for _, upd := range updates {
+		ret = append(ret, upd.(*QualifiedString))
+	}
+	return ret, predTrue
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent.
+func (n *ParentPath) GetFull(t testing.TB) *QualifiedParent {
+	t.Helper()
+	goStruct := &Parent{}
+	ret := &QualifiedParent{
+		QualifiedType: getFull(t, n, "Parent", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent, erroring out if it is not present.
+func (n *ParentPath) Get(t testing.TB) *Parent {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent.
+func (n *ParentPathAny) GetFull(t testing.TB) []*QualifiedParent {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedParent
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedParent{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent.
+func (n *ParentPathAny) Get(t testing.TB) []*Parent {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Parent
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child.
+func (n *Parent_ChildPath) GetFull(t testing.TB) *QualifiedParent_Child {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedParent_Child{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child, erroring out if it is not present.
+func (n *Parent_ChildPath) Get(t testing.TB) *Parent_Child {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child.
+func (n *Parent_ChildPathAny) GetFull(t testing.TB) []*QualifiedParent_Child {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedParent_Child
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedParent_Child{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child.
+func (n *Parent_ChildPathAny) Get(t testing.TB) []*Parent_Child {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Parent_Child
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/five.
+func (n *Parent_Child_FivePath) GetFull(t testing.TB) *QualifiedFloat32 {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedFloat32{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_FivePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/five, erroring out if it is not present.
+func (n *Parent_Child_FivePath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/five.
+func (n *Parent_Child_FivePathAny) GetFull(t testing.TB) []*QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_FivePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/five.
+func (n *Parent_Child_FivePathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/five.
+func (n *Parent_Child_FivePath) Collect(t testing.TB, duration time.Duration) *CollectionFloat32 {
+	t.Helper()
+	return &CollectionFloat32{
+		c: n.CollectUntil(t, duration, func(*QualifiedFloat32) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/five and evaluates the predicate on all samples.
+func (n *Parent_Child_FivePath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
+	t.Helper()
+	return &CollectionUntilFloat32{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_FivePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedFloat32)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/parent/child/state/five is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *Parent_Child_FivePath) Await(t testing.TB, duration time.Duration, val float32) []*QualifiedFloat32 {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/parent/child/state/five failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/parent/child/state/five failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/five.
+func (n *Parent_Child_FivePathAny) Collect(t testing.TB, duration time.Duration) *CollectionFloat32 {
+	t.Helper()
+	return &CollectionFloat32{
+		c: n.CollectUntil(t, duration, func(*QualifiedFloat32) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/five and evaluates the predicate on all samples.
+func (n *Parent_Child_FivePathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
+	t.Helper()
+	return &CollectionUntilFloat32{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_FivePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedFloat32)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertParent_Child_FivePath extracts the value of the leaf Five from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedFloat32.
+func convertParent_Child_FivePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedFloat32 {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedFloat32{
+		QualifiedType: qt,
+	}
+	val := parent.Five
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/four.
+func (n *Parent_Child_FourPath) GetFull(t testing.TB) *QualifiedBinary {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedBinary{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_FourPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/four, erroring out if it is not present.
+func (n *Parent_Child_FourPath) Get(t testing.TB) Binary {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/four.
+func (n *Parent_Child_FourPathAny) GetFull(t testing.TB) []*QualifiedBinary {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedBinary
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_FourPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/four.
+func (n *Parent_Child_FourPathAny) Get(t testing.TB) []Binary {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []Binary
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/four.
+func (n *Parent_Child_FourPath) Collect(t testing.TB, duration time.Duration) *CollectionBinary {
+	t.Helper()
+	return &CollectionBinary{
+		c: n.CollectUntil(t, duration, func(*QualifiedBinary) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/four and evaluates the predicate on all samples.
+func (n *Parent_Child_FourPath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinary) bool) *CollectionUntilBinary {
+	t.Helper()
+	return &CollectionUntilBinary{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_FourPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedBinary)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/parent/child/state/four is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *Parent_Child_FourPath) Await(t testing.TB, duration time.Duration, val Binary) []*QualifiedBinary {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedBinary) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/parent/child/state/four failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/parent/child/state/four failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/four.
+func (n *Parent_Child_FourPathAny) Collect(t testing.TB, duration time.Duration) *CollectionBinary {
+	t.Helper()
+	return &CollectionBinary{
+		c: n.CollectUntil(t, duration, func(*QualifiedBinary) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/four and evaluates the predicate on all samples.
+func (n *Parent_Child_FourPathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinary) bool) *CollectionUntilBinary {
+	t.Helper()
+	return &CollectionUntilBinary{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_FourPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedBinary)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertParent_Child_FourPath extracts the value of the leaf Four from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedBinary.
+func convertParent_Child_FourPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedBinary{
+		QualifiedType: qt,
+	}
+	val := parent.Four
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/one.
+func (n *Parent_Child_OnePath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_OnePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/one, erroring out if it is not present.
+func (n *Parent_Child_OnePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/one.
+func (n *Parent_Child_OnePathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_OnePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/one.
+func (n *Parent_Child_OnePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/one.
+func (n *Parent_Child_OnePath) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/one and evaluates the predicate on all samples.
+func (n *Parent_Child_OnePath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_OnePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/parent/child/state/one is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *Parent_Child_OnePath) Await(t testing.TB, duration time.Duration, val string) []*QualifiedString {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/parent/child/state/one failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/parent/child/state/one failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/one.
+func (n *Parent_Child_OnePathAny) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/one and evaluates the predicate on all samples.
+func (n *Parent_Child_OnePathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_OnePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertParent_Child_OnePath extracts the value of the leaf One from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertParent_Child_OnePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.One
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/three.
+func (n *Parent_Child_ThreePath) GetFull(t testing.TB) *QualifiedE_Child_Three {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedE_Child_Three{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_ThreePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/three, erroring out if it is not present.
+func (n *Parent_Child_ThreePath) Get(t testing.TB) E_Child_Three {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/three.
+func (n *Parent_Child_ThreePathAny) GetFull(t testing.TB) []*QualifiedE_Child_Three {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedE_Child_Three
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_ThreePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/three.
+func (n *Parent_Child_ThreePathAny) Get(t testing.TB) []E_Child_Three {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []E_Child_Three
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/three.
+func (n *Parent_Child_ThreePath) Collect(t testing.TB, duration time.Duration) *CollectionE_Child_Three {
+	t.Helper()
+	return &CollectionE_Child_Three{
+		c: n.CollectUntil(t, duration, func(*QualifiedE_Child_Three) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/three and evaluates the predicate on all samples.
+func (n *Parent_Child_ThreePath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedE_Child_Three) bool) *CollectionUntilE_Child_Three {
+	t.Helper()
+	return &CollectionUntilE_Child_Three{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_ThreePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedE_Child_Three)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/parent/child/state/three is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *Parent_Child_ThreePath) Await(t testing.TB, duration time.Duration, val E_Child_Three) []*QualifiedE_Child_Three {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedE_Child_Three) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/parent/child/state/three failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/parent/child/state/three failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/three.
+func (n *Parent_Child_ThreePathAny) Collect(t testing.TB, duration time.Duration) *CollectionE_Child_Three {
+	t.Helper()
+	return &CollectionE_Child_Three{
+		c: n.CollectUntil(t, duration, func(*QualifiedE_Child_Three) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/three and evaluates the predicate on all samples.
+func (n *Parent_Child_ThreePathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedE_Child_Three) bool) *CollectionUntilE_Child_Three {
+	t.Helper()
+	return &CollectionUntilE_Child_Three{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_ThreePath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedE_Child_Three)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertParent_Child_ThreePath extracts the value of the leaf Three from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedE_Child_Three.
+func convertParent_Child_ThreePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedE_Child_Three {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedE_Child_Three{
+		QualifiedType: qt,
+	}
+	val := parent.Three
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_TwoPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/two, erroring out if it is not present.
+func (n *Parent_Child_TwoPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_TwoPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPath) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/two and evaluates the predicate on all samples.
+func (n *Parent_Child_TwoPath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_TwoPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/parent/child/state/two is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *Parent_Child_TwoPath) Await(t testing.TB, duration time.Duration, val string) []*QualifiedString {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/parent/child/state/two failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/parent/child/state/two failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPathAny) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/parent/child/state/two and evaluates the predicate on all samples.
+func (n *Parent_Child_TwoPathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &Parent_Child{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Parent_Child", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertParent_Child_TwoPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertParent_Child_TwoPath extracts the value of the leaf Two from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertParent_Child_TwoPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.Two
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/remote-container.
+func (n *RemoteContainerPath) GetFull(t testing.TB) *QualifiedRemoteContainer {
+	t.Helper()
+	goStruct := &RemoteContainer{}
+	ret := &QualifiedRemoteContainer{
+		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/remote-container, erroring out if it is not present.
+func (n *RemoteContainerPath) Get(t testing.TB) *RemoteContainer {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/remote-container.
+func (n *RemoteContainerPathAny) GetFull(t testing.TB) []*QualifiedRemoteContainer {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedRemoteContainer
+	for _, prefix := range sortedPrefixes {
+		goStruct := &RemoteContainer{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedRemoteContainer{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/remote-container.
+func (n *RemoteContainerPathAny) Get(t testing.TB) []*RemoteContainer {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*RemoteContainer
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// GetFull retrieves a sample for /openconfig-simple/remote-container/state/a-leaf.
+func (n *RemoteContainer_ALeafPath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &RemoteContainer{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, true),
+	}
+	return convertRemoteContainer_ALeafPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/remote-container/state/a-leaf, erroring out if it is not present.
+func (n *RemoteContainer_ALeafPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/remote-container/state/a-leaf.
+func (n *RemoteContainer_ALeafPathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &RemoteContainer{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertRemoteContainer_ALeafPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/remote-container/state/a-leaf.
+func (n *RemoteContainer_ALeafPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/remote-container/state/a-leaf.
+func (n *RemoteContainer_ALeafPath) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/remote-container/state/a-leaf and evaluates the predicate on all samples.
+func (n *RemoteContainer_ALeafPath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &RemoteContainer{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "RemoteContainer", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertRemoteContainer_ALeafPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// Await waits until /openconfig-simple/remote-container/state/a-leaf is deep-equal to the val and returns all received values.
+// If the timeout is exceeded, the test fails fatally.
+// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
+func (n *RemoteContainer_ALeafPath) Await(t testing.TB, duration time.Duration, val string) []*QualifiedString {
+	t.Helper()
+	vals, success := n.CollectUntil(t, duration, func(data *QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		if len(vals) == 0 {
+			t.Fatalf("Await() at /openconfig-simple/remote-container/state/a-leaf failed: no values received")
+		}
+		t.Fatalf("Await() at /openconfig-simple/remote-container/state/a-leaf failed: want %v, last got %v", val, vals[len(vals) - 1])
+	}
+	return vals
+}
+
+// Collect retrieves a Collection sample for /openconfig-simple/remote-container/state/a-leaf.
+func (n *RemoteContainer_ALeafPathAny) Collect(t testing.TB, duration time.Duration) *CollectionString {
+	t.Helper()
+	return &CollectionString{
+		c: n.CollectUntil(t, duration, func(*QualifiedString) bool { return false }),
+	}
+}
+
+// CollectUntil retrieves a Collection sample for /openconfig-simple/remote-container/state/a-leaf and evaluates the predicate on all samples.
+func (n *RemoteContainer_ALeafPathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedString) bool) *CollectionUntilString {
+	t.Helper()
+	return &CollectionUntilString{
+		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+			parentPtr := &RemoteContainer{}
+			// queryPath is not needed on leaves because full gNMI path is always returned.
+			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "RemoteContainer", parentPtr, nil, true, false)
+			if err != nil || qv.ComplianceErrors != nil {
+				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
+			}
+			return convertRemoteContainer_ALeafPath(t, qv, parentPtr), nil
+		},
+		func(qualVal telemgo.QualifiedValue) bool {
+			val, ok := qualVal.(*QualifiedString)
+			return ok && predicate(val)
+		}),
+	}
+}
+
+// convertRemoteContainer_ALeafPath extracts the value of the leaf ALeaf from its parent RemoteContainer
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertRemoteContainer_ALeafPath(t testing.TB, qt *telemgo.QualifiedType, parent *RemoteContainer) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.ALeaf
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /.
+func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+	t.Helper()
+	goStruct := &Root{}
+	ret := &QualifiedRoot{
+		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /, erroring out if it is not present.
+func (n *RootPath) Get(t testing.TB) *Root {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}

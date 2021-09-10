@@ -1,0 +1,568 @@
+package telemetry
+
+// This file contains generated telemetry method augmentations for the
+// generated path structs, which makes use of their gNMI paths for making
+// ONDATRA telemetry calls.
+
+import (
+	"fmt"
+	"reflect"
+	"sort"
+	"strconv"
+	"testing"
+	"time"
+
+	"google.golang.org/protobuf/proto"
+	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ygot/ytypes"
+	"github.com/openconfig/ondatra/telemgen/telemgo"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+)
+
+// WithReplica adds the replica number to the context metadata of the gNMI
+// server query.
+func (n *RootPath) WithReplica(replica int) *RootPath {
+	telemgo.PutReplica(n, replica)
+	return n
+}
+
+// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
+// subscribe.
+func (n *RootPath) WithSubscriptionMode(mode gpb.SubscriptionMode) *RootPath {
+	telemgo.PutSubscriptionMode(n, mode)
+	return n
+}
+
+// WithClient allows the user to provide a gNMI client. This allows for creation
+// of tests for multiple gNMI clients to a single DUT.
+func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
+	telemgo.PutClient(n, c)
+	return n
+}
+
+// WithReplica adds the replica number to the context metadata of the gNMI
+// server query.
+func (b *Batch) WithReplica(replica int) *Batch {
+	b.deviceRoot.WithReplica(replica)
+	return b
+}
+
+// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
+// subscribe.
+func (b *Batch) WithSubscriptionMode(mode gpb.SubscriptionMode) *Batch {
+	b.deviceRoot.WithSubscriptionMode(mode)
+	return b
+}
+
+// Batch is the root of a duplicated path tree that has batch operations instead of synchronous config operations that DevicePath has.
+type Batch struct {
+ 	replaceReqs []telemgo.PathValuePair
+ 	origin string
+ 	deviceRoot *RootPath
+}
+
+// NewBatch returns a newly instantiated Batch object for batching set requests.
+func (d *DevicePath) NewBatch() *Batch {
+	return &Batch{
+		deviceRoot: &RootPath{ygot.NewDeviceRootBase(d.Id())},
+		origin: "openconfig",
+	}
+}
+
+func (b *Batch) batchReplace(t testing.TB, n ygot.PathStruct, val interface{}) {
+	t.Helper()
+	path, customData, errs := ygot.ResolvePath(n)
+	if len(errs) > 0 {
+		t.Fatalf("Errors resolving path %v: %v", n, errs)
+	}
+	if path.GetTarget() != b.deviceRoot.Id() {
+		t.Fatalf("path target doesn't equal the device target for the batch: got %q, want %q", path.GetTarget(), b.deviceRoot.Id())
+	}
+	if len(customData) != 0 {
+		t.Fatalf("batching cannot accept a path that has its custom request options; please set request options solely via the batch object.")
+	}
+	b.replaceReqs = append(b.replaceReqs, telemgo.PathValuePair{PathElems: path.GetElem(), Val: val})
+}
+
+// Set commits all the batched requests.
+func (b *Batch) Set(t testing.TB) *gpb.SetResponse {
+	return telemgo.BatchReplace(t, b.origin, b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.replaceReqs)
+}
+
+func binarySliceToFloat32(in []Binary) []float32 {
+	converted := make([]float32, 0, len(in))
+	for _, binary := range in {
+		converted = append(converted, ygot.BinaryToFloat32(binary))
+	}
+	return converted
+}
+
+// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
+	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
+	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return qv
+}
+
+// getSchema return the generated ytypes schema used for unmarshaling datapoints.
+func getSchema() *ytypes.Schema {
+	return &ytypes.Schema{
+		Root:       &Root{},
+		SchemaTree: SchemaTree,
+		Unmarshal:  Unmarshal,
+	}
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model.
+func (n *ModelPath) GetFull(t testing.TB) *QualifiedModel {
+	t.Helper()
+	goStruct := &Model{}
+	ret := &QualifiedModel{
+		QualifiedType: getFull(t, n, "Model", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model, erroring out if it is not present.
+func (n *ModelPath) Get(t testing.TB) *Model {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model.
+func (n *ModelPathAny) GetFull(t testing.TB) []*QualifiedModel {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedModel
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedModel{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model.
+func (n *ModelPathAny) Get(t testing.TB) []*Model {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Model
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model.
+func (n *ModelPath) Replace(t testing.TB, val *Model) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *ModelPath) BatchReplace(t testing.TB, b *Batch, val *Model) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPath) GetFull(t testing.TB) *QualifiedModel_MultiKey {
+	t.Helper()
+	goStruct := &Model_MultiKey{}
+	ret := &QualifiedModel_MultiKey{
+		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key, erroring out if it is not present.
+func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_MultiKey {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedModel_MultiKey
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model_MultiKey{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedModel_MultiKey{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPathAny) Get(t testing.TB) []*Model_MultiKey {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Model_MultiKey
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPath) Replace(t testing.TB, val *Model_MultiKey) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Model_MultiKeyPath) BatchReplace(t testing.TB, b *Batch, val *Model_MultiKey) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1Path) GetFull(t testing.TB) *QualifiedUint32 {
+	t.Helper()
+	goStruct := &Model_MultiKey{}
+	ret := &QualifiedUint32{
+		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	}
+	return convertModel_MultiKey_Key1Path(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/config/key1, erroring out if it is not present.
+func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1PathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model_MultiKey{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertModel_MultiKey_Key1Path(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1PathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1Path) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *Model_MultiKey_Key1Path) BatchReplace(t testing.TB, b *Batch, val uint32) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertModel_MultiKey_Key1Path extracts the value of the leaf Key1 from its parent Model_MultiKey
+// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
+func convertModel_MultiKey_Key1Path(t testing.TB, qt *telemgo.QualifiedType, parent *Model_MultiKey) *QualifiedUint32 {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedUint32{
+		QualifiedType: qt,
+	}
+	val := parent.Key1
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2Path) GetFull(t testing.TB) *QualifiedUint64 {
+	t.Helper()
+	goStruct := &Model_MultiKey{}
+	ret := &QualifiedUint64{
+		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	}
+	return convertModel_MultiKey_Key2Path(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/config/key2, erroring out if it is not present.
+func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2PathAny) GetFull(t testing.TB) []*QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model_MultiKey{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertModel_MultiKey_Key2Path(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2PathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2Path) Replace(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *Model_MultiKey_Key2Path) BatchReplace(t testing.TB, b *Batch, val uint64) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertModel_MultiKey_Key2Path extracts the value of the leaf Key2 from its parent Model_MultiKey
+// and combines the update with an existing QualifiedType to return a *QualifiedUint64.
+func convertModel_MultiKey_Key2Path(t testing.TB, qt *telemgo.QualifiedType, parent *Model_MultiKey) *QualifiedUint64 {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedUint64{
+		QualifiedType: qt,
+	}
+	val := parent.Key2
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPath) GetFull(t testing.TB) *QualifiedModel_SingleKey {
+	t.Helper()
+	goStruct := &Model_SingleKey{}
+	ret := &QualifiedModel_SingleKey{
+		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model/a/single-key, erroring out if it is not present.
+func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_SingleKey {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedModel_SingleKey
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model_SingleKey{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedModel_SingleKey{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPathAny) Get(t testing.TB) []*Model_SingleKey {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Model_SingleKey
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPath) Replace(t testing.TB, val *Model_SingleKey) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Model_SingleKeyPath) BatchReplace(t testing.TB, b *Batch, val *Model_SingleKey) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPath) GetFull(t testing.TB) *QualifiedUint32 {
+	t.Helper()
+	goStruct := &Model_SingleKey{}
+	ret := &QualifiedUint32{
+		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, true),
+	}
+	return convertModel_SingleKey_KeyPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-withlist/model/a/single-key/config/key, erroring out if it is not present.
+func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Model_SingleKey{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertModel_SingleKey_KeyPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *Model_SingleKey_KeyPath) BatchReplace(t testing.TB, b *Batch, val uint32) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertModel_SingleKey_KeyPath extracts the value of the leaf Key from its parent Model_SingleKey
+// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
+func convertModel_SingleKey_KeyPath(t testing.TB, qt *telemgo.QualifiedType, parent *Model_SingleKey) *QualifiedUint32 {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedUint32{
+		QualifiedType: qt,
+	}
+	val := parent.Key
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /.
+func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+	t.Helper()
+	goStruct := &Root{}
+	ret := &QualifiedRoot{
+		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /, erroring out if it is not present.
+func (n *RootPath) Get(t testing.TB) *Root {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// Replace replaces the configuration at /.
+func (n *RootPath) Replace(t testing.TB, val *Root) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *RootPath) BatchReplace(t testing.TB, b *Batch, val *Root) {
+	b.batchReplace(t, n, val)
+}

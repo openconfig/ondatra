@@ -1,0 +1,19 @@
+# proto-file: google3/third_party/openconfig/ondatra/proto/testbed.proto
+# proto-message: ondatra.Testbed
+
+duts {
+  id: "dut1"
+  ports {
+    id: "port1"
+  }
+}
+duts {
+  id: "dut2"
+  ports {
+    id: "port1"
+  }
+}
+links {
+  a: "dut1:port1"
+  b: "dut2:port1"
+}
