@@ -1,0 +1,10 @@
+package main
+
+import (
+  _ "google3/{TEST_PACKAGE}"
+  "google3/third_party/openconfig/ondatra/internal/reservemain/reservemain"
+)
+
+func main() {
+  reservemain.Main()
+}

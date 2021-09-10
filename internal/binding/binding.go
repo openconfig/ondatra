@@ -1,59 +1,53 @@
-// Copyright 2021 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 // Package binding holds the server binding interface.
 package binding
 
 import (
-	"context"
+	"golang.org/x/net/context"
 	"time"
 
-	"github.com/golang/glog"
-	"github.com/golang/grpc/grpc"
-	"github.com/openconfig/ondatra/internal/reservation/reservation"
+	log "github.com/golang/glog"
+	"google.golang.org/grpc"
+	"github.com/openconfig/ondatra/internal/reservation"
 
-	gpb "github.com/openconfig/gnmi/proto/gnmi/gnmi_go_proto"
-	bpb "github.com/openconfig/gnoi/bgp/bgp_go_proto"
-	cpb "github.com/openconfig/gnoi/cert/cert_go_proto"
-	dpb "github.com/openconfig/gnoi/diag/diag_go_proto"
-	frpb "github.com/openconfig/gnoi/factory_reset/factory_reset_go_proto"
-	fpb "github.com/openconfig/gnoi/file/file_go_proto"
-	hpb "github.com/openconfig/gnoi/healthz/healthz_go_proto"
-	ipb "github.com/openconfig/gnoi/interface/interface_go_proto"
-	lpb "github.com/openconfig/gnoi/layer2/layer2_go_proto"
-	mpb "github.com/openconfig/gnoi/mpls/mpls_go_proto"
-	ospb "github.com/openconfig/gnoi/os/os_go_proto"
-	otpb "github.com/openconfig/gnoi/otdr/otdr_go_proto"
-	spb "github.com/openconfig/gnoi/system/system_go_proto"
-	wpb "github.com/openconfig/gnoi/wavelength_router/wavelength_router_go_proto"
-	opb "github.com/openconfig/ondatra/proto/ondatra_go_proto"
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	bpb "github.com/openconfig/gnoi/bgp"
+	cpb "github.com/openconfig/gnoi/cert"
+	dpb "github.com/openconfig/gnoi/diag"
+	frpb "github.com/openconfig/gnoi/factory_reset"
+	fpb "github.com/openconfig/gnoi/file"
+	hpb "github.com/openconfig/gnoi/healthz"
+	ipb "github.com/openconfig/gnoi/interface"
+	lpb "github.com/openconfig/gnoi/layer2"
+	mpb "github.com/openconfig/gnoi/mpls"
+	ospb "github.com/openconfig/gnoi/os"
+	otpb "github.com/openconfig/gnoi/otdr"
+	spb "github.com/openconfig/gnoi/system"
+	wpb "github.com/openconfig/gnoi/wavelength_router"
+	opb "github.com/openconfig/ondatra/proto"
+	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
-var bind Binding
+var (
+	bind Binding
+)
 
 // Init initializes the Ondatra binding.
 func Init(b Binding) {
 	if bind != nil {
-		glog.Fatal("binding already initialized")
+		log.Fatal("binding already initialized")
 	}
 	bind = b
+}
+
+// IsSet returns if binding is set.
+func IsSet() bool {
+	return bind != nil
 }
 
 // Get gets the Ondatra binding.
 func Get() Binding {
 	if bind == nil {
-		glog.Fatal("binding not initialized")
+		log.Fatal("binding not set; did you pass a binding to ondatra.RunTests")
 	}
 	return bind
 }
@@ -97,13 +91,51 @@ type Binding interface {
 	// otherwise the existing config is replaced with the provided config.
 	PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *ConfigOptions) error
 
-	// DialGNMI creates a client connection to the testbed's GNMI server.
+	// DialGNMI creates a client connection to the GNMI endpoint for the specified DUT.
 	// Implementations must append transport security options necessary to reach the server.
 	DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error)
 
 	// DialGNOI creates a client connection to the specified DUT's gNOI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialGNOI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (*GNOIClient, error)
+	DialGNOI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (GNOIClients, error)
+
+	// DialP4RT creates a client connection to the specified DUT's P4RT endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+
+	// DialATEGNMI creates a client connection to the GNMI endpoint for the specified ATE.
+	// Implementations must append transport security options necessary to reach the server.
+	DialATEGNMI(ctx context.Context, ate *reservation.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error)
+
+	// PushTopology pushes a topology to the ATE.
+	// The framework has already verified that there is at least one interface
+	// and that each port belongs to at most one port bundle.
+	PushTopology(ate *reservation.ATE, topology *opb.Topology) error
+
+	// UpdateTopology updates a topology on the ATE.
+	UpdateTopology(ate *reservation.ATE, topology *opb.Topology) error
+
+	// UpdateBGPPeerStates updates the states of BGP peers on interfaces on the ATE.
+	// TODO: Remove this method once new Ixia config binding is used.
+	UpdateBGPPeerStates(ate *reservation.ATE, interfaces []*opb.InterfaceConfig) error
+
+	// StartProtocols starts control plane protocols on the ATE.
+	StartProtocols(ate *reservation.ATE) error
+
+	// StopProtocols stops control plane protocols on the ATE.
+	StopProtocols(ate *reservation.ATE) error
+
+	// StartTraffic starts traffic flows on the ATE.
+	// All the flows are already verified to belong to the ATE.
+	StartTraffic(ate *reservation.ATE, flows []*opb.Flow) error
+
+	// UpdateTraffic updates traffic flows on the ATE.
+	// Implementations must return an error if any of the flows have not been started.
+	// All the flows are already verified to belong to the ATE.
+	UpdateTraffic(ate *reservation.ATE, flows []*opb.Flow) error
+
+	// StopTraffic stops all traffic flows on the ATE.
+	StopTraffic(ate *reservation.ATE) error
 
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
@@ -111,8 +143,14 @@ type Binding interface {
 	// classify the error as such to distinguish it from a genuine test failure.
 	HandleInfraFail(err error) error
 
+	// SetATEPortState sets the enabled state of a physical port on the ATE.
+	SetATEPortState(ate *reservation.ATE, port string, enabled bool) error
+
 	// SetTestMetadata sets the metadata for the currently running test.
 	SetTestMetadata(md *TestMetadata) error
+
+	// RestartRouting restarts routing on the specified target.
+	RestartRouting(dut *reservation.DUT) error
 }
 
 // ConfigOptions is a set of options for the config push.
@@ -120,22 +158,21 @@ type ConfigOptions struct {
 	OpenConfig, Append bool
 }
 
-// GNOIClient stores APIs to GNOI services.
-// Additional client fields will be added to this as needed.
-type GNOIClient struct {
-	BGP                   bpb.BGPClient
-	CertificateManagement cpb.CertificateManagementClient
-	Diag                  dpb.DiagClient
-	FactoryReset          frpb.FactoryResetClient
-	File                  fpb.FileClient
-	Healthz               hpb.HealthzClient
-	Interface             ipb.InterfaceClient
-	Layer2                lpb.Layer2Client
-	MPLS                  mpb.MPLSClient
-	OS                    ospb.OSClient
-	OTDR                  otpb.OTDRClient
-	System                spb.SystemClient
-	WavelengthRouter      wpb.WavelengthRouterClient
+// GNOIClients stores APIs to GNOI services.
+type GNOIClients interface {
+	BGP() bpb.BGPClient
+	CertificateManagement() cpb.CertificateManagementClient
+	Diag() dpb.DiagClient
+	FactoryReset() frpb.FactoryResetClient
+	File() fpb.FileClient
+	Healthz() hpb.HealthzClient
+	Interface() ipb.InterfaceClient
+	Layer2() lpb.Layer2Client
+	MPLS() mpb.MPLSClient
+	OS() ospb.OSClient
+	OTDR() otpb.OTDRClient
+	System() spb.SystemClient
+	WavelengthRouter() wpb.WavelengthRouterClient
 }
 
 // TestMetadata is metadata about a test.

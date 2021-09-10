@@ -1,0 +1,796 @@
+package telemetry
+
+// This file contains generated telemetry method augmentations for the
+// generated path structs, which makes use of their gNMI paths for making
+// ONDATRA telemetry calls.
+
+import (
+	"fmt"
+	"reflect"
+	"sort"
+	"strconv"
+	"testing"
+	"time"
+
+	"google.golang.org/protobuf/proto"
+	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ygot/ytypes"
+	"github.com/openconfig/ondatra/telemgen/telemgo"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+)
+
+// WithReplica adds the replica number to the context metadata of the gNMI
+// server query.
+func (n *RootPath) WithReplica(replica int) *RootPath {
+	telemgo.PutReplica(n, replica)
+	return n
+}
+
+// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
+// subscribe.
+func (n *RootPath) WithSubscriptionMode(mode gpb.SubscriptionMode) *RootPath {
+	telemgo.PutSubscriptionMode(n, mode)
+	return n
+}
+
+// WithClient allows the user to provide a gNMI client. This allows for creation
+// of tests for multiple gNMI clients to a single DUT.
+func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
+	telemgo.PutClient(n, c)
+	return n
+}
+
+// WithReplica adds the replica number to the context metadata of the gNMI
+// server query.
+func (b *Batch) WithReplica(replica int) *Batch {
+	b.deviceRoot.WithReplica(replica)
+	return b
+}
+
+// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
+// subscribe.
+func (b *Batch) WithSubscriptionMode(mode gpb.SubscriptionMode) *Batch {
+	b.deviceRoot.WithSubscriptionMode(mode)
+	return b
+}
+
+// Batch is the root of a duplicated path tree that has batch operations instead of synchronous config operations that DevicePath has.
+type Batch struct {
+ 	replaceReqs []telemgo.PathValuePair
+ 	origin string
+ 	deviceRoot *RootPath
+}
+
+// NewBatch returns a newly instantiated Batch object for batching set requests.
+func (d *DevicePath) NewBatch() *Batch {
+	return &Batch{
+		deviceRoot: &RootPath{ygot.NewDeviceRootBase(d.Id())},
+		origin: "openconfig",
+	}
+}
+
+func (b *Batch) batchReplace(t testing.TB, n ygot.PathStruct, val interface{}) {
+	t.Helper()
+	path, customData, errs := ygot.ResolvePath(n)
+	if len(errs) > 0 {
+		t.Fatalf("Errors resolving path %v: %v", n, errs)
+	}
+	if path.GetTarget() != b.deviceRoot.Id() {
+		t.Fatalf("path target doesn't equal the device target for the batch: got %q, want %q", path.GetTarget(), b.deviceRoot.Id())
+	}
+	if len(customData) != 0 {
+		t.Fatalf("batching cannot accept a path that has its custom request options; please set request options solely via the batch object.")
+	}
+	b.replaceReqs = append(b.replaceReqs, telemgo.PathValuePair{PathElems: path.GetElem(), Val: val})
+}
+
+// Set commits all the batched requests.
+func (b *Batch) Set(t testing.TB) *gpb.SetResponse {
+	return telemgo.BatchReplace(t, b.origin, b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.replaceReqs)
+}
+
+func binarySliceToFloat32(in []Binary) []float32 {
+	converted := make([]float32, 0, len(in))
+	for _, binary := range in {
+		converted = append(converted, ygot.BinaryToFloat32(binary))
+	}
+	return converted
+}
+
+// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
+	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
+	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return qv
+}
+
+// getSchema return the generated ytypes schema used for unmarshaling datapoints.
+func getSchema() *ytypes.Schema {
+	return &ytypes.Schema{
+		Root:       &Root{},
+		SchemaTree: SchemaTree,
+		Unmarshal:  Unmarshal,
+	}
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent.
+func (n *ParentPath) GetFull(t testing.TB) *QualifiedParent {
+	t.Helper()
+	goStruct := &Parent{}
+	ret := &QualifiedParent{
+		QualifiedType: getFull(t, n, "Parent", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent, erroring out if it is not present.
+func (n *ParentPath) Get(t testing.TB) *Parent {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent.
+func (n *ParentPathAny) GetFull(t testing.TB) []*QualifiedParent {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedParent
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedParent{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent.
+func (n *ParentPathAny) Get(t testing.TB) []*Parent {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Parent
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent.
+func (n *ParentPath) Replace(t testing.TB, val *Parent) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *ParentPath) BatchReplace(t testing.TB, b *Batch, val *Parent) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child.
+func (n *Parent_ChildPath) GetFull(t testing.TB) *QualifiedParent_Child {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedParent_Child{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child, erroring out if it is not present.
+func (n *Parent_ChildPath) Get(t testing.TB) *Parent_Child {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child.
+func (n *Parent_ChildPathAny) GetFull(t testing.TB) []*QualifiedParent_Child {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedParent_Child
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedParent_Child{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child.
+func (n *Parent_ChildPathAny) Get(t testing.TB) []*Parent_Child {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*Parent_Child
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child.
+func (n *Parent_ChildPath) Replace(t testing.TB, val *Parent_Child) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Parent_ChildPath) BatchReplace(t testing.TB, b *Batch, val *Parent_Child) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/config/five.
+func (n *Parent_Child_FivePath) GetFull(t testing.TB) *QualifiedBinary {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedBinary{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_FivePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/config/five, erroring out if it is not present.
+func (n *Parent_Child_FivePath) Get(t testing.TB) Binary {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/five.
+func (n *Parent_Child_FivePathAny) GetFull(t testing.TB) []*QualifiedBinary {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedBinary
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_FivePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/five.
+func (n *Parent_Child_FivePathAny) Get(t testing.TB) []Binary {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []Binary
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child/config/five.
+func (n *Parent_Child_FivePath) Replace(t testing.TB, val Binary) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Parent_Child_FivePath) BatchReplace(t testing.TB, b *Batch, val Binary) {
+	b.batchReplace(t, n, val)
+}
+
+// convertParent_Child_FivePath extracts the value of the leaf Five from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedBinary.
+func convertParent_Child_FivePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedBinary{
+		QualifiedType: qt,
+	}
+	val := parent.Five
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/config/four.
+func (n *Parent_Child_FourPath) GetFull(t testing.TB) *QualifiedBinary {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedBinary{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_FourPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/config/four, erroring out if it is not present.
+func (n *Parent_Child_FourPath) Get(t testing.TB) Binary {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/four.
+func (n *Parent_Child_FourPathAny) GetFull(t testing.TB) []*QualifiedBinary {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedBinary
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_FourPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/four.
+func (n *Parent_Child_FourPathAny) Get(t testing.TB) []Binary {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []Binary
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child/config/four.
+func (n *Parent_Child_FourPath) Replace(t testing.TB, val Binary) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Parent_Child_FourPath) BatchReplace(t testing.TB, b *Batch, val Binary) {
+	b.batchReplace(t, n, val)
+}
+
+// convertParent_Child_FourPath extracts the value of the leaf Four from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedBinary.
+func convertParent_Child_FourPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedBinary{
+		QualifiedType: qt,
+	}
+	val := parent.Four
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/config/one.
+func (n *Parent_Child_OnePath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_OnePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/config/one, erroring out if it is not present.
+func (n *Parent_Child_OnePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/one.
+func (n *Parent_Child_OnePathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_OnePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/one.
+func (n *Parent_Child_OnePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child/config/one.
+func (n *Parent_Child_OnePath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *Parent_Child_OnePath) BatchReplace(t testing.TB, b *Batch, val string) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertParent_Child_OnePath extracts the value of the leaf One from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertParent_Child_OnePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.One
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/config/three.
+func (n *Parent_Child_ThreePath) GetFull(t testing.TB) *QualifiedE_Child_Three {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedE_Child_Three{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_ThreePath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/config/three, erroring out if it is not present.
+func (n *Parent_Child_ThreePath) Get(t testing.TB) E_Child_Three {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/three.
+func (n *Parent_Child_ThreePathAny) GetFull(t testing.TB) []*QualifiedE_Child_Three {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedE_Child_Three
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_ThreePath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/three.
+func (n *Parent_Child_ThreePathAny) Get(t testing.TB) []E_Child_Three {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []E_Child_Three
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child/config/three.
+func (n *Parent_Child_ThreePath) Replace(t testing.TB, val E_Child_Three) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *Parent_Child_ThreePath) BatchReplace(t testing.TB, b *Batch, val E_Child_Three) {
+	b.batchReplace(t, n, val)
+}
+
+// convertParent_Child_ThreePath extracts the value of the leaf Three from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedE_Child_Three.
+func convertParent_Child_ThreePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedE_Child_Three {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedE_Child_Three{
+		QualifiedType: qt,
+	}
+	val := parent.Three
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &Parent_Child{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	}
+	return convertParent_Child_TwoPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/parent/child/state/two, erroring out if it is not present.
+func (n *Parent_Child_TwoPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &Parent_Child{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertParent_Child_TwoPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/parent/child/state/two.
+func (n *Parent_Child_TwoPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *Parent_Child_TwoPath) BatchReplace(t testing.TB, b *Batch, val string) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertParent_Child_TwoPath extracts the value of the leaf Two from its parent Parent_Child
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertParent_Child_TwoPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.Two
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /openconfig-simple/remote-container.
+func (n *RemoteContainerPath) GetFull(t testing.TB) *QualifiedRemoteContainer {
+	t.Helper()
+	goStruct := &RemoteContainer{}
+	ret := &QualifiedRemoteContainer{
+		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /openconfig-simple/remote-container, erroring out if it is not present.
+func (n *RemoteContainerPath) Get(t testing.TB) *RemoteContainer {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/remote-container.
+func (n *RemoteContainerPathAny) GetFull(t testing.TB) []*QualifiedRemoteContainer {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+
+	var data []*QualifiedRemoteContainer
+	for _, prefix := range sortedPrefixes {
+		goStruct := &RemoteContainer{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !qt.IsPresent() {
+			continue
+		}
+		qv := (&QualifiedRemoteContainer{
+			QualifiedType: qt,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/remote-container.
+func (n *RemoteContainerPathAny) Get(t testing.TB) []*RemoteContainer {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []*RemoteContainer
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/remote-container.
+func (n *RemoteContainerPath) Replace(t testing.TB, val *RemoteContainer) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *RemoteContainerPath) BatchReplace(t testing.TB, b *Batch, val *RemoteContainer) {
+	b.batchReplace(t, n, val)
+}
+
+// GetFull retrieves a sample for /openconfig-simple/remote-container/config/a-leaf.
+func (n *RemoteContainer_ALeafPath) GetFull(t testing.TB) *QualifiedString {
+	t.Helper()
+	goStruct := &RemoteContainer{}
+	ret := &QualifiedString{
+		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, true),
+	}
+	return convertRemoteContainer_ALeafPath(t, ret.QualifiedType, goStruct)
+}
+
+// Get retrieves a value sample for /openconfig-simple/remote-container/config/a-leaf, erroring out if it is not present.
+func (n *RemoteContainer_ALeafPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// GetFull retrieves a list of samples for /openconfig-simple/remote-container/config/a-leaf.
+func (n *RemoteContainer_ALeafPathAny) GetFull(t testing.TB) []*QualifiedString {
+	t.Helper()
+	datapoints, queryPath := telemgo.Get(t, n, false)
+	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+
+	var data []*QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &RemoteContainer{}
+		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, true, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		qv := convertRemoteContainer_ALeafPath(t, qt, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get retrieves a list of value samples for /openconfig-simple/remote-container/config/a-leaf.
+func (n *RemoteContainer_ALeafPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.GetFull(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Replace replaces the configuration at /openconfig-simple/remote-container/config/a-leaf.
+func (n *RemoteContainer_ALeafPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, &val)
+}
+
+func (n *RemoteContainer_ALeafPath) BatchReplace(t testing.TB, b *Batch, val string) {
+	b.batchReplace(t, n, &val)
+}
+
+// convertRemoteContainer_ALeafPath extracts the value of the leaf ALeaf from its parent RemoteContainer
+// and combines the update with an existing QualifiedType to return a *QualifiedString.
+func convertRemoteContainer_ALeafPath(t testing.TB, qt *telemgo.QualifiedType, parent *RemoteContainer) *QualifiedString {
+	t.Helper()
+	if qt.ComplianceErrors != nil {
+		t.Fatal(qt.ComplianceErrors)
+	}
+	qv := &QualifiedString{
+		QualifiedType: qt,
+	}
+	val := parent.ALeaf
+	if !reflect.ValueOf(val).IsZero() {
+		qv.Present = true
+		qv.SetVal(*val)
+	} else {
+		qv.Present = false
+	}
+	return qv
+}
+
+// GetFull retrieves a sample for /.
+func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+	t.Helper()
+	goStruct := &Root{}
+	ret := &QualifiedRoot{
+		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	}
+	if ret.IsPresent() {
+		ret.SetVal(goStruct)
+	}
+	return ret
+}
+
+// Get retrieves a value sample for /, erroring out if it is not present.
+func (n *RootPath) Get(t testing.TB) *Root {
+	t.Helper()
+	return n.GetFull(t).Val(t)
+}
+
+// Replace replaces the configuration at /.
+func (n *RootPath) Replace(t testing.TB, val *Root) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Replace(t, n, val)
+}
+
+func (n *RootPath) BatchReplace(t testing.TB, b *Batch, val *Root) {
+	b.batchReplace(t, n, val)
+}
