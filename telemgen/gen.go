@@ -462,53 +462,17 @@ func (n *{{ .FakeRootTypePathName }}) WithClient(c gpb.GNMIClient) *{{ .FakeRoot
 
 {{- if .GenerateConfigCode }}
 
-// WithReplica adds the replica number to the context metadata of the gNMI
-// server query.
-func (b *Batch) WithReplica(replica int) *Batch {
-	b.deviceRoot.WithReplica(replica)
-	return b
+type SetRequestBatch struct {
+  *privateSetRequestBatch
 }
 
-// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
-// subscribe.
-func (b *Batch) WithSubscriptionMode(mode gpb.SubscriptionMode) *Batch {
-	b.deviceRoot.WithSubscriptionMode(mode)
-	return b
+type privateSetRequestBatch struct {
+  *telemgo.SetRequestBatch
 }
 
-// Batch is the root of a duplicated path tree that has batch operations instead of synchronous config operations that DevicePath has.
-type Batch struct {
- 	replaceReqs []telemgo.PathValuePair
- 	origin string
- 	deviceRoot *{{ .FakeRootTypePathName }}
-}
-
-// NewBatch returns a newly instantiated Batch object for batching set requests.
-func (d *DevicePath) NewBatch() *Batch {
-	return &Batch{
-		deviceRoot: &{{ .FakeRootTypePathName }}{ygot.New{{ .FakeRootBaseTypeName }}(d.Id())},
-		origin: "openconfig",
-	}
-}
-
-func (b *Batch) batchReplace(t testing.TB, n ygot.PathStruct, val interface{}) {
-	t.Helper()
-	path, customData, errs := ygot.ResolvePath(n)
-	if len(errs) > 0 {
-		t.Fatalf("Errors resolving path %v: %v", n, errs)
-	}
-	if path.GetTarget() != b.deviceRoot.Id() {
-		t.Fatalf("path target doesn't equal the device target for the batch: got %q, want %q", path.GetTarget(), b.deviceRoot.Id())
-	}
-	if len(customData) != 0 {
-		t.Fatalf("batching cannot accept a path that has its custom request options; please set request options solely via the batch object.")
-	}
-	b.replaceReqs = append(b.replaceReqs, telemgo.PathValuePair{PathElems: path.GetElem(), Val: val})
-}
-
-// Set commits all the batched requests.
-func (b *Batch) Set(t testing.TB) *gpb.SetResponse {
-	return telemgo.BatchReplace(t, b.origin, b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.replaceReqs)
+// NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
+func (d *DevicePath) NewBatch() *SetRequestBatch {
+	return &SetRequestBatch{&privateSetRequestBatch{telemgo.NewSetRequestBatch(&{{ .FakeRootTypePathName }}{ygot.New{{ .FakeRootBaseTypeName }}(d.Id())})} }
 }
 
 {{- end }}
@@ -728,16 +692,42 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) CollectUntil(t testing.TB, 
 }
 `)
 
-	// goNodeReplaceTemplate is used to generate the Replace configuration call.
-	goNodeReplaceTemplate = mustTemplate("goNodeReplaceMethod", `
+	// goNodeSetTemplate is used to generate gNMI Set wrapper calls.
+	goNodeSetTemplate = mustTemplate("goNodeSetMethods", `
+// Delete deletes the configuration at {{ .YANGPath }}.
+func (n *{{ .PathStructName }}) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at {{ .YANGPath }} in the given batch object.
+func (n *{{ .PathStructName }}) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at {{ .YANGPath }}.
 func (n *{{ .PathStructName }}) Replace(t testing.TB, val {{ .GoType.GoTypeName }}) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
 
-func (n *{{ .PathStructName }}) BatchReplace(t testing.TB, b *Batch, val {{ .GoType.GoTypeName }}) {
-	b.batchReplace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
+// BatchReplace buffers a config replace operation at {{ .YANGPath }} in the given batch object.
+func (n *{{ .PathStructName }}) BatchReplace(t testing.TB, b *SetRequestBatch, val {{ .GoType.GoTypeName }}) {
+	t.Helper()
+	b.BatchReplace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
+}
+
+// Update updates the configuration at {{ .YANGPath }}.
+func (n *{{ .PathStructName }}) Update(t testing.TB, val {{ .GoType.GoTypeName }}) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
+}
+
+// BatchUpdate buffers a config update operation at {{ .YANGPath }} in the given batch object.
+func (n *{{ .PathStructName }}) BatchUpdate(t testing.TB, b *SetRequestBatch, val {{ .GoType.GoTypeName }}) {
+	t.Helper()
+	b.BatchUpdate(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
 `)
 
@@ -1037,7 +1027,7 @@ func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.Node
 			util.AppendErr(errs, err)
 		}
 	}
-	if err := goNodeReplaceTemplate.Execute(&replaceMethod, s); err != nil {
+	if err := goNodeSetTemplate.Execute(&replaceMethod, s); err != nil {
 		util.AppendErr(errs, err)
 	}
 	if err := goNodeGetTemplate.Execute(&getMethod, s); err != nil {

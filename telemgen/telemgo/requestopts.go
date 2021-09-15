@@ -1,3 +1,17 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package telemgo
 
 import (
@@ -17,22 +31,18 @@ const (
 )
 
 // PutClient sets the client as metadata request option.
-func PutClient(n rootPath, client gpb.GNMIClient) {
+func PutClient(n FakeRootPathStruct, client gpb.GNMIClient) {
 	n.PutCustomData(clientKey, client)
 }
 
 // PutReplica sets the replica number as a metadata request option.
-func PutReplica(n rootPath, replica int) {
+func PutReplica(n FakeRootPathStruct, replica int) {
 	n.PutCustomData(metadataKeyPrefix+"replica", strconv.Itoa(replica))
 }
 
 // PutSubscriptionMode sets the subscription mode as a request option.
-func PutSubscriptionMode(n rootPath, subMode gpb.SubscriptionMode) {
+func PutSubscriptionMode(n FakeRootPathStruct, subMode gpb.SubscriptionMode) {
 	n.PutCustomData(subscriptionModeKey, subMode)
-}
-
-type rootPath interface {
-	PutCustomData(key string, val interface{})
 }
 
 type requestOpts struct {
@@ -47,17 +57,17 @@ func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error)
 	if v, ok := customData[subscriptionModeKey]; ok {
 		m, ok := v.(gpb.SubscriptionMode)
 		if !ok {
-			return nil, errors.Errorf("CustomData key %q but value is not SubscriptionMode type (%T, %v)", subscriptionModeKey, v, v)
+			return nil, errors.Errorf("customData key %q but value is not SubscriptionMode type (%T, %v)", subscriptionModeKey, v, v)
 		}
 		opts.subMode = m
 	}
 	if v, ok := customData[clientKey]; ok {
 		if v == nil {
-			return nil, errors.Errorf("CustomData key %q but value is nil", clientKey)
+			return nil, errors.Errorf("customData key %q but value is nil", clientKey)
 		}
 		m, ok := v.(gpb.GNMIClient)
 		if !ok {
-			return nil, errors.Errorf("CustomData key %q but value is not GNMIClient type (%T, %v)", clientKey, v, v)
+			return nil, errors.Errorf("customData key %q but value is not GNMIClient type (%T, %v)", clientKey, v, v)
 		}
 		opts.client = m
 	}
@@ -68,7 +78,7 @@ func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error)
 		}
 		sv, ok := v.(string)
 		if !ok {
-			return nil, errors.Errorf("CustomData metadata key %q but value is not string type (%T, %v)", k, v, v)
+			return nil, errors.Errorf("customData metadata key %q but value is not string type (%T, %v)", k, v, v)
 		}
 		md[strings.TrimPrefix(k, metadataKeyPrefix)] = sv
 	}

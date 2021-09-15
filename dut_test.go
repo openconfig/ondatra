@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package ondatra
 
 import (
@@ -34,9 +48,10 @@ var (
 	gotOpts   *binding.ConfigOptions
 )
 
-func init() {
-	initFakeBinding()
-	reserveFakeTestbed()
+func initDUTFakes(t *testing.T) {
+	t.Helper()
+	initFakeBinding(t)
+	reserveFakeTestbed(t)
 	fakeBind.ConfigPusher = func(_ context.Context, _ *reservation.DUT, config string, opts *binding.ConfigOptions) error {
 		gotConfig = config
 		gotOpts = opts
@@ -45,6 +60,7 @@ func init() {
 }
 
 func TestPushConfig(t *testing.T) {
+	initDUTFakes(t)
 	dutArista := DUT(t, "dut")
 	testsPass := []struct {
 		desc       string
@@ -134,6 +150,7 @@ func TestPushConfig(t *testing.T) {
 }
 
 func TestPushConfigErrors(t *testing.T) {
+	initDUTFakes(t)
 	dutArista := DUT(t, "dut")
 	testsFail := []struct {
 		desc         string
@@ -174,6 +191,7 @@ func TestPushConfigErrors(t *testing.T) {
 }
 
 func TestAppendConfig(t *testing.T) {
+	initDUTFakes(t)
 	gotConfig = ""
 	gotOpts = nil
 	wantConfig := "arista config"
@@ -188,6 +206,7 @@ func TestAppendConfig(t *testing.T) {
 }
 
 func TestGNMI(t *testing.T) {
+	initDUTFakes(t)
 	want := struct{ gpb.GNMIClient }{}
 	fakeBind.GNMIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return want, nil
@@ -198,6 +217,7 @@ func TestGNMI(t *testing.T) {
 }
 
 func TestGNMIError(t *testing.T) {
+	initDUTFakes(t)
 	wantErr := "bad gnmi"
 	fakeBind.GNMIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return nil, errors.New(wantErr)
@@ -282,6 +302,7 @@ func (g *gnoiClients) WavelengthRouter() wpb.WavelengthRouterClient {
 }
 
 func TestGNOI(t *testing.T) {
+	initDUTFakes(t)
 	bgnoi := &gnoiClients{
 		bgp: struct{ bpb.BGPClient }{},
 		certMgmt: struct {
@@ -304,51 +325,52 @@ func TestGNOI(t *testing.T) {
 		return bgnoi, nil
 	}
 	gnoi := DUT(t, "dut").RawAPIs().GNOI(t)
-	if got := gnoi.BGP(); got != bgnoi.BGP() {
-		t.Errorf("GNOI(t) got BGP client %v, want %v", got, bgnoi.BGP)
+	if got, want := gnoi.BGP(), bgnoi.BGP(); got != want {
+		t.Errorf("GNOI(t) got BGP client %v, want %v", got, want)
 	}
-	if got := gnoi.CertificateManagement(); got != bgnoi.CertificateManagement() {
-		t.Errorf("GNOI(t) got CertificateManagement client %v, want %v", got, bgnoi.CertificateManagement)
+	if got, want := gnoi.CertificateManagement(), bgnoi.CertificateManagement(); got != want {
+		t.Errorf("GNOI(t) got CertificateManagement client %v, want %v", got, want)
 	}
-	if got := gnoi.Diag(); got != bgnoi.Diag() {
-		t.Errorf("GNOI(t) got Diag client %v, want %v", got, bgnoi.Diag)
+	if got, want := gnoi.Diag(), bgnoi.Diag(); got != want {
+		t.Errorf("GNOI(t) got Diag client %v, want %v", got, want)
 	}
-	if got := gnoi.FactoryReset(); got != bgnoi.FactoryReset() {
-		t.Errorf("GNOI(t) got FactoryReset client %v, want %v", got, bgnoi.FactoryReset)
+	if got, want := gnoi.FactoryReset(), bgnoi.FactoryReset(); got != want {
+		t.Errorf("GNOI(t) got FactoryReset client %v, want %v", got, want)
 	}
-	if got := gnoi.File(); got != bgnoi.File() {
-		t.Errorf("GNOI(t) got File client %v, want %v", got, bgnoi.File)
+	if got, want := gnoi.File(), bgnoi.File(); got != want {
+		t.Errorf("GNOI(t) got File client %v, want %v", got, want)
 	}
-	if got := gnoi.Healthz(); got != bgnoi.Healthz() {
-		t.Errorf("GNOI(t) got Healthz client %v, want %v", got, bgnoi.Healthz)
+	if got, want := gnoi.Healthz(), bgnoi.Healthz(); got != want {
+		t.Errorf("GNOI(t) got Healthz client %v, want %v", got, want)
 	}
-	if got := gnoi.Interface(); got != bgnoi.Interface() {
-		t.Errorf("GNOI(t) got Interface client %v, want %v", got, bgnoi.Interface)
+	if got, want := gnoi.Interface(), bgnoi.Interface(); got != want {
+		t.Errorf("GNOI(t) got Interface client %v, want %v", got, want)
 	}
-	if got := gnoi.Layer2(); got != bgnoi.Layer2() {
-		t.Errorf("GNOI(t) got Layer2 client %v, want %v", got, bgnoi.Layer2)
+	if got, want := gnoi.Layer2(), bgnoi.Layer2(); got != want {
+		t.Errorf("GNOI(t) got Layer2 client %v, want %v", got, want)
 	}
-	if got := gnoi.MPLS(); got != bgnoi.MPLS() {
-		t.Errorf("GNOI(t) got MPLS client %v, want %v", got, bgnoi.MPLS)
+	if got, want := gnoi.MPLS(), bgnoi.MPLS(); got != want {
+		t.Errorf("GNOI(t) got MPLS client %v, want %v", got, want)
 	}
-	if got := gnoi.OS(); got != bgnoi.OS() {
-		t.Errorf("GNOI(t) got OS client %v, want %v", got, bgnoi.OS)
+	if got, want := gnoi.OS(), bgnoi.OS(); got != want {
+		t.Errorf("GNOI(t) got OS client %v, want %v", got, want)
 	}
-	if got := gnoi.OTDR(); got != bgnoi.OTDR() {
-		t.Errorf("GNOI(t) got OTDRS client %v, want %v", got, bgnoi.OTDR)
+	if got, want := gnoi.OTDR(), bgnoi.OTDR(); got != want {
+		t.Errorf("GNOI(t) got OTDRS client %v, want %v", got, want)
 	}
-	if got := gnoi.System(); got != bgnoi.System() {
-		t.Errorf("GNOI(t) got System client %v, want %v", got, bgnoi.System)
+	if got, want := gnoi.System(), bgnoi.System(); got != want {
+		t.Errorf("GNOI(t) got System client %v, want %v", got, want)
 	}
-	if got := gnoi.WavelengthRouter(); got != bgnoi.WavelengthRouter() {
-		t.Errorf("GNOI(t) got WavelengthRouter client %v, want %v", got, bgnoi.WavelengthRouter)
+	if got, want := gnoi.WavelengthRouter(), bgnoi.WavelengthRouter(); got != want {
+		t.Errorf("GNOI(t) got WavelengthRouter client %v, want %v", got, want)
 	}
-	if got := gnoi.(*gnoiClients).custom; got != bgnoi.custom {
-		t.Errorf("GNOI(t) got custom client %v, want %v", got, bgnoi.custom)
+	if got, want := gnoi.(*gnoiClients).custom, bgnoi.custom; got != want {
+		t.Errorf("GNOI(t) got custom client %v, want %v", got, want)
 	}
 }
 
 func TestGNOIError(t *testing.T) {
+	initDUTFakes(t)
 	wantErr := "bad gnoi"
 	fakeBind.GNOIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return nil, errors.New(wantErr)

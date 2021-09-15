@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Package fakebind implements a fake testbed binding, backed by a fake SSH server.
 package fakebind
 
@@ -17,7 +31,7 @@ import (
 
 var _ binding.Binding = &Binding{}
 
-// Binding is a fake testbed binding.
+// Binding is a fake testbed binding comprised of stub implementations.
 type Binding struct {
 	Reservation      *reservation.Reservation
 	ConfigPusher     func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
@@ -28,6 +42,19 @@ type Binding struct {
 	P4RTDialer       func(context.Context, *reservation.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 	RoutingRestarter func(*reservation.DUT) error
 	PortStateSetter  func(*reservation.ATE, string, bool) error
+}
+
+// Reset zeros out all the stub implementations.
+func (b *Binding) Reset() {
+	b.Reservation = nil
+	b.ConfigPusher = nil
+	b.TopologyPusher = nil
+	b.TrafficStarter = nil
+	b.GNMIDialer = nil
+	b.GNOIDialer = nil
+	b.P4RTDialer = nil
+	b.RoutingRestarter = nil
+	b.PortStateSetter = nil
 }
 
 // Reserve reserves a new fake testbed, reading the definition from the given path.

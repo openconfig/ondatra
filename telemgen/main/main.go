@@ -62,13 +62,13 @@ const (
 	// Import path for gNMI's proto package.
 	gnmiProtoPath = "github.com/openconfig/gnmi/proto/gnmi"
 	// Import path for ygot.
-	ygotImportPath = "google3/third_party/golang/ygot/ygot/ygot"
+	ygotImportPath = "github.com/openconfig/ygot/ygot"
 	// Import path for ytypes.
-	ytypesImportPath = "google3/third_party/golang/ygot/ytypes/ytypes"
+	ytypesImportPath = "github.com/openconfig/ygot/ytypes"
 	// Import path for goyang's yang package.
 	goyangImportPath = "google3/third_party/golang/goyang/pkg/yang/yang"
 	// Import path for ONDATRA's telemgo package.
-	telemgoImportPath = "google3/third_party/openconfig/ondatra/telemgen/telemgo/telemgo"
+	telemgoImportPath = "github.com/openconfig/ondatra/telemgen/telemgo"
 	// Import path for the proto library.
 	protoLibImportPath = "google3/third_party/golang/protobuf/v2/proto/proto"
 )

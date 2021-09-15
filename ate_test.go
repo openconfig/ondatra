@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package ondatra
 
 import (
@@ -18,8 +32,9 @@ var got struct {
 	flows []*opb.Flow
 }
 
-func init() {
-	initFakeBinding()
+func initATEFakes(t *testing.T) {
+	t.Helper()
+	initFakeBinding(t)
 	fakeBind.TopologyPusher = func(ate *reservation.ATE, top *opb.Topology) error {
 		got.ate = ate.Name
 		got.ifs = top.GetInterfaces()
@@ -30,10 +45,11 @@ func init() {
 		got.flows = flows
 		return nil
 	}
-	reserveFakeTestbed()
+	reserveFakeTestbed(t)
 }
 
 func TestPushTopology(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	p1 := ate.Port(t, "port1")
 	top := ate.Topology().New()
@@ -181,6 +197,7 @@ func TestPushTopology(t *testing.T) {
 }
 
 func TestClearAndPushTopology(t *testing.T) {
+	initATEFakes(t)
 	wantOriginal := &opb.InterfaceConfig{
 		Name:     "intf",
 		Link:     &opb.InterfaceConfig_Port{"1/1"},
@@ -1071,6 +1088,7 @@ func TestClearAndPushTopology(t *testing.T) {
 }
 
 func TestPushTopologyErrors(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	p1 := ate.Port(t, "port1")
 	p2 := ate.Port(t, "port2")
@@ -1162,6 +1180,7 @@ func TestPushTopologyErrors(t *testing.T) {
 }
 
 func TestUpdateTopology(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	p1 := ate.Port(t, "port1")
 	top := ate.Topology().New()
@@ -1237,6 +1256,7 @@ func TestUpdateTopology(t *testing.T) {
 }
 
 func TestStartTraffic(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	p1 := ate.Port(t, "port1")
 	p2 := ate.Port(t, "port2")
@@ -1523,6 +1543,7 @@ func TestStartTraffic(t *testing.T) {
 }
 
 func TestStartTrafficErrors(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	port := ate.Port(t, "port2")
 	intf := ate.Topology().New().AddInterface("intf").WithPort(port)
@@ -1553,6 +1574,7 @@ func TestStartTrafficErrors(t *testing.T) {
 }
 
 func TestUpdateTraffic(t *testing.T) {
+	initATEFakes(t)
 	ate := ATE(t, "ate")
 	p1 := ate.Port(t, "port1")
 	p2 := ate.Port(t, "port2")

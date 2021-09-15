@@ -1,14 +1,32 @@
 #!/bin/bash
+#
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# This script is used to generate the gNMI Telemetry and Config Go APIs.
+# This script is used to generate the Ondatra Telemetry and Config Go APIs.
 
 go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
+wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
+
+EXCLUDE_MODULES=ietf-interfaces,openconfig-acl,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(
+  -path=public/release/models,public/third_party/ietf
   -generate_path_structs
   -compress_paths
-  -exclude_modules=ietf-interfaces,openconfig-acl,openconfig-bfd,openconfig-messages
+  -exclude_modules="${EXCLUDE_MODULES}"
   -generate_fakeroot
   -fakeroot_name=device
   -ignore_shadow_schema_paths
@@ -68,6 +86,7 @@ YANG_FILES=(
   public/third_party/ietf/ietf-inet-types.yang
   public/third_party/ietf/ietf-interfaces.yang
   public/third_party/ietf/ietf-yang-types.yang
+  gnmi-collector-metadata.yang
 )
 
 # Generate Config API.
@@ -79,7 +98,19 @@ generator \
   -output_dir=config \
   -package_name=config \
   -path_structs_split_files_count=5 \
-  "${COMMON_ARGS[@]}" "${YANG_FILES[@]}"
+  "${COMMON_ARGS[@]}" \
+  "${YANG_FILES[@]}"
+go run telemgen/main/main.go \
+  -output_dir=config \
+  -package_name=config \
+  -path=public/release/models,public/third_party/ietf \
+  -exclude_modules="${EXCLUDE_MODULES}" \
+  -generate_config_func \
+  -prefer_shadow_path \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+  -telemetry_funcs_file_split=10 \
+  -telemetry_types_file_split=0 \
+  "${YANG_FILES[@]}"
 
 # Generate Telemetry API.
 mkdir -p telemetry
@@ -90,8 +121,17 @@ generator \
   -output_dir=telemetry \
   -package_name=telemetry \
   -path_structs_split_files_count=10 \
-  "${COMMON_ARGS[@]}" "${YANG_FILES[@]}"
+  "${COMMON_ARGS[@]}" \
+  "${YANG_FILES[@]}"
+go run telemgen/main/main.go \
+  -output_dir=telemetry \
+  -package_name=telemetry \
+  -path=public/release/models,public/third_party/ietf \
+  -exclude_modules="${EXCLUDE_MODULES}" \
+  -telemetry_funcs_file_split=40 \
+  -telemetry_types_file_split=10 \
+  "${YANG_FILES[@]}"
 
 goimports -w config/*.go telemetry/*.go
 gofmt -w -s config/*.go telemetry/*.go
-rm -rf public
+rm -rf public gnmi-collector-metadata.yang

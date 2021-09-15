@@ -1,3 +1,17 @@
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package ondatra
 
 import (
@@ -23,14 +37,17 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-var fakeGNOI *fakeGNOIClient
+var fakeGNOI = func() *fakeGNOIClient {
+	fg := &fakeGNOIClient{}
+	fg.SystemClient = fg
+	fg.OSClient = fg
+	return fg
+}()
 
-func init() {
-	initFakeBinding()
-	reserveFakeTestbed()
-	fakeGNOI = &fakeGNOIClient{}
-	fakeGNOI.SystemClient = fakeGNOI
-	fakeGNOI.OSClient = fakeGNOI
+func initOperationFakes(t *testing.T) {
+	t.Helper()
+	initFakeBinding(t)
+	reserveFakeTestbed(t)
 	fakeBind.GNOIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return fakeGNOI, nil
 	}
@@ -96,6 +113,7 @@ func (*fakeInstallClient) CloseSend() error {
 }
 
 func TestInstall(t *testing.T) {
+	initOperationFakes(t)
 	const version = "1.2.3"
 	dut := DUT(t, "dut")
 
@@ -192,6 +210,7 @@ func TestInstall(t *testing.T) {
 }
 
 func TestInstallErrors(t *testing.T) {
+	initOperationFakes(t)
 	const version = "1.2.3"
 	dut := DUT(t, "dut")
 
@@ -263,6 +282,7 @@ func (*fakePingClient) CloseSend() error {
 }
 
 func TestPing(t *testing.T) {
+	initOperationFakes(t)
 	var got string
 	fakeGNOI.Pinger = func(_ context.Context, req *spb.PingRequest, _ ...grpc.CallOption) (spb.System_PingClient, error) {
 		got = req.GetDestination()
@@ -276,6 +296,7 @@ func TestPing(t *testing.T) {
 }
 
 func TestPingErrors(t *testing.T) {
+	initOperationFakes(t)
 	tests := []struct {
 		wantErr, dest string
 		pinger        func(context.Context, *spb.PingRequest, ...grpc.CallOption) (spb.System_PingClient, error)
@@ -312,6 +333,7 @@ func TestPingErrors(t *testing.T) {
 }
 
 func TestSetInterfaceState(t *testing.T) {
+	initOperationFakes(t)
 	var gotConfig string
 	fakeBind.ConfigPusher = func(_ context.Context, _ *reservation.DUT, config string, _ *binding.ConfigOptions) error {
 		gotConfig = config
@@ -384,6 +406,7 @@ func TestSetInterfaceState(t *testing.T) {
 }
 
 func TestSetInterfaceStateErrors(t *testing.T) {
+	initOperationFakes(t)
 	dut := DUT(t, "dut")
 	port := dut.Port(t, "port1")
 
@@ -415,6 +438,7 @@ func TestSetInterfaceStateErrors(t *testing.T) {
 }
 
 func TestReboot(t *testing.T) {
+	initOperationFakes(t)
 	reboot := DUT(t, "dut").Operations().NewReboot()
 
 	tests := []struct {
@@ -453,6 +477,7 @@ func TestReboot(t *testing.T) {
 }
 
 func TestRebootErrors(t *testing.T) {
+	initOperationFakes(t)
 	tests := []struct {
 		desc                 string
 		dut                  *DUTDevice
@@ -496,6 +521,7 @@ func TestRebootErrors(t *testing.T) {
 }
 
 func TestRestartRouting(t *testing.T) {
+	initOperationFakes(t)
 	var restarted bool
 	fakeBind.RoutingRestarter = func(*reservation.DUT) error {
 		restarted = true
@@ -511,6 +537,7 @@ func TestRestartRouting(t *testing.T) {
 }
 
 func TestRestartRoutingErrors(t *testing.T) {
+	initOperationFakes(t)
 	fakeBind.RoutingRestarter = func(*reservation.DUT) error {
 		return errors.New("bad bad bad :(")
 	}

@@ -236,14 +236,40 @@ func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *Cont
 `,
 
 			ReplaceMethod: `
+// Delete deletes the configuration at /container/leaf.
+func (n *Container_Leaf) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /container/leaf.
 func (n *Container_Leaf) Replace(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, &val)
 }
 
-func (n *Container_Leaf) BatchReplace(t testing.TB, b *Batch, val int32) {
-	b.batchReplace(t, n, &val)
+// BatchReplace buffers a config replace operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchReplace(t testing.TB, b *SetRequestBatch, val int32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /container/leaf.
+func (n *Container_Leaf) Update(t testing.TB, val int32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
 }
 `,
 		},
@@ -339,14 +365,40 @@ func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *oc.C
 `,
 
 			ReplaceMethod: `
+// Delete deletes the configuration at /container/leaf.
+func (n *Container_Leaf) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /container/leaf.
 func (n *Container_Leaf) Replace(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, &val)
 }
 
-func (n *Container_Leaf) BatchReplace(t testing.TB, b *Batch, val int32) {
-	b.batchReplace(t, n, &val)
+// BatchReplace buffers a config replace operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchReplace(t testing.TB, b *SetRequestBatch, val int32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /container/leaf.
+func (n *Container_Leaf) Update(t testing.TB, val int32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /container/leaf in the given batch object.
+func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
 }
 `,
 		},
@@ -439,14 +491,40 @@ func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *List) *Qua
 }
 `,
 			ReplaceMethod: `
+// Delete deletes the configuration at /lists/list/key.
+func (n *List_Key) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /lists/list/key.
 func (n *List_Key) Replace(t testing.TB, val []Binary) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *List_Key) BatchReplace(t testing.TB, b *Batch, val []Binary) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchReplace(t testing.TB, b *SetRequestBatch, val []Binary) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /lists/list/key.
+func (n *List_Key) Update(t testing.TB, val []Binary) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []Binary) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 `,
 		},
@@ -540,14 +618,40 @@ func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *oc.List) *
 }
 `,
 			ReplaceMethod: `
+// Delete deletes the configuration at /lists/list/key.
+func (n *List_Key) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /lists/list/key.
 func (n *List_Key) Replace(t testing.TB, val []oc.Binary) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *List_Key) BatchReplace(t testing.TB, b *Batch, val []oc.Binary) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchReplace(t testing.TB, b *SetRequestBatch, val []oc.Binary) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /lists/list/key.
+func (n *List_Key) Update(t testing.TB, val []oc.Binary) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /lists/list/key in the given batch object.
+func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []oc.Binary) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 `,
 		},
@@ -627,14 +731,40 @@ func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*SuperContainer_Contai
 }
 `,
 			ReplaceMethod: `
+// Delete deletes the configuration at /super-container/container.
+func (n *SuperContainer_Container) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /super-container/container.
 func (n *SuperContainer_Container) Replace(t testing.TB, val *SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *Batch, val *SuperContainer_Container) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *SetRequestBatch, val *SuperContainer_Container) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /super-container/container.
+func (n *SuperContainer_Container) Update(t testing.TB, val *SuperContainer_Container) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch, val *SuperContainer_Container) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 `,
 		},
@@ -715,14 +845,40 @@ func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*oc.SuperContainer_Con
 }
 `,
 			ReplaceMethod: `
+// Delete deletes the configuration at /super-container/container.
+func (n *SuperContainer_Container) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /super-container/container.
 func (n *SuperContainer_Container) Replace(t testing.TB, val *oc.SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *Batch, val *oc.SuperContainer_Container) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *SetRequestBatch, val *oc.SuperContainer_Container) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /super-container/container.
+func (n *SuperContainer_Container) Update(t testing.TB, val *oc.SuperContainer_Container) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /super-container/container in the given batch object.
+func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch, val *oc.SuperContainer_Container) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 `,
 		},

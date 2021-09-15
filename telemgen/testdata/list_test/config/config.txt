@@ -42,53 +42,17 @@ func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
 	return n
 }
 
-// WithReplica adds the replica number to the context metadata of the gNMI
-// server query.
-func (b *Batch) WithReplica(replica int) *Batch {
-	b.deviceRoot.WithReplica(replica)
-	return b
+type SetRequestBatch struct {
+  *privateSetRequestBatch
 }
 
-// WithSubscriptionMode specifies the subscription mode in the underlying gNMI
-// subscribe.
-func (b *Batch) WithSubscriptionMode(mode gpb.SubscriptionMode) *Batch {
-	b.deviceRoot.WithSubscriptionMode(mode)
-	return b
+type privateSetRequestBatch struct {
+  *telemgo.SetRequestBatch
 }
 
-// Batch is the root of a duplicated path tree that has batch operations instead of synchronous config operations that DevicePath has.
-type Batch struct {
- 	replaceReqs []telemgo.PathValuePair
- 	origin string
- 	deviceRoot *RootPath
-}
-
-// NewBatch returns a newly instantiated Batch object for batching set requests.
-func (d *DevicePath) NewBatch() *Batch {
-	return &Batch{
-		deviceRoot: &RootPath{ygot.NewDeviceRootBase(d.Id())},
-		origin: "openconfig",
-	}
-}
-
-func (b *Batch) batchReplace(t testing.TB, n ygot.PathStruct, val interface{}) {
-	t.Helper()
-	path, customData, errs := ygot.ResolvePath(n)
-	if len(errs) > 0 {
-		t.Fatalf("Errors resolving path %v: %v", n, errs)
-	}
-	if path.GetTarget() != b.deviceRoot.Id() {
-		t.Fatalf("path target doesn't equal the device target for the batch: got %q, want %q", path.GetTarget(), b.deviceRoot.Id())
-	}
-	if len(customData) != 0 {
-		t.Fatalf("batching cannot accept a path that has its custom request options; please set request options solely via the batch object.")
-	}
-	b.replaceReqs = append(b.replaceReqs, telemgo.PathValuePair{PathElems: path.GetElem(), Val: val})
-}
-
-// Set commits all the batched requests.
-func (b *Batch) Set(t testing.TB) *gpb.SetResponse {
-	return telemgo.BatchReplace(t, b.origin, b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.replaceReqs)
+// NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
+func (d *DevicePath) NewBatch() *SetRequestBatch {
+	return &SetRequestBatch{&privateSetRequestBatch{telemgo.NewSetRequestBatch(&RootPath{ygot.NewDeviceRootBase(d.Id())})} }
 }
 
 func binarySliceToFloat32(in []Binary) []float32 {
@@ -172,14 +136,40 @@ func (n *ModelPathAny) Get(t testing.TB) []*Model {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model.
+func (n *ModelPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model in the given batch object.
+func (n *ModelPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model.
 func (n *ModelPath) Replace(t testing.TB, val *Model) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *ModelPath) BatchReplace(t testing.TB, b *Batch, val *Model) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model in the given batch object.
+func (n *ModelPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Model) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model.
+func (n *ModelPath) Update(t testing.TB, val *Model) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model in the given batch object.
+func (n *ModelPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Model) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 
 // GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key.
@@ -236,14 +226,40 @@ func (n *Model_MultiKeyPathAny) Get(t testing.TB) []*Model_MultiKey {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model/b/multi-key in the given batch object.
+func (n *Model_MultiKeyPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model/b/multi-key.
 func (n *Model_MultiKeyPath) Replace(t testing.TB, val *Model_MultiKey) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *Model_MultiKeyPath) BatchReplace(t testing.TB, b *Batch, val *Model_MultiKey) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model/b/multi-key in the given batch object.
+func (n *Model_MultiKeyPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Model_MultiKey) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model/b/multi-key.
+func (n *Model_MultiKeyPath) Update(t testing.TB, val *Model_MultiKey) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model/b/multi-key in the given batch object.
+func (n *Model_MultiKeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Model_MultiKey) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 
 // GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/config/key1.
@@ -292,14 +308,40 @@ func (n *Model_MultiKey_Key1PathAny) Get(t testing.TB) []uint32 {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1Path) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model/b/multi-key/config/key1 in the given batch object.
+func (n *Model_MultiKey_Key1Path) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model/b/multi-key/config/key1.
 func (n *Model_MultiKey_Key1Path) Replace(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, &val)
 }
 
-func (n *Model_MultiKey_Key1Path) BatchReplace(t testing.TB, b *Batch, val uint32) {
-	b.batchReplace(t, n, &val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model/b/multi-key/config/key1 in the given batch object.
+func (n *Model_MultiKey_Key1Path) BatchReplace(t testing.TB, b *SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model/b/multi-key/config/key1.
+func (n *Model_MultiKey_Key1Path) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model/b/multi-key/config/key1 in the given batch object.
+func (n *Model_MultiKey_Key1Path) BatchUpdate(t testing.TB, b *SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
 }
 
 // convertModel_MultiKey_Key1Path extracts the value of the leaf Key1 from its parent Model_MultiKey
@@ -368,14 +410,40 @@ func (n *Model_MultiKey_Key2PathAny) Get(t testing.TB) []uint64 {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2Path) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model/b/multi-key/config/key2 in the given batch object.
+func (n *Model_MultiKey_Key2Path) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model/b/multi-key/config/key2.
 func (n *Model_MultiKey_Key2Path) Replace(t testing.TB, val uint64) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, &val)
 }
 
-func (n *Model_MultiKey_Key2Path) BatchReplace(t testing.TB, b *Batch, val uint64) {
-	b.batchReplace(t, n, &val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model/b/multi-key/config/key2 in the given batch object.
+func (n *Model_MultiKey_Key2Path) BatchReplace(t testing.TB, b *SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model/b/multi-key/config/key2.
+func (n *Model_MultiKey_Key2Path) Update(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model/b/multi-key/config/key2 in the given batch object.
+func (n *Model_MultiKey_Key2Path) BatchUpdate(t testing.TB, b *SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
 }
 
 // convertModel_MultiKey_Key2Path extracts the value of the leaf Key2 from its parent Model_MultiKey
@@ -452,14 +520,40 @@ func (n *Model_SingleKeyPathAny) Get(t testing.TB) []*Model_SingleKey {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model/a/single-key in the given batch object.
+func (n *Model_SingleKeyPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model/a/single-key.
 func (n *Model_SingleKeyPath) Replace(t testing.TB, val *Model_SingleKey) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *Model_SingleKeyPath) BatchReplace(t testing.TB, b *Batch, val *Model_SingleKey) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model/a/single-key in the given batch object.
+func (n *Model_SingleKeyPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Model_SingleKey) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model/a/single-key.
+func (n *Model_SingleKeyPath) Update(t testing.TB, val *Model_SingleKey) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model/a/single-key in the given batch object.
+func (n *Model_SingleKeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Model_SingleKey) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }
 
 // GetFull retrieves a sample for /openconfig-withlist/model/a/single-key/config/key.
@@ -508,14 +602,40 @@ func (n *Model_SingleKey_KeyPathAny) Get(t testing.TB) []uint32 {
 	return data
 }
 
+// Delete deletes the configuration at /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-withlist/model/a/single-key/config/key in the given batch object.
+func (n *Model_SingleKey_KeyPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /openconfig-withlist/model/a/single-key/config/key.
 func (n *Model_SingleKey_KeyPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, &val)
 }
 
-func (n *Model_SingleKey_KeyPath) BatchReplace(t testing.TB, b *Batch, val uint32) {
-	b.batchReplace(t, n, &val)
+// BatchReplace buffers a config replace operation at /openconfig-withlist/model/a/single-key/config/key in the given batch object.
+func (n *Model_SingleKey_KeyPath) BatchReplace(t testing.TB, b *SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-withlist/model/a/single-key/config/key.
+func (n *Model_SingleKey_KeyPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-withlist/model/a/single-key/config/key in the given batch object.
+func (n *Model_SingleKey_KeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
 }
 
 // convertModel_SingleKey_KeyPath extracts the value of the leaf Key from its parent Model_SingleKey
@@ -557,12 +677,38 @@ func (n *RootPath) Get(t testing.TB) *Root {
 	return n.GetFull(t).Val(t)
 }
 
+// Delete deletes the configuration at /.
+func (n *RootPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at / in the given batch object.
+func (n *RootPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
 // Replace replaces the configuration at /.
 func (n *RootPath) Replace(t testing.TB, val *Root) *gpb.SetResponse {
 	t.Helper()
 	return telemgo.Replace(t, n, val)
 }
 
-func (n *RootPath) BatchReplace(t testing.TB, b *Batch, val *Root) {
-	b.batchReplace(t, n, val)
+// BatchReplace buffers a config replace operation at / in the given batch object.
+func (n *RootPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Root) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /.
+func (n *RootPath) Update(t testing.TB, val *Root) *gpb.SetResponse {
+	t.Helper()
+	return telemgo.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at / in the given batch object.
+func (n *RootPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Root) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
 }

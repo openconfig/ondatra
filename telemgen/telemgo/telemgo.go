@@ -530,32 +530,12 @@ func (c *Collection) Await(t testing.TB) ([]QualifiedValue, bool) {
 	return <-c.data, !isTimeout
 }
 
-// PathValuePair is a (gNMI path elem, ygot-value) pair.
-type PathValuePair struct {
-	// PathElems is a gNMI path for the path-value pair.
-	PathElems []*gpb.PathElem
-	// Val is a ygot-generated value for the path specified by PathElems.
-	Val interface{}
-}
-
-// BatchReplace creates and makes a single gNMI SetRequest call for the given set of
-// path-value pairs. It requires a single set of origin, target, and customData
-// for creating the gNMI SetRequest.
-func BatchReplace(t testing.TB, origin string, target string, customData map[string]interface{}, pvs []PathValuePair) *gpb.SetResponse {
-	t.Helper()
-	resp, err := batchSet(context.Background(), origin, target, customData, pvs)
-	if err != nil {
-		t.Fatalf("BatchReplace(t, %v, %v, %v, %v): %v", origin, target, customData, pvs, err)
-	}
-	return resp
-}
-
-func batchSet(ctx context.Context, origin string, target string, customData map[string]interface{}, pvs []PathValuePair) (*gpb.SetResponse, error) {
+func batchSet(origin string, target string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
 	dev, opts, err := resolveBatch(target, customData)
 	if err != nil {
 		return nil, err
 	}
-	return setVals(ctx, dev, opts, origin, target, pvs)
+	return setVals(context.Background(), dev, opts, origin, target, req)
 }
 
 func resolveBatch(target string, customData map[string]interface{}) (reservation.Device, *requestOpts, error) {
@@ -574,13 +554,35 @@ func resolveBatch(target string, customData map[string]interface{}) (reservation
 	return dev, opts, err
 }
 
-// Replace creates and makes a gNMI SetRequest call for the given value for the
-// path specified by the path struct.
+// Delete creates and makes a gNMI SetRequest delete call for the given value
+// for the path specified by the path struct.
+func Delete(t testing.TB, n ygot.PathStruct) *gpb.SetResponse {
+	t.Helper()
+	resp, path, err := set(context.Background(), n, nil, deletePath)
+	if err != nil {
+		t.Fatalf("Delete(t) at path %s: %v", path, err)
+	}
+	return resp
+}
+
+// Replace creates and makes a gNMI SetRequest replace call for the given value
+// for the path specified by the path struct.
 func Replace(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
 	t.Helper()
-	resp, path, err := set(context.Background(), n, val)
+	resp, path, err := set(context.Background(), n, val, replacePath)
 	if err != nil {
 		t.Fatalf("Replace(t, %v) at path %s: %v", val, path, err)
+	}
+	return resp
+}
+
+// Update creates and makes a gNMI SetRequest update call for the given value
+// for the path specified by the path struct.
+func Update(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
+	t.Helper()
+	resp, path, err := set(context.Background(), n, val, updatePath)
+	if err != nil {
+		t.Fatalf("Update(t, %v) at path %s: %v", val, path, err)
 	}
 	return resp
 }
@@ -588,35 +590,22 @@ func Replace(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse 
 // set configures the target with the input SetRequest. The target should be
 // specified in the req.Prefix.Target field of the SetRequest; this field will
 // be erased before the request is forwarded to the target in the gNMI call.
-func set(ctx context.Context, n ygot.PathStruct, val interface{}) (*gpb.SetResponse, *gpb.Path, error) {
+func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperation) (*gpb.SetResponse, *gpb.Path, error) {
 	path, dev, opts, err := resolve(n)
 	if err != nil {
 		return nil, path, err
 	}
-	response, err := setVals(ctx, dev, opts, path.GetOrigin(), path.GetTarget(), []PathValuePair{{PathElems: path.GetElem(), Val: val}})
+	req := &gpb.SetRequest{}
+	if err := populateSetRequest(req, path, val, op); err != nil {
+		return nil, nil, err
+	}
+	response, err := setVals(ctx, dev, opts, path.GetOrigin(), path.GetTarget(), req)
 	return response, path, err
 }
 
-func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, origin, target string, pvs []PathValuePair) (*gpb.SetResponse, error) {
-	req := &gpb.SetRequest{
-		// TODO: Is there any value in setting the target here?
-		Prefix: &gpb.Path{Origin: origin},
-	}
-	for _, pv := range pvs {
-		// Since the GoStructs are generated using preferOperationalState, we
-		// need to turn on preferShadowPath to prefer marshalling config paths.
-		js, err := ygot.Marshal7951(pv.Val, ygot.JSONIndent("  "), &ygot.RFC7951JSONConfig{AppendModuleName: true, PreferShadowPath: true})
-		if err != nil {
-			return nil, fmt.Errorf("Could not encode value into JSON format: %w", err)
-		}
-		if len(pv.PathElems) == 0 {
-			return nil, fmt.Errorf("Got empty path for replace operation: %v", pv)
-		}
-		req.Replace = append(req.Replace, &gpb.Update{
-			Path: &gpb.Path{Elem: pv.PathElems},
-			Val:  &gpb.TypedValue{Value: &gpb.TypedValue_JsonIetfVal{js}},
-		})
-	}
+func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, origin, target string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
+	// TODO: Is there any value in setting the target here?
+	req.Prefix = &gpb.Path{Origin: origin}
 
 	dut, ok := dev.(*reservation.DUT)
 	if !ok {

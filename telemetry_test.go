@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package ondatra
 
 import (
@@ -25,17 +39,18 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-var fakeGNMI *fakegnmi.FakeGNMI
-
-func init() {
-	initFakeBinding()
-	reserveFakeTestbed()
-
+var fakeGNMI = func() *fakegnmi.FakeGNMI {
 	fg, err := fakegnmi.Start(0)
 	if err != nil {
 		log.Fatalf("could not start fake gNMI server: %v", err)
 	}
-	fakeGNMI = fg
+	return fg
+}()
+
+func initTelemetryFakes(t *testing.T) {
+	t.Helper()
+	initFakeBinding(t)
+	reserveFakeTestbed(t)
 	fakeBind.GNMIDialer = func(ctx context.Context, _ *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return fakeGNMI.Dial(ctx, opts...)
 	}
@@ -122,6 +137,7 @@ func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *telemgo.ComplianceEr
 }
 
 func TestMetadata(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 	connPath := gnmiPath(t, "meta/connected")
 	syncPath := gnmiPath(t, "meta/sync")
@@ -298,6 +314,7 @@ func TestMetadata(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 	port := dut.Port(t, "port1")
 
@@ -560,6 +577,7 @@ func TestGet(t *testing.T) {
 }
 
 func TestGetDefault(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
 	getStrPath := func(iname string) string {
@@ -647,6 +665,7 @@ func TestGetDefault(t *testing.T) {
 }
 
 func TestGetConfig(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 	port := dut.Port(t, "port1")
 
@@ -890,6 +909,7 @@ func TestGetConfig(t *testing.T) {
 }
 
 func TestGetNonleaf(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 	port := dut.Port(t, "port1")
 
@@ -1345,6 +1365,7 @@ func TestGetNonleaf(t *testing.T) {
 }
 
 func TestWildcardGet(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
 	getStrPath := func(iname string) string {
@@ -1519,6 +1540,7 @@ func TestWildcardGet(t *testing.T) {
 }
 
 func TestWildcardNonleafGet(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
 	getStrPath := func(iname string) string {
@@ -1715,6 +1737,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 }
 
 func TestCollect(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 	port := dut.Port(t, "port1")
 
@@ -2062,6 +2085,7 @@ func TestCollect(t *testing.T) {
 }
 
 func TestCollectUntil(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
 	getStrPath := func(iname string) string {
@@ -2193,6 +2217,7 @@ func TestCollectUntil(t *testing.T) {
 }
 
 func TestWildcardCollectUntil(t *testing.T) {
+	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
 	getStrPath := func(iname string) string {
