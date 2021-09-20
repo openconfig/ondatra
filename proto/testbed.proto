@@ -68,6 +68,7 @@ message Port {
     S_UNKNOWN = 0;
     S_10GB = 10;
     S_100GB = 100;
+    S_400GB = 400;
   }
   Speed speed = 2;
 }

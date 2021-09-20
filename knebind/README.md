@@ -18,7 +18,7 @@ An example YAML config file:
 ```
 username: tester
 password: hunter2
-topology: /home/tester/3nodes.textproto
+topology: /home/tester/topo.textproto
 cli: /home/tester/go/bin/kne_cli
 kubecfg: /home/tester/go/bin/.kube/config
 ```
