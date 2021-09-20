@@ -30,7 +30,7 @@ import (
 
 	"flag"
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/closer"
+	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/reservemain"

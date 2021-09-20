@@ -18,12 +18,13 @@ package testbed
 import (
 	"golang.org/x/net/context"
 	"fmt"
+	"io/ioutil"
 	"regexp"
 	"sync"
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/common/protoutil"
+	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/usererr"
@@ -63,8 +64,13 @@ func Reserve(ctx context.Context, testbedPath string, runTime, waitTime time.Dur
 		return errors.New("testbed is already reserved; RunTests was already called")
 	}
 	tb := &opb.Testbed{}
-	if err := protoutil.ReadText(testbedPath, tb); err != nil {
-		return usererr.Wrapf(err, "error reading testbed definition %q", testbedPath)
+	s, err := ioutil.ReadFile(testbedPath)
+	if err != nil {
+		return errors.Wrapf(err, "failed to read testbed proto %s", testbedPath)
+	}
+	err = prototext.Unmarshal(s, tb)
+	if err != nil {
+		return errors.Wrapf(err, "failed to parse testbed proto %s", testbedPath)
 	}
 	if err := validateTB(tb); err != nil {
 		return err

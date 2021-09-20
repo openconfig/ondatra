@@ -33,12 +33,12 @@ var _ binding.Binding = &Binding{}
 
 // Binding is a fake testbed binding comprised of stub implementations.
 type Binding struct {
-	Reservation      *reservation.Reservation
-	ConfigPusher     func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
-	TopologyPusher   func(*reservation.ATE, *opb.Topology) error
-	TrafficStarter   func(*reservation.ATE, []*opb.Flow) error
-	GNMIDialer       func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
-	GNOIDialer       func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
+	Reservation    *reservation.Reservation
+	ConfigPusher   func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
+	TopologyPusher func(*reservation.ATE, *opb.Topology) error
+	TrafficStarter func(*reservation.ATE, []*opb.Flow) error
+	GNMIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
+	GNOIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
 	P4RTDialer       func(context.Context, *reservation.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 	RoutingRestarter func(*reservation.DUT) error
 	PortStateSetter  func(*reservation.ATE, string, bool) error

@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"flag"
-	"github.com/openconfig/ondatra/closer"
+	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/testbed"
 )

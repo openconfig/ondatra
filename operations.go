@@ -22,7 +22,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/closer"
+	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/openconfig/ondatra/internal/operations"
 	"github.com/openconfig/ondatra/internal/reservation"
 )

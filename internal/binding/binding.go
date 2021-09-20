@@ -37,8 +37,10 @@ import (
 	otpb "github.com/openconfig/gnoi/otdr"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
+
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
+
 )
 
 var (
@@ -105,7 +107,7 @@ type Binding interface {
 	// otherwise the existing config is replaced with the provided config.
 	PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *ConfigOptions) error
 
-	// DialGNMI creates a client connection to the GNMI endpoint for the specified DUT.
+	// DialGNMI creates a client connection to the specified DUT's gNMI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error)
 

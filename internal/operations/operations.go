@@ -23,7 +23,7 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/closer"
+	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"

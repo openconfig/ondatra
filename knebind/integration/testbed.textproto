@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# proto-file: google3/third_party/openconfig/ondatra/proto/testbed.proto
+# proto-file: proto/testbed.proto
 # proto-message: ondatra.Testbed
 
 duts {
