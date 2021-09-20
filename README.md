@@ -18,8 +18,8 @@ $ go test $(go list ./... | grep -v /integration)
 The Ondatra *binding* is the API layer through which Ondatra connects to and
 controls the devices in your test environment. For an Ondatra test to run in
 your environment, you must provide an implementation of the
-[internal/binding/binding.go](Binding) interface. The interface defines the
+[Binding](internal/binding/binding.go) interface. The interface defines the
 primitive operations that Ondatra needs to be able to test against devices in
-your lab. When authoring a new binding implementation, many methods can be
-left unimplemented to start, with their implementation postponed until you have
-a test that requires that piece of functionality.
+your lab. When authoring a new binding implementation, many methods can be left
+unimplemented to start, with their implementation postponed until you have a
+test that requires that piece of functionality.
