@@ -130,7 +130,7 @@ func (f *fixture) testStarted(t *testing.T, timeout time.Duration) {
 		t.SkipNow()
 	}
 	// Wait until the first testcase to start the timer, so fatalFn is definitely set.
-	if f.fatalFn == nil {
+	if timeout > 0 && f.fatalFn == nil {
 		go func() {
 			time.Sleep(timeout)
 			f.failEarly(fmt.Sprintf("Ondatra test timed out after %v", timeout))

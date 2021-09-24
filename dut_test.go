@@ -15,11 +15,16 @@
 package ondatra
 
 import (
+	"bufio"
+	"bytes"
 	"golang.org/x/net/context"
+	"fmt"
+	"io"
 	"path/filepath"
 	"strings"
 	"testing"
 
+	"google3/ops/netops/util/go/errdiff"
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -382,5 +387,161 @@ func TestGNOIError(t *testing.T) {
 	})
 	if !strings.Contains(gotErr, wantErr) {
 		t.Errorf("GNOI(t) got err %v, want %v", gotErr, wantErr)
+	}
+}
+
+type fakeIO struct {
+	stdin  *bytes.Buffer
+	stdout *bytes.Buffer
+	stderr *bytes.Buffer
+	cErr   error
+}
+
+func (f *fakeIO) SendCommand(_ context.Context, cmd string) (string, error) {
+	if cmd == "error" {
+		return "", fmt.Errorf("error")
+	}
+	return cmd, nil
+}
+
+func (f *fakeIO) Close() error {
+	return f.cErr
+}
+
+func (f *fakeIO) Stdin() io.Writer {
+	return f.stdin
+}
+
+func (f *fakeIO) Stdout() io.Reader {
+	return f.stdout
+}
+
+func (f *fakeIO) Stderr() io.Reader {
+	return f.stderr
+}
+
+func TestStreamingClient(t *testing.T) {
+	initDUTFakes(t)
+	fCLI := &fakeIO{
+		stdin:  bytes.NewBuffer([]byte{}),
+		stdout: bytes.NewBuffer([]byte{}),
+		stderr: bytes.NewBuffer([]byte{}),
+	}
+	fConsole := &fakeIO{
+		stdin:  bytes.NewBuffer([]byte{}),
+		stdout: bytes.NewBuffer([]byte{}),
+		stderr: bytes.NewBuffer([]byte{}),
+	}
+	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+		return fCLI, nil
+	}
+	fakeBind.ConsoleDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+		return fConsole, nil
+	}
+	cliClient := DUT(t, "dut").RawAPIs().CLI(t)
+	consoleClient := DUT(t, "dut").RawAPIs().Console(t)
+	tests := []struct {
+		desc string
+		c    StreamClient
+		f    *fakeIO
+	}{{
+		desc: "Console",
+		c:    consoleClient,
+		f:    fConsole,
+	}, {
+		desc: "CLI",
+		c:    cliClient,
+		f:    fCLI,
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			stdin := tt.c.Stdin()
+			want := "show version\n"
+			stdin.Write([]byte(want))
+			got, err := tt.f.stdin.ReadString('\n')
+			if err != nil {
+				t.Fatalf("failed to write to test buffer: %v", err)
+			}
+			if got != want {
+				t.Fatalf("failed to get expect stream data: got %v, want %v", got, want)
+			}
+			stdout := tt.c.Stdout()
+			want = "some really cool output\n"
+			tt.f.stdout.Write([]byte(want))
+			got, err = bufio.NewReader(stdout).ReadString('\n')
+			if err != nil {
+				t.Fatalf("failed to write to test buffer: %v", err)
+			}
+			if got != want {
+				t.Fatalf("failed to get expect stream data: got %v, want %v", got, want)
+			}
+			stderr := tt.c.Stderr()
+			want = "some errors written to stderr\n"
+			tt.f.stderr.Write([]byte(want))
+			got, err = bufio.NewReader(stderr).ReadString('\n')
+			if err != nil {
+				t.Fatalf("failed to write to test buffer: %v", err)
+			}
+			if got != want {
+				t.Fatalf("failed to get expect stream data: got %v, want %v", got, want)
+			}
+		})
+	}
+}
+
+func TestSendCommand(t *testing.T) {
+	initDUTFakes(t)
+	fCLI := &fakeIO{}
+	fConsole := &fakeIO{}
+	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+		return fCLI, nil
+	}
+	fakeBind.ConsoleDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+		return fConsole, nil
+	}
+	cliClient := DUT(t, "dut").RawAPIs().CLI(t)
+	consoleClient := DUT(t, "dut").RawAPIs().Console(t)
+	tests := []struct {
+		desc    string
+		c       StreamClient
+		f       *fakeIO
+		cmd     string
+		wantErr string
+	}{{
+		desc: "Console",
+		c:    consoleClient,
+		f:    fConsole,
+		cmd:  "some cli command",
+	}, {
+		desc: "CLI",
+		c:    cliClient,
+		f:    fCLI,
+		cmd:  "some cli command",
+	}, {
+		desc:    "Console",
+		c:       consoleClient,
+		f:       fConsole,
+		cmd:     "error",
+		wantErr: "error",
+	}, {
+		desc:    "CLI",
+		c:       cliClient,
+		f:       fCLI,
+		cmd:     "error",
+		wantErr: "error",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			got, err := tt.c.SendCommand(context.Background(), tt.cmd)
+			if s := errdiff.Substring(err, tt.wantErr); s != "" {
+				t.Fatalf("unexpected error: %s", s)
+			}
+			if err != nil {
+				return
+			}
+			if got != tt.cmd {
+				t.Fatalf("SendCommand failed: got %v, want %v", got, tt.cmd)
+			}
+		})
 	}
 }

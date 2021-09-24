@@ -16,5 +16,7 @@
 
 # This script is used to generate the Ondatra proto APIs.
 
+set -e
+
 cd "$( dirname "${BASH_SOURCE[0]}" )"
-protoc --go_out=. --go_opt=paths=source_relative proto/*.proto
+protoc --go_out=. --go_opt=paths=source_relative *.proto

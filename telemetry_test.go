@@ -31,10 +31,10 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/internal/fakegnmi"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/negtest"
 	"github.com/openconfig/ondatra/telemetry"
-	"github.com/openconfig/ondatra/telemgen/telemgo"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -94,8 +94,8 @@ func verifySubscriptionPathsSent(t *testing.T, wantPaths ...*gpb.Path) {
 
 // verifyTelemetryErrSubstr verifies the error components of a given
 // ComplianceErrors value given the consitutent error substrings.
-func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *telemgo.ComplianceErrors, wantPathErrSubstr, wantTypeErrSubstr, wantValidateErrSubstr string) {
-	var pathErrs, typeErrs []*telemgo.TelemetryError
+func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *genutil.ComplianceErrors, wantPathErrSubstr, wantTypeErrSubstr, wantValidateErrSubstr string) {
+	var pathErrs, typeErrs []*genutil.TelemetryError
 	var validateErrs []error
 	if complianceErrs != nil {
 		pathErrs = complianceErrs.PathErrors
@@ -172,7 +172,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: connPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      connPath,
@@ -195,7 +195,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: connPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      connPath,
@@ -218,7 +218,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: syncPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      syncPath,
@@ -241,7 +241,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: syncPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      syncPath,
@@ -264,7 +264,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: leavesAddedPath,
 		wantQualified: (&telemetry.QualifiedInt64{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 200),
 				Present:   true,
 				Path:      leavesAddedPath,
@@ -279,7 +279,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: leavesAddedPath,
 		wantQualified: &(telemetry.QualifiedInt64{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    leavesAddedPath,
 			}}),
@@ -293,7 +293,7 @@ func TestMetadata(t *testing.T) {
 		},
 		wantSubscriptionPath: leavesAddedPath,
 		wantQualified: &(telemetry.QualifiedInt64{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    leavesAddedPath,
 			}}),
@@ -351,7 +351,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      statusPath,
@@ -372,7 +372,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      resolvedPath,
@@ -394,7 +394,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      statusPath,
@@ -416,7 +416,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      resolvedPath,
@@ -437,7 +437,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 101),
 				Present:   true,
 				Path:      statusPath,
@@ -450,7 +450,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: &(telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    statusPath,
 			}}),
@@ -470,7 +470,7 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 102),
 				Present:   true,
 				Path:      statusPath,
@@ -613,7 +613,7 @@ func TestGetDefault(t *testing.T) {
 		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
 		wantSubscriptionPath: enabledPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      enabledPath,
@@ -626,7 +626,7 @@ func TestGetDefault(t *testing.T) {
 		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
 		wantSubscriptionPath: enabledPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: true,
 				Path:    enabledPath,
 			}}).SetVal(true),
@@ -638,7 +638,7 @@ func TestGetDefault(t *testing.T) {
 		inGetCall:            dut.Config().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
 		wantSubscriptionPath: enabledConfigPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: true,
 				Path:    enabledConfigPath,
 			}}).SetVal(true),
@@ -702,7 +702,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      descPath,
@@ -723,7 +723,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      resolvedPath,
@@ -745,7 +745,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      descPath,
@@ -767,7 +767,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      resolvedPath,
@@ -788,7 +788,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 101),
 				Present:   true,
 				Path:      descPath,
@@ -801,7 +801,7 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: &(telemetry.QualifiedString{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    descPath,
 			}}),
@@ -968,7 +968,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -994,7 +994,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -1017,7 +1017,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -1043,7 +1043,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -1066,7 +1066,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				// This value should not be present, but is due to https://github.com/openconfig/ygot/issues/544
 				Present: true,
@@ -1091,7 +1091,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(genericPortName).GetFull,
 		wantSubscriptionPath: resolvedIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 200),
 				Present:   true,
 				Path:      resolvedIntfPath,
@@ -1116,7 +1116,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -1150,7 +1150,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 400),
 				Present:   true,
 				Path:      staticIntfPath,
@@ -1168,7 +1168,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: &telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    staticIntfPath,
 			}},
@@ -1216,7 +1216,7 @@ func TestGetNonleaf(t *testing.T) {
 		inGetCall:            dut.Telemetry().GetFull,
 		wantSubscriptionPath: rootPath,
 		wantQualified: (&telemetry.QualifiedDevice{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 100),
 				Present:   true,
 				Path:      rootPath,
@@ -1275,7 +1275,7 @@ func TestGetNonleaf(t *testing.T) {
 			return dut.Telemetry().Interface(staticPortName)
 		},
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    staticIntfPath,
 			}}),
@@ -1300,7 +1300,7 @@ func TestGetNonleaf(t *testing.T) {
 			return dut.Telemetry().Interface(genericPortName)
 		},
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Timestamp: time.Unix(0, 200),
 				Present:   true,
 				Path:      resolvedIntfPath,
@@ -1326,7 +1326,7 @@ func TestGetNonleaf(t *testing.T) {
 			return dut.Telemetry().Interface(staticPortName)
 		},
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &telemgo.QualifiedType{
+			QualifiedType: &genutil.QualifiedType{
 				Present: false,
 				Path:    staticIntfPath,
 			}}),
@@ -1349,12 +1349,12 @@ func TestGetNonleaf(t *testing.T) {
 			got := tt.inInterfacePath().GetFull(t)
 			checkJustReceived(t, got.RecvTimestamp)
 			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
-			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), cmpopts.IgnoreTypes(&telemgo.ComplianceErrors{}), protocmp.Transform()); diff != "" {
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got Qualified type different from expected (-want,+got):\n %s", diff)
 			}
 			// Test Val(t) API.
 			if tt.wantQualified.Present {
-				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t), cmpopts.IgnoreTypes(&telemgo.ComplianceErrors{})); diff != "" {
+				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{})); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
 			}
@@ -1396,7 +1396,7 @@ func TestWildcardGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      intf1Path,
@@ -1429,13 +1429,13 @@ func TestWildcardGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      intf1Path,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      intf2Path,
@@ -1586,7 +1586,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedInterface{
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(0, 100),
 					Present:   true,
 					Path:      staticIntfPath,
@@ -1629,7 +1629,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedInterface{
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(0, 200),
 					Present:   true,
 					Path:      resolvedIntfPath,
@@ -1638,7 +1638,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 				Enabled:    ygot.Bool(true),
 			}),
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(0, 400),
 					Present:   true,
 					Path:      staticIntfPath,
@@ -1781,7 +1781,7 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -1806,7 +1806,7 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: resolvedOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      resolvedOctetsPath,
@@ -1853,13 +1853,13 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -1895,13 +1895,13 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -1960,39 +1960,39 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(456),
 			{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(20 * time.Millisecond),
 					Present:   false,
 					Path:      staticOctetsPath,
 				},
 			},
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(30 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(789),
 			{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(40 * time.Millisecond),
 					Present:   false,
 					Path:      staticOctetsPath,
 				},
 			},
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(50 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -2132,13 +2132,13 @@ func TestCollectUntil(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(50),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -2178,13 +2178,13 @@ func TestCollectUntil(t *testing.T) {
 		wantStatus:           true,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(50),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      staticOctetsPath,
@@ -2264,13 +2264,13 @@ func TestWildcardCollectUntil(t *testing.T) {
 		wantSubscriptionPath: wildcardPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      ethPath,
 				}}).SetVal(150),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      loPath,
@@ -2302,13 +2302,13 @@ func TestWildcardCollectUntil(t *testing.T) {
 		wantStatus:           true,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime,
 					Present:   true,
 					Path:      ethPath,
 				}}).SetVal(50),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: startTime.Add(10 * time.Millisecond),
 					Present:   true,
 					Path:      loPath,

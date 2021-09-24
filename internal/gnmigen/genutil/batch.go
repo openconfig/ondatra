@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package telemgo
+package genutil
 
 import (
 	"fmt"
@@ -135,7 +135,7 @@ const (
 
 func populateSetRequest(req *gpb.SetRequest, path *gpb.Path, val interface{}, op setOperation) error {
 	if req == nil {
-		return fmt.Errorf("telemgo: cannot populate a nil SetRequest")
+		return fmt.Errorf("cannot populate a nil SetRequest")
 	}
 	if len(path.Elem) == 0 {
 		return fmt.Errorf("got empty path for replace operation")

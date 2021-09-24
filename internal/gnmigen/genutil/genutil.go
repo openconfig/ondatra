@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package telemgo implements helpers used in the generated Go telemetry API.
-package telemgo
+// Package genutil implements helpers used in the generated Go telemetry API.
+package genutil
 
 import (
 	"golang.org/x/net/context"
@@ -271,7 +271,7 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 
 	errs := &errlist.List{}
 	if !schema.IsValid() {
-		errs.Add(errors.Errorf("telemgo: input schema for generated code is invalid"))
+		errs.Add(errors.Errorf("input schema for generated code is invalid"))
 		return nil, nil, errs.Err()
 	}
 	for _, dp := range data {
@@ -293,7 +293,7 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 		schemaPath := util.PathStringToElements(structSchema.Path())[1:]
 		relPath := util.TrimGNMIPathPrefix(dp.Path, schemaPath)
 		if relPath == dp.Path { // input pointer returned by TrimGNMIPathPrefix means input prefix does not match.
-			errs.Add(errors.Errorf("telemgo.unmarshal: parent schema path %v is not a prefix of the datapoints path %v", schemaPath, dp.Path))
+			errs.Add(errors.Errorf("parent schema path %v is not a prefix of the datapoints path %v", schemaPath, dp.Path))
 			continue
 		}
 
@@ -617,9 +617,9 @@ func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, ori
 		return nil, err
 	}
 
-	log.Info(prettySetRequest(req))
+	log.V(1).Info(prettySetRequest(req))
 	resp, err := gnmi.Set(ctx, req)
-	log.Infof("SetResponse:\n%s", prototext.Format(resp))
+	log.V(1).Infof("SetResponse:\n%s", prototext.Format(resp))
 	if err != nil {
 		return nil, fmt.Errorf("SetRequest unsuccessful: %w", err)
 	}
@@ -701,7 +701,7 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint, leaf bool) (map[s
 	for _, dp := range datapoints {
 		elems := dp.Path.GetElem()
 		if uint(len(elems)) < prefixLen {
-			violations = append(violations, fmt.Sprintf("telemgo.bundleDatapoints: invalid datapoint path elems (len < %d): %v", prefixLen, elems))
+			violations = append(violations, fmt.Sprintf("invalid datapoint path elems (len < %d): %v", prefixLen, elems))
 			continue
 		}
 		prefixPath, err := ygot.PathToString(&gpb.Path{Elem: elems[:prefixLen]})
@@ -721,7 +721,7 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint, leaf bool) (map[s
 	if leaf {
 		for prefix, dps := range groups {
 			if len(dps) != 1 {
-				violations = append(violations, fmt.Sprintf("telemgo.bundleDatapoints: got more than 1 path for leaf node %s: %v", prefix, dps))
+				violations = append(violations, fmt.Sprintf("got more than 1 path for leaf node %s: %v", prefix, dps))
 			}
 		}
 	}

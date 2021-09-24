@@ -16,7 +16,7 @@ import (
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
-	"github.com/openconfig/ondatra/telemgen/telemgo"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -24,21 +24,21 @@ import (
 // WithReplica adds the replica number to the context metadata of the gNMI
 // server query.
 func (n *RootPath) WithReplica(replica int) *RootPath {
-	telemgo.PutReplica(n, replica)
+	genutil.PutReplica(n, replica)
 	return n
 }
 
 // WithSubscriptionMode specifies the subscription mode in the underlying gNMI
 // subscribe.
 func (n *RootPath) WithSubscriptionMode(mode gpb.SubscriptionMode) *RootPath {
-	telemgo.PutSubscriptionMode(n, mode)
+	genutil.PutSubscriptionMode(n, mode)
 	return n
 }
 
 // WithClient allows the user to provide a gNMI client. This allows for creation
 // of tests for multiple gNMI clients to a single DUT.
 func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
-	telemgo.PutClient(n, c)
+	genutil.PutClient(n, c)
 	return n
 }
 
@@ -51,9 +51,9 @@ func binarySliceToFloat32(in []Binary) []float32 {
 }
 
 // getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
-	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
-	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
+	datapoints, queryPath := genutil.Get(t, n, isLeaf)
+	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -71,12 +71,12 @@ func getSchema() *ytypes.Schema {
 
 // QualifiedModel is a *Model with a corresponding timestamp.
 type QualifiedModel struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val *Model // val is the sample value.
 }
 
 func (q *QualifiedModel) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the *Model sample, erroring out if not present.
@@ -101,12 +101,12 @@ func (q *QualifiedModel) SetVal(v *Model) *QualifiedModel {
 
 // QualifiedModel_MultiKey is a *Model_MultiKey with a corresponding timestamp.
 type QualifiedModel_MultiKey struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val *Model_MultiKey // val is the sample value.
 }
 
 func (q *QualifiedModel_MultiKey) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the *Model_MultiKey sample, erroring out if not present.
@@ -131,12 +131,12 @@ func (q *QualifiedModel_MultiKey) SetVal(v *Model_MultiKey) *QualifiedModel_Mult
 
 // QualifiedModel_SingleKey is a *Model_SingleKey with a corresponding timestamp.
 type QualifiedModel_SingleKey struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val *Model_SingleKey // val is the sample value.
 }
 
 func (q *QualifiedModel_SingleKey) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the *Model_SingleKey sample, erroring out if not present.
@@ -161,12 +161,12 @@ func (q *QualifiedModel_SingleKey) SetVal(v *Model_SingleKey) *QualifiedModel_Si
 
 // QualifiedRoot is a *Root with a corresponding timestamp.
 type QualifiedRoot struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val *Root // val is the sample value.
 }
 
 func (q *QualifiedRoot) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the *Root sample, erroring out if not present.
@@ -191,12 +191,12 @@ func (q *QualifiedRoot) SetVal(v *Root) *QualifiedRoot {
 
 // QualifiedUint32 is a uint32 with a corresponding timestamp.
 type QualifiedUint32 struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val uint32 // val is the sample value.
 }
 
 func (q *QualifiedUint32) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the uint32 sample, erroring out if not present.
@@ -233,7 +233,7 @@ func (u *CollectionUint32) Await(t testing.TB) []*QualifiedUint32 {
 
 // CollectionUntilUint32 is a telemetry Collection whose Await method returns a slice of uint32 samples.
 type CollectionUntilUint32 struct {
-	c *telemgo.Collection
+	c *genutil.Collection
 }
 
 // Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
@@ -250,12 +250,12 @@ func (u *CollectionUntilUint32) Await(t testing.TB) ([]*QualifiedUint32, bool) {
 
 // QualifiedUint64 is a uint64 with a corresponding timestamp.
 type QualifiedUint64 struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val uint64 // val is the sample value.
 }
 
 func (q *QualifiedUint64) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the uint64 sample, erroring out if not present.
@@ -292,7 +292,7 @@ func (u *CollectionUint64) Await(t testing.TB) []*QualifiedUint64 {
 
 // CollectionUntilUint64 is a telemetry Collection whose Await method returns a slice of uint64 samples.
 type CollectionUntilUint64 struct {
-	c *telemgo.Collection
+	c *genutil.Collection
 }
 
 // Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
@@ -329,13 +329,13 @@ func (n *ModelPath) Get(t testing.TB) *Model {
 // GetFull retrieves a list of samples for /openconfig-withlist/model.
 func (n *ModelPathAny) GetFull(t testing.TB) []*QualifiedModel {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedModel
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -383,13 +383,13 @@ func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
 // GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key.
 func (n *Model_MultiKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_MultiKey {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedModel_MultiKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -434,13 +434,13 @@ func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
 // GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/state/key1.
 func (n *Model_MultiKey_Key1PathAny) GetFull(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -473,16 +473,16 @@ func (n *Model_MultiKey_Key1Path) Collect(t testing.TB, duration time.Duration) 
 func (n *Model_MultiKey_Key1Path) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
 	t.Helper()
 	return &CollectionUntilUint32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_MultiKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_MultiKey_Key1Path(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint32)
 			return ok && predicate(val)
 		}),
@@ -518,16 +518,16 @@ func (n *Model_MultiKey_Key1PathAny) Collect(t testing.TB, duration time.Duratio
 func (n *Model_MultiKey_Key1PathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
 	t.Helper()
 	return &CollectionUntilUint32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_MultiKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_MultiKey_Key1Path(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint32)
 			return ok && predicate(val)
 		}),
@@ -536,7 +536,7 @@ func (n *Model_MultiKey_Key1PathAny) CollectUntil(t testing.TB, duration time.Du
 
 // convertModel_MultiKey_Key1Path extracts the value of the leaf Key1 from its parent Model_MultiKey
 // and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_MultiKey_Key1Path(t testing.TB, qt *telemgo.QualifiedType, parent *Model_MultiKey) *QualifiedUint32 {
+func convertModel_MultiKey_Key1Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -573,13 +573,13 @@ func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
 // GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/state/key2.
 func (n *Model_MultiKey_Key2PathAny) GetFull(t testing.TB) []*QualifiedUint64 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedUint64
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -612,16 +612,16 @@ func (n *Model_MultiKey_Key2Path) Collect(t testing.TB, duration time.Duration) 
 func (n *Model_MultiKey_Key2Path) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint64) bool) *CollectionUntilUint64 {
 	t.Helper()
 	return &CollectionUntilUint64{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_MultiKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_MultiKey_Key2Path(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint64)
 			return ok && predicate(val)
 		}),
@@ -657,16 +657,16 @@ func (n *Model_MultiKey_Key2PathAny) Collect(t testing.TB, duration time.Duratio
 func (n *Model_MultiKey_Key2PathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint64) bool) *CollectionUntilUint64 {
 	t.Helper()
 	return &CollectionUntilUint64{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_MultiKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_MultiKey_Key2Path(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint64)
 			return ok && predicate(val)
 		}),
@@ -675,7 +675,7 @@ func (n *Model_MultiKey_Key2PathAny) CollectUntil(t testing.TB, duration time.Du
 
 // convertModel_MultiKey_Key2Path extracts the value of the leaf Key2 from its parent Model_MultiKey
 // and combines the update with an existing QualifiedType to return a *QualifiedUint64.
-func convertModel_MultiKey_Key2Path(t testing.TB, qt *telemgo.QualifiedType, parent *Model_MultiKey) *QualifiedUint64 {
+func convertModel_MultiKey_Key2Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint64 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -715,13 +715,13 @@ func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
 // GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key.
 func (n *Model_SingleKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_SingleKey {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedModel_SingleKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -766,13 +766,13 @@ func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
 // GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key/state/key.
 func (n *Model_SingleKey_KeyPathAny) GetFull(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -805,16 +805,16 @@ func (n *Model_SingleKey_KeyPath) Collect(t testing.TB, duration time.Duration) 
 func (n *Model_SingleKey_KeyPath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
 	t.Helper()
 	return &CollectionUntilUint32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_SingleKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_SingleKey_KeyPath(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint32)
 			return ok && predicate(val)
 		}),
@@ -850,16 +850,16 @@ func (n *Model_SingleKey_KeyPathAny) Collect(t testing.TB, duration time.Duratio
 func (n *Model_SingleKey_KeyPathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
 	t.Helper()
 	return &CollectionUntilUint32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Model_SingleKey{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertModel_SingleKey_KeyPath(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedUint32)
 			return ok && predicate(val)
 		}),
@@ -868,7 +868,7 @@ func (n *Model_SingleKey_KeyPathAny) CollectUntil(t testing.TB, duration time.Du
 
 // convertModel_SingleKey_KeyPath extracts the value of the leaf Key from its parent Model_SingleKey
 // and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_SingleKey_KeyPath(t testing.TB, qt *telemgo.QualifiedType, parent *Model_SingleKey) *QualifiedUint32 {
+func convertModel_SingleKey_KeyPath(t testing.TB, qt *genutil.QualifiedType, parent *Model_SingleKey) *QualifiedUint32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)

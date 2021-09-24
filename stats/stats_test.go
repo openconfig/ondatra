@@ -19,9 +19,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/negtest"
 	"github.com/openconfig/ondatra/telemetry"
-	"github.com/openconfig/ondatra/telemgen/telemgo"
 )
 
 func TestMeanRateUint64(t *testing.T) {
@@ -33,12 +33,12 @@ func TestMeanRateUint64(t *testing.T) {
 		desc: "two values",
 		inVals: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(1, 0),
 					Present:   true,
 				}}).SetVal(1),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(2, 0),
 					Present:   true,
 				}}).SetVal(2),
@@ -48,23 +48,23 @@ func TestMeanRateUint64(t *testing.T) {
 		desc: "vals must be sorted",
 		inVals: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(50, 0),
 					Present:   true,
 				}}).SetVal(9000),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(40, 0),
 					Present:   true,
 				}}).SetVal(0),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(20, 0),
 					Present:   true,
 				},
 			}).SetVal(0),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &telemgo.QualifiedType{
+				QualifiedType: &genutil.QualifiedType{
 					Timestamp: time.Unix(30, 0),
 					Present:   true,
 				}}).SetVal(0),

@@ -35,6 +35,8 @@ var _ binding.Binding = &Binding{}
 type Binding struct {
 	Reservation    *reservation.Reservation
 	ConfigPusher   func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
+	CLIDialer      func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
+	ConsoleDialer  func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
 	TopologyPusher func(*reservation.ATE, *opb.Topology) error
 	TrafficStarter func(*reservation.ATE, []*opb.Flow) error
 	GNMIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
@@ -50,6 +52,8 @@ func (b *Binding) Reset() {
 	b.ConfigPusher = nil
 	b.TopologyPusher = nil
 	b.TrafficStarter = nil
+	b.CLIDialer = nil
+	b.ConsoleDialer = nil
 	b.GNMIDialer = nil
 	b.GNOIDialer = nil
 	b.P4RTDialer = nil
@@ -132,6 +136,16 @@ func (b *Binding) DialGNOI(ctx context.Context, dut *reservation.DUT, opts ...gr
 // DialP4RT creates a client connection to the fake P4RT server.
 func (b *Binding) DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	return b.P4RTDialer(ctx, dut, opts...)
+}
+
+// DialCLI creates a client connection to the fake CLI server.
+func (b *Binding) DialCLI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (binding.StreamClient, error) {
+	return b.CLIDialer(ctx, dut, opts...)
+}
+
+// DialConsole creates a client connection to the fake Console server.
+func (b *Binding) DialConsole(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (binding.StreamClient, error) {
+	return b.ConsoleDialer(ctx, dut, opts...)
 }
 
 // HandleInfraFail logs the error and returns it unchanged.

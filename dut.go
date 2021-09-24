@@ -21,11 +21,13 @@ import (
 
 	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/internal/cli"
+	"github.com/openconfig/ondatra/internal/console"
 	"github.com/openconfig/ondatra/internal/dut"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/operations"
 	"github.com/openconfig/ondatra/internal/p4rt"
 	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/telemgen/telemgo"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -171,7 +173,7 @@ type RawAPIs struct {
 func (r *RawAPIs) GNMI(t testing.TB) gpb.GNMIClient {
 	t.Helper()
 	logAction(t, "Creating gNMI client for %s", r.dut)
-	gnmi, err := telemgo.NewGNMI(context.Background(), r.dut)
+	gnmi, err := genutil.NewGNMI(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("GNMI(t) on %v: %v", r.dut, err)
 	}
@@ -209,4 +211,37 @@ func (r *RawAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 		t.Fatalf("Failed to fetch P4RT client on %v: %v", r.dut, err)
 	}
 	return p4rtClient
+}
+
+// StreamClient provides the interface for streaming IO to DUT.
+type StreamClient interface {
+	// Embed an unexported interface that wraps binding.GNOIClients,
+	// so as to not expose the binding.GNOIClients instance directly.
+	privateStreamClient
+}
+
+type privateStreamClient interface {
+	binding.StreamClient
+}
+
+// CLI returns a streaming CLI client on the DUT.
+func (r *RawAPIs) CLI(t testing.TB) StreamClient {
+	t.Helper()
+	logAction(t, "Fetching CLI client for %s", r.dut)
+	c, err := cli.FetchCLI(context.Background(), r.dut)
+	if err != nil {
+		t.Fatalf("Failed to fetch CLI client on %v: %v", r.dut, err)
+	}
+	return c
+}
+
+// Console returns a transactional CLI client on the DUT.
+func (r *RawAPIs) Console(t testing.TB) StreamClient {
+	t.Helper()
+	logAction(t, "Fetching CLI client for %s", r.dut)
+	c, err := console.FetchConsole(context.Background(), r.dut)
+	if err != nil {
+		t.Fatalf("Failed to fetch console client on %v: %v", r.dut, err)
+	}
+	return c
 }

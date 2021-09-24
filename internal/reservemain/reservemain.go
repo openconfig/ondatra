@@ -35,7 +35,7 @@ var (
 	TestbedPath = flag.String("testbed", "", "Path to the Ondatra testbed file")
 	// RunTime is a flag for the run time duration of the reservation.
 	RunTime = flag.Duration("run_time", 0, "Timeout of the test run, excluding the wait time for the testbed to be ready. "+
-		" Must be a positive value.")
+		"A zero value means here is no time limit. Must be a non-negative value.")
 	// WaitTime is a flag for the wait time duration of the reservation.
 	WaitTime = flag.Duration("wait_time", 0, "Maximum amount of time the test should wait until the testbed is ready. "+
 		"A zero value lets the binding implementation choose an appropriate wait time. Must be a non-negative value.")

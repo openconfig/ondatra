@@ -52,8 +52,8 @@ func Reserve(ctx context.Context, testbedPath string, runTime, waitTime time.Dur
 	if testbedPath == "" {
 		return errors.New("testbed path not specified")
 	}
-	if runTime <= 0 {
-		return errors.Errorf("run timeout is not positive: %d", runTime)
+	if runTime < 0 {
+		return errors.Errorf("run timeout is negative: %d", runTime)
 	}
 	if waitTime < 0 {
 		return errors.Errorf("wait timeout is negative: %d", waitTime)

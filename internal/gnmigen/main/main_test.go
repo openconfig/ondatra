@@ -19,14 +19,14 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/openconfig/ondatra/telemgen"
+	"github.com/openconfig/ondatra/internal/gnmigen"
 )
 
 func TestWriteGoCode(t *testing.T) {
-	telemCode := &telemgen.GeneratedTelemetryCode{
+	telemCode := &gnmigen.GeneratedTelemetryCode{
 		CommonHeader: "telem common header\n",
 		OneOffHeader: "\ntelem one-off header\n",
-		GoPerNodeSnippets: []telemgen.GoPerNodeCodeSnippet{{
+		GoPerNodeSnippets: []gnmigen.GoPerNodeCodeSnippet{{
 			PathStructName: "PathStruct1",
 			GetMethod:      "\nGet1\n",
 			CollectMethod:  "\nCollect1\n",
@@ -42,7 +42,7 @@ func TestWriteGoCode(t *testing.T) {
 			CollectMethod:  "\nCollect3\n",
 			ConvertHelper:  "\nconvert3\n",
 		}},
-		GoReturnTypeSnippets: []telemgen.GoReturnTypeCodeSnippet{{
+		GoReturnTypeSnippets: []gnmigen.GoReturnTypeCodeSnippet{{
 			TypeName:       "int64",
 			QualifiedType:  "\nQualifiedInt64\n",
 			CollectionType: "\nCollectionInt64\n",

@@ -16,7 +16,7 @@ import (
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
-	"github.com/openconfig/ondatra/telemgen/telemgo"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -24,21 +24,21 @@ import (
 // WithReplica adds the replica number to the context metadata of the gNMI
 // server query.
 func (n *RootPath) WithReplica(replica int) *RootPath {
-	telemgo.PutReplica(n, replica)
+	genutil.PutReplica(n, replica)
 	return n
 }
 
 // WithSubscriptionMode specifies the subscription mode in the underlying gNMI
 // subscribe.
 func (n *RootPath) WithSubscriptionMode(mode gpb.SubscriptionMode) *RootPath {
-	telemgo.PutSubscriptionMode(n, mode)
+	genutil.PutSubscriptionMode(n, mode)
 	return n
 }
 
 // WithClient allows the user to provide a gNMI client. This allows for creation
 // of tests for multiple gNMI clients to a single DUT.
 func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
-	telemgo.PutClient(n, c)
+	genutil.PutClient(n, c)
 	return n
 }
 
@@ -47,12 +47,12 @@ type SetRequestBatch struct {
 }
 
 type privateSetRequestBatch struct {
-  *telemgo.SetRequestBatch
+  *genutil.SetRequestBatch
 }
 
 // NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
 func (d *DevicePath) NewBatch() *SetRequestBatch {
-	return &SetRequestBatch{&privateSetRequestBatch{telemgo.NewSetRequestBatch(&RootPath{ygot.NewDeviceRootBase(d.Id())})} }
+	return &SetRequestBatch{&privateSetRequestBatch{genutil.NewSetRequestBatch(&RootPath{ygot.NewDeviceRootBase(d.Id())})} }
 }
 
 func binarySliceToFloat32(in []Binary) []float32 {
@@ -64,9 +64,9 @@ func binarySliceToFloat32(in []Binary) []float32 {
 }
 
 // getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
-	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
-	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
+	datapoints, queryPath := genutil.Get(t, n, isLeaf)
+	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -104,13 +104,13 @@ func (n *ParentPath) Get(t testing.TB) *Parent {
 // GetFull retrieves a list of samples for /openconfig-simple/parent.
 func (n *ParentPathAny) GetFull(t testing.TB) []*QualifiedParent {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedParent
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -139,7 +139,7 @@ func (n *ParentPathAny) Get(t testing.TB) []*Parent {
 // Delete deletes the configuration at /openconfig-simple/parent.
 func (n *ParentPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent in the given batch object.
@@ -151,7 +151,7 @@ func (n *ParentPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent.
 func (n *ParentPath) Replace(t testing.TB, val *Parent) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent in the given batch object.
@@ -163,7 +163,7 @@ func (n *ParentPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Parent)
 // Update updates the configuration at /openconfig-simple/parent.
 func (n *ParentPath) Update(t testing.TB, val *Parent) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent in the given batch object.
@@ -194,13 +194,13 @@ func (n *Parent_ChildPath) Get(t testing.TB) *Parent_Child {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child.
 func (n *Parent_ChildPathAny) GetFull(t testing.TB) []*QualifiedParent_Child {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedParent_Child
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -229,7 +229,7 @@ func (n *Parent_ChildPathAny) Get(t testing.TB) []*Parent_Child {
 // Delete deletes the configuration at /openconfig-simple/parent/child.
 func (n *Parent_ChildPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child in the given batch object.
@@ -241,7 +241,7 @@ func (n *Parent_ChildPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child.
 func (n *Parent_ChildPath) Replace(t testing.TB, val *Parent_Child) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child in the given batch object.
@@ -253,7 +253,7 @@ func (n *Parent_ChildPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *P
 // Update updates the configuration at /openconfig-simple/parent/child.
 func (n *Parent_ChildPath) Update(t testing.TB, val *Parent_Child) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child in the given batch object.
@@ -281,13 +281,13 @@ func (n *Parent_Child_FivePath) Get(t testing.TB) Binary {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/five.
 func (n *Parent_Child_FivePathAny) GetFull(t testing.TB) []*QualifiedBinary {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedBinary
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -311,7 +311,7 @@ func (n *Parent_Child_FivePathAny) Get(t testing.TB) []Binary {
 // Delete deletes the configuration at /openconfig-simple/parent/child/config/five.
 func (n *Parent_Child_FivePath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child/config/five in the given batch object.
@@ -323,7 +323,7 @@ func (n *Parent_Child_FivePath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child/config/five.
 func (n *Parent_Child_FivePath) Replace(t testing.TB, val Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child/config/five in the given batch object.
@@ -335,7 +335,7 @@ func (n *Parent_Child_FivePath) BatchReplace(t testing.TB, b *SetRequestBatch, v
 // Update updates the configuration at /openconfig-simple/parent/child/config/five.
 func (n *Parent_Child_FivePath) Update(t testing.TB, val Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child/config/five in the given batch object.
@@ -346,7 +346,7 @@ func (n *Parent_Child_FivePath) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 
 // convertParent_Child_FivePath extracts the value of the leaf Five from its parent Parent_Child
 // and combines the update with an existing QualifiedType to return a *QualifiedBinary.
-func convertParent_Child_FivePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+func convertParent_Child_FivePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedBinary {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -383,13 +383,13 @@ func (n *Parent_Child_FourPath) Get(t testing.TB) Binary {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/four.
 func (n *Parent_Child_FourPathAny) GetFull(t testing.TB) []*QualifiedBinary {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedBinary
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -413,7 +413,7 @@ func (n *Parent_Child_FourPathAny) Get(t testing.TB) []Binary {
 // Delete deletes the configuration at /openconfig-simple/parent/child/config/four.
 func (n *Parent_Child_FourPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child/config/four in the given batch object.
@@ -425,7 +425,7 @@ func (n *Parent_Child_FourPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child/config/four.
 func (n *Parent_Child_FourPath) Replace(t testing.TB, val Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child/config/four in the given batch object.
@@ -437,7 +437,7 @@ func (n *Parent_Child_FourPath) BatchReplace(t testing.TB, b *SetRequestBatch, v
 // Update updates the configuration at /openconfig-simple/parent/child/config/four.
 func (n *Parent_Child_FourPath) Update(t testing.TB, val Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child/config/four in the given batch object.
@@ -448,7 +448,7 @@ func (n *Parent_Child_FourPath) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 
 // convertParent_Child_FourPath extracts the value of the leaf Four from its parent Parent_Child
 // and combines the update with an existing QualifiedType to return a *QualifiedBinary.
-func convertParent_Child_FourPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+func convertParent_Child_FourPath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedBinary {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -485,13 +485,13 @@ func (n *Parent_Child_OnePath) Get(t testing.TB) string {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/one.
 func (n *Parent_Child_OnePathAny) GetFull(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -515,7 +515,7 @@ func (n *Parent_Child_OnePathAny) Get(t testing.TB) []string {
 // Delete deletes the configuration at /openconfig-simple/parent/child/config/one.
 func (n *Parent_Child_OnePath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child/config/one in the given batch object.
@@ -527,7 +527,7 @@ func (n *Parent_Child_OnePath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child/config/one.
 func (n *Parent_Child_OnePath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, &val)
+	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child/config/one in the given batch object.
@@ -539,7 +539,7 @@ func (n *Parent_Child_OnePath) BatchReplace(t testing.TB, b *SetRequestBatch, va
 // Update updates the configuration at /openconfig-simple/parent/child/config/one.
 func (n *Parent_Child_OnePath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, &val)
+	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child/config/one in the given batch object.
@@ -550,7 +550,7 @@ func (n *Parent_Child_OnePath) BatchUpdate(t testing.TB, b *SetRequestBatch, val
 
 // convertParent_Child_OnePath extracts the value of the leaf One from its parent Parent_Child
 // and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertParent_Child_OnePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+func convertParent_Child_OnePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedString {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -587,13 +587,13 @@ func (n *Parent_Child_ThreePath) Get(t testing.TB) E_Child_Three {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/three.
 func (n *Parent_Child_ThreePathAny) GetFull(t testing.TB) []*QualifiedE_Child_Three {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedE_Child_Three
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -617,7 +617,7 @@ func (n *Parent_Child_ThreePathAny) Get(t testing.TB) []E_Child_Three {
 // Delete deletes the configuration at /openconfig-simple/parent/child/config/three.
 func (n *Parent_Child_ThreePath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child/config/three in the given batch object.
@@ -629,7 +629,7 @@ func (n *Parent_Child_ThreePath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child/config/three.
 func (n *Parent_Child_ThreePath) Replace(t testing.TB, val E_Child_Three) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child/config/three in the given batch object.
@@ -641,7 +641,7 @@ func (n *Parent_Child_ThreePath) BatchReplace(t testing.TB, b *SetRequestBatch, 
 // Update updates the configuration at /openconfig-simple/parent/child/config/three.
 func (n *Parent_Child_ThreePath) Update(t testing.TB, val E_Child_Three) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child/config/three in the given batch object.
@@ -652,7 +652,7 @@ func (n *Parent_Child_ThreePath) BatchUpdate(t testing.TB, b *SetRequestBatch, v
 
 // convertParent_Child_ThreePath extracts the value of the leaf Three from its parent Parent_Child
 // and combines the update with an existing QualifiedType to return a *QualifiedE_Child_Three.
-func convertParent_Child_ThreePath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedE_Child_Three {
+func convertParent_Child_ThreePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedE_Child_Three {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -689,13 +689,13 @@ func (n *Parent_Child_TwoPath) Get(t testing.TB) string {
 // GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/two.
 func (n *Parent_Child_TwoPathAny) GetFull(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -719,7 +719,7 @@ func (n *Parent_Child_TwoPathAny) Get(t testing.TB) []string {
 // Delete deletes the configuration at /openconfig-simple/parent/child/state/two.
 func (n *Parent_Child_TwoPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/parent/child/state/two in the given batch object.
@@ -731,7 +731,7 @@ func (n *Parent_Child_TwoPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/parent/child/state/two.
 func (n *Parent_Child_TwoPath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, &val)
+	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/parent/child/state/two in the given batch object.
@@ -743,7 +743,7 @@ func (n *Parent_Child_TwoPath) BatchReplace(t testing.TB, b *SetRequestBatch, va
 // Update updates the configuration at /openconfig-simple/parent/child/state/two.
 func (n *Parent_Child_TwoPath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, &val)
+	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/parent/child/state/two in the given batch object.
@@ -754,7 +754,7 @@ func (n *Parent_Child_TwoPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val
 
 // convertParent_Child_TwoPath extracts the value of the leaf Two from its parent Parent_Child
 // and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertParent_Child_TwoPath(t testing.TB, qt *telemgo.QualifiedType, parent *Parent_Child) *QualifiedString {
+func convertParent_Child_TwoPath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedString {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -794,13 +794,13 @@ func (n *RemoteContainerPath) Get(t testing.TB) *RemoteContainer {
 // GetFull retrieves a list of samples for /openconfig-simple/remote-container.
 func (n *RemoteContainerPathAny) GetFull(t testing.TB) []*QualifiedRemoteContainer {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedRemoteContainer
 	for _, prefix := range sortedPrefixes {
 		goStruct := &RemoteContainer{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -829,7 +829,7 @@ func (n *RemoteContainerPathAny) Get(t testing.TB) []*RemoteContainer {
 // Delete deletes the configuration at /openconfig-simple/remote-container.
 func (n *RemoteContainerPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/remote-container in the given batch object.
@@ -841,7 +841,7 @@ func (n *RemoteContainerPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /openconfig-simple/remote-container.
 func (n *RemoteContainerPath) Replace(t testing.TB, val *RemoteContainer) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/remote-container in the given batch object.
@@ -853,7 +853,7 @@ func (n *RemoteContainerPath) BatchReplace(t testing.TB, b *SetRequestBatch, val
 // Update updates the configuration at /openconfig-simple/remote-container.
 func (n *RemoteContainerPath) Update(t testing.TB, val *RemoteContainer) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/remote-container in the given batch object.
@@ -881,13 +881,13 @@ func (n *RemoteContainer_ALeafPath) Get(t testing.TB) string {
 // GetFull retrieves a list of samples for /openconfig-simple/remote-container/config/a-leaf.
 func (n *RemoteContainer_ALeafPathAny) GetFull(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &RemoteContainer{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -911,7 +911,7 @@ func (n *RemoteContainer_ALeafPathAny) Get(t testing.TB) []string {
 // Delete deletes the configuration at /openconfig-simple/remote-container/config/a-leaf.
 func (n *RemoteContainer_ALeafPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /openconfig-simple/remote-container/config/a-leaf in the given batch object.
@@ -923,7 +923,7 @@ func (n *RemoteContainer_ALeafPath) BatchDelete(t testing.TB, b *SetRequestBatch
 // Replace replaces the configuration at /openconfig-simple/remote-container/config/a-leaf.
 func (n *RemoteContainer_ALeafPath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, &val)
+	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-simple/remote-container/config/a-leaf in the given batch object.
@@ -935,7 +935,7 @@ func (n *RemoteContainer_ALeafPath) BatchReplace(t testing.TB, b *SetRequestBatc
 // Update updates the configuration at /openconfig-simple/remote-container/config/a-leaf.
 func (n *RemoteContainer_ALeafPath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, &val)
+	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-simple/remote-container/config/a-leaf in the given batch object.
@@ -946,7 +946,7 @@ func (n *RemoteContainer_ALeafPath) BatchUpdate(t testing.TB, b *SetRequestBatch
 
 // convertRemoteContainer_ALeafPath extracts the value of the leaf ALeaf from its parent RemoteContainer
 // and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertRemoteContainer_ALeafPath(t testing.TB, qt *telemgo.QualifiedType, parent *RemoteContainer) *QualifiedString {
+func convertRemoteContainer_ALeafPath(t testing.TB, qt *genutil.QualifiedType, parent *RemoteContainer) *QualifiedString {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -986,7 +986,7 @@ func (n *RootPath) Get(t testing.TB) *Root {
 // Delete deletes the configuration at /.
 func (n *RootPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at / in the given batch object.
@@ -998,7 +998,7 @@ func (n *RootPath) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /.
 func (n *RootPath) Replace(t testing.TB, val *Root) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at / in the given batch object.
@@ -1010,7 +1010,7 @@ func (n *RootPath) BatchReplace(t testing.TB, b *SetRequestBatch, val *Root) {
 // Update updates the configuration at /.
 func (n *RootPath) Update(t testing.TB, val *Root) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at / in the given batch object.

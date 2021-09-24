@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package telemgen
+package gnmigen
 
 import (
 	"io/ioutil"
@@ -80,7 +80,7 @@ func generateCodeTestHelper(t *testing.T, dirName string, generatedFileName stri
 
 	for _, tt := range tests {
 		// Set up
-		tt.inConfig.GeneratingBinary = "telemgen-tests"
+		tt.inConfig.GeneratingBinary = "gnmigen-tests"
 		tt.inConfig.ListBuilderKeyThreshold = tt.inListBuilderKeyThreshold
 		for i := range tt.inFiles {
 			tt.inFiles[i] = filepath.Join(datapath, tt.resultsFolder, tt.inFiles[i])
@@ -186,13 +186,13 @@ func (n *Container_Leaf) Get(t testing.TB) int32 {
 // GetFull retrieves a list of samples for /container/leaf.
 func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -216,7 +216,7 @@ func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
 // and combines the update with an existing QualifiedType to return a *QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *Container) *QualifiedInt32 {
+func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedInt32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -239,7 +239,7 @@ func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *Cont
 // Delete deletes the configuration at /container/leaf.
 func (n *Container_Leaf) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /container/leaf in the given batch object.
@@ -251,7 +251,7 @@ func (n *Container_Leaf) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /container/leaf.
 func (n *Container_Leaf) Replace(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, &val)
+	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /container/leaf in the given batch object.
@@ -263,7 +263,7 @@ func (n *Container_Leaf) BatchReplace(t testing.TB, b *SetRequestBatch, val int3
 // Update updates the configuration at /container/leaf.
 func (n *Container_Leaf) Update(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, &val)
+	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /container/leaf in the given batch object.
@@ -315,13 +315,13 @@ func (n *Container_Leaf) Get(t testing.TB) int32 {
 // GetFull retrieves a list of samples for /container/leaf.
 func (n *Container_LeafAny) GetFull(t testing.TB) []*oc.QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*oc.QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -345,7 +345,7 @@ func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent oc.Container
 // and combines the update with an existing QualifiedType to return a *oc.QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *oc.Container) *oc.QualifiedInt32 {
+func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *oc.Container) *oc.QualifiedInt32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -368,7 +368,7 @@ func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *oc.C
 // Delete deletes the configuration at /container/leaf.
 func (n *Container_Leaf) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /container/leaf in the given batch object.
@@ -380,7 +380,7 @@ func (n *Container_Leaf) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /container/leaf.
 func (n *Container_Leaf) Replace(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, &val)
+	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /container/leaf in the given batch object.
@@ -392,7 +392,7 @@ func (n *Container_Leaf) BatchReplace(t testing.TB, b *SetRequestBatch, val int3
 // Update updates the configuration at /container/leaf.
 func (n *Container_Leaf) Update(t testing.TB, val int32) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, &val)
+	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /container/leaf in the given batch object.
@@ -442,13 +442,13 @@ func (n *List_Key) Get(t testing.TB) []Binary {
 // GetFull retrieves a list of samples for /lists/list/key.
 func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -472,7 +472,7 @@ func (n *List_KeyAny) Get(t testing.TB) [][]Binary {
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
 // and combines the update with an existing QualifiedType to return a *QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *List) *QualifiedBinarySlice {
+func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedBinarySlice {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -494,7 +494,7 @@ func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *List) *Qua
 // Delete deletes the configuration at /lists/list/key.
 func (n *List_Key) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /lists/list/key in the given batch object.
@@ -506,7 +506,7 @@ func (n *List_Key) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /lists/list/key.
 func (n *List_Key) Replace(t testing.TB, val []Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /lists/list/key in the given batch object.
@@ -518,7 +518,7 @@ func (n *List_Key) BatchReplace(t testing.TB, b *SetRequestBatch, val []Binary) 
 // Update updates the configuration at /lists/list/key.
 func (n *List_Key) Update(t testing.TB, val []Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /lists/list/key in the given batch object.
@@ -569,13 +569,13 @@ func (n *List_Key) Get(t testing.TB) []oc.Binary {
 // GetFull retrieves a list of samples for /lists/list/key.
 func (n *List_KeyAny) GetFull(t testing.TB) []*oc.QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*oc.QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.List{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -599,7 +599,7 @@ func (n *List_KeyAny) Get(t testing.TB) [][]oc.Binary {
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent oc.List
 // and combines the update with an existing QualifiedType to return a *oc.QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *oc.List) *oc.QualifiedBinarySlice {
+func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *oc.List) *oc.QualifiedBinarySlice {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -621,7 +621,7 @@ func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *oc.List) *
 // Delete deletes the configuration at /lists/list/key.
 func (n *List_Key) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /lists/list/key in the given batch object.
@@ -633,7 +633,7 @@ func (n *List_Key) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at /lists/list/key.
 func (n *List_Key) Replace(t testing.TB, val []oc.Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /lists/list/key in the given batch object.
@@ -645,7 +645,7 @@ func (n *List_Key) BatchReplace(t testing.TB, b *SetRequestBatch, val []oc.Binar
 // Update updates the configuration at /lists/list/key.
 func (n *List_Key) Update(t testing.TB, val []oc.Binary) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /lists/list/key in the given batch object.
@@ -698,13 +698,13 @@ func (n *SuperContainer_Container) Get(t testing.TB) *SuperContainer_Container {
 // GetFull retrieves a list of samples for /super-container/container.
 func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &SuperContainer_Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -734,7 +734,7 @@ func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*SuperContainer_Contai
 // Delete deletes the configuration at /super-container/container.
 func (n *SuperContainer_Container) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /super-container/container in the given batch object.
@@ -746,7 +746,7 @@ func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *SetRequestBatch)
 // Replace replaces the configuration at /super-container/container.
 func (n *SuperContainer_Container) Replace(t testing.TB, val *SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /super-container/container in the given batch object.
@@ -758,7 +758,7 @@ func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *SetRequestBatch
 // Update updates the configuration at /super-container/container.
 func (n *SuperContainer_Container) Update(t testing.TB, val *SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /super-container/container in the given batch object.
@@ -812,13 +812,13 @@ func (n *SuperContainer_Container) Get(t testing.TB) *oc.SuperContainer_Containe
 // GetFull retrieves a list of samples for /super-container/container.
 func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*oc.QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*oc.QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.SuperContainer_Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -848,7 +848,7 @@ func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*oc.SuperContainer_Con
 // Delete deletes the configuration at /super-container/container.
 func (n *SuperContainer_Container) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at /super-container/container in the given batch object.
@@ -860,7 +860,7 @@ func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *SetRequestBatch)
 // Replace replaces the configuration at /super-container/container.
 func (n *SuperContainer_Container) Replace(t testing.TB, val *oc.SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, val)
+	return genutil.Replace(t, n, val)
 }
 
 // BatchReplace buffers a config replace operation at /super-container/container in the given batch object.
@@ -872,7 +872,7 @@ func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *SetRequestBatch
 // Update updates the configuration at /super-container/container.
 func (n *SuperContainer_Container) Update(t testing.TB, val *oc.SuperContainer_Container) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, val)
+	return genutil.Update(t, n, val)
 }
 
 // BatchUpdate buffers a config update operation at /super-container/container in the given batch object.
@@ -963,13 +963,13 @@ func (n *Container_Leaf) Get(t testing.TB) int32 {
 // GetFull retrieves a list of samples for /container/leaf.
 func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1003,16 +1003,16 @@ func (n *Container_Leaf) Collect(t testing.TB, duration time.Duration) *Collecti
 func (n *Container_Leaf) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedInt32) bool) *CollectionUntilInt32 {
 	t.Helper()
 	return &CollectionUntilInt32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Container{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertContainer_Leaf(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedInt32)
 			return ok && predicate(val)
 		}),
@@ -1048,16 +1048,16 @@ func (n *Container_LeafAny) Collect(t testing.TB, duration time.Duration) *Colle
 func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedInt32) bool) *CollectionUntilInt32 {
 	t.Helper()
 	return &CollectionUntilInt32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Container{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertContainer_Leaf(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedInt32)
 			return ok && predicate(val)
 		}),
@@ -1067,7 +1067,7 @@ func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, p
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
 // and combines the update with an existing QualifiedType to return a *QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *Container) *QualifiedInt32 {
+func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedInt32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -1127,13 +1127,13 @@ func (n *List_Key) Get(t testing.TB) []Binary {
 // GetFull retrieves a list of samples for /lists/list/key.
 func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1167,16 +1167,16 @@ func (n *List_Key) Collect(t testing.TB, duration time.Duration) *CollectionBina
 func (n *List_Key) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinarySlice) bool) *CollectionUntilBinarySlice {
 	t.Helper()
 	return &CollectionUntilBinarySlice{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &List{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertList_Key(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedBinarySlice)
 			return ok && predicate(val)
 		}),
@@ -1212,16 +1212,16 @@ func (n *List_KeyAny) Collect(t testing.TB, duration time.Duration) *CollectionB
 func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinarySlice) bool) *CollectionUntilBinarySlice {
 	t.Helper()
 	return &CollectionUntilBinarySlice{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &List{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertList_Key(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedBinarySlice)
 			return ok && predicate(val)
 		}),
@@ -1231,7 +1231,7 @@ func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predica
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
 // and combines the update with an existing QualifiedType to return a *QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *List) *QualifiedBinarySlice {
+func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedBinarySlice {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -1291,13 +1291,13 @@ func (n *Container_Leaf) Get(t testing.TB) float32 {
 // GetFull retrieves a list of samples for /container/leaf.
 func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedFloat32 {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedFloat32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1331,16 +1331,16 @@ func (n *Container_Leaf) Collect(t testing.TB, duration time.Duration) *Collecti
 func (n *Container_Leaf) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
 	t.Helper()
 	return &CollectionUntilFloat32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Container{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertContainer_Leaf(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedFloat32)
 			return ok && predicate(val)
 		}),
@@ -1376,16 +1376,16 @@ func (n *Container_LeafAny) Collect(t testing.TB, duration time.Duration) *Colle
 func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
 	t.Helper()
 	return &CollectionUntilFloat32{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &Container{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertContainer_Leaf(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedFloat32)
 			return ok && predicate(val)
 		}),
@@ -1395,7 +1395,7 @@ func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, p
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
 // and combines the update with an existing QualifiedType to return a *QualifiedFloat32.
-func convertContainer_Leaf(t testing.TB, qt *telemgo.QualifiedType, parent *Container) *QualifiedFloat32 {
+func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedFloat32 {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -1468,13 +1468,13 @@ func (n *List_Key) Get(t testing.TB) []float32 {
 // GetFull retrieves a list of samples for /lists/list/key.
 func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedFloat32Slice {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
 
 	var data []*QualifiedFloat32Slice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1508,16 +1508,16 @@ func (n *List_Key) Collect(t testing.TB, duration time.Duration) *CollectionFloa
 func (n *List_Key) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *CollectionUntilFloat32Slice {
 	t.Helper()
 	return &CollectionUntilFloat32Slice{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &List{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertList_Key(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedFloat32Slice)
 			return ok && predicate(val)
 		}),
@@ -1553,16 +1553,16 @@ func (n *List_KeyAny) Collect(t testing.TB, duration time.Duration) *CollectionF
 func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *CollectionUntilFloat32Slice {
 	t.Helper()
 	return &CollectionUntilFloat32Slice{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &List{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convertList_Key(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*QualifiedFloat32Slice)
 			return ok && predicate(val)
 		}),
@@ -1572,7 +1572,7 @@ func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predica
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
 // and combines the update with an existing QualifiedType to return a *QualifiedFloat32Slice.
-func convertList_Key(t testing.TB, qt *telemgo.QualifiedType, parent *List) *QualifiedFloat32Slice {
+func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedFloat32Slice {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -1634,13 +1634,13 @@ func (n *SuperContainer_Container) Get(t testing.TB) *SuperContainer_Container {
 // GetFull retrieves a list of samples for /super-container/container.
 func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
 
 	var data []*QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &SuperContainer_Container{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, true)
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1717,12 +1717,12 @@ func TestGeneratePerTypeSnippet(t *testing.T) {
 			QualifiedType: `
 // QualifiedInt32 is a int32 with a corresponding timestamp.
 type QualifiedInt32 struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val int32 // val is the sample value.
 }
 
 func (q *QualifiedInt32) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the int32 sample, erroring out if not present.
@@ -1760,7 +1760,7 @@ func (u *CollectionInt32) Await(t testing.TB) []*QualifiedInt32 {
 
 // CollectionUntilInt32 is a telemetry Collection whose Await method returns a slice of int32 samples.
 type CollectionUntilInt32 struct {
-	c *telemgo.Collection
+	c *genutil.Collection
 }
 
 // Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
@@ -1789,12 +1789,12 @@ func (u *CollectionUntilInt32) Await(t testing.TB) ([]*QualifiedInt32, bool) {
 			QualifiedType: `
 // QualifiedBinarySlice is a []Binary with a corresponding timestamp.
 type QualifiedBinarySlice struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val []Binary // val is the sample value.
 }
 
 func (q *QualifiedBinarySlice) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the []Binary sample, erroring out if not present.
@@ -1832,7 +1832,7 @@ func (u *CollectionBinarySlice) Await(t testing.TB) []*QualifiedBinarySlice {
 
 // CollectionUntilBinarySlice is a telemetry Collection whose Await method returns a slice of []Binary samples.
 type CollectionUntilBinarySlice struct {
-	c *telemgo.Collection
+	c *genutil.Collection
 }
 
 // Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.

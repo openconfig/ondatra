@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package telemgen is a library for generating an API for creating gNMI paths
+// Package gnmigen is a library for generating an API for creating gNMI paths
 // from a YANG model and allowing ONDATRA telemetry calls to be made targeting
 // those paths. The generated code is a hierarchy of structs which follows a
 // similar structure to ygen's compressed output, where each struct identifies
@@ -23,7 +23,7 @@
 // telemetry methods are also generated for each struct, thereby providing for
 // a way of doing telemetry calls on a given schema that is by construction
 // less error-prone.
-package telemgen
+package gnmigen
 
 import (
 	"sort"
@@ -53,12 +53,12 @@ const (
 	// PathStructs to distinguish them from the generated GoStructs, which
 	// assume a similar name.
 	pathStructSuffix = "Path"
-	// GoDefaultProtoLibImportPath is the default path for the proto
+	// defaultProtoLibImportPath is the default path for the proto
 	// library used in the generated code.
-	GoDefaultProtoLibImportPath = "google.golang.org/protobuf/proto"
-	// GoDefaultTelemGoImportPath is the default path for the telemgo library that
+	defaultProtoLibImportPath = "google.golang.org/protobuf/proto"
+	// defaultGenUtilImportPath is the default path for the genutil library that
 	// is used in the generated code.
-	GoDefaultTelemGoImportPath = "github.com/openconfig/ondatra/telemgen/telemgo"
+	defaultGenUtilImportPath = "github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
 )
 
 // NewDefaultConfig creates a GenConfig with default configuration.
@@ -69,9 +69,9 @@ func NewDefaultConfig() *GenConfig {
 			YgotImportPath:     genutil.GoDefaultYgotImportPath,
 			YtypesImportPath:   genutil.GoDefaultYtypesImportPath,
 			GoyangImportPath:   genutil.GoDefaultGoyangImportPath,
-			ProtoLibImportPath: GoDefaultProtoLibImportPath,
+			ProtoLibImportPath: defaultProtoLibImportPath,
 			GNMIProtoPath:      genutil.GoDefaultGNMIImportPath,
-			TelemGoImportPath:  GoDefaultTelemGoImportPath,
+			GenUtilImportPath:  defaultGenUtilImportPath,
 		},
 		FakeRootName:     defaultFakeRootName,
 		GeneratingBinary: genutil.CallerName(),
@@ -135,9 +135,9 @@ type GoImports struct {
 	// ProtoLibImportPath is the import path to the proto package used by
 	// the generated code.
 	ProtoLibImportPath string
-	// TelemGoImportPath is the import path to the telemgo package,
+	// GenUtilImportPath is the import path to the genutil package,
 	// which contains helpers used by the generated code.
-	TelemGoImportPath string
+	GenUtilImportPath string
 }
 
 // GeneratedTelemetryCode contains generated code snippets that when written
@@ -422,7 +422,7 @@ import (
 	"{{ .GoyangImportPath }}"
 	"{{ .YgotImportPath }}"
 	"{{ .YtypesImportPath }}"
-	"{{ .TelemGoImportPath }}"
+	"{{ .GenUtilImportPath }}"
 	{{- if .SchemaStructPkgPath }}
 	{{ .SchemaStructPkgAlias }} "{{ .SchemaStructPkgPath }}"
 	{{- end }}
@@ -442,21 +442,21 @@ import (
 // WithReplica adds the replica number to the context metadata of the gNMI
 // server query.
 func (n *{{ .FakeRootTypePathName }}) WithReplica(replica int) *{{ .FakeRootTypePathName }} {
-	telemgo.PutReplica(n, replica)
+	genutil.PutReplica(n, replica)
 	return n
 }
 
 // WithSubscriptionMode specifies the subscription mode in the underlying gNMI
 // subscribe.
 func (n *{{ .FakeRootTypePathName }}) WithSubscriptionMode(mode gpb.SubscriptionMode) *{{ .FakeRootTypePathName }} {
-	telemgo.PutSubscriptionMode(n, mode)
+	genutil.PutSubscriptionMode(n, mode)
 	return n
 }
 
 // WithClient allows the user to provide a gNMI client. This allows for creation
 // of tests for multiple gNMI clients to a single DUT.
 func (n *{{ .FakeRootTypePathName }}) WithClient(c gpb.GNMIClient) *{{ .FakeRootTypePathName }} {
-	telemgo.PutClient(n, c)
+	genutil.PutClient(n, c)
 	return n
 }
 
@@ -467,12 +467,12 @@ type SetRequestBatch struct {
 }
 
 type privateSetRequestBatch struct {
-  *telemgo.SetRequestBatch
+  *genutil.SetRequestBatch
 }
 
 // NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
 func (d *DevicePath) NewBatch() *SetRequestBatch {
-	return &SetRequestBatch{&privateSetRequestBatch{telemgo.NewSetRequestBatch(&{{ .FakeRootTypePathName }}{ygot.New{{ .FakeRootBaseTypeName }}(d.Id())})} }
+	return &SetRequestBatch{&privateSetRequestBatch{genutil.NewSetRequestBatch(&{{ .FakeRootTypePathName }}{ygot.New{{ .FakeRootBaseTypeName }}(d.Id())})} }
 }
 
 {{- end }}
@@ -486,9 +486,9 @@ func binarySliceToFloat32(in []{{ .SchemaStructPkgAccessor }}Binary) []float32 {
 }
 
 // getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *telemgo.QualifiedType {
-	datapoints, queryPath := telemgo.Get(t, n, isLeaf)
-	qv, err := telemgo.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, {{ .PreferShadowPath }})
+func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
+	datapoints, queryPath := genutil.Get(t, n, isLeaf)
+	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, {{ .PreferShadowPath }})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +510,7 @@ func getSchema() *ytypes.Schema {
 	goLeafConvertTemplate = mustTemplate("goLeafConvertHelper", `{{ $QualifiedGoTypeName := printf "%sQualified%s" .SchemaStructPkgAccessor .GoType.TransformedGoTypeName }}
 // convert{{ .PathStructName }} extracts the value of the leaf {{ .GoFieldName }} from its parent {{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}
 // and combines the update with an existing QualifiedType to return a *{{ $QualifiedGoTypeName }}.
-func convert{{ .PathStructName }}(t testing.TB, qt *telemgo.QualifiedType, parent *{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}) *{{ $QualifiedGoTypeName }} {
+func convert{{ .PathStructName }}(t testing.TB, qt *genutil.QualifiedType, parent *{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}) *{{ $QualifiedGoTypeName }} {
 	t.Helper()
 	if qt.ComplianceErrors != nil {
 		t.Fatal(qt.ComplianceErrors)
@@ -573,13 +573,13 @@ func (n *{{ .PathStructName }}) Get(t testing.TB) {{ .GoType.GoTypeName }} {
 // GetFull retrieves a list of samples for {{ .YANGPath }}.
 func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) GetFull(t testing.TB) []*{{ $QualifiedGoTypeName }} {
 	t.Helper()
-	datapoints, queryPath := telemgo.Get(t, n, false)
-	datapointGroups, sortedPrefixes := telemgo.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), {{- if .GoType.IsLeaf }} true {{- else }} false {{- end }})
+	datapoints, queryPath := genutil.Get(t, n, false)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), {{- if .GoType.IsLeaf }} true {{- else }} false {{- end }})
 
 	var data []*{{ $QualifiedGoTypeName }}
 	for _, prefix := range sortedPrefixes {
 		goStruct := &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
-		qt, err := telemgo.Unmarshal(t, datapointGroups[prefix], getSchema(), "{{ .GoStructTypeName }}", goStruct, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "{{ .GoStructTypeName }}", goStruct, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -630,16 +630,16 @@ func (n *{{ .PathStructName }}) Collect(t testing.TB, duration time.Duration) *{
 func (n *{{ .PathStructName }}) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }} {
 	t.Helper()
 	return &{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }}{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &{{ .GoStructTypeName }}{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convert{{ .PathStructName }}(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
 			return ok && predicate(val)
 		}),
@@ -675,16 +675,16 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Collect(t testing.TB, durat
 func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }} {
 	t.Helper()
 	return &{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }}{
-		c: telemgo.CollectUntil(t, n, duration, func(upd *telemgo.DataPoint) (telemgo.QualifiedValue, error) {
+		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
 			parentPtr := &{{ .GoStructTypeName }}{}
 			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := telemgo.Unmarshal(t, []*telemgo.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
 			if err != nil || qv.ComplianceErrors != nil {
 				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
 			}
 			return convert{{ .PathStructName }}(t, qv, parentPtr), nil
 		},
-		func(qualVal telemgo.QualifiedValue) bool {
+		func(qualVal genutil.QualifiedValue) bool {
 			val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
 			return ok && predicate(val)
 		}),
@@ -697,7 +697,7 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) CollectUntil(t testing.TB, 
 // Delete deletes the configuration at {{ .YANGPath }}.
 func (n *{{ .PathStructName }}) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Delete(t, n)
+	return genutil.Delete(t, n)
 }
 
 // BatchDelete buffers a config delete operation at {{ .YANGPath }} in the given batch object.
@@ -709,7 +709,7 @@ func (n *{{ .PathStructName }}) BatchDelete(t testing.TB, b *SetRequestBatch) {
 // Replace replaces the configuration at {{ .YANGPath }}.
 func (n *{{ .PathStructName }}) Replace(t testing.TB, val {{ .GoType.GoTypeName }}) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Replace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
+	return genutil.Replace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
 
 // BatchReplace buffers a config replace operation at {{ .YANGPath }} in the given batch object.
@@ -721,7 +721,7 @@ func (n *{{ .PathStructName }}) BatchReplace(t testing.TB, b *SetRequestBatch, v
 // Update updates the configuration at {{ .YANGPath }}.
 func (n *{{ .PathStructName }}) Update(t testing.TB, val {{ .GoType.GoTypeName }}) *gpb.SetResponse {
 	t.Helper()
-	return telemgo.Update(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
+	return genutil.Update(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
 
 // BatchUpdate buffers a config update operation at {{ .YANGPath }} in the given batch object.
@@ -737,12 +737,12 @@ func (n *{{ .PathStructName }}) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 	goQualifiedTypeTemplate = mustTemplate("goQualifiedType", `{{ $QualifiedGoTypeName := printf "Qualified%s" .TransformedGoTypeName }}
 // {{ $QualifiedGoTypeName }} is a {{ .GoTypeName }} with a corresponding timestamp.
 type {{ $QualifiedGoTypeName }} struct {
-	*telemgo.QualifiedType
+	*genutil.QualifiedType
 	val {{ .GoTypeName }} // val is the sample value.
 }
 
 func (q *{{ $QualifiedGoTypeName }}) String() string {
-	return telemgo.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
 }
 
 // Val returns the value of the {{ .GoTypeName }} sample, erroring out if not present.
@@ -794,7 +794,7 @@ func (u *Collection{{ .TransformedGoTypeName }}) Await(t testing.TB) []*{{ $Qual
 
 // CollectionUntil{{ .TransformedGoTypeName }} is a telemetry Collection whose Await method returns a slice of {{ .GoTypeName }} samples.
 type CollectionUntil{{ .TransformedGoTypeName }} struct {
-	c *telemgo.Collection
+	c *genutil.Collection
 }
 
 // Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.

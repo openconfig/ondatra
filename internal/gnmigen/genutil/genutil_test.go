@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package telemgo
+package genutil
 
 import (
 	"fmt"
@@ -1099,7 +1099,7 @@ func TestUnmarshal(t *testing.T) {
 		wantPathErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "super-container/xxxxxxxxx/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
-			Err:   errors.New("no match found in *telemgo.SuperContainer, for path"),
+			Err:   errors.New("no match found in *genutil.SuperContainer, for path"),
 		},
 	}, {
 		name: "retrieve union with field that doesn't match regex",
@@ -1134,7 +1134,7 @@ func TestUnmarshal(t *testing.T) {
 		inStruct:       &LeafContainerStruct{},
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/dne"),
-			Err:  errors.New("no match found in *telemgo.LeafContainerStruct, for path"),
+			Err:  errors.New("no match found in *genutil.LeafContainerStruct, for path"),
 		},
 	}, {
 		name: "fail to delete union with a single enum inside due to wrong path prefix",
@@ -1146,7 +1146,7 @@ func TestUnmarshal(t *testing.T) {
 		inStruct:       &LeafContainerStruct{UnionLeaf2: EnumType(44)},
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "not-valid-prefix/leaf-container-struct/union-leaf2"),
-			Err:  errors.New("no match found in *telemgo.Device, for path"),
+			Err:  errors.New("no match found in *genutil.Device, for path"),
 		},
 	}, {
 		name: "fail to delete union with a single enum inside due to wrong path suffix",
@@ -1158,7 +1158,7 @@ func TestUnmarshal(t *testing.T) {
 		inStruct:       &LeafContainerStruct{UnionLeaf2: EnumType(44)},
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-needle2"),
-			Err:  errors.New("no match found in *telemgo.LeafContainerStruct, for path"),
+			Err:  errors.New("no match found in *genutil.LeafContainerStruct, for path"),
 		},
 	}, {
 		name: "retrieve a list value with an invalid list key",
@@ -1186,7 +1186,7 @@ func TestUnmarshal(t *testing.T) {
 		wantPathErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "different-container/leaf-container-struct/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
-			Err:   errors.New("no match found in *telemgo.Device, for path"),
+			Err:   errors.New("no match found in *genutil.Device, for path"),
 		},
 	}}
 

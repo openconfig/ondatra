@@ -29,10 +29,10 @@ import (
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/genutil"
 	"github.com/openconfig/ygot/util"
-	"github.com/openconfig/ondatra/telemgen"
+	"github.com/openconfig/ondatra/internal/gnmigen"
 )
 
-// Flags for telemgen's configuration
+// Flags for gnmigen's configuration
 var (
 	yangPaths               = flag.String("path", "", "Comma separated list of paths to be recursively searched for included modules or submodules within the defined YANG modules.")
 	packageName             = flag.String("package_name", "telemetry", "The name of the Go package that should be generated.")
@@ -53,7 +53,7 @@ func init() {
 	flag.IntVar(&telemTypesFileN, "telemetry_types_file_split", 10, "The number of files into which to split the telemetry type definitions.")
 }
 
-// Static values for telemgen's configuration
+// Static values for gnmigen's configuration
 const (
 	// If set to true, circular dependencies between submodules are ignored.
 	ignoreCircDeps = false
@@ -67,8 +67,8 @@ const (
 	ytypesImportPath = "github.com/openconfig/ygot/ytypes"
 	// Import path for goyang's yang package.
 	goyangImportPath = "google3/third_party/golang/goyang/pkg/yang/yang"
-	// Import path for ONDATRA's telemgo package.
-	telemgoImportPath = "github.com/openconfig/ondatra/telemgen/telemgo"
+	// Import path for Ondatra's genutil package.
+	genUtilImportPath = "github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	// Import path for the proto library.
 	protoLibImportPath = "google3/third_party/golang/protobuf/v2/proto/proto"
 )
@@ -95,7 +95,7 @@ const (
 // telemFuncsFileN parameter as it can be quite large. The file splitting is
 // done roughly by splitting on the number of nodes, so it's an approximation
 // instead of an exact split, which does have some variance.
-func makeFileOutputSpec(telemCode *telemgen.GeneratedTelemetryCode, telemFuncsFileN, telemTypesFileN int) (map[string]string, error) {
+func makeFileOutputSpec(telemCode *gnmigen.GeneratedTelemetryCode, telemFuncsFileN, telemTypesFileN int) (map[string]string, error) {
 	var b strings.Builder
 	b.WriteString(telemCode.CommonHeader)
 	b.WriteString(telemCode.OneOffHeader)
@@ -234,14 +234,14 @@ func main() {
 	}
 
 	// Perform the code generation.
-	cg := &telemgen.GenConfig{
+	cg := &gnmigen.GenConfig{
 		PackageName: *packageName,
-		GoImports: telemgen.GoImports{
+		GoImports: gnmigen.GoImports{
 			YgotImportPath:      ygotImportPath,
 			YtypesImportPath:    ytypesImportPath,
 			GoyangImportPath:    goyangImportPath,
 			GNMIProtoPath:       gnmiProtoPath,
-			TelemGoImportPath:   telemgoImportPath,
+			GenUtilImportPath:   genUtilImportPath,
 			ProtoLibImportPath:  protoLibImportPath,
 			SchemaStructPkgPath: *schemaStructPath,
 		},
@@ -255,7 +255,7 @@ func main() {
 		PreferShadowPath:        *preferShadowPath,
 	}
 
-	var genCode *telemgen.GeneratedTelemetryCode
+	var genCode *gnmigen.GeneratedTelemetryCode
 	var errs util.Errors
 	if *generateConfigFunc {
 		if genCode, errs = cg.GenerateConfigCode(generateModules, includePaths); errs != nil {

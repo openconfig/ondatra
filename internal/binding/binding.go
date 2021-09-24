@@ -17,6 +17,7 @@ package binding
 
 import (
 	"golang.org/x/net/context"
+	"io"
 	"time"
 
 	log "github.com/golang/glog"
@@ -86,8 +87,10 @@ type Binding interface {
 	// validate that the returned reservation matches the testbed criteria.
 	//
 	// The testbed resources must be reserved for the specified runTime, or
-	// until Release is called. The framework has already checked that the
-	// runTime is a positive value.
+	// until Release is called. A runTime of zero means the caller requested an
+	// unlimited runTime. The implementation is free to impose a maximum limit on
+	// the runTime and return an error if it exceeds that limit. The framework has
+	// already checked that the runTime is not negative.
 	//
 	// This method may block for up to the specified waitTime for all testbed
 	// resources to become available. Given a zero waitTime, the implementation
@@ -122,6 +125,14 @@ type Binding interface {
 	// DialATEGNMI creates a client connection to the GNMI endpoint for the specified ATE.
 	// Implementations must append transport security options necessary to reach the server.
 	DialATEGNMI(ctx context.Context, ate *reservation.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error)
+
+	// DialConsole creates a client connection to the specified DUT's Console endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialConsole(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
+
+  // DialCLI creates a client connection to the specified DUT's CLI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialCLI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
 
 	// PushTopology pushes a topology to the ATE.
 	// The framework has already verified that there is at least one interface
@@ -194,4 +205,18 @@ type GNOIClients interface {
 // TestMetadata is metadata about a test.
 type TestMetadata struct {
 	TestName string
+}
+
+// StreamClient provides the interface for streaming IO to DUT.
+type StreamClient interface {
+	// SendCommand always expects a clean "prompt" on the underlying
+	// device. If the device is interleaving Stdin writes with SendCommand
+	// the underlying channel must be at a clean prompt to allow SendCommand
+	// to complete the operation. Additionaly, the result buffer will be fully
+	// consumed by SendCommand, ensuring it leaves a clean prompt behind.
+	SendCommand(context.Context, string) (string, error)
+	Stdin() io.Writer
+	Stdout() io.Reader
+	Stderr() io.Reader
+	Close() error
 }

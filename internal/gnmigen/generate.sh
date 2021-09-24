@@ -16,6 +16,8 @@
 
 # This script is used to generate the Ondatra Telemetry and Config Go APIs.
 
+set -e
+
 go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
@@ -100,7 +102,7 @@ generator \
   -path_structs_split_files_count=5 \
   "${COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
-go run telemgen/main/main.go \
+go run internal/gnmigen/main/main.go \
   -output_dir=config \
   -package_name=config \
   -path=public/release/models,public/third_party/ietf \
@@ -123,7 +125,7 @@ generator \
   -path_structs_split_files_count=10 \
   "${COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
-go run telemgen/main/main.go \
+go run internal/gnmigen/main/main.go \
   -output_dir=telemetry \
   -package_name=telemetry \
   -path=public/release/models,public/third_party/ietf \

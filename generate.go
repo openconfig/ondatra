@@ -14,5 +14,5 @@
 
 package ondatra
 
-//go:generate ./gen_yang.sh
-//go:generate ./gen_proto.sh
+//go:generate ./proto/generate.sh
+//go:generate ./internal/gnmigen/generate.sh
