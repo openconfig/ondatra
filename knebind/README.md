@@ -32,9 +32,10 @@ kubecfg: /home/tester/go/bin/.kube/config
 
 ## Running the Integration Test
 
-This repo includes an [example integration test](integrate/integration_test.go)
-that uses the KNE binding, as well as a [testbed file](testbed/text.proto) for
-that test. To execute the test, you must:
+This repo includes an
+[example integration test](integration/integration_test.go) that uses the KNE
+binding, as well as a [testbed file](integration/testbed.textproto) for that
+test. To execute the test, you must:
 
 1.  create a local KNE topology with at least two linked nodes, as the testbed
     requires
