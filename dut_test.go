@@ -24,10 +24,10 @@ import (
 	"strings"
 	"testing"
 
-	"google3/ops/netops/util/go/errdiff"
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/negtest"

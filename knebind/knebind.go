@@ -46,6 +46,7 @@ var (
 		kpb.Node_CISCO_CXR:    opb.Device_CISCO,
 		kpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
 		kpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
+		kpb.Node_IXIA_TG:      opb.Device_IXIA,
 	}
 
 	fetchTopo = fetchTopology // to be stubbed out by tests
@@ -84,6 +85,7 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	res := &reservation.Reservation{
 		ID:   uuid.New(),
 		DUTs: make(map[string]*reservation.DUT),
+		ATEs: make(map[string]*reservation.ATE),
 	}
 	for _, dut := range tb.GetDuts() {
 		resDUT, err := b.resolveDUT(dut, a)
@@ -91,6 +93,13 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 			return nil, err
 		}
 		res.DUTs[dut.GetId()] = resDUT
+	}
+	for _, ate := range tb.GetAtes() {
+		resATE, err := b.resolveATE(ate, a)
+		if err != nil {
+			return nil, err
+		}
+		res.ATEs[ate.GetId()] = resATE
 	}
 	return res, nil
 }
@@ -113,29 +122,45 @@ func fetchTopology(cfg *Config) (*kpb.Topology, error) {
 }
 
 func (b *Bind) resolveDUT(dev *opb.Device, a *assign) (*reservation.DUT, error) {
-	node := a.dut2Node[dev]
+	dims, err := b.resolveDims(dev, a)
+	if err != nil {
+		return nil, err
+	}
+	dut := &reservation.DUT{dims}
+	b.dut2GNMIAddr[dut], err = gnmiAddr(a.dev2Node[dev])
+	if err != nil {
+		return nil, err
+	}
+	return dut, nil
+}
+
+func (b *Bind) resolveATE(dev *opb.Device, a *assign) (*reservation.ATE, error) {
+	dims, err := b.resolveDims(dev, a)
+	if err != nil {
+		return nil, err
+	}
+	return &reservation.ATE{dims}, nil
+}
+
+func (b *Bind) resolveDims(dev *opb.Device, a *assign) (*reservation.Dims, error) {
+	node := a.dev2Node[dev]
 	vendor, ok := type2VendorMap[node.GetType()]
 	if !ok {
 		return nil, errors.Errorf("No known device vendor for node type: %v", node.GetType())
 	}
 	typeName := kpb.Node_Type_name[int32(node.GetType())]
-	dut := &reservation.DUT{&reservation.Dims{
+	dims := &reservation.Dims{
 		Name:   node.GetName(),
 		Vendor: vendor,
 		// TODO: Determine appropriate hardware model and software version
 		HardwareModel:   typeName,
 		SoftwareVersion: typeName,
 		Ports:           make(map[string]*reservation.Port),
-	}}
+	}
 	for _, p := range dev.GetPorts() {
-		dut.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].name}
+		dims.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].name}
 	}
-	ga, err := gnmiAddr(node)
-	if err != nil {
-		return nil, err
-	}
-	b.dut2GNMIAddr[dut] = ga
-	return dut, nil
+	return dims, nil
 }
 
 func gnmiAddr(node *kpb.Node) (string, error) {

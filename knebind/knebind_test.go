@@ -41,23 +41,32 @@ func TestReserve(t *testing.T) {
 			Name:     "node3",
 			Type:     kpb.Node_JUNIPER_CEVO,
 			Services: map[uint32]*kpb.Service{3456: {Name: "gnmi"}},
+		}, {
+			Name: "node4",
+			Type: kpb.Node_IXIA_TG,
 		}},
 		Links: []*kpb.Link{
 			{ANode: "node1", AInt: "intf1", ZNode: "node2", ZInt: "intf1"},
 			{ANode: "node2", AInt: "intf2", ZNode: "node3", ZInt: "intf2"},
+			{ANode: "node1", AInt: "intf2", ZNode: "node4", ZInt: "intf1"},
 		},
 	}
 	dut1 := &opb.Device{
 		Id:     "dut1",
 		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}},
+		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut2 := &opb.Device{
 		Id:    "dut2",
 		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut3 := &opb.Device{
-		Id:    "dut3",
+		Id:     "dut3",
+		Vendor: opb.Device_JUNIPER,
+		Ports:  []*opb.Port{{Id: "port1"}},
+	}
+	ate := &opb.Device{
+		Id:    "ate",
 		Ports: []*opb.Port{{Id: "port1"}},
 	}
 	link12 := &opb.Link{
@@ -67,6 +76,10 @@ func TestReserve(t *testing.T) {
 	link23 := &opb.Link{
 		A: "dut2:port2",
 		B: "dut3:port1",
+	}
+	link14 := &opb.Link{
+		A: "dut1:port2",
+		B: "ate:port1",
 	}
 	fetchTopo = func(*Config) (*kpb.Topology, error) {
 		return topo, nil
@@ -78,6 +91,7 @@ func TestReserve(t *testing.T) {
 		SoftwareVersion: "ARISTA_CEOS",
 		Ports: map[string]*reservation.Port{
 			"port1": {Name: "intf1"},
+			"port2": {Name: "intf2"},
 		},
 	}}
 	wantDUT2 := &reservation.DUT{&reservation.Dims{
@@ -99,6 +113,15 @@ func TestReserve(t *testing.T) {
 			"port1": {Name: "intf2"},
 		},
 	}}
+	wantATE := &reservation.ATE{&reservation.Dims{
+		Name:            "node4",
+		Vendor:          opb.Device_IXIA,
+		HardwareModel:   "IXIA_TG",
+		SoftwareVersion: "IXIA_TG",
+		Ports: map[string]*reservation.Port{
+			"port1": {Name: "intf1"},
+		},
+	}}
 
 	tests := []struct {
 		name    string
@@ -107,16 +130,23 @@ func TestReserve(t *testing.T) {
 	}{{
 		name: "one dut",
 		tb: &opb.Testbed{
-			Duts: []*opb.Device{{
-				Id: "dut1",
-				Ports: []*opb.Port{{
-					Id: "port1",
-				}},
-			}},
+			Duts: []*opb.Device{dut3},
 		},
 		wantRes: &reservation.Reservation{
 			DUTs: map[string]*reservation.DUT{
-				"dut1": wantDUT1,
+				"dut3": wantDUT3,
+			},
+			ATEs: map[string]*reservation.ATE{},
+		},
+	}, {
+		name: "one ate",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{ate},
+		},
+		wantRes: &reservation.Reservation{
+			DUTs: map[string]*reservation.DUT{},
+			ATEs: map[string]*reservation.ATE{
+				"ate": wantATE,
 			},
 		},
 	}, {
@@ -129,6 +159,22 @@ func TestReserve(t *testing.T) {
 			DUTs: map[string]*reservation.DUT{
 				"dut1": wantDUT1,
 				"dut2": wantDUT2,
+			},
+			ATEs: map[string]*reservation.ATE{},
+		},
+	}, {
+		name: "dut and ate",
+		tb: &opb.Testbed{
+			Duts:  []*opb.Device{dut1},
+			Ates:  []*opb.Device{ate},
+			Links: []*opb.Link{link14},
+		},
+		wantRes: &reservation.Reservation{
+			DUTs: map[string]*reservation.DUT{
+				"dut1": wantDUT1,
+			},
+			ATEs: map[string]*reservation.ATE{
+				"ate": wantATE,
 			},
 		},
 	}, {
@@ -143,6 +189,7 @@ func TestReserve(t *testing.T) {
 				"dut2": wantDUT2,
 				"dut3": wantDUT3,
 			},
+			ATEs: map[string]*reservation.ATE{},
 		},
 	}}
 	for _, test := range tests {
@@ -173,10 +220,6 @@ func TestReserveErrors(t *testing.T) {
 		topo    *kpb.Topology
 		wantErr string
 	}{{
-		name:    "no ATE support",
-		tb:      &opb.Testbed{Ates: []*opb.Device{{Id: "ate"}}},
-		wantErr: "not yet support ATEs",
-	}, {
 		name:    "too few nodes",
 		tb:      &opb.Testbed{Duts: []*opb.Device{{Id: "dut1"}}},
 		wantErr: "Not enough nodes",
@@ -202,6 +245,20 @@ func TestReserveErrors(t *testing.T) {
 			Duts: []*opb.Device{{
 				Id:     "dut1",
 				Vendor: opb.Device_ARISTA,
+			}},
+		},
+		topo: &kpb.Topology{
+			Nodes: []*kpb.Node{{
+				Name: "node1",
+				Type: kpb.Node_CISCO_CXR,
+			}},
+		},
+		wantErr: "No node in KNE topology to match testbed",
+	}, {
+		name: "no match for ATE",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{{
+				Id: "ate1",
 			}},
 		},
 		topo: &kpb.Topology{
