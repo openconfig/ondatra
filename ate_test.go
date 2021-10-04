@@ -1121,25 +1121,23 @@ func TestPushTopologyErrors(t *testing.T) {
 		}(),
 		wantFatalMsg: "duplicate network name",
 	}, {
-		name: "no port",
+		name: "no link",
 		top: func() *ATETopology {
 			top := ate.Topology().New()
 			top.AddInterface("i")
 			return top
 		}(),
-		wantFatalMsg: "port",
+		wantFatalMsg: "no port or lag",
 	}, {
-		// TODO: Renable test that port cannot belong to multiple different
-		//                    bundles when go/ondatra-lags support is complete.
-		// name: "multiple bundles",
-		// top: func() *ATETopology {
-		//   top := ate.Topology().New()
-		//   top.AddInterface("i1").WithPort(p1)
-		//   top.AddInterface("i2").WithLACPBundlePorts(p1, p2)
-		// return top
-		// }(),
-		// wantFatalMsg: "multiple bundles",
-		// }, {
+		name: "lag and lacp",
+		top: func() *ATETopology {
+			top := ate.Topology().New()
+			top.AddInterface("i").WithLAG(top.AddLAG().WithPorts(p1)).
+				WithLACPEnabled(true)
+			return top
+		}(),
+		wantFatalMsg: "both a lag and that lacp",
+	}, {
 		name: "bad address format",
 		top: func() *ATETopology {
 			top := ate.Topology().New()

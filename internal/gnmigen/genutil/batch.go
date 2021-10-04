@@ -137,9 +137,6 @@ func populateSetRequest(req *gpb.SetRequest, path *gpb.Path, val interface{}, op
 	if req == nil {
 		return fmt.Errorf("cannot populate a nil SetRequest")
 	}
-	if len(path.Elem) == 0 {
-		return fmt.Errorf("got empty path for replace operation")
-	}
 
 	// Keep only the path elements.
 	path = &gpb.Path{Elem: path.Elem}

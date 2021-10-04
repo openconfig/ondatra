@@ -99,6 +99,9 @@ func validateInterfaces(ate *reservation.ATE, ifs []*opb.InterfaceConfig) error 
 		if i.GetPort() == "" && i.GetLag() == "" {
 			return usererr.New("interface has no port or lag specified: %v", i)
 		}
+		if i.GetLag() != "" && i.GetEnableLacp() {
+			return usererr.New("interface should not specify both a LAG and that LACP is enabled: %v", i)
+		}
 		if intfs[i.GetName()] {
 			return usererr.New("duplicate interface name: %s", i.GetName())
 		}
