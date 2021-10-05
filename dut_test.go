@@ -16,10 +16,7 @@ package ondatra
 
 import (
 	"bufio"
-	"bytes"
 	"golang.org/x/net/context"
-	"fmt"
-	"io"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -28,10 +25,6 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"github.com/openconfig/gnmi/errdiff"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/negtest"
-
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	bpb "github.com/openconfig/gnoi/bgp"
 	cpb "github.com/openconfig/gnoi/cert"
@@ -46,6 +39,10 @@ import (
 	otpb "github.com/openconfig/gnoi/otdr"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
+	"github.com/openconfig/ondatra/fakes/fakestreamclient"
+	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/negtest"
 
 )
 
@@ -390,48 +387,10 @@ func TestGNOIError(t *testing.T) {
 	}
 }
 
-type fakeIO struct {
-	stdin  *bytes.Buffer
-	stdout *bytes.Buffer
-	stderr *bytes.Buffer
-	cErr   error
-}
-
-func (f *fakeIO) SendCommand(_ context.Context, cmd string) (string, error) {
-	if cmd == "error" {
-		return "", fmt.Errorf("error")
-	}
-	return cmd, nil
-}
-
-func (f *fakeIO) Close() error {
-	return f.cErr
-}
-
-func (f *fakeIO) Stdin() io.Writer {
-	return f.stdin
-}
-
-func (f *fakeIO) Stdout() io.Reader {
-	return f.stdout
-}
-
-func (f *fakeIO) Stderr() io.Reader {
-	return f.stderr
-}
-
 func TestStreamingClient(t *testing.T) {
 	initDUTFakes(t)
-	fCLI := &fakeIO{
-		stdin:  bytes.NewBuffer([]byte{}),
-		stdout: bytes.NewBuffer([]byte{}),
-		stderr: bytes.NewBuffer([]byte{}),
-	}
-	fConsole := &fakeIO{
-		stdin:  bytes.NewBuffer([]byte{}),
-		stdout: bytes.NewBuffer([]byte{}),
-		stderr: bytes.NewBuffer([]byte{}),
-	}
+	fCLI := fakestreamclient.New()
+	fConsole := fakestreamclient.New()
 	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
@@ -443,7 +402,7 @@ func TestStreamingClient(t *testing.T) {
 	tests := []struct {
 		desc string
 		c    StreamClient
-		f    *fakeIO
+		f    *fakestreamclient.FakeStreamClient
 	}{{
 		desc: "Console",
 		c:    consoleClient,
@@ -455,30 +414,27 @@ func TestStreamingClient(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			stdin := tt.c.Stdin()
 			want := "show version\n"
-			stdin.Write([]byte(want))
-			got, err := tt.f.stdin.ReadString('\n')
+			go tt.c.Stdin().Write([]byte(want))
+			got, err := bufio.NewReader(tt.f.InReader).ReadString('\n')
 			if err != nil {
 				t.Fatalf("failed to write to test buffer: %v", err)
 			}
 			if got != want {
 				t.Fatalf("failed to get expect stream data: got %v, want %v", got, want)
 			}
-			stdout := tt.c.Stdout()
 			want = "some really cool output\n"
-			tt.f.stdout.Write([]byte(want))
-			got, err = bufio.NewReader(stdout).ReadString('\n')
+			go tt.f.OutWriter.Write([]byte(want))
+			got, err = bufio.NewReader(tt.c.Stdout()).ReadString('\n')
 			if err != nil {
 				t.Fatalf("failed to write to test buffer: %v", err)
 			}
 			if got != want {
 				t.Fatalf("failed to get expect stream data: got %v, want %v", got, want)
 			}
-			stderr := tt.c.Stderr()
 			want = "some errors written to stderr\n"
-			tt.f.stderr.Write([]byte(want))
-			got, err = bufio.NewReader(stderr).ReadString('\n')
+			go tt.f.ErrWriter.Write([]byte(want))
+			got, err = bufio.NewReader(tt.c.Stderr()).ReadString('\n')
 			if err != nil {
 				t.Fatalf("failed to write to test buffer: %v", err)
 			}
@@ -491,8 +447,8 @@ func TestStreamingClient(t *testing.T) {
 
 func TestSendCommand(t *testing.T) {
 	initDUTFakes(t)
-	fCLI := &fakeIO{}
-	fConsole := &fakeIO{}
+	fCLI := &fakestreamclient.FakeStreamClient{}
+	fConsole := &fakestreamclient.FakeStreamClient{}
 	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
@@ -504,7 +460,7 @@ func TestSendCommand(t *testing.T) {
 	tests := []struct {
 		desc    string
 		c       StreamClient
-		f       *fakeIO
+		f       *fakestreamclient.FakeStreamClient
 		cmd     string
 		wantErr string
 	}{{

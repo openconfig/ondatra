@@ -130,7 +130,7 @@ type Binding interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialConsole(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
 
-  // DialCLI creates a client connection to the specified DUT's CLI endpoint.
+	// DialCLI creates a client connection to the specified DUT's CLI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialCLI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
 
@@ -215,8 +215,8 @@ type StreamClient interface {
 	// to complete the operation. Additionaly, the result buffer will be fully
 	// consumed by SendCommand, ensuring it leaves a clean prompt behind.
 	SendCommand(context.Context, string) (string, error)
-	Stdin() io.Writer
-	Stdout() io.Reader
-	Stderr() io.Reader
+	Stdin() io.WriteCloser
+	Stdout() io.ReadCloser
+	Stderr() io.ReadCloser
 	Close() error
 }

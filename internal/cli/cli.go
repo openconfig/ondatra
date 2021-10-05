@@ -17,30 +17,13 @@ package cli
 
 import (
 	"golang.org/x/net/context"
-	"sync"
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 )
 
-var (
-	mu   sync.Mutex
-	clis = map[*reservation.DUT]binding.StreamClient{}
-)
-
 // FetchCLI will return a CLI client for interacting with the DUT.
 func FetchCLI(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
-	mu.Lock()
-	defer mu.Unlock()
-	c, ok := clis[dut]
-	if !ok {
-		var err error
-		c, err = binding.Get().DialCLI(ctx, dut, grpc.WithBlock())
-		if err != nil {
-			return nil, err
-		}
-		clis[dut] = c
-	}
-	return c, nil
+	return binding.Get().DialCLI(ctx, dut, grpc.WithBlock())
 }

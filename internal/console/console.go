@@ -17,30 +17,13 @@ package console
 
 import (
 	"golang.org/x/net/context"
-	"sync"
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 )
 
-var (
-	mu       sync.Mutex
-	consoles = map[*reservation.DUT]binding.StreamClient{}
-)
-
 // FetchConsole will return a console client for interacting with the DUT.
 func FetchConsole(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
-	mu.Lock()
-	defer mu.Unlock()
-	c, ok := consoles[dut]
-	if !ok {
-		var err error
-		c, err = binding.Get().DialConsole(ctx, dut, grpc.WithBlock())
-		if err != nil {
-			return nil, err
-		}
-		consoles[dut] = c
-	}
-	return c, nil
+	return binding.Get().DialConsole(ctx, dut, grpc.WithBlock())
 }
