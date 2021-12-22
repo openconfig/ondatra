@@ -20,6 +20,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ygot/ygot"
+
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 

@@ -21,6 +21,7 @@ import (
 	"flag"
 	"fmt"
 	"math"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -28,7 +29,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/genutil"
-	"github.com/openconfig/ygot/util"
 	"github.com/openconfig/ondatra/internal/gnmigen"
 )
 
@@ -37,11 +37,17 @@ var (
 	yangPaths               = flag.String("path", "", "Comma separated list of paths to be recursively searched for included modules or submodules within the defined YANG modules.")
 	packageName             = flag.String("package_name", "telemetry", "The name of the Go package that should be generated.")
 	schemaStructPath        = flag.String("schema_struct_path", "", "The Go import path for the schema structs package. This should be specified if and only if schema structs are not being generated at the same time as the path structs.")
+	configPath              = flag.String("config_import_path", "", "The Go import path for the config package. This should be specified if and only if split by module if true.")
 	excludeModules          = flag.String("exclude_modules", "", "Comma separated set of module names that should be excluded from code generation this can be used to ensure overlapping namespaces can be ignored.")
 	outputDir               = flag.String("output_dir", "", "The directory that the Go package should be written to.")
 	generateConfigFunc      = flag.Bool("generate_config_func", false, "Whether config functions should be generated instead of telemetry functions.")
 	preferShadowPath        = flag.Bool("prefer_shadow_path", false, "Whether to use the \"shadow-path\" or the \"path\" struct tags when both are present when marshalling or unmarshalling a GoStruct.")
 	listBuilderKeyThreshold = flag.Uint("list_builder_key_threshold", 0, "The threshold equal or over which the builder API is used for key population. 0 means to never use the builder API.")
+	splitByModule           = flag.Bool("split_pathstructs_by_module", false, "Whether to split path struct generation by module.")
+	generatePathAPI         = flag.Bool("gen_path_struct_api", true, "Whether to generate the per path struct gNMI funcs (Get, Collect, etc.). To generate only per type code, (QualifiedString, CollectionString etc), set this to false.")
+	fakeRootHelperFileName  = flag.String("fake_root_helper_filename", fakeRootMethodsFileName, "Filename for the fake root helpers file.")
+	fakeRootGNMIFileName    = flag.String("fake_root_gnmi_filename", defaultFakeRootGNMIFileName, "Filename for the fake root gNMI file.")
+
 	// The number of files into which to split the telemetry functions.
 	telemFuncsFileN int
 	// The number of files into which to split the telemetry type definitions.
@@ -65,12 +71,8 @@ const (
 	ygotImportPath = "github.com/openconfig/ygot/ygot"
 	// Import path for ytypes.
 	ytypesImportPath = "github.com/openconfig/ygot/ytypes"
-	// Import path for goyang's yang package.
-	goyangImportPath = "google3/third_party/golang/goyang/pkg/yang/yang"
 	// Import path for Ondatra's genutil package.
 	genUtilImportPath = "github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	// Import path for the proto library.
-	protoLibImportPath = "google3/third_party/golang/protobuf/v2/proto/proto"
 )
 
 // File names for the output files.
@@ -83,9 +85,12 @@ const (
 	// be used for the return types used by telemetry calls when Go code is
 	// output to a directory.
 	telemTypesFileFmt = "telem_types-%d.go"
-	// telemHelpersFileName is the file name containing hand-written helper
-	// functions.
-	telemHelpersFileName = "telem_helpers.go"
+	// fakeRootMethodsFileName is the file name containing helper
+	// functions for the fake root path struct.
+	fakeRootMethodsFileName = "telem_root_helpers.go"
+	// fakeRootGNMIFileName is the file name containing GNMI operations
+	// functions for the fake root path struct.
+	defaultFakeRootGNMIFileName = "device_telem.go"
 )
 
 // makeFileOutputSpec generates a map, keyed by filenames, to strings
@@ -94,36 +99,54 @@ const (
 // while also allowing the first to be split into multiple files using the
 // telemFuncsFileN parameter as it can be quite large. The file splitting is
 // done roughly by splitting on the number of nodes, so it's an approximation
-// instead of an exact split, which does have some variance.
-func makeFileOutputSpec(telemCode *gnmigen.GeneratedTelemetryCode, telemFuncsFileN, telemTypesFileN int) (map[string]string, error) {
+// instead of an exact split, which does have some variance. If the splitting by
+// module is enabled, the map will contain files in several folders. For path structs,
+// module will be in its own package and the fake root will be generated
+// in the user-specified packageName.
+func makeFileOutputSpec(telemCode *gnmigen.GeneratedTelemetryCode, modSplit, genPathHelpers bool, telemFuncsFileN, telemTypesFileN int) (map[string]string, error) {
+	out := map[string]string{}
+	if len(telemCode.GoReturnTypeSnippets) > 0 {
+		var snippets []string
+		for _, s := range telemCode.GoReturnTypeSnippets {
+			snippets = append(snippets, s.String())
+		}
+		files, err := splitCodeSnippets(snippets, telemCode.Headers[*packageName], telemTypesFileN)
+		if err != nil {
+			return nil, err
+		}
+		for i, file := range files {
+			out[fmt.Sprintf(telemTypesFileFmt, i)] = file
+		}
+	}
+
+	if !genPathHelpers {
+		return out, nil
+	}
+
 	var b strings.Builder
-	b.WriteString(telemCode.CommonHeader)
-	b.WriteString(telemCode.OneOffHeader)
-	out := map[string]string{telemHelpersFileName: b.String()}
-
-	// Split the telemetry API code into files.
-	var snippets []string
-	for _, s := range telemCode.GoReturnTypeSnippets {
-		snippets = append(snippets, s.String())
-	}
-	files, err := splitCodeSnippets(snippets, telemCode.CommonHeader, telemTypesFileN)
-	if err != nil {
-		return nil, err
-	}
-	for i, file := range files {
-		out[fmt.Sprintf(telemTypesFileFmt, i)] = file
-	}
-
-	snippets = []string{}
-	for _, s := range telemCode.GoPerNodeSnippets {
-		snippets = append(snippets, s.String())
-	}
-	files, err = splitCodeSnippets(snippets, telemCode.CommonHeader, telemFuncsFileN)
-	if err != nil {
-		return nil, err
-	}
-	for i, file := range files {
-		out[fmt.Sprintf(telemFuncsFileFmt, i)] = file
+	b.WriteString(telemCode.Headers[*packageName])
+	b.WriteString(telemCode.FakeRootMethods)
+	out[*fakeRootHelperFileName] = b.String()
+	for pkg, pkgSnips := range telemCode.GoPerNodeSnippets {
+		snippets := []string{}
+		for _, s := range pkgSnips {
+			snippets = append(snippets, s.String())
+		}
+		pathPrefix := ""
+		if modSplit {
+			pathPrefix = pkg
+			if pkg == *packageName {
+				out[*fakeRootGNMIFileName] = telemCode.Headers[*packageName] + strings.Join(snippets, "")
+				continue
+			}
+		}
+		files, err := splitCodeSnippets(snippets, telemCode.Headers[pkg], telemFuncsFileN)
+		if err != nil {
+			return nil, err
+		}
+		for i, file := range files {
+			out[filepath.Join(pathPrefix, fmt.Sprintf(telemFuncsFileFmt, i))] = file
+		}
 	}
 
 	return out, nil
@@ -179,7 +202,11 @@ func writeFiles(dir string, out map[string]string) error {
 		if len(contents) == 0 {
 			continue
 		}
-		fh := genutil.OpenFile(filepath.Join(dir, filename))
+		path := filepath.Join(dir, filename)
+		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			return err
+		}
+		fh := genutil.OpenFile(path)
 		if fh == nil {
 			return errors.Errorf("could not open file %q", filename)
 		}
@@ -239,11 +266,10 @@ func main() {
 		GoImports: gnmigen.GoImports{
 			YgotImportPath:      ygotImportPath,
 			YtypesImportPath:    ytypesImportPath,
-			GoyangImportPath:    goyangImportPath,
 			GNMIProtoPath:       gnmiProtoPath,
 			GenUtilImportPath:   genUtilImportPath,
-			ProtoLibImportPath:  protoLibImportPath,
 			SchemaStructPkgPath: *schemaStructPath,
+			ConfigImportPath:    *configPath,
 		},
 		FakeRootName:   fakeRootName,
 		ExcludeModules: modsExcluded,
@@ -253,21 +279,14 @@ func main() {
 		GeneratingBinary:        genutil.CallerName(),
 		ListBuilderKeyThreshold: *listBuilderKeyThreshold,
 		PreferShadowPath:        *preferShadowPath,
+		SplitByModule:           *splitByModule,
 	}
 
-	var genCode *gnmigen.GeneratedTelemetryCode
-	var errs util.Errors
-	if *generateConfigFunc {
-		if genCode, errs = cg.GenerateConfigCode(generateModules, includePaths); errs != nil {
-			log.Exitf("Error: Generating Config Functions: %s\n", errs)
-		}
-	} else {
-		if genCode, errs = cg.GenerateTelemetryCode(generateModules, includePaths); errs != nil {
-			log.Exitf("Error: Generating Telemetry Functions: %s\n", errs)
-		}
+	genCode, errs := cg.GenerateCode(generateModules, includePaths, *generateConfigFunc)
+	if errs != nil {
+		log.Exitf("Error: Generating Config Functions: %s\n", errs)
 	}
-
-	out, err := makeFileOutputSpec(genCode, telemFuncsFileN, telemTypesFileN)
+	out, err := makeFileOutputSpec(genCode, cg.SplitByModule, *generatePathAPI, telemFuncsFileN, telemTypesFileN)
 	if err != nil {
 		log.Exitf("Error: Generating Code: %s\n", err)
 	}

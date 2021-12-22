@@ -15,6 +15,7 @@
 package genutil
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
 	"testing"
 
@@ -65,7 +66,7 @@ func (b *SetRequestBatch) WithSubscriptionMode(mode gpb.SubscriptionMode) *SetRe
 // Set creates and makes a single gNMI SetRequest call for the batched set requests.
 func (b *SetRequestBatch) Set(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	resp, err := batchSet("openconfig", b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.req)
+	resp, err := batchSet(context.Background(), "openconfig", b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.req)
 	if err != nil {
 		t.Fatalf("SetRequestBatch.Set: %v", err)
 	}
@@ -110,8 +111,8 @@ func (b *SetRequestBatch) batchSet(n ygot.PathStruct, val interface{}, op setOpe
 	if path.GetTarget() != b.deviceRoot.Id() {
 		return fmt.Errorf("path target doesn't equal the device target for the batch: got %q, want %q", path.GetTarget(), b.deviceRoot.Id())
 	}
-	if len(customData) != 0 {
-		return fmt.Errorf("batching cannot accept a path that has its custom request options; please set request options solely via the batch object")
+	if _, ok := customData[DefaultClientKey]; ok && len(customData) > 1 || !ok && len(customData) > 0 {
+		return fmt.Errorf("batch cannot accept a path that has custom request options; please set request options solely via the batch object")
 	}
 
 	if err := populateSetRequest(b.req, path, val, op); err != nil {

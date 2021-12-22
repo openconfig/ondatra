@@ -21,6 +21,8 @@ import (
 
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/testbed"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 func reserve(testbedPath string, runTime, waitTime time.Duration) error {
@@ -62,7 +64,11 @@ func DUTs(t testing.TB) map[string]*DUTDevice {
 }
 
 func newDUT(id string, res *reservation.DUT) *DUTDevice {
-	return &DUTDevice{&Device{id: id, res: res}}
+	return &DUTDevice{&Device{
+		id:       id,
+		res:      res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, res, nil) },
+	}}
 }
 
 // ATE returns the ATE in the testbed with a given id.
@@ -87,7 +93,11 @@ func ATEs(t testing.TB) map[string]*ATEDevice {
 }
 
 func newATE(id string, res *reservation.ATE) *ATEDevice {
-	return &ATEDevice{&Device{id: id, res: res}}
+	return &ATEDevice{&Device{
+		id:       id,
+		res:      res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, res, nil) },
+	}}
 }
 
 // ReservationID returns the reservation ID for the testbed.

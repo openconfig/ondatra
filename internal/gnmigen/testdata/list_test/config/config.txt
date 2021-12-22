@@ -12,8 +12,6 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/protobuf/proto"
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
@@ -42,93 +40,59 @@ func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
 	return n
 }
 
-type SetRequestBatch struct {
-  *privateSetRequestBatch
-}
-
-type privateSetRequestBatch struct {
-  *genutil.SetRequestBatch
-}
-
 // NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
-func (d *DevicePath) NewBatch() *SetRequestBatch {
-	return &SetRequestBatch{&privateSetRequestBatch{genutil.NewSetRequestBatch(&RootPath{ygot.NewDeviceRootBase(d.Id())})} }
+func (d *RootPath) NewBatch() *SetRequestBatch {
+	return NewSetBatch(d)
 }
 
-func binarySliceToFloat32(in []Binary) []float32 {
-	converted := make([]float32, 0, len(in))
-	for _, binary := range in {
-		converted = append(converted, ygot.BinaryToFloat32(binary))
-	}
-	return converted
-}
-
-// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
-	datapoints, queryPath := genutil.Get(t, n, isLeaf)
-	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return qv
-}
-
-// getSchema return the generated ytypes schema used for unmarshaling datapoints.
-func getSchema() *ytypes.Schema {
-	return &ytypes.Schema{
-		Root:       &Root{},
-		SchemaTree: SchemaTree,
-		Unmarshal:  Unmarshal,
-	}
-}
-
-// GetFull retrieves a sample for /openconfig-withlist/model.
-func (n *ModelPath) GetFull(t testing.TB) *QualifiedModel {
+// Lookup fetches the value at /openconfig-withlist/model with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *ModelPath) Lookup(t testing.TB) *QualifiedModel {
 	t.Helper()
 	goStruct := &Model{}
-	ret := &QualifiedModel{
-		QualifiedType: getFull(t, n, "Model", goStruct, false),
+	md, ok := Lookup(t, n, "Model", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *ModelPath) Get(t testing.TB) *Model {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model.
-func (n *ModelPathAny) GetFull(t testing.TB) []*QualifiedModel {
+// Lookup fetches the values at /openconfig-withlist/model with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *ModelPathAny) Lookup(t testing.TB) []*QualifiedModel {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model.
+// Get fetches the values at /openconfig-withlist/model with a ONCE subscription.
 func (n *ModelPathAny) Get(t testing.TB) []*Model {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -172,53 +136,54 @@ func (n *ModelPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Model) {
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key.
-func (n *Model_MultiKeyPath) GetFull(t testing.TB) *QualifiedModel_MultiKey {
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKeyPath) Lookup(t testing.TB) *QualifiedModel_MultiKey {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedModel_MultiKey{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, false),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel_MultiKey{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key.
-func (n *Model_MultiKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_MultiKey {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKeyPathAny) Lookup(t testing.TB) []*QualifiedModel_MultiKey {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel_MultiKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel_MultiKey{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
 func (n *Model_MultiKeyPathAny) Get(t testing.TB) []*Model_MultiKey {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model_MultiKey
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -262,45 +227,50 @@ func (n *Model_MultiKeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/config/key1.
-func (n *Model_MultiKey_Key1Path) GetFull(t testing.TB) *QualifiedUint32 {
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key/config/key1 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKey_Key1Path) Lookup(t testing.TB) *QualifiedUint32 {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedUint32{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, true, false)
+	if ok {
+		return convertModel_MultiKey_Key1Path(t, md, goStruct)
 	}
-	return convertModel_MultiKey_Key1Path(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/config/key1, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key/config/key1 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/config/key1.
-func (n *Model_MultiKey_Key1PathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key/config/key1 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKey_Key1PathAny) Lookup(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_MultiKey_Key1Path(t, qt, goStruct)
+		qv := convertModel_MultiKey_Key1Path(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/config/key1.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key/config/key1 with a ONCE subscription.
 func (n *Model_MultiKey_Key1PathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -345,64 +315,63 @@ func (n *Model_MultiKey_Key1Path) BatchUpdate(t testing.TB, b *SetRequestBatch, 
 }
 
 // convertModel_MultiKey_Key1Path extracts the value of the leaf Key1 from its parent Model_MultiKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_MultiKey_Key1Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint32 {
+// and combines the update with an existing Metadata to return a *QualifiedUint32.
+func convertModel_MultiKey_Key1Path(t testing.TB, md *genutil.Metadata, parent *Model_MultiKey) *QualifiedUint32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key1
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/config/key2.
-func (n *Model_MultiKey_Key2Path) GetFull(t testing.TB) *QualifiedUint64 {
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key/config/key2 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKey_Key2Path) Lookup(t testing.TB) *QualifiedUint64 {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedUint64{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, true, false)
+	if ok {
+		return convertModel_MultiKey_Key2Path(t, md, goStruct)
 	}
-	return convertModel_MultiKey_Key2Path(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/config/key2, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key/config/key2 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/config/key2.
-func (n *Model_MultiKey_Key2PathAny) GetFull(t testing.TB) []*QualifiedUint64 {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key/config/key2 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKey_Key2PathAny) Lookup(t testing.TB) []*QualifiedUint64 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint64
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_MultiKey_Key2Path(t, qt, goStruct)
+		qv := convertModel_MultiKey_Key2Path(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/config/key2.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key/config/key2 with a ONCE subscription.
 func (n *Model_MultiKey_Key2PathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -447,72 +416,67 @@ func (n *Model_MultiKey_Key2Path) BatchUpdate(t testing.TB, b *SetRequestBatch, 
 }
 
 // convertModel_MultiKey_Key2Path extracts the value of the leaf Key2 from its parent Model_MultiKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint64.
-func convertModel_MultiKey_Key2Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint64 {
+// and combines the update with an existing Metadata to return a *QualifiedUint64.
+func convertModel_MultiKey_Key2Path(t testing.TB, md *genutil.Metadata, parent *Model_MultiKey) *QualifiedUint64 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint64{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key2
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key.
-func (n *Model_SingleKeyPath) GetFull(t testing.TB) *QualifiedModel_SingleKey {
+// Lookup fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_SingleKeyPath) Lookup(t testing.TB) *QualifiedModel_SingleKey {
 	t.Helper()
 	goStruct := &Model_SingleKey{}
-	ret := &QualifiedModel_SingleKey{
-		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, false),
+	md, ok := Lookup(t, n, "Model_SingleKey", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel_SingleKey{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/a/single-key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key.
-func (n *Model_SingleKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_SingleKey {
+// Lookup fetches the values at /openconfig-withlist/model/a/single-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_SingleKeyPathAny) Lookup(t testing.TB) []*QualifiedModel_SingleKey {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel_SingleKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel_SingleKey{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key.
+// Get fetches the values at /openconfig-withlist/model/a/single-key with a ONCE subscription.
 func (n *Model_SingleKeyPathAny) Get(t testing.TB) []*Model_SingleKey {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model_SingleKey
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -556,45 +520,50 @@ func (n *Model_SingleKeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val 
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key/config/key.
-func (n *Model_SingleKey_KeyPath) GetFull(t testing.TB) *QualifiedUint32 {
+// Lookup fetches the value at /openconfig-withlist/model/a/single-key/config/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_SingleKey_KeyPath) Lookup(t testing.TB) *QualifiedUint32 {
 	t.Helper()
 	goStruct := &Model_SingleKey{}
-	ret := &QualifiedUint32{
-		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_SingleKey", goStruct, true, false)
+	if ok {
+		return convertModel_SingleKey_KeyPath(t, md, goStruct)
 	}
-	return convertModel_SingleKey_KeyPath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/a/single-key/config/key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/a/single-key/config/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key/config/key.
-func (n *Model_SingleKey_KeyPathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+// Lookup fetches the values at /openconfig-withlist/model/a/single-key/config/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_SingleKey_KeyPathAny) Lookup(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_SingleKey_KeyPath(t, qt, goStruct)
+		qv := convertModel_SingleKey_KeyPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key/config/key.
+// Get fetches the values at /openconfig-withlist/model/a/single-key/config/key with a ONCE subscription.
 func (n *Model_SingleKey_KeyPathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -639,42 +608,39 @@ func (n *Model_SingleKey_KeyPath) BatchUpdate(t testing.TB, b *SetRequestBatch, 
 }
 
 // convertModel_SingleKey_KeyPath extracts the value of the leaf Key from its parent Model_SingleKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_SingleKey_KeyPath(t testing.TB, qt *genutil.QualifiedType, parent *Model_SingleKey) *QualifiedUint32 {
+// and combines the update with an existing Metadata to return a *QualifiedUint32.
+func convertModel_SingleKey_KeyPath(t testing.TB, md *genutil.Metadata, parent *Model_SingleKey) *QualifiedUint32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /.
-func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+// Lookup fetches the value at / with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 	t.Helper()
 	goStruct := &Root{}
-	ret := &QualifiedRoot{
-		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	md, ok := Lookup(t, n, "Root", goStruct, false, false)
+	if ok {
+		return (&QualifiedRoot{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /, erroring out if it is not present.
+// Get fetches the value at / with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
 // Delete deletes the configuration at /.

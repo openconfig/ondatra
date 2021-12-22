@@ -34,6 +34,8 @@ import (
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/negtest"
+	"github.com/openconfig/ondatra/telemetry/device"
+	"github.com/openconfig/ondatra/telemetry/interfaces"
 	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -68,6 +70,18 @@ func gnmiPath(t *testing.T, s string) *gpb.Path {
 	return p
 }
 
+func gnmiDeprecatedPath(t *testing.T, s string) *gpb.Path {
+	t.Helper()
+	p, err := ygot.StringToStringSlicePath(s)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(p.GetElement()) == 0 || p.GetElement()[0] != "meta" {
+		p.Origin = "openconfig"
+	}
+	return p
+}
+
 // verifySubscriptionPathsSent verifies the paths of the sent subscription requests is the same as wantPaths.
 func verifySubscriptionPathsSent(t *testing.T, wantPaths ...*gpb.Path) {
 	t.Helper()
@@ -95,6 +109,7 @@ func verifySubscriptionPathsSent(t *testing.T, wantPaths ...*gpb.Path) {
 // verifyTelemetryErrSubstr verifies the error components of a given
 // ComplianceErrors value given the consitutent error substrings.
 func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *genutil.ComplianceErrors, wantPathErrSubstr, wantTypeErrSubstr, wantValidateErrSubstr string) {
+	t.Helper()
 	var pathErrs, typeErrs []*genutil.TelemetryError
 	var validateErrs []error
 	if complianceErrs != nil {
@@ -143,17 +158,12 @@ func TestMetadata(t *testing.T) {
 	syncPath := gnmiPath(t, "meta/sync")
 	leavesAddedPath := gnmiPath(t, "meta/targetLeavesAdded")
 
-	type qualifiedType interface {
-		GetTimestamp() time.Time
-		GetRecvTimestamp() time.Time
-	}
-
 	testsPass := []struct {
 		desc                 string
 		stub                 func(s *fakegnmi.Stubber)
-		getFunc              func(t testing.TB) qualifiedType
+		getFunc              func(t testing.TB) genutil.QualifiedValue
 		wantSubscriptionPath *gpb.Path
-		wantQualified        qualifiedType
+		wantQualified        genutil.QualifiedValue
 	}{{
 		desc: "check connected",
 		stub: func(s *fakegnmi.Stubber) {
@@ -167,14 +177,13 @@ func TestMetadata(t *testing.T) {
 				}).
 				Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().Connected().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			return dut.Telemetry().Meta().Connected().Lookup(t)
 		},
 		wantSubscriptionPath: connPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      connPath,
 			}}).SetVal(true),
 	}, {
@@ -190,14 +199,13 @@ func TestMetadata(t *testing.T) {
 				}).
 				Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().Connected().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			return dut.Telemetry().Meta().Connected().Lookup(t)
 		},
 		wantSubscriptionPath: connPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      connPath,
 			}}).SetVal(false),
 	}, {
@@ -213,14 +221,13 @@ func TestMetadata(t *testing.T) {
 				}).
 				Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().Sync().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			return dut.Telemetry().Meta().Sync().Lookup(t)
 		},
 		wantSubscriptionPath: syncPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      syncPath,
 			}}).SetVal(true),
 	}, {
@@ -236,14 +243,13 @@ func TestMetadata(t *testing.T) {
 				}).
 				Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().Sync().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			return dut.Telemetry().Meta().Sync().Lookup(t)
 		},
 		wantSubscriptionPath: syncPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      syncPath,
 			}}).SetVal(false),
 	}, {
@@ -259,14 +265,13 @@ func TestMetadata(t *testing.T) {
 				}).
 				Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().TargetLeavesAdded().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			return dut.Telemetry().Meta().TargetLeavesAdded().Lookup(t)
 		},
 		wantSubscriptionPath: leavesAddedPath,
 		wantQualified: (&telemetry.QualifiedInt64{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 200),
-				Present:   true,
 				Path:      leavesAddedPath,
 			}}).SetVal(42),
 	}, {
@@ -274,29 +279,29 @@ func TestMetadata(t *testing.T) {
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(&gpb.Notification{}).Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().TargetLeavesAdded().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			ret := dut.Telemetry().Meta().TargetLeavesAdded().Lookup(t)
+			if ret != nil { // avoid typed-nil
+				return ret
+			}
+			return nil
 		},
 		wantSubscriptionPath: leavesAddedPath,
-		wantQualified: &(telemetry.QualifiedInt64{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    leavesAddedPath,
-			}}),
+		wantQualified:        nil,
 	}, {
 		desc: "no values for leaves added without connected return value",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Sync()
 		},
-		getFunc: func(t testing.TB) qualifiedType {
-			return dut.Telemetry().Meta().TargetLeavesAdded().GetFull(t)
+		getFunc: func(t testing.TB) genutil.QualifiedValue {
+			ret := dut.Telemetry().Meta().TargetLeavesAdded().Lookup(t)
+			if ret != nil { // avoid typed-nil
+				return ret
+			}
+			return nil
 		},
 		wantSubscriptionPath: leavesAddedPath,
-		wantQualified: &(telemetry.QualifiedInt64{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    leavesAddedPath,
-			}}),
+		wantQualified:        nil,
 	}}
 
 	for _, tt := range testsPass {
@@ -304,8 +309,9 @@ func TestMetadata(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := tt.getFunc(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-
-			checkJustReceived(t, got.GetRecvTimestamp())
+			if got != nil {
+				checkJustReceived(t, got.GetRecvTimestamp())
+			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmpopts.IgnoreFields(telemetry.QualifiedBool{}, "RecvTimestamp"), cmpopts.IgnoreFields(telemetry.QualifiedInt64{}, "RecvTimestamp"), cmp.AllowUnexported(telemetry.QualifiedBool{}, telemetry.QualifiedInt64{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got status Qualified type different from expected (-want,+got):\n %s", diff)
 			}
@@ -335,6 +341,7 @@ func TestGet(t *testing.T) {
 		inPortKey            string
 		wantSubscriptionPath *gpb.Path
 		wantQualified        *telemetry.QualifiedE_Interface_OperStatus
+		wantValFatal         string
 	}{{
 		desc: "one notification",
 		stub: func(s *fakegnmi.Stubber) {
@@ -351,9 +358,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      statusPath,
 			}}).SetVal(telemetry.Interface_OperStatus_UP),
 	}, {
@@ -372,9 +378,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      resolvedPath,
 			}}).SetVal(telemetry.Interface_OperStatus_UP),
 	}, {
@@ -394,9 +399,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      statusPath,
 			}}).SetVal(telemetry.Interface_OperStatus_DOWN),
 	}, {
@@ -416,9 +420,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      resolvedPath,
 			}}).SetVal(telemetry.Interface_OperStatus_DOWN),
 	}, {
@@ -437,9 +440,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 101),
-				Present:   true,
 				Path:      statusPath,
 			}}).SetVal(telemetry.Interface_OperStatus_UP),
 	}, {
@@ -449,11 +451,8 @@ func TestGet(t *testing.T) {
 		},
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
-		wantQualified: &(telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    statusPath,
-			}}),
+		wantQualified:        nil,
+		wantValFatal:         "No value present\n",
 	}, {
 		desc: "with connection",
 		stub: func(s *fakegnmi.Stubber) {
@@ -470,9 +469,8 @@ func TestGet(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: statusPath,
 		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 102),
-				Present:   true,
 				Path:      statusPath,
 			}}).SetVal(telemetry.Interface_OperStatus_UP),
 	}}
@@ -480,18 +478,22 @@ func TestGet(t *testing.T) {
 	for _, tt := range testsPass {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(tt.inPortKey).OperStatus().GetFull(t)
+			got := dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(tt.inPortKey).OperStatus().Lookup(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedE_Interface_OperStatus{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got status Qualified type different from expected (-want,+got):\n %s", diff)
 			}
-			// Test Val(t) API.
-			if tt.wantQualified.Present {
+			fatalMsg := negtest.CaptureFatal(t, func(t testing.TB) {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
+			})
+			if fatalMsg != nil && *fatalMsg != tt.wantValFatal {
+				t.Errorf("Got fatal msg different from expected: got %q, want %q", *fatalMsg, tt.wantValFatal)
 			}
 		})
 	}
@@ -517,7 +519,33 @@ func TestGet(t *testing.T) {
 						}}}).
 				Sync()
 		},
-		wantFatalMsg: "2 data points",
+		wantFatalMsg: "got multiple",
+	}, {
+		desc: "returned path uses deprecated Element field",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: gnmiDeprecatedPath(t, getStrPath(staticPortName)),
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
+					}},
+				}).
+				Sync()
+		},
+		wantFatalMsg: "deprecated and unsupported Element field",
+	}, {
+		desc: "last element is different than the query path",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: gnmiPath(t, fmt.Sprintf("interfaces/interface[name=%s]/state/description", staticPortName)),
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
+					}},
+				}).
+				Sync()
+		},
+		wantFatalMsg: "does not match the query path",
 	}, {
 		desc: "returned prefix + path is incompatible",
 		stub: func(s *fakegnmi.Stubber) {
@@ -532,7 +560,21 @@ func TestGet(t *testing.T) {
 				}).
 				Sync()
 		},
-		wantFatalMsg: "query-noncompliant",
+		wantFatalMsg: "does not match the query path",
+	}, {
+		desc: "returned path is incompatible",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: &gpb.Path{Elem: append(statusPath.GetElem(), &gpb.PathElem{Name: "does-not-exist"})},
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "UP"}},
+					}},
+				}).
+				Sync()
+		},
+		// The path cannot be unmarshalled because it doesn't exist in the schema.
+		wantFatalMsg: "does-not-exist",
 	}, {
 		desc: "one invalid notification where Val of Update is nil",
 		stub: func(s *fakegnmi.Stubber) {
@@ -567,10 +609,10 @@ func TestGet(t *testing.T) {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := negtest.ExpectFatal(t, func(t testing.TB) {
-				dut.Telemetry().Interface(staticPortName).OperStatus().GetFull(t)
+				dut.Telemetry().Interface(staticPortName).OperStatus().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
-				t.Errorf("GetFull failed with message %q, want %q", got, tt.wantFatalMsg)
+				t.Errorf("Lookup failed with message %q, want %q", got, tt.wantFatalMsg)
 			}
 		})
 	}
@@ -610,12 +652,11 @@ func TestGetDefault(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
+		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().Lookup,
 		wantSubscriptionPath: enabledPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      enabledPath,
 			}}).SetVal(false),
 	}, {
@@ -623,24 +664,22 @@ func TestGetDefault(t *testing.T) {
 		stub: func(s *fakegnmi.Stubber) {
 			s.Sync()
 		},
-		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
+		inGetCall:            dut.Telemetry().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().Lookup,
 		wantSubscriptionPath: enabledPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
-				Present: true,
-				Path:    enabledPath,
+			Metadata: &genutil.Metadata{
+				Path: enabledPath,
 			}}).SetVal(true),
 	}, {
 		desc: "config path API: zero notifications on a leaf that has a default value",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Sync()
 		},
-		inGetCall:            dut.Config().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().GetFull,
+		inGetCall:            dut.Config().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(staticPortName).Enabled().Lookup,
 		wantSubscriptionPath: enabledConfigPath,
 		wantQualified: (&telemetry.QualifiedBool{
-			QualifiedType: &genutil.QualifiedType{
-				Present: true,
-				Path:    enabledConfigPath,
+			Metadata: &genutil.Metadata{
+				Path: enabledConfigPath,
 			}}).SetVal(true),
 	}}
 
@@ -649,13 +688,15 @@ func TestGetDefault(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := tt.inGetCall(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedBool{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got status Qualified type different from expected (-want,+got):\n %s", diff)
 			}
 			// Test Val(t) API.
-			if tt.wantQualified.Present {
+			if tt.wantQualified.IsPresent() {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
@@ -702,9 +743,8 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      descPath,
 			}}).SetVal("foo"),
 	}, {
@@ -723,10 +763,10 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
-				Path:      resolvedPath,
+
+				Path: resolvedPath,
 			}}).SetVal("foo"),
 	}, {
 		desc: "one notification with a prefix",
@@ -745,9 +785,8 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      descPath,
 			}}).SetVal("bar"),
 	}, {
@@ -767,9 +806,8 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            genericPortName,
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      resolvedPath,
 			}}).SetVal("bar"),
 	}, {
@@ -788,9 +826,8 @@ func TestGetConfig(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 101),
-				Present:   true,
 				Path:      descPath,
 			}}).SetVal("foo"),
 	}, {
@@ -800,25 +837,23 @@ func TestGetConfig(t *testing.T) {
 		},
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: descPath,
-		wantQualified: &(telemetry.QualifiedString{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    descPath,
-			}}),
+		wantQualified:        nil,
 	}}
 
 	for _, tt := range testsPass {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := dut.Config().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(tt.inPortKey).Description().GetFull(t)
+			got := dut.Config().WithReplica(5).WithSubscriptionMode(gpb.SubscriptionMode_ON_CHANGE).Interface(tt.inPortKey).Description().Lookup(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedString{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got desc Qualified type different from expected (-want,+got):\n %s", diff)
 			}
 			// Test Val(t) API.
-			if tt.wantQualified.Present {
+			if tt.wantQualified.IsPresent() {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
 					t.Errorf("Got desc val different from expected (-want,+got):\n %s", diff)
 				}
@@ -849,22 +884,7 @@ func TestGetConfig(t *testing.T) {
 					}).
 				Sync()
 		},
-		wantFatalMsg: "2 data points",
-	}, {
-		desc: "returned prefix + path is incompatible",
-		stub: func(s *fakegnmi.Stubber) {
-			s.Notification(
-				&gpb.Notification{
-					Update: []*gpb.Update{{
-						Path: &gpb.Path{Elem: descPath.GetElem()[len(descPath.GetElem())-1:]},
-						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
-					}},
-					// missing first element.
-					Prefix: &gpb.Path{Elem: descPath.GetElem()[1 : len(descPath.GetElem())-1]},
-				}).
-				Sync()
-		},
-		wantFatalMsg: "query-noncompliant",
+		wantFatalMsg: "got multiple",
 	}, {
 		desc: "one invalid notification where Val of Update is nil",
 		stub: func(s *fakegnmi.Stubber) {
@@ -893,16 +913,31 @@ func TestGetConfig(t *testing.T) {
 				Sync()
 		},
 		wantFatalMsg: "failed to unmarshal",
+	}, {
+		desc: "unmarshal fails because returned prefix and path don't match",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: &gpb.Path{Elem: descPath.GetElem()[len(descPath.GetElem())-1:]},
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
+					}},
+					// missing first element.
+					Prefix: &gpb.Path{Elem: descPath.GetElem()[1 : len(descPath.GetElem())-1]},
+				}).
+				Sync()
+		},
+		wantFatalMsg: "does not match the query path",
 	}}
 
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := negtest.ExpectFatal(t, func(t testing.TB) {
-				dut.Config().Interface(staticPortName).Description().GetFull(t)
+				dut.Config().Interface(staticPortName).Description().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
-				t.Errorf("GetFull failed with message %q, want %q", got, tt.wantFatalMsg)
+				t.Errorf("Lookup failed with message %q, want %q", got, tt.wantFatalMsg)
 			}
 		})
 	}
@@ -947,11 +982,14 @@ func TestGetNonleaf(t *testing.T) {
 	bogusPath := gnmiPath(t, fmt.Sprintf("interfaces/interface[name=%s]/bogus", staticPortName))
 
 	testsPass := []struct {
-		desc                 string
-		stub                 func(s *fakegnmi.Stubber)
-		inGetCall            func(t testing.TB) *telemetry.QualifiedInterface
-		wantSubscriptionPath *gpb.Path
-		wantQualified        *telemetry.QualifiedInterface
+		desc                  string
+		stub                  func(s *fakegnmi.Stubber)
+		inGetCall             func(t testing.TB) *telemetry.QualifiedInterface
+		wantSubscriptionPath  *gpb.Path
+		wantQualified         *telemetry.QualifiedInterface
+		wantPathErrSubstr     string
+		wantTypeErrSubstr     string
+		wantValidateErrSubstr string
 	}{{
 		desc: "one notification",
 		stub: func(s *fakegnmi.Stubber) {
@@ -965,13 +1003,13 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
-				Path:      staticIntfPath,
+
+				Path: staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			OperStatus: telemetry.Interface_OperStatus_UP,
 		}),
@@ -991,12 +1029,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			Name: ygot.String(staticPortName),
@@ -1014,12 +1051,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Config().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			Name: ygot.String(staticPortName),
@@ -1040,12 +1076,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Config().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			Name: ygot.String(staticPortName),
@@ -1063,14 +1098,12 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Config().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Config().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				// This value should not be present, but is due to https://github.com/openconfig/ygot/issues/544
-				Present: true,
-				Path:    staticIntfPath,
+				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{}),
 	}, {
 		desc: "one notification with interpolation and two data points",
@@ -1088,12 +1121,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(genericPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(genericPortName).Lookup,
 		wantSubscriptionPath: resolvedIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 200),
-				Present:   true,
 				Path:      resolvedIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			OperStatus: telemetry.Interface_OperStatus_UP,
@@ -1113,12 +1145,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			OperStatus: telemetry.Interface_OperStatus_DOWN,
@@ -1147,12 +1178,11 @@ func TestGetNonleaf(t *testing.T) {
 					}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 400),
-				Present:   true,
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			OperStatus: telemetry.Interface_OperStatus_UP,
@@ -1165,13 +1195,27 @@ func TestGetNonleaf(t *testing.T) {
 		stub: func(s *fakegnmi.Stubber) {
 			s.Sync()
 		},
-		inGetCall:            dut.Telemetry().Interface(staticPortName).GetFull,
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
 		wantSubscriptionPath: staticIntfPath,
-		wantQualified: &telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    staticIntfPath,
-			}},
+		wantQualified:        nil,
+	}, {
+		desc: "unmarshal fails because returned prefix and path don't match",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: &gpb.Path{Elem: statusPath.GetElem()[2:]},
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "DOWN"}},
+					}},
+					Prefix:    &gpb.Path{Elem: statusPath.GetElem()[1:2]},
+					Timestamp: 100,
+				}).
+				Sync()
+		},
+		inGetCall:            dut.Telemetry().Interface(staticPortName).Lookup,
+		wantSubscriptionPath: staticIntfPath,
+		wantQualified:        nil,
+		wantPathErrSubstr:    "does not match the query path",
 	}}
 
 	for _, tt := range testsPass {
@@ -1179,16 +1223,24 @@ func TestGetNonleaf(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := tt.inGetCall(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
-			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), protocmp.Transform()); diff != "" {
-				t.Errorf("Got Qualified type different from expected (-want,+got):\n %s\nComplianceErrors:\n%v", diff, got.ComplianceErrors)
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Got Qualified type different from expected (-want,+got):\n %s\n", diff)
+				if got != nil {
+					t.Logf("ComplianceErrors:\n%v", got.GetComplianceErrors())
+				}
 			}
 			// Test Val(t) API.
-			if tt.wantQualified.Present {
-				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
+			if tt.wantQualified.IsPresent() {
+				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{})); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
+			}
+			if got != nil {
+				verifyTelemetryErrSubstr(t, got.ComplianceErrors, tt.wantPathErrSubstr, tt.wantTypeErrSubstr, tt.wantValidateErrSubstr)
 			}
 		})
 	}
@@ -1213,12 +1265,11 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inGetCall:            dut.Telemetry().GetFull,
+		inGetCall:            dut.Telemetry().Lookup,
 		wantSubscriptionPath: rootPath,
 		wantQualified: (&telemetry.QualifiedDevice{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 100),
-				Present:   true,
 				Path:      rootPath,
 			}}).SetVal(&telemetry.Device{
 			Interface: map[string]*telemetry.Interface{
@@ -1241,7 +1292,7 @@ func TestGetNonleaf(t *testing.T) {
 				t.Errorf("Got Qualified type different from expected (-want,+got):\n %s\nComplianceErrors:\n%v", diff, got.ComplianceErrors)
 			}
 			// Test Val(t) API.
-			if tt.wantQualified.Present {
+			if tt.wantQualified.IsPresent() {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
@@ -1252,7 +1303,7 @@ func TestGetNonleaf(t *testing.T) {
 	testsFail := []struct {
 		desc                  string
 		stub                  func(s *fakegnmi.Stubber)
-		inInterfacePath       func() *telemetry.InterfacePath
+		inInterfacePath       func() *interfaces.InterfacePath
 		wantQualified         *telemetry.QualifiedInterface
 		wantPathErrSubstr     string
 		wantTypeErrSubstr     string
@@ -1271,14 +1322,10 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inInterfacePath: func() *telemetry.InterfacePath {
+		inInterfacePath: func() *interfaces.InterfacePath {
 			return dut.Telemetry().Interface(staticPortName)
 		},
-		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    staticIntfPath,
-			}}),
+		wantQualified:     nil,
 		wantPathErrSubstr: "no match found",
 	}, {
 		desc: "schema noncompliance: one notification with interpolation and two data points, where the type doesn't match for one of them",
@@ -1296,41 +1343,17 @@ func TestGetNonleaf(t *testing.T) {
 				}).
 				Sync()
 		},
-		inInterfacePath: func() *telemetry.InterfacePath {
+		inInterfacePath: func() *interfaces.InterfacePath {
 			return dut.Telemetry().Interface(genericPortName)
 		},
 		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
+			Metadata: &genutil.Metadata{
 				Timestamp: time.Unix(0, 200),
-				Present:   true,
 				Path:      resolvedIntfPath,
 			}}).SetVal(&telemetry.Interface{
 			Enabled: ygot.Bool(true),
 		}),
 		wantTypeErrSubstr: "failed to unmarshal",
-	}, {
-		desc: "returned prefix + path is incompatible",
-		stub: func(s *fakegnmi.Stubber) {
-			s.Notification(
-				&gpb.Notification{
-					Update: []*gpb.Update{{
-						Path: &gpb.Path{Elem: statusPath.GetElem()[2:]},
-						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "DOWN"}},
-					}},
-					Prefix:    &gpb.Path{Elem: statusPath.GetElem()[1:2]},
-					Timestamp: 100,
-				}).
-				Sync()
-		},
-		inInterfacePath: func() *telemetry.InterfacePath {
-			return dut.Telemetry().Interface(staticPortName)
-		},
-		wantQualified: (&telemetry.QualifiedInterface{
-			QualifiedType: &genutil.QualifiedType{
-				Present: false,
-				Path:    staticIntfPath,
-			}}),
-		wantPathErrSubstr: "no match found",
 	}}
 
 	for _, tt := range testsFail {
@@ -1338,28 +1361,31 @@ func TestGetNonleaf(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			if tt.wantFatalMsg != "" {
 				got := negtest.ExpectFatal(t, func(t testing.TB) {
-					tt.inInterfacePath().GetFull(t)
+					tt.inInterfacePath().Lookup(t)
 				})
 				if !strings.Contains(got, tt.wantFatalMsg) {
-					t.Errorf("GetFull failed with message %q, want %q", got, tt.wantFatalMsg)
+					t.Errorf("Lookup failed with message %q, want %q", got, tt.wantFatalMsg)
 				}
 				return
 			}
 
-			got := tt.inInterfacePath().GetFull(t)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			got := tt.inInterfacePath().Lookup(t)
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got Qualified type different from expected (-want,+got):\n %s", diff)
 			}
 			// Test Val(t) API.
-			if tt.wantQualified.Present {
+			if tt.wantQualified.IsPresent() {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t), cmpopts.IgnoreTypes(&genutil.ComplianceErrors{})); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
 			}
-
-			verifyTelemetryErrSubstr(t, got.ComplianceErrors, tt.wantPathErrSubstr, tt.wantTypeErrSubstr, tt.wantValidateErrSubstr)
+			if got != nil {
+				verifyTelemetryErrSubstr(t, got.ComplianceErrors, tt.wantPathErrSubstr, tt.wantTypeErrSubstr, tt.wantValidateErrSubstr)
+			}
 		})
 	}
 }
@@ -1396,10 +1422,10 @@ func TestWildcardGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
-					Path:      intf1Path,
+
+					Path: intf1Path,
 				}}).SetVal(123),
 		},
 	}, {
@@ -1429,56 +1455,17 @@ func TestWildcardGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      intf1Path,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
 					Path:      intf2Path,
 				}}).SetVal(456),
 		},
-	}}
-
-	for _, tt := range testsPass {
-		t.Run(tt.desc, func(t *testing.T) {
-			tt.stub(fakeGNMI.Stub())
-			got := dut.Telemetry().InterfaceAny().Counters().InOctets().GetFull(t)
-			verifySubscriptionPathsSent(t, wantSubscriptionPath)
-			for i, q := range got {
-				checkJustReceived(t, q.RecvTimestamp)
-				tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
-			}
-			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
-				t.Errorf("Got in octets different from expected, diff(-want,+got):\n %s", diff)
-			}
-
-			var wantVals, gotVals []uint64
-			for _, wantQualified := range tt.wantQualified {
-				wantVals = append(wantVals, wantQualified.Val(t))
-			}
-			for _, inOctet := range got {
-				gotVals = append(gotVals, inOctet.Val(t))
-			}
-			if diff := cmp.Diff(wantVals, gotVals); diff != "" {
-				t.Errorf("GetFull(wildcard leaf): Got values different from expected (-want,+got):\n %s", diff)
-			}
-
-			inOctetVals := dut.Telemetry().InterfaceAny().Counters().InOctets().Get(t)
-			if diff := cmp.Diff(wantVals, inOctetVals); diff != "" {
-				t.Errorf("Get(wildcard leaf): Got values different from expected (-want,+got):\n %s", diff)
-			}
-		})
-	}
-
-	testsFail := []struct {
-		desc         string
-		stub         func(s *fakegnmi.Stubber)
-		wantFatalMsg string
-	}{{
+	}, {
 		desc: "multiple values, but one of them has a path which does not match the query",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(
@@ -1497,8 +1484,67 @@ func TestWildcardGet(t *testing.T) {
 						}}}).
 				Sync()
 		},
-		wantFatalMsg: "query-noncompliant",
+		wantQualified: []*telemetry.QualifiedUint64{
+			(&telemetry.QualifiedUint64{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+
+					Path: intf1Path,
+				}}).SetVal(123),
+		},
 	}, {
+		desc: "schema noncompliance: one notification that doesn't unmarshal because type doesn't match",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: intf1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_BoolVal{BoolVal: true}},
+					}}}).
+				Sync()
+		},
+		wantQualified: nil,
+	}}
+
+	for _, tt := range testsPass {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			got := dut.Telemetry().InterfaceAny().Counters().InOctets().Lookup(t)
+			verifySubscriptionPathsSent(t, wantSubscriptionPath)
+			for i, q := range got {
+				checkJustReceived(t, q.RecvTimestamp)
+				if i < len(tt.wantQualified) {
+					tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
+				}
+			}
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Got in octets different from expected, diff(-want,+got):\n %s", diff)
+			}
+
+			var wantVals, gotVals []uint64
+			for _, wantQualified := range tt.wantQualified {
+				wantVals = append(wantVals, wantQualified.Val(t))
+			}
+			for _, inOctet := range got {
+				gotVals = append(gotVals, inOctet.Val(t))
+			}
+			if diff := cmp.Diff(wantVals, gotVals); diff != "" {
+				t.Errorf("Lookup(wildcard leaf): Got values different from expected (-want,+got):\n %s", diff)
+			}
+
+			inOctetVals := dut.Telemetry().InterfaceAny().Counters().InOctets().Get(t)
+			if diff := cmp.Diff(wantVals, inOctetVals); diff != "" {
+				t.Errorf("Get(wildcard leaf): Got values different from expected (-want,+got):\n %s", diff)
+			}
+		})
+	}
+
+	testsFail := []struct {
+		desc         string
+		stub         func(s *fakegnmi.Stubber)
+		wantFatalMsg string
+	}{{
 		desc: "one invalid value -- Update's Val is empty",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(
@@ -1511,26 +1557,13 @@ func TestWildcardGet(t *testing.T) {
 				Sync()
 		},
 		wantFatalMsg: "invalid nil Val",
-	}, {
-		desc: "schema noncompliance (update ignored for groups that are entirely noncompliant): one notification that doesn't unmarshal because type doesn't match",
-		stub: func(s *fakegnmi.Stubber) {
-			s.Notification(
-				&gpb.Notification{
-					Timestamp: startTime.UnixNano(),
-					Update: []*gpb.Update{{
-						Path: intf1Path,
-						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_BoolVal{BoolVal: true}},
-					}}}).
-				Sync()
-		},
-		wantFatalMsg: "failed to unmarshal",
 	}}
 
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			got := negtest.ExpectFatal(t, func(t testing.TB) {
-				dut.Telemetry().InterfaceAny().Counters().InOctets().GetFull(t)
+				dut.Telemetry().InterfaceAny().Counters().InOctets().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
 				t.Errorf("Wildcard Get failed with message %q, want %q", got, tt.wantFatalMsg)
@@ -1586,10 +1619,10 @@ func TestWildcardNonleafGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedInterface{
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: time.Unix(0, 100),
-					Present:   true,
-					Path:      staticIntfPath,
+
+					Path: staticIntfPath,
 				}}).SetVal(&telemetry.Interface{
 				OperStatus: telemetry.Interface_OperStatus_UP,
 			}),
@@ -1629,18 +1662,16 @@ func TestWildcardNonleafGet(t *testing.T) {
 		},
 		wantQualified: []*telemetry.QualifiedInterface{
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: time.Unix(0, 200),
-					Present:   true,
 					Path:      resolvedIntfPath,
 				}}).SetVal(&telemetry.Interface{
 				OperStatus: telemetry.Interface_OperStatus_UP,
 				Enabled:    ygot.Bool(true),
 			}),
 			(&telemetry.QualifiedInterface{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: time.Unix(0, 400),
-					Present:   true,
 					Path:      staticIntfPath,
 				}}).SetVal(&telemetry.Interface{
 				OperStatus: telemetry.Interface_OperStatus_DOWN,
@@ -1660,11 +1691,13 @@ func TestWildcardNonleafGet(t *testing.T) {
 	for _, tt := range testsPass {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := dut.Telemetry().InterfaceAny().GetFull(t)
+			got := dut.Telemetry().InterfaceAny().Lookup(t)
 			verifySubscriptionPathsSent(t, wantSubscriptionPath)
 			for i, q := range got {
 				checkJustReceived(t, q.RecvTimestamp)
-				tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
+				if i < len(tt.wantQualified) {
+					tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
+				}
 			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got Interface GoStructs different from expected, diff(-want,+got):\n %s", diff)
@@ -1678,7 +1711,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 				gotVals = append(gotVals, qType.Val(t))
 			}
 			if diff := cmp.Diff(wantVals, gotVals); diff != "" {
-				t.Errorf("GetFull(wildcard non-leaf): Got values different from expected (-want,+got):\n %s", diff)
+				t.Errorf("Lookup(wildcard non-leaf): Got values different from expected (-want,+got):\n %s", diff)
 			}
 
 			interfaceVals := dut.Telemetry().InterfaceAny().Get(t)
@@ -1719,14 +1752,14 @@ func TestWildcardNonleafGet(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			if tt.wantFatalMsg != "" {
 				got := negtest.ExpectFatal(t, func(t testing.TB) {
-					dut.Telemetry().InterfaceAny().GetFull(t)
+					dut.Telemetry().InterfaceAny().Lookup(t)
 				})
 				if !strings.Contains(got, tt.wantFatalMsg) {
-					t.Errorf("GetFull failed with message %q, want %q", got, tt.wantFatalMsg)
+					t.Errorf("Lookup failed with message %q, want %q", got, tt.wantFatalMsg)
 				}
 				return
 			}
-			got := dut.Telemetry().InterfaceAny().GetFull(t)
+			got := dut.Telemetry().InterfaceAny().Lookup(t)
 			if len(got) != 1 {
 				t.Fatalf("Expected exactly one piece of data for this test, but got %v: %v", len(got), got)
 			}
@@ -1781,9 +1814,8 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 		},
@@ -1806,9 +1838,8 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: resolvedOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      resolvedOctetsPath,
 				}}).SetVal(123),
 		},
@@ -1853,18 +1884,67 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(456),
 		},
+	}, {
+		desc: "multiple values with the last one being type noncompliant",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: staticOctetsPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 123}},
+					}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: staticOctetsPath,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: -456}},
+						}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		inPortKey:            staticPortName,
+		wantSubscriptionPath: staticOctetsPath,
+		wantQualified: []*telemetry.QualifiedUint64{
+			(&telemetry.QualifiedUint64{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path:      staticOctetsPath,
+				}}).SetVal(123),
+		},
+	}, {
+		desc: "single value that is path noncompliant",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: &gpb.Path{Elem: staticOctetsPath.Elem[len(staticOctetsPath.Elem)-2:]},
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 456}},
+					}},
+					Prefix: &gpb.Path{Elem: append([]*gpb.PathElem{{Name: "foo"}}, staticOctetsPath.Elem[:len(staticOctetsPath.Elem)-2]...)},
+				}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		inPortKey:            staticPortName,
+		wantSubscriptionPath: staticOctetsPath,
+		wantQualified:        nil,
 	}, {
 		desc: "multiple values with different prefixes",
 		stub: func(s *fakegnmi.Stubber) {
@@ -1895,15 +1975,13 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(456),
 		},
@@ -1960,41 +2038,35 @@ func TestCollect(t *testing.T) {
 		wantSubscriptionPath: staticOctetsPath,
 		wantQualified: []*telemetry.QualifiedUint64{
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime,
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(123),
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(456),
 			{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(20 * time.Millisecond),
-					Present:   false,
 					Path:      staticOctetsPath,
 				},
 			},
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(30 * time.Millisecond),
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(789),
 			{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(40 * time.Millisecond),
-					Present:   false,
 					Path:      staticOctetsPath,
 				},
 			},
 			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
+				Metadata: &genutil.Metadata{
 					Timestamp: startTime.Add(50 * time.Millisecond),
-					Present:   true,
 					Path:      staticOctetsPath,
 				}}).SetVal(111),
 		},
@@ -2007,84 +2079,18 @@ func TestCollect(t *testing.T) {
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
 			for i, q := range got {
 				checkJustReceived(t, q.RecvTimestamp)
-				tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
+				if i < len(tt.wantQualified) {
+					tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
+				}
 			}
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)
 			}
 		})
 	}
-
-	testsFail := []struct {
-		desc         string
-		stub         func(s *fakegnmi.Stubber)
-		wantFatalMsg string
-	}{{
-		desc: "multiple values with prefixes but the last one is wrong",
-		stub: func(s *fakegnmi.Stubber) {
-			s.Notification(
-				&gpb.Notification{
-					Timestamp: startTime.UnixNano(),
-					Update: []*gpb.Update{{
-						Path: &gpb.Path{Elem: staticOctetsPath.Elem[len(staticOctetsPath.Elem)-1:]},
-						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 123}},
-					}},
-					Prefix: &gpb.Path{Elem: staticOctetsPath.Elem[:len(staticOctetsPath.Elem)-1]},
-				}).
-				Notification(
-					&gpb.Notification{
-						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
-						Update: []*gpb.Update{{
-							Path: &gpb.Path{Elem: staticOctetsPath.Elem[len(staticOctetsPath.Elem)-2:]},
-							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 456}},
-						}},
-						Prefix: &gpb.Path{Elem: append([]*gpb.PathElem{{Name: "foo"}}, staticOctetsPath.Elem[:len(staticOctetsPath.Elem)-2]...)},
-					}).
-				Notification(
-					&gpb.Notification{
-						Timestamp: startTime.Add(time.Minute).UnixNano(),
-					})
-		},
-		wantFatalMsg: "no match found",
-	}, {
-		desc: "multiple values with the last one being type noncompliant",
-		stub: func(s *fakegnmi.Stubber) {
-			s.Notification(
-				&gpb.Notification{
-					Timestamp: startTime.UnixNano(),
-					Update: []*gpb.Update{{
-						Path: staticOctetsPath,
-						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 123}},
-					}}}).
-				Notification(
-					&gpb.Notification{
-						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
-						Update: []*gpb.Update{{
-							Path: staticOctetsPath,
-							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: -456}},
-						}}}).
-				Notification(
-					&gpb.Notification{
-						Timestamp: startTime.Add(time.Minute).UnixNano(),
-					})
-		},
-		wantFatalMsg: "failed to unmarshal",
-	}}
-
-	for _, tt := range testsFail {
-		t.Run(tt.desc, func(t *testing.T) {
-			tt.stub(fakeGNMI.Stub())
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
-				dut.Telemetry().Interface(staticPortName).Counters().OutOctets().Collect(t, time.Second).Await(t)
-			})
-			if !strings.Contains(got, tt.wantFatalMsg) {
-				t.Errorf("Collect failed with message %q, want %q", got, tt.wantFatalMsg)
-			}
-		})
-	}
 }
 
-func TestCollectUntil(t *testing.T) {
+func TestWatch(t *testing.T) {
 	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
@@ -2104,7 +2110,7 @@ func TestCollectUntil(t *testing.T) {
 		stub                 func(s *fakegnmi.Stubber)
 		inPortKey            string
 		wantSubscriptionPath *gpb.Path
-		wantQualified        []*telemetry.QualifiedUint64
+		wantQualified        *telemetry.QualifiedUint64
 		wantStatus           bool
 	}{{
 		desc: "values and predicate never true",
@@ -2130,20 +2136,12 @@ func TestCollectUntil(t *testing.T) {
 		},
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: staticOctetsPath,
-		wantQualified: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime,
-					Present:   true,
-					Path:      staticOctetsPath,
-				}}).SetVal(50),
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
-					Path:      staticOctetsPath,
-				}}).SetVal(80),
-		},
+		wantQualified: (&telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      staticOctetsPath,
+			},
+		}).SetVal(80),
 	}, {
 		desc: "values and predicate becomes true",
 		stub: func(s *fakegnmi.Stubber) {
@@ -2176,36 +2174,27 @@ func TestCollectUntil(t *testing.T) {
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: staticOctetsPath,
 		wantStatus:           true,
-		wantQualified: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime,
-					Present:   true,
-					Path:      staticOctetsPath,
-				}}).SetVal(50),
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
-					Path:      staticOctetsPath,
-				}}).SetVal(120),
-		},
+		wantQualified: (&telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      staticOctetsPath,
+			},
+		}).SetVal(120),
 	}}
 
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got, predStatus := dut.Telemetry().Interface(tt.inPortKey).Counters().OutOctets().CollectUntil(t, time.Second, func(val *telemetry.QualifiedUint64) bool {
+			got, predStatus := dut.Telemetry().Interface(tt.inPortKey).Counters().OutOctets().Watch(t, time.Second, func(val *telemetry.QualifiedUint64) bool {
 				if val.IsPresent() {
 					return val.Val(t) > 100
 				}
 				return false
 			}).Await(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			for i, q := range got {
-				checkJustReceived(t, q.RecvTimestamp)
-				tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
-			}
+			checkJustReceived(t, got.RecvTimestamp)
+			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)
 			}
@@ -2216,7 +2205,7 @@ func TestCollectUntil(t *testing.T) {
 	}
 }
 
-func TestWildcardCollectUntil(t *testing.T) {
+func TestWildcardWatch(t *testing.T) {
 	initTelemetryFakes(t)
 	dut := DUT(t, "dut")
 
@@ -2237,7 +2226,7 @@ func TestWildcardCollectUntil(t *testing.T) {
 		stub                 func(s *fakegnmi.Stubber)
 		inPortKey            string
 		wantSubscriptionPath *gpb.Path
-		wantQualified        []*telemetry.QualifiedUint64
+		wantQualified        *telemetry.QualifiedUint64
 		wantStatus           bool
 	}{{
 		desc: "values and predicate never true",
@@ -2262,20 +2251,38 @@ func TestWildcardCollectUntil(t *testing.T) {
 					})
 		},
 		wantSubscriptionPath: wildcardPath,
-		wantQualified: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime,
-					Present:   true,
-					Path:      ethPath,
-				}}).SetVal(150),
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
-					Path:      loPath,
-				}}).SetVal(50),
+		wantQualified: (&telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      loPath,
+			},
+		}).SetVal(50),
+	}, {
+		desc: "multiple values in notfication",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: ethPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 150}},
+					}, {
+						Path: loPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
+					}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
 		},
+		wantSubscriptionPath: wildcardPath,
+		wantQualified: (&telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime,
+				Path:      loPath,
+			},
+		}).SetVal(50),
 	}, {
 		desc: "values and predicate becomes true",
 		stub: func(s *fakegnmi.Stubber) {
@@ -2286,6 +2293,7 @@ func TestWildcardCollectUntil(t *testing.T) {
 						Path: ethPath,
 						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
 					}}}).
+				Sync().
 				Notification(
 					&gpb.Notification{
 						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
@@ -2300,20 +2308,12 @@ func TestWildcardCollectUntil(t *testing.T) {
 		},
 		wantSubscriptionPath: wildcardPath,
 		wantStatus:           true,
-		wantQualified: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime,
-					Present:   true,
-					Path:      ethPath,
-				}}).SetVal(50),
-			(&telemetry.QualifiedUint64{
-				QualifiedType: &genutil.QualifiedType{
-					Timestamp: startTime.Add(10 * time.Millisecond),
-					Present:   true,
-					Path:      loPath,
-				}}).SetVal(150),
-		},
+		wantQualified: (&telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      loPath,
+			},
+		}).SetVal(150),
 	}}
 
 	for _, tt := range tests {
@@ -2321,7 +2321,7 @@ func TestWildcardCollectUntil(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 
 			var ethCond, loCond bool
-			got, predStatus := dut.Telemetry().InterfaceAny().Counters().OutOctets().CollectUntil(t, time.Second, func(val *telemetry.QualifiedUint64) bool {
+			got, predStatus := dut.Telemetry().InterfaceAny().Counters().OutOctets().Watch(t, time.Second, func(val *telemetry.QualifiedUint64) bool {
 				if !ethCond {
 					ethCond = val.IsPresent() && val.Path.String() == ethPath.String() && val.Val(t) < 100
 				}
@@ -2331,15 +2331,1292 @@ func TestWildcardCollectUntil(t *testing.T) {
 				return ethCond && loCond
 			}).Await(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			for i, q := range got {
-				checkJustReceived(t, q.RecvTimestamp)
-				tt.wantQualified[i].RecvTimestamp = q.RecvTimestamp
-			}
+			checkJustReceived(t, got.RecvTimestamp)
+			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)
 			}
 			if predStatus != tt.wantStatus {
 				t.Errorf("Got different predicate status, got %v want %v ", predStatus, tt.wantStatus)
+			}
+		})
+	}
+}
+
+func TestBatchGet(t *testing.T) {
+	initTelemetryFakes(t)
+	dut := DUT(t, "dut")
+
+	getStrPath := func(iname string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
+	}
+
+	port1Name := "Ethernet3/1/1"
+	port2Name := "Ethernet3/1/2"
+	port1Path := gnmiPath(t, getStrPath(port1Name))
+	port2Path := gnmiPath(t, getStrPath(port2Name))
+	wildcardPath := gnmiPath(t, getStrPath("*"))
+
+	tests := []struct {
+		desc                 string
+		stub                 func(s *fakegnmi.Stubber)
+		addPaths             func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch)
+		wantSubscriptionPath []*gpb.Path
+		wantQualified        *telemetry.QualifiedDevice
+	}{{
+		desc: "two leaves in single notifcation",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: 100,
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 10}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 12}},
+					}}}).
+				Sync()
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: time.Unix(0, 100),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			},
+		}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(10),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(12),
+					},
+				},
+			},
+		}),
+	}, {
+		desc: "leaves with prefix",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: 100,
+					Prefix: &gpb.Path{
+						Elem:   port1Path.Elem[0:1],
+						Origin: "openconfig",
+					},
+					Update: []*gpb.Update{{
+						Path: &gpb.Path{
+							Elem: port1Path.Elem[1:],
+						},
+						Val: &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 10}},
+					}, {
+						Path: &gpb.Path{
+							Elem: port2Path.Elem[1:],
+						},
+						Val: &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 12}},
+					}}}).
+				Sync()
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: time.Unix(0, 100),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			},
+		}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(10),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(12),
+					},
+				},
+			},
+		}),
+	}, { // TODO: Decide whether batch Lookup should validate that data matches subscribed paths
+		desc: "non-subscribed paths",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: 100,
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 10}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 12}},
+					}}}).
+				Sync()
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port2Path},
+		wantQualified: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+				Timestamp: time.Unix(0, 100),
+			},
+		}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(10),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(12),
+					},
+				},
+			},
+		}),
+	}, {
+		desc: "two leaves with wildcard subcription",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: 100,
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 10}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 12}},
+					}}}).
+				Sync()
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.InterfaceAny().Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{wildcardPath},
+		wantQualified: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: time.Unix(0, 100),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			},
+		}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(10),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(12),
+					},
+				},
+			},
+		}),
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			batch := dut.Telemetry().NewBatch()
+			tt.addPaths(t, dut.Telemetry(), batch)
+			got := batch.Lookup(t)
+			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath...)
+			checkJustReceived(t, got.RecvTimestamp)
+			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			if diff := cmp.Diff(tt.wantQualified, got, cmpopts.EquateErrors(), cmp.AllowUnexported(telemetry.QualifiedDevice{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Lookup() return unexpected device diff(-want,+got):\n %s", diff)
+			}
+		})
+	}
+}
+
+func TestBatchWatch(t *testing.T) {
+	initTelemetryFakes(t)
+	dut := DUT(t, "dut")
+
+	getStrPath := func(iname string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
+	}
+
+	port1Name := "Ethernet3/1/1"
+	port2Name := "Ethernet3/1/2"
+	port1Path := gnmiPath(t, getStrPath(port1Name))
+	port2Path := gnmiPath(t, getStrPath(port2Name))
+	wildcardPath := gnmiPath(t, getStrPath("*"))
+
+	startTime := time.Now()
+
+	// All of stubbed responses need to end with a notification timestamped
+	// after the collect has timed out; otherwise the fake encounters an EOF.
+	tests := []struct {
+		desc                 string
+		stub                 func(s *fakegnmi.Stubber)
+		addPaths             func(testing.TB, *device.DevicePath, *telemetry.Batch)
+		wantSubscriptionPath []*gpb.Path
+		wantPredicateArgs    []*telemetry.QualifiedDevice
+		wantWatchRet         *telemetry.QualifiedDevice
+		wantPredStatus       bool
+	}{{
+		desc: "multiple notifications before sync and predicate never true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 30}},
+					}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: port1Path,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
+						}, {
+							Path: port2Path,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+						}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantWatchRet: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			}}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(50),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(80),
+					},
+				},
+			},
+		}),
+		wantPredicateArgs: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(50),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "collection with delete",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Delete:    []*gpb.Path{port1Path},
+						Update: []*gpb.Update{{
+							Path: port2Path,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+						}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantWatchRet: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			}}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name:     ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(120),
+					},
+				},
+			},
+		}),
+		wantPredicateArgs: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name:     ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "predicate becomes true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: port2Path,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+						}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantPredStatus:       true,
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantWatchRet: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			}}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(75),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(120),
+					},
+				},
+			},
+		}),
+		wantPredicateArgs: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "wildcard predicate becomes true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: port2Path,
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+						}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(35 * time.Minute).UnixNano(),
+					})
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.InterfaceAny().Counters().OutOctets().Batch(t, b)
+		},
+		wantPredStatus:       true,
+		wantSubscriptionPath: []*gpb.Path{wildcardPath},
+		wantWatchRet: (&telemetry.QualifiedDevice{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+
+				Path: &gpb.Path{
+					Origin: "openconfig",
+				},
+			}}).SetVal(&telemetry.Device{
+			Interface: map[string]*telemetry.Interface{
+				port1Name: {
+					Name: ygot.String(port1Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(75),
+					},
+				},
+				port2Name: {
+					Name: ygot.String(port2Name),
+					Counters: &telemetry.Interface_Counters{
+						OutOctets: ygot.Uint64(120),
+					},
+				},
+			},
+		}),
+		wantPredicateArgs: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				}}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "no values",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+				}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantWatchRet:         nil,
+		wantPredicateArgs:    []*telemetry.QualifiedDevice{},
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			batch := dut.Telemetry().NewBatch()
+			tt.addPaths(t, dut.Telemetry(), batch)
+			i := 0
+
+			got, predStatus := batch.Watch(t, 250*time.Millisecond, func(val *telemetry.QualifiedDevice) bool {
+				checkJustReceived(t, val.RecvTimestamp)
+				tt.wantPredicateArgs[i].RecvTimestamp = val.RecvTimestamp
+				if diff := cmp.Diff(tt.wantPredicateArgs[i], val, cmp.AllowUnexported(telemetry.QualifiedDevice{}), protocmp.Transform()); diff != "" {
+					t.Errorf("Predicate received unexpected device diff (-want,+got):\n %s", diff)
+				}
+				i++
+				return val.IsPresent() && val.Val(t).GetInterface(port1Name).GetCounters().GetOutOctets() > 60 &&
+					val.Val(t).GetInterface(port2Name).GetCounters().GetOutOctets() > 100
+			}).Await(t)
+			if i != len(tt.wantPredicateArgs) {
+				t.Errorf("Predicate didn't receive all qualified devices: got %d, want %d", i, len(tt.wantPredicateArgs))
+			}
+			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath...)
+			if tt.wantWatchRet != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantWatchRet.RecvTimestamp = got.RecvTimestamp
+			}
+			if diff := cmp.Diff(tt.wantWatchRet, got, cmp.AllowUnexported(telemetry.QualifiedDevice{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Watch() returned unexpected device diff (-want,+got):\n %s", diff)
+			}
+			if predStatus != tt.wantPredStatus {
+				t.Errorf("Watch() returned unexpected status: got %v, want %v ", predStatus, tt.wantPredStatus)
+			}
+		})
+	}
+}
+
+func TestBatchCollect(t *testing.T) {
+	initTelemetryFakes(t)
+	dut := DUT(t, "dut")
+
+	getStrPath := func(iname string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
+	}
+
+	port1Name := "Ethernet3/1/1"
+	port2Name := "Ethernet3/1/2"
+	port1Path := gnmiPath(t, getStrPath(port1Name))
+	port2Path := gnmiPath(t, getStrPath(port2Name))
+	wildcardPath := gnmiPath(t, getStrPath("*"))
+
+	startTime := time.Now()
+
+	// All of stubbed responses need to end with a notification timestamped
+	// after the collect has timed out; otherwise the fake encounters an EOF.
+	tests := []struct {
+		desc                 string
+		stub                 func(s *fakegnmi.Stubber)
+		addPaths             func(testing.TB, *device.DevicePath, *telemetry.Batch)
+		wantSubscriptionPath []*gpb.Path
+		wantQualified        []*telemetry.QualifiedDevice
+	}{{
+		desc: "collection with delete",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Delete:    []*gpb.Path{port1Path},
+					Update: []*gpb.Update{{
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name:     ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "multiple paths",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "multiple notifications before sync",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "wildcard subscription",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port1Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}, {
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Update: []*gpb.Update{{
+						Path: port2Path,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.InterfaceAny().Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{wildcardPath},
+		wantQualified: []*telemetry.QualifiedDevice{
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(80),
+						},
+					},
+				},
+			}),
+			(&telemetry.QualifiedDevice{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+
+					Path: &gpb.Path{
+						Origin: "openconfig",
+					},
+				},
+			}).SetVal(&telemetry.Device{
+				Interface: map[string]*telemetry.Interface{
+					port1Name: {
+						Name: ygot.String(port1Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(75),
+						},
+					},
+					port2Name: {
+						Name: ygot.String(port2Name),
+						Counters: &telemetry.Interface_Counters{
+							OutOctets: ygot.Uint64(120),
+						},
+					},
+				},
+			}),
+		},
+	}, {
+		desc: "no values",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		addPaths: func(t testing.TB, dev *device.DevicePath, b *telemetry.Batch) {
+			dev.Interface(port1Name).Counters().OutOctets().Batch(t, b)
+			dev.Interface(port2Name).Counters().OutOctets().Batch(t, b)
+		},
+		wantSubscriptionPath: []*gpb.Path{port1Path, port2Path},
+		wantQualified:        nil,
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			batch := dut.Telemetry().NewBatch()
+			tt.addPaths(t, dut.Telemetry(), batch)
+
+			got := batch.Collect(t, 250*time.Millisecond).Await(t)
+			for i, qt := range got {
+				checkJustReceived(t, qt.RecvTimestamp)
+				tt.wantQualified[i].RecvTimestamp = qt.RecvTimestamp
+			}
+
+			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath...)
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedDevice{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Collect() returned unexpected device diff (-want,+got):\n %s", diff)
+			}
+		})
+	}
+}
+
+func TestNonleafWatch(t *testing.T) {
+	initTelemetryFakes(t)
+	dut := DUT(t, "dut")
+
+	getStrPath := func(iname string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters", iname)
+	}
+
+	port1Name := "Ethernet3/1/1"
+	containerPath := gnmiPath(t, getStrPath(port1Name))
+	inOctPath := gnmiPath(t, getStrPath(port1Name)+"/in-octets")
+	outOctPath := gnmiPath(t, getStrPath(port1Name)+"/out-octets")
+
+	startTime := time.Now()
+
+	// All of stubbed responses need to end with a notification timestamped
+	// after the collect has timed out; otherwise the fake encounters an EOF.
+	tests := []struct {
+		desc                 string
+		stub                 func(s *fakegnmi.Stubber)
+		wantSubscriptionPath *gpb.Path
+		wantPredicateArgs    []*telemetry.QualifiedInterface_Counters
+		wantWatchRet         *telemetry.QualifiedInterface_Counters
+		wantPredStatus       bool
+	}{{
+		desc: "multiple notifications before sync and predicate never true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: inOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 30}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Update: []*gpb.Update{{
+						Path: inOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
+					}, {
+						Path: outOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		wantSubscriptionPath: containerPath,
+		wantPredicateArgs: []*telemetry.QualifiedInterface_Counters{
+			(&telemetry.QualifiedInterface_Counters{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path:      containerPath,
+				},
+			}).SetVal(&telemetry.Interface_Counters{
+				InOctets:  ygot.Uint64(50),
+				OutOctets: ygot.Uint64(80),
+			}),
+		},
+		wantWatchRet: (&telemetry.QualifiedInterface_Counters{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      containerPath,
+			},
+		}).SetVal(&telemetry.Interface_Counters{
+			InOctets:  ygot.Uint64(50),
+			OutOctets: ygot.Uint64(80),
+		}),
+	}, {
+		desc: "with delete",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: inOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Delete:    []*gpb.Path{inOctPath},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		wantSubscriptionPath: containerPath,
+		wantPredicateArgs: []*telemetry.QualifiedInterface_Counters{
+			(&telemetry.QualifiedInterface_Counters{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path:      containerPath,
+				},
+			}).SetVal(&telemetry.Interface_Counters{
+				InOctets: ygot.Uint64(75),
+			}),
+			(&telemetry.QualifiedInterface_Counters{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path:      containerPath,
+				},
+			}).SetVal(&telemetry.Interface_Counters{}),
+		},
+		wantWatchRet: (&telemetry.QualifiedInterface_Counters{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      containerPath,
+			},
+		}).SetVal(&telemetry.Interface_Counters{}),
+	}, {
+		desc: "predicate becomes true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: inOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 75}},
+					}, {
+						Path: outOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 80}},
+					}},
+				},
+			).Sync().Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+					Update: []*gpb.Update{{
+						Path: inOctPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 120}},
+					}},
+				},
+			).Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				},
+			)
+		},
+		wantPredStatus:       true,
+		wantSubscriptionPath: containerPath,
+		wantPredicateArgs: []*telemetry.QualifiedInterface_Counters{
+			(&telemetry.QualifiedInterface_Counters{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime,
+					Path:      containerPath,
+				},
+			}).SetVal(&telemetry.Interface_Counters{
+				InOctets:  ygot.Uint64(75),
+				OutOctets: ygot.Uint64(80),
+			}),
+			(&telemetry.QualifiedInterface_Counters{
+				Metadata: &genutil.Metadata{
+					Timestamp: startTime.Add(10 * time.Millisecond),
+					Path:      containerPath,
+				},
+			}).SetVal(&telemetry.Interface_Counters{
+				InOctets:  ygot.Uint64(120),
+				OutOctets: ygot.Uint64(80),
+			}),
+		},
+		wantWatchRet: (&telemetry.QualifiedInterface_Counters{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      containerPath,
+			},
+		}).SetVal(&telemetry.Interface_Counters{
+			InOctets:  ygot.Uint64(120),
+			OutOctets: ygot.Uint64(80),
+		}),
+	}, {
+		desc: "no values",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+				}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					},
+				)
+		},
+		wantSubscriptionPath: containerPath,
+		wantWatchRet:         nil,
+		wantPredicateArgs:    []*telemetry.QualifiedInterface_Counters{},
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			dut.Telemetry()
+			i := 0
+
+			got, predStatus := dut.Telemetry().Interface(port1Name).Counters().Watch(t, 250*time.Millisecond, func(val *telemetry.QualifiedInterface_Counters) bool {
+				checkJustReceived(t, val.RecvTimestamp)
+				tt.wantPredicateArgs[i].RecvTimestamp = val.RecvTimestamp
+				if diff := cmp.Diff(tt.wantPredicateArgs[i], val, cmp.AllowUnexported(telemetry.QualifiedInterface_Counters{}), protocmp.Transform()); diff != "" {
+					t.Errorf("Predicate received unexpected device diff (-want,+got):\n %s", diff)
+				}
+				i++
+				return val.IsPresent() && val.Val(t).GetOutOctets() > 60 && val.Val(t).GetInOctets() > 100
+			}).Await(t)
+			if i != len(tt.wantPredicateArgs) {
+				t.Errorf("Predicate didn't receive all qualified devices: got %d, want %d", i, len(tt.wantPredicateArgs))
+			}
+			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
+			if tt.wantWatchRet != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantWatchRet.RecvTimestamp = got.RecvTimestamp
+			}
+			if diff := cmp.Diff(tt.wantWatchRet, got, cmp.AllowUnexported(telemetry.QualifiedInterface_Counters{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Watch() returned unexpected device diff (-want,+got):\n %s", diff)
+			}
+			if predStatus != tt.wantPredStatus {
+				t.Errorf("Watch() returned unexpected status: got %v, want %v ", predStatus, tt.wantPredStatus)
 			}
 		})
 	}

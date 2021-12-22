@@ -81,7 +81,8 @@ func (a *ATE) String() string {
 
 // Port is a reserved Port.
 type Port struct {
-	Name string
+	Name  string
+	Speed opb.Port_Speed
 }
 
 func (p *Port) String() string {

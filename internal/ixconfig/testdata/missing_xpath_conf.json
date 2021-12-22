@@ -1,0 +1,9 @@
+{
+  "xpath": "/",
+  "topology": [
+    {
+      "name": "Topology 0",
+      "deviceGroup": [{}]
+    }
+  ]
+}

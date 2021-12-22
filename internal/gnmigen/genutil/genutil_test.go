@@ -400,8 +400,10 @@ func TestUnmarshal(t *testing.T) {
 	passingTests := []struct {
 		name                 string
 		inData               []*DataPoint
+		inQueryPath          *gpb.Path
 		inStructSchema       *yang.Entry
 		inStruct             ygot.GoStruct
+		inLeaf               bool
 		inPreferShadowPath   bool
 		wantUnmarshalledData []*DataPoint
 		wantStruct           ygot.GoStruct
@@ -412,8 +414,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 43}},
@@ -427,8 +431,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: rootSchema,
 		inStruct:       &Device{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 43}},
@@ -442,8 +448,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 42}},
@@ -457,8 +465,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 0}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 0}},
@@ -471,8 +481,10 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{Uint64Leaf: ygot.Uint64(0)},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Timestamp: time.Unix(1, 1),
@@ -489,8 +501,10 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Value: &gpb.TypedValue{
@@ -507,8 +521,10 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{UnionLeaf: &UnionLeafType_String{"forty two"}},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Timestamp: time.Unix(2, 2),
@@ -520,8 +536,10 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Timestamp: time.Unix(2, 2),
@@ -538,8 +556,10 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf2"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-leaf2"),
 			Value: &gpb.TypedValue{
@@ -566,8 +586,10 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(1, 3),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-stleaflist"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{UnionLeaf2: EnumType(44)},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-stleaflist"),
 			Value: &gpb.TypedValue{
@@ -592,11 +614,13 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-stleaflist"),
 			Timestamp: time.Unix(1, 3),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-stleaflist"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct: &LeafContainerStruct{
 			UnionLeaf2:          EnumType(44),
 			UnionLeafSingleType: []string{"forty two", "forty three"},
 		},
+		inLeaf: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-stleaflist"),
 			Timestamp: time.Unix(1, 3),
@@ -619,6 +643,7 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
 		wantUnmarshalledData: []*DataPoint{{
@@ -682,6 +707,7 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(10, 10),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct: &LeafContainerStruct{
 			Uint64Leaf: ygot.Uint64(42),
@@ -747,8 +773,10 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(10, 10),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Value: &gpb.TypedValue{
@@ -764,14 +792,18 @@ func TestUnmarshal(t *testing.T) {
 	}, {
 		name:           "empty datapoint slice",
 		inData:         []*DataPoint{},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantStruct:     &LeafContainerStruct{},
 	}, {
 		name:           "nil datapoint slice",
 		inData:         nil,
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantStruct:     &LeafContainerStruct{},
 	}, {
 		name: "not all timestamps are the same -- the values should apply in order they are in the slice",
@@ -810,6 +842,7 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(20, 20),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct"),
 		inStructSchema: superContainerSchema,
 		inStruct:       &SuperContainer{},
 		wantUnmarshalledData: []*DataPoint{{
@@ -864,8 +897,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/config/key"),
 		inStructSchema: superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:       &Model_SingleKey{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/key"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
@@ -879,8 +914,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/state/key"),
 		inStructSchema: superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:       &Model_SingleKey{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/state/key"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
@@ -894,8 +931,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:        gnmiPath(t, "super-container/model/a/single-key[key=42]/state/key"),
 		inStructSchema:     superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:           &Model_SingleKey{},
+		inLeaf:             true,
 		inPreferShadowPath: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/state/key"),
@@ -910,8 +949,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 		inStructSchema: superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:       &Model_SingleKey{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
@@ -925,8 +966,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/state/value"),
 		inStructSchema: superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:       &Model_SingleKey{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/state/value"),
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
@@ -940,8 +983,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:        gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 		inStructSchema:     superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:           &Model_SingleKey{},
+		inLeaf:             true,
 		inPreferShadowPath: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
@@ -956,8 +1001,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 4242}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:        gnmiPath(t, "super-container/model/a/single-key[key=42]/state/value"),
 		inStructSchema:     superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:           &Model_SingleKey{},
+		inLeaf:             true,
 		inPreferShadowPath: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/state/value"),
@@ -976,6 +1023,7 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key"),
 		inStructSchema: superContainerSchema.Dir["model"],
 		inStruct:       &Model{},
 		wantUnmarshalledData: []*DataPoint{{
@@ -997,10 +1045,12 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 		inStructSchema: superContainerSchema.Dir["model"],
 		inStruct: &Model{SingleKey: map[int32]*Model_SingleKey{
 			42: {Key: ygot.Int32(42), Value: ygot.Int64(4242)},
 		}},
+		inLeaf: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 			Timestamp: time.Unix(4, 4),
@@ -1014,10 +1064,12 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
 		inStructSchema: superContainerSchema.Dir["model"],
 		inStruct: &Model{SingleKey: map[int32]*Model_SingleKey{
 			42: {Key: ygot.Int32(42), Value: ygot.Int64(4242)},
 		}},
+		inLeaf:             true,
 		inPreferShadowPath: true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path:      gnmiPath(t, "super-container/model/a/single-key[key=42]/config/value"),
@@ -1030,7 +1082,7 @@ func TestUnmarshal(t *testing.T) {
 
 	for _, tt := range passingTests {
 		t.Run(tt.name, func(t *testing.T) {
-			unmarshalledData, complianceErrs, err := unmarshal(tt.inData, tt.inStructSchema, tt.inStruct, schemaStruct(), tt.inPreferShadowPath)
+			unmarshalledData, complianceErrs, err := unmarshal(tt.inData, tt.inStructSchema, tt.inStruct, tt.inQueryPath, schemaStruct(), tt.inLeaf, tt.inPreferShadowPath)
 			if err != nil {
 				t.Fatalf("unmarshal: got error, want none: %v", err)
 			}
@@ -1050,8 +1102,10 @@ func TestUnmarshal(t *testing.T) {
 	failingTests := []struct {
 		name                  string
 		inData                []*DataPoint
+		inQueryPath           *gpb.Path
 		inStructSchema        *yang.Entry
 		inStruct              ygot.GoStruct
+		inLeaf                bool
 		inPreferShadowPath    bool
 		wantUnmarshalledData  []*DataPoint
 		wantStruct            ygot.GoStruct
@@ -1066,12 +1120,32 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantTypeErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "foo"}},
 			Err:   errors.New("failed to unmarshal"),
+		},
+	}, {
+		name: "multiple datapoints for leaf node",
+		inData: []*DataPoint{{
+			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
+			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 42}},
+			Timestamp: time.Unix(1, 1),
+		}, {
+			Path:      gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
+			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 43}},
+			Timestamp: time.Unix(1, 1),
+		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
+		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
+		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
+		wantPathErrSubstr: &TelemetryError{
+			Err: errors.New("got multiple"),
 		},
 	}, {
 		name: "failed to retrieve uint64 with negative int",
@@ -1080,8 +1154,10 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: -42}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantTypeErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: -42}},
@@ -1094,12 +1170,14 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "super-container/xxxxxxxxx/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
-			Err:   errors.New("no match found in *genutil.SuperContainer, for path"),
+			Err:   errors.New(`does not match the query path "/super-container/leaf-container-struct/uint64-leaf"`),
 		},
 	}, {
 		name: "retrieve union with field that doesn't match regex",
@@ -1112,8 +1190,10 @@ func TestUnmarshal(t *testing.T) {
 			},
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantUnmarshalledData: []*DataPoint{{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 			Value: &gpb.TypedValue{
@@ -1130,11 +1210,13 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/dne"),
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/dne"),
-			Err:  errors.New("no match found in *genutil.LeafContainerStruct, for path"),
+			Err:  errors.New("does not match the query path"),
 		},
 	}, {
 		name: "fail to delete union with a single enum inside due to wrong path prefix",
@@ -1142,11 +1224,13 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "not-valid-prefix/leaf-container-struct/union-leaf2"),
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf2"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{UnionLeaf2: EnumType(44)},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "not-valid-prefix/leaf-container-struct/union-leaf2"),
-			Err:  errors.New("no match found in *genutil.Device, for path"),
+			Err:  errors.New(`does not match the query path "/super-container/leaf-container-struct/union-leaf2"`),
 		},
 	}, {
 		name: "fail to delete union with a single enum inside due to wrong path suffix",
@@ -1154,11 +1238,13 @@ func TestUnmarshal(t *testing.T) {
 			Path:      gnmiPath(t, "super-container/leaf-container-struct/union-needle2"),
 			Timestamp: time.Unix(2, 2),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/union-leaf2"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{UnionLeaf2: EnumType(44)},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path: gnmiPath(t, "super-container/leaf-container-struct/union-needle2"),
-			Err:  errors.New("no match found in *genutil.LeafContainerStruct, for path"),
+			Err:  errors.New(`does not match the query path "/super-container/leaf-container-struct/union-leaf2"`),
 		},
 	}, {
 		name: "retrieve a list value with an invalid list key",
@@ -1167,12 +1253,14 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
 			Timestamp: time.Unix(4, 4),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=44]/config/key"),
 		inStructSchema: superContainerSchema.Dir["model"].Dir["a"].Dir["single-key"],
 		inStruct:       &Model_SingleKey{},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "super-container/model/a/single-key[key=forty-four]/config/key"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 42}},
-			Err:   errors.New(`unable to convert "forty-four" to int32`),
+			Err:   errors.New(`does not match the query path "/super-container/model/a/single-key[key=44]/config/key"`),
 		},
 	}, {
 		name: "invalid input: parent schema is not parent of input data's path.",
@@ -1181,18 +1269,40 @@ func TestUnmarshal(t *testing.T) {
 			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
 			Timestamp: time.Unix(1, 1),
 		}},
+		inQueryPath:    gnmiPath(t, "super-container/leaf-container-struct/uint64-leaf"),
 		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
 		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
 		wantPathErrSubstr: &TelemetryError{
 			Path:  gnmiPath(t, "different-container/leaf-container-struct/uint64-leaf"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
-			Err:   errors.New("no match found in *genutil.Device, for path"),
+			Err:   errors.New(`does not match the query path "/super-container/leaf-container-struct/uint64-leaf"`),
+		},
+	}, {
+		name: "invalid input: deprecated elements field in path",
+		inData: []*DataPoint{{
+			Path: &gpb.Path{
+				Element: []string{"super-container", "model", "a", "single-key", "forty-four", "config", "key"},
+			},
+			Value:     &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
+			Timestamp: time.Unix(1, 1),
+		}},
+		inQueryPath:    gnmiPath(t, "super-container/model/a/single-key[key=44]/config/key"),
+		inStructSchema: superContainerSchema.Dir["leaf-container-struct"],
+		inStruct:       &LeafContainerStruct{},
+		inLeaf:         true,
+		wantPathErrSubstr: &TelemetryError{
+			Path: &gpb.Path{
+				Element: []string{"super-container", "model", "a", "single-key", "forty-four", "config", "key"},
+			},
+			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 43}},
+			Err:   errors.New(`path uses deprecated and unsupported Element field`),
 		},
 	}}
 
 	for _, tt := range failingTests {
 		t.Run(tt.name, func(t *testing.T) {
-			unmarshalledData, complianceErrs, errs := unmarshal(tt.inData, tt.inStructSchema, tt.inStruct, schemaStruct(), tt.inPreferShadowPath)
+			unmarshalledData, complianceErrs, errs := unmarshal(tt.inData, tt.inStructSchema, tt.inStruct, tt.inQueryPath, schemaStruct(), tt.inLeaf, tt.inPreferShadowPath)
 			if errs != nil {
 				t.Fatalf("unmarshal: got more than one error: %v", errs)
 			}
@@ -1316,37 +1426,11 @@ func TestBundleDatapoints(t *testing.T) {
 		desc         string
 		inDatapoints []*DataPoint
 		inPrefixLen  uint
-		inLeaf       bool
 		want         map[string][]*DataPoint
 		wantPrefixes []string
 		wantErr      bool
 	}{{
-		desc: "leaf paths without error",
-		inDatapoints: []*DataPoint{{
-			Path:  gnmiPath(t, "alpha[key=un]/bravo/leaf0"),
-			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
-		}, {
-			Path:  gnmiPath(t, "alpha[key=deux]/bravo/leaf0"),
-			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 200}},
-		}},
-		inPrefixLen: 3,
-		inLeaf:      true,
-		want: map[string][]*DataPoint{
-			"/alpha[key=un]/bravo/leaf0": {{
-				Path:  gnmiPath(t, "alpha[key=un]/bravo/leaf0"),
-				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
-			}},
-			"/alpha[key=deux]/bravo/leaf0": {{
-				Path:  gnmiPath(t, "alpha[key=deux]/bravo/leaf0"),
-				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 200}},
-			}},
-		},
-		wantPrefixes: []string{
-			"/alpha[key=deux]/bravo/leaf0",
-			"/alpha[key=un]/bravo/leaf0",
-		},
-	}, {
-		desc: "leaf paths with more than 1 path for a leaf",
+		desc: "leaf-paths",
 		inDatapoints: []*DataPoint{{
 			Path:  gnmiPath(t, "alpha[key=un]/bravo/leaf0"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
@@ -1358,10 +1442,25 @@ func TestBundleDatapoints(t *testing.T) {
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 300}},
 		}},
 		inPrefixLen: 3,
-		inLeaf:      true,
-		wantErr:     true,
+		want: map[string][]*DataPoint{
+			"/alpha[key=un]/bravo/leaf0": {{
+				Path:  gnmiPath(t, "alpha[key=un]/bravo/leaf0"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
+			}, {
+				Path:  gnmiPath(t, "alpha[key=un]/bravo/leaf0/leaf-under-leaf"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 300}},
+			}},
+			"/alpha[key=deux]/bravo/leaf0": {{
+				Path:  gnmiPath(t, "alpha[key=deux]/bravo/leaf0"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 200}},
+			}},
+		},
+		wantPrefixes: []string{
+			"/alpha[key=deux]/bravo/leaf0",
+			"/alpha[key=un]/bravo/leaf0",
+		},
 	}, {
-		desc: "non-leaf paths without error",
+		desc: "non-leaf-paths",
 		inDatapoints: []*DataPoint{{
 			Path:  gnmiPath(t, "alpha/bravo[key=un]/leaf0"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
@@ -1375,8 +1474,7 @@ func TestBundleDatapoints(t *testing.T) {
 			Path:  gnmiPath(t, "alpha/bravo[key=trois]/leaf4"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 500}},
 		}, {
-			// TODO: Add fatal check for duplicate paths, as they're not allowed by GET semantics.
-			// "got more than 1 path for leaf node /alpha/bravo[key=trois]/leaf3",
+			// duplicate path
 			Path:  gnmiPath(t, "alpha/bravo[key=trois]/leaf3"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 1000}},
 		}, {
@@ -1419,7 +1517,7 @@ func TestBundleDatapoints(t *testing.T) {
 			"/alpha/bravo[key=un]",
 		},
 	}, {
-		desc: "non-leaf paths with a path that's shorter than prefixLen",
+		desc: "path-shorter-than-prefixLen",
 		inDatapoints: []*DataPoint{{
 			Path:  gnmiPath(t, "alpha/"),
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 10}},
@@ -1443,12 +1541,44 @@ func TestBundleDatapoints(t *testing.T) {
 			Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 700}},
 		}},
 		inPrefixLen: 2,
-		wantErr:     true,
+		want: map[string][]*DataPoint{
+			"/": {{
+				Path:  gnmiPath(t, "alpha/"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 10}},
+			}},
+			"/alpha/bravo[key=un]": {{
+				Path:  gnmiPath(t, "alpha/bravo[key=un]/leaf0"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 100}},
+			}, {
+				Path:  gnmiPath(t, "alpha/bravo[key=un]/foo/bar/leaf6"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 700}},
+			}},
+			"/alpha/bravo[key=deux]": {{
+				Path:  gnmiPath(t, "alpha/bravo[key=deux]/leaf2"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 300}},
+			}, {
+				Path:  gnmiPath(t, "alpha/bravo[key=deux]/foo/leaf5"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 600}},
+			}},
+			"/alpha/bravo[key=trois]": {{
+				Path:  gnmiPath(t, "alpha/bravo[key=trois]/leaf3"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 400}},
+			}, {
+				Path:  gnmiPath(t, "alpha/bravo[key=trois]/leaf4"),
+				Value: &gpb.TypedValue{Value: &gpb.TypedValue_IntVal{IntVal: 500}},
+			}},
+		},
+		wantPrefixes: []string{
+			"/",
+			"/alpha/bravo[key=deux]",
+			"/alpha/bravo[key=trois]",
+			"/alpha/bravo[key=un]",
+		},
 	}}
 
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			got, gotPrefixes, err := bundleDatapoints(tt.inDatapoints, tt.inPrefixLen, tt.inLeaf)
+			got, gotPrefixes, err := bundleDatapoints(tt.inDatapoints, tt.inPrefixLen)
 			if gotErr := err != nil; gotErr != tt.wantErr {
 				t.Errorf("Got error: %v, want error: %v", err, tt.wantErr)
 			}
@@ -1464,31 +1594,15 @@ func TestBundleDatapoints(t *testing.T) {
 
 func TestQualifiedTypeString(t *testing.T) {
 	tests := []struct {
-		desc    string
-		want    string
-		value   interface{}
-		present bool
-		time    time.Time
-		path    *gpb.Path
+		desc  string
+		want  string
+		value interface{}
+		time  time.Time
+		path  *gpb.Path
 	}{{
-		desc:    "nil interface",
-		value:   nil,
-		present: true,
-		time:    time.Time{},
-		path: &gpb.Path{
-			Origin: "openconfig",
-			Elem: []*gpb.PathElem{{
-				Name: "network-instances",
-			}, {
-				Name: "network-instance",
-				Key:  map[string]string{"name": "master"},
-			}}},
-		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (present)\n\n",
-	}, {
-		desc:    "typed nil",
-		value:   (*LeafContainerStruct)(nil),
-		present: false,
-		time:    time.Time{},
+		desc:  "nil interface",
+		value: nil,
+		time:  time.Time{},
 		path: &gpb.Path{
 			Origin: "openconfig",
 			Elem: []*gpb.PathElem{{
@@ -1499,10 +1613,9 @@ func TestQualifiedTypeString(t *testing.T) {
 			}}},
 		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
 	}, {
-		desc:    "typed nil and ValidatedGoStruct",
-		value:   (*Device)(nil),
-		present: false,
-		time:    time.Time{},
+		desc:  "typed nil",
+		value: (*LeafContainerStruct)(nil),
+		time:  time.Time{},
 		path: &gpb.Path{
 			Origin: "openconfig",
 			Elem: []*gpb.PathElem{{
@@ -1513,17 +1626,28 @@ func TestQualifiedTypeString(t *testing.T) {
 			}}},
 		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
 	}, {
-		desc:    "non-nil validated struct",
-		value:   &Device{},
-		present: true,
-		time:    time.Time{},
-		want:    "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\n\nVal: \n{}\n\n",
+		desc:  "typed nil and ValidatedGoStruct",
+		value: (*Device)(nil),
+		time:  time.Time{},
+		path: &gpb.Path{
+			Origin: "openconfig",
+			Elem: []*gpb.PathElem{{
+				Name: "network-instances",
+			}, {
+				Name: "network-instance",
+				Key:  map[string]string{"name": "master"},
+			}}},
+		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
+	}, {
+		desc:  "non-nil validated struct",
+		value: &Device{},
+		time:  time.Time{},
+		want:  "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\n\nVal: \n{}\n\n",
 	}}
 
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			got := QualifiedTypeString(tt.value, &QualifiedType{
-				Present:   tt.present,
+			got := QualifiedTypeString(tt.value, &Metadata{
 				Timestamp: tt.time,
 				Path:      tt.path,
 			})

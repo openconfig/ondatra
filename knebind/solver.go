@@ -69,6 +69,10 @@ func solve(tb *opb.Testbed, topo *kpb.Topology) (*assign, error) {
 			i = &intf{name: intfName}
 			s.node2Intfs[node][intfName] = i
 		}
+		i.vendorName = node.Interfaces[intfName].GetName()
+		if i.vendorName == "" {
+			i.vendorName = intfName
+		}
 		return i
 	}
 	for _, link := range s.topology.GetLinks() {
@@ -87,7 +91,8 @@ type assign struct {
 }
 
 type intf struct {
-	name string
+	name       string
+	vendorName string
 }
 
 func (a *assign) String() string {

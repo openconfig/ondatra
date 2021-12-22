@@ -23,7 +23,7 @@ import (
 	"github.com/openconfig/ondatra/internal/reservation"
 )
 
-// FetchConsole will return a console client for interacting with the DUT.
-func FetchConsole(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
+// NewConsole creates a console client for the specified DUT.
+func NewConsole(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
 	return binding.Get().DialConsole(ctx, dut, grpc.WithBlock())
 }

@@ -33,22 +33,40 @@ func TestReserve(t *testing.T) {
 			Name:     "node1",
 			Type:     kpb.Node_ARISTA_CEOS,
 			Services: map[uint32]*kpb.Service{1234: {Name: "gnmi"}},
+			Interfaces: map[string]*kpb.Interface{
+				"eth1": {
+					Name: "Ethernet1",
+				},
+				"eth2": {
+					Name: "Ethernet2",
+				},
+			},
 		}, {
 			Name:     "node2",
 			Type:     kpb.Node_CISCO_CXR,
 			Services: map[uint32]*kpb.Service{2345: {Name: "gnmi"}},
+			Interfaces: map[string]*kpb.Interface{
+				"eth1": {},
+				"eth2": {},
+			},
 		}, {
 			Name:     "node3",
 			Type:     kpb.Node_JUNIPER_CEVO,
 			Services: map[uint32]*kpb.Service{3456: {Name: "gnmi"}},
+			Interfaces: map[string]*kpb.Interface{
+				"eth1": {},
+			},
 		}, {
 			Name: "node4",
 			Type: kpb.Node_IXIA_TG,
+			Interfaces: map[string]*kpb.Interface{
+				"eth1": {},
+			},
 		}},
 		Links: []*kpb.Link{
-			{ANode: "node1", AInt: "intf1", ZNode: "node2", ZInt: "intf1"},
-			{ANode: "node2", AInt: "intf2", ZNode: "node3", ZInt: "intf2"},
-			{ANode: "node1", AInt: "intf2", ZNode: "node4", ZInt: "intf1"},
+			{ANode: "node1", AInt: "eth1", ZNode: "node2", ZInt: "eth1"},
+			{ANode: "node2", AInt: "eth2", ZNode: "node3", ZInt: "eth1"},
+			{ANode: "node1", AInt: "eth2", ZNode: "node4", ZInt: "eth1"},
 		},
 	}
 	dut1 := &opb.Device{
@@ -90,8 +108,8 @@ func TestReserve(t *testing.T) {
 		HardwareModel:   "ARISTA_CEOS",
 		SoftwareVersion: "ARISTA_CEOS",
 		Ports: map[string]*reservation.Port{
-			"port1": {Name: "intf1"},
-			"port2": {Name: "intf2"},
+			"port1": {Name: "Ethernet1"},
+			"port2": {Name: "Ethernet2"},
 		},
 	}}
 	wantDUT2 := &reservation.DUT{&reservation.Dims{
@@ -100,8 +118,8 @@ func TestReserve(t *testing.T) {
 		HardwareModel:   "CISCO_CXR",
 		SoftwareVersion: "CISCO_CXR",
 		Ports: map[string]*reservation.Port{
-			"port1": {Name: "intf1"},
-			"port2": {Name: "intf2"},
+			"port1": {Name: "eth1"},
+			"port2": {Name: "eth2"},
 		},
 	}}
 	wantDUT3 := &reservation.DUT{&reservation.Dims{
@@ -110,7 +128,7 @@ func TestReserve(t *testing.T) {
 		HardwareModel:   "JUNIPER_CEVO",
 		SoftwareVersion: "JUNIPER_CEVO",
 		Ports: map[string]*reservation.Port{
-			"port1": {Name: "intf2"},
+			"port1": {Name: "eth1"},
 		},
 	}}
 	wantATE := &reservation.ATE{&reservation.Dims{
@@ -119,7 +137,7 @@ func TestReserve(t *testing.T) {
 		HardwareModel:   "IXIA_TG",
 		SoftwareVersion: "IXIA_TG",
 		Ports: map[string]*reservation.Port{
-			"port1": {Name: "intf1"},
+			"port1": {Name: "eth1"},
 		},
 	}}
 

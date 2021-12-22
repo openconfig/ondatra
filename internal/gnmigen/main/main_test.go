@@ -24,24 +24,27 @@ import (
 
 func TestWriteGoCode(t *testing.T) {
 	telemCode := &gnmigen.GeneratedTelemetryCode{
-		CommonHeader: "telem common header\n",
-		OneOffHeader: "\ntelem one-off header\n",
-		GoPerNodeSnippets: []gnmigen.GoPerNodeCodeSnippet{{
-			PathStructName: "PathStruct1",
-			GetMethod:      "\nGet1\n",
-			CollectMethod:  "\nCollect1\n",
-			ConvertHelper:  "\nconvert1\n",
-		}, {
-			PathStructName: "PathStruct2",
-			GetMethod:      "\nGet2\n",
-			CollectMethod:  "\nCollect2\n",
-			ConvertHelper:  "\nconvert2\n",
-		}, {
-			PathStructName: "PathStruct3",
-			GetMethod:      "\nGet3\n",
-			CollectMethod:  "\nCollect3\n",
-			ConvertHelper:  "\nconvert3\n",
-		}},
+		Headers: map[string]string{
+			"telemetry": "telem common header\n",
+		},
+		FakeRootMethods: "\ntelem root methods\n",
+		GoPerNodeSnippets: map[string]gnmigen.GoPerNodeCodeSnippets{
+			"telemetry": {{
+				PathStructName: "PathStruct1",
+				GetMethod:      "\nGet1\n",
+				CollectMethod:  "\nCollect1\n",
+				ConvertHelper:  "\nconvert1\n",
+			}, {
+				PathStructName: "PathStruct2",
+				GetMethod:      "\nGet2\n",
+				CollectMethod:  "\nCollect2\n",
+				ConvertHelper:  "\nconvert2\n",
+			}, {
+				PathStructName: "PathStruct3",
+				GetMethod:      "\nGet3\n",
+				CollectMethod:  "\nCollect3\n",
+				ConvertHelper:  "\nconvert3\n",
+			}}},
 		GoReturnTypeSnippets: []gnmigen.GoReturnTypeCodeSnippet{{
 			TypeName:       "int64",
 			QualifiedType:  "\nQualifiedInt64\n",
@@ -66,20 +69,14 @@ func TestWriteGoCode(t *testing.T) {
 		inTelemFuncsFileN: 0,
 		inTelemTypesFileN: 0,
 		want: map[string]string{
-			telemHelpersFileName: `telem common header
-
-telem one-off header
-`,
+			fakeRootMethodsFileName: "telem common header\n\ntelem root methods\n",
 		},
 	}, {
 		name:              "no file splitting",
 		inTelemFuncsFileN: 1,
 		inTelemTypesFileN: 1,
 		want: map[string]string{
-			telemHelpersFileName: `telem common header
-
-telem one-off header
-`,
+			fakeRootMethodsFileName: "telem common header\n\ntelem root methods\n",
 			telemTypesFileName(0): `telem common header
 
 QualifiedInt64
@@ -116,10 +113,7 @@ convert3
 		inTelemFuncsFileN: 2,
 		inTelemTypesFileN: 2,
 		want: map[string]string{
-			telemHelpersFileName: `telem common header
-
-telem one-off header
-`,
+			fakeRootMethodsFileName: "telem common header\n\ntelem root methods\n",
 			telemTypesFileName(0): `telem common header
 
 QualifiedInt64
@@ -159,7 +153,109 @@ convert3
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := makeFileOutputSpec(telemCode, tt.inTelemFuncsFileN, tt.inTelemTypesFileN)
+			got, err := makeFileOutputSpec(telemCode, false, true, tt.inTelemFuncsFileN, tt.inTelemTypesFileN)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if diff := cmp.Diff(tt.want, got); diff != "" {
+				t.Errorf("Did not get expected output, diff (-want,+got):\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestWriteGoCodeSplitPackage(t *testing.T) {
+	telemCode := &gnmigen.GeneratedTelemetryCode{
+		Headers: map[string]string{
+			"telemetry": "telem common header\n",
+			"foo_path":  "foo_path common header\n",
+		},
+		FakeRootMethods: "telem fake root helper\n",
+		GoPerNodeSnippets: map[string]gnmigen.GoPerNodeCodeSnippets{
+			"telemetry": {{
+				PathStructName: "PathStruct1",
+				GetMethod:      "\nGet1\n",
+				CollectMethod:  "\nCollect1\n",
+				ConvertHelper:  "\nconvert1\n",
+			}, {
+				PathStructName: "PathStruct2",
+				GetMethod:      "\nGet2\n",
+				CollectMethod:  "\nCollect2\n",
+				ConvertHelper:  "\nconvert2\n",
+			}},
+			"foo_path": {{
+				PathStructName: "PathStruct3",
+				GetMethod:      "\nGet3\n",
+				CollectMethod:  "\nCollect3\n",
+				ConvertHelper:  "\nconvert3\n",
+			}}},
+		GoReturnTypeSnippets: []gnmigen.GoReturnTypeCodeSnippet{{
+			TypeName:       "int64",
+			QualifiedType:  "\nQualifiedInt64\n",
+			CollectionType: "\nCollectionInt64\n",
+		}, {
+			TypeName:       "float64",
+			QualifiedType:  "\nQualifiedFloat64\n",
+			CollectionType: "\nCollectionFloat64\n",
+		}},
+	}
+
+	tests := []struct {
+		name                 string
+		inTelemFuncsFileN    int
+		inTelemTypesFileN    int
+		inGeneratePathHelper bool
+		want                 map[string]string
+	}{{
+		name:              "no outputs",
+		inTelemFuncsFileN: 0,
+		inTelemTypesFileN: 0,
+		want:              map[string]string{},
+	}, {
+		name:                 "generate path structs",
+		inTelemFuncsFileN:    1,
+		inTelemTypesFileN:    1,
+		inGeneratePathHelper: true,
+		want: map[string]string{
+			fakeRootMethodsFileName: "telem common header\ntelem fake root helper\n",
+			"foo_path/telemetry-0.go": `foo_path common header
+
+Get3
+
+Collect3
+
+convert3
+`,
+			"device_telem.go": `telem common header
+
+Get1
+
+Collect1
+
+convert1
+
+Get2
+
+Collect2
+
+convert2
+`,
+			"telem_types-0.go": `telem common header
+
+QualifiedInt64
+
+CollectionInt64
+
+QualifiedFloat64
+
+CollectionFloat64
+`,
+		},
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := makeFileOutputSpec(telemCode, true, tt.inGeneratePathHelper, tt.inTelemFuncsFileN, tt.inTelemTypesFileN)
 			if err != nil {
 				t.Fatal(err)
 			}

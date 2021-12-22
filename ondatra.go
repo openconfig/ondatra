@@ -23,7 +23,6 @@ import (
 	"runtime"
 	"runtime/debug"
 	"sync"
-	"syscall"
 	"testing"
 	"time"
 	"unsafe"
@@ -31,6 +30,7 @@ import (
 	"flag"
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/closer"
+	"golang.org/x/sys/unix"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/reservemain"
@@ -50,24 +50,22 @@ type Binder func() (binding.Binding, error)
 // initialized with a baseline configuration that allows it to be managed.
 func RunTests(m *testing.M, binders ...Binder) {
 	// Careful to only exit at the very end, because exiting skips all pending defers.
-	res, err := doRun(m, binders...)
-	if err != nil {
+	if err := doRun(m, binders...); err != nil {
 		log.Exit(err)
 	}
-	os.Exit(res)
 }
 
-func doRun(m *testing.M, binders ...Binder) (res int, rerr error) {
+func doRun(m *testing.M, binders ...Binder) (rerr error) {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
 	if len(binders) > 1 {
-		return 0, fmt.Errorf("found %d bindings, one or zero(deprecated) required", len(binders))
+		return fmt.Errorf("found %d bindings, one or zero(deprecated) required", len(binders))
 	}
 	if len(binders) == 1 {
 		b, err := binders[0]()
 		if err != nil {
-			return 0, fmt.Errorf("failed to create binding: %w", err)
+			return fmt.Errorf("failed to create binding: %w", err)
 		}
 		binding.Init(b)
 	}
@@ -76,14 +74,15 @@ func doRun(m *testing.M, binders ...Binder) (res int, rerr error) {
 	}
 	fmt.Println(actionMsg("Reserving the testbed"))
 	if err := reserveFn(*reservemain.TestbedPath, *reservemain.RunTime, *reservemain.WaitTime); err != nil {
-		return 0, err
+		return err
 	}
-	go fnAfterSignal(releaseFn, syscall.SIGINT, syscall.SIGTERM)
+	go fnAfterSignal(releaseFn, unix.SIGINT, unix.SIGTERM)
 	defer closer.Close(&rerr, func() error {
 		fmt.Println(actionMsg("Releasing the testbed"))
 		return releaseFn()
 	}, "error releasing testbed")
-	return runTestsFn(new(fixture), m, *reservemain.RunTime), nil
+	runTestsFn(new(fixture), m, *reservemain.RunTime)
+	return nil
 }
 
 // fnAfterSignal waits for one of `signals` then calls `fn`.
@@ -91,7 +90,7 @@ func fnAfterSignal(fn func() error, signals ...os.Signal) {
 	signal.Notify(sigc, signals...)
 	s := <-sigc
 	fnName := runtime.FuncForPC(reflect.ValueOf(fn).Pointer()).Name()
-	log.Infof("FnAfterSignal caught %s, calling %v\n", s, fnName)
+	log.Infof("caught signal %s, calling %s\n", s, fnName)
 	if err := fn(); err != nil {
 		log.Errorf("error calling %s: %v", fnName, err)
 	}
@@ -103,7 +102,7 @@ type fixture struct {
 	fatalFn   func(args ...interface{})
 }
 
-func (f *fixture) runTests(m *testing.M, timeout time.Duration) int {
+func (f *fixture) runTests(m *testing.M, timeout time.Duration) {
 	tests := reflect.ValueOf(m).Elem().FieldByName("tests")
 	for i := 0; i < tests.Len(); i++ {
 		fnVal := tests.Index(i).FieldByName("F")
@@ -120,7 +119,7 @@ func (f *fixture) runTests(m *testing.M, timeout time.Duration) int {
 			fn(t)
 		}
 	}
-	return m.Run()
+	m.Run()
 }
 
 func (f *fixture) testStarted(t *testing.T, timeout time.Duration) {
@@ -147,6 +146,7 @@ func (f *fixture) failEarly(msg string) {
 }
 
 func logAction(t testing.TB, format string, dev reservation.Device) {
+	t.Helper()
 	t.Log(actionMsg(fmt.Sprintf(format, dev.Dimensions().Name)))
 }
 

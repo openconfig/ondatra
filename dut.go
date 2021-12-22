@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/openconfig/ondatra/config"
+	"github.com/openconfig/ondatra/config/device"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/cli"
 	"github.com/openconfig/ondatra/internal/console"
@@ -42,15 +42,19 @@ type DUTDevice struct {
 
 // Config returns a handle to the DUT configuration API.
 func (d *DUTDevice) Config() *Config {
+	dev := device.DeviceRoot(d.ID())
+	// TODO: Add field to root node in ygot instead of using custom data.
+	dev.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
 		dut:        d.res.(*reservation.DUT),
-		DevicePath: config.DeviceRoot(d.ID())}
+		DevicePath: dev,
+	}
 }
 
 // Config is the DUT configuration API.
 type Config struct {
 	dut *reservation.DUT
-	*config.DevicePath
+	*device.DevicePath
 }
 
 // New returns an empty DUT configuration.
@@ -144,7 +148,7 @@ func (c *DUTConfig) Push(t testing.TB) {
 	t.Helper()
 	logAction(t, "Pushing config to %s", c.dut)
 	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, false); err != nil {
-		t.Fatalf("Push(t) on %s: %v", c, err)
+		t.Fatalf("Push(t) on %s: %v", c.dut, err)
 	}
 }
 
@@ -155,7 +159,7 @@ func (c *DUTConfig) Append(t testing.TB) {
 	t.Helper()
 	logAction(t, "Appending config to %s", c.dut)
 	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, true); err != nil {
-		t.Fatalf("Append(t) on %s: %v", c, err)
+		t.Fatalf("Append(t) on %s: %v", c.dut, err)
 	}
 }
 
@@ -169,24 +173,66 @@ type RawAPIs struct {
 	dut *reservation.DUT
 }
 
-// GNMI returns a new gNMI client on the DUT. This client will not be cached.
-func (r *RawAPIs) GNMI(t testing.TB) gpb.GNMIClient {
+// GNMI provides access to either a new or default gNMI client.
+func (r *RawAPIs) GNMI() *GNMIAPI {
+	return &GNMIAPI{dut: r.dut}
+}
+
+// GNOI provides access to either a new or default gNOI client.
+func (r *RawAPIs) GNOI() *GNOIAPI {
+	return &GNOIAPI{dut: r.dut}
+}
+
+// GNMIAPI provides access for creating a default or new gNMI client on the DUT.
+type GNMIAPI struct {
+	dut *reservation.DUT
+}
+
+// GNOIAPI provides access for creating a default or new gNOI client on the DUT.
+type GNOIAPI struct {
+	dut *reservation.DUT
+}
+
+// New returns a new gNMI client on the DUT. This client will not be cached.
+func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 	t.Helper()
-	logAction(t, "Creating gNMI client for %s", r.dut)
-	gnmi, err := genutil.NewGNMI(context.Background(), r.dut)
+	logAction(t, "Creating gNMI client for %s", g.dut)
+	gnmi, err := newGNMI(context.Background(), g.dut)
 	if err != nil {
-		t.Fatalf("GNMI(t) on %v: %v", r.dut, err)
+		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
 	}
 	return gnmi
 }
 
-// GNOI returns a gNOI client on the DUT.
-func (r *RawAPIs) GNOI(t testing.TB) GNOI {
+// Default returns the default gNMI client for the DUT.
+func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 	t.Helper()
-	logAction(t, "Creating gNOI client for %s", r.dut)
-	bgnoi, err := operations.NewGNOI(context.Background(), r.dut)
+	logAction(t, "Fetching gNMI client for %s", g.dut)
+	gnmi, err := fetchGNMI(context.Background(), g.dut, nil)
 	if err != nil {
-		t.Fatalf("GNOI(t) on %v: %v", r.dut, err)
+		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
+	}
+	return gnmi
+}
+
+// New returns a new gNOI client on the DUT.
+func (g *GNOIAPI) New(t testing.TB) GNOI {
+	t.Helper()
+	logAction(t, "Creating gNOI client for %s", g.dut)
+	bgnoi, err := operations.NewGNOI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
+	}
+	return bgnoi
+}
+
+// Default returns the default gNOI client for the DUT.
+func (g *GNOIAPI) Default(t testing.TB) GNOI {
+	t.Helper()
+	logAction(t, "Fetching gNOI client for %s", g.dut)
+	bgnoi, err := operations.FetchGNOI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
 	}
 	return bgnoi
 }
@@ -205,10 +251,10 @@ type privateGNOI interface {
 // P4RT returns a P4RT client on the DUT.
 func (r *RawAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
-	logAction(t, "Fetching P4RT client for %s", r.dut)
-	p4rtClient, err := p4rt.FetchP4RT(context.Background(), r.dut)
+	logAction(t, "Creating P4RT client for %s", r.dut)
+	p4rtClient, err := p4rt.NewP4RT(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch P4RT client on %v: %v", r.dut, err)
+		t.Fatalf("Failed to create P4RT client on %v: %v", r.dut, err)
 	}
 	return p4rtClient
 }
@@ -227,10 +273,10 @@ type privateStreamClient interface {
 // CLI returns a streaming CLI client on the DUT.
 func (r *RawAPIs) CLI(t testing.TB) StreamClient {
 	t.Helper()
-	logAction(t, "Fetching CLI client for %s", r.dut)
-	c, err := cli.FetchCLI(context.Background(), r.dut)
+	logAction(t, "Creating CLI client for %s", r.dut)
+	c, err := cli.NewCLI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch CLI client on %v: %v", r.dut, err)
+		t.Fatalf("Failed to create CLI client on %v: %v", r.dut, err)
 	}
 	return c
 }
@@ -238,10 +284,10 @@ func (r *RawAPIs) CLI(t testing.TB) StreamClient {
 // Console returns a transactional CLI client on the DUT.
 func (r *RawAPIs) Console(t testing.TB) StreamClient {
 	t.Helper()
-	logAction(t, "Fetching CLI client for %s", r.dut)
-	c, err := console.FetchConsole(context.Background(), r.dut)
+	logAction(t, "Creating console client for %s", r.dut)
+	c, err := console.NewConsole(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch console client on %v: %v", r.dut, err)
+		t.Fatalf("Failed to create console client on %v: %v", r.dut, err)
 	}
 	return c
 }

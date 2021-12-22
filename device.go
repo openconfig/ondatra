@@ -15,12 +15,20 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
+	"math"
+	"sync"
 	"testing"
 
+	"google.golang.org/grpc"
+	"github.com/openconfig/ondatra/internal/ate"
+	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/ondatra/telemetry/device"
 
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -28,6 +36,8 @@ import (
 type Device struct {
 	id  string
 	res reservation.Device
+	// clientFn is the func used by the telemetry library to get the gnmi client for a DUT.
+	clientFn func(context.Context) (gpb.GNMIClient, error)
 }
 
 // String returns a string repesentation of the device.
@@ -59,11 +69,21 @@ const (
 	IXIA = Vendor(opb.Device_IXIA)
 	// CIENA vendor.
 	CIENA = Vendor(opb.Device_CIENA)
+	// PALOALTO vendor.
+	PALOALTO = Vendor(opb.Device_PALOALTO)
 )
 
 // String returns the name of the vendor.
 func (v Vendor) String() string {
 	return opb.Device_Vendor(v).String()
+}
+
+// Telemetry returns a telemetry path root for the device.
+func (d *Device) Telemetry() *device.DevicePath {
+	root := device.DeviceRoot(d.ID())
+	// TODO: Add field to root node in ygot instead of using custom data.
+	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
+	return root
 }
 
 // Vendor returns the device vendor.
@@ -117,11 +137,6 @@ func (d *Device) Operations() *Operations {
 	return &Operations{d.res}
 }
 
-// Telemetry returns a telemetry path root for the device.
-func (d *Device) Telemetry() *telemetry.DevicePath {
-	return telemetry.DeviceRoot(d.ID())
-}
-
 // Port represents a port.
 type Port struct {
 	dev *Device
@@ -158,8 +173,47 @@ const (
 	Speed100Gb = Speed(opb.Port_S_100GB)
 )
 
-// TODO: Restore when speed is consistently propagated back.
 // Speed returns the port speed.
-// func (p *Port) Speed() Speed {
-//	return Speed(p.pb.GetSpeed())
-//}
+func (p *Port) Speed() Speed {
+	return Speed(p.res.Speed)
+}
+
+var (
+	gnmisMu sync.Mutex
+	gnmis   = make(map[reservation.Device]gpb.GNMIClient)
+)
+
+// newGNMI creates a new gNMI client for the specified Device.
+func newGNMI(ctx context.Context, dev reservation.Device) (gpb.GNMIClient, error) {
+	dialGNMI := func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+		return binding.Get().DialGNMI(ctx, dev.(*reservation.DUT), opts...)
+	}
+	if rATE, ok := dev.(*reservation.ATE); ok {
+		dialGNMI = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return ate.DialGNMI(ctx, rATE, opts...)
+		}
+	}
+	return dialGNMI(ctx,
+		grpc.WithBlock(),
+		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32)))
+}
+
+// fetchGNMI fetches the gNMI client for the given device.
+// If a GNMIClient is provided it will be just returned as is and not cached.
+func fetchGNMI(ctx context.Context, dev reservation.Device, c gpb.GNMIClient) (gpb.GNMIClient, error) {
+	if c != nil {
+		return c, nil
+	}
+	gnmisMu.Lock()
+	defer gnmisMu.Unlock()
+	c, ok := gnmis[dev]
+	if !ok {
+		var err error
+		c, err = newGNMI(ctx, dev)
+		if err != nil {
+			return nil, err
+		}
+		gnmis[dev] = c
+	}
+	return c, nil
+}

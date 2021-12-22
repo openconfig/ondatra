@@ -12,8 +12,6 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/protobuf/proto"
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
@@ -42,47 +40,29 @@ func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
 	return n
 }
 
-func binarySliceToFloat32(in []Binary) []float32 {
-	converted := make([]float32, 0, len(in))
-	for _, binary := range in {
-		converted = append(converted, ygot.BinaryToFloat32(binary))
-	}
-	return converted
-}
-
-// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
-	datapoints, queryPath := genutil.Get(t, n, isLeaf)
-	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return qv
-}
-
-// getSchema return the generated ytypes schema used for unmarshaling datapoints.
-func getSchema() *ytypes.Schema {
-	return &ytypes.Schema{
-		Root:       &Root{},
-		SchemaTree: SchemaTree,
-		Unmarshal:  Unmarshal,
-	}
+// NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
+func (d *RootPath) NewBatch() *Batch {
+	return NewBatch(d)
 }
 
 // QualifiedModel is a *Model with a corresponding timestamp.
 type QualifiedModel struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val *Model // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedModel) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the *Model sample, erroring out if not present.
 func (q *QualifiedModel) Val(t testing.TB) *Model {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -95,24 +75,60 @@ func (q *QualifiedModel) Val(t testing.TB) *Model {
 // SetVal sets the value of the *Model sample.
 func (q *QualifiedModel) SetVal(v *Model) *QualifiedModel {
 	q.val = v
+	q.present = true
 	return q
 }
 
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedModel) IsPresent() bool {
+	return q != nil && q.present
+}
+
+
+// CollectionModel is a telemetry Collection whose Await method returns a slice of *Model samples.
+type CollectionModel struct {
+	W *ModelWatcher
+	Data []*QualifiedModel
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionModel) Await(t testing.TB) []*QualifiedModel {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// ModelWatcher observes a stream of *Model samples.
+type ModelWatcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedModel
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *ModelWatcher) Await(t testing.TB) (*QualifiedModel, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
 
 // QualifiedModel_MultiKey is a *Model_MultiKey with a corresponding timestamp.
 type QualifiedModel_MultiKey struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val *Model_MultiKey // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedModel_MultiKey) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the *Model_MultiKey sample, erroring out if not present.
 func (q *QualifiedModel_MultiKey) Val(t testing.TB) *Model_MultiKey {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -125,24 +141,60 @@ func (q *QualifiedModel_MultiKey) Val(t testing.TB) *Model_MultiKey {
 // SetVal sets the value of the *Model_MultiKey sample.
 func (q *QualifiedModel_MultiKey) SetVal(v *Model_MultiKey) *QualifiedModel_MultiKey {
 	q.val = v
+	q.present = true
 	return q
 }
 
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedModel_MultiKey) IsPresent() bool {
+	return q != nil && q.present
+}
+
+
+// CollectionModel_MultiKey is a telemetry Collection whose Await method returns a slice of *Model_MultiKey samples.
+type CollectionModel_MultiKey struct {
+	W *Model_MultiKeyWatcher
+	Data []*QualifiedModel_MultiKey
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionModel_MultiKey) Await(t testing.TB) []*QualifiedModel_MultiKey {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Model_MultiKeyWatcher observes a stream of *Model_MultiKey samples.
+type Model_MultiKeyWatcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedModel_MultiKey
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Model_MultiKeyWatcher) Await(t testing.TB) (*QualifiedModel_MultiKey, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
 
 // QualifiedModel_SingleKey is a *Model_SingleKey with a corresponding timestamp.
 type QualifiedModel_SingleKey struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val *Model_SingleKey // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedModel_SingleKey) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the *Model_SingleKey sample, erroring out if not present.
 func (q *QualifiedModel_SingleKey) Val(t testing.TB) *Model_SingleKey {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -155,24 +207,60 @@ func (q *QualifiedModel_SingleKey) Val(t testing.TB) *Model_SingleKey {
 // SetVal sets the value of the *Model_SingleKey sample.
 func (q *QualifiedModel_SingleKey) SetVal(v *Model_SingleKey) *QualifiedModel_SingleKey {
 	q.val = v
+	q.present = true
 	return q
 }
 
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedModel_SingleKey) IsPresent() bool {
+	return q != nil && q.present
+}
+
+
+// CollectionModel_SingleKey is a telemetry Collection whose Await method returns a slice of *Model_SingleKey samples.
+type CollectionModel_SingleKey struct {
+	W *Model_SingleKeyWatcher
+	Data []*QualifiedModel_SingleKey
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionModel_SingleKey) Await(t testing.TB) []*QualifiedModel_SingleKey {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Model_SingleKeyWatcher observes a stream of *Model_SingleKey samples.
+type Model_SingleKeyWatcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedModel_SingleKey
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Model_SingleKeyWatcher) Await(t testing.TB) (*QualifiedModel_SingleKey, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
 
 // QualifiedRoot is a *Root with a corresponding timestamp.
 type QualifiedRoot struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val *Root // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedRoot) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the *Root sample, erroring out if not present.
 func (q *QualifiedRoot) Val(t testing.TB) *Root {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -185,24 +273,60 @@ func (q *QualifiedRoot) Val(t testing.TB) *Root {
 // SetVal sets the value of the *Root sample.
 func (q *QualifiedRoot) SetVal(v *Root) *QualifiedRoot {
 	q.val = v
+	q.present = true
 	return q
 }
 
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedRoot) IsPresent() bool {
+	return q != nil && q.present
+}
+
+
+// CollectionRoot is a telemetry Collection whose Await method returns a slice of *Root samples.
+type CollectionRoot struct {
+	W *RootWatcher
+	Data []*QualifiedRoot
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionRoot) Await(t testing.TB) []*QualifiedRoot {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// RootWatcher observes a stream of *Root samples.
+type RootWatcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedRoot
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *RootWatcher) Await(t testing.TB) (*QualifiedRoot, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
 
 // QualifiedUint32 is a uint32 with a corresponding timestamp.
 type QualifiedUint32 struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val uint32 // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedUint32) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the uint32 sample, erroring out if not present.
 func (q *QualifiedUint32) Val(t testing.TB) uint32 {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -215,53 +339,60 @@ func (q *QualifiedUint32) Val(t testing.TB) uint32 {
 // SetVal sets the value of the uint32 sample.
 func (q *QualifiedUint32) SetVal(v uint32) *QualifiedUint32 {
 	q.val = v
+	q.present = true
 	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedUint32) IsPresent() bool {
+	return q != nil && q.present
 }
 
 
 // CollectionUint32 is a telemetry Collection whose Await method returns a slice of uint32 samples.
 type CollectionUint32 struct {
-	c *CollectionUntilUint32
+	W *Uint32Watcher
+	Data []*QualifiedUint32
 }
 
-// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
-func (u *CollectionUint32) Await(t testing.TB) []*QualifiedUint32 {
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionUint32) Await(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	data, _ := u.c.Await(t)
-	return data
+	c.W.Await(t)
+	return c.Data
 }
 
-// CollectionUntilUint32 is a telemetry Collection whose Await method returns a slice of uint32 samples.
-type CollectionUntilUint32 struct {
-	c *genutil.Collection
+// Uint32Watcher observes a stream of uint32 samples.
+type Uint32Watcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedUint32
 }
 
-// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
-// The received data and the status of the predicate are returned.
-func (u *CollectionUntilUint32) Await(t testing.TB) ([]*QualifiedUint32, bool) {
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Uint32Watcher) Await(t testing.TB) (*QualifiedUint32, bool) {
 	t.Helper()
-	var ret []*QualifiedUint32
-	updates, predTrue := u.c.Await(t)
-	for _, upd := range updates {
-		ret = append(ret, upd.(*QualifiedUint32))
-	}
-	return ret, predTrue
+	return w.LastVal, w.W.Await(t)
 }
 
 // QualifiedUint64 is a uint64 with a corresponding timestamp.
 type QualifiedUint64 struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val uint64 // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedUint64) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the uint64 sample, erroring out if not present.
 func (q *QualifiedUint64) Val(t testing.TB) uint64 {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -274,86 +405,90 @@ func (q *QualifiedUint64) Val(t testing.TB) uint64 {
 // SetVal sets the value of the uint64 sample.
 func (q *QualifiedUint64) SetVal(v uint64) *QualifiedUint64 {
 	q.val = v
+	q.present = true
 	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedUint64) IsPresent() bool {
+	return q != nil && q.present
 }
 
 
 // CollectionUint64 is a telemetry Collection whose Await method returns a slice of uint64 samples.
 type CollectionUint64 struct {
-	c *CollectionUntilUint64
+	W *Uint64Watcher
+	Data []*QualifiedUint64
 }
 
-// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
-func (u *CollectionUint64) Await(t testing.TB) []*QualifiedUint64 {
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionUint64) Await(t testing.TB) []*QualifiedUint64 {
 	t.Helper()
-	data, _ := u.c.Await(t)
-	return data
+	c.W.Await(t)
+	return c.Data
 }
 
-// CollectionUntilUint64 is a telemetry Collection whose Await method returns a slice of uint64 samples.
-type CollectionUntilUint64 struct {
-	c *genutil.Collection
+// Uint64Watcher observes a stream of uint64 samples.
+type Uint64Watcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedUint64
 }
 
-// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
-// The received data and the status of the predicate are returned.
-func (u *CollectionUntilUint64) Await(t testing.TB) ([]*QualifiedUint64, bool) {
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Uint64Watcher) Await(t testing.TB) (*QualifiedUint64, bool) {
 	t.Helper()
-	var ret []*QualifiedUint64
-	updates, predTrue := u.c.Await(t)
-	for _, upd := range updates {
-		ret = append(ret, upd.(*QualifiedUint64))
-	}
-	return ret, predTrue
+	return w.LastVal, w.W.Await(t)
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model.
-func (n *ModelPath) GetFull(t testing.TB) *QualifiedModel {
+// Lookup fetches the value at /openconfig-withlist/model with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *ModelPath) Lookup(t testing.TB) *QualifiedModel {
 	t.Helper()
 	goStruct := &Model{}
-	ret := &QualifiedModel{
-		QualifiedType: getFull(t, n, "Model", goStruct, false),
+	md, ok := Lookup(t, n, "Model", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *ModelPath) Get(t testing.TB) *Model {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model.
-func (n *ModelPathAny) GetFull(t testing.TB) []*QualifiedModel {
+// Lookup fetches the values at /openconfig-withlist/model with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *ModelPathAny) Lookup(t testing.TB) []*QualifiedModel {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model.
+// Get fetches the values at /openconfig-withlist/model with a ONCE subscription.
 func (n *ModelPathAny) Get(t testing.TB) []*Model {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -361,53 +496,150 @@ func (n *ModelPathAny) Get(t testing.TB) []*Model {
 	return data
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key.
-func (n *Model_MultiKeyPath) GetFull(t testing.TB) *QualifiedModel_MultiKey {
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *ModelPath) Collect(t testing.TB, duration time.Duration) *CollectionModel {
+	t.Helper()
+	c := &CollectionModel{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&QualifiedModel{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*Model)))
+		return false
+	})
+	return c
+}
+
+func watch_ModelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel) bool) *ModelWatcher {
+	t.Helper()
+	w := &ModelWatcher{}
+	gs := &Model{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model", gs, queryPath, false, false)
+		return (&QualifiedModel{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *ModelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel) bool) *ModelWatcher {
+	t.Helper()
+	return watch_ModelPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *ModelPath) Await(t testing.TB, timeout time.Duration, val *Model) *QualifiedModel {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedModel) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-withlist/model failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-withlist/model to the batch object.
+func (n *ModelPath) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *ModelPathAny) Collect(t testing.TB, duration time.Duration) *CollectionModel {
+	t.Helper()
+	c := &CollectionModel{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *ModelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel) bool) *ModelWatcher {
+	t.Helper()
+	return watch_ModelPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model to the batch object.
+func (n *ModelPathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKeyPath) Lookup(t testing.TB) *QualifiedModel_MultiKey {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedModel_MultiKey{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, false),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel_MultiKey{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key.
-func (n *Model_MultiKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_MultiKey {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKeyPathAny) Lookup(t testing.TB) []*QualifiedModel_MultiKey {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel_MultiKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel_MultiKey{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key with a ONCE subscription.
 func (n *Model_MultiKeyPathAny) Get(t testing.TB) []*Model_MultiKey {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model_MultiKey
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -415,45 +647,146 @@ func (n *Model_MultiKeyPathAny) Get(t testing.TB) []*Model_MultiKey {
 	return data
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/state/key1.
-func (n *Model_MultiKey_Key1Path) GetFull(t testing.TB) *QualifiedUint32 {
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Model_MultiKeyPath) Collect(t testing.TB, duration time.Duration) *CollectionModel_MultiKey {
+	t.Helper()
+	c := &CollectionModel_MultiKey{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel_MultiKey) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&QualifiedModel_MultiKey{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*Model_MultiKey)))
+		return false
+	})
+	return c
+}
+
+func watch_Model_MultiKeyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel_MultiKey) bool) *Model_MultiKeyWatcher {
+	t.Helper()
+	w := &Model_MultiKeyWatcher{}
+	gs := &Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, false, false)
+		return (&QualifiedModel_MultiKey{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel_MultiKey)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKeyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_MultiKey) bool) *Model_MultiKeyWatcher {
+	t.Helper()
+	return watch_Model_MultiKeyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model/b/multi-key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Model_MultiKeyPath) Await(t testing.TB, timeout time.Duration, val *Model_MultiKey) *QualifiedModel_MultiKey {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedModel_MultiKey) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-withlist/model/b/multi-key to the batch object.
+func (n *Model_MultiKeyPath) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Model_MultiKeyPathAny) Collect(t testing.TB, duration time.Duration) *CollectionModel_MultiKey {
+	t.Helper()
+	c := &CollectionModel_MultiKey{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel_MultiKey) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_MultiKey) bool) *Model_MultiKeyWatcher {
+	t.Helper()
+	return watch_Model_MultiKeyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model/b/multi-key to the batch object.
+func (n *Model_MultiKeyPathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key/state/key1 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKey_Key1Path) Lookup(t testing.TB) *QualifiedUint32 {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedUint32{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, true, false)
+	if ok {
+		return convertModel_MultiKey_Key1Path(t, md, goStruct)
 	}
-	return convertModel_MultiKey_Key1Path(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/state/key1, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key/state/key1 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/state/key1.
-func (n *Model_MultiKey_Key1PathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key/state/key1 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKey_Key1PathAny) Lookup(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_MultiKey_Key1Path(t, qt, goStruct)
+		qv := convertModel_MultiKey_Key1Path(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/state/key1.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key/state/key1 with a ONCE subscription.
 func (n *Model_MultiKey_Key1PathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -461,138 +794,152 @@ func (n *Model_MultiKey_Key1PathAny) Get(t testing.TB) []uint32 {
 	return data
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key1.
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_MultiKey_Key1Path) Collect(t testing.TB, duration time.Duration) *CollectionUint32 {
 	t.Helper()
-	return &CollectionUint32{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint32) bool { return false }),
-	}
+	c := &CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key1 and evaluates the predicate on all samples.
-func (n *Model_MultiKey_Key1Path) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
+func watch_Model_MultiKey_Key1Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return &CollectionUntilUint32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_MultiKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_MultiKey_Key1Path(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint32)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Uint32Watcher{}
+	gs := &Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, true, false)
+		return convertModel_MultiKey_Key1Path(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /openconfig-withlist/model/b/multi-key/state/key1 is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *Model_MultiKey_Key1Path) Await(t testing.TB, duration time.Duration, val uint32) []*QualifiedUint32 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKey_Key1Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedUint32) bool {
+	return watch_Model_MultiKey_Key1Path(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Model_MultiKey_Key1Path) Await(t testing.TB, timeout time.Duration, val uint32) *QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedUint32) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key1 failed: no values received")
-		}
-		t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key1 failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key1 failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key1.
+// Batch adds /openconfig-withlist/model/b/multi-key/state/key1 to the batch object.
+func (n *Model_MultiKey_Key1Path) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_MultiKey_Key1PathAny) Collect(t testing.TB, duration time.Duration) *CollectionUint32 {
 	t.Helper()
-	return &CollectionUint32{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint32) bool { return false }),
-	}
+	c := &CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key1 and evaluates the predicate on all samples.
-func (n *Model_MultiKey_Key1PathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKey_Key1PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return &CollectionUntilUint32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_MultiKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_MultiKey_Key1Path(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint32)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_Model_MultiKey_Key1Path(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model/b/multi-key/state/key1 to the batch object.
+func (n *Model_MultiKey_Key1PathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 
 // convertModel_MultiKey_Key1Path extracts the value of the leaf Key1 from its parent Model_MultiKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_MultiKey_Key1Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint32 {
+// and combines the update with an existing Metadata to return a *QualifiedUint32.
+func convertModel_MultiKey_Key1Path(t testing.TB, md *genutil.Metadata, parent *Model_MultiKey) *QualifiedUint32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key1
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/b/multi-key/state/key2.
-func (n *Model_MultiKey_Key2Path) GetFull(t testing.TB) *QualifiedUint64 {
+// Lookup fetches the value at /openconfig-withlist/model/b/multi-key/state/key2 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_MultiKey_Key2Path) Lookup(t testing.TB) *QualifiedUint64 {
 	t.Helper()
 	goStruct := &Model_MultiKey{}
-	ret := &QualifiedUint64{
-		QualifiedType: getFull(t, n, "Model_MultiKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_MultiKey", goStruct, true, false)
+	if ok {
+		return convertModel_MultiKey_Key2Path(t, md, goStruct)
 	}
-	return convertModel_MultiKey_Key2Path(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/b/multi-key/state/key2, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/b/multi-key/state/key2 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/b/multi-key/state/key2.
-func (n *Model_MultiKey_Key2PathAny) GetFull(t testing.TB) []*QualifiedUint64 {
+// Lookup fetches the values at /openconfig-withlist/model/b/multi-key/state/key2 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_MultiKey_Key2PathAny) Lookup(t testing.TB) []*QualifiedUint64 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint64
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_MultiKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_MultiKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_MultiKey_Key2Path(t, qt, goStruct)
+		qv := convertModel_MultiKey_Key2Path(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/b/multi-key/state/key2.
+// Get fetches the values at /openconfig-withlist/model/b/multi-key/state/key2 with a ONCE subscription.
 func (n *Model_MultiKey_Key2PathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -600,146 +947,156 @@ func (n *Model_MultiKey_Key2PathAny) Get(t testing.TB) []uint64 {
 	return data
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key2.
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_MultiKey_Key2Path) Collect(t testing.TB, duration time.Duration) *CollectionUint64 {
 	t.Helper()
-	return &CollectionUint64{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint64) bool { return false }),
-	}
+	c := &CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key2 and evaluates the predicate on all samples.
-func (n *Model_MultiKey_Key2Path) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint64) bool) *CollectionUntilUint64 {
+func watch_Model_MultiKey_Key2Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint64) bool) *Uint64Watcher {
 	t.Helper()
-	return &CollectionUntilUint64{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_MultiKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_MultiKey_Key2Path(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint64)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Uint64Watcher{}
+	gs := &Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, true, false)
+		return convertModel_MultiKey_Key2Path(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /openconfig-withlist/model/b/multi-key/state/key2 is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *Model_MultiKey_Key2Path) Await(t testing.TB, duration time.Duration, val uint64) []*QualifiedUint64 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKey_Key2Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint64) bool) *Uint64Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedUint64) bool {
+	return watch_Model_MultiKey_Key2Path(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Model_MultiKey_Key2Path) Await(t testing.TB, timeout time.Duration, val uint64) *QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key2 failed: no values received")
-		}
-		t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key2 failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /openconfig-withlist/model/b/multi-key/state/key2 failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key2.
+// Batch adds /openconfig-withlist/model/b/multi-key/state/key2 to the batch object.
+func (n *Model_MultiKey_Key2Path) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_MultiKey_Key2PathAny) Collect(t testing.TB, duration time.Duration) *CollectionUint64 {
 	t.Helper()
-	return &CollectionUint64{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint64) bool { return false }),
-	}
+	c := &CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/b/multi-key/state/key2 and evaluates the predicate on all samples.
-func (n *Model_MultiKey_Key2PathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint64) bool) *CollectionUntilUint64 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_MultiKey_Key2PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint64) bool) *Uint64Watcher {
 	t.Helper()
-	return &CollectionUntilUint64{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_MultiKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_MultiKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_MultiKey_Key2Path(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint64)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_Model_MultiKey_Key2Path(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model/b/multi-key/state/key2 to the batch object.
+func (n *Model_MultiKey_Key2PathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 
 // convertModel_MultiKey_Key2Path extracts the value of the leaf Key2 from its parent Model_MultiKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint64.
-func convertModel_MultiKey_Key2Path(t testing.TB, qt *genutil.QualifiedType, parent *Model_MultiKey) *QualifiedUint64 {
+// and combines the update with an existing Metadata to return a *QualifiedUint64.
+func convertModel_MultiKey_Key2Path(t testing.TB, md *genutil.Metadata, parent *Model_MultiKey) *QualifiedUint64 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint64{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key2
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key.
-func (n *Model_SingleKeyPath) GetFull(t testing.TB) *QualifiedModel_SingleKey {
+// Lookup fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_SingleKeyPath) Lookup(t testing.TB) *QualifiedModel_SingleKey {
 	t.Helper()
 	goStruct := &Model_SingleKey{}
-	ret := &QualifiedModel_SingleKey{
-		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, false),
+	md, ok := Lookup(t, n, "Model_SingleKey", goStruct, false, false)
+	if ok {
+		return (&QualifiedModel_SingleKey{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/a/single-key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key.
-func (n *Model_SingleKeyPathAny) GetFull(t testing.TB) []*QualifiedModel_SingleKey {
+// Lookup fetches the values at /openconfig-withlist/model/a/single-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_SingleKeyPathAny) Lookup(t testing.TB) []*QualifiedModel_SingleKey {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedModel_SingleKey
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_SingleKey", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedModel_SingleKey{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key.
+// Get fetches the values at /openconfig-withlist/model/a/single-key with a ONCE subscription.
 func (n *Model_SingleKeyPathAny) Get(t testing.TB) []*Model_SingleKey {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Model_SingleKey
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -747,45 +1104,146 @@ func (n *Model_SingleKeyPathAny) Get(t testing.TB) []*Model_SingleKey {
 	return data
 }
 
-// GetFull retrieves a sample for /openconfig-withlist/model/a/single-key/state/key.
-func (n *Model_SingleKey_KeyPath) GetFull(t testing.TB) *QualifiedUint32 {
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/a/single-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Model_SingleKeyPath) Collect(t testing.TB, duration time.Duration) *CollectionModel_SingleKey {
+	t.Helper()
+	c := &CollectionModel_SingleKey{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel_SingleKey) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&QualifiedModel_SingleKey{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*Model_SingleKey)))
+		return false
+	})
+	return c
+}
+
+func watch_Model_SingleKeyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel_SingleKey) bool) *Model_SingleKeyWatcher {
+	t.Helper()
+	w := &Model_SingleKeyWatcher{}
+	gs := &Model_SingleKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_SingleKey", gs, queryPath, false, false)
+		return (&QualifiedModel_SingleKey{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel_SingleKey)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_SingleKeyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_SingleKey) bool) *Model_SingleKeyWatcher {
+	t.Helper()
+	return watch_Model_SingleKeyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model/a/single-key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Model_SingleKeyPath) Await(t testing.TB, timeout time.Duration, val *Model_SingleKey) *QualifiedModel_SingleKey {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedModel_SingleKey) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-withlist/model/a/single-key failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-withlist/model/a/single-key to the batch object.
+func (n *Model_SingleKeyPath) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/a/single-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Model_SingleKeyPathAny) Collect(t testing.TB, duration time.Duration) *CollectionModel_SingleKey {
+	t.Helper()
+	c := &CollectionModel_SingleKey{}
+	c.W = n.Watch(t, duration, func(v *QualifiedModel_SingleKey) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_SingleKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_SingleKey) bool) *Model_SingleKeyWatcher {
+	t.Helper()
+	return watch_Model_SingleKeyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model/a/single-key to the batch object.
+func (n *Model_SingleKeyPathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-withlist/model/a/single-key/state/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Model_SingleKey_KeyPath) Lookup(t testing.TB) *QualifiedUint32 {
 	t.Helper()
 	goStruct := &Model_SingleKey{}
-	ret := &QualifiedUint32{
-		QualifiedType: getFull(t, n, "Model_SingleKey", goStruct, true),
+	md, ok := Lookup(t, n, "Model_SingleKey", goStruct, true, false)
+	if ok {
+		return convertModel_SingleKey_KeyPath(t, md, goStruct)
 	}
-	return convertModel_SingleKey_KeyPath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-withlist/model/a/single-key/state/key, erroring out if it is not present.
+// Get fetches the value at /openconfig-withlist/model/a/single-key/state/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-withlist/model/a/single-key/state/key.
-func (n *Model_SingleKey_KeyPathAny) GetFull(t testing.TB) []*QualifiedUint32 {
+// Lookup fetches the values at /openconfig-withlist/model/a/single-key/state/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Model_SingleKey_KeyPathAny) Lookup(t testing.TB) []*QualifiedUint32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Model_SingleKey{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Model_SingleKey", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertModel_SingleKey_KeyPath(t, qt, goStruct)
+		qv := convertModel_SingleKey_KeyPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-withlist/model/a/single-key/state/key.
+// Get fetches the values at /openconfig-withlist/model/a/single-key/state/key with a ONCE subscription.
 func (n *Model_SingleKey_KeyPathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -793,114 +1251,194 @@ func (n *Model_SingleKey_KeyPathAny) Get(t testing.TB) []uint32 {
 	return data
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/a/single-key/state/key.
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_SingleKey_KeyPath) Collect(t testing.TB, duration time.Duration) *CollectionUint32 {
 	t.Helper()
-	return &CollectionUint32{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint32) bool { return false }),
-	}
+	c := &CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/a/single-key/state/key and evaluates the predicate on all samples.
-func (n *Model_SingleKey_KeyPath) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
+func watch_Model_SingleKey_KeyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return &CollectionUntilUint32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_SingleKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_SingleKey_KeyPath(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint32)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Uint32Watcher{}
+	gs := &Model_SingleKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_SingleKey", gs, queryPath, true, false)
+		return convertModel_SingleKey_KeyPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /openconfig-withlist/model/a/single-key/state/key is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *Model_SingleKey_KeyPath) Await(t testing.TB, duration time.Duration, val uint32) []*QualifiedUint32 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_SingleKey_KeyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedUint32) bool {
+	return watch_Model_SingleKey_KeyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Model_SingleKey_KeyPath) Await(t testing.TB, timeout time.Duration, val uint32) *QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedUint32) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /openconfig-withlist/model/a/single-key/state/key failed: no values received")
-		}
-		t.Fatalf("Await() at /openconfig-withlist/model/a/single-key/state/key failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /openconfig-withlist/model/a/single-key/state/key failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /openconfig-withlist/model/a/single-key/state/key.
+// Batch adds /openconfig-withlist/model/a/single-key/state/key to the batch object.
+func (n *Model_SingleKey_KeyPath) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Model_SingleKey_KeyPathAny) Collect(t testing.TB, duration time.Duration) *CollectionUint32 {
 	t.Helper()
-	return &CollectionUint32{
-		c: n.CollectUntil(t, duration, func(*QualifiedUint32) bool { return false }),
-	}
+	c := &CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /openconfig-withlist/model/a/single-key/state/key and evaluates the predicate on all samples.
-func (n *Model_SingleKey_KeyPathAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedUint32) bool) *CollectionUntilUint32 {
+// Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Model_SingleKey_KeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return &CollectionUntilUint32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Model_SingleKey{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Model_SingleKey", parentPtr, nil, true, false)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertModel_SingleKey_KeyPath(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedUint32)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_Model_SingleKey_KeyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-withlist/model/a/single-key/state/key to the batch object.
+func (n *Model_SingleKey_KeyPathAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 
 // convertModel_SingleKey_KeyPath extracts the value of the leaf Key from its parent Model_SingleKey
-// and combines the update with an existing QualifiedType to return a *QualifiedUint32.
-func convertModel_SingleKey_KeyPath(t testing.TB, qt *genutil.QualifiedType, parent *Model_SingleKey) *QualifiedUint32 {
+// and combines the update with an existing Metadata to return a *QualifiedUint32.
+func convertModel_SingleKey_KeyPath(t testing.TB, md *genutil.Metadata, parent *Model_SingleKey) *QualifiedUint32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedUint32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /.
-func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+// Lookup fetches the value at / with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 	t.Helper()
 	goStruct := &Root{}
-	ret := &QualifiedRoot{
-		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	md, ok := Lookup(t, n, "Root", goStruct, false, false)
+	if ok {
+		return (&QualifiedRoot{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /, erroring out if it is not present.
+// Get fetches the value at / with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
+}
+
+// Collect starts an asynchronous collection of the values at / with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *RootPath) Collect(t testing.TB, duration time.Duration) *CollectionRoot {
+	t.Helper()
+	c := &CollectionRoot{}
+	c.W = n.Watch(t, duration, func(v *QualifiedRoot) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&QualifiedRoot{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*Root)))
+		return false
+	})
+	return c
+}
+
+func watch_RootPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedRoot) bool) *RootWatcher {
+	t.Helper()
+	w := &RootWatcher{}
+	gs := &Root{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Root", gs, queryPath, false, false)
+		return (&QualifiedRoot{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedRoot)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at / with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *RootPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedRoot) bool) *RootWatcher {
+	t.Helper()
+	return watch_RootPath(t, n, timeout, predicate)
+}
+
+// Await observes values at / with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *RootPath) Await(t testing.TB, timeout time.Duration, val *Root) *QualifiedRoot {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedRoot) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at / failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds / to the batch object.
+func (n *RootPath) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }

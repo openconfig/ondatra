@@ -167,15 +167,6 @@ func validateDevice(dev *opb.Device, rd reservation.Device) error {
 	if dims.Name == "" {
 		return errors.Errorf("no name for reserved device: %v", rd)
 	}
-	if dims.Vendor == opb.Device_UNKNOWN {
-		return errors.Errorf("no vendor for reserved device: %v", rd)
-	}
-	if dims.HardwareModel == "" {
-		return errors.Errorf("no hardware model for reserved device: %v", rd)
-	}
-	if dims.SoftwareVersion == "" {
-		return errors.Errorf("no software version for reserved device: %v", rd)
-	}
 	for _, p := range dev.GetPorts() {
 		rp, err := dims.Port(p.GetId())
 		if err != nil {

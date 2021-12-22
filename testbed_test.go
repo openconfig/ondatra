@@ -30,7 +30,7 @@ import (
 func TestReserveErrors(t *testing.T) {
 	initFakeBinding(t)
 
-	for _, tt := range []struct {
+	tests := []struct {
 		name, tbProto string
 		res           *reservation.Reservation
 		wantErr       string
@@ -103,38 +103,18 @@ func TestReserveErrors(t *testing.T) {
 			&reservation.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
 		}}},
 		wantErr: "no name",
-	}, {
-		name:    "No device vendor",
-		tbProto: `duts{id:"dut"}`,
-		res: &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{
-			Name: "d1", HardwareModel: "m", SoftwareVersion: "v"},
-		}}},
-		wantErr: "no vendor",
-	}, {
-		name:    "No hardware model",
-		tbProto: `duts{id:"dut"}`,
-		res: &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{
-			Name: "d1", Vendor: opb.Device_ARISTA, SoftwareVersion: "v"},
-		}}},
-		wantErr: "no hardware model",
-	}, {
-		name:    "No software version",
-		tbProto: `duts{id:"dut"}`,
-		res: &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{
-			Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m"},
-		}}},
-		wantErr: "no software version",
-	}} {
-		t.Run(tt.name, func(t *testing.T) {
-			fakeBind.Reservation = tt.res
-			err := reserve(writeTemp(t, tt.tbProto), time.Hour, 0)
+	}}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			fakeBind.Reservation = test.res
+			err := reserve(writeTemp(t, test.tbProto), time.Hour, 0)
 			if err == nil {
 				release()
 				t.Fatalf("Reserve unexpectedly succeeded, must fail")
 			}
 			t.Logf("Testbed reservation error: %v", err)
-			if !strings.Contains(err.Error(), tt.wantErr) {
-				t.Errorf("Reserve error message was '%s', must contain '%s'", err.Error(), tt.wantErr)
+			if !strings.Contains(err.Error(), test.wantErr) {
+				t.Errorf("Reserve error message was '%s', must contain '%s'", err.Error(), test.wantErr)
 			}
 		})
 	}
@@ -243,10 +223,9 @@ func TestReserve(t *testing.T) {
 		if got, want := p.Device().ID(), did; got != want {
 			t.Errorf("port device id = %q, want %q", got, want)
 		}
-		// TODO: Restore when speed is consistently propagated back.
-		// if got, want := p.Speed(), Speed10Gb; got != want {
-		//	t.Errorf("port speed = %d, want %d", got, want)
-		// }
+		if got, want := p.Speed(), Speed10Gb; got != want {
+			t.Errorf("port speed = %d, want %d", got, want)
+		}
 	})
 
 	t.Run("Get Port failure", func(t *testing.T) {

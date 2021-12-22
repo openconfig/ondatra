@@ -36,6 +36,7 @@ message Device {
     IXIA = 3;
     JUNIPER = 4;
     CIENA = 5;
+    PALOALTO = 6;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.
@@ -52,10 +53,13 @@ message Device {
   string software_version = 5;
   repeated Port ports = 3;
 
-  // Map of additional device filters. Optional.
-  //
+  //  // A key-value map of additional device dimensions. Optional.
+
   // In addition to the above fields, the extra dimensions field can be used to
-  // further restrict matching devices, e.g. {"label": "foo"}.
+  // further restrict matching devices. The set of dimension keys that are
+  // supported is specific to the binding implementation. For example, if the
+  // binding supports filtering devices by a dimension named "label," the
+  // testbed could specify an extra dimensions map of {"label": "foo"}.
   map<string, string> extra_dimensions = 6;
 }
 

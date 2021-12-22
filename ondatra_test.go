@@ -16,7 +16,6 @@ package ondatra
 
 import (
 	"os"
-	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -35,68 +34,57 @@ func TestReserveOnRun(t *testing.T) {
 		desc                  string
 		sig                   os.Signal
 		reservErr, releaseErr error
-		wantReleased          bool
 		wantErr               string
 	}{{
 		desc:      "error on reserve",
 		reservErr: errors.New("error reserving testbed"),
 		wantErr:   "error reserving testbed",
 	}, {
-		desc:         "error on release",
-		releaseErr:   errors.New("error releasing testbed"),
-		wantReleased: true,
-		wantErr:      "error releasing testbed",
+		desc:       "error on release",
+		releaseErr: errors.New("error releasing testbed"),
+		wantErr:    "error releasing testbed",
 	}, {
-		desc:         "release on signal",
-		sig:          os.Interrupt,
-		wantReleased: true,
+		desc: "release on signal",
+		sig:  os.Interrupt,
 	}, {
-		desc:         "release on test completion",
-		wantReleased: true,
+		desc: "release on test completion",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			reserveFn = func(_ string, _, _ time.Duration) error {
 				return test.reservErr
 			}
-			tbReleased := false
-			releaseCh := make(chan bool, 1)
-			releaseMtx := &sync.Mutex{}
+			var releaseMu sync.Mutex
+			var released bool
+			releaseCh := make(chan struct{}, 1)
+			releaseErr := test.releaseErr
 			defer close(releaseCh)
 			releaseFn = func() error {
-				releaseMtx.Lock()
-				defer releaseMtx.Unlock()
-				if !tbReleased {
-					tbReleased = true
-					releaseCh <- true
+				releaseMu.Lock()
+				defer releaseMu.Unlock()
+				if !released {
+					released = true
+					releaseCh <- struct{}{}
 				}
-				return test.releaseErr
+				return releaseErr
 			}
-
-			runTestsFn = func(*fixture, *testing.M, time.Duration) int { return 0 }
-			if test.sig != nil {
-				// Run indefinitely if we should close on a signal.
-				runTestsFn = func(*fixture, *testing.M, time.Duration) int {
-					<-releaseCh
-					return 0
+			runTestsFn = func(*fixture, *testing.M, time.Duration) {
+				if test.sig != nil {
+					sigc <- test.sig
 				}
 			}
 
-			if test.sig != nil {
-				sigc <- os.Interrupt
-			}
-			_, gotErr := doRun(nil)
-			if (gotErr != nil) != (test.wantErr != "") {
+			if gotErr := doRun(nil); (gotErr != nil) != (test.wantErr != "") {
 				t.Fatalf("doRun: got err %v, wanted err? %t", gotErr, test.wantErr != "")
 			}
-			if test.wantErr != "" && !strings.Contains(gotErr.Error(), test.wantErr) {
-				t.Errorf("doRun: unexpected error: got %v, wanted error with substring %q", gotErr, test.wantErr)
+			wantReleased := test.reservErr == nil
+			if wantReleased {
+				<-releaseCh
 			}
-
-			releaseMtx.Lock()
-			defer releaseMtx.Unlock()
-			if tbReleased != test.wantReleased {
-				t.Errorf("doRun: testbed released? %t, wanted testbed released? %t", tbReleased, test.wantReleased)
+			releaseMu.Lock()
+			defer releaseMu.Unlock()
+			if released != wantReleased {
+				t.Errorf("doRun: testbed released? %t, wanted testbed released? %t", released, wantReleased)
 			}
 		})
 	}

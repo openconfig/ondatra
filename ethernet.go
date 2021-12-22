@@ -233,3 +233,19 @@ func (c *ConnectivityAssociation) WithCAK(key string) *ConnectivityAssociation {
 	c.pb.Cak = key
 	return c
 }
+
+// FEC creates a an FEC config or returns the existing config.
+func (e *Ethernet) FEC() *FEC {
+	return &FEC{pb: e.pb.Fec}
+}
+
+// FEC is a representation of forward error correction settings on an ATE.
+type FEC struct {
+	pb *opb.Fec
+}
+
+// WithEnabled sets whether FEC is enabled.
+func (f *FEC) WithEnabled(enabled bool) *FEC {
+	f.pb.Enabled = enabled
+	return f
+}

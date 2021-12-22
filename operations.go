@@ -25,6 +25,8 @@ import (
 	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/openconfig/ondatra/internal/operations"
 	"github.com/openconfig/ondatra/internal/reservation"
+
+	spb "github.com/openconfig/gnoi/system"
 )
 
 // Operations is the device operations API.
@@ -212,25 +214,66 @@ func (r *RebootOp) Operate(t testing.TB) {
 	}
 }
 
-// NewRestartRouting creates a new restart routing operation.
-func (o *Operations) NewRestartRouting() *RestartRoutingOp {
-	return &RestartRoutingOp{o.dev}
+// NewKillProcess creates a new kill process operation.
+// By default the process is killed with a SIGTERM signal.
+func (o *Operations) NewKillProcess() *KillProcessOp {
+	return &KillProcessOp{
+		dev: o.dev,
+		req: &spb.KillProcessRequest{Signal: spb.KillProcessRequest_SIGNAL_TERM},
+	}
 }
 
-// RestartRoutingOp is an operation that restarts the routing process on a device
-type RestartRoutingOp struct {
+// KillProcessOp is an operation that kills a process on a device.
+type KillProcessOp struct {
 	dev reservation.Device
+	req *spb.KillProcessRequest
 }
 
-func (r *RestartRoutingOp) String() string {
-	return fmt.Sprintf("RestartRoutingOp%+v", *r)
+// WithPID sets the PID to be killed.
+func (r *KillProcessOp) WithPID(pid uint32) *KillProcessOp {
+	r.req.Pid = pid
+	return r
 }
 
-// Operate performs the RestartRouting operation.
-func (r *RestartRoutingOp) Operate(t testing.TB) {
+// WithName sets the name of the process to be killed.
+func (r *KillProcessOp) WithName(name string) *KillProcessOp {
+	r.req.Name = name
+	return r
+}
+
+// WithSIGTERM sets the kill signal to SIGTERM.
+func (r *KillProcessOp) WithSIGTERM() *KillProcessOp {
+	r.req.Signal = spb.KillProcessRequest_SIGNAL_TERM
+	return r
+}
+
+// WithSIGKILL sets the kill signal to SIGKILL.
+func (r *KillProcessOp) WithSIGKILL() *KillProcessOp {
+	r.req.Signal = spb.KillProcessRequest_SIGNAL_KILL
+	return r
+}
+
+// WithSIGHUP sets the kill signal to SIGHUP.
+func (r *KillProcessOp) WithSIGHUP() *KillProcessOp {
+	r.req.Signal = spb.KillProcessRequest_SIGNAL_HUP
+	return r
+}
+
+// WithRestart sets whether the process should restart after being killed.
+func (r *KillProcessOp) WithRestart(restart bool) *KillProcessOp {
+	r.req.Restart = true
+	return r
+}
+
+func (r *KillProcessOp) String() string {
+	return fmt.Sprintf("KillProcessOp%+v", *r)
+}
+
+// Operate performs the kill process operation.
+func (r *KillProcessOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Restarting routing on %s", r.dev)
-	if err := operations.RestartRouting(context.Background(), r.dev); err != nil {
+	logAction(t, "Killing process on %s", r.dev)
+	if err := operations.KillProcess(context.Background(), r.dev, r.req); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
 }

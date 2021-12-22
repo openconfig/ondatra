@@ -214,8 +214,8 @@ func TestGNMI(t *testing.T) {
 	fakeBind.GNMIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return want, nil
 	}
-	if got := DUT(t, "dut").RawAPIs().GNMI(t); got != want {
-		t.Errorf("GNMI(t) got %v, want %v", got, want)
+	if got := DUT(t, "dut").RawAPIs().GNMI().New(t); got != want {
+		t.Errorf("GNMI().New(t) got %v, want %v", got, want)
 	}
 }
 
@@ -227,10 +227,10 @@ func TestGNMIError(t *testing.T) {
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
 	gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
-		raw.GNMI(t)
+		raw.GNMI().New(t)
 	})
 	if !strings.Contains(gotErr, wantErr) {
-		t.Errorf("GNMI(t) got err %v, want %v", gotErr, wantErr)
+		t.Errorf("GNMI().New(t) got err %v, want %v", gotErr, wantErr)
 	}
 }
 
@@ -327,7 +327,7 @@ func TestGNOI(t *testing.T) {
 	fakeBind.GNOIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return bgnoi, nil
 	}
-	gnoi := DUT(t, "dut").RawAPIs().GNOI(t)
+	gnoi := DUT(t, "dut").RawAPIs().GNOI().New(t)
 	if got, want := gnoi.BGP(), bgnoi.BGP(); got != want {
 		t.Errorf("GNOI(t) got BGP client %v, want %v", got, want)
 	}
@@ -380,7 +380,7 @@ func TestGNOIError(t *testing.T) {
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
 	gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
-		raw.GNOI(t)
+		raw.GNOI().New(t)
 	})
 	if !strings.Contains(gotErr, wantErr) {
 		t.Errorf("GNOI(t) got err %v, want %v", gotErr, wantErr)

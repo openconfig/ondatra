@@ -1,0 +1,430 @@
+{
+  "topology": [
+    {
+      "deviceGroup": [
+        {
+          "enabled": {
+            "singleValue": {
+              "value": "true"
+            }
+          },
+          "ethernet": [
+            {
+              "enableVlans": {
+                "singleValue": {
+                  "value": "false"
+                }
+              },
+              "ipv4": [
+                {
+                  "address": {
+                    "singleValue": {
+                      "value": "192.168.31.2"
+                    }
+                  },
+                  "gatewayIp": {
+                    "singleValue": {
+                      "value": "192.168.31.1"
+                    }
+                  },
+                  "name": "IPv4 on intf",
+                  "prefix": {
+                    "singleValue": {
+                      "value": "30"
+                    }
+                  },
+                  "resolveGateway": {
+                    "singleValue": {
+                      "value": "true"
+                    }
+                  },
+		  "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1]"
+                }
+              ],
+              "isisL3": [
+                {
+                  "authType": {
+                    "singleValue": {
+                      "value": "md5"
+                    }
+                  },
+                  "circuitTranmitPasswordOrMD5Key": {
+                    "singleValue": {
+                      "value": "md5password"
+                    }
+                  },
+                  "enable3WayHandshake": {
+                    "singleValue": {
+                      "value": "true"
+                    }
+                  },
+                  "enableAdjSID": {
+                    "singleValue": {
+                      "value": "false"
+                    }
+                  },
+                  "interfaceMetric": {
+                    "singleValue": {
+                      "value": "10"
+                    }
+                  },
+                  "level2DeadInterval": {
+                    "singleValue": {
+                      "value": "30"
+                    }
+                  },
+                  "level2HelloInterval": {
+                    "singleValue": {
+                      "value": "10"
+                    }
+                  },
+                  "level2Priority": {
+                    "singleValue": {
+                      "value": "0"
+                    }
+                  },
+                  "levelType": {
+                    "singleValue": {
+                      "value": "level2"
+                    }
+                  },
+                  "name": "IS-IS on intf",
+                  "networkType": {
+                    "singleValue": {
+                      "value": "pointpoint"
+                    }
+                  }
+                }
+              ],
+	      "mac": {
+		      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mac']"
+	      },
+              "mtu": {
+                "singleValue": {
+                  "value": "9000"
+                }
+              },
+              "name": "Ethernet on 12/1",
+	      "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]"
+            }
+          ],
+          "isisL3Router": [
+            {
+              "areaAddresses": {
+                "singleValue": {
+                  "value": "490001"
+                }
+              },
+              "discardLSPs": {
+                "singleValue": {
+                  "value": "false"
+                }
+              },
+              "enableHelloPadding": {
+                "singleValue": {
+                  "value": "true"
+                }
+              },
+	      "enableSR": false,
+              "enableTE": {
+                "singleValue": {
+                  "value": "false"
+                }
+              },
+              "enableWideMetric": {
+                "singleValue": {
+                  "value": "true"
+                }
+              },
+              "name": "IS-IS Router on intf",
+              "tERouterId": {
+                "singleValue": {
+                  "value": "0.0.0.0"
+                }
+              }
+            }
+          ],
+          "multiplier": 1,
+          "name": "Device Group on intf",
+          "networkGroup": [
+            {
+              "ipv4PrefixPools": [
+                {
+                  "isisL3RouteProperty": [
+                    {
+                      "algorithm": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "configureSIDIndexLabel": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "eFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "lFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "metric": {
+                        "singleValue": {
+                          "value": "10"
+                        }
+                      },
+                      "nFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "pFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "rFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "routeOrigin": {
+                        "singleValue": {
+                          "value": "internal"
+                        }
+                      },
+                      "sIDIndexLabel": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "vFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      }
+                    }
+                  ],
+                  "networkAddress": {
+                    "singleValue": {
+                      "value": "30.0.0.0"
+                    }
+                  },
+                  "numberOfAddressesAsy": {
+                    "singleValue": {
+                      "value": "15000"
+                    }
+                  },
+                  "prefixLength": {
+                    "singleValue": {
+                      "value": "30"
+                    }
+                  }
+                }
+              ],
+              "name": "net1",
+	      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[1]"
+            },
+            {
+              "ipv4PrefixPools": [
+                {
+                  "isisL3RouteProperty": [
+                    {
+                      "algorithm": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "configureSIDIndexLabel": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "eFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "lFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "metric": {
+                        "singleValue": {
+                          "value": "10"
+                        }
+                      },
+                      "nFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "pFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "rFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "routeOrigin": {
+                        "singleValue": {
+                          "value": "internal"
+                        }
+                      },
+                      "sIDIndexLabel": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "vFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      }
+                    }
+                  ],
+                  "networkAddress": {
+                    "singleValue": {
+                      "value": "40.0.0.0"
+                    }
+                  },
+                  "numberOfAddressesAsy": {
+                    "singleValue": {
+                      "value": "35000"
+                    }
+                  },
+                  "prefixLength": {
+                    "singleValue": {
+                      "value": "30"
+                    }
+                  }
+                }
+              ],
+              "name": "net2",
+	      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[2]"
+            },
+            {
+              "ipv6PrefixPools": [
+                {
+                  "isisL3RouteProperty": [
+                    {
+                      "algorithm": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "configureSIDIndexLabel": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "eFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "lFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "metric": {
+                        "singleValue": {
+                          "value": "10"
+                        }
+                      },
+                      "nFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "pFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "rFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      },
+                      "routeOrigin": {
+                        "singleValue": {
+                          "value": "internal"
+                        }
+                      },
+                      "sIDIndexLabel": {
+                        "singleValue": {
+                          "value": "0"
+                        }
+                      },
+                      "vFlag": {
+                        "singleValue": {
+                          "value": "false"
+                        }
+                      }
+                    }
+                  ],
+                  "networkAddress": {
+                    "singleValue": {
+                      "value": "2001:4860:0:1::444:1"
+                    }
+                  },
+                  "numberOfAddressesAsy": {
+                    "singleValue": {
+                      "value": "15000"
+                    }
+                  },
+                  "prefixLength": {
+                    "singleValue": {
+                      "value": "126"
+                    }
+                  }
+                }
+              ],
+              "name": "net3",
+	      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[3]"
+            }
+          ],
+	  "xpath": "/topology[1]/deviceGroup[1]"
+        }
+      ],
+      "name": "Topology on 12/1",
+      "vports": [
+        "/vport[1]"
+      ]
+    }
+  ],
+  "vport": [
+    {
+      "l1config": {
+        "aresOneFourHundredGigLan": {
+          "autoInstrumentation": "floating"
+        },
+        "novusHundredGigLan": {
+          "autoInstrumentation": "floating"
+        },
+        "novusTenGigLan": {
+          "autoInstrumentation": "floating"
+        }
+      },
+      "location": "192.168.1.1;12;1",
+      "name": "ixia1/12/1",
+      "protocolStack": {
+        "options": {
+          "mcast_solicit": 8,
+          "retransTime": 7000
+        }
+      },
+      "xpath": "/vport[1]"
+    }
+  ]
+}

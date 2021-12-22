@@ -18,33 +18,39 @@ package ate
 import (
 	"golang.org/x/net/context"
 	"net"
+	"sync"
 
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/usererr"
 
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// StartTraffic starts traffic flows on an ATE.
-func StartTraffic(ctx context.Context, ate *reservation.ATE, flows []*opb.Flow) error {
-	if err := validateFlows(ate, flows); err != nil {
-		return err
-	}
-	return binding.Get().StartTraffic(ate, flows)
-}
+var (
+	mu    sync.Mutex
+	ixias = make(map[*reservation.ATE]*IxiaCfgClient)
+)
 
-// UpdateTraffic updates traffic flows an an ATE.
-func UpdateTraffic(ctx context.Context, ate *reservation.ATE, flows []*opb.Flow) error {
-	if err := validateFlows(ate, flows); err != nil {
-		return err
+func ixiaForATE(ctx context.Context, ate *reservation.ATE) (*IxiaCfgClient, error) {
+	mu.Lock()
+	defer mu.Unlock()
+	ix, ok := ixias[ate]
+	if !ok {
+		ixnet, err := binding.Get().DialIxNetwork(ctx, ate)
+		if err != nil {
+			return nil, err
+		}
+		ix, err = New(ctx, ate.Name, ixnet)
+		if err != nil {
+			return nil, err
+		}
+		ixias[ate] = ix
 	}
-	return binding.Get().UpdateTraffic(ate, flows)
-}
-
-// StopTraffic stops traffic flows on an ATE>
-func StopTraffic(ctx context.Context, ate *reservation.ATE) error {
-	return binding.Get().StopTraffic(ate)
+	return ix, nil
 }
 
 // PushTopology pushes a topology to an ATE.
@@ -52,7 +58,15 @@ func PushTopology(ctx context.Context, ate *reservation.ATE, top *opb.Topology) 
 	if err := validateInterfaces(ate, top.GetInterfaces()); err != nil {
 		return err
 	}
-	return binding.Get().PushTopology(ate, top)
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.PushTopology(ctx, top); err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
 }
 
 // UpdateTopology updates a topology on an ATE.
@@ -60,21 +74,110 @@ func UpdateTopology(ctx context.Context, ate *reservation.ATE, top *opb.Topology
 	if err := validateInterfaces(ate, top.GetInterfaces()); err != nil {
 		return err
 	}
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
 	// TODO: Remove this branching once new Ixia config binding is used.
 	if bgpPeerStateOnly {
-		return binding.Get().UpdateBGPPeerStates(ate, top.GetInterfaces())
+		err = ix.UpdateBGPPeerStates(ctx, top.GetInterfaces())
+	} else {
+		err = ix.UpdateTopology(ctx, top)
 	}
-	return binding.Get().UpdateTopology(ate, top)
+	if err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
 }
 
 // StartProtocols starts control plane protocols on an ATE.
 func StartProtocols(ctx context.Context, ate *reservation.ATE) error {
-	return binding.Get().StartProtocols(ate)
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.StartProtocols(ctx); err != nil {
+		return errors.Wrap(err, "failed to start protocols")
+	}
+	ix.FlushStats()
+	return nil
 }
 
 // StopProtocols stops control protocols on an ATE.
 func StopProtocols(ctx context.Context, ate *reservation.ATE) error {
-	return binding.Get().StopProtocols(ate)
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.StopProtocols(ctx); err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
+}
+
+// StartTraffic starts traffic flows on an ATE.
+func StartTraffic(ctx context.Context, ate *reservation.ATE, flows []*opb.Flow) error {
+	if err := validateFlows(ate, flows); err != nil {
+		return err
+	}
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.StartTraffic(ctx, flows); err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
+}
+
+// UpdateTraffic updates traffic flows an an ATE.
+func UpdateTraffic(ctx context.Context, ate *reservation.ATE, flows []*opb.Flow) error {
+	if err := validateFlows(ate, flows); err != nil {
+		return err
+	}
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.UpdateTraffic(ctx, flows); err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
+}
+
+// StopTraffic stops traffic flows on an ATE.
+func StopTraffic(ctx context.Context, ate *reservation.ATE) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.StopAllTraffic(ctx); err != nil {
+		return err
+	}
+	ix.FlushStats()
+	return nil
+}
+
+// SetInterfaceState sets the state of a specified interface on the ATE.
+func SetInterfaceState(ctx context.Context, ate *reservation.ATE, intf string, enabled bool) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	return ix.SetPortState(ctx, intf, enabled)
+}
+
+// DialGNMI constructs and returns a GNMI client for the Ixia.
+func DialGNMI(ctx context.Context, ate *reservation.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	return ix.DialGNMI(ctx, opts...)
 }
 
 func validateFlows(ate *reservation.ATE, fs []*opb.Flow) error {

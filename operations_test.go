@@ -60,6 +60,7 @@ type fakeGNOIClient struct {
 	Pinger         func(context.Context, *spb.PingRequest, ...grpc.CallOption) (spb.System_PingClient, error)
 	Rebooter       func(context.Context, *spb.RebootRequest, ...grpc.CallOption) (*spb.RebootResponse, error)
 	RebootStatuser func(context.Context, *spb.RebootStatusRequest, ...grpc.CallOption) (*spb.RebootStatusResponse, error)
+	KillProcessor  func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error)
 	Installer      func(context.Context, ...grpc.CallOption) (ospb.OS_InstallClient, error)
 }
 
@@ -81,6 +82,10 @@ func (fg *fakeGNOIClient) Reboot(ctx context.Context, req *spb.RebootRequest, op
 
 func (fg *fakeGNOIClient) RebootStatus(ctx context.Context, req *spb.RebootStatusRequest, opts ...grpc.CallOption) (*spb.RebootStatusResponse, error) {
 	return fg.RebootStatuser(ctx, req, opts...)
+}
+
+func (fg *fakeGNOIClient) KillProcess(ctx context.Context, req *spb.KillProcessRequest, opts ...grpc.CallOption) (*spb.KillProcessResponse, error) {
+	return fg.KillProcessor(ctx, req, opts...)
 }
 
 func (fg *fakeGNOIClient) Install(ctx context.Context, opts ...grpc.CallOption) (ospb.OS_InstallClient, error) {
@@ -520,26 +525,26 @@ func TestRebootErrors(t *testing.T) {
 	}
 }
 
-func TestRestartRouting(t *testing.T) {
+func TestKillProcess(t *testing.T) {
 	initOperationFakes(t)
-	var restarted bool
-	fakeBind.RoutingRestarter = func(*reservation.DUT) error {
-		restarted = true
-		return nil
+	var killed bool
+	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
+		killed = true
+		return &spb.KillProcessResponse{}, nil
 	}
 
 	dut := DUT(t, "dut_juniper")
-	op := dut.Operations().NewRestartRouting()
+	op := dut.Operations().NewKillProcess().WithPID(123)
 	op.Operate(t)
-	if !restarted {
+	if !killed {
 		t.Fatalf("Operate() on op %v failed, want success", op)
 	}
 }
 
-func TestRestartRoutingErrors(t *testing.T) {
+func TestKillProcessErrors(t *testing.T) {
 	initOperationFakes(t)
-	fakeBind.RoutingRestarter = func(*reservation.DUT) error {
-		return errors.New("bad bad bad :(")
+	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
+		return nil, errors.New("bad bad bad :(")
 	}
 
 	tests := []struct {
@@ -553,14 +558,14 @@ func TestRestartRoutingErrors(t *testing.T) {
 			res: &reservation.DUT{&reservation.Dims{Vendor: opb.Device_JUNIPER}},
 		}},
 	}, {
-		desc: "restart fails on good dut",
+		desc: "kill fails on good dut",
 		dut:  DUT(t, "dut_juniper"),
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			var op *RestartRoutingOp
+			var op *KillProcessOp
 			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
-				op = tt.dut.Operations().NewRestartRouting()
+				op = tt.dut.Operations().NewKillProcess()
 				op.Operate(t)
 			})
 			if gotErr == "" {

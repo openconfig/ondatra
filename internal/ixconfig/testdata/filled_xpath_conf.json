@@ -1,0 +1,12 @@
+{
+  "xpath": "/",
+  "topology": [
+    {
+      "xpath": "/topology[1]",
+      "name": "Topology 0",
+      "deviceGroup": [{
+        "xpath": "/topology[1]/deviceGroup[1]"
+      }]
+    }
+  ]
+}

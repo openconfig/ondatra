@@ -1,0 +1,32 @@
+# proto-file: third_party/openconfig/ondatra/proto/ate.proto
+# proto-message: Traffic
+flows: {
+  name: "ipv4Traffic"
+  src_endpoints: {
+    interface_name: "intf1"
+  }
+  dst_endpoints: {
+    interface_name: "intf2"
+  }
+  headers: {
+    eth: {}
+  }
+  headers: {
+    ipv4: {
+      ttl: 32
+    }
+  }
+  headers: {
+    tcp: {
+      dst_port: {
+        min: 443
+        max: 443
+        count: 1
+      }
+    }
+  }
+  egress_tracking: {
+    custom_offset: 128
+    custom_width: 4
+  }
+}

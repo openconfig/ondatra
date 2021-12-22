@@ -1,0 +1,12 @@
+# proto-file: third_party/openconfig/ondatra/proto/ate.proto
+# proto-message: Topology
+interfaces: {
+  name: "intf"
+  port: "12/1"
+  ethernet: {
+    mtu: 1500
+    fec: {
+      enabled: false
+    }
+  }
+}

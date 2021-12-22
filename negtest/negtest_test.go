@@ -56,6 +56,53 @@ func TestFatalMsg(t *testing.T) {
 	}
 }
 
+func TestCaptureFatal(t *testing.T) {
+	msgEmpty := ""
+	msgFatalErr := "fatal error\n"
+	msgFatalfErr := "fatalf error"
+
+	tests := []struct {
+		desc    string
+		fn      func(t testing.TB)
+		wantMsg *string
+	}{{
+		desc: "NoError",
+		fn: func(t testing.TB) {},
+		wantMsg: nil,
+	}, {
+		desc: "FailNow",
+		fn: func(t testing.TB) {
+			t.FailNow()
+		},
+		wantMsg: &msgEmpty,
+	}, {
+		desc: "Fatal",
+		fn: func(t testing.TB) {
+			t.Fatal("fatal error")
+		},
+		wantMsg: &msgFatalErr,
+	}, {
+		desc: "Fatalf",
+		fn: func(t testing.TB) {
+			t.Fatalf("fatalf error")
+		},
+		wantMsg: &msgFatalfErr,
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			got := CaptureFatal(t, tt.fn)
+			didGet, didWant := got != nil, tt.wantMsg != nil;
+			if didGet != didWant {
+				t.Errorf("CaptureFatal got? %v, want? %v", didGet, didWant)
+			}
+			if didGet && didWant && *got != *tt.wantMsg {
+				t.Errorf("CaptureFatal got msg = %v, want %v", *got, *tt.wantMsg)
+		 }
+		})
+	}
+}
+
 func TestErrorMsg(t *testing.T) {
 	tests := []struct {
 		desc               string

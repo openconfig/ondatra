@@ -18,11 +18,9 @@ package genutil
 import (
 	"golang.org/x/net/context"
 	"fmt"
-	"math"
 	"reflect"
 	"sort"
 	"strings"
-	"sync"
 	"testing"
 	"time"
 
@@ -31,7 +29,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/encoding/prototext"
@@ -40,16 +37,10 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/gnmi/errlist"
-	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
-)
-
-var (
-	mu    sync.Mutex
-	gnmis = make(map[reservation.Device]gpb.GNMIClient)
 )
 
 // DataPoint is a value of a gNMI path at a particular time.
@@ -63,9 +54,19 @@ type DataPoint struct {
 	RecvTimestamp time.Time
 }
 
+func (d *DataPoint) String() string {
+	return fmt.Sprintf(`Value: %s
+Timestamp: %v
+RecvTimestamp: %v
+Path: %s`, prototext.Format(d.Value), d.Timestamp, d.RecvTimestamp, prototext.Format(d.Path))
+}
+
+// DefaultClientKey is the key for the default client in the customData map.
+const DefaultClientKey = "defaultclient"
+
 // QualifiedTypeString renders a Qualified* telemetry value to a format that's
 // easier to read when debugging.
-func QualifiedTypeString(value interface{}, qv *QualifiedType) string {
+func QualifiedTypeString(value interface{}, md *Metadata) string {
 	// Get string for value
 	var valStr string
 	if v, ok := value.(ygot.ValidatedGoStruct); ok && !reflect.ValueOf(v).IsNil() {
@@ -84,7 +85,8 @@ func QualifiedTypeString(value interface{}, qv *QualifiedType) string {
 		// Add a blank line for JSON output.
 		valStr = "\n" + valStr
 	} else {
-		if qv.IsPresent() {
+		// TODO: Decide if value presence should be inferred by checking zero value
+		if val := reflect.ValueOf(value); val.IsValid() && !val.IsZero() {
 			valStr = fmt.Sprintf("%v (present)", value)
 		} else {
 			valStr = fmt.Sprintf("%v (not present)", value)
@@ -92,15 +94,15 @@ func QualifiedTypeString(value interface{}, qv *QualifiedType) string {
 	}
 
 	// Get string for path
-	pathStr, err := ygot.PathToString(qv.GetPath())
+	pathStr, err := ygot.PathToString(md.Path)
 	if err != nil {
-		b, _ := prototext.Marshal(qv.GetPath())
+		b, _ := prototext.Marshal(md.Path)
 		pathStr = string(b)
 	} else {
-		pathStr = fmt.Sprintf("target: %v, path: %s", qv.GetPath().GetTarget(), pathStr)
+		pathStr = fmt.Sprintf("target: %v, path: %s", md.Path.GetTarget(), pathStr)
 	}
 
-	return fmt.Sprintf("\nTimestamp: %v\n%s\nVal: %s\n%s\n", qv.GetTimestamp(), pathStr, valStr, qv.GetComplianceErrors())
+	return fmt.Sprintf("\nTimestamp: %v\n%s\nVal: %s\n%s\n", md.Timestamp, pathStr, valStr, md.ComplianceErrors)
 }
 
 // TelemetryError stores the path, value, and error string from unsuccessfully
@@ -207,64 +209,101 @@ func prettySetRequest(setRequest *gpb.SetRequest) string {
 	return buf.String()
 }
 
+// MustUnmarshal calls Unmarshal and fails the calling test fatally on error.
+func MustUnmarshal(t testing.TB, data []*DataPoint, schema *ytypes.Schema, goStructName string, structPtr ygot.GoStruct,
+	queryPath *gpb.Path, isLeaf bool, reverseShadowPaths bool) (*Metadata, bool) {
+
+	t.Helper()
+	md, ok, err := Unmarshal(data, schema, goStructName, structPtr, queryPath, isLeaf, reverseShadowPaths)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return md, ok
+}
+
 // Unmarshal is a wrapper to ytypes.SetNode() and ygot.Validate() that
 // unmarshals a given *DataPoint to its field given the parent and parent
 // schema and verifies that all data conform to the schema. Any errors due to
 // the unmarshal operations above are returned in a *ComplianceErrors for the
 // caller to choose whether to tolerate, while other errors will cause the test
-// to error out.
+// to error out. The returned bool indicates whether at least data was unmarshaled
+// successfully.
 // The queryPath is used to trim output Path to match length of the input path.
 // If node is a leaf, the full path is returned and the queryPath can be nil.
 // NOTE: The datapoints are applied in order as they are in the input slice,
 // *NOT* in order of their timestamps. As such, in order to correctly support
 // Collect calls, the input data must be sorted in order of timestamps.
-func Unmarshal(t testing.TB, data []*DataPoint, schema *ytypes.Schema, goStructName string, structPtr ygot.GoStruct,
-	queryPath *gpb.Path, isLeaf bool, reverseShadowPaths bool) (*QualifiedType, error) {
-	t.Helper()
+func Unmarshal(data []*DataPoint, schema *ytypes.Schema, goStructName string, structPtr ygot.GoStruct,
+	queryPath *gpb.Path, isLeaf bool, reverseShadowPaths bool) (*Metadata, bool, error) {
 
-	ret := &QualifiedType{
+	ret := &Metadata{
 		Path: queryPath,
 	}
 	if len(data) == 0 {
-		return ret, nil
+		return ret, false, nil
 	}
 
-	unmarshalledData, complianceErrs, err := unmarshal(data, schema.SchemaTree[goStructName], structPtr, schema, reverseShadowPaths)
-	if err != nil {
-		return ret, err
-	}
-	if complianceErrs != nil {
-		t.Logf("INFO: noncompliant data encountered while unmarshalling: %v", complianceErrs)
-	}
-
+	unmarshalledData, complianceErrs, err := unmarshal(data, schema.SchemaTree[goStructName], structPtr, queryPath, schema, isLeaf, reverseShadowPaths)
 	ret.ComplianceErrors = complianceErrs
+	if err != nil {
+		return ret, false, err
+	}
 	if len(unmarshalledData) == 0 {
-		return ret, nil
+		return ret, false, nil
 	}
 
+	// Received path will be different for wildcard queries.
 	path := unmarshalledData[0].Path
 	if !isLeaf {
 		path = proto.Clone(unmarshalledData[0].Path).(*gpb.Path)
 		path.Elem = path.Elem[:len(queryPath.Elem)]
 		ret.Timestamp = LatestTimestamp(unmarshalledData)
 		ret.RecvTimestamp = LatestRecvTimestamp(unmarshalledData)
-	} else { // leaves only have one datapoint, so get timestamp from first element
+	} else {
 		ret.Timestamp = unmarshalledData[0].Timestamp
 		ret.RecvTimestamp = unmarshalledData[0].RecvTimestamp
 	}
-
 	ret.Path = path
-	ret.Present = true
-	return ret, nil
+
+	return ret, true, nil
+}
+
+// pathToString returns a string version of the input path for display during
+// debugging.
+func pathToString(path *gpb.Path) string {
+	pathStr, err := ygot.PathToString(path)
+	if err != nil {
+		// Use Sprint instead of prototext.Format to avoid newlines.
+		pathStr = fmt.Sprint(path)
+	}
+	return pathStr
+}
+
+// PathStructToString returns a string representing the path struct.
+// Note: the output may contain an error message or invalid path;
+// do not use this func outside of the generated code.
+func PathStructToString(ps ygot.PathStruct) string {
+	p, _, err := ygot.ResolvePath(ps)
+	if err != nil {
+		return fmt.Sprintf("unknown path: %v", err)
+	}
+	return pathToString(p)
 }
 
 // unmarshal unmarshals a given slice of datapoints to its field given a
 // containing GoStruct and its schema and verifies that all data conform to the
 // schema. The subset of datapoints that successfully unmarshalled into the given GoStruct is returned.
 // NOTE: The subset of datapoints includes datapoints that are value restriction noncompliant.
-// The first error slice are internal errors, while the returned
+// The second error slice are internal errors, while the returned
 // *ComplianceError stores the compliance errors.
-func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStruct, schema *ytypes.Schema, reverseShadowPaths bool) ([]*DataPoint, *ComplianceErrors, error) {
+func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStruct, queryPath *gpb.Path, schema *ytypes.Schema, isLeaf, reverseShadowPaths bool) ([]*DataPoint, *ComplianceErrors, error) {
+	queryPathStr := pathToString(queryPath)
+	if isLeaf && len(data) > 1 {
+		return nil, &ComplianceErrors{PathErrors: []*TelemetryError{{
+			Err: fmt.Errorf("got multiple (%d) data points for leaf node at path %s: %v", len(data), queryPathStr, data),
+		}}}, nil
+	}
+
 	var unmarshalledDatapoints []*DataPoint
 	var pathUnmarshalErrs []*TelemetryError
 	var typeUnmarshalErrs []*TelemetryError
@@ -274,13 +313,34 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 		errs.Add(errors.Errorf("input schema for generated code is invalid"))
 		return nil, nil, errs.Err()
 	}
+	// TODO: Add fatal check for duplicate paths, as they're not allowed by GET semantics.
 	for _, dp := range data {
-		// 1. Check for path compliance. Note that by unmarshalling from
-		// the root, we check the entire path, including the list key.
 		var gcopts []ytypes.GetOrCreateNodeOpt
 		if reverseShadowPaths {
 			gcopts = append(gcopts, &ytypes.PreferShadowPath{})
 		}
+
+		// 1a. Check for path compliance by doing a prefix-match, since
+		// the given datapoint must be a descendant of the query.
+		if !util.PathMatchesQuery(dp.Path, queryPath) {
+			var pathErr error
+			dpPathStr := pathToString(dp.Path)
+			switch {
+			case len(dp.Path.Elem) == 0 && len(dp.Path.Element) > 0:
+				pathErr = errors.Errorf("datapoint path uses deprecated and unsupported Element field: %s", prototext.Format(dp.Path))
+			default:
+				pathErr = errors.Errorf("datapoint path %q (value %v) does not match the query path %q", dpPathStr, dp.Value, queryPathStr)
+			}
+			pathUnmarshalErrs = append(pathUnmarshalErrs, &TelemetryError{
+				Path:  dp.Path,
+				Value: dp.Value,
+				Err:   pathErr,
+			})
+			continue
+		}
+		// 1b. Check for path compliance: by unmarshalling from the
+		// root, we check that the path, including the list key,
+		// corresponds to an actual schema element.
 		if _, _, err := ytypes.GetOrCreateNode(schema.RootSchema(), schema.Root, dp.Path, gcopts...); err != nil {
 			pathUnmarshalErrs = append(pathUnmarshalErrs, &TelemetryError{Path: dp.Path, Value: dp.Value, Err: err})
 			continue
@@ -290,13 +350,7 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 		// root entry that all top-level schemas are connected to via their
 		// parent pointers. Therefore, we must remove that first element to
 		// obtain the sanitized path.
-		schemaPath := util.PathStringToElements(structSchema.Path())[1:]
-		relPath := util.TrimGNMIPathPrefix(dp.Path, schemaPath)
-		if relPath == dp.Path { // input pointer returned by TrimGNMIPathPrefix means input prefix does not match.
-			errs.Add(errors.Errorf("parent schema path %v is not a prefix of the datapoints path %v", schemaPath, dp.Path))
-			continue
-		}
-
+		relPath := util.TrimGNMIPathPrefix(dp.Path, util.PathStringToElements(structSchema.Path())[1:])
 		if dp.Value == nil {
 			var dopts []ytypes.DelNodeOpt
 			if reverseShadowPaths {
@@ -308,11 +362,11 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 				errs.Add(err)
 			}
 		} else {
-			// 2. Check for type compliance (since path should already be compliant).
 			sopts := []ytypes.SetNodeOpt{&ytypes.InitMissingElements{}, &ytypes.TolerateJSONInconsistencies{}}
 			if reverseShadowPaths {
 				sopts = append(sopts, &ytypes.PreferShadowPath{})
 			}
+			// 2. Check for type compliance (since path should already be compliant).
 			if err := ytypes.SetNode(structSchema, structPtr, relPath, dp.Value, sopts...); err == nil {
 				unmarshalledDatapoints = append(unmarshalledDatapoints, dp)
 			} else {
@@ -328,21 +382,19 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 	return unmarshalledDatapoints, nil, errs.Err()
 }
 
-// Get uses GetFn to retrieve a []*DataPoint sample for a PathStruct.
-// If singleLeaf is specified, which says that the path struct corresponds to a
-// non-wildcarded leaf node, then it verifies that the result is no more than 1
-// datapoint.
-func Get(t testing.TB, n ygot.PathStruct, singleLeaf bool) ([]*DataPoint, *gpb.Path) {
+// MustGet calls Get and fails the calling test fatally on error.
+func MustGet(t testing.TB, n ygot.PathStruct, subPaths ...*gpb.Path) ([]*DataPoint, *gpb.Path) {
 	t.Helper()
-	data, path, err := get(context.Background(), n, singleLeaf)
+	data, path, err := Get(context.Background(), n, subPaths...)
 	if err != nil {
 		t.Fatalf("Get(t) at path %s: %v", path, err)
 	}
 	return data, path
 }
 
-func get(ctx context.Context, n ygot.PathStruct, singleLeaf bool) ([]*DataPoint, *gpb.Path, error) {
-	sub, path, err := subscribe(ctx, n, gpb.SubscriptionList_ONCE)
+// Get does gNMI ONCE subscription for the device under n. SubPaths, if set, override the subscription paths.
+func Get(ctx context.Context, n ygot.PathStruct, subPaths ...*gpb.Path) ([]*DataPoint, *gpb.Path, error) {
+	sub, path, err := subscribe(ctx, n, subPaths, gpb.SubscriptionList_ONCE)
 	if err != nil {
 		return nil, path, errors.Wrap(err, "cannot subscribe to gNMI client")
 	}
@@ -350,34 +402,11 @@ func get(ctx context.Context, n ygot.PathStruct, singleLeaf bool) ([]*DataPoint,
 	if err != nil {
 		return nil, path, err
 	}
-	if singleLeaf && len(data) > 1 {
-		return nil, path, fmt.Errorf("Got %d data points from leaf node %v, want 0 or 1: %v", len(data), path, data)
-	}
-	var nonMatchingLines []string
-	for _, dp := range data {
-		if len(dp.Path.GetElem()) < len(path.GetElem()) {
-			// TODO: Catch all query-noncompliant paths.
-			// It's ok to keep this temporarily, as users (i.e. generated telemetry library)
-			// are unaffected. They already check for unmarshal errors, and will treat these as
-			// path-noncompliant datapoints.
-			pathStr, err := ygot.PathToString(path)
-			if err != nil {
-				b, _ := prototext.Marshal(dp.Path)
-				pathStr = string(b)
-			}
-			nonMatchingLines = append(nonMatchingLines, fmt.Sprintf("path: %s, data: %v", pathStr, dp.Value))
-		}
-	}
-	if nonMatchingLines != nil {
-		nonMatchingLines = append([]string{"query-noncompliant datapoints encountered while unmarshalling:"}, nonMatchingLines...)
-		return nil, path, errors.New(strings.Join(nonMatchingLines, "\n"))
-	}
 	return data, path, nil
 }
 
-// QualifiedType contains to common fields and method for the generated Qualified structs.
-type QualifiedType struct {
-	Present          bool              // Present indicates whether the sample value is nil.
+// Metadata contains to common fields and method for the generated Qualified structs.
+type Metadata struct {
 	Path             *gpb.Path         // Path is the sample's YANG path.
 	Timestamp        time.Time         // Timestamp is the sample time.
 	RecvTimestamp    time.Time         // Timestamp is the time the test received the sample.
@@ -385,70 +414,54 @@ type QualifiedType struct {
 }
 
 // GetPath returns the YANG query path for this value.
-func (q *QualifiedType) GetPath() *gpb.Path {
-	if q == nil {
-		return nil
-	}
+func (q *Metadata) GetPath() *gpb.Path {
 	return q.Path
 }
 
-// IsPresent returns whether the value is present.
-func (q *QualifiedType) IsPresent() bool {
-	if q == nil {
-		return false
-	}
-	return q.Present
-}
-
 // GetTimestamp returns the latest notification timestamp.
-func (q *QualifiedType) GetTimestamp() time.Time {
-	if q == nil {
-		return time.Time{}
-	}
+func (q *Metadata) GetTimestamp() time.Time {
 	return q.Timestamp
 }
 
 // GetRecvTimestamp returns the latest timestamp when notification(s) were received.
-func (q *QualifiedType) GetRecvTimestamp() time.Time {
-	if q == nil {
-		return time.Time{}
-	}
+func (q *Metadata) GetRecvTimestamp() time.Time {
 	return q.RecvTimestamp
 }
 
 // GetComplianceErrors returns the schema compliance errors encountered while unmarshalling and validating the received data.
-func (q *QualifiedType) GetComplianceErrors() *ComplianceErrors {
-	if q == nil {
-		return nil
-	}
+func (q *Metadata) GetComplianceErrors() *ComplianceErrors {
 	return q.ComplianceErrors
+}
+
+// QualifiedValue is an interface for generated telemetry types.
+type QualifiedValue interface {
+	GetPath() *gpb.Path
+	GetRecvTimestamp() time.Time
+	GetTimestamp() time.Time
+	GetComplianceErrors() *ComplianceErrors
 }
 
 // Predicate is a func used for conditional collection.
 type Predicate func(QualifiedValue) bool
 
-// ConvertFunc converts a datapoint to the corresponding QualifiedType.
-type ConvertFunc func(*DataPoint) (QualifiedValue, error)
+// ConvertFunc converts a datapoint queried from a path to the corresponding
+// Metadata.
+type ConvertFunc func([]*DataPoint, *gpb.Path) (QualifiedValue, error)
 
-// QualifiedValue is an interface for generated telemetry types.
-type QualifiedValue interface {
-	GetPath() *gpb.Path
-	IsPresent() bool
-	GetRecvTimestamp() time.Time
-	GetTimestamp() time.Time
-}
-
-// CollectUntil uses CollectFn to retrieve a Collection sample for a PathStruct and evaluates data against the predicate.
-func CollectUntil(t testing.TB, n ygot.PathStruct, duration time.Duration, converter ConvertFunc, pred Predicate) *Collection {
+// MustWatch retrieves a Collection sample for a PathStruct and evaluates data against the predicate.
+func MustWatch(t testing.TB, n ygot.PathStruct, paths []*gpb.Path, duration time.Duration, isLeaf bool, converter ConvertFunc, pred Predicate) *Watcher {
 	t.Helper()
-	coll, path, err := collect(context.Background(), n, duration, converter, pred)
+	w, path, err := watch(context.Background(), n, paths, duration, isLeaf, converter, pred)
 	if err != nil {
-		t.Fatalf("CollectUntil(t) at path %s: %v", path, err)
+		t.Fatalf("Watch(t) at path %s: %v", path, err)
 	}
-	return coll
+	return w
 }
 
-func collect(ctx context.Context, n ygot.PathStruct, duration time.Duration, converter ConvertFunc, pred Predicate) (_ *Collection, _ *gpb.Path, rerr error) {
+// watch starts a gNMI subscription for the provided duration. Specifying subPaths is optional, if unset will subscribe to the path at n.
+// Note: For leaves the converter and predicate are evaluated once per DataPoint. For non-leaves, they are evaluated once per notification,
+// after the first sync is received.
+func watch(ctx context.Context, n ygot.PathStruct, paths []*gpb.Path, duration time.Duration, isLeaf bool, converter ConvertFunc, pred Predicate) (_ *Watcher, _ *gpb.Path, rerr error) {
 	cancel := func() {}
 	mode := gpb.SubscriptionList_ONCE
 	collectEnd := time.Now().Add(duration)
@@ -459,61 +472,80 @@ func collect(ctx context.Context, n ygot.PathStruct, duration time.Duration, con
 		defer closer.CloseVoidOnErr(&rerr, cancel)
 		mode = gpb.SubscriptionList_STREAM
 	}
-	sub, path, err := subscribe(ctx, n, mode)
+	sub, path, err := subscribe(ctx, n, paths, mode)
 	if err != nil {
 		return nil, path, errors.Wrap(err, "cannot subscribe to gNMI client")
 	}
 
-	c := &Collection{
-		data: make(chan []QualifiedValue, 1),
+	c := &Watcher{
 		err:  make(chan error, 1),
 		path: path,
 	}
 
 	go func() {
 		defer cancel()
-		data, err := receiveUntil(sub, mode, converter, pred)
-		c.data <- data
+		err := receiveUntil(sub, mode, path, isLeaf, converter, pred)
 		c.err <- err
 	}()
 
 	return c, path, nil
 }
 
-// receiveUntil receives gNMI notifications until predicate is true (if setZ) or subscription times out.
-func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, converter ConvertFunc, pred Predicate) ([]QualifiedValue, error) {
-	var convertedData []QualifiedValue
+// receiveUntil receives gNMI notifications until predicate is true (if set) or subscription times out.
+// Note: For leaves the converter and predicate are evaluated once per DataPoint. For non-leaves,
+// they are evaluated once per notification, after the first sync is received.
+func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, path *gpb.Path, isLeaf bool, converter ConvertFunc, pred Predicate) error {
+	var recvData []*DataPoint
+	var initialSync bool
+	var sync bool
+	var err error
+
 	for {
-		data, sync, err := receive(sub, []*DataPoint{}, true)
+		recvData, sync, err = receive(sub, recvData, true)
 		if err != nil {
-			return convertedData, errors.Wrap(err, "error receiving gNMI response")
+			return errors.Wrap(err, "error receiving gNMI response")
 		}
 		if mode == gpb.SubscriptionList_ONCE && sync {
-			return convertedData, nil
+			return nil
 		}
-		for _, upd := range data {
-			val, err := converter(upd)
+		initialSync = initialSync || sync || isLeaf
+		// Skip conversion and predicate until first sync with data for non-leaves.
+		if !initialSync || len(recvData) == 0 {
+			continue
+		}
+		var datas [][]*DataPoint
+		if isLeaf {
+			for _, datum := range recvData {
+				datas = append(datas, []*DataPoint{datum})
+			}
+		} else {
+			datas = [][]*DataPoint{recvData}
+		}
+		for _, data := range datas {
+			val, err := converter(data, path)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			convertedData = append(convertedData, val)
+			if complianceErrs := val.GetComplianceErrors(); complianceErrs != nil {
+				log.V(0).Infof("noncompliant data encountered during receiveUntil, ignoring value: %v", complianceErrs)
+				continue
+			}
 			if pred(val) {
-				return convertedData, nil
+				return nil
 			}
 		}
+		recvData = nil
 	}
 }
 
-// Collection represents an ongoing collection of telemetry values.
-type Collection struct {
+// Watcher represents an ongoing watch of telemetry values.
+type Watcher struct {
 	err  chan error
-	data chan []QualifiedValue
 	path *gpb.Path
 }
 
-// Await waits for the collection to finish and returns the time series of results
-// and a boolean indicating whether the predicate evaluated to true.
-func (c *Collection) Await(t testing.TB) ([]QualifiedValue, bool) {
+// Await waits for the watch to finish and returns a boolean indicating whether the predicate evaluated to true.
+func (c *Watcher) Await(t testing.TB) bool {
 	t.Helper()
 	err := <-c.err
 	isTimeout := false
@@ -526,19 +558,18 @@ func (c *Collection) Await(t testing.TB) ([]QualifiedValue, bool) {
 			t.Fatal(err)
 		}
 	}
-
-	return <-c.data, !isTimeout
+	return !isTimeout
 }
 
-func batchSet(origin string, target string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
-	dev, opts, err := resolveBatch(target, customData)
+func batchSet(ctx context.Context, origin string, target string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
+	dev, opts, err := resolveBatch(ctx, target, customData)
 	if err != nil {
 		return nil, err
 	}
-	return setVals(context.Background(), dev, opts, origin, target, req)
+	return setVals(ctx, dev, opts, origin, target, req)
 }
 
-func resolveBatch(target string, customData map[string]interface{}) (reservation.Device, *requestOpts, error) {
+func resolveBatch(ctx context.Context, target string, customData map[string]interface{}) (reservation.Device, *requestOpts, error) {
 	res, err := testbed.Reservation()
 	if err != nil {
 		return nil, nil, err
@@ -551,7 +582,23 @@ func resolveBatch(target string, customData map[string]interface{}) (reservation
 	if err != nil {
 		return dev, nil, errors.Wrapf(err, "Error extracting request options from %v", customData)
 	}
-	return dev, opts, err
+	if opts.client != nil {
+		return dev, opts, nil
+	}
+
+	dc, ok := customData[DefaultClientKey]
+	if !ok {
+		return dev, opts, fmt.Errorf("gnmi client getter not set on root object")
+	}
+	client, ok := dc.(func(context.Context) (gpb.GNMIClient, error))
+	if !ok {
+		return dev, opts, fmt.Errorf("unexpected gnmi client getter type")
+	}
+	opts.client, err = client(ctx)
+	if err != nil {
+		return nil, nil, err
+	}
+	return dev, opts, nil
 }
 
 // Delete creates and makes a gNMI SetRequest delete call for the given value
@@ -591,7 +638,7 @@ func Update(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
 // specified in the req.Prefix.Target field of the SetRequest; this field will
 // be erased before the request is forwarded to the target in the gNMI call.
 func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperation) (*gpb.SetResponse, *gpb.Path, error) {
-	path, dev, opts, err := resolve(n)
+	path, dev, opts, err := resolve(ctx, n)
 	if err != nil {
 		return nil, path, err
 	}
@@ -606,19 +653,10 @@ func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperatio
 func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, origin, target string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
 	// TODO: Is there any value in setting the target here?
 	req.Prefix = &gpb.Path{Origin: origin}
-
-	dut, ok := dev.(*reservation.DUT)
-	if !ok {
-		return nil, errors.Errorf("gNMI set cannot be called on ATEs: %v", dev)
-	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
-	gnmi, err := fetchGNMI(ctx, dut, opts.client)
-	if err != nil {
-		return nil, err
-	}
 
 	log.V(1).Info(prettySetRequest(req))
-	resp, err := gnmi.Set(ctx, req)
+	resp, err := opts.client.Set(ctx, req)
 	log.V(1).Infof("SetResponse:\n%s", prototext.Format(resp))
 	if err != nil {
 		return nil, fmt.Errorf("SetRequest unsuccessful: %w", err)
@@ -626,28 +664,27 @@ func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, ori
 	return resp, nil
 }
 
-// resolve resolves a path struct to a path, device, and request options.
-func resolve(n ygot.PathStruct) (*gpb.Path, reservation.Device, *requestOpts, error) {
+// ResolvePath resolves a path struct to a path and request options.
+func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]interface{}, error) {
 	path, customData, errs := ygot.ResolvePath(n)
 	if len(errs) > 0 {
-		return nil, nil, nil, errors.Errorf("Errors resolving path struct %v: %v", n, errs)
+		return nil, nil, errors.Errorf("Errors resolving path struct %v: %v", n, errs)
 	}
 	// All paths that don't start with "meta" must be OC paths.
 	if len(path.GetElem()) == 0 || path.GetElem()[0].GetName() != "meta" {
 		path.Origin = "openconfig"
 	}
-	res, err := testbed.Reservation()
+	return path, customData, nil
+}
+
+// resolve resolves a path struct to a path, device, and request options.
+// The returned requestOpts contains the gnmi Client to use.
+func resolve(ctx context.Context, n ygot.PathStruct) (*gpb.Path, reservation.Device, *requestOpts, error) {
+	path, customData, err := ResolvePath(n)
 	if err != nil {
 		return path, nil, nil, err
 	}
-	dev, err := res.Device(path.GetTarget())
-	if err != nil {
-		return path, nil, nil, err
-	}
-	opts, err := extractRequestOpts(customData)
-	if err != nil {
-		return path, dev, nil, errors.Wrapf(err, "Error extracting request options from %v", customData)
-	}
+	dev, opts, err := resolveBatch(ctx, path.GetTarget(), customData)
 	return path, dev, opts, err
 }
 
@@ -675,39 +712,33 @@ func LatestRecvTimestamp(data []*DataPoint) time.Time {
 	return latest
 }
 
-// BundleDatapoints splits the incoming datapoints into groups where each has
-// the same common prefix path for the given query path (which may contain
-// wildcards). A slice of sorted prefixes is returned so users can examine each
-// group deterministically.
-// The leaf input specifies that no datapoint group should have more than 1 datapoint.
-// A fatal error occurs if:
-// - Any path is shorter than the prefixLen.
-// - leaf is true, and a particular datapoint group (i.e. common-prefix group)
-//   contains more than 1 path.
-func BundleDatapoints(t testing.TB, datapoints []*DataPoint, prefixLen uint, leaf bool) (map[string][]*DataPoint, []string) {
+// BundleDatapoints splits the incoming datapoints into common-prefix groups.
+//
+// Each bundle is identified by a common prefix path of length prefixLen. A
+// slice of sorted prefixes is returned so users can examine each group
+// deterministically. If any path is longer than prefixLen, then it is stored
+// in a special "/" bundle.
+func BundleDatapoints(t testing.TB, datapoints []*DataPoint, prefixLen uint) (map[string][]*DataPoint, []string) {
 	t.Helper()
-	groups, prefixes, err := bundleDatapoints(datapoints, prefixLen, leaf)
+	groups, prefixes, err := bundleDatapoints(datapoints, prefixLen)
 	if err != nil {
 		t.Fatal(err)
 	}
 	return groups, prefixes
 }
 
-func bundleDatapoints(datapoints []*DataPoint, prefixLen uint, leaf bool) (map[string][]*DataPoint, []string, error) {
+func bundleDatapoints(datapoints []*DataPoint, prefixLen uint) (map[string][]*DataPoint, []string, error) {
 	groups := map[string][]*DataPoint{}
-	var violations []string
 
-	// TODO: Add fatal check for duplicate paths, as they're not allowed by GET semantics.
 	for _, dp := range datapoints {
 		elems := dp.Path.GetElem()
 		if uint(len(elems)) < prefixLen {
-			violations = append(violations, fmt.Sprintf("invalid datapoint path elems (len < %d): %v", prefixLen, elems))
+			groups["/"] = append(groups["/"], dp)
 			continue
 		}
 		prefixPath, err := ygot.PathToString(&gpb.Path{Elem: elems[:prefixLen]})
 		if err != nil {
-			violations = append(violations, err.Error())
-			continue
+			return nil, nil, err
 		}
 		groups[prefixPath] = append(groups[prefixPath], dp)
 	}
@@ -718,94 +749,51 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint, leaf bool) (map[s
 	}
 	sort.Strings(prefixes)
 
-	if leaf {
-		for prefix, dps := range groups {
-			if len(dps) != 1 {
-				violations = append(violations, fmt.Sprintf("got more than 1 path for leaf node %s: %v", prefix, dps))
-			}
-		}
-	}
-
-	if len(violations) > 0 {
-		return nil, nil, fmt.Errorf("%d violations found:\n%s", len(violations), strings.Join(violations, "\n"))
-	}
 	return groups, prefixes, nil
 }
 
-// NewGNMI creates a new gNMI client for the specified Device.
-func NewGNMI(ctx context.Context, dev reservation.Device) (gpb.GNMIClient, error) {
-	switch d := dev.(type) {
-	case *reservation.DUT:
-		c, err := binding.Get().DialGNMI(ctx, d,
-			grpc.WithBlock(),
-			grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32)))
-		if err != nil {
-			return nil, err
-		}
-		return c, nil
-	case *reservation.ATE:
-		c, err := binding.Get().DialATEGNMI(ctx, d, grpc.WithBlock())
-		if err != nil {
-			return nil, err
-		}
-		return c, nil
-	}
-	return nil, fmt.Errorf("unsupported device type: %T", dev)
-}
-
-// fetchGNMI fetches the gNMI client for the given device.
-// If a GNMIClient is provided it will be just returned as is and not cached.
-func fetchGNMI(ctx context.Context, dev reservation.Device, c gpb.GNMIClient) (gpb.GNMIClient, error) {
-	if c != nil {
-		return c, nil
-	}
-	mu.Lock()
-	defer mu.Unlock()
-	c, ok := gnmis[dev]
-	if !ok {
-		var err error
-		c, err = NewGNMI(ctx, dev)
-		if err != nil {
-			return nil, err
-		}
-		gnmis[dev] = c
-	}
-	return c, nil
-}
-
-func subscribe(ctx context.Context, n ygot.PathStruct, mode gpb.SubscriptionList_Mode) (_ gpb.GNMI_SubscribeClient, _ *gpb.Path, rerr error) {
-	path, dev, opts, err := resolve(n)
+// subscribe create a gNMI SubscribeClient. Specifying subPaths is optional, if unset will subscribe to the path at n.
+func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mode gpb.SubscriptionList_Mode) (_ gpb.GNMI_SubscribeClient, _ *gpb.Path, rerr error) {
+	path, dev, opts, err := resolve(ctx, n)
 	if err != nil {
 		return nil, path, err
+	}
+	if len(subPaths) == 0 {
+		subPaths = []*gpb.Path{path}
 	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
-	gnmi, err := fetchGNMI(ctx, dev, opts.client)
+	sub, err := opts.client.Subscribe(ctx)
 	if err != nil {
-		return nil, path, err
-	}
-	sub, err := gnmi.Subscribe(ctx)
-	if err != nil {
-		return nil, path, errors.Wrap(err, "gNMI failed to Subscribe")
+		return nil, nil, errors.Wrap(err, "gNMI failed to Subscribe")
 	}
 	defer closer.Close(&rerr, sub.CloseSend, "error closing gNMI send stream")
+
+	var subs []*gpb.Subscription
+	for _, path := range subPaths {
+		subs = append(subs, &gpb.Subscription{
+			Path: &gpb.Path{
+				Elem:   path.GetElem(),
+				Origin: path.GetOrigin(),
+			},
+			Mode: opts.subMode,
+		})
+	}
+
 	sr := &gpb.SubscribeRequest{
 		Request: &gpb.SubscribeRequest_Subscribe{
 			Subscribe: &gpb.SubscriptionList{
 				Prefix: &gpb.Path{
-					Origin: path.GetOrigin(),
 					Target: dev.Dimensions().Name,
 				},
-				Subscription: []*gpb.Subscription{{
-					Path: &gpb.Path{Elem: path.GetElem()},
-					Mode: opts.subMode,
-				}},
-				Mode:     mode,
-				Encoding: gpb.Encoding_PROTO,
+				Subscription: subs,
+				Mode:         mode,
+				Encoding:     gpb.Encoding_PROTO,
 			},
 		},
 	}
+	log.V(1).Info(prototext.Format(sr))
 	if err := sub.Send(sr); err != nil {
-		return nil, path, errors.Wrapf(err, "gNMI failed to Send(%+v)", sr)
+		return nil, nil, errors.Wrapf(err, "gNMI failed to Send(%+v)", sr)
 	}
 	// Use the target only for the subscription but exclude from the datapoint construction.
 	path.Target = ""
@@ -870,6 +858,10 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 			if err != nil {
 				return nil, err
 			}
+			// Record the deprecated Element field for clearer compliance error messages.
+			if elements := append(append([]string{}, n.GetPrefix().GetElement()...), p.GetElement()...); len(elements) > 0 {
+				j.Element = elements
+			}
 			// Use the target only for the subscription but exclude from the datapoint construction.
 			j.Target = ""
 			return &DataPoint{Path: j, Value: val, Timestamp: ts, RecvTimestamp: recvTS}, nil
@@ -878,11 +870,13 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 		// Append delete data before the update values -- per gNMI spec, they
 		// should always be processed first if both update types exist in the
 		// same notification.
-		for _, d := range n.Delete {
-			dp, err := newDataPoint(d, nil)
+		for _, p := range n.Delete {
+			log.V(2).Infof("Received gNMI Delete at path: %s", prototext.Format(p))
+			dp, err := newDataPoint(p, nil)
 			if err != nil {
 				return data, false, err
 			}
+			log.V(2).Infof("Constructed datapoint for delete: %s", dp)
 			data = append(data, dp)
 		}
 		for _, u := range n.GetUpdate() {
@@ -892,14 +886,17 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 			if u.Val == nil {
 				return data, false, errors.Errorf("invalid nil Val in update: %v", u)
 			}
+			log.V(2).Infof("Received gNMI Update value %s at path: %s", prototext.Format(u.Val), prototext.Format(u.Path))
 			dp, err := newDataPoint(u.Path, u.Val)
 			if err != nil {
 				return data, false, err
 			}
+			log.V(2).Infof("Constructed datapoint for update: %s", dp)
 			data = append(data, dp)
 		}
 		return data, false, nil
 	case *gpb.SubscribeResponse_SyncResponse:
+		log.V(2).Infof("Received gNMI SyncResponse.")
 		return data, true, nil
 	default:
 		return data, false, errors.Errorf("unexpected response: %v (%T)", v, v)

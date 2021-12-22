@@ -112,6 +112,9 @@ func fetchTopology(cfg *Config) (*kpb.Topology, error) {
 	cmd := exec.Command(cfg.CLIPath, args...)
 	out, err := cmd.Output()
 	if err != nil {
+		if execErr, ok := err.(*exec.ExitError); ok {
+			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
+		}
 		return nil, errors.Wrapf(err, "error executing command %v", cmd)
 	}
 	topo := new(kpb.Topology)
@@ -158,7 +161,7 @@ func (b *Bind) resolveDims(dev *opb.Device, a *assign) (*reservation.Dims, error
 		Ports:           make(map[string]*reservation.Port),
 	}
 	for _, p := range dev.GetPorts() {
-		dims.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].name}
+		dims.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].vendorName}
 	}
 	return dims, nil
 }

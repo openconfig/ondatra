@@ -43,10 +43,13 @@ message InterfaceConfig {
   EthernetConfig ethernet = 4;
   IpConfig ipv4 = 5;
   IpConfig ipv6 = 6;
+  string ipv4_loopback_cidr = 11;
   ISISConfig isis = 7;
   BgpConfig bgp = 8;
+  repeated RsvpConfig rsvp = 12;
   repeated Network networks = 9;
   bool enable_lacp = 10;
+  // NEXT ID: 13
 }
 
 message EthernetConfig {
@@ -54,6 +57,11 @@ message EthernetConfig {
   // Note that this is only a 12-bit value in the protocol.
   uint32 vlan_id = 2;
   MacSec macsec = 3;
+  Fec fec = 4;
+}
+
+message Fec {
+  bool enabled = 1;
 }
 
 message MacSec {
@@ -235,6 +243,7 @@ message ISReachability {
     Routes routes_ipv4 = 10;
   }
   repeated Node nodes = 1;
+  string name = 2;
 }
 
 enum BgpAsnSetMode {
@@ -245,6 +254,15 @@ enum BgpAsnSetMode {
   ASN_SET_MODE_AS_SEQ_CONFEDERATION = 4;
   ASN_SET_MODE_AS_SET_CONFEDERATION = 5;
   ASN_SET_MODE_PREPEND = 6;
+}
+
+message BgpCommunities {
+  bool no_export = 1;
+  bool no_advertise = 2;
+  bool no_export_subconfed = 3;
+  bool llgr_stale = 4;
+  bool no_llgr = 5;
+  repeated string private_communities = 6;
 }
 
 // BGP config for the ATE.
@@ -293,6 +311,7 @@ message BgpPeer {
     bool ipv6_srte_policy = 23;
     bool ipv4_mpls_add_path = 24;
     bool ipv6_mpls_add_path = 25;
+    bool graceful_restart = 26;
   }
   Capabilities capabilities = 8;
   message SrtePolicyGroup {
@@ -303,21 +322,7 @@ message BgpPeer {
     string endpoint = 5;
     string next_hop_address = 6;
     StringIncRange originator_id = 7;
-    message Community {
-      enum Type {
-        TYPE_UNSPECIFIED = 0;
-        TYPE_NO_EXPORT = 1;
-        TYPE_NO_ADVERTISE = 2;
-        TYPE_NO_EXPORT_SUBCONFED = 3;
-        TYPE_MANUAL_ASN = 4;
-        TYPE_LLGR_STALE = 5;
-        TYPE_NO_LLGR = 6;
-      }
-      Type type = 1;
-      uint32 asn = 2;
-      uint32 pattern = 3;
-    }
-    repeated Community communities = 8;
+    BgpCommunities communities = 8;
     BgpAsnSetMode asn_set_mode = 9;
     message Preference {
       uint32 preference = 1;
@@ -377,7 +382,7 @@ message BgpAttributes {
   }
   Origin origin = 2;
   uint32 local_preference = 3;
-  repeated string communities = 4;
+  BgpCommunities communities = 4;
   message ExtendedCommunity {
     message Color {
       enum CoBits {
@@ -409,6 +414,36 @@ message BgpAttributes {
     repeated uint32 asns = 2;
   }
   repeated AsPathSegment as_path_segments = 7;
+  StringIncRange originator_id = 9;
+  repeated string cluster_ids = 10;
+  // NEXT ID: 11
+}
+
+message RsvpConfig {
+  string is_reachability_name = 2;
+  message Loopback {
+    string local_ip_cidr = 1;
+    message IngressLSP {
+      string remote_ip_cidr = 1;
+      bool local_protection = 2;
+      bool bandwidth_protection = 3;
+      bool fast_reroute = 4;
+      bool path_reoptimization = 5;
+      message ERO {
+        string ipv4_cidr = 1;
+      }
+      repeated ERO eros = 6;
+      message RRO {
+        string ipv4 = 1;
+      }
+      repeated RRO rros = 7;
+    }
+    repeated IngressLSP ingress_lsps = 2;
+  }
+  repeated Loopback loopbacks = 3;
+  bool bundle_message_sending = 4;
+  bool refresh_reduction = 5;
+  // NEXT ID: 6
 }
 
 message Network {
@@ -503,10 +538,20 @@ message FrameSize {
     uint32 max = 2;
   }
 
+  message ImixCustomEntry {
+    uint32 size = 1;
+    uint32 weight = 2;
+  }
+
+  message ImixCustom {
+    repeated ImixCustomEntry entries = 1;
+  }
+
   oneof type {
     uint32 fixed = 1;
     Random random = 2;
     ImixPreset imix_preset = 3;
+    ImixCustom imix_custom = 4;
   }
 }
 
@@ -540,6 +585,11 @@ message Header {
     MplsHeader mpls = 5;
     TcpHeader tcp = 6;
     UdpHeader udp = 7;
+    HttpHeader http = 8;
+    IcmpHeader icmp = 9;
+    OspfHeader ospf = 10;
+    RsvpHeader rsvp = 11;
+    PimHeader pim = 12;
   }
 }
 
@@ -562,6 +612,7 @@ message Ipv4Header {
   uint32 ttl = 3;
   uint32 dscp = 4;
   uint32 ecn = 5;
+  uint32 checksum = 7;
 }
 
 message Ipv6Header {
@@ -588,6 +639,145 @@ message TcpHeader {
 message UdpHeader {
   UIntRange src_port = 1;
   UIntRange dst_port = 2;
+}
+
+message HttpHeader {}
+
+message IcmpHeader {
+  message EchoReply {}
+  message DestinationUnreachable {
+    enum Code {
+      CODE_UNSPECIFIED = 0;
+      NETWORK_UNREACHABLE = 1;
+      HOST_UNREACHABLE = 2;
+      PROTOCOL_UNREACHABLE = 3;
+      PORT_UNREACHABLE = 4;
+      FRAGMENTATION_REQUIRED = 5;
+      SOURCE_ROUTE_FAILED = 6;
+    }
+    Code code = 1;
+  }
+  message RedirectMessage {
+    enum Code {
+      CODE_UNSPECIFIED = 0;
+      NETWORK = 1;
+      HOST = 2;
+      TOS_AND_NETWORK = 3;
+      TOS_AND_HOST = 4;
+    }
+    Code code = 1;
+    string ip_addr = 2;
+  }
+  message EchoRequest {}
+  message TimeExceeded {
+    enum Code {
+      CODE_UNSPECIFIED = 0;
+      TRANSIT = 1;
+      FRAGMENT_REASSEMBLY = 2;
+    }
+    Code code = 1;
+  }
+  message ParameterProblem {
+    uint32 pointer = 1;
+  }
+  message Timestamp {
+    uint32 id = 1;
+    uint32 seq = 2;
+    uint32 originate_ts = 3;
+  }
+  message TimestampReply {
+    uint32 id = 1;
+    uint32 seq = 2;
+    uint32 originate_ts = 3;
+    uint32 receive_ts = 4;
+    uint32 transmit_ts = 5;
+  }
+  oneof type {
+    EchoReply echo_reply = 1;
+    DestinationUnreachable destination_unreachable = 2;
+    RedirectMessage redirect_message = 3;
+    EchoRequest echo_request = 4;
+    TimeExceeded time_exceeded = 5;
+    ParameterProblem parameter_problem = 6;
+    Timestamp timestamp = 7;
+    TimestampReply timestamp_reply = 8;
+  }
+}
+
+message OspfHeader {
+  string router_id = 1;
+  string area_id = 2;
+  message Hello {
+    uint32 network_mask_length = 1;
+    uint32 hello_interval_sec = 2;
+    uint32 router_priority = 3;
+    uint32 router_dead_interval_sec = 4;
+    string designated_router = 5;
+    string backup_designated_router = 6;
+    repeated string neighbors = 7;
+  }
+  message DatabaseDescription {
+    uint32 mtu = 1;
+    bool initial = 2;
+    bool more = 3;
+    bool master = 4;
+    uint32 seq = 5;
+  }
+  enum LinkStateType {
+    LINK_STATE_TYPE_UNSPECIFIED = 0;
+    LINK_STATE_TYPE_ROUTER = 1;
+    LINK_STATE_TYPE_NETWORK = 2;
+    LINK_STATE_TYPE_SUMMARY_NETWORK = 3;
+    LINK_STATE_TYPE_SUMMARY_ASBR = 4;
+    LINK_STATE_TYPE_AS_EXTERNAL = 5;
+  }
+  message LinkStateRequest {
+    LinkStateType type = 1;
+    string link_state_id = 2;
+    string advertising_router = 3;
+  }
+  message LinkStateAdvertisementHeader {
+    uint32 age_seconds = 1;
+    LinkStateType type = 2;
+    string link_state_id = 3;
+    string advertising_router = 4;
+    uint32 seq = 5;
+  }
+  message LinkStateUpdate {
+    message Advertisement {
+      LinkStateAdvertisementHeader header = 1;
+    }
+    repeated Advertisement advertisements = 1;
+  }
+  message LinkStateAck {
+    repeated LinkStateAdvertisementHeader headers = 1;
+  }
+  oneof type {
+    Hello hello = 3;
+    DatabaseDescription dbd = 4;
+    LinkStateRequest lsr = 5;
+    LinkStateUpdate lsu = 6;
+    LinkStateAck lsa = 7;
+  }
+}
+
+message RsvpHeader {
+  uint32 version = 1;
+  bool refresh_reduction_capable = 2;
+  enum MessageType {
+    MESSAGE_TYPE_UNSPECIFIED = 0;
+    PATH = 1;
+    RESV = 2;
+  }
+  MessageType message_type = 3;
+  uint32 ttl = 4;
+}
+
+message PimHeader {
+  message Hello {}
+  oneof type {
+    Hello hello = 1;
+  }
 }
 
 message IpAddressGenerator {

@@ -27,14 +27,27 @@ import (
 // If it does fail fatally, returns the fatal error message it logged.
 // It is recommended the error message be checked to distinguish the
 // expected failure from unrelated failures that may have occurred.
-func ExpectFatal(t testing.TB, fn func(t testing.TB)) (msg string) {
+func ExpectFatal(t testing.TB, fn func(t testing.TB)) string {
+	t.Helper()
+	if msg := CaptureFatal(t, fn); msg != nil {
+		return *msg
+	}
+	t.Fatalf("%s did not fail fatally as expected", funcName(fn))
+	return ""
+}
+
+// CaptureFatal returns fatal error message if the specified function fails
+// fatally, i.e. calls any of t.{FailNow, Fatal, Fatalf}.
+// If it does fail fatally, returns the fatal error message it logged.
+func CaptureFatal(t testing.TB, fn func(t testing.TB)) (msg *string) {
 	t.Helper()
 	// Defer and recover to capture the expected fatal message.
 	defer func() {
 		switch r := recover().(type) {
 		case failure:
 			// panic from fatal fakeT failure, return the message
-			msg = string(r)
+			m := string(r)
+			msg = &m
 		case nil:
 			// no panic at all, do nothing
 		default:
@@ -43,8 +56,7 @@ func ExpectFatal(t testing.TB, fn func(t testing.TB)) (msg string) {
 		}
 	}()
 	fn(&fakeT{realT: t})
-	t.Fatalf("%s did not fail fatally as expected", funcName(fn))
-	return ""
+	return nil
 }
 
 func funcName(i interface{}) string {

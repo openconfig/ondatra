@@ -1,0 +1,10 @@
+
+inet.0: 1032302 destinations, 3221108 routes (1032089 active, 963 holddown, 1907 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[Aggregate/130] 6w2d 12:34:01
+                      Discard
+1.0.0.0/24         *[BGP/170] 5d 18:01:02, MED 1000, localpref 1000, from 72.14.203.143
+                      AS path: 3356 13335 I, validation-state: unverified
+                    > to 199.229.230.133 via ae17.0
+                      to 72.14.203.143 via ae19.0

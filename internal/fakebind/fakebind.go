@@ -33,32 +33,26 @@ var _ binding.Binding = &Binding{}
 
 // Binding is a fake testbed binding comprised of stub implementations.
 type Binding struct {
-	Reservation    *reservation.Reservation
-	ConfigPusher   func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
-	CLIDialer      func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
-	ConsoleDialer  func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
-	TopologyPusher func(*reservation.ATE, *opb.Topology) error
-	TrafficStarter func(*reservation.ATE, []*opb.Flow) error
-	GNMIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
-	GNOIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
-	P4RTDialer       func(context.Context, *reservation.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
-	RoutingRestarter func(*reservation.DUT) error
-	PortStateSetter  func(*reservation.ATE, string, bool) error
+	Reservation   *reservation.Reservation
+	ConfigPusher  func(context.Context, *reservation.DUT, string, *binding.ConfigOptions) error
+	CLIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
+	ConsoleDialer func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error)
+	GNMIDialer    func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
+	GNOIDialer    func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
+	P4RTDialer      func(context.Context, *reservation.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+	IxNetworkDialer func(context.Context, *reservation.ATE) (*binding.IxNetwork, error)
 }
 
 // Reset zeros out all the stub implementations.
 func (b *Binding) Reset() {
 	b.Reservation = nil
 	b.ConfigPusher = nil
-	b.TopologyPusher = nil
-	b.TrafficStarter = nil
 	b.CLIDialer = nil
 	b.ConsoleDialer = nil
 	b.GNMIDialer = nil
 	b.GNOIDialer = nil
 	b.P4RTDialer = nil
-	b.RoutingRestarter = nil
-	b.PortStateSetter = nil
+	b.IxNetworkDialer = nil
 }
 
 // Reserve reserves a new fake testbed, reading the definition from the given path.
@@ -80,47 +74,6 @@ func (b *Binding) DialATEGNMI(ctx context.Context, ate *reservation.ATE, opts ..
 // PushConfig delegates to b.ConfigPusher.
 func (b *Binding) PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *binding.ConfigOptions) error {
 	return b.ConfigPusher(ctx, dut, config, opts)
-}
-
-// PushTopology delegates to b.TopologyPusher.
-func (b *Binding) PushTopology(ate *reservation.ATE, top *opb.Topology) error {
-	return b.TopologyPusher(ate, top)
-}
-
-// UpdateTopology delegates to b.TopologyPusher.
-func (b *Binding) UpdateTopology(ate *reservation.ATE, top *opb.Topology) error {
-	return b.TopologyPusher(ate, top)
-}
-
-// UpdateBGPPeerStates is a noop.
-// TODO: Remove this method once new Ixia config binding is used.
-func (b *Binding) UpdateBGPPeerStates(ate *reservation.ATE, interfaces []*opb.InterfaceConfig) error {
-	return nil
-}
-
-// StartProtocols is a noop.
-func (b *Binding) StartProtocols(ate *reservation.ATE) error {
-	return nil
-}
-
-// StopProtocols is a noop.
-func (b *Binding) StopProtocols(ate *reservation.ATE) error {
-	return nil
-}
-
-// StartTraffic delegates to b.TrafficStarter.
-func (b *Binding) StartTraffic(ate *reservation.ATE, fs []*opb.Flow) error {
-	return b.TrafficStarter(ate, fs)
-}
-
-// UpdateTraffic delegates to b.TrafficStarter.
-func (b *Binding) UpdateTraffic(ate *reservation.ATE, fs []*opb.Flow) error {
-	return b.TrafficStarter(ate, fs)
-}
-
-// StopTraffic is a noop.
-func (b *Binding) StopTraffic(ate *reservation.ATE) error {
-	return nil
 }
 
 // DialGNMI creates a client connection to the fake GNMI server.
@@ -148,23 +101,18 @@ func (b *Binding) DialConsole(ctx context.Context, dut *reservation.DUT, opts ..
 	return b.ConsoleDialer(ctx, dut, opts...)
 }
 
+// DialIxNetwork delegates to b.IxNetworkDialer.
+func (b *Binding) DialIxNetwork(ctx context.Context, ate *reservation.ATE) (*binding.IxNetwork, error) {
+	return b.IxNetworkDialer(ctx, ate)
+}
+
 // HandleInfraFail logs the error and returns it unchanged.
 func (b *Binding) HandleInfraFail(err error) error {
 	log.Errorf("Infrastructure failure: %v", err)
 	return err
 }
 
-// SetATEPortState delegates to b.PortStateSetter.
-func (b *Binding) SetATEPortState(ate *reservation.ATE, port string, enabled bool) error {
-	return b.PortStateSetter(ate, port, enabled)
-}
-
 // SetTestMetadata is a noop.
 func (b *Binding) SetTestMetadata(md *binding.TestMetadata) error {
 	return nil
-}
-
-// RestartRouting delegates to b.RoutingRestarter.
-func (b *Binding) RestartRouting(dut *reservation.DUT) error {
-	return b.RoutingRestarter(dut)
 }

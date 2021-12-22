@@ -23,7 +23,7 @@ import (
 	"github.com/openconfig/ondatra/internal/reservation"
 )
 
-// FetchCLI will return a CLI client for interacting with the DUT.
-func FetchCLI(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
+// NewCLI creates a CLI client for the specified DUT.
+func NewCLI(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
 	return binding.Get().DialCLI(ctx, dut, grpc.WithBlock())
 }

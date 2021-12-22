@@ -22,6 +22,7 @@ import (
 
 	log "github.com/golang/glog"
 	"google.golang.org/grpc"
+	"github.com/openconfig/ondatra/internal/ixweb"
 	"github.com/openconfig/ondatra/internal/reservation"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -122,10 +123,6 @@ type Binding interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 
-	// DialATEGNMI creates a client connection to the GNMI endpoint for the specified ATE.
-	// Implementations must append transport security options necessary to reach the server.
-	DialATEGNMI(ctx context.Context, ate *reservation.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error)
-
 	// DialConsole creates a client connection to the specified DUT's Console endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialConsole(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
@@ -134,35 +131,8 @@ type Binding interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialCLI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
 
-	// PushTopology pushes a topology to the ATE.
-	// The framework has already verified that there is at least one interface
-	// and that each port belongs to at most one port bundle.
-	PushTopology(ate *reservation.ATE, topology *opb.Topology) error
-
-	// UpdateTopology updates a topology on the ATE.
-	UpdateTopology(ate *reservation.ATE, topology *opb.Topology) error
-
-	// UpdateBGPPeerStates updates the states of BGP peers on interfaces on the ATE.
-	// TODO: Remove this method once new Ixia config binding is used.
-	UpdateBGPPeerStates(ate *reservation.ATE, interfaces []*opb.InterfaceConfig) error
-
-	// StartProtocols starts control plane protocols on the ATE.
-	StartProtocols(ate *reservation.ATE) error
-
-	// StopProtocols stops control plane protocols on the ATE.
-	StopProtocols(ate *reservation.ATE) error
-
-	// StartTraffic starts traffic flows on the ATE.
-	// All the flows are already verified to belong to the ATE.
-	StartTraffic(ate *reservation.ATE, flows []*opb.Flow) error
-
-	// UpdateTraffic updates traffic flows on the ATE.
-	// Implementations must return an error if any of the flows have not been started.
-	// All the flows are already verified to belong to the ATE.
-	UpdateTraffic(ate *reservation.ATE, flows []*opb.Flow) error
-
-	// StopTraffic stops all traffic flows on the ATE.
-	StopTraffic(ate *reservation.ATE) error
+	// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
+	DialIxNetwork(ctx context.Context, ate *reservation.ATE) (*IxNetwork, error)
 
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
@@ -170,19 +140,25 @@ type Binding interface {
 	// classify the error as such to distinguish it from a genuine test failure.
 	HandleInfraFail(err error) error
 
-	// SetATEPortState sets the enabled state of a physical port on the ATE.
-	SetATEPortState(ate *reservation.ATE, port string, enabled bool) error
-
 	// SetTestMetadata sets the metadata for the currently running test.
 	SetTestMetadata(md *TestMetadata) error
-
-	// RestartRouting restarts routing on the specified target.
-	RestartRouting(dut *reservation.DUT) error
 }
 
 // ConfigOptions is a set of options for the config push.
 type ConfigOptions struct {
 	OpenConfig, Append bool
+}
+
+// IxNetwork provides information for an IxNetwork session.
+type IxNetwork struct {
+	// Session is an IxNetwork session for an ATE.
+	Session *ixweb.Session
+	// ChassisHost is an optional hostname or IP address to use when assigning
+	// Ixia VPorts. If empty, defaults to the name of the reserved ATE.
+	ChassisHost string
+	// SyslogHost is an optional hostname or IP address to which IxNetwork should
+	// stream logs. If empty, syslog streaming is not enabled.
+	SyslogHost string
 }
 
 // GNOIClients stores APIs to GNOI services.

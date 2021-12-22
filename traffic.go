@@ -89,6 +89,11 @@ func (tr *Traffic) Stop(t testing.TB) {
 	}
 }
 
+// IMIXCustom is an representation of custom IMIX entries to be configured for a flow on the ATE.
+type IMIXCustom struct {
+	pb *opb.FrameSize_ImixCustom
+}
+
 // Flow is an representation of a flow that is to be configured on the ATE.
 type Flow struct {
 	headers []Header
@@ -424,4 +429,25 @@ func (f *Flow) WithFrameSizeIMIXTolly() *Flow {
 		},
 	}
 	return f
+}
+
+// FrameSizeIMIXCustom configures this IMIX to use custom size and weight pairs.
+func (f *Flow) FrameSizeIMIXCustom() *IMIXCustom {
+	if f.pb.FrameSize.GetImixCustom() == nil {
+		f.pb.FrameSize = &opb.FrameSize{
+			Type: &opb.FrameSize_ImixCustom_ {
+				ImixCustom: &opb.FrameSize_ImixCustom{},
+			},
+		}
+	}
+	return &IMIXCustom{pb: f.pb.FrameSize.GetImixCustom()}
+}
+
+// AddEntry adds a custom IMIX entry.
+func (ic *IMIXCustom) AddEntry(size, weight uint32) *IMIXCustom {
+	ic.pb.Entries = append(ic.pb.Entries, &opb.FrameSize_ImixCustomEntry{
+		Size: size,
+		Weight: weight,
+	})
+	return ic
 }

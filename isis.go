@@ -33,6 +33,13 @@ type ISReachabilityConfig struct {
 	pb *opb.ISReachability
 }
 
+// WithName assigns a name to the IS-IS reachability config.
+// It should be unique among all reachability configs on the interface.
+func (i *ISReachabilityConfig) WithName(name string) *ISReachabilityConfig {
+	i.pb.Name = name
+	return i
+}
+
 // ISISNode is a representation of a simulated IS-IS node.
 type ISISNode struct {
 	pb *opb.ISReachability_Node

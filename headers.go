@@ -183,6 +183,12 @@ func (h *IPv4Header) WithECN(ecn uint8) *IPv4Header {
 	return h
 }
 
+// WithHeaderChecksum sets the header checksum value of the IPv4 header.
+func (h *IPv4Header) WithHeaderChecksum(checksum uint16) *IPv4Header {
+	h.pb.Checksum = uint32(checksum)
+	return h
+}
+
 func (h *IPv4Header) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Ipv4{h.pb}}
 }
@@ -417,4 +423,636 @@ func (h *UDPHeader) DstPortRange() *UIntRange {
 
 func (h *UDPHeader) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Udp{h.pb}}
+}
+
+// HTTPHeader is an HTTP packet header.
+type HTTPHeader struct {
+	pb *opb.HttpHeader
+}
+
+// NewHTTPHeader returns a new HTTP header.
+// The header is initialized with none of its properties specified.
+func NewHTTPHeader() *HTTPHeader {
+	return &HTTPHeader{&opb.HttpHeader{}}
+}
+
+func (h *HTTPHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Http{h.pb}}
+}
+
+// ICMPHeader is an ICMP packet header.
+type ICMPHeader struct {
+	pb *opb.IcmpHeader
+}
+
+// NewICMPHeader returns a new ICMP header.
+// The header is initialized as an Echo Reply.
+func NewICMPHeader() *ICMPHeader {
+	return &ICMPHeader{&opb.IcmpHeader{
+		Type: &opb.IcmpHeader_EchoReply_{&opb.IcmpHeader_EchoReply{}},
+	}}
+}
+
+func (h *ICMPHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Icmp{h.pb}}
+}
+
+// ICMPEchoReply is an ICMP echo reply message.
+type ICMPEchoReply struct {
+	pb *opb.IcmpHeader_EchoReply
+}
+
+// EchoReply sets the ICMPHeader message type to echo reply.
+func (h *ICMPHeader) EchoReply() *ICMPEchoReply {
+	epb := &opb.IcmpHeader_EchoReply{}
+	h.pb.Type = &opb.IcmpHeader_EchoReply_{epb}
+	return &ICMPEchoReply{epb}
+}
+
+// ICMPDestinationUnreachable is an ICMP destination unreachable message.
+type ICMPDestinationUnreachable struct {
+	pb *opb.IcmpHeader_DestinationUnreachable
+}
+
+// DestinationUnreachable sets the ICMPHeader message type to destination unreachable.
+func (h *ICMPHeader) DestinationUnreachable() *ICMPDestinationUnreachable {
+	dupb := &opb.IcmpHeader_DestinationUnreachable{}
+	h.pb.Type = &opb.IcmpHeader_DestinationUnreachable_{dupb}
+	return &ICMPDestinationUnreachable{dupb}
+}
+
+// WithNetworkUnreachable sets the destination unreachable code to network unreachable.
+func (h *ICMPDestinationUnreachable) WithNetworkUnreachable() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_NETWORK_UNREACHABLE
+	return h
+}
+
+// WithHostUnreachable sets the destination unreachable code to host unreachable.
+func (h *ICMPDestinationUnreachable) WithHostUnreachable() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_HOST_UNREACHABLE
+	return h
+}
+
+// WithProtocolUnreachable sets the destination unreachable code to protocol unreachable.
+func (h *ICMPDestinationUnreachable) WithProtocolUnreachable() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_PROTOCOL_UNREACHABLE
+	return h
+}
+
+// WithPortUnreachable sets the destination unreachable code to port unreachable.
+func (h *ICMPDestinationUnreachable) WithPortUnreachable() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_PORT_UNREACHABLE
+	return h
+}
+
+// WithFragmentationRequired sets the destination unreachable code to fragmentation required.
+func (h *ICMPDestinationUnreachable) WithFragmentationRequired() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_FRAGMENTATION_REQUIRED
+	return h
+}
+
+// WithSourceRouteFailed sets the destination unreachable code to source route failed.
+func (h *ICMPDestinationUnreachable) WithSourceRouteFailed() *ICMPDestinationUnreachable {
+	h.pb.Code = opb.IcmpHeader_DestinationUnreachable_SOURCE_ROUTE_FAILED
+	return h
+}
+
+// ICMPRedirectMessage is an ICMP redirect message.
+type ICMPRedirectMessage struct {
+	pb *opb.IcmpHeader_RedirectMessage
+}
+
+// RedirectMessage sets the ICMPHeader message type to redirect message.
+func (h *ICMPHeader) RedirectMessage() *ICMPRedirectMessage {
+	rmpb := &opb.IcmpHeader_RedirectMessage{}
+	h.pb.Type = &opb.IcmpHeader_RedirectMessage_{rmpb}
+	return &ICMPRedirectMessage{rmpb}
+}
+
+// WithForNetwork sets the redirect message code to redirect for network.
+func (h *ICMPRedirectMessage) WithForNetwork() *ICMPRedirectMessage {
+	h.pb.Code = opb.IcmpHeader_RedirectMessage_NETWORK
+	return h
+}
+
+// WithForHost sets the redirect message code to redirect for host.
+func (h *ICMPRedirectMessage) WithForHost() *ICMPRedirectMessage {
+	h.pb.Code = opb.IcmpHeader_RedirectMessage_HOST
+	return h
+}
+
+// WithForToSAndNetwork sets the redirect message code to redirect for ToS and network.
+func (h *ICMPRedirectMessage) WithForToSAndNetwork() *ICMPRedirectMessage {
+	h.pb.Code = opb.IcmpHeader_RedirectMessage_TOS_AND_NETWORK
+	return h
+}
+
+// WithForToSAndHost sets the redirect message code to redirect for ToS and host.
+func (h *ICMPRedirectMessage) WithForToSAndHost() *ICMPRedirectMessage {
+	h.pb.Code = opb.IcmpHeader_RedirectMessage_TOS_AND_HOST
+	return h
+}
+
+// WithIP sets the redirect gateway IP address.
+func (h *ICMPRedirectMessage) WithIP(ip string) *ICMPRedirectMessage {
+	h.pb.IpAddr = ip
+	return h
+}
+
+// ICMPEchoRequest is an ICMP echo request message.
+type ICMPEchoRequest struct {
+	pb *opb.IcmpHeader_EchoRequest
+}
+
+// EchoRequest sets the ICMPHeader message type to echo request.
+func (h *ICMPHeader) EchoRequest() *ICMPEchoRequest {
+	epb := &opb.IcmpHeader_EchoRequest{}
+	h.pb.Type = &opb.IcmpHeader_EchoRequest_{epb}
+	return &ICMPEchoRequest{epb}
+}
+
+// ICMPTimeExceeded is an ICMP time exceeded message.
+type ICMPTimeExceeded struct {
+	pb *opb.IcmpHeader_TimeExceeded
+}
+
+// TimeExceeded sets the ICMPHeader message type to time exceeded.
+func (h *ICMPHeader) TimeExceeded() *ICMPTimeExceeded {
+	tepb := &opb.IcmpHeader_TimeExceeded{}
+	h.pb.Type = &opb.IcmpHeader_TimeExceeded_{tepb}
+	return &ICMPTimeExceeded{tepb}
+}
+
+// WithTransit sets the time exceeded message code to time exceeded in transit.
+func (h *ICMPTimeExceeded) WithTransit() *ICMPTimeExceeded {
+	h.pb.Code = opb.IcmpHeader_TimeExceeded_TRANSIT
+	return h
+}
+
+// WithFragmentReassembly sets the time exceeded message code to time exceeded in fragment reassembly.
+func (h *ICMPTimeExceeded) WithFragmentReassembly() *ICMPTimeExceeded {
+	h.pb.Code = opb.IcmpHeader_TimeExceeded_FRAGMENT_REASSEMBLY
+	return h
+}
+
+// ICMPParameterProblem is an ICMP parameter problem message.
+type ICMPParameterProblem struct {
+	pb *opb.IcmpHeader_ParameterProblem
+}
+
+// ParameterProblem sets the ICMPHeader message type to parameter problem.
+func (h *ICMPHeader) ParameterProblem() *ICMPParameterProblem {
+	pppb := &opb.IcmpHeader_ParameterProblem{}
+	h.pb.Type = &opb.IcmpHeader_ParameterProblem_{pppb}
+	return &ICMPParameterProblem{pppb}
+}
+
+// WithPointer sets the pointer for the parameter problem message.
+func (h *ICMPParameterProblem) WithPointer(pointer uint32) *ICMPParameterProblem {
+	h.pb.Pointer = pointer
+	return h
+}
+
+// ICMPTimestamp is an ICMP timestamp message.
+type ICMPTimestamp struct {
+	pb *opb.IcmpHeader_Timestamp
+}
+
+// Timestamp sets the ICMPHeader message type to timestamp message.
+func (h *ICMPHeader) Timestamp() *ICMPTimestamp {
+	tpb := &opb.IcmpHeader_Timestamp{}
+	h.pb.Type = &opb.IcmpHeader_Timestamp_{tpb}
+	return &ICMPTimestamp{tpb}
+}
+
+// WithID sets the ID for the timestamp message.
+func (h *ICMPTimestamp) WithID(id uint32) *ICMPTimestamp {
+	h.pb.Id = id
+	return h
+}
+
+// WithSeq sets the sequence number for the timestamp message.
+func (h *ICMPTimestamp) WithSeq(seq uint32) *ICMPTimestamp {
+	h.pb.Seq = seq
+	return h
+}
+
+// WithOriginateTimestamp sets the originate timestamp for the timestamp message.
+func (h *ICMPTimestamp) WithOriginateTimestamp(ts uint32) *ICMPTimestamp {
+	h.pb.OriginateTs = ts
+	return h
+}
+
+// ICMPTimestampReply is an ICMP timestamp reply message.
+type ICMPTimestampReply struct {
+	pb *opb.IcmpHeader_TimestampReply
+}
+
+// TimestampReply sets the ICMPHeader message type to timestamp reply.
+func (h *ICMPHeader) TimestampReply() *ICMPTimestampReply {
+	trpb := &opb.IcmpHeader_TimestampReply{}
+	h.pb.Type = &opb.IcmpHeader_TimestampReply_{trpb}
+	return &ICMPTimestampReply{trpb}
+}
+
+// WithID sets the ID for the timestamp reply message.
+func (h *ICMPTimestampReply) WithID(id uint32) *ICMPTimestampReply {
+	h.pb.Id = id
+	return h
+}
+
+// WithSeq sets the sequence number for the timestamp reply message.
+func (h *ICMPTimestampReply) WithSeq(seq uint32) *ICMPTimestampReply {
+	h.pb.Seq = seq
+	return h
+}
+
+// WithOriginateTimestamp sets the originate timestamp for the timestamp reply message.
+func (h *ICMPTimestampReply) WithOriginateTimestamp(ts uint32) *ICMPTimestampReply {
+	h.pb.OriginateTs = ts
+	return h
+}
+
+// WithReceiveTimestamp sets the receive timestamp for the timestamp reply message.
+func (h *ICMPTimestampReply) WithReceiveTimestamp(ts uint32) *ICMPTimestampReply {
+	h.pb.ReceiveTs = ts
+	return h
+}
+
+// WithTransmitTimestamp sets the transmit timestamp for the timestamp reply message.
+func (h *ICMPTimestampReply) WithTransmitTimestamp(ts uint32) *ICMPTimestampReply {
+	h.pb.TransmitTs = ts
+	return h
+}
+
+// OSPFHeader is an OSPF packet header.
+type OSPFHeader struct {
+	pb *opb.OspfHeader
+}
+
+// NewOSPFHeader returns a new OSPF header.
+// The header is initialized as a default Hello packet.
+func NewOSPFHeader() *OSPFHeader {
+	hdr := &OSPFHeader{&opb.OspfHeader{}}
+	hdr.Hello()
+	return hdr
+}
+
+func (h *OSPFHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Ospf{h.pb}}
+}
+
+// OSPFHello is an OSPF hello message.
+type OSPFHello struct {
+	pb *opb.OspfHeader_Hello
+}
+
+// Hello sets the OSPFHeader message type to a hello message with the following
+// default values:
+// - Network Mask: 24
+// - Hello Interval: 10
+// - Router Dead Interval: 40
+func (h *OSPFHeader) Hello() *OSPFHello {
+	hpb := &opb.OspfHeader_Hello{
+		NetworkMaskLength:     24,
+		HelloIntervalSec:      10,
+		RouterDeadIntervalSec: 40,
+	}
+	h.pb.Type = &opb.OspfHeader_Hello_{hpb}
+	return &OSPFHello{hpb}
+}
+
+// WithNetworkMaskLength sets the network mask length for the hello message.
+func (h *OSPFHello) WithNetworkMaskLength(length uint32) *OSPFHello {
+	h.pb.NetworkMaskLength = length
+	return h
+}
+
+// WithHelloIntervalSec sets the interval for the hello message.
+func (h *OSPFHello) WithHelloIntervalSec(secs uint32) *OSPFHello {
+	h.pb.HelloIntervalSec = secs
+	return h
+}
+
+// WithRouterPriority sets the router priority for the hello message.
+func (h *OSPFHello) WithRouterPriority(prio uint32) *OSPFHello {
+	h.pb.RouterPriority = prio
+	return h
+}
+
+// WithRouterDeadIntervalSec sets the dead interval for the hello message.
+func (h *OSPFHello) WithRouterDeadIntervalSec(secs uint32) *OSPFHello {
+	h.pb.RouterDeadIntervalSec = secs
+	return h
+}
+
+// WithDesignatedRouter sets the designated router for the hello message.
+func (h *OSPFHello) WithDesignatedRouter(ip string) *OSPFHello {
+	h.pb.DesignatedRouter = ip
+	return h
+}
+
+// WithBackupDesignatedRouter sets the backup designated router for the hello message.
+func (h *OSPFHello) WithBackupDesignatedRouter(ip string) *OSPFHello {
+	h.pb.BackupDesignatedRouter = ip
+	return h
+}
+
+// WithNeighbors sets the neighbor routers for the hello message.
+func (h *OSPFHello) WithNeighbors(ips ...string) *OSPFHello {
+	h.pb.Neighbors = ips
+	return h
+}
+
+// OSPFDatabaseDescription is an OSPF database description message.
+type OSPFDatabaseDescription struct {
+	pb *opb.OspfHeader_DatabaseDescription
+}
+
+// DatabaseDescription sets the OSPFHeader message type to a DBD message with
+// MTU set to 1500.
+func (h *OSPFHeader) DatabaseDescription() *OSPFDatabaseDescription {
+	dpb := &opb.OspfHeader_DatabaseDescription{Mtu: 1500}
+	h.pb.Type = &opb.OspfHeader_Dbd{dpb}
+	return &OSPFDatabaseDescription{dpb}
+}
+
+// WithMTU sets the MTU field of the database description message.
+func (h *OSPFDatabaseDescription) WithMTU(mtu uint32) *OSPFDatabaseDescription {
+	h.pb.Mtu = mtu
+	return h
+}
+
+// WithInitial sets the 'initial' bit of the database description message.
+func (h *OSPFDatabaseDescription) WithInitial(initial bool) *OSPFDatabaseDescription {
+	h.pb.Initial = initial
+	return h
+}
+
+// WithMore sets the 'more' bit of the database description message.
+func (h *OSPFDatabaseDescription) WithMore(more bool) *OSPFDatabaseDescription {
+	h.pb.More = more
+	return h
+}
+
+// WithMaster sets the 'master' bit of the database description message.
+func (h *OSPFDatabaseDescription) WithMaster(master bool) *OSPFDatabaseDescription {
+	h.pb.Master = master
+	return h
+}
+
+// WithSeq sets the sequence number of the database description message.
+func (h *OSPFDatabaseDescription) WithSeq(seq uint32) *OSPFDatabaseDescription {
+	h.pb.Seq = seq
+	return h
+}
+
+// OSPFLinkStateRequest is an OSPF link state request message.
+type OSPFLinkStateRequest struct {
+	pb *opb.OspfHeader_LinkStateRequest
+}
+
+// LinkStateRequest sets the OSPFHeader message type to a link state request,
+// defaulting to asking for a Router link.
+func (h *OSPFHeader) LinkStateRequest() *OSPFLinkStateRequest {
+	lpb := &opb.OspfHeader_LinkStateRequest{Type: opb.OspfHeader_LINK_STATE_TYPE_ROUTER}
+	h.pb.Type = &opb.OspfHeader_Lsr{lpb}
+	return &OSPFLinkStateRequest{lpb}
+}
+
+// WithLinkStateTypeRouter sets the link state request type to router.
+func (h *OSPFLinkStateRequest) WithLinkStateTypeRouter() *OSPFLinkStateRequest {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_ROUTER
+	return h
+}
+
+// WithLinkStateTypeNetwork sets the link state request type to network.
+func (h *OSPFLinkStateRequest) WithLinkStateTypeNetwork() *OSPFLinkStateRequest {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_NETWORK
+	return h
+}
+
+// WithLinkStateTypeSummaryNetwork sets the link state request type to a network summary.
+func (h *OSPFLinkStateRequest) WithLinkStateTypeSummaryNetwork() *OSPFLinkStateRequest {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_SUMMARY_NETWORK
+	return h
+}
+
+// WithLinkStateTypeSummaryASBR sets the link state request type to an AS boundary router summary.
+func (h *OSPFLinkStateRequest) WithLinkStateTypeSummaryASBR() *OSPFLinkStateRequest {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_SUMMARY_ASBR
+	return h
+}
+
+// WithLinkStateTypeASExternal sets the link state request type to AS external.
+func (h *OSPFLinkStateRequest) WithLinkStateTypeASExternal() *OSPFLinkStateRequest {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_AS_EXTERNAL
+	return h
+}
+
+// WithLinkStateID sets the link state ID of the link state request.
+func (h *OSPFLinkStateRequest) WithLinkStateID(id string) *OSPFLinkStateRequest {
+	h.pb.LinkStateId = id
+	return h
+}
+
+// WithAdvertisingRouter sets the advertising router ID of the link state request.
+func (h *OSPFLinkStateRequest) WithAdvertisingRouter(id string) *OSPFLinkStateRequest {
+	h.pb.AdvertisingRouter = id
+	return h
+}
+
+// OSPFLinkStateAdvertisementHeader is an OSPF link state advertisement header.
+type OSPFLinkStateAdvertisementHeader struct {
+	pb *opb.OspfHeader_LinkStateAdvertisementHeader
+}
+
+// WithAge sets the age in seconds of the link state advertisement.
+func (h *OSPFLinkStateAdvertisementHeader) WithAge(sec uint32) *OSPFLinkStateAdvertisementHeader {
+	h.pb.AgeSeconds = sec
+	return h
+}
+
+// WithLinkStateTypeRouter sets the link state type to router.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateTypeRouter() *OSPFLinkStateAdvertisementHeader {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_ROUTER
+	return h
+}
+
+// WithLinkStateTypeNetwork sets the link state type to network.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateTypeNetwork() *OSPFLinkStateAdvertisementHeader {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_NETWORK
+	return h
+}
+
+// WithLinkStateTypeSummaryNetwork sets the link state type to a network summary.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateTypeSummaryNetwork() *OSPFLinkStateAdvertisementHeader {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_SUMMARY_NETWORK
+	return h
+}
+
+// WithLinkStateTypeSummaryASBR sets the link state type to an AS boundary router summary.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateTypeSummaryASBR() *OSPFLinkStateAdvertisementHeader {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_SUMMARY_ASBR
+	return h
+}
+
+// WithLinkStateTypeASExternal sets the link state type to AS external.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateTypeASExternal() *OSPFLinkStateAdvertisementHeader {
+	h.pb.Type = opb.OspfHeader_LINK_STATE_TYPE_AS_EXTERNAL
+	return h
+}
+
+// WithLinkStateID sets the ID of the link state advertisement.
+func (h *OSPFLinkStateAdvertisementHeader) WithLinkStateID(id string) *OSPFLinkStateAdvertisementHeader {
+	h.pb.LinkStateId = id
+	return h
+}
+
+// WithAdvertisingRouter sets the advertising router ID of the link state advertisement.
+func (h *OSPFLinkStateAdvertisementHeader) WithAdvertisingRouter(id string) *OSPFLinkStateAdvertisementHeader {
+	h.pb.AdvertisingRouter = id
+	return h
+}
+
+// WithSeq sets the sequence number of the link state advertisement.
+func (h *OSPFLinkStateAdvertisementHeader) WithSeq(seq uint32) *OSPFLinkStateAdvertisementHeader {
+	h.pb.Seq = seq
+	return h
+}
+
+// OSPFLinkStateUpdate is an OSPF link state update message.
+type OSPFLinkStateUpdate struct {
+	pb *opb.OspfHeader_LinkStateUpdate
+}
+
+// LinkStateUpdate sets the OSPFHeader message type to a link state update.
+func (h *OSPFHeader) LinkStateUpdate() *OSPFLinkStateUpdate {
+	lpb := &opb.OspfHeader_LinkStateUpdate{}
+	h.pb.Type = &opb.OspfHeader_Lsu{lpb}
+	return &OSPFLinkStateUpdate{lpb}
+}
+
+// OSPFAdvertisement respresents an OSPF link state update advertisement.
+type OSPFAdvertisement struct {
+	pb *opb.OspfHeader_LinkStateUpdate_Advertisement
+}
+
+// AddAdvertisement adds a link state advertisement to the link state update message.
+// Defaults to setting the link state type to 'router'.
+func (h *OSPFLinkStateUpdate) AddAdvertisement() *OSPFAdvertisement {
+	apb := &opb.OspfHeader_LinkStateUpdate_Advertisement{
+		Header: &opb.OspfHeader_LinkStateAdvertisementHeader{
+			Type: opb.OspfHeader_LINK_STATE_TYPE_ROUTER,
+		},
+	}
+	h.pb.Advertisements = append(h.pb.Advertisements, apb)
+	return &OSPFAdvertisement{apb}
+}
+
+// AdvertisementHeader returns the advertisement header for the link state advertisement.
+func (h *OSPFAdvertisement) AdvertisementHeader() *OSPFLinkStateAdvertisementHeader {
+	return &OSPFLinkStateAdvertisementHeader{h.pb.Header}
+}
+
+// OSPFLinkStateAck is an OSPF link state ack message.
+type OSPFLinkStateAck struct {
+	pb *opb.OspfHeader_LinkStateAck
+}
+
+// LinkStateAck sets the OSPFHeader message type to a link state ack.
+func (h *OSPFHeader) LinkStateAck() *OSPFLinkStateAck {
+	lpb := &opb.OspfHeader_LinkStateAck{}
+	h.pb.Type = &opb.OspfHeader_Lsa{lpb}
+	return &OSPFLinkStateAck{lpb}
+}
+
+// AddAdvertisementHeader adds a link state advertisement header to the link
+// state ack message.
+// Defaults to setting the link state type to 'router'.
+func (h *OSPFLinkStateAck) AddAdvertisementHeader() *OSPFLinkStateAdvertisementHeader {
+	hpb := &opb.OspfHeader_LinkStateAdvertisementHeader{
+		Type: opb.OspfHeader_LINK_STATE_TYPE_ROUTER,
+	}
+	h.pb.Headers = append(h.pb.Headers, hpb)
+	return &OSPFLinkStateAdvertisementHeader{hpb}
+}
+
+// RSVPHeader is an RSVP packet header.
+type RSVPHeader struct {
+	pb *opb.RsvpHeader
+}
+
+// NewRSVPHeader returns a new RSVP header.
+// The header is initialized with a default message type of 'Path'.
+func NewRSVPHeader() *RSVPHeader {
+	hdr := &RSVPHeader{&opb.RsvpHeader{
+		MessageType: opb.RsvpHeader_PATH,
+	}}
+	return hdr
+}
+
+func (h *RSVPHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Rsvp{h.pb}}
+}
+
+// WithVersion sets the version for the RSVP header.
+func (h *RSVPHeader) WithVersion(v uint32) *RSVPHeader {
+	h.pb.Version = v
+	return h
+}
+
+// WithRefreshReductionCapable sets the refresh reduction bit of the RSVP
+// header.
+func (h *RSVPHeader) WithRefreshReductionCapable(rr bool) *RSVPHeader {
+	h.pb.RefreshReductionCapable = rr
+	return h
+}
+
+// WithMessageTypePath sets the message type of the RSVP header to 'Path'.
+func (h *RSVPHeader) WithMessageTypePath() *RSVPHeader {
+	h.pb.MessageType = opb.RsvpHeader_PATH
+	return h
+}
+
+// WithMessageTypeResv sets the message type of the RSVP header to 'Resv'.
+func (h *RSVPHeader) WithMessageTypeResv() *RSVPHeader {
+	h.pb.MessageType = opb.RsvpHeader_RESV
+	return h
+}
+
+// WithTTL sets the TTL of the RSVP header.
+func (h *RSVPHeader) WithTTL(ttl uint32) *RSVPHeader {
+	h.pb.Ttl = ttl
+	return h
+}
+
+// PIMHeader is a PIM packet header.
+type PIMHeader struct {
+	pb *opb.PimHeader
+}
+
+// NewPIMHeader returns a new PIM header.
+// The header is initialized with a default message type of 'Hello'.
+func NewPIMHeader() *PIMHeader {
+	hdr := &PIMHeader{&opb.PimHeader{
+		Type: &opb.PimHeader_Hello_{Hello: &opb.PimHeader_Hello{}},
+	}}
+	return hdr
+}
+
+func (h *PIMHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Pim{h.pb}}
+}
+
+// Hello sets the PIMHeader message type to a hello message.
+func (h *PIMHeader) Hello() *PIMHello {
+	hpb := &opb.PimHeader_Hello{}
+	h.pb.Type = &opb.PimHeader_Hello_{hpb}
+	return &PIMHello{hpb}
+}
+
+// PIMHello is a PIM hello message.
+type PIMHello struct {
+	pb *opb.PimHeader_Hello
 }

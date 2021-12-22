@@ -52,11 +52,16 @@ func (at *ATETopology) String() string {
 }
 
 // AddInterface adds and returns an interface with the specified name.
-// The returned interface has an Ethernet configuration with an MTU of 1500.
+// The returned interface has an Ethernet configuration with the following defaults:
+// MTU: 1500
+// FEC: enabled
 func (at *ATETopology) AddInterface(name string) *Interface {
 	ipb := &opb.InterfaceConfig{
-		Name:     name,
-		Ethernet: &opb.EthernetConfig{Mtu: 1500},
+		Name: name,
+		Ethernet: &opb.EthernetConfig{
+			Mtu: 1500,
+			Fec: &opb.Fec{Enabled: true},
+		},
 	}
 	at.top.Interfaces = append(at.top.Interfaces, ipb)
 	return &Interface{pb: ipb}

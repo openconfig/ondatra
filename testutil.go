@@ -41,8 +41,8 @@ var (
 				HardwareModel:   "aristaModel",
 				SoftwareVersion: "aristaVersion",
 				Ports: map[string]*reservation.Port{
-					"port1": &reservation.Port{Name: "Et1/2/3"},
-					"port2": &reservation.Port{Name: "Et4/5/6"},
+					"port1": &reservation.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+					"port2": &reservation.Port{Name: "Et4/5/6", Speed: opb.Port_S_100GB},
 				},
 			}},
 			"dut_cisco": &reservation.DUT{&reservation.Dims{
@@ -65,8 +65,8 @@ var (
 				HardwareModel:   "ixiaModel",
 				SoftwareVersion: "ixiaVersion",
 				Ports: map[string]*reservation.Port{
-					"port1": &reservation.Port{Name: "1/1"},
-					"port2": &reservation.Port{Name: "1/2"},
+					"port1": &reservation.Port{Name: "1/1", Speed: opb.Port_S_10GB},
+					"port2": &reservation.Port{Name: "1/2", Speed: opb.Port_S_100GB},
 				},
 			}},
 		},

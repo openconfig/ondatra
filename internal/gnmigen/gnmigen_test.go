@@ -86,13 +86,8 @@ func generateCodeTestHelper(t *testing.T, dirName string, generatedFileName stri
 			tt.inFiles[i] = filepath.Join(datapath, tt.resultsFolder, tt.inFiles[i])
 		}
 
-		genCode := tt.inConfig.GenerateTelemetryCode
-		if config {
-			genCode = tt.inConfig.GenerateConfigCode
-		}
-
 		t.Run(tt.name, func(t *testing.T) {
-			code, errs := genCode(tt.inFiles, tt.inIncludePaths)
+			code, errs := tt.inConfig.GenerateCode(tt.inFiles, tt.inIncludePaths, config)
 			if gotErr := errs != nil; gotErr != tt.wantErr {
 				t.Fatalf("got errors: %v, wantErr: %v", errs, tt.wantErr)
 			} else if gotErr {
@@ -101,7 +96,7 @@ func generateCodeTestHelper(t *testing.T, dirName string, generatedFileName stri
 			}
 
 			wantFile := filepath.Join(datapath, tt.resultsFolder, dirName, generatedFileName)
-			got := code.String()
+			got := code.String(tt.inConfig.PackageName)
 			diffDetected := false
 			wantCodeBytes, err := ioutil.ReadFile(wantFile)
 			if err != nil {
@@ -116,10 +111,9 @@ func generateCodeTestHelper(t *testing.T, dirName string, generatedFileName stri
 				// Don't check flakes unless diff succeeds.
 				return
 			}
-
 			for i := 0; i < deflakeRuns; i++ {
-				gotAttempt, _ := genCode(tt.inFiles, tt.inIncludePaths)
-				if diff := codeDiff(t, got, gotAttempt.String()); diff != "" {
+				gotAttempt, _ := tt.inConfig.GenerateCode(tt.inFiles, tt.inIncludePaths, config)
+				if diff := codeDiff(t, got, gotAttempt.String(tt.inConfig.PackageName)); diff != "" {
 					t.Fatalf("flaky code generation, (-want, +got):\n%s", diff)
 				}
 			}
@@ -142,6 +136,7 @@ func TestGeneratePerNodeConfigSnippet(t *testing.T) {
 		inNodeData                *ypathgen.NodeData
 		inFakeRootTypeName        string
 		inSchemaStructPkgAccessor string
+		inConfigPkgAccessor       string
 		wantSnippet               GoPerNodeCodeSnippet
 		wantGoTypeData            goTypeData
 		wantErr                   bool
@@ -162,50 +157,52 @@ func TestGeneratePerNodeConfigSnippet(t *testing.T) {
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "Container_Leaf",
 			GetMethod: `
-// GetFull retrieves a sample for /container/leaf.
-func (n *Container_Leaf) GetFull(t testing.TB) *QualifiedInt32 {
+// Lookup fetches the value at /container/leaf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Container_Leaf) Lookup(t testing.TB) *QualifiedInt32 {
 	t.Helper()
 	goStruct := &Container{}
-	ret := &QualifiedInt32{
-		QualifiedType: getFull(t, n, "Container", goStruct, true),
+	md, ok := Lookup(t, n, "Container", goStruct, true, false)
+	if ok {
+		return convertContainer_Leaf(t, md, goStruct)
 	}
-	if !ret.IsPresent() {
-		ret.SetVal(goStruct.GetLeaf())
-		ret.Present = true
-		return ret
-	}
-	return convertContainer_Leaf(t, ret.QualifiedType, goStruct)
+	return (&QualifiedInt32{
+		Metadata: md,
+	}).SetVal(goStruct.GetLeaf())
 }
 
-// Get retrieves a value sample for /container/leaf, erroring out if it is not present.
+// Get fetches the value at /container/leaf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Container_Leaf) Get(t testing.TB) int32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /container/leaf.
-func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedInt32 {
+// Lookup fetches the values at /container/leaf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Container_LeafAny) Lookup(t testing.TB) []*QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Container", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertContainer_Leaf(t, qt, goStruct)
+		qv := convertContainer_Leaf(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /container/leaf.
+// Get fetches the values at /container/leaf with a ONCE subscription.
 func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []int32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -215,21 +212,15 @@ func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 `,
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
-// and combines the update with an existing QualifiedType to return a *QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedInt32 {
+// and combines the update with an existing Metadata to return a *QualifiedInt32.
+func convertContainer_Leaf(t testing.TB, md *genutil.Metadata, parent *Container) *QualifiedInt32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedInt32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Leaf
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -280,7 +271,7 @@ func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32
 			HasDefault:            true,
 		},
 	}, {
-		name:             "scalar leaf with schemaStructPkgAccessor",
+		name:             "scalar leaf with accessors",
 		inPathStructName: "Container_Leaf",
 		inNodeData: &ypathgen.NodeData{
 			GoTypeName:            "int32",
@@ -293,48 +284,54 @@ func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32
 		},
 		inFakeRootTypeName:        "oc.Device",
 		inSchemaStructPkgAccessor: "oc.",
+		inConfigPkgAccessor:       "config.",
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "Container_Leaf",
 			GetMethod: `
-// GetFull retrieves a sample for /container/leaf.
-func (n *Container_Leaf) GetFull(t testing.TB) *oc.QualifiedInt32 {
+// Lookup fetches the value at /container/leaf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Container_Leaf) Lookup(t testing.TB) *oc.QualifiedInt32 {
 	t.Helper()
 	goStruct := &oc.Container{}
-	ret := &oc.QualifiedInt32{
-		QualifiedType: getFull(t, n, "Container", goStruct, true),
+	md, ok := oc.Lookup(t, n, "Container", goStruct, true, false)
+	if ok {
+		return convertContainer_Leaf(t, md, goStruct)
 	}
-	return convertContainer_Leaf(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /container/leaf, erroring out if it is not present.
+// Get fetches the value at /container/leaf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Container_Leaf) Get(t testing.TB) int32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /container/leaf.
-func (n *Container_LeafAny) GetFull(t testing.TB) []*oc.QualifiedInt32 {
+// Lookup fetches the values at /container/leaf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Container_LeafAny) Lookup(t testing.TB) []*oc.QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Container", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertContainer_Leaf(t, qt, goStruct)
+		qv := convertContainer_Leaf(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /container/leaf.
+// Get fetches the values at /container/leaf with a ONCE subscription.
 func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []int32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -344,21 +341,15 @@ func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 `,
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent oc.Container
-// and combines the update with an existing QualifiedType to return a *oc.QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *oc.Container) *oc.QualifiedInt32 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedInt32.
+func convertContainer_Leaf(t testing.TB, md *genutil.Metadata, parent *oc.Container) *oc.QualifiedInt32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &oc.QualifiedInt32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Leaf
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -372,7 +363,7 @@ func (n *Container_Leaf) Delete(t testing.TB) *gpb.SetResponse {
 }
 
 // BatchDelete buffers a config delete operation at /container/leaf in the given batch object.
-func (n *Container_Leaf) BatchDelete(t testing.TB, b *SetRequestBatch) {
+func (n *Container_Leaf) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
@@ -384,7 +375,7 @@ func (n *Container_Leaf) Replace(t testing.TB, val int32) *gpb.SetResponse {
 }
 
 // BatchReplace buffers a config replace operation at /container/leaf in the given batch object.
-func (n *Container_Leaf) BatchReplace(t testing.TB, b *SetRequestBatch, val int32) {
+func (n *Container_Leaf) BatchReplace(t testing.TB, b *config.SetRequestBatch, val int32) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
@@ -396,7 +387,7 @@ func (n *Container_Leaf) Update(t testing.TB, val int32) *gpb.SetResponse {
 }
 
 // BatchUpdate buffers a config update operation at /container/leaf in the given batch object.
-func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32) {
+func (n *Container_Leaf) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val int32) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
@@ -423,45 +414,50 @@ func (n *Container_Leaf) BatchUpdate(t testing.TB, b *SetRequestBatch, val int32
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "List_Key",
 			GetMethod: `
-// GetFull retrieves a sample for /lists/list/key.
-func (n *List_Key) GetFull(t testing.TB) *QualifiedBinarySlice {
+// Lookup fetches the value at /lists/list/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *List_Key) Lookup(t testing.TB) *QualifiedBinarySlice {
 	t.Helper()
 	goStruct := &List{}
-	ret := &QualifiedBinarySlice{
-		QualifiedType: getFull(t, n, "List", goStruct, true),
+	md, ok := Lookup(t, n, "List", goStruct, true, false)
+	if ok {
+		return convertList_Key(t, md, goStruct)
 	}
-	return convertList_Key(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /lists/list/key, erroring out if it is not present.
+// Get fetches the value at /lists/list/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *List_Key) Get(t testing.TB) []Binary {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /lists/list/key.
-func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedBinarySlice {
+// Lookup fetches the values at /lists/list/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *List_KeyAny) Lookup(t testing.TB) []*QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "List", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertList_Key(t, qt, goStruct)
+		qv := convertList_Key(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /lists/list/key.
+// Get fetches the values at /lists/list/key with a ONCE subscription.
 func (n *List_KeyAny) Get(t testing.TB) [][]Binary {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data [][]Binary
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -471,21 +467,15 @@ func (n *List_KeyAny) Get(t testing.TB) [][]Binary {
 `,
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
-// and combines the update with an existing QualifiedType to return a *QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedBinarySlice {
+// and combines the update with an existing Metadata to return a *QualifiedBinarySlice.
+func convertList_Key(t testing.TB, md *genutil.Metadata, parent *List) *QualifiedBinarySlice {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedBinarySlice{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -534,7 +524,7 @@ func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []Binary) {
 			IsLeaf:                true,
 		},
 	}, {
-		name:             "non-scalar leaf with schemaStructPkgAccessor",
+		name:             "non-scalar leaf with accessors",
 		inPathStructName: "List_Key",
 		inNodeData: &ypathgen.NodeData{
 			GoTypeName:            "[]oc.Binary",
@@ -547,48 +537,54 @@ func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []Binary) {
 		},
 		inFakeRootTypeName:        "oc.Device",
 		inSchemaStructPkgAccessor: "oc.",
+		inConfigPkgAccessor:       "config.",
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "List_Key",
 			GetMethod: `
-// GetFull retrieves a sample for /lists/list/key.
-func (n *List_Key) GetFull(t testing.TB) *oc.QualifiedBinarySlice {
+// Lookup fetches the value at /lists/list/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *List_Key) Lookup(t testing.TB) *oc.QualifiedBinarySlice {
 	t.Helper()
 	goStruct := &oc.List{}
-	ret := &oc.QualifiedBinarySlice{
-		QualifiedType: getFull(t, n, "List", goStruct, true),
+	md, ok := oc.Lookup(t, n, "List", goStruct, true, false)
+	if ok {
+		return convertList_Key(t, md, goStruct)
 	}
-	return convertList_Key(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /lists/list/key, erroring out if it is not present.
+// Get fetches the value at /lists/list/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *List_Key) Get(t testing.TB) []oc.Binary {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /lists/list/key.
-func (n *List_KeyAny) GetFull(t testing.TB) []*oc.QualifiedBinarySlice {
+// Lookup fetches the values at /lists/list/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *List_KeyAny) Lookup(t testing.TB) []*oc.QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.List{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "List", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertList_Key(t, qt, goStruct)
+		qv := convertList_Key(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /lists/list/key.
+// Get fetches the values at /lists/list/key with a ONCE subscription.
 func (n *List_KeyAny) Get(t testing.TB) [][]oc.Binary {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data [][]oc.Binary
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -598,21 +594,15 @@ func (n *List_KeyAny) Get(t testing.TB) [][]oc.Binary {
 `,
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent oc.List
-// and combines the update with an existing QualifiedType to return a *oc.QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *oc.List) *oc.QualifiedBinarySlice {
+// and combines the update with an existing Metadata to return a *oc.QualifiedBinarySlice.
+func convertList_Key(t testing.TB, md *genutil.Metadata, parent *oc.List) *oc.QualifiedBinarySlice {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &oc.QualifiedBinarySlice{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -625,7 +615,7 @@ func (n *List_Key) Delete(t testing.TB) *gpb.SetResponse {
 }
 
 // BatchDelete buffers a config delete operation at /lists/list/key in the given batch object.
-func (n *List_Key) BatchDelete(t testing.TB, b *SetRequestBatch) {
+func (n *List_Key) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
@@ -637,7 +627,7 @@ func (n *List_Key) Replace(t testing.TB, val []oc.Binary) *gpb.SetResponse {
 }
 
 // BatchReplace buffers a config replace operation at /lists/list/key in the given batch object.
-func (n *List_Key) BatchReplace(t testing.TB, b *SetRequestBatch, val []oc.Binary) {
+func (n *List_Key) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []oc.Binary) {
 	t.Helper()
 	b.BatchReplace(t, n, val)
 }
@@ -649,7 +639,7 @@ func (n *List_Key) Update(t testing.TB, val []oc.Binary) *gpb.SetResponse {
 }
 
 // BatchUpdate buffers a config update operation at /lists/list/key in the given batch object.
-func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []oc.Binary) {
+func (n *List_Key) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []oc.Binary) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
 }
@@ -676,53 +666,54 @@ func (n *List_Key) BatchUpdate(t testing.TB, b *SetRequestBatch, val []oc.Binary
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "SuperContainer_Container",
 			GetMethod: `
-// GetFull retrieves a sample for /super-container/container.
-func (n *SuperContainer_Container) GetFull(t testing.TB) *QualifiedSuperContainer_Container {
+// Lookup fetches the value at /super-container/container with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *SuperContainer_Container) Lookup(t testing.TB) *QualifiedSuperContainer_Container {
 	t.Helper()
 	goStruct := &SuperContainer_Container{}
-	ret := &QualifiedSuperContainer_Container{
-		QualifiedType: getFull(t, n, "SuperContainer_Container", goStruct, false),
+	md, ok := Lookup(t, n, "SuperContainer_Container", goStruct, false, false)
+	if ok {
+		return (&QualifiedSuperContainer_Container{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /super-container/container, erroring out if it is not present.
+// Get fetches the value at /super-container/container with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *SuperContainer_Container) Get(t testing.TB) *SuperContainer_Container {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /super-container/container.
-func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*QualifiedSuperContainer_Container {
+// Lookup fetches the values at /super-container/container with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *SuperContainer_ContainerAny) Lookup(t testing.TB) []*QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &SuperContainer_Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedSuperContainer_Container{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /super-container/container.
+// Get fetches the values at /super-container/container with a ONCE subscription.
 func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*SuperContainer_Container {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*SuperContainer_Container
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -774,7 +765,7 @@ func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch,
 			IsLeaf:                false,
 		},
 	}, {
-		name:             "non-leaf with schemaStructPkgAccessor",
+		name:             "non-leaf with accessors",
 		inPathStructName: "SuperContainer_Container",
 		inNodeData: &ypathgen.NodeData{
 			GoTypeName:            "*oc.SuperContainer_Container",
@@ -787,56 +778,58 @@ func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch,
 		},
 		inFakeRootTypeName:        "oc.Device",
 		inSchemaStructPkgAccessor: "oc.",
+		inConfigPkgAccessor:       "config.",
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "SuperContainer_Container",
 			GetMethod: `
-// GetFull retrieves a sample for /super-container/container.
-func (n *SuperContainer_Container) GetFull(t testing.TB) *oc.QualifiedSuperContainer_Container {
+// Lookup fetches the value at /super-container/container with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *SuperContainer_Container) Lookup(t testing.TB) *oc.QualifiedSuperContainer_Container {
 	t.Helper()
 	goStruct := &oc.SuperContainer_Container{}
-	ret := &oc.QualifiedSuperContainer_Container{
-		QualifiedType: getFull(t, n, "SuperContainer_Container", goStruct, false),
+	md, ok := oc.Lookup(t, n, "SuperContainer_Container", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSuperContainer_Container{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /super-container/container, erroring out if it is not present.
+// Get fetches the value at /super-container/container with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *SuperContainer_Container) Get(t testing.TB) *oc.SuperContainer_Container {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /super-container/container.
-func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*oc.QualifiedSuperContainer_Container {
+// Lookup fetches the values at /super-container/container with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *SuperContainer_ContainerAny) Lookup(t testing.TB) []*oc.QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.SuperContainer_Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "SuperContainer_Container", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&oc.QualifiedSuperContainer_Container{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /super-container/container.
+// Get fetches the values at /super-container/container with a ONCE subscription.
 func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*oc.SuperContainer_Container {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*oc.SuperContainer_Container
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -852,7 +845,7 @@ func (n *SuperContainer_Container) Delete(t testing.TB) *gpb.SetResponse {
 }
 
 // BatchDelete buffers a config delete operation at /super-container/container in the given batch object.
-func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *SetRequestBatch) {
+func (n *SuperContainer_Container) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
@@ -864,7 +857,7 @@ func (n *SuperContainer_Container) Replace(t testing.TB, val *oc.SuperContainer_
 }
 
 // BatchReplace buffers a config replace operation at /super-container/container in the given batch object.
-func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *SetRequestBatch, val *oc.SuperContainer_Container) {
+func (n *SuperContainer_Container) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.SuperContainer_Container) {
 	t.Helper()
 	b.BatchReplace(t, n, val)
 }
@@ -876,7 +869,7 @@ func (n *SuperContainer_Container) Update(t testing.TB, val *oc.SuperContainer_C
 }
 
 // BatchUpdate buffers a config update operation at /super-container/container in the given batch object.
-func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch, val *oc.SuperContainer_Container) {
+func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.SuperContainer_Container) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
 }
@@ -891,7 +884,7 @@ func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch,
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotSnippet, gotGoTypeData, errs := generatePerNodeConfigSnippet(tt.inPathStructName, tt.inNodeData, tt.inFakeRootTypeName, tt.inSchemaStructPkgAccessor, false)
+			gotSnippet, gotGoTypeData, errs := generatePerNodeConfigSnippet(tt.inPathStructName, tt.inNodeData, tt.inFakeRootTypeName, tt.inSchemaStructPkgAccessor, tt.inConfigPkgAccessor, false)
 			if tt.wantErr {
 				if errs == nil {
 					t.Fatalf("want error but did not get any.\ngotSnippet: %v\n\ngotGoTypeData: %v", gotSnippet, gotGoTypeData)
@@ -899,7 +892,6 @@ func (n *SuperContainer_Container) BatchUpdate(t testing.TB, b *SetRequestBatch,
 				t.Logf("success: expected any error, received %q", errs)
 				return
 			}
-
 			if errs != nil {
 				t.Fatal(errs)
 			}
@@ -939,50 +931,52 @@ func TestGeneratePerNodeSnippet(t *testing.T) {
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "Container_Leaf",
 			GetMethod: `
-// GetFull retrieves a sample for /container/leaf.
-func (n *Container_Leaf) GetFull(t testing.TB) *QualifiedInt32 {
+// Lookup fetches the value at /container/leaf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Container_Leaf) Lookup(t testing.TB) *QualifiedInt32 {
 	t.Helper()
 	goStruct := &Container{}
-	ret := &QualifiedInt32{
-		QualifiedType: getFull(t, n, "Container", goStruct, true),
+	md, ok := Lookup(t, n, "Container", goStruct, true, true)
+	if ok {
+		return convertContainer_Leaf(t, md, goStruct)
 	}
-	if !ret.IsPresent() {
-		ret.SetVal(goStruct.GetLeaf())
-		ret.Present = true
-		return ret
-	}
-	return convertContainer_Leaf(t, ret.QualifiedType, goStruct)
+	return (&QualifiedInt32{
+		Metadata: md,
+	}).SetVal(goStruct.GetLeaf())
 }
 
-// Get retrieves a value sample for /container/leaf, erroring out if it is not present.
+// Get fetches the value at /container/leaf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Container_Leaf) Get(t testing.TB) int32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /container/leaf.
-func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedInt32 {
+// Lookup fetches the values at /container/leaf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Container_LeafAny) Lookup(t testing.TB) []*QualifiedInt32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedInt32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Container", goStruct, queryPath, true, true)
+		if !ok {
+			continue
 		}
-		qv := convertContainer_Leaf(t, qt, goStruct)
+		qv := convertContainer_Leaf(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /container/leaf.
+// Get fetches the values at /container/leaf with a ONCE subscription.
 func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []int32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -991,96 +985,105 @@ func (n *Container_LeafAny) Get(t testing.TB) []int32 {
 }
 `,
 			CollectMethod: `
-// Collect retrieves a Collection sample for /container/leaf.
+// Collect starts an asynchronous collection of the values at /container/leaf with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Container_Leaf) Collect(t testing.TB, duration time.Duration) *CollectionInt32 {
 	t.Helper()
-	return &CollectionInt32{
-		c: n.CollectUntil(t, duration, func(*QualifiedInt32) bool { return false }),
-	}
+	c := &CollectionInt32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedInt32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /container/leaf and evaluates the predicate on all samples.
-func (n *Container_Leaf) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedInt32) bool) *CollectionUntilInt32 {
+func watch_Container_Leaf(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedInt32) bool) *Int32Watcher {
 	t.Helper()
-	return &CollectionUntilInt32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Container{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertContainer_Leaf(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedInt32)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Int32Watcher{}
+	gs := &Container{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Container", gs, queryPath, true, true)
+		return convertContainer_Leaf(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedInt32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /container/leaf is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *Container_Leaf) Await(t testing.TB, duration time.Duration, val int32) []*QualifiedInt32 {
+// Watch starts an asynchronous observation of the values at /container/leaf with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Container_Leaf) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedInt32) bool) *Int32Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedInt32) bool {
+	return watch_Container_Leaf(t, n, timeout, predicate)
+}
+
+// Await observes values at /container/leaf with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Container_Leaf) Await(t testing.TB, timeout time.Duration, val int32) *QualifiedInt32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedInt32) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /container/leaf failed: no values received")
-		}
-		t.Fatalf("Await() at /container/leaf failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /container/leaf failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /container/leaf.
+// Batch adds /container/leaf to the batch object.
+func (n *Container_Leaf) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /container/leaf with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Container_LeafAny) Collect(t testing.TB, duration time.Duration) *CollectionInt32 {
 	t.Helper()
-	return &CollectionInt32{
-		c: n.CollectUntil(t, duration, func(*QualifiedInt32) bool { return false }),
-	}
+	c := &CollectionInt32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedInt32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /container/leaf and evaluates the predicate on all samples.
-func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedInt32) bool) *CollectionUntilInt32 {
+// Watch starts an asynchronous observation of the values at /container/leaf with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Container_LeafAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedInt32) bool) *Int32Watcher {
 	t.Helper()
-	return &CollectionUntilInt32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Container{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertContainer_Leaf(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedInt32)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_Container_Leaf(t, n, timeout, predicate)
+}
+
+// Batch adds /container/leaf to the batch object.
+func (n *Container_LeafAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 `,
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
-// and combines the update with an existing QualifiedType to return a *QualifiedInt32.
-func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedInt32 {
+// and combines the update with an existing Metadata to return a *QualifiedInt32.
+func convertContainer_Leaf(t testing.TB, md *genutil.Metadata, parent *Container) *QualifiedInt32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedInt32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Leaf
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -1108,45 +1111,50 @@ func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Cont
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "List_Key",
 			GetMethod: `
-// GetFull retrieves a sample for /lists/list/key.
-func (n *List_Key) GetFull(t testing.TB) *QualifiedBinarySlice {
+// Lookup fetches the value at /lists/list/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *List_Key) Lookup(t testing.TB) *QualifiedBinarySlice {
 	t.Helper()
 	goStruct := &List{}
-	ret := &QualifiedBinarySlice{
-		QualifiedType: getFull(t, n, "List", goStruct, true),
+	md, ok := Lookup(t, n, "List", goStruct, true, true)
+	if ok {
+		return convertList_Key(t, md, goStruct)
 	}
-	return convertList_Key(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /lists/list/key, erroring out if it is not present.
+// Get fetches the value at /lists/list/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *List_Key) Get(t testing.TB) []Binary {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /lists/list/key.
-func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedBinarySlice {
+// Lookup fetches the values at /lists/list/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *List_KeyAny) Lookup(t testing.TB) []*QualifiedBinarySlice {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedBinarySlice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "List", goStruct, queryPath, true, true)
+		if !ok {
+			continue
 		}
-		qv := convertList_Key(t, qt, goStruct)
+		qv := convertList_Key(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /lists/list/key.
+// Get fetches the values at /lists/list/key with a ONCE subscription.
 func (n *List_KeyAny) Get(t testing.TB) [][]Binary {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data [][]Binary
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -1155,96 +1163,105 @@ func (n *List_KeyAny) Get(t testing.TB) [][]Binary {
 }
 `,
 			CollectMethod: `
-// Collect retrieves a Collection sample for /lists/list/key.
+// Collect starts an asynchronous collection of the values at /lists/list/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *List_Key) Collect(t testing.TB, duration time.Duration) *CollectionBinarySlice {
 	t.Helper()
-	return &CollectionBinarySlice{
-		c: n.CollectUntil(t, duration, func(*QualifiedBinarySlice) bool { return false }),
-	}
+	c := &CollectionBinarySlice{}
+	c.W = n.Watch(t, duration, func(v *QualifiedBinarySlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /lists/list/key and evaluates the predicate on all samples.
-func (n *List_Key) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinarySlice) bool) *CollectionUntilBinarySlice {
+func watch_List_Key(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedBinarySlice) bool) *BinarySliceWatcher {
 	t.Helper()
-	return &CollectionUntilBinarySlice{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &List{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertList_Key(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedBinarySlice)
-			return ok && predicate(val)
-		}),
-	}
+	w := &BinarySliceWatcher{}
+	gs := &List{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "List", gs, queryPath, true, true)
+		return convertList_Key(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedBinarySlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /lists/list/key is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *List_Key) Await(t testing.TB, duration time.Duration, val []Binary) []*QualifiedBinarySlice {
+// Watch starts an asynchronous observation of the values at /lists/list/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *List_Key) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedBinarySlice) bool) *BinarySliceWatcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedBinarySlice) bool {
+	return watch_List_Key(t, n, timeout, predicate)
+}
+
+// Await observes values at /lists/list/key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *List_Key) Await(t testing.TB, timeout time.Duration, val []Binary) *QualifiedBinarySlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedBinarySlice) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /lists/list/key failed: no values received")
-		}
-		t.Fatalf("Await() at /lists/list/key failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /lists/list/key failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /lists/list/key.
+// Batch adds /lists/list/key to the batch object.
+func (n *List_Key) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /lists/list/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *List_KeyAny) Collect(t testing.TB, duration time.Duration) *CollectionBinarySlice {
 	t.Helper()
-	return &CollectionBinarySlice{
-		c: n.CollectUntil(t, duration, func(*QualifiedBinarySlice) bool { return false }),
-	}
+	c := &CollectionBinarySlice{}
+	c.W = n.Watch(t, duration, func(v *QualifiedBinarySlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /lists/list/key and evaluates the predicate on all samples.
-func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedBinarySlice) bool) *CollectionUntilBinarySlice {
+// Watch starts an asynchronous observation of the values at /lists/list/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *List_KeyAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedBinarySlice) bool) *BinarySliceWatcher {
 	t.Helper()
-	return &CollectionUntilBinarySlice{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &List{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertList_Key(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedBinarySlice)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_List_Key(t, n, timeout, predicate)
+}
+
+// Batch adds /lists/list/key to the batch object.
+func (n *List_KeyAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 `,
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
-// and combines the update with an existing QualifiedType to return a *QualifiedBinarySlice.
-func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedBinarySlice {
+// and combines the update with an existing Metadata to return a *QualifiedBinarySlice.
+func convertList_Key(t testing.TB, md *genutil.Metadata, parent *List) *QualifiedBinarySlice {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedBinarySlice{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -1272,45 +1289,50 @@ func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *Qua
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "Container_Leaf",
 			GetMethod: `
-// GetFull retrieves a sample for /container/leaf.
-func (n *Container_Leaf) GetFull(t testing.TB) *QualifiedFloat32 {
+// Lookup fetches the value at /container/leaf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Container_Leaf) Lookup(t testing.TB) *QualifiedFloat32 {
 	t.Helper()
 	goStruct := &Container{}
-	ret := &QualifiedFloat32{
-		QualifiedType: getFull(t, n, "Container", goStruct, true),
+	md, ok := Lookup(t, n, "Container", goStruct, true, true)
+	if ok {
+		return convertContainer_Leaf(t, md, goStruct)
 	}
-	return convertContainer_Leaf(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /container/leaf, erroring out if it is not present.
+// Get fetches the value at /container/leaf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Container_Leaf) Get(t testing.TB) float32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /container/leaf.
-func (n *Container_LeafAny) GetFull(t testing.TB) []*QualifiedFloat32 {
+// Lookup fetches the values at /container/leaf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Container_LeafAny) Lookup(t testing.TB) []*QualifiedFloat32 {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedFloat32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Container", goStruct, queryPath, true, true)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Container", goStruct, queryPath, true, true)
+		if !ok {
+			continue
 		}
-		qv := convertContainer_Leaf(t, qt, goStruct)
+		qv := convertContainer_Leaf(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /container/leaf.
+// Get fetches the values at /container/leaf with a ONCE subscription.
 func (n *Container_LeafAny) Get(t testing.TB) []float32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []float32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -1319,96 +1341,105 @@ func (n *Container_LeafAny) Get(t testing.TB) []float32 {
 }
 `,
 			CollectMethod: `
-// Collect retrieves a Collection sample for /container/leaf.
+// Collect starts an asynchronous collection of the values at /container/leaf with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Container_Leaf) Collect(t testing.TB, duration time.Duration) *CollectionFloat32 {
 	t.Helper()
-	return &CollectionFloat32{
-		c: n.CollectUntil(t, duration, func(*QualifiedFloat32) bool { return false }),
-	}
+	c := &CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /container/leaf and evaluates the predicate on all samples.
-func (n *Container_Leaf) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
+func watch_Container_Leaf(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *Float32Watcher {
 	t.Helper()
-	return &CollectionUntilFloat32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Container{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertContainer_Leaf(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedFloat32)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Float32Watcher{}
+	gs := &Container{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Container", gs, queryPath, true, true)
+		return convertContainer_Leaf(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /container/leaf is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *Container_Leaf) Await(t testing.TB, duration time.Duration, val float32) []*QualifiedFloat32 {
+// Watch starts an asynchronous observation of the values at /container/leaf with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Container_Leaf) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedFloat32) bool) *Float32Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedFloat32) bool {
+	return watch_Container_Leaf(t, n, timeout, predicate)
+}
+
+// Await observes values at /container/leaf with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Container_Leaf) Await(t testing.TB, timeout time.Duration, val float32) *QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedFloat32) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /container/leaf failed: no values received")
-		}
-		t.Fatalf("Await() at /container/leaf failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /container/leaf failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /container/leaf.
+// Batch adds /container/leaf to the batch object.
+func (n *Container_Leaf) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /container/leaf with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *Container_LeafAny) Collect(t testing.TB, duration time.Duration) *CollectionFloat32 {
 	t.Helper()
-	return &CollectionFloat32{
-		c: n.CollectUntil(t, duration, func(*QualifiedFloat32) bool { return false }),
-	}
+	c := &CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /container/leaf and evaluates the predicate on all samples.
-func (n *Container_LeafAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32) bool) *CollectionUntilFloat32 {
+// Watch starts an asynchronous observation of the values at /container/leaf with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Container_LeafAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedFloat32) bool) *Float32Watcher {
 	t.Helper()
-	return &CollectionUntilFloat32{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &Container{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "Container", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertContainer_Leaf(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedFloat32)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_Container_Leaf(t, n, timeout, predicate)
+}
+
+// Batch adds /container/leaf to the batch object.
+func (n *Container_LeafAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 `,
 			ConvertHelper: `
 // convertContainer_Leaf extracts the value of the leaf Leaf from its parent Container
-// and combines the update with an existing QualifiedType to return a *QualifiedFloat32.
-func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Container) *QualifiedFloat32 {
+// and combines the update with an existing Metadata to return a *QualifiedFloat32.
+func convertContainer_Leaf(t testing.TB, md *genutil.Metadata, parent *Container) *QualifiedFloat32 {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedFloat32{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Leaf
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(ygot.BinaryToFloat32(val))
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -1449,45 +1480,50 @@ func convertContainer_Leaf(t testing.TB, qt *genutil.QualifiedType, parent *Cont
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "List_Key",
 			GetMethod: `
-// GetFull retrieves a sample for /lists/list/key.
-func (n *List_Key) GetFull(t testing.TB) *QualifiedFloat32Slice {
+// Lookup fetches the value at /lists/list/key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *List_Key) Lookup(t testing.TB) *QualifiedFloat32Slice {
 	t.Helper()
 	goStruct := &List{}
-	ret := &QualifiedFloat32Slice{
-		QualifiedType: getFull(t, n, "List", goStruct, true),
+	md, ok := Lookup(t, n, "List", goStruct, true, true)
+	if ok {
+		return convertList_Key(t, md, goStruct)
 	}
-	return convertList_Key(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /lists/list/key, erroring out if it is not present.
+// Get fetches the value at /lists/list/key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *List_Key) Get(t testing.TB) []float32 {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /lists/list/key.
-func (n *List_KeyAny) GetFull(t testing.TB) []*QualifiedFloat32Slice {
+// Lookup fetches the values at /lists/list/key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *List_KeyAny) Lookup(t testing.TB) []*QualifiedFloat32Slice {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedFloat32Slice
 	for _, prefix := range sortedPrefixes {
 		goStruct := &List{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "List", goStruct, queryPath, true, true)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "List", goStruct, queryPath, true, true)
+		if !ok {
+			continue
 		}
-		qv := convertList_Key(t, qt, goStruct)
+		qv := convertList_Key(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /lists/list/key.
+// Get fetches the values at /lists/list/key with a ONCE subscription.
 func (n *List_KeyAny) Get(t testing.TB) [][]float32 {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data [][]float32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -1496,96 +1532,105 @@ func (n *List_KeyAny) Get(t testing.TB) [][]float32 {
 }
 `,
 			CollectMethod: `
-// Collect retrieves a Collection sample for /lists/list/key.
+// Collect starts an asynchronous collection of the values at /lists/list/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *List_Key) Collect(t testing.TB, duration time.Duration) *CollectionFloat32Slice {
 	t.Helper()
-	return &CollectionFloat32Slice{
-		c: n.CollectUntil(t, duration, func(*QualifiedFloat32Slice) bool { return false }),
-	}
+	c := &CollectionFloat32Slice{}
+	c.W = n.Watch(t, duration, func(v *QualifiedFloat32Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /lists/list/key and evaluates the predicate on all samples.
-func (n *List_Key) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *CollectionUntilFloat32Slice {
+func watch_List_Key(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *Float32SliceWatcher {
 	t.Helper()
-	return &CollectionUntilFloat32Slice{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &List{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertList_Key(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedFloat32Slice)
-			return ok && predicate(val)
-		}),
-	}
+	w := &Float32SliceWatcher{}
+	gs := &List{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "List", gs, queryPath, true, true)
+		return convertList_Key(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedFloat32Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until /lists/list/key is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *List_Key) Await(t testing.TB, duration time.Duration, val []float32) []*QualifiedFloat32Slice {
+// Watch starts an asynchronous observation of the values at /lists/list/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *List_Key) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *Float32SliceWatcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *QualifiedFloat32Slice) bool {
+	return watch_List_Key(t, n, timeout, predicate)
+}
+
+// Await observes values at /lists/list/key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *List_Key) Await(t testing.TB, timeout time.Duration, val []float32) *QualifiedFloat32Slice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedFloat32Slice) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at /lists/list/key failed: no values received")
-		}
-		t.Fatalf("Await() at /lists/list/key failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at /lists/list/key failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for /lists/list/key.
+// Batch adds /lists/list/key to the batch object.
+func (n *List_Key) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /lists/list/key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *List_KeyAny) Collect(t testing.TB, duration time.Duration) *CollectionFloat32Slice {
 	t.Helper()
-	return &CollectionFloat32Slice{
-		c: n.CollectUntil(t, duration, func(*QualifiedFloat32Slice) bool { return false }),
-	}
+	c := &CollectionFloat32Slice{}
+	c.W = n.Watch(t, duration, func(v *QualifiedFloat32Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for /lists/list/key and evaluates the predicate on all samples.
-func (n *List_KeyAny) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *CollectionUntilFloat32Slice {
+// Watch starts an asynchronous observation of the values at /lists/list/key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *List_KeyAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedFloat32Slice) bool) *Float32SliceWatcher {
 	t.Helper()
-	return &CollectionUntilFloat32Slice{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &List{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "List", parentPtr, nil, true, true)
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convertList_Key(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*QualifiedFloat32Slice)
-			return ok && predicate(val)
-		}),
-	}
+	return watch_List_Key(t, n, timeout, predicate)
+}
+
+// Batch adds /lists/list/key to the batch object.
+func (n *List_KeyAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 `,
 			ConvertHelper: `
 // convertList_Key extracts the value of the leaf Key from its parent List
-// and combines the update with an existing QualifiedType to return a *QualifiedFloat32Slice.
-func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *QualifiedFloat32Slice {
+// and combines the update with an existing Metadata to return a *QualifiedFloat32Slice.
+func convertList_Key(t testing.TB, md *genutil.Metadata, parent *List) *QualifiedFloat32Slice {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedFloat32Slice{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Key
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(binarySliceToFloat32(val))
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -1612,58 +1657,156 @@ func convertList_Key(t testing.TB, qt *genutil.QualifiedType, parent *List) *Qua
 		wantSnippet: GoPerNodeCodeSnippet{
 			PathStructName: "SuperContainer_Container",
 			GetMethod: `
-// GetFull retrieves a sample for /super-container/container.
-func (n *SuperContainer_Container) GetFull(t testing.TB) *QualifiedSuperContainer_Container {
+// Lookup fetches the value at /super-container/container with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *SuperContainer_Container) Lookup(t testing.TB) *QualifiedSuperContainer_Container {
 	t.Helper()
 	goStruct := &SuperContainer_Container{}
-	ret := &QualifiedSuperContainer_Container{
-		QualifiedType: getFull(t, n, "SuperContainer_Container", goStruct, false),
+	md, ok := Lookup(t, n, "SuperContainer_Container", goStruct, false, true)
+	if ok {
+		return (&QualifiedSuperContainer_Container{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /super-container/container, erroring out if it is not present.
+// Get fetches the value at /super-container/container with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *SuperContainer_Container) Get(t testing.TB) *SuperContainer_Container {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /super-container/container.
-func (n *SuperContainer_ContainerAny) GetFull(t testing.TB) []*QualifiedSuperContainer_Container {
+// Lookup fetches the values at /super-container/container with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *SuperContainer_ContainerAny) Lookup(t testing.TB) []*QualifiedSuperContainer_Container {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedSuperContainer_Container
 	for _, prefix := range sortedPrefixes {
 		goStruct := &SuperContainer_Container{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "SuperContainer_Container", goStruct, queryPath, false, true)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "SuperContainer_Container", goStruct, queryPath, false, true)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedSuperContainer_Container{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /super-container/container.
+// Get fetches the values at /super-container/container with a ONCE subscription.
 func (n *SuperContainer_ContainerAny) Get(t testing.TB) []*SuperContainer_Container {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*SuperContainer_Container
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
+}
+`,
+			CollectMethod: `
+// Collect starts an asynchronous collection of the values at /super-container/container with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *SuperContainer_Container) Collect(t testing.TB, duration time.Duration) *CollectionSuperContainer_Container {
+	t.Helper()
+	c := &CollectionSuperContainer_Container{}
+	c.W = n.Watch(t, duration, func(v *QualifiedSuperContainer_Container) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&QualifiedSuperContainer_Container{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*SuperContainer_Container)))
+		return false
+	})
+	return c
+}
+
+func watch_SuperContainer_Container(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedSuperContainer_Container) bool) *SuperContainer_ContainerWatcher {
+	t.Helper()
+	w := &SuperContainer_ContainerWatcher{}
+	gs := &SuperContainer_Container{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "SuperContainer_Container", gs, queryPath, false, true)
+		return (&QualifiedSuperContainer_Container{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedSuperContainer_Container)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /super-container/container with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *SuperContainer_Container) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedSuperContainer_Container) bool) *SuperContainer_ContainerWatcher {
+	t.Helper()
+	return watch_SuperContainer_Container(t, n, timeout, predicate)
+}
+
+// Await observes values at /super-container/container with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *SuperContainer_Container) Await(t testing.TB, timeout time.Duration, val *SuperContainer_Container) *QualifiedSuperContainer_Container {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *QualifiedSuperContainer_Container) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /super-container/container failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /super-container/container to the batch object.
+func (n *SuperContainer_Container) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /super-container/container with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *SuperContainer_ContainerAny) Collect(t testing.TB, duration time.Duration) *CollectionSuperContainer_Container {
+	t.Helper()
+	c := &CollectionSuperContainer_Container{}
+	c.W = n.Watch(t, duration, func(v *QualifiedSuperContainer_Container) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /super-container/container with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *SuperContainer_ContainerAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedSuperContainer_Container) bool) *SuperContainer_ContainerWatcher {
+	t.Helper()
+	return watch_SuperContainer_Container(t, n, timeout, predicate)
+}
+
+// Batch adds /super-container/container to the batch object.
+func (n *SuperContainer_ContainerAny) Batch(t testing.TB, b *Batch) {
+	t.Helper()
+	MustAddToBatch(t, b, n)
 }
 `,
 		},
@@ -1717,18 +1860,22 @@ func TestGeneratePerTypeSnippet(t *testing.T) {
 			QualifiedType: `
 // QualifiedInt32 is a int32 with a corresponding timestamp.
 type QualifiedInt32 struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val int32 // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedInt32) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the int32 sample, erroring out if not present.
 func (q *QualifiedInt32) Val(t testing.TB) int32 {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -1741,38 +1888,41 @@ func (q *QualifiedInt32) Val(t testing.TB) int32 {
 // SetVal sets the value of the int32 sample.
 func (q *QualifiedInt32) SetVal(v int32) *QualifiedInt32 {
 	q.val = v
+	q.present = true
 	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedInt32) IsPresent() bool {
+	return q != nil && q.present
 }
 
 `,
 			CollectionType: `
 // CollectionInt32 is a telemetry Collection whose Await method returns a slice of int32 samples.
 type CollectionInt32 struct {
-	c *CollectionUntilInt32
+	W *Int32Watcher
+	Data []*QualifiedInt32
 }
 
-// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
-func (u *CollectionInt32) Await(t testing.TB) []*QualifiedInt32 {
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionInt32) Await(t testing.TB) []*QualifiedInt32 {
 	t.Helper()
-	data, _ := u.c.Await(t)
-	return data
+	c.W.Await(t)
+	return c.Data
 }
 
-// CollectionUntilInt32 is a telemetry Collection whose Await method returns a slice of int32 samples.
-type CollectionUntilInt32 struct {
-	c *genutil.Collection
+// Int32Watcher observes a stream of int32 samples.
+type Int32Watcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedInt32
 }
 
-// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
-// The received data and the status of the predicate are returned.
-func (u *CollectionUntilInt32) Await(t testing.TB) ([]*QualifiedInt32, bool) {
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Int32Watcher) Await(t testing.TB) (*QualifiedInt32, bool) {
 	t.Helper()
-	var ret []*QualifiedInt32
-	updates, predTrue := u.c.Await(t)
-	for _, upd := range updates {
-		ret = append(ret, upd.(*QualifiedInt32))
-	}
-	return ret, predTrue
+	return w.LastVal, w.W.Await(t)
 }
 `,
 		},
@@ -1789,18 +1939,22 @@ func (u *CollectionUntilInt32) Await(t testing.TB) ([]*QualifiedInt32, bool) {
 			QualifiedType: `
 // QualifiedBinarySlice is a []Binary with a corresponding timestamp.
 type QualifiedBinarySlice struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val []Binary // val is the sample value.
+	present bool
 }
 
 func (q *QualifiedBinarySlice) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the []Binary sample, erroring out if not present.
 func (q *QualifiedBinarySlice) Val(t testing.TB) []Binary {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -1813,38 +1967,41 @@ func (q *QualifiedBinarySlice) Val(t testing.TB) []Binary {
 // SetVal sets the value of the []Binary sample.
 func (q *QualifiedBinarySlice) SetVal(v []Binary) *QualifiedBinarySlice {
 	q.val = v
+	q.present = true
 	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedBinarySlice) IsPresent() bool {
+	return q != nil && q.present
 }
 
 `,
 			CollectionType: `
 // CollectionBinarySlice is a telemetry Collection whose Await method returns a slice of []Binary samples.
 type CollectionBinarySlice struct {
-	c *CollectionUntilBinarySlice
+	W *BinarySliceWatcher
+	Data []*QualifiedBinarySlice
 }
 
-// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
-func (u *CollectionBinarySlice) Await(t testing.TB) []*QualifiedBinarySlice {
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionBinarySlice) Await(t testing.TB) []*QualifiedBinarySlice {
 	t.Helper()
-	data, _ := u.c.Await(t)
-	return data
+	c.W.Await(t)
+	return c.Data
 }
 
-// CollectionUntilBinarySlice is a telemetry Collection whose Await method returns a slice of []Binary samples.
-type CollectionUntilBinarySlice struct {
-	c *genutil.Collection
+// BinarySliceWatcher observes a stream of []Binary samples.
+type BinarySliceWatcher struct {
+	W *genutil.Watcher
+	LastVal *QualifiedBinarySlice
 }
 
-// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
-// The received data and the status of the predicate are returned.
-func (u *CollectionUntilBinarySlice) Await(t testing.TB) ([]*QualifiedBinarySlice, bool) {
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *BinarySliceWatcher) Await(t testing.TB) (*QualifiedBinarySlice, bool) {
 	t.Helper()
-	var ret []*QualifiedBinarySlice
-	updates, predTrue := u.c.Await(t)
-	for _, upd := range updates {
-		ret = append(ret, upd.(*QualifiedBinarySlice))
-	}
-	return ret, predTrue
+	return w.LastVal, w.W.Await(t)
 }
 `,
 		},

@@ -12,8 +12,6 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/protobuf/proto"
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
@@ -42,93 +40,59 @@ func (n *RootPath) WithClient(c gpb.GNMIClient) *RootPath {
 	return n
 }
 
-type SetRequestBatch struct {
-  *privateSetRequestBatch
-}
-
-type privateSetRequestBatch struct {
-  *genutil.SetRequestBatch
-}
-
 // NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
-func (d *DevicePath) NewBatch() *SetRequestBatch {
-	return &SetRequestBatch{&privateSetRequestBatch{genutil.NewSetRequestBatch(&RootPath{ygot.NewDeviceRootBase(d.Id())})} }
+func (d *RootPath) NewBatch() *SetRequestBatch {
+	return NewSetBatch(d)
 }
 
-func binarySliceToFloat32(in []Binary) []float32 {
-	converted := make([]float32, 0, len(in))
-	for _, binary := range in {
-		converted = append(converted, ygot.BinaryToFloat32(binary))
-	}
-	return converted
-}
-
-// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
-	datapoints, queryPath := genutil.Get(t, n, isLeaf)
-	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, false)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return qv
-}
-
-// getSchema return the generated ytypes schema used for unmarshaling datapoints.
-func getSchema() *ytypes.Schema {
-	return &ytypes.Schema{
-		Root:       &Root{},
-		SchemaTree: SchemaTree,
-		Unmarshal:  Unmarshal,
-	}
-}
-
-// GetFull retrieves a sample for /openconfig-simple/parent.
-func (n *ParentPath) GetFull(t testing.TB) *QualifiedParent {
+// Lookup fetches the value at /openconfig-simple/parent with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *ParentPath) Lookup(t testing.TB) *QualifiedParent {
 	t.Helper()
 	goStruct := &Parent{}
-	ret := &QualifiedParent{
-		QualifiedType: getFull(t, n, "Parent", goStruct, false),
+	md, ok := Lookup(t, n, "Parent", goStruct, false, false)
+	if ok {
+		return (&QualifiedParent{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *ParentPath) Get(t testing.TB) *Parent {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent.
-func (n *ParentPathAny) GetFull(t testing.TB) []*QualifiedParent {
+// Lookup fetches the values at /openconfig-simple/parent with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *ParentPathAny) Lookup(t testing.TB) []*QualifiedParent {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedParent
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedParent{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent.
+// Get fetches the values at /openconfig-simple/parent with a ONCE subscription.
 func (n *ParentPathAny) Get(t testing.TB) []*Parent {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Parent
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -172,53 +136,54 @@ func (n *ParentPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Parent) 
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child.
-func (n *Parent_ChildPath) GetFull(t testing.TB) *QualifiedParent_Child {
+// Lookup fetches the value at /openconfig-simple/parent/child with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_ChildPath) Lookup(t testing.TB) *QualifiedParent_Child {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedParent_Child{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, false),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, false, false)
+	if ok {
+		return (&QualifiedParent_Child{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_ChildPath) Get(t testing.TB) *Parent_Child {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child.
-func (n *Parent_ChildPathAny) GetFull(t testing.TB) []*QualifiedParent_Child {
+// Lookup fetches the values at /openconfig-simple/parent/child with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_ChildPathAny) Lookup(t testing.TB) []*QualifiedParent_Child {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedParent_Child
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedParent_Child{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child.
+// Get fetches the values at /openconfig-simple/parent/child with a ONCE subscription.
 func (n *Parent_ChildPathAny) Get(t testing.TB) []*Parent_Child {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*Parent_Child
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -262,45 +227,50 @@ func (n *Parent_ChildPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val *Pa
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child/config/five.
-func (n *Parent_Child_FivePath) GetFull(t testing.TB) *QualifiedBinary {
+// Lookup fetches the value at /openconfig-simple/parent/child/config/five with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_Child_FivePath) Lookup(t testing.TB) *QualifiedBinary {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedBinary{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, true, false)
+	if ok {
+		return convertParent_Child_FivePath(t, md, goStruct)
 	}
-	return convertParent_Child_FivePath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child/config/five, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child/config/five with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_FivePath) Get(t testing.TB) Binary {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/five.
-func (n *Parent_Child_FivePathAny) GetFull(t testing.TB) []*QualifiedBinary {
+// Lookup fetches the values at /openconfig-simple/parent/child/config/five with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_Child_FivePathAny) Lookup(t testing.TB) []*QualifiedBinary {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedBinary
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertParent_Child_FivePath(t, qt, goStruct)
+		qv := convertParent_Child_FivePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/five.
+// Get fetches the values at /openconfig-simple/parent/child/config/five with a ONCE subscription.
 func (n *Parent_Child_FivePathAny) Get(t testing.TB) []Binary {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []Binary
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -345,64 +315,63 @@ func (n *Parent_Child_FivePath) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 }
 
 // convertParent_Child_FivePath extracts the value of the leaf Five from its parent Parent_Child
-// and combines the update with an existing QualifiedType to return a *QualifiedBinary.
-func convertParent_Child_FivePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+// and combines the update with an existing Metadata to return a *QualifiedBinary.
+func convertParent_Child_FivePath(t testing.TB, md *genutil.Metadata, parent *Parent_Child) *QualifiedBinary {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedBinary{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Five
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child/config/four.
-func (n *Parent_Child_FourPath) GetFull(t testing.TB) *QualifiedBinary {
+// Lookup fetches the value at /openconfig-simple/parent/child/config/four with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_Child_FourPath) Lookup(t testing.TB) *QualifiedBinary {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedBinary{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, true, false)
+	if ok {
+		return convertParent_Child_FourPath(t, md, goStruct)
 	}
-	return convertParent_Child_FourPath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child/config/four, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child/config/four with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_FourPath) Get(t testing.TB) Binary {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/four.
-func (n *Parent_Child_FourPathAny) GetFull(t testing.TB) []*QualifiedBinary {
+// Lookup fetches the values at /openconfig-simple/parent/child/config/four with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_Child_FourPathAny) Lookup(t testing.TB) []*QualifiedBinary {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedBinary
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertParent_Child_FourPath(t, qt, goStruct)
+		qv := convertParent_Child_FourPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/four.
+// Get fetches the values at /openconfig-simple/parent/child/config/four with a ONCE subscription.
 func (n *Parent_Child_FourPathAny) Get(t testing.TB) []Binary {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []Binary
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -447,64 +416,63 @@ func (n *Parent_Child_FourPath) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 }
 
 // convertParent_Child_FourPath extracts the value of the leaf Four from its parent Parent_Child
-// and combines the update with an existing QualifiedType to return a *QualifiedBinary.
-func convertParent_Child_FourPath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedBinary {
+// and combines the update with an existing Metadata to return a *QualifiedBinary.
+func convertParent_Child_FourPath(t testing.TB, md *genutil.Metadata, parent *Parent_Child) *QualifiedBinary {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedBinary{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Four
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child/config/one.
-func (n *Parent_Child_OnePath) GetFull(t testing.TB) *QualifiedString {
+// Lookup fetches the value at /openconfig-simple/parent/child/config/one with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_Child_OnePath) Lookup(t testing.TB) *QualifiedString {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedString{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, true, false)
+	if ok {
+		return convertParent_Child_OnePath(t, md, goStruct)
 	}
-	return convertParent_Child_OnePath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child/config/one, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child/config/one with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_OnePath) Get(t testing.TB) string {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/one.
-func (n *Parent_Child_OnePathAny) GetFull(t testing.TB) []*QualifiedString {
+// Lookup fetches the values at /openconfig-simple/parent/child/config/one with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_Child_OnePathAny) Lookup(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertParent_Child_OnePath(t, qt, goStruct)
+		qv := convertParent_Child_OnePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/one.
+// Get fetches the values at /openconfig-simple/parent/child/config/one with a ONCE subscription.
 func (n *Parent_Child_OnePathAny) Get(t testing.TB) []string {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []string
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -549,64 +517,63 @@ func (n *Parent_Child_OnePath) BatchUpdate(t testing.TB, b *SetRequestBatch, val
 }
 
 // convertParent_Child_OnePath extracts the value of the leaf One from its parent Parent_Child
-// and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertParent_Child_OnePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedString {
+// and combines the update with an existing Metadata to return a *QualifiedString.
+func convertParent_Child_OnePath(t testing.TB, md *genutil.Metadata, parent *Parent_Child) *QualifiedString {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedString{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.One
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child/config/three.
-func (n *Parent_Child_ThreePath) GetFull(t testing.TB) *QualifiedE_Child_Three {
+// Lookup fetches the value at /openconfig-simple/parent/child/config/three with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_Child_ThreePath) Lookup(t testing.TB) *QualifiedE_Child_Three {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedE_Child_Three{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, true, false)
+	if ok {
+		return convertParent_Child_ThreePath(t, md, goStruct)
 	}
-	return convertParent_Child_ThreePath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child/config/three, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child/config/three with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_ThreePath) Get(t testing.TB) E_Child_Three {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child/config/three.
-func (n *Parent_Child_ThreePathAny) GetFull(t testing.TB) []*QualifiedE_Child_Three {
+// Lookup fetches the values at /openconfig-simple/parent/child/config/three with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_Child_ThreePathAny) Lookup(t testing.TB) []*QualifiedE_Child_Three {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedE_Child_Three
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertParent_Child_ThreePath(t, qt, goStruct)
+		qv := convertParent_Child_ThreePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child/config/three.
+// Get fetches the values at /openconfig-simple/parent/child/config/three with a ONCE subscription.
 func (n *Parent_Child_ThreePathAny) Get(t testing.TB) []E_Child_Three {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []E_Child_Three
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -651,64 +618,63 @@ func (n *Parent_Child_ThreePath) BatchUpdate(t testing.TB, b *SetRequestBatch, v
 }
 
 // convertParent_Child_ThreePath extracts the value of the leaf Three from its parent Parent_Child
-// and combines the update with an existing QualifiedType to return a *QualifiedE_Child_Three.
-func convertParent_Child_ThreePath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedE_Child_Three {
+// and combines the update with an existing Metadata to return a *QualifiedE_Child_Three.
+func convertParent_Child_ThreePath(t testing.TB, md *genutil.Metadata, parent *Parent_Child) *QualifiedE_Child_Three {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedE_Child_Three{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Three
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-simple/parent/child/state/two.
-func (n *Parent_Child_TwoPath) GetFull(t testing.TB) *QualifiedString {
+// Lookup fetches the value at /openconfig-simple/parent/child/state/two with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Parent_Child_TwoPath) Lookup(t testing.TB) *QualifiedString {
 	t.Helper()
 	goStruct := &Parent_Child{}
-	ret := &QualifiedString{
-		QualifiedType: getFull(t, n, "Parent_Child", goStruct, true),
+	md, ok := Lookup(t, n, "Parent_Child", goStruct, true, false)
+	if ok {
+		return convertParent_Child_TwoPath(t, md, goStruct)
 	}
-	return convertParent_Child_TwoPath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/parent/child/state/two, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/parent/child/state/two with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_TwoPath) Get(t testing.TB) string {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/parent/child/state/two.
-func (n *Parent_Child_TwoPathAny) GetFull(t testing.TB) []*QualifiedString {
+// Lookup fetches the values at /openconfig-simple/parent/child/state/two with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Parent_Child_TwoPathAny) Lookup(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &Parent_Child{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "Parent_Child", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "Parent_Child", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertParent_Child_TwoPath(t, qt, goStruct)
+		qv := convertParent_Child_TwoPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/parent/child/state/two.
+// Get fetches the values at /openconfig-simple/parent/child/state/two with a ONCE subscription.
 func (n *Parent_Child_TwoPathAny) Get(t testing.TB) []string {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []string
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -753,72 +719,67 @@ func (n *Parent_Child_TwoPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val
 }
 
 // convertParent_Child_TwoPath extracts the value of the leaf Two from its parent Parent_Child
-// and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertParent_Child_TwoPath(t testing.TB, qt *genutil.QualifiedType, parent *Parent_Child) *QualifiedString {
+// and combines the update with an existing Metadata to return a *QualifiedString.
+func convertParent_Child_TwoPath(t testing.TB, md *genutil.Metadata, parent *Parent_Child) *QualifiedString {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedString{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.Two
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /openconfig-simple/remote-container.
-func (n *RemoteContainerPath) GetFull(t testing.TB) *QualifiedRemoteContainer {
+// Lookup fetches the value at /openconfig-simple/remote-container with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *RemoteContainerPath) Lookup(t testing.TB) *QualifiedRemoteContainer {
 	t.Helper()
 	goStruct := &RemoteContainer{}
-	ret := &QualifiedRemoteContainer{
-		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, false),
+	md, ok := Lookup(t, n, "RemoteContainer", goStruct, false, false)
+	if ok {
+		return (&QualifiedRemoteContainer{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/remote-container, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/remote-container with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *RemoteContainerPath) Get(t testing.TB) *RemoteContainer {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/remote-container.
-func (n *RemoteContainerPathAny) GetFull(t testing.TB) []*QualifiedRemoteContainer {
+// Lookup fetches the values at /openconfig-simple/remote-container with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *RemoteContainerPathAny) Lookup(t testing.TB) []*QualifiedRemoteContainer {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), false)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedRemoteContainer
 	for _, prefix := range sortedPrefixes {
 		goStruct := &RemoteContainer{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, false, false)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "RemoteContainer", goStruct, queryPath, false, false)
+		if !ok {
 			continue
 		}
 		qv := (&QualifiedRemoteContainer{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/remote-container.
+// Get fetches the values at /openconfig-simple/remote-container with a ONCE subscription.
 func (n *RemoteContainerPathAny) Get(t testing.TB) []*RemoteContainer {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []*RemoteContainer
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -862,45 +823,50 @@ func (n *RemoteContainerPath) BatchUpdate(t testing.TB, b *SetRequestBatch, val 
 	b.BatchUpdate(t, n, val)
 }
 
-// GetFull retrieves a sample for /openconfig-simple/remote-container/config/a-leaf.
-func (n *RemoteContainer_ALeafPath) GetFull(t testing.TB) *QualifiedString {
+// Lookup fetches the value at /openconfig-simple/remote-container/config/a-leaf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *RemoteContainer_ALeafPath) Lookup(t testing.TB) *QualifiedString {
 	t.Helper()
 	goStruct := &RemoteContainer{}
-	ret := &QualifiedString{
-		QualifiedType: getFull(t, n, "RemoteContainer", goStruct, true),
+	md, ok := Lookup(t, n, "RemoteContainer", goStruct, true, false)
+	if ok {
+		return convertRemoteContainer_ALeafPath(t, md, goStruct)
 	}
-	return convertRemoteContainer_ALeafPath(t, ret.QualifiedType, goStruct)
+	return nil
 }
 
-// Get retrieves a value sample for /openconfig-simple/remote-container/config/a-leaf, erroring out if it is not present.
+// Get fetches the value at /openconfig-simple/remote-container/config/a-leaf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *RemoteContainer_ALeafPath) Get(t testing.TB) string {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
-// GetFull retrieves a list of samples for /openconfig-simple/remote-container/config/a-leaf.
-func (n *RemoteContainer_ALeafPathAny) GetFull(t testing.TB) []*QualifiedString {
+// Lookup fetches the values at /openconfig-simple/remote-container/config/a-leaf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *RemoteContainer_ALeafPathAny) Lookup(t testing.TB) []*QualifiedString {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), true)
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*QualifiedString
 	for _, prefix := range sortedPrefixes {
 		goStruct := &RemoteContainer{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "RemoteContainer", goStruct, queryPath, true, false)
-		if err != nil {
-			t.Fatal(err)
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], GetSchema(), "RemoteContainer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
 		}
-		qv := convertRemoteContainer_ALeafPath(t, qt, goStruct)
+		qv := convertRemoteContainer_ALeafPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get retrieves a list of value samples for /openconfig-simple/remote-container/config/a-leaf.
+// Get fetches the values at /openconfig-simple/remote-container/config/a-leaf with a ONCE subscription.
 func (n *RemoteContainer_ALeafPathAny) Get(t testing.TB) []string {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []string
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -945,42 +911,39 @@ func (n *RemoteContainer_ALeafPath) BatchUpdate(t testing.TB, b *SetRequestBatch
 }
 
 // convertRemoteContainer_ALeafPath extracts the value of the leaf ALeaf from its parent RemoteContainer
-// and combines the update with an existing QualifiedType to return a *QualifiedString.
-func convertRemoteContainer_ALeafPath(t testing.TB, qt *genutil.QualifiedType, parent *RemoteContainer) *QualifiedString {
+// and combines the update with an existing Metadata to return a *QualifiedString.
+func convertRemoteContainer_ALeafPath(t testing.TB, md *genutil.Metadata, parent *RemoteContainer) *QualifiedString {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &QualifiedString{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.ALeaf
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		qv.SetVal(*val)
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
 
-// GetFull retrieves a sample for /.
-func (n *RootPath) GetFull(t testing.TB) *QualifiedRoot {
+// Lookup fetches the value at / with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 	t.Helper()
 	goStruct := &Root{}
-	ret := &QualifiedRoot{
-		QualifiedType: getFull(t, n, "Root", goStruct, false),
+	md, ok := Lookup(t, n, "Root", goStruct, false, false)
+	if ok {
+		return (&QualifiedRoot{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 }
 
-// Get retrieves a value sample for /, erroring out if it is not present.
+// Get fetches the value at / with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
 // Delete deletes the configuration at /.

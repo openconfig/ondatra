@@ -28,6 +28,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
+	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/internal/usererr"
@@ -46,13 +47,13 @@ var (
 	gnois = make(map[*reservation.DUT]binding.GNOIClients)
 )
 
-// NewGNOI creates a new gNOI client for the specified DUT.
+// NewGNOI creates a gNOI client for the specified DUT.
 func NewGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, error) {
 	return binding.Get().DialGNOI(ctx, dut, grpc.WithBlock())
 }
 
-// fetchGNOI fetches a cached gNOI client for the given DUT.
-func fetchGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, error) {
+// FetchGNOI fetches a cached gNOI client for the given DUT.
+func FetchGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	gnoi, ok := gnois[dut]
@@ -60,7 +61,7 @@ func fetchGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, 
 		var err error
 		gnoi, err = NewGNOI(ctx, dut)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error dialing gNOI: %w", err)
 		}
 		gnois[dut] = gnoi
 	}
@@ -78,9 +79,9 @@ func Install(ctx context.Context, dev reservation.Device, version string, standb
 	if version == "" {
 		return usererr.New("version not set in install operation on device: %v", dev)
 	}
-	gnoi, err := fetchGNOI(ctx, dut)
+	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
-		return errors.Wrap(err, "error dialing gnoi")
+		return err
 	}
 	ic, err := gnoi.OS().Install(ctx)
 	if err != nil {
@@ -177,9 +178,9 @@ func Ping(ctx context.Context, dev reservation.Device, dest string) (rerr error)
 	if dest == "" {
 		return errors.Errorf("no destination for ping operation: %v", dest)
 	}
-	gnoi, err := fetchGNOI(ctx, dut)
+	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
-		return errors.Wrap(err, "error dialing gnoi")
+		return err
 	}
 	ping, err := gnoi.System().Ping(ctx, &spb.PingRequest{Destination: dest})
 	if err != nil {
@@ -203,7 +204,7 @@ func SetInterfaceState(ctx context.Context, dev reservation.Device, intf string,
 	if dut, ok := dev.(*reservation.DUT); ok {
 		return setDUTInterfaceState(ctx, dut, intf, *enabled)
 	}
-	return binding.Get().SetATEPortState(dev.(*reservation.ATE), intf, *enabled)
+	return ate.SetInterfaceState(ctx, dev.(*reservation.ATE), intf, *enabled)
 }
 
 func setDUTInterfaceState(ctx context.Context, dut *reservation.DUT, intf string, enabled bool) error {
@@ -235,9 +236,9 @@ func Reboot(ctx context.Context, dev reservation.Device, timeout time.Duration) 
 	if err != nil {
 		return err
 	}
-	gnoi, err := fetchGNOI(ctx, dut)
+	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
-		return errors.Wrap(err, "error dialing gnoi")
+		return err
 	}
 	if _, err := gnoi.System().Reboot(ctx, &spb.RebootRequest{Method: spb.RebootMethod_COLD}); err != nil {
 		return errors.Wrap(err, "error on gnoi reboot")
@@ -278,13 +279,18 @@ func Reboot(ctx context.Context, dev reservation.Device, timeout time.Duration) 
 	return errors.Errorf("reboot of %s timed out after %s", dev, rebootTimeout)
 }
 
-// RestartRouting restarts routing on a device.
-func RestartRouting(ctx context.Context, dev reservation.Device) error {
+// KillProcess kills a process on a device, and optionally restarts it.
+func KillProcess(ctx context.Context, dev reservation.Device, req *spb.KillProcessRequest) error {
 	dut, err := checkDUT(dev, "restart routing")
 	if err != nil {
 		return err
 	}
-	return binding.Get().RestartRouting(dut)
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return err
+	}
+	_, err = gnoi.System().KillProcess(ctx, req)
+	return err
 }
 
 func checkDUT(dev reservation.Device, op string) (*reservation.DUT, error) {

@@ -26,6 +26,7 @@
 package gnmigen
 
 import (
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -43,19 +44,23 @@ const (
 	// defaultPathPackageName specifies the default name that should be
 	// used for the generated Go package.
 	defaultPathPackageName = "telemetry"
+	// defaultConfigPackageName specifies the default name that should be
+	// used for the generated Go package.
+	defaultConfigPackageName = "config"
 	// schemaStructPkgAlias is the package alias of the schema struct
 	// package when the struct package is to be generated in a
 	// separate package.
 	schemaStructPkgAlias = "oc"
+	// configPkgAlias is the package alias of the config
+	// package when the package is to be generated in a
+	// separate package.
+	configPkgAlias = "config"
 	// defaultFakeRootName is the default name for the root structure.
 	defaultFakeRootName = "root"
 	// pathStructSuffix is the suffix to be appended to generated
 	// PathStructs to distinguish them from the generated GoStructs, which
 	// assume a similar name.
 	pathStructSuffix = "Path"
-	// defaultProtoLibImportPath is the default path for the proto
-	// library used in the generated code.
-	defaultProtoLibImportPath = "google.golang.org/protobuf/proto"
 	// defaultGenUtilImportPath is the default path for the genutil library that
 	// is used in the generated code.
 	defaultGenUtilImportPath = "github.com/openconfig/ondatra/internal/gnmigen/genutil/genutil"
@@ -66,12 +71,10 @@ func NewDefaultConfig() *GenConfig {
 	return &GenConfig{
 		PackageName: defaultPathPackageName,
 		GoImports: GoImports{
-			YgotImportPath:     genutil.GoDefaultYgotImportPath,
-			YtypesImportPath:   genutil.GoDefaultYtypesImportPath,
-			GoyangImportPath:   genutil.GoDefaultGoyangImportPath,
-			ProtoLibImportPath: defaultProtoLibImportPath,
-			GNMIProtoPath:      genutil.GoDefaultGNMIImportPath,
-			GenUtilImportPath:  defaultGenUtilImportPath,
+			YgotImportPath:    genutil.GoDefaultYgotImportPath,
+			YtypesImportPath:  genutil.GoDefaultYtypesImportPath,
+			GNMIProtoPath:     genutil.GoDefaultGNMIImportPath,
+			GenUtilImportPath: defaultGenUtilImportPath,
 		},
 		FakeRootName:     defaultFakeRootName,
 		GeneratingBinary: genutil.CallerName(),
@@ -111,6 +114,9 @@ type GenConfig struct {
 	// instead of the "path" struct tags when both are present while
 	// processing a GoStruct for unmarshalling or marshalling.
 	PreferShadowPath bool
+	// SplitByModule controls whether path struct helpers should be split
+	// into different Go packages.
+	SplitByModule bool
 }
 
 // GoImports contains package import paths needed by telemgen.
@@ -126,44 +132,38 @@ type GoImports struct {
 	// YtypesImportPath specifies the path to the ytypes library that should be used
 	// in the generated code.
 	YtypesImportPath string
-	// GoyangImportPath specifies the path that should be used in the generated
-	// code for importing the goyang/pkg/yang package.
-	GoyangImportPath string
 	// GNMIProtoPath specifies the path to the generated gNMI protobuf, which
 	// is used when generating gNMI paths for unmarshalling a schema element.
 	GNMIProtoPath string
-	// ProtoLibImportPath is the import path to the proto package used by
-	// the generated code.
-	ProtoLibImportPath string
 	// GenUtilImportPath is the import path to the genutil package,
 	// which contains helpers used by the generated code.
 	GenUtilImportPath string
+	// ConfigImportPath is the import path of the of config batch objects.
+	ConfigImportPath string
 }
 
 // GeneratedTelemetryCode contains generated code snippets that when written
 // into files within a directory, forms the telemetry part of a telemetry path
-// API implementation. The generated code is divided into the header and two
-// types of telemetry struct & method objects. The header is further split into
-// a common and a one-off header, and the telemetry objects is further split
-// into snippets that are per-node, or per return type, as different nodes
-// could have the same return types.
+// API implementation.
 type GeneratedTelemetryCode struct {
-	// CommonHeader is the header that should be used for all output Go files.
-	CommonHeader string
-	// OneOffHeader defines the header that should be included in only one output Go file.
-	OneOffHeader string
-	// GoPerNodeSnippets is the set of generated telemetry methods for all leaf path structs.
-	GoPerNodeSnippets GoPerNodeCodeSnippets
+	// Headers is a map from package name to the header that should be used for the output Go files.
+	Headers map[string]string
+	// FakeRootMethods defines the helper code that must be included in the package containing the fake root.
+	// This includes additional funcs to set custom options on the fake root.
+	FakeRootMethods string
+	// GoPerNodeSnippets is a map from package name to the set of generated telemetry methods
+	// for each top-level path struct below the fake root.
+	GoPerNodeSnippets map[string]GoPerNodeCodeSnippets
 	// GoReturnTypeCodeSnippets is the set of return types for all telemetry methods.
 	GoReturnTypeSnippets GoReturnTypeCodeSnippets
 }
 
-func (c *GeneratedTelemetryCode) String() string {
+func (c *GeneratedTelemetryCode) String(pkg string) string {
 	var b strings.Builder
-	b.WriteString(c.CommonHeader)
-	b.WriteString(c.OneOffHeader)
+	b.WriteString(c.Headers[pkg])
+	b.WriteString(c.FakeRootMethods)
 	b.WriteString(c.GoReturnTypeSnippets.String())
-	b.WriteString(c.GoPerNodeSnippets.String())
+	b.WriteString(c.GoPerNodeSnippets[pkg].String())
 	return b.String()
 }
 
@@ -232,7 +232,9 @@ func (s *GoReturnTypeCodeSnippet) String() string {
 	return b.String()
 }
 
-// GenerateTelemetryCode takes a slice of strings containing the path to a set
+var pkgReplaceExp = regexp.MustCompile("[._-]")
+
+// GenerateCode takes a slice of strings containing the path to a set
 // of YANG files which contain YANG modules, and a second slice of strings
 // which specifies the set of paths that are to be searched for associated
 // models (e.g., modules that are included by the specified set of modules, or
@@ -259,7 +261,7 @@ func (s *GoReturnTypeCodeSnippet) String() string {
 //      leaf update to the desired ygen value.
 // If errors are encountered during code generation, they are returned.
 // TODO: Collect() for non-leaf nodes are currently unsupported (methods are not being generated).
-func (cg *GenConfig) GenerateTelemetryCode(yangFiles, includePaths []string) (*GeneratedTelemetryCode, util.Errors) {
+func (cg *GenConfig) GenerateCode(yangFiles, includePaths []string, config bool) (*GeneratedTelemetryCode, util.Errors) {
 	// pcg is the configuration used to generate the path struct
 	// portion of the generated telemetry code.
 	pcg := &ypathgen.GenConfig{
@@ -278,16 +280,26 @@ func (cg *GenConfig) GenerateTelemetryCode(yangFiles, includePaths []string) (*G
 		YANGParseOptions:                     cg.YANGParseOptions,
 		GeneratingBinary:                     cg.GeneratingBinary,
 		ListBuilderKeyThreshold:              cg.ListBuilderKeyThreshold,
+		TrimOCPackage:                        true,
+		SplitByModule:                        cg.SplitByModule,
+	}
+	if config {
+		pcg.PreferOperationalState = false
+		pcg.ExcludeState = true
 	}
 	_, nodeDataMap, errs := pcg.GeneratePathCode(yangFiles, includePaths)
 	if errs != nil {
 		return nil, errs
 	}
 
-	genCode := &GeneratedTelemetryCode{}
+	genCode := &GeneratedTelemetryCode{
+		GoPerNodeSnippets: make(map[string]GoPerNodeCodeSnippets),
+		Headers:           make(map[string]string),
+	}
 
 	var err error
-	if genCode.CommonHeader, genCode.OneOffHeader, err = cg.generateGoHeader(false, cg.PreferShadowPath); err != nil {
+	genCode.FakeRootMethods, err = cg.executeTemplate(cg.PackageName, config, goFakeRootMethods)
+	if err != nil {
 		return nil, util.AppendErr(errs, err)
 	}
 
@@ -297,6 +309,10 @@ func (cg *GenConfig) GenerateTelemetryCode(yangFiles, includePaths []string) (*G
 	if cg.GoImports.SchemaStructPkgPath != "" {
 		schemaStructPkgAccessor = schemaStructPkgAlias + "."
 	}
+	var configPkgAccessor string
+	if cg.GoImports.ConfigImportPath != "" {
+		configPkgAccessor = configPkgAlias + "."
+	}
 	fakeRootTypeName := cg.fakeRootTypeName(false)
 
 	// Accumulate encountered types for per-type output later.
@@ -304,18 +320,33 @@ func (cg *GenConfig) GenerateTelemetryCode(yangFiles, includePaths []string) (*G
 
 	// Per-node code generation; order by names for deterministic output.
 	for _, pathStructName := range ypathgen.GetOrderedNodeDataNames(nodeDataMap) {
-		perNodeSnippet, goType, es := generatePerNodeSnippet(pathStructName, nodeDataMap[pathStructName], fakeRootTypeName, schemaStructPkgAccessor, cg.PreferShadowPath)
+		pkgName := nodeDataMap[pathStructName].GoPathPackageName
+		var perNodeSnippet GoPerNodeCodeSnippet
+		var goType goTypeData
+		var es util.Errors
+
+		if config {
+			perNodeSnippet, goType, es = generatePerNodeConfigSnippet(pathStructName, nodeDataMap[pathStructName], fakeRootTypeName, schemaStructPkgAccessor, configPkgAccessor, cg.PreferShadowPath)
+		} else {
+			perNodeSnippet, goType, es = generatePerNodeSnippet(pathStructName, nodeDataMap[pathStructName], fakeRootTypeName, schemaStructPkgAccessor, cg.PreferShadowPath)
+		}
 		if es != nil {
 			errs = util.AppendErrs(errs, es)
 			continue
 		}
-		genCode.GoPerNodeSnippets = append(genCode.GoPerNodeSnippets, perNodeSnippet)
+		genCode.GoPerNodeSnippets[pkgName] = append(genCode.GoPerNodeSnippets[pkgName], perNodeSnippet)
 		goTypeSet[goType.GoTypeName] = goType
+	}
+	for pkg := range genCode.GoPerNodeSnippets {
+		genCode.Headers[pkg], err = cg.executeTemplate(pkg, config, goCommonHeaderTemplate)
+		if err != nil {
+			return nil, util.AppendErr(errs, err)
+		}
 	}
 
 	// Per-type code generation. This only makes sense to generate if we're
 	// not already importing a set of schema structs from another package.
-	if cg.GoImports.SchemaStructPkgPath == "" {
+	if cg.GoImports.SchemaStructPkgPath == "" && !config {
 		for _, goType := range goTypeSet {
 			returnTypeSnippet, es := generatePerTypeSnippet(goType, fakeRootTypeName, cg.PreferShadowPath)
 			if es != nil {
@@ -329,75 +360,6 @@ func (cg *GenConfig) GenerateTelemetryCode(yangFiles, includePaths []string) (*G
 			return genCode.GoReturnTypeSnippets[i].TypeName < genCode.GoReturnTypeSnippets[j].TypeName
 		})
 	}
-
-	return genCode, errs
-}
-
-// GenerateConfigCode takes a slice of strings containing the path to a set
-// of YANG files which contain YANG modules, and a second slice of strings
-// which specifies the set of paths that are to be searched for associated
-// models (e.g., modules that are included by the specified set of modules, or
-// submodules of those modules). It extracts the set of modules that are to be
-// generated, and returns *GeneratedTelemetryCode which can be written into a
-// directory of files that together constitute a package for a config path
-// API.
-// If errors are encountered during code generation, they are returned.
-// TODO: Batch and Get functionalities are unimplemented.
-func (cg *GenConfig) GenerateConfigCode(yangFiles, includePaths []string) (*GeneratedTelemetryCode, util.Errors) {
-	// pcg is the configuration used to generate the path struct
-	// portion of the generated telemetry code.
-	pcg := &ypathgen.GenConfig{
-		PackageName: cg.PackageName,
-		GoImports: ypathgen.GoImports{
-			SchemaStructPkgPath: cg.GoImports.SchemaStructPkgPath,
-			YgotImportPath:      cg.GoImports.YgotImportPath,
-		},
-		FakeRootName:                         cg.FakeRootName,
-		PathStructSuffix:                     pathStructSuffix,
-		PreferOperationalState:               false,
-		ExcludeState:                         true,
-		ShortenEnumLeafNames:                 true,
-		EnumOrgPrefixesToTrim:                []string{"openconfig"},
-		UseDefiningModuleForTypedefEnumNames: true,
-		ExcludeModules:                       cg.ExcludeModules,
-		YANGParseOptions:                     cg.YANGParseOptions,
-		GeneratingBinary:                     cg.GeneratingBinary,
-	}
-	_, nodeDataMap, errs := pcg.GeneratePathCode(yangFiles, includePaths)
-	if errs != nil {
-		return nil, errs
-	}
-
-	genCode := &GeneratedTelemetryCode{}
-
-	var err error
-	genCode.CommonHeader, genCode.OneOffHeader, err = cg.generateGoHeader(true, cg.PreferShadowPath)
-	if err != nil {
-		return nil, util.AppendErr(errs, err)
-	}
-
-	// Determine whether there is an accessor for accessing generated
-	// structs and telemetry types from a different package.
-	var schemaStructPkgAccessor string
-	if cg.GoImports.SchemaStructPkgPath != "" {
-		schemaStructPkgAccessor = schemaStructPkgAlias + "."
-	}
-	fakeRootTypeName := cg.fakeRootTypeName(false)
-
-	// Accumulate encountered types for per-type output later.
-	goTypeSet := map[string]goTypeData{}
-
-	// Per-node code generation; order by names for deterministic output.
-	for _, pathStructName := range ypathgen.GetOrderedNodeDataNames(nodeDataMap) {
-		perNodeSnippet, goType, es := generatePerNodeConfigSnippet(pathStructName, nodeDataMap[pathStructName], fakeRootTypeName, schemaStructPkgAccessor, cg.PreferShadowPath)
-		if es != nil {
-			errs = util.AppendErrs(errs, es)
-			continue
-		}
-		genCode.GoPerNodeSnippets = append(genCode.GoPerNodeSnippets, perNodeSnippet)
-		goTypeSet[goType.GoTypeName] = goType
-	}
-
 	return genCode, errs
 }
 
@@ -418,27 +380,23 @@ import (
 	"testing"
 	"time"
 
-	"{{ .ProtoLibImportPath }}"
-	"{{ .GoyangImportPath }}"
 	"{{ .YgotImportPath }}"
 	"{{ .YtypesImportPath }}"
 	"{{ .GenUtilImportPath }}"
 	{{- if .SchemaStructPkgPath }}
 	{{ .SchemaStructPkgAlias }} "{{ .SchemaStructPkgPath }}"
 	{{- end }}
+	{{- if .ConfigImportPath }}
+	{{ .ConfigPkgAlias }} "{{ .ConfigImportPath }}"
+	{{- end }}
 
 	gpb "{{ .GNMIProtoPath }}"
 )
 `)
 
-	// goOneOffHeaderTemplate contains code that should live only in one of the
-	// generated telemetry files (which all live within one package).
-	//
-	// binarySliceToFloat32, although ideally should be part of the ygot
-	// library, lives here due to "[]Binary", a type defined in the
-	// ygen-generated code, not being able to be assigned to [][]byte,
-	// preventing such a function from being used.
-	goOneOffHeaderTemplate = mustTemplate("goOneOffHeader", `
+	// goFakeRootMethods contains code that should live only in the
+	// the package that contains the fake root path struct.
+	goFakeRootMethods = mustTemplate("goFakeRootMethods", `
 // WithReplica adds the replica number to the context metadata of the gNMI
 // server query.
 func (n *{{ .FakeRootTypePathName }}) WithReplica(replica int) *{{ .FakeRootTypePathName }} {
@@ -462,72 +420,36 @@ func (n *{{ .FakeRootTypePathName }}) WithClient(c gpb.GNMIClient) *{{ .FakeRoot
 
 {{- if .GenerateConfigCode }}
 
-type SetRequestBatch struct {
-  *privateSetRequestBatch
+// NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
+func (d *{{ .FakeRootTypePathName }}) NewBatch() *{{ .ConfigPkgAccessor }}SetRequestBatch {
+	return {{ .ConfigPkgAccessor }}NewSetBatch(d)
 }
-
-type privateSetRequestBatch struct {
-  *genutil.SetRequestBatch
-}
+{{- else }}
 
 // NewBatch returns a newly instantiated SetRequestBatch object for batching set requests.
-func (d *DevicePath) NewBatch() *SetRequestBatch {
-	return &SetRequestBatch{&privateSetRequestBatch{genutil.NewSetRequestBatch(&{{ .FakeRootTypePathName }}{ygot.New{{ .FakeRootBaseTypeName }}(d.Id())})} }
+func (d *{{ .FakeRootTypePathName }}) NewBatch() *{{ .SchemaStructPkgAccessor }}Batch {
+	return {{ .SchemaStructPkgAccessor }}NewBatch(d)
 }
-
 {{- end }}
-
-func binarySliceToFloat32(in []{{ .SchemaStructPkgAccessor }}Binary) []float32 {
-	converted := make([]float32, 0, len(in))
-	for _, binary := range in {
-		converted = append(converted, ygot.BinaryToFloat32(binary))
-	}
-	return converted
-}
-
-// getFull uses gNMI Get to fill the input GoStruct with values at the input path.
-func getFull(t testing.TB, n ygot.PathStruct, goStructName string, gs ygot.GoStruct, isLeaf bool) *genutil.QualifiedType {
-	datapoints, queryPath := genutil.Get(t, n, isLeaf)
-	qv, err := genutil.Unmarshal(t, datapoints, getSchema(), goStructName, gs, queryPath, isLeaf, {{ .PreferShadowPath }})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return qv
-}
-
-// getSchema return the generated ytypes schema used for unmarshaling datapoints.
-func getSchema() *ytypes.Schema {
-	return &ytypes.Schema{
-		Root:       &{{ .FakeRootTypeName }}{},
-		SchemaTree: {{ .SchemaStructPkgAccessor }}SchemaTree,
-		Unmarshal:  {{ .SchemaStructPkgAccessor }}Unmarshal,
-	}
-}
 `)
 
 	// goLeafConvertTemplate contains the per-leaf helper that retrieves the leaf
 	// value from its containing parent GoStruct to complete the unmarshalling process.
 	goLeafConvertTemplate = mustTemplate("goLeafConvertHelper", `{{ $QualifiedGoTypeName := printf "%sQualified%s" .SchemaStructPkgAccessor .GoType.TransformedGoTypeName }}
 // convert{{ .PathStructName }} extracts the value of the leaf {{ .GoFieldName }} from its parent {{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}
-// and combines the update with an existing QualifiedType to return a *{{ $QualifiedGoTypeName }}.
-func convert{{ .PathStructName }}(t testing.TB, qt *genutil.QualifiedType, parent *{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}) *{{ $QualifiedGoTypeName }} {
+// and combines the update with an existing Metadata to return a *{{ $QualifiedGoTypeName }}.
+func convert{{ .PathStructName }}(t testing.TB, md *genutil.Metadata, parent *{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}) *{{ $QualifiedGoTypeName }} {
 	t.Helper()
-	if qt.ComplianceErrors != nil {
-		t.Fatal(qt.ComplianceErrors)
-	}
 	qv := &{{ $QualifiedGoTypeName }}{
-		QualifiedType: qt,
+		Metadata: md,
 	}
 	val := parent.{{ .GoFieldName }}
 	if !reflect.ValueOf(val).IsZero() {
-		qv.Present = true
 		{{- if .SpecialConversionFn }}
 		qv.SetVal({{ .SpecialConversionFn }}({{ if .IsScalarField -}} * {{- end -}} val))
 		{{- else }}
 		qv.SetVal({{ if .IsScalarField -}} * {{- end -}} val)
 		{{- end }}
-	} else {
-		qv.Present = false
 	}
 	return qv
 }
@@ -536,62 +458,59 @@ func convert{{ .PathStructName }}(t testing.TB, qt *genutil.QualifiedType, paren
 	// goNodeGetTemplate contains the per-node helper that makes the Get telemetry
 	// call, unmarshals the payload, and returns the result to the user.
 	goNodeGetTemplate = mustTemplate("goLeafGetMethod", `{{ $QualifiedGoTypeName := printf "%sQualified%s" .SchemaStructPkgAccessor .GoType.TransformedGoTypeName }}
-// GetFull retrieves a sample for {{ .YANGPath }}.
-func (n *{{ .PathStructName }}) GetFull(t testing.TB) *{{ $QualifiedGoTypeName }} {
+// Lookup fetches the value at {{ .YANGPath }} with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *{{ .PathStructName }}) Lookup(t testing.TB) *{{ $QualifiedGoTypeName }} {
 	t.Helper()
 	goStruct := &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
-	ret := &{{ $QualifiedGoTypeName }}{
-		QualifiedType: getFull(t, n, "{{ .GoStructTypeName }}", goStruct, {{ .GoType.IsLeaf }}),
+	md, ok := {{ .SchemaStructPkgAccessor }}Lookup(t, n, "{{ .GoStructTypeName }}", goStruct, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+	if ok {
+		{{- if .GoType.IsLeaf }}
+		return convert{{ .PathStructName }}(t, md, goStruct)
+		{{- else }}
+		return (&{{ $QualifiedGoTypeName }}{
+			Metadata: md,
+		}).SetVal(goStruct)
+		{{- end }}
 	}
-
 	{{- if .GoType.HasDefault }}
-	if !ret.IsPresent() {
-		ret.SetVal(goStruct.Get{{ .GoFieldName }}())
-		ret.Present = true
-		return ret
-	}
-	{{- end }}
-
-	{{- if .GoType.IsLeaf }}
-	return convert{{ .PathStructName }}(t, ret.QualifiedType, goStruct)
+	return (&{{ $QualifiedGoTypeName }}{
+		Metadata: md,
+	}).SetVal(goStruct.Get{{ .GoFieldName }}())
 	{{- else }}
-	if ret.IsPresent() {
-		ret.SetVal(goStruct)
-	}
-	return ret
+	return nil
 	{{- end }}
 }
 
-// Get retrieves a value sample for {{ .YANGPath }}, erroring out if it is not present.
+// Get fetches the value at {{ .YANGPath }} with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
 func (n *{{ .PathStructName }}) Get(t testing.TB) {{ .GoType.GoTypeName }} {
 	t.Helper()
-	return n.GetFull(t).Val(t)
+	return n.Lookup(t).Val(t)
 }
 
 {{- if not .IsRoot }}
 
-// GetFull retrieves a list of samples for {{ .YANGPath }}.
-func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) GetFull(t testing.TB) []*{{ $QualifiedGoTypeName }} {
+// Lookup fetches the values at {{ .YANGPath }} with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Lookup(t testing.TB) []*{{ $QualifiedGoTypeName }} {
 	t.Helper()
-	datapoints, queryPath := genutil.Get(t, n, false)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)), {{- if .GoType.IsLeaf }} true {{- else }} false {{- end }})
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*{{ $QualifiedGoTypeName }}
 	for _, prefix := range sortedPrefixes {
 		goStruct := &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
-		qt, err := genutil.Unmarshal(t, datapointGroups[prefix], getSchema(), "{{ .GoStructTypeName }}", goStruct, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		{{- if .GoType.IsLeaf }}
-		qv := convert{{ .PathStructName }}(t, qt, goStruct)
-		{{- else }}
-		if !qt.IsPresent() {
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], {{ .SchemaStructPkgAccessor }}GetSchema(), "{{ .GoStructTypeName }}", goStruct, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+		if !ok {
 			continue
 		}
+		{{- if .GoType.IsLeaf }}
+		qv := convert{{ .PathStructName }}(t, md, goStruct)
+		{{- else }}
 		qv := (&{{ $QualifiedGoTypeName }}{
-			QualifiedType: qt,
+			Metadata: md,
 		}).SetVal(goStruct)
 		{{- end }}
 		data = append(data, qv)
@@ -599,10 +518,10 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) GetFull(t testing.TB) []*{{
 	return data
 }
 
-// Get retrieves a list of value samples for {{ .YANGPath }}.
+// Get fetches the values at {{ .YANGPath }} with a ONCE subscription.
 func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Get(t testing.TB) []{{ .GoType.GoTypeName }} {
 	t.Helper()
-	fulldata := n.GetFull(t)
+	fulldata := n.Lookup(t)
 	var data []{{ .GoType.GoTypeName }}
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
@@ -613,83 +532,117 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Get(t testing.TB) []{{ .GoT
 {{- end }}
 `)
 
-	// goLeafCollectTemplate contains the per-leaf Collect telemetry call. It
+	// goCollectTemplate contains the per-leaf Collect telemetry call. It
 	// triggers the asynchronous data collection at this node, and returns a type
 	// containing an Await method that blocks for the data collection to complete,
 	// as well as unmarshalling that data for the user.
-	goLeafCollectTemplate = mustTemplate("goLeafCollectMethod", `{{ $QualifiedGoTypeName := printf "%sQualified%s" .SchemaStructPkgAccessor .GoType.TransformedGoTypeName }}
-// Collect retrieves a Collection sample for {{ .YANGPath }}.
+	goCollectTemplate = mustTemplate("goLeafCollectMethod", `{{ $QualifiedGoTypeName := printf "%sQualified%s" .SchemaStructPkgAccessor .GoType.TransformedGoTypeName }}
+// Collect starts an asynchronous collection of the values at {{ .YANGPath }} with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *{{ .PathStructName }}) Collect(t testing.TB, duration time.Duration) *{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }} {
 	t.Helper()
-	return &{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }}{
-		c: n.CollectUntil(t, duration, func(*{{ $QualifiedGoTypeName }}) bool { return false }),
-	}
+	c := &{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }}{}
+	c.W = n.Watch(t, duration, func(v *{{ $QualifiedGoTypeName }}) bool {
+		{{- if .GoType.IsLeaf }}
+		c.Data = append(c.Data, v)
+		{{- else }}
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&{{ $QualifiedGoTypeName }}{
+			Metadata: v.Metadata,
+		}).SetVal(copy.({{.GoType.GoTypeName}})))
+		{{- end }}
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for {{ .YANGPath }} and evaluates the predicate on all samples.
-func (n *{{ .PathStructName }}) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }} {
+func watch_{{ .PathStructName }}(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher {
 	t.Helper()
-	return &{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }}{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &{{ .GoStructTypeName }}{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convert{{ .PathStructName }}(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
-			return ok && predicate(val)
-		}),
-	}
+	w := &{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher{}
+	gs := &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
+	w.W = genutil.MustWatch(t, n, nil, duration, {{ .GoType.IsLeaf }}, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, {{ .SchemaStructPkgAccessor }}GetSchema(), "{{ .GoStructTypeName }}", gs, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+		{{- if .GoType.IsLeaf }}
+		return convert{{ .PathStructName }}(t, md, gs), nil
+		{{- else }}
+		return (&{{ $QualifiedGoTypeName }}{
+			Metadata: md,
+		}).SetVal(gs), nil
+		{{- end }}
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
 }
 
-// Await waits until {{ .YANGPath }} is deep-equal to the val and returns all received values.
-// If the timeout is exceeded, the test fails fatally.
-// To avoid a fatal failure or wait for a generic predicate, use CollectUntil.
-func (n *{{ .PathStructName }}) Await(t testing.TB, duration time.Duration, val {{ .GoType.GoTypeName }}) []*{{ $QualifiedGoTypeName }} {
+// Watch starts an asynchronous observation of the values at {{ .YANGPath }} with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *{{ .PathStructName }}) Watch(t testing.TB, timeout time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher {
 	t.Helper()
-	vals, success := n.CollectUntil(t, duration, func(data *{{ $QualifiedGoTypeName }}) bool {
+	return watch_{{ .PathStructName }}(t, n, timeout, predicate)
+}
+
+// Await observes values at {{ .YANGPath }} with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *{{ .PathStructName }}) Await(t testing.TB, timeout time.Duration, val {{ .GoType.GoTypeName }}) *{{ $QualifiedGoTypeName }} {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *{{ $QualifiedGoTypeName }}) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		if len(vals) == 0 {
-			t.Fatalf("Await() at {{ .YANGPath }} failed: no values received")
-		}
-		t.Fatalf("Await() at {{ .YANGPath }} failed: want %v, last got %v", val, vals[len(vals) - 1])
+		t.Fatalf("Await() at {{ .YANGPath }} failed: want %v, last got %v", val, got)
 	}
-	return vals
+	return got
 }
 
-// Collect retrieves a Collection sample for {{ .YANGPath }}.
+// Batch adds {{ .YANGPath }} to the batch object.
+func (n *{{ .PathStructName }}) Batch(t testing.TB, b *{{ .SchemaStructPkgAccessor }}Batch) {
+	t.Helper()
+	{{ .SchemaStructPkgAccessor }}MustAddToBatch(t, b, n)
+}
+
+{{- if not .IsRoot }}
+
+// Collect starts an asynchronous collection of the values at {{ .YANGPath }} with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
 func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Collect(t testing.TB, duration time.Duration) *{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }} {
 	t.Helper()
-	return &{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }}{
-		c: n.CollectUntil(t, duration, func(*{{ $QualifiedGoTypeName }}) bool { return false }),
-	}
+	c := &{{ .SchemaStructPkgAccessor }}Collection{{ .GoType.TransformedGoTypeName }}{}
+	c.W = n.Watch(t, duration, func(v *{{ $QualifiedGoTypeName }}) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
 }
 
-// CollectUntil retrieves a Collection sample for {{ .YANGPath }} and evaluates the predicate on all samples.
-func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) CollectUntil(t testing.TB, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }} {
+// Watch starts an asynchronous observation of the values at {{ .YANGPath }} with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Watch(t testing.TB, timeout time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher {
 	t.Helper()
-	return &{{ .SchemaStructPkgAccessor }}CollectionUntil{{ .GoType.TransformedGoTypeName }}{
-		c: genutil.CollectUntil(t, n, duration, func(upd *genutil.DataPoint) (genutil.QualifiedValue, error) {
-			parentPtr := &{{ .GoStructTypeName }}{}
-			// queryPath is not needed on leaves because full gNMI path is always returned.
-			qv, err := genutil.Unmarshal(t, []*genutil.DataPoint{upd}, getSchema(), "{{ .GoStructTypeName }}", parentPtr, nil, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
-			if err != nil || qv.ComplianceErrors != nil {
-				return nil, fmt.Errorf("unmarshal err: %v, complianceErrs: %v", err, qv.ComplianceErrors)
-			}
-			return convert{{ .PathStructName }}(t, qv, parentPtr), nil
-		},
-		func(qualVal genutil.QualifiedValue) bool {
-			val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
-			return ok && predicate(val)
-		}),
-	}
+	return watch_{{ .PathStructName }}(t, n, timeout, predicate)
 }
+
+// Batch adds {{ .YANGPath }} to the batch object.
+func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Batch(t testing.TB, b *{{ .SchemaStructPkgAccessor }}Batch) {
+	t.Helper()
+	{{ .SchemaStructPkgAccessor }}MustAddToBatch(t, b, n)
+}
+{{- end }}
 `)
 
 	// goNodeSetTemplate is used to generate gNMI Set wrapper calls.
@@ -701,7 +654,7 @@ func (n *{{ .PathStructName }}) Delete(t testing.TB) *gpb.SetResponse {
 }
 
 // BatchDelete buffers a config delete operation at {{ .YANGPath }} in the given batch object.
-func (n *{{ .PathStructName }}) BatchDelete(t testing.TB, b *SetRequestBatch) {
+func (n *{{ .PathStructName }}) BatchDelete(t testing.TB, b *{{ .ConfigPkgAccessor }}SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
@@ -713,7 +666,7 @@ func (n *{{ .PathStructName }}) Replace(t testing.TB, val {{ .GoType.GoTypeName 
 }
 
 // BatchReplace buffers a config replace operation at {{ .YANGPath }} in the given batch object.
-func (n *{{ .PathStructName }}) BatchReplace(t testing.TB, b *SetRequestBatch, val {{ .GoType.GoTypeName }}) {
+func (n *{{ .PathStructName }}) BatchReplace(t testing.TB, b *{{ .ConfigPkgAccessor }}SetRequestBatch, val {{ .GoType.GoTypeName }}) {
 	t.Helper()
 	b.BatchReplace(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
@@ -725,7 +678,7 @@ func (n *{{ .PathStructName }}) Update(t testing.TB, val {{ .GoType.GoTypeName }
 }
 
 // BatchUpdate buffers a config update operation at {{ .YANGPath }} in the given batch object.
-func (n *{{ .PathStructName }}) BatchUpdate(t testing.TB, b *SetRequestBatch, val {{ .GoType.GoTypeName }}) {
+func (n *{{ .PathStructName }}) BatchUpdate(t testing.TB, b *{{ .ConfigPkgAccessor }}SetRequestBatch, val {{ .GoType.GoTypeName }}) {
 	t.Helper()
 	b.BatchUpdate(t, n, {{ if .IsScalarField -}} & {{- end -}} val)
 }
@@ -737,18 +690,22 @@ func (n *{{ .PathStructName }}) BatchUpdate(t testing.TB, b *SetRequestBatch, va
 	goQualifiedTypeTemplate = mustTemplate("goQualifiedType", `{{ $QualifiedGoTypeName := printf "Qualified%s" .TransformedGoTypeName }}
 // {{ $QualifiedGoTypeName }} is a {{ .GoTypeName }} with a corresponding timestamp.
 type {{ $QualifiedGoTypeName }} struct {
-	*genutil.QualifiedType
+	*genutil.Metadata
 	val {{ .GoTypeName }} // val is the sample value.
+	present bool
 }
 
 func (q *{{ $QualifiedGoTypeName }}) String() string {
-	return genutil.QualifiedTypeString(q.val, q.QualifiedType)
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
 // Val returns the value of the {{ .GoTypeName }} sample, erroring out if not present.
 func (q *{{ $QualifiedGoTypeName }}) Val(t testing.TB) {{ .GoTypeName }} {
 	t.Helper()
-	if !q.Present {
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
 		pathStr, err := ygot.PathToString(q.Path)
 		if err != nil {
 			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
@@ -761,7 +718,13 @@ func (q *{{ $QualifiedGoTypeName }}) Val(t testing.TB) {{ .GoTypeName }} {
 // SetVal sets the value of the {{ .GoTypeName }} sample.
 func (q *{{ $QualifiedGoTypeName }}) SetVal(v {{ .GoTypeName }}) *{{ $QualifiedGoTypeName }} {
 	q.val = v
+	q.present = true
 	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *{{ $QualifiedGoTypeName }}) IsPresent() bool {
+	return q != nil && q.present
 }
 
 `)
@@ -775,38 +738,31 @@ func (q *{{ $QualifiedGoTypeName }}) SetVal(v {{ .GoTypeName }}) *{{ $QualifiedG
 	// order to correctly carry out the unmarshal operation once the
 	// user triggers the Await() call that blocks for the data retrieval to
 	// complete.
-	// TODO: DataPoints returned from Await are not guaranteed to be in
-	// order. First decide whether to handle non-leaves in the near future. If not,
-	// incorporate it in the template. If yes, beware that the subtree has to
-	// be deep-copied for each new sample.
 	goCollectionTypeTemplate = mustTemplate("goCollectionType", `{{ $QualifiedGoTypeName := printf "Qualified%s" .TransformedGoTypeName }}
 // Collection{{ .TransformedGoTypeName }} is a telemetry Collection whose Await method returns a slice of {{ .GoTypeName }} samples.
 type Collection{{ .TransformedGoTypeName }} struct {
-	c *CollectionUntil{{ .TransformedGoTypeName }}
+	W *{{ .TransformedGoTypeName }}Watcher
+	Data []*{{ $QualifiedGoTypeName }}
 }
 
-// Await blocks for the telemetry collection to be complete, and then returns the slice of samples received.
-func (u *Collection{{ .TransformedGoTypeName }}) Await(t testing.TB) []*{{ $QualifiedGoTypeName }} {
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *Collection{{ .TransformedGoTypeName }}) Await(t testing.TB) []*{{ $QualifiedGoTypeName }} {
 	t.Helper()
-	data, _ := u.c.Await(t)
-	return data
+	c.W.Await(t)
+	return c.Data
 }
 
-// CollectionUntil{{ .TransformedGoTypeName }} is a telemetry Collection whose Await method returns a slice of {{ .GoTypeName }} samples.
-type CollectionUntil{{ .TransformedGoTypeName }} struct {
-	c *genutil.Collection
+// {{ .TransformedGoTypeName }}Watcher observes a stream of {{ .GoTypeName }} samples.
+type {{ .TransformedGoTypeName }}Watcher struct {
+	W *genutil.Watcher
+	LastVal *{{ $QualifiedGoTypeName }}
 }
 
-// Await blocks for the telemetry collection to be complete or the predicate to be true whichever is first.
-// The received data and the status of the predicate are returned.
-func (u *CollectionUntil{{ .TransformedGoTypeName }}) Await(t testing.TB) ([]*{{ $QualifiedGoTypeName }}, bool) {
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *{{ .TransformedGoTypeName }}Watcher) Await(t testing.TB) (*{{ $QualifiedGoTypeName }}, bool) {
 	t.Helper()
-	var ret []*{{ $QualifiedGoTypeName }}
-	updates, predTrue := u.c.Await(t)
-	for _, upd := range updates {
-		ret = append(ret, upd.(*{{ $QualifiedGoTypeName }}))
-	}
-	return ret, predTrue
+	return w.LastVal, w.W.Await(t)
 }
 `)
 )
@@ -833,14 +789,20 @@ func (cg *GenConfig) fakeRootTypeName(pathStruct bool) string {
 	}
 }
 
-// generateGoHeader returns the common header, one-off header of the file in
-// that order, and error if one is encountered.
-func (cg *GenConfig) generateGoHeader(generateConfigCode bool, preferShadowPath bool) (string, string, error) {
+// executeTemplate excutes the input template using the values from GenConfig.
+// packageName is the name of the package to use in the template.
+// generateConfigCode controls whether to template should contain code for config or telemetry.
+// The usable templates are: goCommonHelpers, goFakeRootMethods.
+func (cg *GenConfig) executeTemplate(packageName string, generateConfigCode bool, tmpl *template.Template) (string, error) {
 	var schemaStructPkgAccessor string
 	if cg.GoImports.SchemaStructPkgPath != "" {
 		schemaStructPkgAccessor = schemaStructPkgAlias + "."
 	}
-	var commonHeader strings.Builder
+	var configPkgAccessor string
+	if cg.GoImports.ConfigImportPath != "" {
+		configPkgAccessor = configPkgAlias + "."
+	}
+	var header strings.Builder
 	s := struct {
 		// GoImports contains package import paths needed by telemgen.
 		GoImports
@@ -858,32 +820,33 @@ func (cg *GenConfig) generateGoHeader(generateConfigCode bool, preferShadowPath 
 		// SchemaStructPkgAccessor is the accessor prefix for types in
 		// the imported ygen-generated file (if any).
 		SchemaStructPkgAccessor string
+		// ConfigPkgAlias is the package alias for the imported ygen-generated file.
+		ConfigPkgAlias string
+		// ConfigPkgAccessor is the accessor prefix for types in
+		// the config file (if any).
+		ConfigPkgAccessor string
 		// GenerateConfigCode is a flag for whether config functions are being
 		// generated instead of telemetry functions.
 		GenerateConfigCode bool
-
-		PreferShadowPath bool
+		PreferShadowPath   bool
 	}{
 		GoImports:               cg.GoImports,
-		PackageName:             cg.PackageName,
+		PackageName:             packageName,
 		FakeRootTypePathName:    cg.fakeRootTypeName(true),
 		FakeRootTypeName:        cg.fakeRootTypeName(false),
 		FakeRootBaseTypeName:    ygot.FakeRootBaseTypeName,
 		SchemaStructPkgAlias:    schemaStructPkgAlias,
 		SchemaStructPkgAccessor: schemaStructPkgAccessor,
 		GenerateConfigCode:      generateConfigCode,
-		PreferShadowPath:        preferShadowPath,
+		PreferShadowPath:        cg.PreferShadowPath,
+		ConfigPkgAlias:          configPkgAlias,
+		ConfigPkgAccessor:       configPkgAccessor,
 	}
-	if err := goCommonHeaderTemplate.Execute(&commonHeader, s); err != nil {
-		return "", "", err
-	}
-
-	var oneOffHeader strings.Builder
-	if err := goOneOffHeaderTemplate.Execute(&oneOffHeader, s); err != nil {
-		return "", "", err
+	if err := tmpl.Execute(&header, s); err != nil {
+		return "", err
 	}
 
-	return commonHeader.String(), oneOffHeader.String(), nil
+	return header.String(), nil
 }
 
 // goTypeData stores processed information of a node's type.
@@ -966,12 +929,12 @@ func generatePerNodeSnippet(pathStructName string, nodeData *ypathgen.NodeData, 
 		if err := goLeafConvertTemplate.Execute(&convertHelper, s); err != nil {
 			util.AppendErr(errs, err)
 		}
-		// TODO: Collect methods for non-leaf nodes is not implemented.
-		if err := goLeafCollectTemplate.Execute(&collectMethod, s); err != nil {
-			util.AppendErr(errs, err)
-		}
 	}
 	if err := goNodeGetTemplate.Execute(&getMethod, s); err != nil {
+		util.AppendErr(errs, err)
+	}
+
+	if err := goCollectTemplate.Execute(&collectMethod, s); err != nil {
 		util.AppendErr(errs, err)
 	}
 
@@ -984,7 +947,7 @@ func generatePerNodeSnippet(pathStructName string, nodeData *ypathgen.NodeData, 
 }
 
 // generatePerNodeConfigSnippet generates the config code for a path node.
-func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.NodeData, fakeRootTypeName, schemaStructPkgAccessor string, preferShadowPath bool) (GoPerNodeCodeSnippet, goTypeData, util.Errors) {
+func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.NodeData, fakeRootTypeName, schemaStructPkgAccessor, configPkgAccessor string, preferShadowPath bool) (GoPerNodeCodeSnippet, goTypeData, util.Errors) {
 	// TODO: See if a float32 -> binary helper should be provided
 	// for setting a float32 leaf.
 	var errs util.Errors
@@ -1001,6 +964,7 @@ func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.Node
 		WildcardSuffix          string
 		SpecialConversionFn     string
 		PreferShadowPath        bool
+		ConfigPkgAccessor       string
 	}{
 		PathStructName: pathStructName,
 		GoType: goTypeData{
@@ -1018,6 +982,7 @@ func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.Node
 		WildcardSuffix:          ypathgen.WildcardSuffix,
 		SchemaStructPkgAccessor: schemaStructPkgAccessor,
 		PreferShadowPath:        preferShadowPath,
+		ConfigPkgAccessor:       configPkgAccessor,
 	}
 	var getMethod, replaceMethod, convertHelper strings.Builder
 	if nodeData.IsLeaf {
@@ -1049,19 +1014,16 @@ func generatePerTypeSnippet(goType goTypeData, fakeRootTypeName string, preferSh
 	if err := goQualifiedTypeTemplate.Execute(&qualifiedType, goType); err != nil {
 		util.AppendErr(errs, err)
 	}
-	if goType.IsLeaf {
-		// TODO: Collect methods for non-leaf nodes is not implemented.
-		if err := goCollectionTypeTemplate.Execute(&collectionType, struct {
-			goTypeData       // Embedded
-			FakeRootTypeName string
-			PreferShadowPath bool
-		}{
-			goTypeData:       goType,
-			FakeRootTypeName: fakeRootTypeName,
-			PreferShadowPath: preferShadowPath,
-		}); err != nil {
-			util.AppendErr(errs, err)
-		}
+	if err := goCollectionTypeTemplate.Execute(&collectionType, struct {
+		goTypeData       // Embedded
+		FakeRootTypeName string
+		PreferShadowPath bool
+	}{
+		goTypeData:       goType,
+		FakeRootTypeName: fakeRootTypeName,
+		PreferShadowPath: preferShadowPath,
+	}); err != nil {
+		util.AppendErr(errs, err)
 	}
 	return GoReturnTypeCodeSnippet{
 		TypeName:       goType.GoTypeName,
@@ -1075,7 +1037,7 @@ func generatePerTypeSnippet(goType goTypeData, fakeRootTypeName string, preferSh
 // identifier. Further, it capitalizes the first letter so that it is exported.
 func transformGoTypeName(nodeData *ypathgen.NodeData) string {
 	// TODO: map[] is an output for a non-leaf wildcard
-	// GetFull()/Collect(), there hasn't been the need for non-leaves so
+	// Lookup()/Collect(), there hasn't been the need for non-leaves so
 	// we haven't decided how to deal with those yet.
 
 	// As maps, lists are never given defined types by ygen, so the input

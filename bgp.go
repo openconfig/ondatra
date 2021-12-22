@@ -289,6 +289,13 @@ func (c *BGPCapabilities) WithIPv6SRTEPolicyEnabled(enabled bool) *BGPCapabiliti
 	return c
 }
 
+// WithGracefulRestart sets whether the Graceful restart capability is
+// enabled on the ATE.
+func (c *BGPCapabilities) WithGracefulRestart(enabled bool) *BGPCapabilities {
+	c.pb.GracefulRestart = enabled
+	return c
+}
+
 // BGPAttributes is a representation of BGP attributes on the ATE.
 type BGPAttributes struct {
 	pb *opb.BgpAttributes
@@ -330,10 +337,56 @@ func (a *BGPAttributes) WithLocalPreference(localPref uint32) *BGPAttributes {
 	return a
 }
 
-// WithCommunities sets the communities for the advertised prefixes.
-func (a *BGPAttributes) WithCommunities(communities ...string) *BGPAttributes {
-	a.pb.Communities = communities
-	return a
+// BGPCommunities is a representation of BGP communities on the ATE.
+type BGPCommunities struct {
+	pb *opb.BgpCommunities
+}
+
+// Communities creates a BGP communities config for the advertised prefixes or
+// returns the existing config.
+func (a *BGPAttributes) Communities() *BGPCommunities {
+	if a.pb.Communities == nil {
+		a.pb.Communities = &opb.BgpCommunities{}
+	}
+	return &BGPCommunities{pb: a.pb.Communities}
+}
+
+// WithNoExport includes the well-known community type NO_EXPORT.
+func (c *BGPCommunities) WithNoExport() *BGPCommunities {
+	c.pb.NoExport = true
+	return c
+}
+
+// WithNoAdvertise includes the well-known community type NO_ADVERTISE.
+func (c *BGPCommunities) WithNoAdvertise() *BGPCommunities {
+	c.pb.NoAdvertise = true
+	return c
+}
+
+// WithNoExportSubconfed includes the well-known community type
+// NO_EXPORT_SUBCONFED.
+func (c *BGPCommunities) WithNoExportSubconfed() *BGPCommunities {
+	c.pb.NoExportSubconfed = true
+	return c
+}
+
+// WithLLGRStale includes the well-known community type LLGR_STALE.
+func (c *BGPCommunities) WithLLGRStale() *BGPCommunities {
+	c.pb.LlgrStale = true
+	return c
+}
+
+// WithNoLLGR includes the well-known community type NO_LLGR.
+func (c *BGPCommunities) WithNoLLGR() *BGPCommunities {
+	c.pb.NoLlgr = true
+	return c
+}
+
+// WithPrivateCommunities includes private communities using an "AS:value"
+// format.
+func (c *BGPCommunities) WithPrivateCommunities(values ...string) *BGPCommunities {
+	c.pb.PrivateCommunities = values
+	return c
 }
 
 // BGPExtendedCommunityColor is a representation of the BGP color extended
@@ -493,6 +546,36 @@ func (a *BGPASPathSegment) WithTypeSETConfederation() *BGPASPathSegment {
 	return a
 }
 
+// WithOriginatorID sets the originator ID for the routes.
+func (a *BGPAttributes) WithOriginatorID(id string) *BGPAttributes {
+	a.pb.OriginatorId = &opb.StringIncRange{
+		Start: id,
+		Step:  "0.0.0.0",
+	}
+	return a
+}
+
+// OriginatorIDRange sets the originator ID of the routes to a range of values
+// and returns the range. By default, the range will have the following
+// configuration:
+//   Start: 0.0.0.1
+//   Step: 0.0.0.1
+func (a *BGPAttributes) OriginatorIDRange() *StringIncRange {
+	if a.pb.OriginatorId == nil {
+		a.pb.OriginatorId = &opb.StringIncRange{
+			Start: "0.0.0.1",
+			Step:  "0.0.0.1",
+		}
+	}
+	return &StringIncRange{pb: a.pb.OriginatorId}
+}
+
+// WithClusterIDs sets the given cluster IDs for the associated routes.
+func (a *BGPAttributes) WithClusterIDs(values ...string) *BGPAttributes {
+	a.pb.ClusterIds = values
+	return a
+}
+
 // BGPSRTEPolicyGroup is a representation of BGP SR-TE policies on the ATE.
 type BGPSRTEPolicyGroup struct {
 	pb *opb.BgpPeer_SrtePolicyGroup
@@ -603,78 +686,13 @@ func (p *BGPSRTEPolicyGroup) OriginatorIDRange() *StringIncRange {
 	return &StringIncRange{pb: p.pb.OriginatorId}
 }
 
-// BGPCommunity is a representation of a BGP community on the ATE.
-type BGPCommunity struct {
-	pb *opb.BgpPeer_SrtePolicyGroup_Community
-}
-
-// AddCommunity adds a community to the policies.  By default, the community
-// will have the following configuration:
-//   Type: NO_ADVERTISE
-//   ASN: 0
-//   Pattern: 0
-func (p *BGPSRTEPolicyGroup) AddCommunity() *BGPCommunity {
-	cpb := &opb.BgpPeer_SrtePolicyGroup_Community{
-		Type:    opb.BgpPeer_SrtePolicyGroup_Community_TYPE_NO_ADVERTISE,
-		Asn:     0,
-		Pattern: 0,
+// Communities creates a BGP communities config for the advertised prefixes or
+// returns the existing config.
+func (p *BGPSRTEPolicyGroup) Communities() *BGPCommunities {
+	if p.pb.Communities == nil {
+		p.pb.Communities = &opb.BgpCommunities{}
 	}
-	p.pb.Communities = append(p.pb.Communities, cpb)
-	return &BGPCommunity{pb: cpb}
-}
-
-// ClearCommunities clears communities from the policies.
-func (p *BGPSRTEPolicyGroup) ClearCommunities() *BGPSRTEPolicyGroup {
-	p.pb.Communities = nil
-	return p
-}
-
-// WithTypeNoExport sets the community type to NO_EXPORT.
-func (c *BGPCommunity) WithTypeNoExport() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_NO_EXPORT
-	return c
-}
-
-// WithTypeNoAdvertise sets the community type to NO_ADVERTISE.
-func (c *BGPCommunity) WithTypeNoAdvertise() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_NO_ADVERTISE
-	return c
-}
-
-// WithTypeNoExportSubconfed sets the community type to NO_EXPORT_SUBCONFED.
-func (c *BGPCommunity) WithTypeNoExportSubconfed() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_NO_EXPORT_SUBCONFED
-	return c
-}
-
-// WithTypeManualASN sets the community type to MANUAL_ASN.
-func (c *BGPCommunity) WithTypeManualASN() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_MANUAL_ASN
-	return c
-}
-
-// WithTypeLLGRStale sets the community type to LLGR_STALE.
-func (c *BGPCommunity) WithTypeLLGRStale() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_LLGR_STALE
-	return c
-}
-
-// WithTypeNoLLGR sets the community type to NO_LLGR.
-func (c *BGPCommunity) WithTypeNoLLGR() *BGPCommunity {
-	c.pb.Type = opb.BgpPeer_SrtePolicyGroup_Community_TYPE_NO_LLGR
-	return c
-}
-
-// WithASN sets the ASN of the community.
-func (c *BGPCommunity) WithASN(asn uint16) *BGPCommunity {
-	c.pb.Asn = uint32(asn)
-	return c
-}
-
-// WithPattern sets the pattern of the community.
-func (c *BGPCommunity) WithPattern(pattern uint16) *BGPCommunity {
-	c.pb.Pattern = uint32(pattern)
-	return c
+	return &BGPCommunities{pb: p.pb.Communities}
 }
 
 // WithASNSetModeDoNotInclude sets the ASN set mode to not include the local ASN

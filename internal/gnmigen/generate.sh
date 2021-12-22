@@ -22,7 +22,7 @@ go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 
-EXCLUDE_MODULES=ietf-interfaces,openconfig-acl,openconfig-bfd,openconfig-messages
+EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(
   -path=public/release/models,public/third_party/ietf
@@ -47,36 +47,41 @@ COMMON_ARGS=(
 )
 
 YANG_FILES=(
-  public/release/models/openconfig-extensions.yang
+  gnmi-collector-metadata.yang
+  public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
   public/release/models/aft/openconfig-aft.yang
+  public/release/models/ate/openconfig-ate-flow.yang
+  public/release/models/ate/openconfig-ate-intf.yang
   public/release/models/bfd/openconfig-bfd.yang
+  public/release/models/bgp/openconfig-bgp-policy.yang
   public/release/models/bgp/openconfig-bgp-types.yang
   public/release/models/interfaces/openconfig-if-aggregate.yang
   public/release/models/interfaces/openconfig-if-ethernet.yang
-  public/release/models/interfaces/openconfig-if-ip.yang
   public/release/models/interfaces/openconfig-if-ip-ext.yang
+  public/release/models/interfaces/openconfig-if-ip.yang
   public/release/models/interfaces/openconfig-interfaces.yang
   public/release/models/isis/openconfig-isis.yang
   public/release/models/lacp/openconfig-lacp.yang
-  public/release/models/lldp/openconfig-lldp.yang
   public/release/models/lldp/openconfig-lldp-types.yang
+  public/release/models/lldp/openconfig-lldp.yang
   public/release/models/local-routing/openconfig-local-routing.yang
   public/release/models/mpls/openconfig-mpls-types.yang
   public/release/models/multicast/openconfig-pim.yang
   public/release/models/network-instance/openconfig-network-instance.yang
+  public/release/models/openconfig-extensions.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
   public/release/models/ospf/openconfig-ospfv2.yang
   public/release/models/platform/openconfig-platform-cpu.yang
   public/release/models/platform/openconfig-platform-software.yang
   public/release/models/platform/openconfig-platform-transceiver.yang
   public/release/models/platform/openconfig-platform.yang
-  public/release/models/policy/openconfig-policy-types.yang
   public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
-  public/release/models/qos/openconfig-qos.yang
+  public/release/models/policy/openconfig-policy-types.yang
   public/release/models/qos/openconfig-qos-elements.yang
   public/release/models/qos/openconfig-qos-interfaces.yang
   public/release/models/qos/openconfig-qos-types.yang
+  public/release/models/qos/openconfig-qos.yang
   public/release/models/rib/openconfig-rib-bgp.yang
   public/release/models/segment-routing/openconfig-segment-routing-types.yang
   public/release/models/system/openconfig-system.yang
@@ -88,36 +93,12 @@ YANG_FILES=(
   public/third_party/ietf/ietf-inet-types.yang
   public/third_party/ietf/ietf-interfaces.yang
   public/third_party/ietf/ietf-yang-types.yang
-  gnmi-collector-metadata.yang
 )
 
-# Generate Config API.
-mkdir -p config
-generator \
-  -generate_structs=false \
-  -exclude_state \
-  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
-  -output_dir=config \
-  -package_name=config \
-  -path_structs_split_files_count=5 \
-  "${COMMON_ARGS[@]}" \
-  "${YANG_FILES[@]}"
-go run internal/gnmigen/main/main.go \
-  -output_dir=config \
-  -package_name=config \
-  -path=public/release/models,public/third_party/ietf \
-  -exclude_modules="${EXCLUDE_MODULES}" \
-  -generate_config_func \
-  -prefer_shadow_path \
-  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
-  -telemetry_funcs_file_split=10 \
-  -telemetry_types_file_split=0 \
-  "${YANG_FILES[@]}"
-
-# Generate Telemetry API.
-mkdir -p telemetry
+# Generate Structs
 generator \
   -generate_structs \
+  -generate_path_structs=false \
   -prefer_operational_state \
   -list_builder_key_threshold=4 \
   -output_dir=telemetry \
@@ -125,15 +106,81 @@ generator \
   -path_structs_split_files_count=10 \
   "${COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
+
 go run internal/gnmigen/main/main.go \
   -output_dir=telemetry \
   -package_name=telemetry \
   -path=public/release/models,public/third_party/ietf \
   -exclude_modules="${EXCLUDE_MODULES}" \
-  -telemetry_funcs_file_split=40 \
+  -gen_path_struct_api=false \
+  -split_pathstructs_by_module=true \
   -telemetry_types_file_split=10 \
   "${YANG_FILES[@]}"
 
-goimports -w config/*.go telemetry/*.go
-gofmt -w -s config/*.go telemetry/*.go
+# Generate Config API.
+mkdir -p config/device
+generator \
+  -generate_structs=false \
+  -exclude_state \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+  -output_dir=config \
+  -package_name=device \
+  -path_structs_split_files_count=5 \
+  -split_pathstructs_by_module=true \
+  -path_structs_output_file=config/device/device.go \
+  -base_import_path=github.com/openconfig/ondatra/config \
+  -trim_path_package_oc_prefix=true \
+  -path_struct_package_suffix="" \
+  "${COMMON_ARGS[@]}" \
+  "${YANG_FILES[@]}"
+
+go run internal/gnmigen/main/main.go \
+  -output_dir=config \
+  -package_name=device \
+  -path=public/release/models,public/third_party/ietf \
+  -exclude_modules="${EXCLUDE_MODULES}" \
+  -generate_config_func \
+  -prefer_shadow_path \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+  -split_pathstructs_by_module=true \
+  -fake_root_helper_filename=device/root_helper.go \
+  -fake_root_gnmi_filename=device/device_telem.go \
+  -config_import_path=github.com/openconfig/ondatra/config \
+  -telemetry_funcs_file_split=5 \
+  -telemetry_types_file_split=0 \
+  "${YANG_FILES[@]}"
+
+# Generate Telemetry API.
+mkdir -p telemetry/device
+generator \
+  -generate_structs=false \
+  -prefer_operational_state \
+  -list_builder_key_threshold=4 \
+  -output_dir=telemetry \
+  -package_name=device \
+  -path_structs_output_file=telemetry/device/device.go \
+  -split_pathstructs_by_module=true \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+  -trim_path_package_oc_prefix=true \
+  -path_struct_package_suffix="" \
+  -base_import_path=github.com/openconfig/ondatra/telemetry \
+  -path_structs_split_files_count=10 \
+  "${COMMON_ARGS[@]}" \
+  "${YANG_FILES[@]}"
+
+go run internal/gnmigen/main/main.go \
+  -output_dir=telemetry \
+  -package_name=device \
+  -path=public/release/models,public/third_party/ietf \
+  -exclude_modules="${EXCLUDE_MODULES}" \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+  -split_pathstructs_by_module=true \
+  -fake_root_helper_filename=device/root_helper.go \
+  -fake_root_gnmi_filename=device/device_telem.go \
+  -telemetry_funcs_file_split=20 \
+  -telemetry_types_file_split=10 \
+  "${YANG_FILES[@]}"
+
+find config telemetry -name "*.go" -exec goimports -w {} +
+find config telemetry -name "*.go" -exec gofmt -w -s {} +
 rm -rf public gnmi-collector-metadata.yang

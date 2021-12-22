@@ -1,0 +1,44 @@
+# proto-file: third_party/openconfig/ondatra/proto/ate.proto
+# proto-message: Traffic
+flows: {
+  name: "ipv6FlowLabels1"
+  src_endpoints: {
+    interface_name: "intf1"
+  }
+  dst_endpoints: {
+    interface_name: "intf2"
+  }
+  headers: {
+    eth: {}
+  }
+  headers: {
+    ipv6: {
+      hop_limit: 64
+      flow_label: {
+        max: 65535
+        count: 65535
+        random: true
+      }
+    }
+  }
+  headers: {
+    tcp: {
+      src_port: {
+        min: 1000
+        max: 1000
+        count: 1
+      }
+      dst_port: {
+        min: 2000
+        max: 2000
+        count: 1
+      }
+    }
+  }
+  frame_rate: {
+    percent: 20
+  }
+  frame_size: {
+    fixed: 1000
+  }
+}
