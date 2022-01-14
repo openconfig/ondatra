@@ -17,6 +17,7 @@ package ondatra
 import (
 	"bytes"
 	"golang.org/x/net/context"
+	"io"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -279,7 +280,12 @@ type fakePingClient struct {
 }
 
 func (pc *fakePingClient) Recv() (*spb.PingResponse, error) {
-	return pc.resp, pc.err
+	if pc.resp == nil && pc.err == nil {
+		return nil, io.EOF
+	}
+	resp := pc.resp
+	pc.resp = nil
+	return resp, pc.err
 }
 
 func (*fakePingClient) CloseSend() error {
@@ -288,16 +294,29 @@ func (*fakePingClient) CloseSend() error {
 
 func TestPing(t *testing.T) {
 	initOperationFakes(t)
-	var got string
-	fakeGNOI.Pinger = func(_ context.Context, req *spb.PingRequest, _ ...grpc.CallOption) (spb.System_PingClient, error) {
-		got = req.GetDestination()
-		return &fakePingClient{resp: &spb.PingResponse{}}, nil
+	tests := []struct {
+		desc, dest string
+		count      int32
+	}{
+		{desc: "zero count", dest: "1.2.3.4"},
+		{desc: "non-zero count", dest: "1.2.3.4", count: 7},
 	}
-	want := "1.2.3.4"
-	DUT(t, "dut").Operations().NewPing().WithDestination(want).Operate(t)
-	if got != want {
-		t.Errorf("Operate(t) got %s, want %s", got, want)
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			var got string
+			fakeGNOI.Pinger = func(_ context.Context, req *spb.PingRequest, _ ...grpc.CallOption) (spb.System_PingClient, error) {
+				got = req.GetDestination()
+				return &fakePingClient{resp: &spb.PingResponse{Sent: tt.count, Received: tt.count}}, nil
+			}
+			want := tt.dest
+			DUT(t, "dut").Operations().NewPing().WithDestination(tt.dest).WithCount(tt.count).Operate(t)
+			if got != want {
+				t.Errorf("Operate(t) got %s, want %s", got, want)
+			}
+
+		})
 	}
+
 }
 
 func TestPingErrors(t *testing.T) {
@@ -321,7 +340,16 @@ func TestPingErrors(t *testing.T) {
 				err: errors.New("recv error"),
 			}, nil
 		},
-	}}
+	}, {
+		wantErr: "ping sent 5 packets, received 3",
+		dest:    "1.2.3.4",
+		pinger: func(_ context.Context, req *spb.PingRequest, _ ...grpc.CallOption) (spb.System_PingClient, error) {
+			return &fakePingClient{
+				resp: &spb.PingResponse{Sent: 5, Received: 3},
+			}, nil
+		},
+	},
+	}
 
 	for _, tt := range tests {
 		t.Run(tt.wantErr, func(t *testing.T) {

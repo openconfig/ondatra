@@ -76,6 +76,12 @@ func (b *BGPPeer) WithActive(active bool) *BGPPeer {
 	return b
 }
 
+// WithOnLoopback sets whether the peering should configured on the loopback IP.
+func (b *BGPPeer) WithOnLoopback(enable bool) *BGPPeer {
+	b.pb.OnLoopback = enable
+	return b
+}
+
 // WithTypeExternal sets the peering type to external.
 func (b *BGPPeer) WithTypeExternal() *BGPPeer {
 	b.pb.Type = opb.BgpPeer_TYPE_EXTERNAL

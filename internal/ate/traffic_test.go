@@ -667,13 +667,13 @@ func TestFrameSize(t *testing.T) {
 	}, {
 		desc: "custom frame sizes as weighted pairs",
 		frameSizePB: &opb.FrameSize{
-			Type: &opb.FrameSize_ImixCustom_ {
+			Type: &opb.FrameSize_ImixCustom_{
 				ImixCustom: &opb.FrameSize_ImixCustom{
 					Entries: []*opb.FrameSize_ImixCustomEntry{{
-						Size: 82,
+						Size:   82,
 						Weight: 35,
 					}, {
-						Size: 125,
+						Size:   125,
 						Weight: 22,
 					}},
 				},

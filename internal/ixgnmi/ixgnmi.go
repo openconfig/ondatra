@@ -53,8 +53,12 @@ var (
 		"/components": statViewReader(portCPUStatsCaption),
 		"/flows":      statViewReader(flowStatsCaption, ixweb.EgressStatsCaption),
 		"/interfaces": statViewReader(portStatsCaption),
-		ribOCPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) (ygot.GoStruct, error) {
-			return c.pathToOCRIB(ctx, p)
+		ribOCPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
+			n, err := c.pathToOCRIB(ctx, p)
+			if n != nil {
+				return []*gpb.Notification{n}, err
+			}
+			return nil, err
 		}},
 	}
 
@@ -62,11 +66,12 @@ var (
 	readStatsFn = func(ctx context.Context, c *Client, cacheKey string, captions []string) (ygot.GoStruct, error) {
 		return c.readStats(ctx, cacheKey, captions)
 	}
+	ribFromIxiaFn = (*Client).ribFromIxia
 )
 
 type prefixReader struct {
 	mu   sync.Mutex
-	read func(context.Context, *Client, *gpb.Path) (ygot.GoStruct, error)
+	read func(context.Context, *Client, *gpb.Path) ([]*gpb.Notification, error)
 }
 
 // StatReader reads Ixia stats for a specified set of views.
@@ -99,8 +104,23 @@ func (cw *clientWrapper) Session() session {
 }
 
 func statViewReader(captions ...string) *prefixReader {
-	return &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) (ygot.GoStruct, error) {
-		return readStatsFn(ctx, c, p.GetElem()[0].GetName(), captions)
+	return &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
+		ys, err := readStatsFn(ctx, c, p.GetElem()[0].GetName(), captions)
+		if err != nil {
+			return nil, err
+		}
+		if ys == nil {
+			return nil, nil
+		}
+		ns, err := ygot.TogNMINotifications(
+			ys,
+			time.Now().UnixNano(),
+			ygot.GNMINotificationsConfig{UsePathElem: true},
+		)
+		if err != nil {
+			return nil, errors.Wrap(err, "cannot render telemetry Notifications")
+		}
+		return ns, nil
 	}}
 }
 
@@ -191,20 +211,9 @@ func (c *Client) publishRoot(ctx context.Context, root string, path *gpb.Path) e
 	defer reader.mu.Unlock()
 
 	c.fresh.DeleteExpired()
-	ys, err := reader.read(ctx, c, path)
+	ns, err := reader.read(ctx, c, path)
 	if err != nil {
 		return err
-	}
-	if ys == nil {
-		return nil
-	}
-	ns, err := ygot.TogNMINotifications(
-		ys,
-		time.Now().UnixNano(),
-		ygot.GNMINotificationsConfig{UsePathElem: true},
-	)
-	if err != nil {
-		return errors.Wrap(err, "cannot render telemetry Notifications")
 	}
 	for _, n := range ns {
 		n.Prefix = &gpb.Path{
@@ -246,6 +255,7 @@ func (c *Client) fetchPeerCache(ctx context.Context) (map[string]map[string]ixco
 		return nil, errors.New("no IxNetwork config found")
 	}
 
+	var allPeers []ixconfig.IxiaCfgNode
 	for _, topo := range cfg.Topology {
 		for _, dg := range topo.DeviceGroup {
 			if len(dg.Ethernet) < 1 {
@@ -259,29 +269,26 @@ func (c *Client) fetchPeerCache(ctx context.Context) (map[string]map[string]ixco
 			c.peerCache[iface] = make(map[string]ixconfig.IxiaCfgNode)
 			if len(dg.Ethernet[0].Ipv4) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv4[0].BgpIpv4Peer {
-					addr := *p.DutIp.SingleValue.Value
-					if err := c.client.UpdateIDs(ctx, cfg, p); err != nil {
-						return nil, errors.Wrapf(err, "failed to update id for interface %q peer %q", iface, addr)
-					}
-					c.peerCache[iface][addr] = p
+					c.peerCache[iface][*p.DutIp.SingleValue.Value] = p
+					allPeers = append(allPeers, p)
 				}
 			}
 			if len(dg.Ethernet[0].Ipv6) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv6[0].BgpIpv6Peer {
-					addr := *p.DutIp.SingleValue.Value
-					if err := c.client.UpdateIDs(ctx, cfg, p); err != nil {
-						return nil, errors.Wrapf(err, "failed to update id for interface %q peer %q", iface, addr)
-					}
-					c.peerCache[iface][addr] = p
+					c.peerCache[iface][*p.DutIp.SingleValue.Value] = p
+					allPeers = append(allPeers, p)
 				}
 			}
 		}
+	}
+	if err := c.client.UpdateIDs(ctx, cfg, allPeers...); err != nil {
+		return nil, fmt.Errorf("failed to update IDs for bgp peers: %v", allPeers)
 	}
 	return c.peerCache, nil
 }
 
 // ribFromIxia gets the BGP RIB from an IXIA device.
-func (c *Client) ribFromIxia(ctx context.Context, intfName, neighbor string, ipv4 bool) (*table, error) {
+func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	const (
 		bgpV4OpPath = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
 		bgpV6OpPath = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
@@ -290,13 +297,13 @@ func (c *Client) ribFromIxia(ctx context.Context, intfName, neighbor string, ipv
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to update cache")
 	}
-	node, ok := peerCache[intfName][neighbor]
+	node, ok := peerCache[pi.intf][pi.neighbor]
 	if !ok {
-		return nil, fmt.Errorf("no peer %q on interface %q", neighbor, intfName)
+		return nil, fmt.Errorf("no peer %q on interface %q", pi.neighbor, pi.intf)
 	}
 
 	opPath := bgpV6OpPath
-	if ipv4 {
+	if pi.isIPV4 {
 		opPath = bgpV4OpPath
 	}
 	restID := node.GetRestID()
@@ -310,34 +317,68 @@ func (c *Client) ribFromIxia(ctx context.Context, intfName, neighbor string, ipv
 	return table, nil
 }
 
-func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (ygot.GoStruct, error) {
+type peerInfo struct {
+	protocolName string
+	intf         string
+	neighbor     string
+	isIPV4       bool
+}
+
+const (
+	peerInfoCacheKey = "bgpLearnedInfoCacheKey"
+	oldRibCacheKey   = "bgpRIBCacheKey"
+)
+
+func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notification, error) {
 	const (
 		attrSetOCPath      = ribOCPath + "/attr-sets"
 		communityOCPath    = ribOCPath + "/communities"
-		bgpV4UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre/routes/route/state/attr-index"
-		bgpV6UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre/routes/route/state/attr-index"
+		bgpV4UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre/"
+		bgpV6UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre/"
 	)
-	strPath, err := ygot.PathToSchemaPath(p)
+
+	schemaPath, err := ygot.PathToSchemaPath(p)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get schema path")
 	}
-	if strings.HasPrefix(strPath, attrSetOCPath) || strings.HasPrefix(strPath, communityOCPath) {
-		if _, ok := c.fresh.Get(ribOCPath); !ok {
-			return nil, errors.New("BGP RIB doesn't contain any information")
+
+	var cachePI peerInfo
+	cached, hasCachedPeer := c.fresh.Get(peerInfoCacheKey)
+	if hasCachedPeer {
+		cachePI = cached.(peerInfo)
+	}
+
+	// Attr set and communities are only valid and updated on calls to Adj RIB paths.
+	if strings.HasPrefix(schemaPath, attrSetOCPath) || strings.HasPrefix(schemaPath, communityOCPath) {
+		if !hasCachedPeer {
+			return nil, errors.New("need to read the attr index or comm index before reading attr sets or communities")
 		}
 		return nil, nil
 	}
-	// if the path is unknown, do nothing
-	if strPath != bgpV4UnicastOCPath && strPath != bgpV6UnicastOCPath {
+
+	// Ignore unknown paths.
+	if !strings.HasPrefix(schemaPath, bgpV4UnicastOCPath) && !strings.HasPrefix(schemaPath, bgpV6UnicastOCPath) {
 		return nil, nil
 	}
 
-	bgpProtoName := p.GetElem()[3].GetKey()["name"]
-	intf := p.GetElem()[1].GetKey()["name"]
-	neighbor := p.GetElem()[10].GetKey()["neighbor-address"]
-	isIPV4 := strPath == bgpV4UnicastOCPath
+	pi := peerInfo{
+		protocolName: p.GetElem()[3].GetKey()["name"],
+		intf:         p.GetElem()[1].GetKey()["name"],
+		neighbor:     p.GetElem()[10].GetKey()["neighbor-address"],
+		isIPV4:       strings.HasPrefix(schemaPath, bgpV4UnicastOCPath),
+	}
 
-	table, err := c.ribFromIxia(ctx, intf, neighbor, isIPV4)
+	_, hasFreshInfo := c.fresh.Get(ribOCPath)
+
+	// Getting a new path ignores the cache duration and forces a refresh.
+	if hasFreshInfo && cachePI == pi {
+		return nil, nil
+	}
+
+	cachePI = pi
+	c.fresh.Set(peerInfoCacheKey, cachePI, -1)
+
+	table, err := ribFromIxiaFn(c, ctx, pi)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to read Ixia table")
 	}
@@ -348,12 +389,26 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (ygot.GoStruct, e
 	}
 
 	dev := &telemetry.Device{}
-	rib := dev.GetOrCreateNetworkInstance(intf).GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, bgpProtoName).GetOrCreateBgp().GetOrCreateRib()
-	if err := learnedInfoToRIB(info, neighbor, isIPV4, rib); err != nil {
+	rib := dev.GetOrCreateNetworkInstance(cachePI.intf).GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, cachePI.protocolName).GetOrCreateBgp().GetOrCreateRib()
+	if err := learnedInfoToRIB(info, cachePI.neighbor, cachePI.isIPV4, rib); err != nil {
 		return nil, err
 	}
-	c.fresh.Set(ribOCPath, true, -1)
-	return dev, nil
+
+	var oldRIB *telemetry.Device
+	if old, ok := c.fresh.Get(oldRibCacheKey); ok {
+		oldRIB = old.(*telemetry.Device)
+	}
+
+	notif, err := ygot.Diff(oldRIB, dev)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to render notifications")
+	}
+	notif.Timestamp = time.Now().UnixNano()
+
+	c.fresh.Set(oldRibCacheKey, dev, -1)
+	c.fresh.SetDefault(ribOCPath, true)
+
+	return notif, nil
 }
 
 type subClient struct {

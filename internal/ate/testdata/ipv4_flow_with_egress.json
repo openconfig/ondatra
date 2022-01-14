@@ -656,8 +656,7 @@
           "values": []
         }
       ],
-      "transmissionDistribution": null,
-      "xpath": "/traffic/trafficItem[1]"
+      "transmissionDistribution": null
     }
   ]
 }

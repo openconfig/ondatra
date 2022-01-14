@@ -163,6 +163,8 @@ type intf struct {
 	deviceGroup       *ixconfig.TopologyDeviceGroup
 	ipv4              *ixconfig.TopologyIpv4
 	ipv6              *ixconfig.TopologyIpv6
+	ipv4Loopback      *ixconfig.TopologyIpv4Loopback
+	ingressLSPs       []*ixconfig.TopologyRsvpP2PIngressLsps
 	link              ixconfig.IxiaCfgNode
 	isrToNetworkGroup map[string]*ixconfig.TopologyNetworkGroup
 	netToNetworkGroup map[string]*ixconfig.TopologyNetworkGroup
@@ -525,13 +527,66 @@ func (ix *IxiaCfgClient) UpdateTopology(ctx context.Context, top *opb.Topology) 
 	return nil
 }
 
+type stateRsp interface {
+	Up() bool
+}
+
+type protocolRsp struct {
+	SessionStatus []string
+}
+
+func (r *protocolRsp) Up() bool {
+	return len(r.SessionStatus) > 0 && r.SessionStatus[0] == "up"
+}
+
+type lspRsp struct {
+	State []string
+}
+
+func (r *lspRsp) Up() bool {
+	if len(r.State) == 0 {
+		return false
+	}
+	for _, s := range r.State {
+		if s != "up" {
+			return false
+		}
+	}
+	return true
+}
+
+func checkUp(ctx context.Context, ix *IxiaCfgClient, nodes []ixconfig.IxiaCfgNode, r stateRsp, retries int) ([]ixconfig.IxiaCfgNode, error) {
+	const retryWait = 10 * time.Second
+	notUp := func(nodes []ixconfig.IxiaCfgNode) ([]ixconfig.IxiaCfgNode, error) {
+		var notUp []ixconfig.IxiaCfgNode
+		for _, n := range nodes {
+			if err := ix.c.GetNode(ctx, n, r); err != nil {
+				return nil, errors.Wrapf(err, "could not fetch element at %q to check session status", n.GetRestID())
+			}
+			if !r.Up() {
+				notUp = append(notUp, n)
+			}
+		}
+		return notUp, nil
+	}
+	nodes, err := notUp(nodes)
+	for i := 0; i < retries && err == nil && len(nodes) > 0; i++ {
+		sleepFn(retryWait)
+		nodes, err = notUp(nodes)
+	}
+	return nodes, err
+}
+
 // Waits for protocols to start, restarting any that initially fail and rechecking as necessary.
 func validateProtocolStart(ctx context.Context, ix *IxiaCfgClient) error {
-	const retryWait = 10 * time.Second
-	maxRetries := 5
+	const (
+		retryWait      = 10 * time.Second
+		maxRetriesLSPs = 60
+	)
+	maxRetriesProtocols := 5
 	if len(ix.routeTableToIxFile) > 0 {
 		// Protocols may need extra time to start on large-scale route imports.
-		maxRetries = 15
+		maxRetriesProtocols = 15
 	}
 	topo := struct {
 		ProtocolActionsInProgress []string
@@ -545,7 +600,7 @@ func validateProtocolStart(ctx context.Context, ix *IxiaCfgClient) error {
 	}
 	// Wait for protocols to start.
 	start, err := started()
-	for i := 0; i < maxRetries && err == nil && !start; i++ {
+	for i := 0; i < maxRetriesProtocols && err == nil && !start; i++ {
 		sleepFn(retryWait)
 		start, err = started()
 	}
@@ -556,51 +611,32 @@ func validateProtocolStart(ctx context.Context, ix *IxiaCfgClient) error {
 		return errors.New("protocols did not start in time")
 	}
 
-	// Validate protocol session state
-	var nodes []ixconfig.IxiaCfgNode
+	var protocolNodes []ixconfig.IxiaCfgNode
+	var ingressLSPNodes []ixconfig.IxiaCfgNode
 	for _, intf := range ix.intfs {
-		nodes = append(nodes, intf.deviceGroup.Ethernet[0])
+		protocolNodes = append(protocolNodes, intf.deviceGroup.Ethernet[0])
 		if intf.ipv4 != nil {
-			nodes = append(nodes, intf.ipv4)
+			protocolNodes = append(protocolNodes, intf.ipv4)
 		}
 		if intf.ipv6 != nil {
-			nodes = append(nodes, intf.ipv6)
+			protocolNodes = append(protocolNodes, intf.ipv6)
+		}
+		for _, lsp := range intf.ingressLSPs {
+			ingressLSPNodes = append(ingressLSPNodes, lsp)
 		}
 	}
-	if err := ix.c.UpdateIDs(ctx, ix.cfg, nodes...); err != nil {
-		return errors.Wrap(err, "could not fetch IDs for checking protocol sessions")
+	var cfgNodes []ixconfig.IxiaCfgNode
+	cfgNodes = append(cfgNodes, protocolNodes...)
+	cfgNodes = append(cfgNodes, ingressLSPNodes...)
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, cfgNodes...); err != nil {
+		return errors.Wrap(err, "could not update IDs for checking protocol sessions")
 	}
 
-	checkProtocols := func(nodes []ixconfig.IxiaCfgNode) ([]ixconfig.IxiaCfgNode, error) {
-		notUp := func(nodes []ixconfig.IxiaCfgNode) ([]ixconfig.IxiaCfgNode, error) {
-			type protocol struct {
-				SessionStatus []string
-			}
-			var notUp []ixconfig.IxiaCfgNode
-			for _, n := range nodes {
-				var p protocol
-				if err := ix.c.GetNode(ctx, n, &p); err != nil {
-					return nil, errors.Wrapf(err, "could not fetch element at %q to check session status", n.GetRestID())
-				}
-				if len(p.SessionStatus) == 0 || p.SessionStatus[0] != "up" {
-					notUp = append(notUp, n)
-				}
-			}
-			return notUp, nil
-		}
-		var err error
-		nodes, err = notUp(nodes)
-		for i := 0; i < maxRetries && err == nil && len(nodes) > 0; i++ {
-			sleepFn(retryWait)
-			nodes, err = notUp(nodes)
-		}
-		return nodes, err
-	}
-	nodes, err = checkProtocols(nodes)
+	protocolNodes, err = checkUp(ctx, ix, protocolNodes, &protocolRsp{}, maxRetriesProtocols)
 	if err != nil {
 		return err
 	}
-	for _, n := range nodes {
+	for _, n := range protocolNodes {
 		// Restart any still down protocols individually.
 		var op string
 		switch cn := n.(type) {
@@ -617,16 +653,29 @@ func validateProtocolStart(ctx context.Context, ix *IxiaCfgClient) error {
 			return fmt.Errorf("could not restart down protocol at %q", n.GetRestID())
 		}
 	}
-	nodes, err = checkProtocols(nodes)
+	protocolNodes, err = checkUp(ctx, ix, protocolNodes, &protocolRsp{}, maxRetriesProtocols)
 	if err != nil {
 		return err
 	}
-	if len(nodes) > 0 {
-		var xps []string
-		for _, n := range nodes {
-			xps = append(xps, n.XPath().String())
+	if len(protocolNodes) > 0 {
+		var ids []string
+		for _, n := range protocolNodes {
+			ids = append(ids, n.GetRestID())
 		}
-		return fmt.Errorf("some protocol instances did not start: %v", xps)
+		return fmt.Errorf("some protocol instances did not start: %v", ids)
+	}
+
+	// Validate ingress LSP state
+	ingressLSPNodes, err = checkUp(ctx, ix, ingressLSPNodes, &lspRsp{}, maxRetriesLSPs)
+	if err != nil {
+		return err
+	}
+	if len(ingressLSPNodes) > 0 {
+		var ids []string
+		for _, n := range ingressLSPNodes {
+			ids = append(ids, n.GetRestID())
+		}
+		return fmt.Errorf("some ingress LSP instances did not start: %v", ids)
 	}
 	return nil
 }
@@ -817,7 +866,7 @@ func startTraffic(ctx context.Context, ix *IxiaCfgClient) error {
 		return errors.Wrap(err, "could not start traffic")
 	}
 
-	// TODO: Use JSON-based config instead of the REST API for egress tracking configuration.
+	// TODO: Investigate using JSON-based config instead of the REST API.
 	if len(ix.egressTrackingFlows) > 0 {
 		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, ix.egressTrackingFlows); err != nil {
 			return errors.Wrap(err, "could not set egress stat tracking")
@@ -977,25 +1026,44 @@ func (ix *IxiaCfgClient) FlushStats() {
 }
 
 // UpdateBGPPeerStates exists only to match the API of the prior IxNetwork ATE binding.
+// It assumes that the only changes in the provided interface configs are updates to
+// BGP active states.
 // TODO: Remove this method once new Ixia config binding is used.
 func (ix *IxiaCfgClient) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceConfig) error {
 	if err := ix.configureTopology(ifs); err != nil {
 		return err
 	}
+	var peerStates []*ixconfig.MultivalueSingleValue
 	for _, intf := range ix.intfs {
 		if v4 := intf.ipv4; v4 != nil {
-			for _, peer := range v4.BgpIpv4Peer {
-				if err := ix.importConfig(ctx, ix.cfg, peer, false); err != nil {
-					return errors.Wrap(err, "could not update BGP v4 peer")
-				}
+			for _, p := range v4.BgpIpv4Peer {
+				peerStates = append(peerStates, p.Active.SingleValue)
 			}
 		}
 		if v6 := intf.ipv6; v6 != nil {
-			for _, peer := range v6.BgpIpv6Peer {
-				if err := ix.importConfig(ctx, ix.cfg, peer, false); err != nil {
-					return errors.Wrap(err, "could not update BGP v6 peer")
-				}
+			for _, p := range v6.BgpIpv6Peer {
+				peerStates = append(peerStates, p.Active.SingleValue)
 			}
+		}
+		if v4lb := intf.ipv4Loopback; v4lb != nil {
+			for _, p := range v4lb.BgpIpv4Peer {
+				peerStates = append(peerStates, p.Active.SingleValue)
+			}
+		}
+	}
+	if len(peerStates) == 0 {
+		return nil
+	}
+	var psCfgNodes []ixconfig.IxiaCfgNode
+	for _, p := range peerStates {
+		psCfgNodes = append(psCfgNodes, p)
+	}
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, psCfgNodes...); err != nil {
+		return errors.Wrap(err, "could not update IDs of BGP peer 'active' multivalue nodes")
+	}
+	for _, p := range peerStates {
+		if err := ix.c.Session().Patch(ctx, p.GetRestID(), map[string]string{"value": *(p.Value)}); err != nil {
+			return errors.Wrapf(err, "could not update peer state for node at XPath %v", p.XPath())
 		}
 	}
 	const (

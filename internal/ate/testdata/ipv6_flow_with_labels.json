@@ -2,7 +2,6 @@
   "useRfc5952": true,
   "trafficItem": [
     {
-      "xpath": "/traffic/trafficItem[1]",
       "name": "ipv6FlowLabels1",
       "routeMesh": "fullMesh",
       "trafficType": "ipv6",

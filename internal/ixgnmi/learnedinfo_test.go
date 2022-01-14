@@ -38,8 +38,10 @@ func TestLearnedInfoToRIB(t *testing.T) {
 				1: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{},
 			},
 		},
-		inLearnedInfo: []bgpLearnedInfo{{}},
-		wantErr:       "failed to append details for elem 0",
+		inLearnedInfo: []bgpLearnedInfo{{
+			IPV4NextHop: "localhost",
+		}},
+		wantErr: "failed to append details for elem 0",
 	}, {
 		name: "invalid community index",
 		inRIB: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
@@ -85,6 +87,25 @@ func TestLearnedInfoToRIB(t *testing.T) {
 			Origin:     "IGP",
 		}},
 		wantErr: "failed to append route for elem 1",
+	}, {
+		name:          "empty learned info",
+		inRIB:         &telemetry.NetworkInstance_Protocol_Bgp_Rib{},
+		inLearnedInfo: []bgpLearnedInfo{{}},
+		wantRIB: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
+			AfiSafi: map[telemetry.E_BgpTypes_AFI_SAFI_TYPE]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+				telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
+					AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
+					Ipv6Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
+						Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
+							"localhost": {
+								NeighborAddress: ygot.String("localhost"),
+								AdjRibInPre:     &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
+							},
+						},
+					},
+				},
+			},
+		},
 	}, {
 		name:  "v4 routes",
 		inV4:  true,

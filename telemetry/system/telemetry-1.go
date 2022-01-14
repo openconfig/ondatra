@@ -1,0 +1,1845 @@
+package system
+
+// This file contains generated telemetry method augmentations for the
+// generated path structs, which makes use of their gNMI paths for making
+// ONDATRA telemetry calls.
+
+import (
+	"reflect"
+	"testing"
+	"time"
+
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
+	oc "github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/ygot/ygot"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+)
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/state/authentication-method with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_AuthenticationMethodPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/state/authentication-method with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authentication_AuthenticationMethod_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_AuthenticationMethodPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_AuthenticationMethodPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a ONCE subscription.
+func (n *System_Aaa_Authentication_AuthenticationMethodPathAny) Get(t testing.TB) [][]oc.System_Aaa_Authentication_AuthenticationMethod_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]oc.System_Aaa_Authentication_AuthenticationMethod_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_AuthenticationMethodPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool) *oc.System_Aaa_Authentication_AuthenticationMethod_UnionSliceWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_Authentication_AuthenticationMethod_UnionSliceWatcher{}
+	gs := &oc.System_Aaa_Authentication{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_AuthenticationMethodPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool) *oc.System_Aaa_Authentication_AuthenticationMethod_UnionSliceWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_AuthenticationMethodPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/state/authentication-method with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Await(t testing.TB, timeout time.Duration, val []oc.System_Aaa_Authentication_AuthenticationMethod_Union) *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/state/authentication-method failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/state/authentication-method to the batch object.
+func (n *System_Aaa_Authentication_AuthenticationMethodPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_AuthenticationMethodPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/state/authentication-method with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_AuthenticationMethodPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice) bool) *oc.System_Aaa_Authentication_AuthenticationMethod_UnionSliceWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_AuthenticationMethodPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/state/authentication-method to the batch object.
+func (n *System_Aaa_Authentication_AuthenticationMethodPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_AuthenticationMethodPath extracts the value of the leaf AuthenticationMethod from its parent oc.System_Aaa_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice.
+func convertSystem_Aaa_Authentication_AuthenticationMethodPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication) *oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice {
+	t.Helper()
+	qv := &oc.QualifiedSystem_Aaa_Authentication_AuthenticationMethod_UnionSlice{
+		Metadata: md,
+	}
+	val := parent.AuthenticationMethod
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_UserPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authentication_User {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_Authentication_User{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_UserPath) Get(t testing.TB) *oc.System_Aaa_Authentication_User {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_UserPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authentication_User {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authentication_User
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_Authentication_User{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription.
+func (n *System_Aaa_Authentication_UserPathAny) Get(t testing.TB) []*oc.System_Aaa_Authentication_User {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_Authentication_User
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_UserPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_User {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_User{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_User) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Aaa_Authentication_User{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.System_Aaa_Authentication_User)))
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_UserPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User) bool) *oc.System_Aaa_Authentication_UserWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_Authentication_UserWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Aaa_Authentication_User{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authentication_User)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_UserPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User) bool) *oc.System_Aaa_Authentication_UserWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_UserPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_UserPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Aaa_Authentication_User) *oc.QualifiedSystem_Aaa_Authentication_User {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authentication_User) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user to the batch object.
+func (n *System_Aaa_Authentication_UserPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_UserPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_User {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_User{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_User) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_UserPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User) bool) *oc.System_Aaa_Authentication_UserWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_UserPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user to the batch object.
+func (n *System_Aaa_Authentication_UserPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_User_PasswordHashedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_User_PasswordHashedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a ONCE subscription.
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_User_PasswordHashedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_User_PasswordHashedPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_PasswordHashedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/password-hashed to the batch object.
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/password-hashed with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_PasswordHashedPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/password-hashed to the batch object.
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_User_PasswordHashedPath extracts the value of the leaf PasswordHashed from its parent oc.System_Aaa_Authentication_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_Authentication_User_PasswordHashedPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.PasswordHashed
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/password with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_User_PasswordPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_User_PasswordPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/password with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_User_PasswordPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_User_PasswordPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a ONCE subscription.
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_PasswordPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_User_PasswordPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_User_PasswordPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_PasswordPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_PasswordPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user/state/password with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_User_PasswordPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user/state/password failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/password to the batch object.
+func (n *System_Aaa_Authentication_User_PasswordPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/password with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_PasswordPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/password to the batch object.
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_User_PasswordPath extracts the value of the leaf Password from its parent oc.System_Aaa_Authentication_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_Authentication_User_PasswordPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Password
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/role with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_User_RolePath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_User_RolePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/role with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_User_RolePath) Get(t testing.TB) oc.System_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_User_RolePathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authentication_User_Role_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_User_RolePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a ONCE subscription.
+func (n *System_Aaa_Authentication_User_RolePathAny) Get(t testing.TB) []oc.System_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.System_Aaa_Authentication_User_Role_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_RolePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_User_Role_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_User_RolePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool) *oc.System_Aaa_Authentication_User_Role_UnionWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_Authentication_User_Role_UnionWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_User_RolePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authentication_User_Role_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_RolePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool) *oc.System_Aaa_Authentication_User_Role_UnionWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_RolePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user/state/role with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_User_RolePath) Await(t testing.TB, timeout time.Duration, val oc.System_Aaa_Authentication_User_Role_Union) *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user/state/role failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/role to the batch object.
+func (n *System_Aaa_Authentication_User_RolePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_RolePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authentication_User_Role_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/role with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_RolePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union) bool) *oc.System_Aaa_Authentication_User_Role_UnionWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_RolePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/role to the batch object.
+func (n *System_Aaa_Authentication_User_RolePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_User_RolePath extracts the value of the leaf Role from its parent oc.System_Aaa_Authentication_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union.
+func convertSystem_Aaa_Authentication_User_RolePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union {
+	t.Helper()
+	qv := &oc.QualifiedSystem_Aaa_Authentication_User_Role_Union{
+		Metadata: md,
+	}
+	val := parent.Role
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_User_SshKeyPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_User_SshKeyPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a ONCE subscription.
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_User_SshKeyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_User_SshKeyPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_SshKeyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/ssh-key to the batch object.
+func (n *System_Aaa_Authentication_User_SshKeyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/ssh-key with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_SshKeyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/ssh-key to the batch object.
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_User_SshKeyPath extracts the value of the leaf SshKey from its parent oc.System_Aaa_Authentication_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_Authentication_User_SshKeyPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SshKey
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/username with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authentication_User_UsernamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authentication_User{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authentication_User_UsernamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/state/username with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authentication_User_UsernamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authentication_User_UsernamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authentication_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authentication_User_UsernamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a ONCE subscription.
+func (n *System_Aaa_Authentication_User_UsernamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_UsernamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authentication_User_UsernamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.System_Aaa_Authentication_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authentication_User", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authentication_User_UsernamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_UsernamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_UsernamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authentication/users/user/state/username with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authentication_User_UsernamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authentication/users/user/state/username failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/username to the batch object.
+func (n *System_Aaa_Authentication_User_UsernamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authentication_User_UsernamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authentication/users/user/state/username with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authentication_User_UsernamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authentication_User_UsernamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authentication/users/user/state/username to the batch object.
+func (n *System_Aaa_Authentication_User_UsernamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authentication_User_UsernamePath extracts the value of the leaf Username from its parent oc.System_Aaa_Authentication_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_Authentication_User_UsernamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Username
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authorization with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_AuthorizationPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authorization {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authorization{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authorization", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_Authorization{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authorization with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_AuthorizationPath) Get(t testing.TB) *oc.System_Aaa_Authorization {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authorization with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_AuthorizationPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authorization {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authorization
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authorization{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authorization", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_Authorization{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authorization with a ONCE subscription.
+func (n *System_Aaa_AuthorizationPathAny) Get(t testing.TB) []*oc.System_Aaa_Authorization {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_Authorization
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_AuthorizationPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Aaa_Authorization{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.System_Aaa_Authorization)))
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_AuthorizationPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization) bool) *oc.System_Aaa_AuthorizationWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_AuthorizationWatcher{}
+	gs := &oc.System_Aaa_Authorization{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authorization", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Aaa_Authorization{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authorization)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_AuthorizationPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization) bool) *oc.System_Aaa_AuthorizationWatcher {
+	t.Helper()
+	return watch_System_Aaa_AuthorizationPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authorization with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_AuthorizationPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Aaa_Authorization) *oc.QualifiedSystem_Aaa_Authorization {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authorization) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authorization failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization to the batch object.
+func (n *System_Aaa_AuthorizationPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_AuthorizationPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_AuthorizationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization) bool) *oc.System_Aaa_AuthorizationWatcher {
+	t.Helper()
+	return watch_System_Aaa_AuthorizationPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization to the batch object.
+func (n *System_Aaa_AuthorizationPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authorization/state/authorization-method with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authorization{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authorization", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authorization_AuthorizationMethodPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authorization/state/authorization-method with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authorization_AuthorizationMethod_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authorization_AuthorizationMethodPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authorization{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authorization", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authorization_AuthorizationMethodPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a ONCE subscription.
+func (n *System_Aaa_Authorization_AuthorizationMethodPathAny) Get(t testing.TB) [][]oc.System_Aaa_Authorization_AuthorizationMethod_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]oc.System_Aaa_Authorization_AuthorizationMethod_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authorization_AuthorizationMethodPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool) *oc.System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher{}
+	gs := &oc.System_Aaa_Authorization{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authorization", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authorization_AuthorizationMethodPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool) *oc.System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_AuthorizationMethodPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authorization/state/authorization-method with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Await(t testing.TB, timeout time.Duration, val []oc.System_Aaa_Authorization_AuthorizationMethod_Union) *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authorization/state/authorization-method failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/state/authorization-method to the batch object.
+func (n *System_Aaa_Authorization_AuthorizationMethodPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_AuthorizationMethodPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/state/authorization-method with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_AuthorizationMethodPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice) bool) *oc.System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_AuthorizationMethodPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/state/authorization-method to the batch object.
+func (n *System_Aaa_Authorization_AuthorizationMethodPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authorization_AuthorizationMethodPath extracts the value of the leaf AuthorizationMethod from its parent oc.System_Aaa_Authorization
+// and combines the update with an existing Metadata to return a *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice.
+func convertSystem_Aaa_Authorization_AuthorizationMethodPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authorization) *oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice {
+	t.Helper()
+	qv := &oc.QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice{
+		Metadata: md,
+	}
+	val := parent.AuthorizationMethod
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authorization_EventPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authorization_Event {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authorization_Event{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authorization_Event", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_Authorization_Event{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authorization_EventPath) Get(t testing.TB) *oc.System_Aaa_Authorization_Event {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authorization_EventPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_Authorization_Event {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_Authorization_Event
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authorization_Event{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authorization_Event", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_Authorization_Event{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription.
+func (n *System_Aaa_Authorization_EventPathAny) Get(t testing.TB) []*oc.System_Aaa_Authorization_Event {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_Authorization_Event
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/events/event with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_EventPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization_Event {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization_Event{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization_Event) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Aaa_Authorization_Event{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.System_Aaa_Authorization_Event)))
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authorization_EventPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_Event) bool) *oc.System_Aaa_Authorization_EventWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_Authorization_EventWatcher{}
+	gs := &oc.System_Aaa_Authorization_Event{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authorization_Event", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Aaa_Authorization_Event{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_Authorization_Event)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/events/event with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_EventPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_Event) bool) *oc.System_Aaa_Authorization_EventWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_EventPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authorization/events/event with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authorization_EventPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Aaa_Authorization_Event) *oc.QualifiedSystem_Aaa_Authorization_Event {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_Authorization_Event) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authorization/events/event failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/events/event to the batch object.
+func (n *System_Aaa_Authorization_EventPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/events/event with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_EventPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_Authorization_Event {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_Authorization_Event{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_Authorization_Event) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/events/event with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_EventPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_Authorization_Event) bool) *oc.System_Aaa_Authorization_EventWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_EventPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/events/event to the batch object.
+func (n *System_Aaa_Authorization_EventPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Lookup(t testing.TB) *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	goStruct := &oc.System_Aaa_Authorization_Event{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_Authorization_Event", goStruct, true, false)
+	if ok {
+		return convertSystem_Aaa_Authorization_Event_EventTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_Authorization_Event_EventTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_Authorization_Event{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authorization_Event", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_Authorization_Event_EventTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a ONCE subscription.
+func (n *System_Aaa_Authorization_Event_EventTypePathAny) Get(t testing.TB) []oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_Authorization_Event_EventTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool) *oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPEWatcher{}
+	gs := &oc.System_Aaa_Authorization_Event{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_Authorization_Event", gs, queryPath, true, false)
+		return convertSystem_Aaa_Authorization_Event_EventTypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool) *oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPEWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_Event_EventTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/authorization/events/event/state/event-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/events/event/state/event-type to the batch object.
+func (n *System_Aaa_Authorization_Event_EventTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_Authorization_Event_EventTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/authorization/events/event/state/event-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_Authorization_Event_EventTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE) bool) *oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPEWatcher {
+	t.Helper()
+	return watch_System_Aaa_Authorization_Event_EventTypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/authorization/events/event/state/event-type to the batch object.
+func (n *System_Aaa_Authorization_Event_EventTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Aaa_Authorization_Event_EventTypePath extracts the value of the leaf EventType from its parent oc.System_Aaa_Authorization_Event
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE.
+func convertSystem_Aaa_Authorization_Event_EventTypePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authorization_Event) *oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE{
+		Metadata: md,
+	}
+	val := parent.EventType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroupPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroupPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_ServerGroup {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_ServerGroup
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+func (n *System_Aaa_ServerGroupPathAny) Get(t testing.TB) []*oc.System_Aaa_ServerGroup {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_ServerGroup
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_ServerGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_ServerGroup {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_ServerGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_ServerGroup) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.System_Aaa_ServerGroup)))
+		return false
+	})
+	return c
+}
+
+func watch_System_Aaa_ServerGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup) bool) *oc.System_Aaa_ServerGroupWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_ServerGroupWatcher{}
+	gs := &oc.System_Aaa_ServerGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_ServerGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup) bool) *oc.System_Aaa_ServerGroupWatcher {
+	t.Helper()
+	return watch_System_Aaa_ServerGroupPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/aaa/server-groups/server-group with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Aaa_ServerGroupPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Aaa_ServerGroup) *oc.QualifiedSystem_Aaa_ServerGroup {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_ServerGroup) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/aaa/server-groups/server-group to the batch object.
+func (n *System_Aaa_ServerGroupPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Aaa_ServerGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_ServerGroup {
+	t.Helper()
+	c := &oc.CollectionSystem_Aaa_ServerGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_ServerGroup) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Aaa_ServerGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup) bool) *oc.System_Aaa_ServerGroupWatcher {
+	t.Helper()
+	return watch_System_Aaa_ServerGroupPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/aaa/server-groups/server-group to the batch object.
+func (n *System_Aaa_ServerGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}

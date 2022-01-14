@@ -1345,7 +1345,7 @@ func TestISISReachability(t *testing.T) {
 
 func TestAddBGPProtocols(t *testing.T) {
 	const ifName = "someIntf"
-	baseClient := func(withIPv4, withIPv6 bool) *IxiaCfgClient {
+	baseClient := func(withIPv4, withIPv6, withIPv4Loopback bool) *IxiaCfgClient {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -1354,7 +1354,8 @@ func TestAddBGPProtocols(t *testing.T) {
 			}},
 		}
 		ifc := &intf{deviceGroup: cfg.Topology[0].DeviceGroup[0]}
-		eth := cfg.Topology[0].DeviceGroup[0].Ethernet[0]
+		dg := cfg.Topology[0].DeviceGroup[0]
+		eth := dg.Ethernet[0]
 		if withIPv4 {
 			eth.Ipv4 = []*ixconfig.TopologyIpv4{{}}
 			ifc.ipv4 = eth.Ipv4[0]
@@ -1363,6 +1364,10 @@ func TestAddBGPProtocols(t *testing.T) {
 			eth.Ipv6 = []*ixconfig.TopologyIpv6{{}}
 			ifc.ipv6 = eth.Ipv6[0]
 		}
+		if withIPv4Loopback {
+			dg.Ipv4Loopback = []*ixconfig.TopologyIpv4Loopback{{}}
+			ifc.ipv4Loopback = dg.Ipv4Loopback[0]
+		}
 		return &IxiaCfgClient{
 			cfg:   cfg,
 			intfs: map[string]*intf{ifName: ifc},
@@ -1370,11 +1375,11 @@ func TestAddBGPProtocols(t *testing.T) {
 	}
 
 	tests := []struct {
-		desc                   string
-		hasV4Intf, hasV6Intf   bool
-		peers                  []*opb.BgpPeer
-		wantV4Peer, wantV6Peer bool
-		wantErr                string
+		desc                                       string
+		hasV4Intf, hasV6Intf, hasV4Loopback        bool
+		peers                                      []*opb.BgpPeer
+		wantV4Peer, wantV6Peer, wantV4LoopbackPeer bool
+		wantErr                                    string
 	}{{
 		desc: "invalid peer address",
 		peers: []*opb.BgpPeer{{
@@ -1404,6 +1409,20 @@ func TestAddBGPProtocols(t *testing.T) {
 		}},
 		wantErr: "without IPv6 configured on interface",
 	}, {
+		desc: "v4 loopback peer without intf",
+		peers: []*opb.BgpPeer{{
+			PeerAddress: "1.1.1.1",
+			OnLoopback:  true,
+		}},
+		wantErr: "without IPv4 loopback configured on interface",
+	}, {
+		desc: "unsupported v6 loopback peer",
+		peers: []*opb.BgpPeer{{
+			PeerAddress: "aa::",
+			OnLoopback:  true,
+		}},
+		wantErr: "IPv6 loopbacks not supported",
+	}, {
 		desc:      "valid peers",
 		hasV4Intf: true,
 		hasV6Intf: true,
@@ -1414,6 +1433,14 @@ func TestAddBGPProtocols(t *testing.T) {
 		}},
 		wantV4Peer: true,
 		wantV6Peer: true,
+	}, {
+		desc:          "valid loopback peer",
+		hasV4Loopback: true,
+		peers: []*opb.BgpPeer{{
+			PeerAddress: "1.1.1.1",
+			OnLoopback:  true,
+		}},
+		wantV4LoopbackPeer: true,
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -1423,7 +1450,7 @@ func TestAddBGPProtocols(t *testing.T) {
 					BgpPeers: test.peers,
 				},
 			}
-			c := baseClient(test.hasV4Intf, test.hasV6Intf)
+			c := baseClient(test.hasV4Intf, test.hasV6Intf, test.hasV4Loopback)
 			gotErr := c.addBGPProtocols(ifc)
 			if ((gotErr == nil) != (test.wantErr == "")) || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("addBGPProtocols: got err: %v, want err %q", gotErr, test.wantErr)
@@ -1431,14 +1458,19 @@ func TestAddBGPProtocols(t *testing.T) {
 			if gotErr != nil {
 				return
 			}
-			eth := c.cfg.Topology[0].DeviceGroup[0].Ethernet[0]
+			dg := c.cfg.Topology[0].DeviceGroup[0]
+			eth := dg.Ethernet[0]
 			hasV4Peer := len(eth.Ipv4) > 0 && len(eth.Ipv4[0].BgpIpv4Peer) > 0
 			if hasV4Peer != test.wantV4Peer {
 				t.Errorf("addBGPProtocols: has V4 peer? %t, wanted V4 peer? %t", hasV4Peer, test.wantV4Peer)
 			}
 			hasV6Peer := len(eth.Ipv6) > 0 && len(eth.Ipv6[0].BgpIpv6Peer) > 0
 			if hasV6Peer != test.wantV6Peer {
-				t.Errorf("addBGPProtocols: has V6 peer? %t, wanted V4 peer? %t", hasV6Peer, test.wantV6Peer)
+				t.Errorf("addBGPProtocols: has V6 peer? %t, wanted V6 peer? %t", hasV6Peer, test.wantV6Peer)
+			}
+			hasV4LoopbackPeer := len(dg.Ipv4Loopback) > 0 && len(dg.Ipv4Loopback[0].BgpIpv4Peer) > 0
+			if hasV4LoopbackPeer != test.wantV4LoopbackPeer {
+				t.Errorf("addBGPProtocols: has V4 loopback peer? %t, wanted V4 loopback peer? %t", hasV4LoopbackPeer, test.wantV4LoopbackPeer)
 			}
 		})
 	}
@@ -2123,9 +2155,7 @@ func TestAddRSVPProtocols(t *testing.T) {
 					EnableP2PEgress: ixconfig.Bool(true),
 					IngressP2PLsps:  ixconfig.NumberUint32(0),
 					RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
-						Active:                ixconfig.MultivalueFalse(),
-						NumberOfEroSubObjects: ixconfig.NumberUint32(0),
-						NumberOfRroSubObjects: ixconfig.NumberUint32(0),
+						Active: ixconfig.MultivalueFalse(),
 					},
 				}},
 			}},
@@ -2216,6 +2246,8 @@ func TestAddRSVPProtocols(t *testing.T) {
 					RemoteIpCidr:        "9.9.9.9/32",
 					LocalProtection:     true,
 					BandwidthProtection: true,
+					TunnelId:            1,
+					LspId:               2,
 				}},
 			}, {
 				LocalIpCidr: "2.2.2.2/31",
@@ -2223,6 +2255,8 @@ func TestAddRSVPProtocols(t *testing.T) {
 					RemoteIpCidr:       "4.4.4.4/32",
 					FastReroute:        true,
 					PathReoptimization: true,
+					TunnelId:           3,
+					LspId:              4,
 				}, {
 					RemoteIpCidr: "6.6.6.6/31",
 					Rros: []*opb.RsvpConfig_Loopback_IngressLSP_RRO{
@@ -2274,6 +2308,8 @@ func TestAddRSVPProtocols(t *testing.T) {
 						BandwidthProtectionDesired: ixconfig.MultivalueBoolList(false, true, false, false),
 						EnableFastReroute:          ixconfig.MultivalueBoolList(false, false, true, false),
 						EnablePathReOptimization:   ixconfig.MultivalueBoolList(false, false, true, false),
+						TunnelId:                   ixconfig.MultivalueUintList(0, 1, 3, 0),
+						LspId:                      ixconfig.MultivalueUintList(0, 2, 4, 0),
 					},
 				}},
 			}},

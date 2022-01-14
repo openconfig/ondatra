@@ -106,6 +106,12 @@ func headerStacks(hdr *opb.Header, idx int) ([]*ixconfig.TrafficStack, error) {
 			return nil, err
 		}
 		return []*ixconfig.TrafficStack{s}, nil
+	case *opb.Header_Ldp:
+		s, err := ldpStack(v.Ldp, idx)
+		if err != nil {
+			return nil, err
+		}
+		return []*ixconfig.TrafficStack{s}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized header type: %v", hdr)
 	}
@@ -597,5 +603,41 @@ func pimStack(pim *opb.PimHeader, idx int) (*ixconfig.TrafficStack, error) {
 	}
 	setSingleValue(stack.Version(), uintToStr(2))
 	setSingleValue(stack.Type(), uintToStr(msgType))
+	return stack.TrafficStack(), nil
+}
+
+type ldpTrafficStack interface {
+	LsrID() *ixconfig.TrafficField
+	LabelSpace() *ixconfig.TrafficField
+	MessageID() *ixconfig.TrafficField
+	TrafficStack() *ixconfig.TrafficStack
+}
+
+func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficStack, error) {
+	var stack ldpTrafficStack
+	switch l := ldp.Type.(type) {
+	case *opb.LdpHeader_Hello_:
+		var targeted, reqTargeted uint32
+		if l.Hello.GetTargeted() {
+			targeted = 1
+		}
+		if l.Hello.GetRequestTargeted() {
+			reqTargeted = 1
+		}
+		s := ixconfig.NewLdpHelloStack(idx)
+		setSingleValue(s.CommonHelloParametersTLVHoldTime(), uintToStr(l.Hello.GetHoldTimeSec()))
+		setSingleValue(s.CommonHelloParametersTLVTBit(), uintToStr(targeted))
+		setSingleValue(s.CommonHelloParametersTLVRBit(), uintToStr(reqTargeted))
+		stack = s
+	default:
+		return nil, fmt.Errorf("unrecognized LDP header type: %v", ldp)
+	}
+	ip, isV6 := parseIP(ldp.GetLsrId())
+	if ip == nil || isV6 {
+		return nil, fmt.Errorf("provided LSR ID %q for LDP message is not a V4 address", ldp.GetLsrId())
+	}
+	setSingleValue(stack.LsrID(), ixconfig.String(ldp.GetLsrId()))
+	setSingleValue(stack.LabelSpace(), uintToStr(ldp.GetLabelSpace()))
+	setSingleValue(stack.MessageID(), uintToStr(ldp.GetMessageId()))
 	return stack.TrafficStack(), nil
 }

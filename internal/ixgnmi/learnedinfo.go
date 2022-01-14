@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"strings"
 
+	log "github.com/golang/glog"
 	"github.com/pkg/errors"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/telemetry"
@@ -58,6 +59,11 @@ func learnedInfoToRIB(learnedInfo []bgpLearnedInfo, neighbor string, v4 bool, ri
 	commLen := len(rib.Community)
 
 	for i, info := range learnedInfo {
+		if info == (bgpLearnedInfo{}) {
+			log.Infof("Skipping empty learned info")
+			continue
+		}
+
 		attrIndex := uint64(i + attrLen)
 		commIndex := uint64(i + commLen)
 		if err := appendDetails(info, rib, attrIndex, commIndex, v4); err != nil {

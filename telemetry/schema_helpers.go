@@ -22,9 +22,9 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
-	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
