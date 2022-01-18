@@ -57,10 +57,6 @@ func TestSubscribe(t *testing.T) {
 	}
 
 	ctx := context.Background()
-	client, err := NewClient(ctx, "fakeIxia", nil, nil)
-	if err != nil {
-		t.Fatalf("NewClient() got unexpected error: %v", err)
-	}
 
 	devWithAttr1 := &telemetry.Device{}
 	devWithAttr1.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
@@ -69,6 +65,9 @@ func TestSubscribe(t *testing.T) {
 	devWithAttr2 := &telemetry.Device{}
 	devWithAttr2.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
 		GetOrCreateBgp().GetOrCreateRib().GetOrCreateAttrSet(2)
+
+	devWithPartial := &telemetry.Device{}
+	devWithPartial.GetOrCreateNetworkInstance("foo")
 
 	tests := []struct {
 		name        string
@@ -80,6 +79,7 @@ func TestSubscribe(t *testing.T) {
 	}{{
 		name: "no such path",
 		path: &gpb.Path{Elem: []*gpb.PathElem{{Name: "bogus"}}},
+		mode: gpb.SubscriptionList_ONCE,
 		want: []*gpb.SubscribeResponse{
 			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 		},
@@ -336,6 +336,52 @@ func TestSubscribe(t *testing.T) {
 				}},
 			}}},
 		},
+	}, {
+		name: "bgp rib streaming with no data",
+		mode: gpb.SubscriptionList_STREAM,
+		learnedInfo: []*telemetry.Device{
+			nil,
+			nil,
+			devWithAttr1,
+		},
+		path: &gpb.Path{
+			Origin: "openconfig",
+			Elem: []*gpb.PathElem{
+				{Name: "network-instances"},
+				{Name: "network-instance", Key: map[string]string{"name": "foo"}},
+				{Name: "protocols"},
+				{Name: "protocol", Key: map[string]string{"identifier": "BGP", "name": "1"}},
+				{Name: "bgp"},
+				{Name: "rib"},
+				{Name: "attr-sets"},
+				{Name: "attr-set", Key: map[string]string{"index": "*"}},
+				{Name: "state"},
+				{Name: "index"},
+			},
+		},
+		want: []*gpb.SubscribeResponse{
+			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
+			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
+				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
+				Update: []*gpb.Update{{
+					Val: &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{1}},
+					Path: &gpb.Path{
+						Elem: []*gpb.PathElem{
+							{Name: "network-instances"},
+							{Name: "network-instance", Key: map[string]string{"name": "foo"}},
+							{Name: "protocols"},
+							{Name: "protocol", Key: map[string]string{"identifier": "BGP", "name": "1"}},
+							{Name: "bgp"},
+							{Name: "rib"},
+							{Name: "attr-sets"},
+							{Name: "attr-set", Key: map[string]string{"index": "1"}},
+							{Name: "state"},
+							{Name: "index"},
+						},
+					},
+				}},
+			}}},
+		},
 	}}
 
 	/*
@@ -347,11 +393,19 @@ func TestSubscribe(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			client, err := NewClient(ctx, "fakeIxia", nil, nil)
+			if err != nil {
+				t.Fatalf("NewClient() got unexpected error: %v", err)
+			}
+
 			prefixToReader[ribOCPath] = &prefixReader{read: func(_ context.Context, _ *Client, p *gpb.Path) ([]*gpb.Notification, error) {
 				if len(tt.learnedInfo) == 0 {
 					return nil, nil
 				}
 				defer func() { tt.learnedInfo = tt.learnedInfo[1:] }()
+				if tt.learnedInfo[0] == nil {
+					return nil, nil
+				}
 				ns, err := ygot.TogNMINotifications(tt.learnedInfo[0], time.Now().UnixNano(), ygot.GNMINotificationsConfig{UsePathElem: true})
 				if err != nil {
 					t.Fatalf("failed to create gNMI notifications: %v", err)
