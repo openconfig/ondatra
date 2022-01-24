@@ -273,6 +273,7 @@ message BgpConfig {
 // BGP peer for the ATE.
 message BgpPeer {
   bool active = 1;
+  bool on_loopback = 10;
   enum Type {
     TYPE_UNSPECIFIED = 0;
     TYPE_EXTERNAL = 1;
@@ -368,6 +369,7 @@ message BgpPeer {
     Enlp enlp = 13;
   }
   repeated SrtePolicyGroup srte_policy_groups = 9;
+  // NEXT ID: 11
 }
 
 // BGP attributes for advertised prefixes.
@@ -429,6 +431,8 @@ message RsvpConfig {
       bool bandwidth_protection = 3;
       bool fast_reroute = 4;
       bool path_reoptimization = 5;
+      uint32 tunnel_id = 8;  // Max 16-bit value in the protocol.
+      uint32 lsp_id = 9;     // Max 16-bit value in the protocol.
       message ERO {
         string ipv4_cidr = 1;
       }
@@ -437,6 +441,7 @@ message RsvpConfig {
         string ipv4 = 1;
       }
       repeated RRO rros = 7;
+      // NEXT ID: 10
     }
     repeated IngressLSP ingress_lsps = 2;
   }
@@ -590,6 +595,7 @@ message Header {
     OspfHeader ospf = 10;
     RsvpHeader rsvp = 11;
     PimHeader pim = 12;
+    LdpHeader ldp = 13;
   }
 }
 
@@ -777,6 +783,20 @@ message PimHeader {
   message Hello {}
   oneof type {
     Hello hello = 1;
+  }
+}
+
+message LdpHeader {
+  string lsr_id = 1;
+  uint32 label_space = 2;
+  uint32 message_id = 3;
+  message Hello {
+    uint32 hold_time_sec = 1;
+    bool targeted = 2;
+    bool request_targeted = 3;
+  }
+  oneof type {
+    Hello hello = 4;
   }
 }
 

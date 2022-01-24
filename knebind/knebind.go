@@ -28,36 +28,26 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/knebind/solver"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	kpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
+	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
 var (
-	// TODO: when Ondatra supports the OS dimension, use it to
-	// distinguish CSR from CXR and CEVO from VMX.
-	type2VendorMap = map[kpb.Node_Type]opb.Device_Vendor{
-		kpb.Node_ARISTA_CEOS:  opb.Device_ARISTA,
-		kpb.Node_CISCO_CSR:    opb.Device_CISCO,
-		kpb.Node_CISCO_CXR:    opb.Device_CISCO,
-		kpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
-		kpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
-		kpb.Node_IXIA_TG:      opb.Device_IXIA,
-	}
-
 	fetchTopo = fetchTopology // to be stubbed out by tests
 )
 
 // Bind implements the ondatra Binding interface for KNE
 type Bind struct {
 	binding.Binding
-	dut2GNMIAddr map[*reservation.DUT]string
-	mu           sync.Mutex
-	cfg          *Config
+	services solver.ServiceMap
+	mu       sync.Mutex
+	cfg      *Config
 }
 
 // New returns a new KNE bind instance.
@@ -66,8 +56,7 @@ func New(cfg *Config) (*Bind, error) {
 		return nil, fmt.Errorf("config cannot be nil")
 	}
 	return &Bind{
-		cfg:          cfg,
-		dut2GNMIAddr: make(map[*reservation.DUT]string),
+		cfg: cfg,
 	}, nil
 }
 
@@ -78,30 +67,12 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	if err != nil {
 		return nil, err
 	}
-	a, err := solve(tb, topo)
+	sol, err := solver.Solve(tb, topo)
 	if err != nil {
 		return nil, err
 	}
-	res := &reservation.Reservation{
-		ID:   uuid.New(),
-		DUTs: make(map[string]*reservation.DUT),
-		ATEs: make(map[string]*reservation.ATE),
-	}
-	for _, dut := range tb.GetDuts() {
-		resDUT, err := b.resolveDUT(dut, a)
-		if err != nil {
-			return nil, err
-		}
-		res.DUTs[dut.GetId()] = resDUT
-	}
-	for _, ate := range tb.GetAtes() {
-		resATE, err := b.resolveATE(ate, a)
-		if err != nil {
-			return nil, err
-		}
-		res.ATEs[ate.GetId()] = resATE
-	}
-	return res, nil
+	b.services = sol.Services
+	return sol.Reservation, nil
 }
 
 func fetchTopology(cfg *Config) (*kpb.Topology, error) {
@@ -124,57 +95,6 @@ func fetchTopology(cfg *Config) (*kpb.Topology, error) {
 	return topo, nil
 }
 
-func (b *Bind) resolveDUT(dev *opb.Device, a *assign) (*reservation.DUT, error) {
-	dims, err := b.resolveDims(dev, a)
-	if err != nil {
-		return nil, err
-	}
-	dut := &reservation.DUT{dims}
-	b.dut2GNMIAddr[dut], err = gnmiAddr(a.dev2Node[dev])
-	if err != nil {
-		return nil, err
-	}
-	return dut, nil
-}
-
-func (b *Bind) resolveATE(dev *opb.Device, a *assign) (*reservation.ATE, error) {
-	dims, err := b.resolveDims(dev, a)
-	if err != nil {
-		return nil, err
-	}
-	return &reservation.ATE{dims}, nil
-}
-
-func (b *Bind) resolveDims(dev *opb.Device, a *assign) (*reservation.Dims, error) {
-	node := a.dev2Node[dev]
-	vendor, ok := type2VendorMap[node.GetType()]
-	if !ok {
-		return nil, errors.Errorf("No known device vendor for node type: %v", node.GetType())
-	}
-	typeName := kpb.Node_Type_name[int32(node.GetType())]
-	dims := &reservation.Dims{
-		Name:   node.GetName(),
-		Vendor: vendor,
-		// TODO: Determine appropriate hardware model and software version
-		HardwareModel:   typeName,
-		SoftwareVersion: typeName,
-		Ports:           make(map[string]*reservation.Port),
-	}
-	for _, p := range dev.GetPorts() {
-		dims.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].vendorName}
-	}
-	return dims, nil
-}
-
-func gnmiAddr(node *kpb.Node) (string, error) {
-	for _, s := range node.GetServices() {
-		if s.GetName() == "gnmi" {
-			return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside()), nil
-		}
-	}
-	return "", errors.Errorf("No GNMI service found in node: %v", node)
-}
-
 // Release is a no-op because there's need to reserve local VMs.
 func (b *Bind) Release(_ context.Context) error {
 	return nil
@@ -186,8 +106,28 @@ func (b *Bind) SetTestMetadata(_ *binding.TestMetadata) error {
 }
 
 func (b *Bind) DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-	addr := b.dut2GNMIAddr[dut]
-	log.Infof("Dialing GNMI dut %s@%s", dut.Name, addr)
+	conn, err := b.dialGRPC(ctx, dut, "gnmi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return gpb.NewGNMIClient(conn), nil
+}
+
+func (b *Bind) DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
+	conn, err := b.dialGRPC(ctx, dut, "p4rt", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return p4pb.NewP4RuntimeClient(conn), nil
+}
+
+func (b *Bind) dialGRPC(ctx context.Context, dut *reservation.DUT, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	s, err := b.services.Lookup(dut.Name, serviceName)
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+	log.Infof("Dialing service %q on dut %s@%s", serviceName, dut.Name, addr)
 	opts = append(opts,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
 		grpc.WithPerRPCCredentials(&passCred{
@@ -198,7 +138,12 @@ func (b *Bind) DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.
 	if err != nil {
 		return nil, errors.Wrapf(err, "DialContext(ctx, %s, %v)", addr, opts)
 	}
-	return gpb.NewGNMIClient(conn), nil
+	return conn, nil
+}
+
+// serviceAddr returns the external IP address of a KNE service.
+func serviceAddr(s *kpb.Service) string {
+	return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside())
 }
 
 type passCred struct {

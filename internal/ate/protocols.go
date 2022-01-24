@@ -232,7 +232,8 @@ func (ix *IxiaCfgClient) addIPProtocols(ifc *opb.InterfaceConfig) error {
 // device group for the given interface already exsts.
 // Returns an error if the IP configuration does not validate.
 func (ix *IxiaCfgClient) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
-	dg := ix.intfs[ifc.GetName()].deviceGroup
+	intf := ix.intfs[ifc.GetName()]
+	dg := intf.deviceGroup
 	if ipv4 := ifc.GetIpv4LoopbackCidr(); ipv4 != "" {
 		ip, netw, err := net.ParseCIDR(ipv4)
 		if err != nil {
@@ -244,6 +245,7 @@ func (ix *IxiaCfgClient) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error 
 			Address: ixconfig.MultivalueStr(ip.String()),
 			Prefix:  ixconfig.MultivalueUint32(uint32(mask)),
 		})
+		intf.ipv4Loopback = dg.Ipv4Loopback[0]
 	}
 	return nil
 }
@@ -757,9 +759,9 @@ func (ix *IxiaCfgClient) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 		return nil
 	}
 	if peerCount := len(ifc.GetBgp().GetBgpPeers()); peerCount > maxNumPeersIxNetwork {
-		return usererr.New("specified number of peers %d exceeds maximum of %d", peerCount, maxNumPeersIxNetwork)
+		return usererr.New("specified number of peers %d exceeds maximum of %d for IxNetwork device group", peerCount, maxNumPeersIxNetwork)
 	}
-	v4Peers, v6Peers, err := splitBGPPeers(ifc.GetBgp().GetBgpPeers())
+	v4Peers, v6Peers, v4LoopbackPeers, err := splitBGPPeers(ifc.GetBgp().GetBgpPeers())
 	if err != nil {
 		return err
 	}
@@ -784,23 +786,38 @@ func (ix *IxiaCfgClient) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 		}
 		intf.ipv6.BgpIpv6Peer = peers
 	}
+	if len(v4LoopbackPeers) > 0 {
+		if intf.ipv4Loopback == nil {
+			return usererr.New("specified V4 loopback peers without IPv4 loopback configured on interface %q", ifc.GetName())
+		}
+		peers, err := bgpV4Peers(v4LoopbackPeers)
+		if err != nil {
+			return err
+		}
+		intf.ipv4Loopback.BgpIpv4Peer = peers
+	}
 	return nil
 }
 
-func splitBGPPeers(peers []*opb.BgpPeer) ([]*opb.BgpPeer, []*opb.BgpPeer, error) {
-	var v4Peers, v6Peers []*opb.BgpPeer
+func splitBGPPeers(peers []*opb.BgpPeer) ([]*opb.BgpPeer, []*opb.BgpPeer, []*opb.BgpPeer, error) {
+	var v4Peers, v6Peers, v4LoopbackPeers []*opb.BgpPeer
 	for _, peer := range peers {
 		ip, isV6 := parseIP(peer.GetPeerAddress())
 		if ip == nil {
-			return nil, nil, usererr.New("invalid peer address %q", peer.GetPeerAddress())
+			return nil, nil, nil, usererr.New("invalid peer address %q", peer.GetPeerAddress())
 		}
-		if isV6 {
+		if peer.GetOnLoopback() {
+			if isV6 {
+				return nil, nil, nil, fmt.Errorf("IPv6 loopbacks not supported (saw peer with address %v configured on loopback)", peer.GetPeerAddress())
+			}
+			v4LoopbackPeers = append(v4LoopbackPeers, peer)
+		} else if isV6 {
 			v6Peers = append(v6Peers, peer)
 		} else {
 			v4Peers = append(v4Peers, peer)
 		}
 	}
-	return v4Peers, v6Peers, nil
+	return v4Peers, v6Peers, v4LoopbackPeers, nil
 }
 
 func bgpType(pt opb.BgpPeer_Type) *ixconfig.Multivalue {
@@ -1477,8 +1494,9 @@ func appendUint64ToMultivalueList(mv *ixconfig.Multivalue, val uint64) *ixconfig
 // addISISProtocols adds IxNetwork RSVP protocols, assuming the IS-IS network
 // groups for the given interface already exist.
 func (ix *IxiaCfgClient) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
+	intf := ix.intfs[ifc.GetName()]
+	intf.ingressLSPs = make([]*ixconfig.TopologyRsvpP2PIngressLsps, 0, len(ifc.GetRsvp()))
 	for _, rsvp := range ifc.GetRsvp() {
-		intf := ix.intfs[ifc.GetName()]
 		if intf.ipv4 == nil {
 			return usererr.New("could not find IPv4 config to configure RSVP interface for %q", ifc.GetName())
 		}
@@ -1535,12 +1553,16 @@ func (ix *IxiaCfgClient) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 		for i := 0; i < numRROs; i++ {
 			rros = append(rros, &ixconfig.TopologyRsvpIngressRroSubObjectsList{})
 		}
-		ingressLSPs := &ixconfig.TopologyRsvpP2PIngressLsps{
-			Active:                       ixconfig.MultivalueBool(numIngressLSPs != 0),
-			NumberOfEroSubObjects:        ixconfig.NumberInt(numEROs),
-			RsvpEROSubObjectsList:        eros,
-			NumberOfRroSubObjects:        ixconfig.NumberInt(numRROs),
-			RsvpIngressRROSubObjectsList: rros,
+		ingressLSPs := &ixconfig.TopologyRsvpP2PIngressLsps{Active: ixconfig.MultivalueFalse()}
+		if numIngressLSPs != 0 {
+			ingressLSPs = &ixconfig.TopologyRsvpP2PIngressLsps{
+				Active:                       ixconfig.MultivalueTrue(),
+				NumberOfEroSubObjects:        ixconfig.NumberInt(numEROs),
+				RsvpEROSubObjectsList:        eros,
+				NumberOfRroSubObjects:        ixconfig.NumberInt(numRROs),
+				RsvpIngressRROSubObjectsList: rros,
+			}
+			intf.ingressLSPs = append(intf.ingressLSPs, ingressLSPs)
 		}
 		dg := &ixconfig.TopologyDeviceGroup{
 			Multiplier: ixconfig.NumberInt(numLoopbacks),
@@ -1576,6 +1598,9 @@ func (ix *IxiaCfgClient) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 				ingressLSPs.BandwidthProtectionDesired = appendBoolToMultivalueList(ingressLSPs.BandwidthProtectionDesired, lsp.GetBandwidthProtection())
 				ingressLSPs.EnableFastReroute = appendBoolToMultivalueList(ingressLSPs.EnableFastReroute, lsp.GetFastReroute())
 				ingressLSPs.EnablePathReOptimization = appendBoolToMultivalueList(ingressLSPs.EnablePathReOptimization, lsp.GetPathReoptimization())
+
+				ingressLSPs.TunnelId = appendUintToMultivalueList(ingressLSPs.TunnelId, lsp.GetTunnelId())
+				ingressLSPs.LspId = appendUintToMultivalueList(ingressLSPs.LspId, lsp.GetLspId())
 
 				enableEROs := len(lsp.GetEros()) > 0
 				ingressLSPs.EnableEro = appendBoolToMultivalueList(ingressLSPs.EnableEro, enableEROs)

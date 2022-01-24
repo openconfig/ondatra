@@ -573,6 +573,146 @@ func NewIpv6Stack(idx int) *Ipv6Stack {
 	return &stack
 }
 
+type LdpHelloStack TrafficStack
+
+var ldpHelloAliasToFieldIdx = aliasesToFieldIdx([]string{
+	"header.version-1",
+	"header.pduLengthinOctets-2",
+	"header.lsrID-3",
+	"header.labelSpace-4",
+	"header.uBit-5",
+	"header.type-6",
+	"header.length-7",
+	"header.messageID-8",
+	"header.commonHelloParametersTLV.uBit-9",
+	"header.commonHelloParametersTLV.fBit-10",
+	"header.commonHelloParametersTLV.type-11",
+	"header.commonHelloParametersTLV.length-12",
+	"header.commonHelloParametersTLV.holdTime-13",
+	"header.commonHelloParametersTLV.tBit-14",
+	"header.commonHelloParametersTLV.rBit-15",
+	"header.commonHelloParametersTLV.reserved-16",
+	"header.optionalParameter.ipv4TransportAddressTLV.uBit-17",
+	"header.optionalParameter.ipv4TransportAddressTLV.fBit-18",
+	"header.optionalParameter.ipv4TransportAddressTLV.type-19",
+	"header.optionalParameter.ipv4TransportAddressTLV.length-20",
+	"header.optionalParameter.ipv4TransportAddressTLV.ipv4Address-21",
+	"header.optionalParameter.configurationSequenceNumberTLV.uBit-22",
+	"header.optionalParameter.configurationSequenceNumberTLV.fBit-23",
+	"header.optionalParameter.configurationSequenceNumberTLV.type-24",
+	"header.optionalParameter.configurationSequenceNumberTLV.length-25",
+	"header.optionalParameter.configurationSequenceNumberTLV.sequenceNumber-26",
+	"header.optionalParameter.ipv6TransportAddressTLV.uBit-27",
+	"header.optionalParameter.ipv6TransportAddressTLV.fBit-28",
+	"header.optionalParameter.ipv6TransportAddressTLV.type-29",
+	"header.optionalParameter.ipv6TransportAddressTLV.length-30",
+	"header.optionalParameter.ipv6TransportAddressTLV.ipv6Address-31",
+})
+
+func (s *LdpHelloStack) Version() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.version-1"]]
+}
+func (s *LdpHelloStack) PduLengthinOctets() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.pduLengthinOctets-2"]]
+}
+func (s *LdpHelloStack) LsrID() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.lsrID-3"]]
+}
+func (s *LdpHelloStack) LabelSpace() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.labelSpace-4"]]
+}
+func (s *LdpHelloStack) UBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.uBit-5"]]
+}
+func (s *LdpHelloStack) Type() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.type-6"]]
+}
+func (s *LdpHelloStack) Length() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.length-7"]]
+}
+func (s *LdpHelloStack) MessageID() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.messageID-8"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVUBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.uBit-9"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVFBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.fBit-10"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVType() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.type-11"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVLength() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.length-12"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVHoldTime() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.holdTime-13"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVTBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.tBit-14"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVRBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.rBit-15"]]
+}
+func (s *LdpHelloStack) CommonHelloParametersTLVReserved() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.commonHelloParametersTLV.reserved-16"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv4TransportAddressTLVUBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv4TransportAddressTLV.uBit-17"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv4TransportAddressTLVFBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv4TransportAddressTLV.fBit-18"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv4TransportAddressTLVType() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv4TransportAddressTLV.type-19"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv4TransportAddressTLVLength() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv4TransportAddressTLV.length-20"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv4TransportAddressTLVIpv4Address() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv4TransportAddressTLV.ipv4Address-21"]]
+}
+func (s *LdpHelloStack) OptionalParameterConfigurationSequenceNumberTLVUBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.configurationSequenceNumberTLV.uBit-22"]]
+}
+func (s *LdpHelloStack) OptionalParameterConfigurationSequenceNumberTLVFBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.configurationSequenceNumberTLV.fBit-23"]]
+}
+func (s *LdpHelloStack) OptionalParameterConfigurationSequenceNumberTLVType() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.configurationSequenceNumberTLV.type-24"]]
+}
+func (s *LdpHelloStack) OptionalParameterConfigurationSequenceNumberTLVLength() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.configurationSequenceNumberTLV.length-25"]]
+}
+func (s *LdpHelloStack) OptionalParameterConfigurationSequenceNumberTLVSequenceNumber() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.configurationSequenceNumberTLV.sequenceNumber-26"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv6TransportAddressTLVUBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv6TransportAddressTLV.uBit-27"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv6TransportAddressTLVFBit() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv6TransportAddressTLV.fBit-28"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv6TransportAddressTLVType() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv6TransportAddressTLV.type-29"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv6TransportAddressTLVLength() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv6TransportAddressTLV.length-30"]]
+}
+func (s *LdpHelloStack) OptionalParameterIpv6TransportAddressTLVIpv6Address() *TrafficField {
+	return s.Field[ldpHelloAliasToFieldIdx["header.optionalParameter.ipv6TransportAddressTLV.ipv6Address-31"]]
+}
+
+func (s *LdpHelloStack) TrafficStack() *TrafficStack {
+	ts := TrafficStack(*s)
+	return &ts
+}
+
+func NewLdpHelloStack(idx int) *LdpHelloStack {
+	stack := LdpHelloStack(newStack(idx, "ldpHello", ldpHelloAliasToFieldIdx))
+	return &stack
+}
+
 type PimHelloMessageStack TrafficStack
 
 var pimHelloMessageAliasToFieldIdx = aliasesToFieldIdx([]string{

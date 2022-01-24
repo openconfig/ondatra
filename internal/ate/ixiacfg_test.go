@@ -22,11 +22,11 @@ import (
 	"io/ioutil"
 	"path"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"testing"
 	"time"
 
+	log "github.com/golang/glog"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/internal/ixconfig"
@@ -42,73 +42,41 @@ const (
 )
 
 var (
-	lastMVID          int
 	origImportTimeout = importTimeout
 )
 
-func updateXPaths(cfg *ixconfig.Ixnetwork) {
-	toXPath := func(p string) *ixconfig.XPath {
-		var xp *ixconfig.XPath
-		json.Unmarshal([]byte(strconv.Quote(p)), &xp)
+// updateXPaths sets fake XPaths only for those nodes that require it for config
+// generation: vports, lags, and any node that may be a traffic item endpoint.
+func updateXPaths(cfg *ixconfig.Ixnetwork) error {
+	toXPath := func(format string, args ...interface{}) *ixconfig.XPath {
+		xp, err := ixconfig.ParseXPath(fmt.Sprintf(format, args...))
+		if err != nil {
+			log.Fatalf("Impossible XPath parsing error: %v", err)
+		}
 		return xp
 	}
-	for i, vport := range cfg.Vport {
-		vport.Xpath = toXPath(fmt.Sprintf("/vport[%d]", i+1))
+	for i, p := range cfg.Vport {
+		p.Xpath = toXPath("/vport[%d]", i+1)
 	}
-	for i, lag := range cfg.Lag {
-		lag.Xpath = toXPath(fmt.Sprintf("/lag[%d]", i+1))
+	for i, l := range cfg.Lag {
+		l.Xpath = toXPath("/lag[%d]", i+1)
 	}
-	const (
-		dgXPathFmt            = "/topology[%d]/deviceGroup[%d]"
-		ngXPathFmt            = dgXPathFmt + "/networkGroup[%d]"
-		bgpRoutePropPathFmt   = ngXPathFmt + "/ipv4PrefixPools[%d]/bgpIPRouteProperty[%d]"
-		bgpV6RoutePropPathFmt = ngXPathFmt + "/ipv6PrefixPools[%d]/bgpV6IPRouteProperty[%d]"
-		ethXPathFmt           = dgXPathFmt + "/ethernet[%d]"
-		ipv4XPathFmt          = ethXPathFmt + "/ipv4[%d]"
-		ipv6XPathFmt          = ethXPathFmt + "/ipv6[%d]"
-	)
-	for i, topo := range cfg.Topology {
-		for j, dg := range topo.DeviceGroup {
-			dg.Xpath = toXPath(fmt.Sprintf(dgXPathFmt, i+1, j+1))
+	for i, t := range cfg.Topology {
+		for j, dg := range t.DeviceGroup {
+			dg.Xpath = toXPath("/topology[%d]/deviceGroup[%d]", i+1, j+1)
 			for k, ng := range dg.NetworkGroup {
-				ng.Xpath = toXPath(fmt.Sprintf(ngXPathFmt, i+1, j+1, k+1))
-				for l, pool := range ng.Ipv4PrefixPools {
-					for m, brp := range pool.BgpIPRouteProperty {
-						brp.Xpath = toXPath(fmt.Sprintf(bgpRoutePropPathFmt, i+1, j+1, k+1, l+1, m+1))
-					}
-				}
-				for l, pool := range ng.Ipv6PrefixPools {
-					for m, brp := range pool.BgpV6IPRouteProperty {
-						brp.Xpath = toXPath(fmt.Sprintf(bgpV6RoutePropPathFmt, i+1, j+1, k+1, l+1, m+1))
-					}
-				}
-			}
-			for k, eth := range dg.Ethernet {
-				eth.Xpath = toXPath(fmt.Sprintf(ethXPathFmt, i+1, j+1, k+1))
-				if eth.Mac != nil {
-					eth.Mac.Xpath = toXPath(fmt.Sprintf("/multivalue[@source = '%s mac']", eth.Xpath.String()))
-				}
-				for l, ip := range eth.Ipv4 {
-					ip.Xpath = toXPath(fmt.Sprintf(ipv4XPathFmt, i+1, j+1, k+1, l+1))
-				}
-				for l, ip := range eth.Ipv6 {
-					ip.Xpath = toXPath(fmt.Sprintf(ipv6XPathFmt, i+1, j+1, k+1, l+1))
-				}
+				ng.Xpath = toXPath("/topology[%d]/deviceGroup[%d]/networkGroup[%d]", i+1, j+1, k+1)
 			}
 		}
 	}
-	if cfg.Traffic != nil {
-		for i, ti := range cfg.Traffic.TrafficItem {
-			ti.Xpath = toXPath(fmt.Sprintf("/traffic/trafficItem[%d]", i+1))
-		}
-	}
+	return nil
 }
 
 type fakeCfgClient struct {
 	cfgClient
 	updateIDErr   error
-	pushErrs      []error
-	lastPushedCfg ixconfig.IxiaCfgNode
+	importErrs    []error
+	lastImportCfg ixconfig.IxiaCfgNode
 	session       *fakeSession
 }
 
@@ -116,15 +84,17 @@ func (c *fakeCfgClient) Session() session {
 	return c.session
 }
 
-func (c *fakeCfgClient) ImportConfig(ctx context.Context, cfg *ixconfig.Ixnetwork, cfgNode ixconfig.IxiaCfgNode, _ bool) error {
+func (c *fakeCfgClient) ImportConfig(ctx context.Context, cfg *ixconfig.Ixnetwork, node ixconfig.IxiaCfgNode, _ bool) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
-	updateXPaths(cfg)
-	c.lastPushedCfg = cfgNode
-	pushErr := c.pushErrs[0]
-	c.pushErrs = c.pushErrs[1:]
-	return pushErr
+	importErr := c.importErrs[0]
+	c.importErrs = c.importErrs[1:]
+	if importErr != nil {
+		return importErr
+	}
+	c.lastImportCfg = node
+	return updateXPaths(cfg)
 }
 
 func (c *fakeCfgClient) GetNode(ctx context.Context, n ixconfig.IxiaCfgNode, v interface{}) error {
@@ -146,47 +116,7 @@ func (c *fakeDelayImportClient) ImportConfig(ctx context.Context, _ *ixconfig.Ix
 	return ctx.Err()
 }
 
-// Computes a plausible Ixnetwork REST API ID based on the object's XPath.
-// Does not currently work foralias-based XPaths.
-func toID(cn ixconfig.IxiaCfgNode) string {
-	if cn.GetRestID() != "" {
-		return cn.GetRestID()
-	}
-	var id string
-	xp := cn.XPath().String()
-	if strings.Contains(xp, "multivalue") {
-		id = fmt.Sprintf("/multivalue/%d", lastMVID)
-		lastMVID++
-	} else {
-		id = strings.ReplaceAll(cn.XPath().String(), "[", "/")
-		id = strings.ReplaceAll(id, "]", "/")
-	}
-	return path.Join(sessionPrefix, id)
-}
-
 func (c *fakeCfgClient) UpdateIDs(_ context.Context, _ *ixconfig.Ixnetwork, cns ...ixconfig.IxiaCfgNode) error {
-	for _, cn := range cns {
-		switch c := cn.(type) {
-		case *ixconfig.Multivalue:
-			c.RestID = toID(c)
-		case *ixconfig.TopologyEthernet:
-			c.RestID = toID(c)
-		case *ixconfig.TopologyIpv4:
-			c.RestID = toID(c)
-		case *ixconfig.TopologyIpv6:
-			c.RestID = toID(c)
-		case *ixconfig.TopologyBgpIpRouteProperty:
-			c.RestID = toID(c)
-		case *ixconfig.TopologyBgpV6IpRouteProperty:
-			c.RestID = toID(c)
-		case *ixconfig.TrafficTrafficItem:
-			c.RestID = toID(c)
-		case *ixconfig.Vport:
-			c.RestID = toID(c)
-		default:
-			return fmt.Errorf("id update not supported for node type %T", c)
-		}
-	}
 	return c.updateIDErr
 }
 
@@ -420,48 +350,48 @@ func TestPushTopology(t *testing.T) {
 	}
 	tests := []struct {
 		desc, reqFile, wantCfgFile string
-		pushErrs                   []error
+		importErrs                 []error
 		routeTableImportErr        error
 		opErr                      error
 		wantErr                    bool
 	}{{
 		desc:        "Error on port config push",
 		reqFile:     "no_intfs.textproto",
-		pushErrs:    []error{errors.New("ports push err")},
+		importErrs:  []error{errors.New("ports push err")},
 		wantCfgFile: "no_intfs_cfg.json",
 		wantErr:     true,
 	}, {
 		desc:        "Error on topo config push",
 		reqFile:     "no_intfs.textproto",
-		pushErrs:    []error{nil, errors.New("topo push err")},
+		importErrs:  []error{nil, errors.New("topo push err")},
 		wantCfgFile: "no_intfs_cfg.json",
 		wantErr:     true,
 	}, {
 		desc:                "Route table import err",
 		reqFile:             "no_intfs.textproto",
-		pushErrs:            []error{nil, nil},
+		importErrs:          []error{nil, nil},
 		routeTableImportErr: errors.New("failed route table import"),
 		wantErr:             true,
 	}, {
 		desc:        "Base config push",
 		reqFile:     "no_intfs.textproto",
-		pushErrs:    []error{nil, nil},
+		importErrs:  []error{nil, nil},
 		wantCfgFile: "no_intfs_cfg.json",
 	}, {
 		desc:        "IS-IS config with no traffic",
 		reqFile:     "isis_no_traffic.textproto",
-		pushErrs:    []error{nil, nil},
+		importErrs:  []error{nil, nil},
 		wantCfgFile: "isis_no_traffic_cfg.json",
 	}, {
 		desc:        "FEC disabled",
 		reqFile:     "fec_disabled.textproto",
-		pushErrs:    []error{nil, nil},
+		importErrs:  []error{nil, nil},
 		wantCfgFile: "fec_disabled.json",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			fc := &fakeCfgClient{
-				pushErrs: test.pushErrs,
+				importErrs: test.importErrs,
 			}
 			c := IxiaCfgClient{
 				c:           fc,
@@ -480,7 +410,7 @@ func TestPushTopology(t *testing.T) {
 
 			if !test.wantErr {
 				wantCfg := toCfg(t, test.wantCfgFile)
-				if diff := jsonCfgDiff(t, wantCfg, fc.lastPushedCfg); diff != "" {
+				if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
 					t.Fatalf("PushTopology: Unexpected topology config pushed, diff (-want, +got)\n%s", diff)
 				}
 			}
@@ -493,7 +423,7 @@ func TestUpdateTopology(t *testing.T) {
 	tests := []struct {
 		desc                 string
 		operState            operState
-		pushErr              error
+		importErr            error
 		routeTableImportErr  error
 		startProtocolsErr    error
 		validateProtocolsErr error
@@ -501,9 +431,9 @@ func TestUpdateTopology(t *testing.T) {
 		startErr             error
 		wantErr              string
 	}{{
-		desc:    "Error on config push",
-		pushErr: errors.New("push error"),
-		wantErr: "push error",
+		desc:      "Error on config push",
+		importErr: errors.New("push error"),
+		wantErr:   "push error",
 	}, {
 		desc:                "Error on route table import",
 		routeTableImportErr: errors.New("route table import error"),
@@ -540,7 +470,7 @@ func TestUpdateTopology(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
 			fc := &fakeCfgClient{
-				pushErrs: []error{test.pushErr},
+				importErrs: []error{test.importErr},
 				session: &fakeSession{
 					postErrs: map[string]error{"/operations/startallprotocols": test.startProtocolsErr},
 				},
@@ -596,7 +526,6 @@ func TestSyncRouteTableFilesAndImport(t *testing.T) {
 				}},
 			}},
 		}
-		updateXPaths(cfg)
 		return &IxiaCfgClient{
 			cfg: cfg,
 			intfs: map[string]*intf{
@@ -712,27 +641,26 @@ func TestSyncRouteTableFilesAndImport(t *testing.T) {
 }
 
 func TestValidateProtocolStart(t *testing.T) {
-	baseClient := func() *IxiaCfgClient {
-		cfg := &ixconfig.Ixnetwork{
-			Topology: []*ixconfig.Topology{{
-				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
-					Ethernet: []*ixconfig.TopologyEthernet{{
-						Mac:  &ixconfig.Multivalue{},
-						Ipv4: []*ixconfig.TopologyIpv4{{}},
-						Ipv6: []*ixconfig.TopologyIpv6{{}},
-					}},
-				}},
-			}},
-		}
-		updateXPaths(cfg)
-		return &IxiaCfgClient{
-			cfg: cfg,
-			intfs: map[string]*intf{
-				"someIntf": &intf{
-					deviceGroup: cfg.Topology[0].DeviceGroup[0],
-				},
+	dg := &ixconfig.TopologyDeviceGroup{
+		Ethernet: []*ixconfig.TopologyEthernet{{
+			RestID: "id/to/eth",
+			Mac:    &ixconfig.Multivalue{},
+		}},
+	}
+	ipv4 := &ixconfig.TopologyIpv4{RestID: "id/to/ipv4"}
+	ipv6 := &ixconfig.TopologyIpv6{RestID: "id/to/ipv6"}
+	lsp := &ixconfig.TopologyRsvpP2PIngressLsps{RestID: "id/to/ingressLSP"}
+	c := &IxiaCfgClient{
+		//cfg: cfg,
+		cfg: &ixconfig.Ixnetwork{},
+		intfs: map[string]*intf{
+			"someIntf": &intf{
+				deviceGroup: dg,
+				ipv4:        ipv4,
+				ipv6:        ipv6,
+				ingressLSPs: []*ixconfig.TopologyRsvpP2PIngressLsps{lsp},
 			},
-		}
+		},
 	}
 	tests := []struct {
 		desc           string
@@ -741,6 +669,8 @@ func TestValidateProtocolStart(t *testing.T) {
 		idErr          error
 		protocolStatus string
 		protocolErr    error
+		lspStatus      string
+		lspErr         error
 		ethRestartErr  error
 		wantErr        string
 	}{{
@@ -754,8 +684,8 @@ func TestValidateProtocolStart(t *testing.T) {
 	}, {
 		desc:       "error updating protocol IDs",
 		topoStatus: "started",
-		idErr:      errors.New("error fetching IDs"),
-		wantErr:    "could not fetch IDs",
+		idErr:      errors.New("error updating IDs"),
+		wantErr:    "could not update IDs",
 	}, {
 		desc:        "error fetching individual protocol statuses",
 		topoStatus:  "started",
@@ -773,31 +703,45 @@ func TestValidateProtocolStart(t *testing.T) {
 		ethRestartErr:  errors.New("error restarting protocol"),
 		wantErr:        "could not restart down protocol",
 	}, {
-		desc:           "protocols all up",
+		desc:           "error fetching ingress LSP status",
 		topoStatus:     "started",
 		protocolStatus: "up",
+		lspErr:         errors.New("error querying ingress LSP"),
+		wantErr:        "could not fetch element",
+	}, {
+		desc:           "ingress LSP never starts",
+		topoStatus:     "started",
+		protocolStatus: "up",
+		lspStatus:      "down",
+		wantErr:        "some ingress LSP instances did not start",
+	}, {
+		desc:           "all up",
+		topoStatus:     "started",
+		protocolStatus: "up",
+		lspStatus:      "up",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
 			sleepFn = func(time.Duration) {}
 
-			c := baseClient()
-			eth := c.cfg.Topology[0].DeviceGroup[0].Ethernet[0]
+			eth := dg.Ethernet[0]
 			c.c = &fakeCfgClient{
 				updateIDErr: test.idErr,
 				session: &fakeSession{
 					getRsps: map[string]string{
 						"globals/topology": fmt.Sprintf(`{"status": "%s"}`, test.topoStatus),
-						toID(eth):          fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
-						toID(eth.Ipv4[0]):  fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
-						toID(eth.Ipv6[0]):  fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						eth.RestID:         fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						ipv4.RestID:        fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						ipv6.RestID:        fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						lsp.RestID:         fmt.Sprintf(`{"state": ["%s"]}`, test.lspStatus),
 					},
 					getErrs: map[string]error{
 						"globals/topology": test.topoErr,
-						toID(eth):          test.protocolErr,
-						toID(eth.Ipv4[0]):  test.protocolErr,
-						toID(eth.Ipv6[0]):  test.protocolErr,
+						eth.RestID:         test.protocolErr,
+						ipv4.RestID:        test.protocolErr,
+						ipv6.RestID:        test.protocolErr,
+						lsp.RestID:         test.lspErr,
 					},
 					postErrs: map[string]error{
 						"topology/deviceGroup/ethernet/operations/restartdown": test.ethRestartErr,
@@ -887,7 +831,6 @@ func TestSetPortState(t *testing.T) {
 	cfg := &ixconfig.Ixnetwork{
 		Vport: []*ixconfig.Vport{{Name: ixconfig.String(port)}},
 	}
-	updateXPaths(cfg)
 
 	tests := []struct {
 		desc         string
@@ -946,15 +889,14 @@ func TestResolveMacs(t *testing.T) {
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
 				Ethernet: []*ixconfig.TopologyEthernet{{
 					Mac:  &ixconfig.Multivalue{},
-					Ipv4: []*ixconfig.TopologyIpv4{{}},
-					Ipv6: []*ixconfig.TopologyIpv6{{}},
+					Ipv4: []*ixconfig.TopologyIpv4{{RestID: "id/to/ipv4"}},
+					Ipv6: []*ixconfig.TopologyIpv6{{RestID: "id/to/ipv6"}},
 				}},
 			}},
 		}},
 	}
 	dg := cfg.Topology[0].DeviceGroup[0]
 	eth := dg.Ethernet[0]
-	updateXPaths(cfg)
 
 	tests := []struct {
 		desc                                 string
@@ -1002,12 +944,12 @@ func TestResolveMacs(t *testing.T) {
 					updateIDErr: test.idErr,
 					session: &fakeSession{
 						getRsps: map[string]string{
-							toID(eth.Ipv4[0]): fmt.Sprintf("{\"resolvedGatewayMac\": [\"%s\"]}", test.ipv4MacRsp),
-							toID(eth.Ipv6[0]): fmt.Sprintf("{\"resolvedGatewayMac\": [\"%s\"]}", test.ipv6MacRsp),
+							eth.Ipv4[0].RestID: fmt.Sprintf("{\"resolvedGatewayMac\": [\"%s\"]}", test.ipv4MacRsp),
+							eth.Ipv6[0].RestID: fmt.Sprintf("{\"resolvedGatewayMac\": [\"%s\"]}", test.ipv6MacRsp),
 						},
 						getErrs: map[string]error{
-							toID(eth.Ipv4[0]): test.ipv4Err,
-							toID(eth.Ipv6[0]): test.ipv6Err,
+							eth.Ipv4[0].RestID: test.ipv4Err,
+							eth.Ipv6[0].RestID: test.ipv6Err,
 						},
 						postRsps: map[string]string{
 							valuesOp: fmt.Sprintf("[\"%s\"]", test.ethMacRsp),
@@ -1142,6 +1084,7 @@ func TestUpdateFlows(t *testing.T) {
 		cfg := &ixconfig.Ixnetwork{
 			Traffic: &ixconfig.Traffic{
 				TrafficItem: []*ixconfig.TrafficTrafficItem{{
+					RestID: "id/to/trafficItem",
 					ConfigElement: []*ixconfig.TrafficConfigElement{{
 						FrameSize: &ixconfig.TrafficFrameSize{
 							Type_:     ixconfig.String("fixed"),
@@ -1155,8 +1098,6 @@ func TestUpdateFlows(t *testing.T) {
 				}},
 			},
 		}
-		updateXPaths(cfg)
-		c.UpdateIDs(context.Background(), cfg, cfg.Traffic.TrafficItem[0])
 		return &IxiaCfgClient{
 			cfg: cfg,
 			c:   c,
@@ -1241,8 +1182,8 @@ func TestUpdateFlows(t *testing.T) {
 			c := baseClient(fc)
 			ti := c.flowToTrafficItem[flowName]
 			fc.session.patchErrs = map[string]error{
-				path.Join(ti.GetRestID(), "highLevelStream/1", "frameSize"): test.patchSizeErr,
-				path.Join(ti.GetRestID(), "highLevelStream/1", "frameRate"): test.patchRateErr,
+				path.Join(ti.RestID, "highLevelStream/1", "frameSize"): test.patchSizeErr,
+				path.Join(ti.RestID, "highLevelStream/1", "frameRate"): test.patchRateErr,
 			}
 
 			gotErr := updateFlows(context.Background(), c, []*opb.Flow{test.flow})
@@ -1306,16 +1247,12 @@ func TestStart(t *testing.T) {
 }
 
 func TestStartTraffic(t *testing.T) {
-	const (
-		intfName = "someIntf"
-	)
-
 	tests := []struct {
 		desc                               string
 		operState                          operState
 		intfsFile, reqFile, wantCfgFile    string
 		resetTrafficCfgErr, resolveMacsErr error
-		pushErr                            error
+		importErr                          error
 		updateIDsErr                       error
 		genErr                             error
 		flowsErr                           error
@@ -1348,7 +1285,7 @@ func TestStartTraffic(t *testing.T) {
 	}, {
 		desc:      "failed traffic config push",
 		operState: operStateProtocolsOn,
-		pushErr:   errors.New("traffic config push failed"),
+		importErr: errors.New("traffic config push failed"),
 		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 		wantErr:   true,
@@ -1408,7 +1345,7 @@ func TestStartTraffic(t *testing.T) {
 				return nil
 			}
 			c := IxiaCfgClient{
-				c: &fakeCfgClient{pushErrs: []error{nil, nil, nil}},
+				c: &fakeCfgClient{importErrs: []error{nil, nil, nil}},
 			}
 			top := readTopology(t, test.intfsFile)
 			if err := c.PushTopology(context.Background(), top); err != nil {
@@ -1417,7 +1354,7 @@ func TestStartTraffic(t *testing.T) {
 
 			// Swap out no-op config client with the one to use for StartTraffic testing.
 			fc := &fakeCfgClient{
-				pushErrs:    []error{test.pushErr},
+				importErrs:  []error{test.importErr},
 				updateIDErr: test.updateIDsErr,
 			}
 			c.c = fc
@@ -1447,7 +1384,7 @@ func TestStartTraffic(t *testing.T) {
 
 			if !test.wantErr && test.wantCfgFile != "" {
 				wantCfg := toTrafficCfg(t, test.wantCfgFile)
-				if diff := jsonCfgDiff(t, wantCfg, fc.lastPushedCfg); diff != "" {
+				if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
 					t.Fatalf("StartTraffic: Unexpected traffic config pushed, diff (-want, +got)\n%s", diff)
 				}
 			}
@@ -1584,13 +1521,14 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 		port     = "1/1"
 	)
 	tests := []struct {
-		desc     string
-		ifc      *opb.InterfaceConfig
-		pushErrs []error
-		applyErr error
-		wantErr  string
+		desc         string
+		ifc          *opb.InterfaceConfig
+		updateIDsErr error
+		patchErr     error
+		applyErr     error
+		wantErr      string
 	}{{
-		desc: "BGP v4 peer config failure",
+		desc: "update IDs failure",
 		ifc: &opb.InterfaceConfig{
 			Name:     intfName,
 			Link:     &opb.InterfaceConfig_Port{port},
@@ -1603,30 +1541,37 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1"}},
 			},
 		},
-		pushErrs: []error{errors.New("error pushing config")},
-		wantErr:  "could not update BGP v4 peer",
+		updateIDsErr: errors.New("error updating IDs"),
+		wantErr:      "could not update IDs",
 	}, {
-		desc: "BGP v6 peer config failure",
+		desc: "config patch failure",
 		ifc: &opb.InterfaceConfig{
 			Name:     intfName,
 			Link:     &opb.InterfaceConfig_Port{port},
 			Ethernet: &opb.EthernetConfig{Mtu: 1500},
-			Ipv6: &opb.IpConfig{
-				AddressCidr:    "aa::/127",
-				DefaultGateway: "aa::2",
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "192.168.1.2",
 			},
 			Bgp: &opb.BgpConfig{
-				BgpPeers: []*opb.BgpPeer{{PeerAddress: "bb::"}},
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1"}},
 			},
 		},
-		pushErrs: []error{errors.New("error pushing config")},
-		wantErr:  "could not update BGP v6 peer",
+		patchErr: errors.New("could not patch"),
+		wantErr:  "could not update peer state",
 	}, {
 		desc: "config apply failure",
 		ifc: &opb.InterfaceConfig{
 			Name:     intfName,
 			Link:     &opb.InterfaceConfig_Port{port},
 			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "192.168.1.2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1"}},
+			},
 		},
 		applyErr: errors.New("apply on the fly failure"),
 		wantErr:  "could not apply",
@@ -1648,7 +1593,6 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1"}, {PeerAddress: "bb::"}},
 			},
 		},
-		pushErrs: []error{nil, nil},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -1664,10 +1608,16 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 				intfs: map[string]*intf{},
 				ports: map[string]*ixconfig.Vport{port: cfg.Vport[0]},
 				c: &fakeCfgClient{
-					pushErrs: test.pushErrs,
-					session: &fakeSession{postErrs: map[string]error{
-						"globals/topology/operations/applyonthefly": test.applyErr,
-					}},
+					updateIDErr: test.updateIDsErr,
+					session: &fakeSession{
+						patchErrs: map[string]error{
+							// No path for patch requests since the unit test does not actually update REST IDs.
+							"": test.patchErr,
+						},
+						postErrs: map[string]error{
+							"globals/topology/operations/applyonthefly": test.applyErr,
+						},
+					},
 				},
 			}
 			gotErr := c.UpdateBGPPeerStates(context.Background(), []*opb.InterfaceConfig{test.ifc})

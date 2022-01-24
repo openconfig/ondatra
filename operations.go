@@ -116,8 +116,9 @@ func (o *Operations) NewPing() *PingOp {
 
 // PingOp is a ping operation.
 type PingOp struct {
-	dev  reservation.Device
-	dest string
+	dev   reservation.Device
+	dest  string
+	count int32
 }
 
 func (p *PingOp) String() string {
@@ -130,11 +131,17 @@ func (p *PingOp) WithDestination(dest string) *PingOp {
 	return p
 }
 
+// WithCount specifies the number of packets used by a Ping operation.
+func (p *PingOp) WithCount(count int32) *PingOp {
+	p.count = count
+	return p
+}
+
 // Operate performs the Ping operation.
 func (p *PingOp) Operate(t testing.TB) {
 	t.Helper()
 	logAction(t, "Pinging from %s", p.dev)
-	if err := operations.Ping(context.Background(), p.dev, p.dest); err != nil {
+	if err := operations.Ping(context.Background(), p.dev, p.dest, p.count); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
 	}
 }

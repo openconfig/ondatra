@@ -102,6 +102,18 @@ func (r *RSVPIngressLSP) WithPathReoptimization(enable bool) *RSVPIngressLSP {
 	return r
 }
 
+// WithTunnelID sets the tunnel ID for the RSVP ingress LSP.
+func (r *RSVPIngressLSP) WithTunnelID(id uint16) *RSVPIngressLSP {
+	r.pb.TunnelId = uint32(id)
+	return r
+}
+
+// WithLSPID sets the LSP ID for the RSVP ingress LSP.
+func (r *RSVPIngressLSP) WithLSPID(id uint16) *RSVPIngressLSP {
+	r.pb.LspId = uint32(id)
+	return r
+}
+
 // AddERO adds an ERO for the RSVP ingress LSP.
 func (r *RSVPIngressLSP) AddERO() *RSVPIngressLSPERO {
 	ero := &RSVPIngressLSPERO{pb: &opb.RsvpConfig_Loopback_IngressLSP_ERO{}}

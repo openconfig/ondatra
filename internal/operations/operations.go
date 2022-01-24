@@ -23,7 +23,6 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"
@@ -170,7 +169,7 @@ func awaitPackageInstall(ic ospb.OS_InstallClient) (*ospb.Validated, error) {
 }
 
 // Ping executes the ping command from target device to a specified destination.
-func Ping(ctx context.Context, dev reservation.Device, dest string) (rerr error) {
+func Ping(ctx context.Context, dev reservation.Device, dest string, count int32) error {
 	dut, err := checkDUT(dev, "ping")
 	if err != nil {
 		return err
@@ -182,13 +181,29 @@ func Ping(ctx context.Context, dev reservation.Device, dest string) (rerr error)
 	if err != nil {
 		return err
 	}
-	ping, err := gnoi.System().Ping(ctx, &spb.PingRequest{Destination: dest})
+	ping, err := gnoi.System().Ping(ctx, &spb.PingRequest{
+		Destination: dest,
+		Count:       count,
+	})
 	if err != nil {
 		return errors.Wrapf(err, "error on gnoi ping of %s from %v", dest, dev)
 	}
-	defer closer.Close(&rerr, ping.CloseSend, "error closing gnoi ping client")
-	if _, err := ping.Recv(); err != nil {
-		return errors.Wrapf(err, "error on ping recv")
+
+	// Ping result is included in the last message of the stream.
+	lastPingResp := &spb.PingResponse{}
+	for {
+		resp, err := ping.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return errors.Wrap(err, "error receiving ping response")
+		}
+		lastPingResp = resp
+	}
+
+	if sent, recv := lastPingResp.GetSent(), lastPingResp.GetReceived(); sent != recv {
+		return fmt.Errorf("ping sent %d packets, received %d", sent, recv)
 	}
 	return nil
 }

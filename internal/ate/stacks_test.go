@@ -860,6 +860,69 @@ func TestHeaderStacks(t *testing.T) {
 				},
 			}},
 		},
+	}, {
+		desc: "LDP header, Hello message",
+		hdr: &opb.Header{
+			Type: &opb.Header_Ldp{
+				&opb.LdpHeader{
+					LsrId:      "1.1.1.1",
+					LabelSpace: 2,
+					MessageId:  3,
+					Type: &opb.LdpHeader_Hello_{
+						&opb.LdpHeader_Hello{
+							HoldTimeSec:     15,
+							Targeted:        true,
+							RequestTargeted: true,
+						},
+					},
+				},
+			},
+		},
+		wantFields: [][]wantField{
+			[]wantField{{
+				name:    "lsr ID",
+				wantVal: ixconfig.String("1.1.1.1"),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).LsrID()
+				},
+			}, {
+				name:    "label space",
+				wantVal: ixconfig.String(strconv.Itoa(2)),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).LabelSpace()
+				},
+			}, {
+				name:    "message ID",
+				wantVal: ixconfig.String(strconv.Itoa(3)),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).MessageID()
+				},
+			}, {
+				name:    "hold time secs",
+				wantVal: ixconfig.String(strconv.Itoa(15)),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).CommonHelloParametersTLVHoldTime()
+				},
+			}, {
+				name:    "targeted",
+				wantVal: ixconfig.String(strconv.Itoa(1)),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).CommonHelloParametersTLVTBit()
+				},
+			}, {
+				name:    "request targeted",
+				wantVal: ixconfig.String(strconv.Itoa(1)),
+				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+					i := ixconfig.LdpHelloStack(*s)
+					return (&i).CommonHelloParametersTLVRBit()
+				},
+			}},
+		},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

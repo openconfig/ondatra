@@ -81,7 +81,7 @@ func (ix *IxiaCfgClient) addNetworks(ifc *opb.InterfaceConfig) error {
 		var v6Pools []*ixconfig.TopologyIpv6PrefixPools
 
 		hasBGPv4Peer, hasBGPv6Peer := false, false
-		if intf.ipv4 != nil && len(intf.ipv4.BgpIpv4Peer) > 0 {
+		if (intf.ipv4 != nil && len(intf.ipv4.BgpIpv4Peer) > 0) || (intf.ipv4Loopback != nil && len(intf.ipv4Loopback.BgpIpv4Peer) > 0) {
 			hasBGPv4Peer = true
 		}
 		if intf.ipv6 != nil && len(intf.ipv6.BgpIpv6Peer) > 0 {

@@ -88,30 +88,34 @@ func (xp *XPath) UnmarshalJSON(b []byte) error {
 		return nil
 	}
 	// XPath strings are assumed to always start with a "/" and equivalent to their path.Clean representation.
-	xPath, err := strconv.Unquote(string(b))
+	str, err := strconv.Unquote(string(b))
 	if err != nil {
 		return fmt.Errorf("Could not interpret %q as a JSON string: %v", string(b), err)
 	}
-	if xPath == "/" {
+	return xp.unmarshalString(str)
+}
+
+func (xp *XPath) unmarshalString(str string) error {
+	if str == "/" {
 		// We are at the root of the hierarchy, no objectName to set.
 		xp.parentXPath = "/"
 		return nil
 	}
-	matches := multivalueRe.FindStringSubmatch(xPath)
+	matches := multivalueRe.FindStringSubmatch(str)
 	if matches != nil {
 		xp.parentXPath = path.Clean(matches[1])
 		xp.objectName = matches[2]
 		xp.isMultivalue = true
 		return nil
 	}
-	matches = aliasRe.FindStringSubmatch(xPath)
+	matches = aliasRe.FindStringSubmatch(str)
 	if matches != nil {
 		xp.parentXPath = path.Clean(matches[1])
 		xp.objectName = matches[2]
 		xp.alias = matches[3]
 		return nil
 	}
-	matches = arrayRe.FindStringSubmatch(xPath)
+	matches = arrayRe.FindStringSubmatch(str)
 	if matches != nil {
 		xp.parentXPath = path.Clean(matches[1])
 		xp.objectName = matches[2]
@@ -119,15 +123,24 @@ func (xp *XPath) UnmarshalJSON(b []byte) error {
 		xp.index, err = strconv.ParseUint(matches[3], 10, 64)
 		if err != nil {
 			// Should never happen because the regex can only match on an integer index.
-			return fmt.Errorf("could not parse numerical index from XPath string %q: %v", xPath, err)
+			return fmt.Errorf("could not parse numerical index from XPath string %q: %v", str, err)
 		}
 		return nil
 	}
-	matches = singleRe.FindStringSubmatch(xPath)
+	matches = singleRe.FindStringSubmatch(str)
 	if matches != nil {
 		xp.parentXPath = path.Clean(matches[1])
 		xp.objectName = matches[2]
 		return nil
 	}
-	return fmt.Errorf("could not parse %q as an IxNetwork XPath", xPath)
+	return fmt.Errorf("could not parse %q as an IxNetwork XPath", str)
+}
+
+// ParseXPath parses the specified string to an XPath.
+func ParseXPath(str string) (*XPath, error) {
+	xp := &XPath{}
+	if err := xp.unmarshalString(str); err != nil {
+		return nil, err
+	}
+	return xp, nil
 }

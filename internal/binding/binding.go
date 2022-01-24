@@ -39,7 +39,6 @@ import (
 	otpb "github.com/openconfig/gnoi/otdr"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
-
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 
@@ -51,9 +50,10 @@ var (
 
 // Init initializes the Ondatra binding.
 func Init(b Binding) {
-	if bind != nil {
-		log.Fatal("binding already initialized")
-	}
+	// TODO: Restore this check once binding init is standardized.
+	// if bind != nil {
+	// 	log.Fatal("binding already initialized")
+	// }
 	bind = b
 }
 

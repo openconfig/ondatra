@@ -37,6 +37,7 @@ message Device {
     JUNIPER = 4;
     CIENA = 5;
     PALOALTO = 6;
+    NOKIA = 7;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.

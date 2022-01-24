@@ -1056,3 +1056,66 @@ func (h *PIMHeader) Hello() *PIMHello {
 type PIMHello struct {
 	pb *opb.PimHeader_Hello
 }
+
+// LDPHeader is an LDP packet header.
+type LDPHeader struct {
+	pb *opb.LdpHeader
+}
+
+// NewLDPHeader returns a new LDP header.
+// The header is initialized as a default Hello message.
+func NewLDPHeader() *LDPHeader {
+	hdr := &LDPHeader{&opb.LdpHeader{}}
+	hdr.Hello()
+	return hdr
+}
+
+func (h *LDPHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Ldp{h.pb}}
+}
+
+// WithLSRID sets the LSR ID.
+func (h *LDPHeader) WithLSRID(id string) *LDPHeader {
+	h.pb.LsrId = id
+	return h
+}
+
+// WithLabelSpace sets the label space.
+func (h *LDPHeader) WithLabelSpace(label uint16) *LDPHeader {
+	h.pb.LabelSpace = uint32(label)
+	return h
+}
+
+// LDPHello is an LDP hello message.
+type LDPHello struct {
+	pb *opb.LdpHeader_Hello
+}
+
+// Hello sets the LDPHeader message type to a hello message with the following
+// default values:
+// - Hold time: 15
+// - Targeted: false
+// - Request Targeted: false
+func (h *LDPHeader) Hello() *LDPHello {
+	hpb := &opb.LdpHeader_Hello{HoldTimeSec: 15}
+	h.pb.Type = &opb.LdpHeader_Hello_{hpb}
+	return &LDPHello{hpb}
+}
+
+// WithHoldTimeSec sets the hold time in the Hello message.
+func (h *LDPHello) WithHoldTimeSec(secs uint16) *LDPHello {
+	h.pb.HoldTimeSec = uint32(secs)
+	return h
+}
+
+// WithTargeted specifies if the message is a targeted hello.
+func (h *LDPHello) WithTargeted(targeted bool) *LDPHello {
+	h.pb.Targeted = targeted
+	return h
+}
+
+// WithRequestTargeted specifies if the message is requesting targeted Hello replies.
+func (h *LDPHello) WithRequestTargeted(targeted bool) *LDPHello {
+	h.pb.RequestTargeted = targeted
+	return h
+}

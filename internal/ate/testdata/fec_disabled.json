@@ -15,16 +15,13 @@
                   "value": "false"
                 }
               },
-              "mac": {
-                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mac']"
-              },
+              "mac": {},
               "mtu": {
                 "singleValue": {
                   "value": "1500"
                 }
               },
-              "name": "Ethernet on 12/1",
-              "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]"
+              "name": "Ethernet on 12/1"
             }
           ],
           "multiplier": 1,
