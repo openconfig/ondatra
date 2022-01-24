@@ -41,7 +41,7 @@ import (
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
+	fgribi "github.com/openconfig/gribigo/fluent"
 )
 
 var (
@@ -134,6 +134,10 @@ type Binding interface {
 	// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
 	DialIxNetwork(ctx context.Context, ate *reservation.ATE) (*IxNetwork, error)
 
+	// DialGRIBI creates a client connection to the specified DUT's gRIBI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGRIBI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (*GRIBIClient, error)
+
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
 	// rather than user error, it will be passed to HandleInfraFail, which can
@@ -195,4 +199,13 @@ type StreamClient interface {
 	Stdout() io.ReadCloser
 	Stderr() io.ReadCloser
 	Close() error
+}
+
+// GRIBIClient stores APIs to GRIBI server.
+type GRIBIClient struct {
+	// pointer to the grpc client connection. We need to save
+	// this in order to close it properly when the test cases is done.
+	GRPCClient *grpc.ClientConn
+	// handle to fluent GRIBI API
+	FluentAPIHandle *fgribi.GRIBIClient
 }

@@ -16,24 +16,27 @@
 package knebind
 
 import (
-	"golang.org/x/net/context"
 	"crypto/tls"
 	"fmt"
 	"os/exec"
 	"sync"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/protobuf/encoding/prototext"
 
-	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	kpb "github.com/google/kne/proto/topo"
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gribipb "github.com/openconfig/gribi/v1/proto/service"
+	fluentgribi "github.com/openconfig/gribigo/fluent"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -144,6 +147,18 @@ func (b *Bind) dialGRPC(ctx context.Context, dut *reservation.DUT, serviceName s
 // serviceAddr returns the external IP address of a KNE service.
 func serviceAddr(s *kpb.Service) string {
 	return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside())
+}
+
+func (b *Bind) DialGRIBI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (*binding.GRIBIClient, error) {
+	// Todo: For now, we assume that gribi server use that same port as gribi
+	conn, err := b.dialGRPC(ctx, dut, "gnmi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	stub := gribipb.NewGRIBIClient(conn)
+	fluentCli := fluentgribi.NewClient()
+	fluentCli.Connection().WithStub(stub)
+	return &binding.GRIBIClient{GRPCClient: conn, FluentAPIHandle: fluentCli}, nil
 }
 
 type passCred struct {

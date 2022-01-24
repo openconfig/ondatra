@@ -15,10 +15,14 @@
 package integration_test
 
 import (
-	"testing"
-
-	kinit "github.com/openconfig/ondatra/knebind/init"
+	"context"
+	"github.com/openconfig/gribigo/chk"
+	"github.com/openconfig/gribigo/fluent"
+	"github.com/openconfig/gribigo/server"
 	"github.com/openconfig/ondatra"
+	kinit "github.com/openconfig/ondatra/knebind/init"
+	"testing"
+	"time"
 )
 
 func TestMain(m *testing.M) {
@@ -32,4 +36,48 @@ func TestGNMI(t *testing.T) {
 	sys2 := dut2.Telemetry().System().Lookup(t)
 	t.Logf("dut1 system: %v", sys1)
 	t.Logf("dut2 system: %v", sys2)
+}
+
+func TestGRIBISample(t *testing.T) {
+	dut1 := ondatra.DUT(t, "dut1")
+	dut1.GRIBI().MasterClient(t)
+	defer dut1.GRIBI().CloseMasterClient(t)
+	dut1.GRIBI().SynchElectionID(t, true)
+	dut1.GRIBI().IncElectionID(t)
+	elecLow, elecHigh := dut1.GRIBI().GetElectionID(t)
+	dut1.GRIBI().MasterClient(t).Connection().WithInitialElectionID(elecLow, elecHigh).WithRedundancyMode(fluent.ElectedPrimaryClient).WithPersistence()
+	dut1.GRIBI().MasterClient(t).Start(context.Background(), t)
+	defer dut1.GRIBI().MasterClient(t).Stop(t)
+	dut1.GRIBI().MasterClient(t).StartSending(context.Background(), t)
+
+	subctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+	dut1.GRIBI().MasterClient(t).Await(subctx, t)
+
+	// check sessoin param result
+	chk.HasResult(t, dut1.GRIBI().MasterClient(t).Results(t),
+		fluent.OperationResult().
+			WithSuccessfulSessionParams().
+			AsResult(),
+	)
+
+	// check election id result
+	chk.HasResult(t, dut1.GRIBI().MasterClient(t).Results(t),
+		fluent.OperationResult().
+			WithCurrentServerElectionID(elecLow, elecHigh).
+			AsResult(),
+	)
+
+	// Send modify request with lower election id
+	dut1.GRIBI().MasterClient(t).Modify().AddEntry(t, fluent.NextHopEntry().WithNetworkInstance(server.DefaultNetworkInstanceName).WithIndex(1).WithIPAddress("192.0.2.2").WithElectionID(elecLow+1, elecHigh))
+
+	dut1.GRIBI().MasterClient(t).Await(subctx, t)
+
+	// check AFT result, expecting operation fails
+	chk.HasResult(t, dut1.GRIBI().MasterClient(t).Results(t), fluent.OperationResult().
+		WithOperationID(1).
+		WithProgrammingResult(fluent.ProgrammingFailed).
+		AsResult(),
+	)
+
 }

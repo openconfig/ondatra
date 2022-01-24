@@ -15,9 +15,11 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"testing"
+	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/config/device"
 	"github.com/openconfig/ondatra/internal/binding"
@@ -25,14 +27,16 @@ import (
 	"github.com/openconfig/ondatra/internal/console"
 	"github.com/openconfig/ondatra/internal/dut"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
+	"github.com/openconfig/ondatra/internal/gribi"
 	"github.com/openconfig/ondatra/internal/operations"
 	"github.com/openconfig/ondatra/internal/p4rt"
 	"github.com/openconfig/ondatra/internal/reservation"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	fgribi "github.com/openconfig/gribigo/fluent"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
 )
 
 // DUTDevice is a device under test.
@@ -290,4 +294,130 @@ func (r *RawAPIs) Console(t testing.TB) StreamClient {
 		t.Fatalf("Failed to create console client on %v: %v", r.dut, err)
 	}
 	return c
+}
+
+// GRIBI returns a handle to GRIBI APIs on the DUT.
+func (d *DUTDevice) GRIBI() *GRIBI {
+	return &GRIBI{dut: d.res.(*reservation.DUT)}
+}
+
+// GRIBI provides access to GRIBI APIs of the DUT.
+type GRIBI struct {
+	dut *reservation.DUT
+}
+
+// GRIBI returns the gRIBI client on the DUT. This client will not be cached.
+// The function returns grpc client connection along with the gribi fluent client to allow the caller to close the grpc connection
+func (g *GRIBI) NewGRIBIClient(t testing.TB) (*fgribi.GRIBIClient, *grpc.ClientConn) {
+	t.Helper()
+	logAction(t, "Creating GRIBI non-chached client for %s", g.dut)
+	gribiCLI, err := gribi.NewGRIBIClient(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("New GRIBI(t) on %v: %v", g.dut, err)
+	}
+	return gribiCLI.FluentAPIHandle, gribiCLI.GRPCClient
+}
+
+// GRIBI returns a gRIBI client for the DUT. The client will be cached.
+func (g *GRIBI) MasterClient(t testing.TB) *fgribi.GRIBIClient {
+	t.Helper()
+	gribiCLI, err := gribi.FetchMasterGRIBI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
+	}
+	return gribiCLI
+}
+
+// Reset the cached gribi clinet connection.
+func (g *GRIBI) ResetMasterClient(t testing.TB) *fgribi.GRIBIClient {
+	t.Helper()
+	logAction(t, "Reseting GRIBI Master client for %s", g.dut)
+	gribiCLI, err := gribi.ResetMasterGRIBI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
+	}
+	return gribiCLI
+}
+
+func (g *GRIBI) CloseMasterClient(t testing.TB) {
+	t.Helper()
+	logAction(t, "Closing GRIBI Master client for %s", g.dut)
+	gribi.CloseMasterGRIBI(context.Background(), g.dut)
+}
+
+// GRIBI returns a gRIBI client on the DUT. This client will be cached.
+func (g *GRIBI) SecondaryClient(t testing.TB) *fgribi.GRIBIClient {
+	t.Helper()
+	gribiCLI, err := gribi.FetchSecondGRIBI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("Second GRIBI(t) on %v: %v", g.dut, err)
+	}
+	return gribiCLI
+}
+
+// GRIBI returns a gRIBI client on the DUT. This client will be cached.
+func (g *GRIBI) ResetSecondaryClient(t testing.TB) *fgribi.GRIBIClient {
+	t.Helper()
+	logAction(t, "Reseting GRIBI Secondary client for %s", g.dut)
+	gribiCLI, err := gribi.ResetSecondGRIBI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
+	}
+	return gribiCLI
+}
+
+func (g *GRIBI) CloseSecondaryClient(t testing.TB) {
+	t.Helper()
+	logAction(t, "Close GRIBI Secondary client for %s", g.dut)
+	gribi.CloseSecondGRIBI(context.Background(), g.dut)
+}
+
+// set the election id to the last known election id quered from gribi server
+func (g *GRIBI) SynchElectionID(t testing.TB, persistence bool) {
+	t.Helper()
+	logAction(t, "Synchorize GRIBI Election ID with GRIBI server for  %s", g.dut)
+	c, err := gribi.FetchMasterGRIBI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
+	}
+	if persistence {
+		c.Connection().WithInitialElectionID(1, 0).WithRedundancyMode(fgribi.ElectedPrimaryClient).WithPersistence()
+	} else {
+		c.Connection().WithInitialElectionID(1, 0).WithRedundancyMode(fgribi.ElectedPrimaryClient)
+	}
+	c.Start(context.Background(), t)
+	defer c.Stop(t)
+	c.StartSending(context.Background(), t)
+	subctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+	err = c.Await(subctx, t)
+	if err != nil {
+		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
+	}
+
+	if len(c.Results(t)) != 2 {
+		t.Fatalf("GRIBI(t) on %v, expected two responses", g.dut)
+	}
+
+	result := c.Results(t)[1]
+	gribi.SetElectionID(context.Background(), g.dut, result.CurrentServerElectionID.Low, result.CurrentServerElectionID.High)
+
+}
+
+// get the election id that is used for connecting to gribi server
+func (g *GRIBI) GetElectionID(t testing.TB) (low, high uint64) {
+	t.Helper()
+	return gribi.GetElectionID(context.Background(), g.dut)
+}
+
+// set the election id that is used for connecting to gribi server
+func (g *GRIBI) SetElectionID(t testing.TB, low, high uint64) {
+	t.Helper()
+	gribi.SetElectionID(context.Background(), g.dut, low, high)
+}
+
+// increament the election id that is used for connecting to gribi server
+func (g *GRIBI) IncElectionID(t testing.TB) {
+	t.Helper()
+	gribi.IncElectionID(context.Background(), g.dut)
 }

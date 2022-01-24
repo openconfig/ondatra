@@ -41,6 +41,7 @@ type Binding struct {
 	GNOIDialer    func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
 	P4RTDialer      func(context.Context, *reservation.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 	IxNetworkDialer func(context.Context, *reservation.ATE) (*binding.IxNetwork, error)
+	GRIBIDialer     func(context.Context, *reservation.DUT, ...grpc.DialOption) (*binding.GRIBIClient, error)
 }
 
 // Reset zeros out all the stub implementations.
@@ -53,6 +54,7 @@ func (b *Binding) Reset() {
 	b.GNOIDialer = nil
 	b.P4RTDialer = nil
 	b.IxNetworkDialer = nil
+	b.GRIBIDialer = nil
 }
 
 // Reserve reserves a new fake testbed, reading the definition from the given path.
@@ -115,4 +117,9 @@ func (b *Binding) HandleInfraFail(err error) error {
 // SetTestMetadata is a noop.
 func (b *Binding) SetTestMetadata(md *binding.TestMetadata) error {
 	return nil
+}
+
+// DialGNOI creates a client connection to the fake gRIBI server.
+func (b *Binding) DialGRIBI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (*binding.GRIBIClient, error) {
+	return b.GRIBIDialer(ctx, dut, opts...)
 }
