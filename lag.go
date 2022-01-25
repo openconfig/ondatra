@@ -31,3 +31,19 @@ func (l *LAG) WithPorts(ports ...*Port) *LAG {
 	}
 	return l
 }
+
+// LACP returns the LACP configuration of the LAG.
+func (l *LAG) LACP() *LACP {
+	return &LACP{pb: l.pb.Lacp}
+}
+
+// LACP is a LACP configuration on a LAG.
+type LACP struct {
+	pb *opb.Lag_Lacp
+}
+
+// WithEnabled sets whether LACP is enabled on the LAG.
+func (l *LACP) WithEnabled(enabled bool) *LACP {
+	l.pb.Enabled = enabled
+	return l
+}

@@ -16,25 +16,28 @@ package knebind
 
 import (
 	"golang.org/x/net/context"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
+	"golang.org/x/crypto/ssh"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/knebind/solver"
 
-	kpb "github.com/google/kne/proto/topo"
+	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 func TestReserve(t *testing.T) {
-	topo := &kpb.Topology{
-		Nodes: []*kpb.Node{{
+	topo := &tpb.Topology{
+		Nodes: []*tpb.Node{{
 			Name:     "node1",
-			Type:     kpb.Node_ARISTA_CEOS,
-			Services: map[uint32]*kpb.Service{1234: {Name: "gnmi"}},
-			Interfaces: map[string]*kpb.Interface{
+			Type:     tpb.Node_ARISTA_CEOS,
+			Services: map[uint32]*tpb.Service{1234: {Name: "gnmi"}},
+			Interfaces: map[string]*tpb.Interface{
 				"eth1": {
 					Name: "Ethernet1",
 				},
@@ -44,27 +47,27 @@ func TestReserve(t *testing.T) {
 			},
 		}, {
 			Name:     "node2",
-			Type:     kpb.Node_CISCO_CXR,
-			Services: map[uint32]*kpb.Service{2345: {Name: "gnmi"}},
-			Interfaces: map[string]*kpb.Interface{
+			Type:     tpb.Node_CISCO_CXR,
+			Services: map[uint32]*tpb.Service{2345: {Name: "gnmi"}},
+			Interfaces: map[string]*tpb.Interface{
 				"eth1": {},
 				"eth2": {},
 			},
 		}, {
 			Name:     "node3",
-			Type:     kpb.Node_JUNIPER_CEVO,
-			Services: map[uint32]*kpb.Service{3456: {Name: "gnmi"}},
-			Interfaces: map[string]*kpb.Interface{
+			Type:     tpb.Node_JUNIPER_CEVO,
+			Services: map[uint32]*tpb.Service{3456: {Name: "gnmi"}},
+			Interfaces: map[string]*tpb.Interface{
 				"eth1": {},
 			},
 		}, {
 			Name: "node4",
-			Type: kpb.Node_IXIA_TG,
-			Interfaces: map[string]*kpb.Interface{
+			Type: tpb.Node_IXIA_TG,
+			Interfaces: map[string]*tpb.Interface{
 				"eth1": {},
 			},
 		}},
-		Links: []*kpb.Link{
+		Links: []*tpb.Link{
 			{ANode: "node1", AInt: "eth1", ZNode: "node2", ZInt: "eth1"},
 			{ANode: "node2", AInt: "eth2", ZNode: "node3", ZInt: "eth1"},
 			{ANode: "node1", AInt: "eth2", ZNode: "node4", ZInt: "eth1"},
@@ -100,7 +103,7 @@ func TestReserve(t *testing.T) {
 		A: "dut1:port2",
 		B: "ate:port1",
 	}
-	fetchTopo = func(*Config) (*kpb.Topology, error) {
+	fetchTopoFn = func(*Config) (*tpb.Topology, error) {
 		return topo, nil
 	}
 	wantDUT1 := &reservation.DUT{&reservation.Dims{
@@ -236,7 +239,7 @@ func TestReserveErrors(t *testing.T) {
 	tests := []struct {
 		desc        string
 		tb          *opb.Testbed
-		topo        *kpb.Topology
+		topo        *tpb.Topology
 		wantErr     string
 		wantGNMIErr string
 	}{{
@@ -252,10 +255,10 @@ func TestReserveErrors(t *testing.T) {
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{Id: "dut1"}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name: "node1",
-				Type: kpb.Node_ARISTA_CEOS,
+				Type: tpb.Node_ARISTA_CEOS,
 			}},
 		},
 		wantGNMIErr: "gnmi",
@@ -267,10 +270,10 @@ func TestReserveErrors(t *testing.T) {
 				Vendor: opb.Device_ARISTA,
 			}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name: "node1",
-				Type: kpb.Node_CISCO_CXR,
+				Type: tpb.Node_CISCO_CXR,
 			}},
 		},
 		wantErr: "No node in KNE topology to match testbed",
@@ -281,10 +284,10 @@ func TestReserveErrors(t *testing.T) {
 				Id: "ate1",
 			}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name: "node1",
-				Type: kpb.Node_CISCO_CXR,
+				Type: tpb.Node_CISCO_CXR,
 			}},
 		},
 		wantErr: "No node in KNE topology to match testbed",
@@ -299,10 +302,10 @@ func TestReserveErrors(t *testing.T) {
 				Vendor: opb.Device_ARISTA,
 			}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{
-				{Name: "node1", Type: kpb.Node_ARISTA_CEOS},
-				{Name: "node2", Type: kpb.Node_CISCO_CXR},
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{
+				{Name: "node1", Type: tpb.Node_ARISTA_CEOS},
+				{Name: "node2", Type: tpb.Node_CISCO_CXR},
 			},
 		},
 		wantErr: "No combination of nodes",
@@ -331,14 +334,14 @@ func TestReserveErrors(t *testing.T) {
 				{A: "dut3:port1", B: "dut4:port1"},
 			},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{
-				{Name: "node1", Type: kpb.Node_ARISTA_CEOS},
-				{Name: "node2", Type: kpb.Node_ARISTA_CEOS},
-				{Name: "node3", Type: kpb.Node_JUNIPER_VMX},
-				{Name: "node4", Type: kpb.Node_JUNIPER_VMX},
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{
+				{Name: "node1", Type: tpb.Node_ARISTA_CEOS},
+				{Name: "node2", Type: tpb.Node_ARISTA_CEOS},
+				{Name: "node3", Type: tpb.Node_JUNIPER_VMX},
+				{Name: "node4", Type: tpb.Node_JUNIPER_VMX},
 			},
-			Links: []*kpb.Link{
+			Links: []*tpb.Link{
 				{ANode: "node1", AInt: "eth1", ZNode: "node3", ZInt: "eth1"},
 				{ANode: "node2", AInt: "eth1", ZNode: "node4", ZInt: "eth1"},
 			},
@@ -347,7 +350,7 @@ func TestReserveErrors(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			fetchTopo = func(*Config) (*kpb.Topology, error) {
+			fetchTopoFn = func(*Config) (*tpb.Topology, error) {
 				return tt.topo, nil
 			}
 			b, err := New(&Config{})
@@ -377,17 +380,17 @@ func TestServices(t *testing.T) {
 	tests := []struct {
 		desc         string
 		tb           *opb.Testbed
-		topo         *kpb.Topology
+		topo         *tpb.Topology
 		serviceCheck func(t *testing.T, b binding.Binding, d *reservation.DUT)
 	}{{
 		desc: "missing gnmi",
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{Id: "dut1"}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name: "node1",
-				Type: kpb.Node_ARISTA_CEOS,
+				Type: tpb.Node_ARISTA_CEOS,
 			}},
 		},
 		serviceCheck: func(t *testing.T, b binding.Binding, d *reservation.DUT) {
@@ -403,11 +406,11 @@ func TestServices(t *testing.T) {
 				Id: "dut1",
 			}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name:     "node1",
-				Type:     kpb.Node_CISCO_CXR,
-				Services: map[uint32]*kpb.Service{9339: {Name: "gnmi", Outside: 9339, OutsideIp: "1.1.1.1"}},
+				Type:     tpb.Node_CISCO_CXR,
+				Services: map[uint32]*tpb.Service{9339: {Name: "gnmi", Outside: 9339, OutsideIp: "1.1.1.1"}},
 			}},
 		},
 		serviceCheck: func(t *testing.T, b binding.Binding, d *reservation.DUT) {
@@ -423,11 +426,11 @@ func TestServices(t *testing.T) {
 				Id: "dut1",
 			}},
 		},
-		topo: &kpb.Topology{
-			Nodes: []*kpb.Node{{
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
 				Name: "node1",
-				Type: kpb.Node_CISCO_CXR,
-				Services: map[uint32]*kpb.Service{
+				Type: tpb.Node_CISCO_CXR,
+				Services: map[uint32]*tpb.Service{
 					9336: {Name: "p4rt", Outside: 9336, OutsideIp: "1.1.1.1"},
 					9339: {Name: "gnmi", Outside: 9339, OutsideIp: "1.1.1.1"},
 				},
@@ -445,7 +448,7 @@ func TestServices(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			fetchTopo = func(*Config) (*kpb.Topology, error) {
+			fetchTopoFn = func(*Config) (*tpb.Topology, error) {
 				return tt.topo, nil
 			}
 			b, err := New(&Config{})
@@ -461,6 +464,53 @@ func TestServices(t *testing.T) {
 				t.Fatalf("Node %q not found in topology", "node1")
 			}
 			tt.serviceCheck(t, b, d)
+		})
+	}
+}
+
+func TestPushConfig(t *testing.T) {
+	const dutName = "dut"
+	bind := &Bind{
+		cfg: &Config{},
+		services: solver.ServiceMap{dutName: map[string]*tpb.Service{
+			"ssh": &tpb.Service{OutsideIp: "1.2.3.4", Outside: 1234},
+		}},
+	}
+	sshExecFn = func(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr error) {
+		return "", nil
+	}
+
+	tests := []struct {
+		desc    string
+		dut     *reservation.DUT
+		opts    *binding.ConfigOptions
+		wantErr string
+	}{{
+		desc: "success",
+		dut:  &reservation.DUT{&reservation.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		opts: &binding.ConfigOptions{Append: true},
+	}, {
+		desc:    "only arista support",
+		dut:     &reservation.DUT{&reservation.Dims{Name: dutName, Vendor: opb.Device_CISCO}},
+		opts:    &binding.ConfigOptions{Append: true},
+		wantErr: "supports Arista",
+	}, {
+		desc:    "no openconfig support",
+		dut:     &reservation.DUT{&reservation.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		opts:    &binding.ConfigOptions{OpenConfig: true},
+		wantErr: "OpenConfig",
+	}, {
+		desc:    "no replace support",
+		dut:     &reservation.DUT{&reservation.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		opts:    &binding.ConfigOptions{},
+		wantErr: "config replace",
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			err := bind.PushConfig(context.Background(), tt.dut, "my config", tt.opts)
+			if (err == nil) != (tt.wantErr == "") || (err != nil && !strings.Contains(err.Error(), tt.wantErr)) {
+				t.Fatalf("PushConfig got error %v, want %v", err, tt.wantErr)
+			}
 		})
 	}
 }

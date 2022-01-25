@@ -52,7 +52,7 @@ type headers struct {
 	ipv6 *opb.Ipv6Header
 }
 
-func (ix *IxiaCfgClient) addTraffic(flows []*opb.Flow) error {
+func (ix *ixATE) addTraffic(flows []*opb.Flow) error {
 	ix.cfg.Traffic = &ixconfig.Traffic{UseRfc5952: ixconfig.Bool(true)}
 	for _, f := range flows {
 		if err := ix.addTrafficItem(f); err != nil {
@@ -62,7 +62,7 @@ func (ix *IxiaCfgClient) addTraffic(flows []*opb.Flow) error {
 	return nil
 }
 
-func (ix *IxiaCfgClient) addTrafficItem(f *opb.Flow) error {
+func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	hdrs, err := resolveHeaders(f.GetHeaders())
 	if err != nil {
 		return usererr.Wrapf(err, "bad header spec for flow %q", f.GetName())
@@ -89,16 +89,16 @@ func (ix *IxiaCfgClient) addTrafficItem(f *opb.Flow) error {
 		return errors.Wrapf(err, "could not determine traffic type for flow %q", f.GetName())
 	}
 
-	epFn := devOrNetEPs
+	epFn := devOrGeneratedEPs
 	if trafType == rawTraffic {
 		inferAddresses(hdrs, srcEPs, dstEPs, ix.intfs)
 		epFn = portOrLagEPs
 	}
-	srcs, err := epFn(srcEPs, ix.intfs)
+	srcs, err := epFn(srcEPs, ix.intfs, true)
 	if err != nil {
 		return errors.Wrapf(err, "could not find source endpoint paths for flow %q", f.GetName())
 	}
-	dsts, err := epFn(dstEPs, ix.intfs)
+	dsts, err := epFn(dstEPs, ix.intfs, false)
 	if err != nil {
 		return errors.Wrapf(err, "could not find dest endpoint paths for flow %q", f.GetName())
 	}
@@ -184,6 +184,9 @@ func resolveHeaders(flowHdrs []*opb.Header) (*headers, error) {
 	}
 	if len(flowHdrs) > 1 {
 		h := flowHdrs[1]
+		if h.GetMpls() != nil && len(flowHdrs) > 2 {
+			h = flowHdrs[2]
+		}
 		hdrs.ipv4 = h.GetIpv4()
 		hdrs.ipv6 = h.GetIpv6()
 	}
@@ -203,10 +206,14 @@ func resolveTrafficType(hdrs *headers, srcEPs, dstEPs []*opb.Flow_Endpoint) (tra
 		}
 	}
 
+	if hasRSVPEP(srcEPs) || hasRSVPEP(dstEPs) {
+		return "", usererr.New("cannot use RSVP endpoint for non-IP traffic")
+	}
+
 	// Traffic with a Network endpoint cannot not have any addresses set.
 	if hasNetworkEP(srcEPs) || hasNetworkEP(dstEPs) {
 		if ethAddrsSet {
-			return "", usererr.New("addresses of the initial Ethernet header should not be set when using Network endpoints")
+			return "", usererr.New("addresses of the initial Ethernet header should not be set when using generated endpoints")
 		}
 		// IP traffic types would have already been detected above, so must be Ethernet here.
 		return ethTraffic, nil
@@ -218,7 +225,18 @@ func resolveTrafficType(hdrs *headers, srcEPs, dstEPs []*opb.Flow_Endpoint) (tra
 
 func hasNetworkEP(eps []*opb.Flow_Endpoint) bool {
 	for _, ep := range eps {
-		if ep.GetNetworkName() != "" {
+		switch ep.GetGenerated().(type) {
+		case *opb.Flow_Endpoint_NetworkName:
+			return true
+		}
+	}
+	return false
+}
+
+func hasRSVPEP(eps []*opb.Flow_Endpoint) bool {
+	for _, ep := range eps {
+		switch ep.GetGenerated().(type) {
+		case *opb.Flow_Endpoint_RsvpName:
 			return true
 		}
 	}
@@ -284,7 +302,7 @@ func ipv6Addr(intf *intf) string {
 	return ""
 }
 
-func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf) ([]string, error) {
+func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, _ bool) ([]string, error) {
 	visited := make(map[ixconfig.IxiaCfgNode]bool)
 	var paths []string
 	for _, ep := range eps {
@@ -305,20 +323,33 @@ func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf) ([]string, e
 	return paths, nil
 }
 
-func devOrNetEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf) ([]string, error) {
+func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP bool) ([]string, error) {
 	visited := make(map[string]bool)
 	var paths []string
 	for _, ep := range eps {
 		var p string
 		intf, _ := intfs[ep.GetInterfaceName()]
-		if ep.GetNetworkName() == "" {
+		switch ept := ep.GetGenerated().(type) {
+		case nil:
 			p = intf.deviceGroup.XPath().String()
-		} else {
+		case *opb.Flow_Endpoint_NetworkName:
 			netg, ok := intf.netToNetworkGroup[ep.GetNetworkName()]
 			if !ok {
 				return nil, usererr.New("no network group associated with endpoint %v", ep)
 			}
 			p = netg.XPath().String()
+		case *opb.Flow_Endpoint_RsvpName:
+			rsvp, ok := intf.rsvpLSPs[ep.GetRsvpName()]
+			if !ok {
+				return nil, usererr.New("no RSVP config associated with endpoint %v", ep)
+			}
+			// LSPs are unidirectional, so need to distinguish between src/dest endpoints.
+			p = rsvp.RsvpP2PEgressLsps.XPath().String()
+			if isSrcEP {
+				p = rsvp.RsvpP2PIngressLsps.XPath().String()
+			}
+		default:
+			return nil, usererr.New("unrecognized endpoint type %T", ept)
 		}
 		if !visited[p] {
 			paths = append(paths, p)

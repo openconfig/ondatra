@@ -32,10 +32,10 @@ import (
 
 var (
 	mu    sync.Mutex
-	ixias = make(map[*reservation.ATE]*IxiaCfgClient)
+	ixias = make(map[*reservation.ATE]*ixATE)
 )
 
-func ixiaForATE(ctx context.Context, ate *reservation.ATE) (*IxiaCfgClient, error) {
+func ixiaForATE(ctx context.Context, ate *reservation.ATE) (*ixATE, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	ix, ok := ixias[ate]
@@ -44,7 +44,7 @@ func ixiaForATE(ctx context.Context, ate *reservation.ATE) (*IxiaCfgClient, erro
 		if err != nil {
 			return nil, err
 		}
-		ix, err = New(ctx, ate.Name, ixnet)
+		ix, err = newIxATE(ctx, ate.Name, ixnet)
 		if err != nil {
 			return nil, err
 		}

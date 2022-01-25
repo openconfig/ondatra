@@ -17,6 +17,7 @@ package ixgnmi
 import (
 	"golang.org/x/net/context"
 	"encoding/json"
+	"fmt"
 	"testing"
 	"time"
 
@@ -55,8 +56,6 @@ func TestSubscribe(t *testing.T) {
 		}
 		return data, nil
 	}
-
-	ctx := context.Background()
 
 	devWithAttr1 := &telemetry.Device{}
 	devWithAttr1.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
@@ -132,6 +131,7 @@ func TestSubscribe(t *testing.T) {
 			}(),
 		}},
 		want: []*gpb.SubscribeResponse{
+			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -143,7 +143,6 @@ func TestSubscribe(t *testing.T) {
 					Val: &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{"fakeComp"}}},
 				},
 			}}},
-			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -205,6 +204,7 @@ func TestSubscribe(t *testing.T) {
 			}(),
 		}},
 		want: []*gpb.SubscribeResponse{
+			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -216,7 +216,6 @@ func TestSubscribe(t *testing.T) {
 					Val: &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{"fakeIntf"}}},
 				},
 			}}},
-			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -294,6 +293,7 @@ func TestSubscribe(t *testing.T) {
 			},
 		},
 		want: []*gpb.SubscribeResponse{
+			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -314,7 +314,6 @@ func TestSubscribe(t *testing.T) {
 					},
 				}},
 			}}},
-			{Response: &gpb.SubscribeResponse_SyncResponse{true}},
 			{Response: &gpb.SubscribeResponse_Update{&gpb.Notification{
 				Prefix: &gpb.Path{Origin: "openconfig", Target: "fakeIxia"},
 				Update: []*gpb.Update{{
@@ -393,6 +392,7 @@ func TestSubscribe(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			ctx := context.Background()
 			client, err := NewClient(ctx, "fakeIxia", nil, nil)
 			if err != nil {
 				t.Fatalf("NewClient() got unexpected error: %v", err)
@@ -425,7 +425,8 @@ func TestSubscribe(t *testing.T) {
 			if err := sub.Send(req); err != nil {
 				t.Fatalf("Send(%v) got unexpected error: %v", req, err)
 			}
-
+			// Sleep to ensure that notifications are received in the correct order.
+			time.Sleep(100 * time.Millisecond)
 			for _, want := range tt.want {
 				// Flush the freshness cache to force the data to be repopulated.
 				client.fresh.Flush()
@@ -454,43 +455,56 @@ func TestSubscribe(t *testing.T) {
 }
 
 type fakeCfgClient struct {
-	getRsps   map[string]string
-	getErrs   map[string]error
-	postErrs  map[string]error
-	pushErrs  []error
+	sess      session
 	cfg       *ixconfig.Ixnetwork
-	cfgErr    error
+	xpathToID map[string]string
 	updateErr error
 }
 
 func (f *fakeCfgClient) Session() session {
-	return f
+	return f.sess
 }
 
-func (f *fakeCfgClient) Get(_ context.Context, p string, v interface{}) error {
-	if f.getRsps[p] != "" {
-		json.Unmarshal([]byte(f.getRsps[p]), v)
+func (f *fakeCfgClient) NodeID(node ixconfig.IxiaCfgNode) (string, error) {
+	xp := node.XPath()
+	if xp == nil {
+		return "", fmt.Errorf("no stub XPath for node of type %T", node)
 	}
-	return f.getErrs[p]
-}
-
-func (f *fakeCfgClient) Post(_ context.Context, p string, _, _ interface{}) error {
-	return f.postErrs[p]
+	id, ok := f.xpathToID[xp.String()]
+	if !ok {
+		return "", fmt.Errorf("no stub ID for node at %q", xp)
+	}
+	return id, nil
 }
 
 func (f *fakeCfgClient) LastImportedConfig() *ixconfig.Ixnetwork {
 	return f.cfg
 }
 
-func (f *fakeCfgClient) GetNode(ctx context.Context, n ixconfig.IxiaCfgNode, v interface{}) error {
-	return f.Get(ctx, n.GetRestID(), v)
-}
-
 func (f *fakeCfgClient) UpdateIDs(context.Context, *ixconfig.Ixnetwork, ...ixconfig.IxiaCfgNode) error {
 	return f.updateErr
 }
 
+type fakeSession struct {
+	getRsps  map[string]string
+	getErrs  map[string]error
+	postErrs map[string]error
+}
+
+func (f *fakeSession) Get(_ context.Context, p string, v interface{}) error {
+	if f.getRsps[p] != "" {
+		json.Unmarshal([]byte(f.getRsps[p]), v)
+	}
+	return f.getErrs[p]
+}
+
+func (f *fakeSession) Post(_ context.Context, p string, _, _ interface{}) error {
+	return f.postErrs[p]
+}
+
 func TestRIBFromIxia(t *testing.T) {
+	bgp4XP := parseXPath(t, "/xpath/to/bgpv4")
+	bgp6XP := parseXPath(t, "/xpath/to/bgpv6")
 	fullCfg := &ixconfig.Ixnetwork{
 		Topology: []*ixconfig.Topology{{
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -498,16 +512,16 @@ func TestRIBFromIxia(t *testing.T) {
 				Ethernet: []*ixconfig.TopologyEthernet{{
 					Ipv4: []*ixconfig.TopologyIpv4{{
 						BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{{
-							Name:   ixconfig.String("fake v4"),
-							DutIp:  ixconfig.MultivalueStr("localhost"),
-							RestID: "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1",
+							Name:  ixconfig.String("fake v4"),
+							DutIp: ixconfig.MultivalueStr("localhost"),
+							Xpath: bgp4XP,
 						}},
 					}},
 					Ipv6: []*ixconfig.TopologyIpv6{{
 						BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{{
-							Name:   ixconfig.String("fake v6"),
-							DutIp:  ixconfig.MultivalueStr("::1"),
-							RestID: "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1",
+							Name:  ixconfig.String("fake v6"),
+							DutIp: ixconfig.MultivalueStr("::1"),
+							Xpath: bgp6XP,
 						}},
 					}},
 				}},
@@ -524,7 +538,6 @@ func TestRIBFromIxia(t *testing.T) {
 		postErr   map[string]error
 		getErr    map[string]error
 		getRsps   map[string]string
-		cfgErr    error
 		updateErr error
 		want      *table
 		wantErr   string
@@ -627,11 +640,17 @@ func TestRIBFromIxia(t *testing.T) {
 		t.Run(tt.desc, func(t *testing.T) {
 			c := &Client{
 				client: &fakeCfgClient{
-					postErrs:  tt.postErr,
-					getErrs:   tt.getErr,
-					getRsps:   tt.getRsps,
+					sess: &fakeSession{
+						postErrs: tt.postErr,
+						getErrs:  tt.getErr,
+						getRsps:  tt.getRsps,
+					},
 					cfg:       tt.cfg,
 					updateErr: tt.updateErr,
+					xpathToID: map[string]string{
+						bgp4XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1",
+						bgp6XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1",
+					},
 				},
 			}
 			pi := peerInfo{
@@ -651,6 +670,14 @@ func TestRIBFromIxia(t *testing.T) {
 			}
 		})
 	}
+}
+
+func parseXPath(t *testing.T, str string) *ixconfig.XPath {
+	xp, err := ixconfig.ParseXPath(str)
+	if err != nil {
+		t.Fatalf("Error parsing XPath %q: %v", str, err)
+	}
+	return xp
 }
 
 func createSampleDev(t testing.TB, deletes ...*gpb.Path) *gpb.Notification {

@@ -93,7 +93,7 @@ func ATEs(t testing.TB) map[string]*ATEDevice {
 }
 
 func newATE(id string, res *reservation.ATE) *ATEDevice {
-	return &ATEDevice{&Device{
+	return &ATEDevice{Device: &Device{
 		id:       id,
 		res:      res,
 		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, res, nil) },

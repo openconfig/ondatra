@@ -148,7 +148,15 @@ func endpointPBs(eps []Endpoint) []*opb.Flow_Endpoint {
 		case *Interface:
 			epPB = &opb.Flow_Endpoint{InterfaceName: e.pb.GetName()}
 		case *Network:
-			epPB = &opb.Flow_Endpoint{InterfaceName: e.pb.GetInterfaceName(), NetworkName: e.pb.GetName()}
+			epPB = &opb.Flow_Endpoint{
+				InterfaceName: e.pb.GetInterfaceName(),
+				Generated:     &opb.Flow_Endpoint_NetworkName{NetworkName: e.pb.GetName()},
+			}
+		case *RSVP:
+			epPB = &opb.Flow_Endpoint{
+				InterfaceName: e.pb.GetInterfaceName(),
+				Generated:     &opb.Flow_Endpoint_RsvpName{RsvpName: e.pb.GetName()},
+			}
 		default:
 			log.Fatalf("unknown endpoint type: %v (%T)", e, e)
 		}
@@ -435,7 +443,7 @@ func (f *Flow) WithFrameSizeIMIXTolly() *Flow {
 func (f *Flow) FrameSizeIMIXCustom() *IMIXCustom {
 	if f.pb.FrameSize.GetImixCustom() == nil {
 		f.pb.FrameSize = &opb.FrameSize{
-			Type: &opb.FrameSize_ImixCustom_ {
+			Type: &opb.FrameSize_ImixCustom_{
 				ImixCustom: &opb.FrameSize_ImixCustom{},
 			},
 		}
@@ -446,7 +454,7 @@ func (f *Flow) FrameSizeIMIXCustom() *IMIXCustom {
 // AddEntry adds a custom IMIX entry.
 func (ic *IMIXCustom) AddEntry(size, weight uint32) *IMIXCustom {
 	ic.pb.Entries = append(ic.pb.Entries, &opb.FrameSize_ImixCustomEntry{
-		Size: size,
+		Size:   size,
 		Weight: weight,
 	})
 	return ic

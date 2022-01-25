@@ -19,7 +19,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"reflect"
 	"strconv"
 	"strings"
 	"testing"
@@ -30,19 +29,7 @@ import (
 
 type fakeSession struct {
 	ixSession
-	getRes interface{}
 	config config
-}
-
-func (s *fakeSession) Get(_ context.Context, _ string, out interface{}) error {
-	if err, ok := s.getRes.(error); ok {
-		return err
-	}
-	if out != nil && s.getRes != nil {
-		// Sets the value indirectly pointed to by the out pointer.
-		reflect.Indirect(reflect.ValueOf(out)).Set(reflect.ValueOf(s.getRes))
-	}
-	return nil
 }
 
 func (s *fakeSession) Config() config {
@@ -75,45 +62,12 @@ func (c *fakeConfig) QueryIDs(ctx context.Context, xpaths ...string) (map[string
 	switch v := c.queryRes.(type) {
 	case map[string]string:
 		return v, nil
+	case nil:
+		return nil, nil
 	case error:
 		return nil, v
 	default:
 		return nil, fmt.Errorf("unexpected result type: %v (%T)", v, v)
-	}
-}
-
-func TestGetNode(t *testing.T) {
-	tests := []struct {
-		desc    string
-		cfgNode IxiaCfgNode
-		res     interface{}
-		wantErr string
-	}{{
-		desc:    "no REST ID",
-		cfgNode: &TopologyIpv4{},
-		wantErr: "no REST ID set",
-	}, {
-		desc:    "error",
-		cfgNode: &TopologyIpv4{RestID: "/some/id"},
-		res:     errors.New("GET error"),
-		wantErr: "GET error",
-	}, {
-		desc:    "success",
-		cfgNode: &TopologyIpv4{RestID: "/some/id"},
-		res:     "output",
-	}}
-	for _, test := range tests {
-		t.Run(test.desc, func(t *testing.T) {
-			c := &Client{sess: &fakeSession{getRes: test.res}}
-			var gotRes interface{}
-			gotErr := c.GetNode(context.Background(), test.cfgNode, &gotRes)
-			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
-				t.Errorf("GetNode: unexpected error, got err %v, want err %q", gotErr, test.wantErr)
-			}
-			if gotErr == nil && !reflect.DeepEqual(gotRes, test.res) {
-				t.Errorf("GetNode: unexpected result, got %v, want %q", gotRes, test.res)
-			}
-		})
 	}
 }
 
@@ -209,20 +163,18 @@ func TestUpdateIDs(t *testing.T) {
 	cfg := &Ixnetwork{
 		Topology: []*Topology{topology},
 	}
-	allNodes := []IxiaCfgNode{deviceGroup, topology}
 
 	cfg.updateAllXPaths() // Needed for mapping XPaths to expected IDs.
 	topologyXPath := topology.XPath().String()
 	deviceGroupXPath := deviceGroup.XPath().String()
 
 	tests := []struct {
-		desc      string
-		nodes     []IxiaCfgNode
-		res       interface{}
-		cache     map[string]string
-		wantIDs   map[string]string
-		wantCache map[string]string
-		wantErr   string
+		desc    string
+		nodes   []IxiaCfgNode
+		res     interface{}
+		ids     map[string]string
+		wantIDs map[string]string
+		wantErr string
 	}{{
 		desc: "empty list noop",
 	}, {
@@ -231,59 +183,43 @@ func TestUpdateIDs(t *testing.T) {
 		res:     errors.New("query error"),
 		wantErr: "query error",
 	}, {
-		desc:      "update object from cache",
-		nodes:     []IxiaCfgNode{deviceGroup},
-		cache:     map[string]string{deviceGroupXPath: deviceGroupID},
-		wantIDs:   map[string]string{deviceGroupXPath: deviceGroupID},
-		wantCache: map[string]string{deviceGroupXPath: deviceGroupID},
+		desc:    "update object from cache",
+		nodes:   []IxiaCfgNode{deviceGroup},
+		ids:     map[string]string{deviceGroupXPath: deviceGroupID},
+		wantIDs: map[string]string{deviceGroupXPath: deviceGroupID},
 	}, {
 		desc:  "query multiple objects and update non-empty cache",
 		nodes: []IxiaCfgNode{topology, deviceGroup},
-		cache: map[string]string{"/fake/xpath": "/fakeID"},
+		ids:   map[string]string{"/fake/xpath": "/fakeID"},
 		res: map[string]string{
 			topologyXPath:    topologyID,
 			deviceGroupXPath: deviceGroupID,
 		},
 		wantIDs: map[string]string{
-			topologyXPath:    topologyID,
-			deviceGroupXPath: deviceGroupID,
-		},
-		wantCache: map[string]string{
 			"/fake/xpath":    "/fakeID",
 			topologyXPath:    topologyID,
 			deviceGroupXPath: deviceGroupID,
 		},
 	}, {
-		desc:      "query single object",
-		nodes:     []IxiaCfgNode{deviceGroup},
-		cache:     map[string]string{},
-		res:       map[string]string{deviceGroupXPath: deviceGroupID},
-		wantIDs:   map[string]string{deviceGroupXPath: deviceGroupID},
-		wantCache: map[string]string{deviceGroupXPath: deviceGroupID},
+		desc:    "query single object",
+		nodes:   []IxiaCfgNode{deviceGroup},
+		ids:     map[string]string{},
+		res:     map[string]string{deviceGroupXPath: deviceGroupID},
+		wantIDs: map[string]string{deviceGroupXPath: deviceGroupID},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			// Reset ID for config nodes
-			deviceGroup.RestID = ""
-			topology.RestID = ""
 			c := &Client{
 				sess: &fakeSession{
 					config: &fakeConfig{queryRes: test.res},
 				},
-				xPathToRestID: test.cache,
+				xPathToID: test.ids,
 			}
 			gotErr := c.UpdateIDs(context.Background(), cfg, test.nodes...)
-			for _, n := range allNodes {
-				xp := n.XPath()
-				if n.GetRestID() != test.wantIDs[xp.String()] {
-					t.Errorf("UpdateIDs: Unexpected ID for node with XPath %q: got %s, want %s.",
-						xp, n.GetRestID(), test.wantIDs[xp.String()])
-				}
-			}
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("UpdateIDs: unexpected error, got err %v, want err %q", gotErr, test.wantErr)
 			}
-			if diff := cmp.Diff(test.wantCache, c.xPathToRestID); diff != "" {
+			if diff := cmp.Diff(test.wantIDs, c.xPathToID); diff != "" {
 				t.Errorf("UpdateIDs: unexpected diff in ID cache (-want,+got): %s\n", diff)
 			}
 		})
@@ -294,10 +230,10 @@ func TestUpdateIDs(t *testing.T) {
 // as is the case for Ixnetwork objects returned from LastImportedConfig.
 func TestUpdateIDsOfLastImported(t *testing.T) {
 	const (
-		fakeXPath         = "/fake/xpath"
-		fakeID            = "/fakeID"
-		topoRestID        = "/fake/abs/path/to/topology/2"
-		deviceGroupRestID = "/fake/abs/path/to/topology/2/deviceGroup/3"
+		fakeXPath     = "/fake/xpath"
+		fakeID        = "/fakeID"
+		topoID        = "/fake/abs/path/to/topology/2"
+		deviceGroupID = "/fake/abs/path/to/topology/2/deviceGroup/3"
 	)
 
 	cfg := &Ixnetwork{
@@ -312,35 +248,29 @@ func TestUpdateIDsOfLastImported(t *testing.T) {
 	c := &Client{
 		sess: &fakeSession{config: &fakeConfig{
 			queryRes: map[string]string{
-				topoXPath:        topoRestID,
-				deviceGroupXPath: deviceGroupRestID,
+				topoXPath:        topoID,
+				deviceGroupXPath: deviceGroupID,
 			},
 		}},
-		xPathToRestID: map[string]string{"/fake/xpath": "/fakeID"},
-		lastImported:  deepcopy.Copy(cfg).(*Ixnetwork),
+		xPathToID:    map[string]string{fakeXPath: fakeID},
+		lastImported: deepcopy.Copy(cfg).(*Ixnetwork),
 	}
 
 	lastCfg := c.LastImportedConfig()
 	lastCfgTopo := lastCfg.Topology[0]
 	lastCfgDeviceGroup := lastCfgTopo.DeviceGroup[0]
+
 	if err := c.UpdateIDs(context.Background(), lastCfg, lastCfgTopo, lastCfgDeviceGroup); err != nil {
 		t.Fatalf("UpdateIDs: unexpected error updating config objects with unset xpaths: %v", err)
 	}
 
 	// Instantiate after UpdateIDs when xpaths should be set
-	wantCache := map[string]string{
-		fakeXPath:        fakeID,
-		topoXPath:        topoRestID,
-		deviceGroupXPath: deviceGroupRestID,
+	wantIDs := map[string]string{
+		fakeXPath:                           fakeID,
+		lastCfgTopo.XPath().String():        topoID,
+		lastCfgDeviceGroup.XPath().String(): deviceGroupID,
 	}
-
-	if lastCfgTopo.GetRestID() != topoRestID {
-		t.Errorf("UpdateIDs: unexpected REST ID for topology object: got %q, want %q", lastCfgTopo.GetRestID(), topoRestID)
-	}
-	if lastCfgDeviceGroup.GetRestID() != deviceGroupRestID {
-		t.Errorf("UpdateIDs: unexpected REST ID for device group object: got %q, want %q", lastCfgDeviceGroup.GetRestID(), deviceGroupRestID)
-	}
-	if diff := cmp.Diff(wantCache, c.xPathToRestID); diff != "" {
+	if diff := cmp.Diff(wantIDs, c.xPathToID); diff != "" {
 		t.Errorf("UpdateIDs: unexpected diff in ID cache (-want,+got): %s\n", diff)
 	}
 }

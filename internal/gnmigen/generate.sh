@@ -44,6 +44,7 @@ COMMON_ARGS=(
   -generate_delete
   -generate_leaf_getters
   -structs_split_files_count=10
+  -generate_populate_defaults
 )
 
 YANG_FILES=(

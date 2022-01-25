@@ -23,6 +23,9 @@ type RSVP struct {
 	pb *opb.RsvpConfig
 }
 
+// Implement the Endpoint marker interface.
+func (*RSVP) isEndpoint() {}
+
 // WithISISReachability configures which IS-IS reachability config defines the
 // routes available for LSPs.
 func (r *RSVP) WithISISReachability(isr string) *RSVP {

@@ -87,6 +87,7 @@ type Stats struct {
 
 type cfgClient interface {
 	Session() session
+	NodeID(ixconfig.IxiaCfgNode) (string, error)
 	LastImportedConfig() *ixconfig.Ixnetwork
 	UpdateIDs(context.Context, *ixconfig.Ixnetwork, ...ixconfig.IxiaCfgNode) error
 }
@@ -310,12 +311,15 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	if pi.isIPV4 {
 		opPath = bgpV4OpPath
 	}
-	restID := node.GetRestID()
-	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{restID}}, nil); err != nil {
+	nodeID, err := c.client.NodeID(node)
+	if err != nil {
+		return nil, err
+	}
+	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
 		return nil, errors.Wrap(err, "failed to run op")
 	}
 	table := &table{}
-	if err := c.client.Session().Get(ctx, path.Join(restID, "learnedInfo/1/table/1"), table); err != nil {
+	if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
 		return nil, errors.Wrap(err, "failed to get learned info")
 	}
 	return table, nil

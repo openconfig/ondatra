@@ -31,20 +31,10 @@ type AvailableHardware struct {
 	Chassis       []*AvailableHardwareChassis `json:"chassis"`
 
 	VirtualChassis *AvailableHardwareVirtualChassis `json:"virtualChassis,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardware) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardware) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardware) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -79,20 +69,10 @@ type AvailableHardwareAggregation struct {
 	// Mode: TBD
 
 	Mode *string `json:"mode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareAggregation) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareAggregation) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareAggregation) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -113,20 +93,10 @@ type AvailableHardwareCard struct {
 	AggregationMode *string                         `json:"aggregationMode,omitempty"`
 	Aggregation     []*AvailableHardwareAggregation `json:"aggregation"`
 	Port            []*AvailableHardwarePort        `json:"port"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareCard) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareCard) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareCard) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -182,20 +152,10 @@ type AvailableHardwareChassis struct {
 
 	SequenceId *float32                 `json:"sequenceId,omitempty"`
 	Card       []*AvailableHardwareCard `json:"card"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareChassis) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareChassis) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareChassis) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -224,20 +184,10 @@ type AvailableHardwareDiscoveredAppliance struct {
 
 	Xpath               *XPath                                  `json:"xpath,omitempty"`
 	DiscoveredInterface []*AvailableHardwareDiscoveredInterface `json:"discoveredInterface"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareDiscoveredAppliance) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareDiscoveredAppliance) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareDiscoveredAppliance) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -265,20 +215,10 @@ type AvailableHardwareDiscoveredInterface struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareDiscoveredInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareDiscoveredInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareDiscoveredInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -309,20 +249,10 @@ type AvailableHardwareHypervisor struct {
 	// User: TBD
 
 	User *string `json:"user,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareHypervisor) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareHypervisor) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareHypervisor) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -351,20 +281,10 @@ type AvailableHardwareIxVmCard struct {
 
 	ManagementIp *string                      `json:"managementIp,omitempty"`
 	IxVmPort     []*AvailableHardwareIxVmPort `json:"ixVmPort"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareIxVmCard) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareIxVmCard) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareIxVmCard) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -413,20 +333,10 @@ type AvailableHardwareIxVmPort struct {
 	// PromiscMode: TBD
 
 	PromiscMode *bool `json:"promiscMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareIxVmPort) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareIxVmPort) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareIxVmPort) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -445,20 +355,10 @@ type AvailableHardwareParameter struct {
 	// CurrentValue: Parameter UI Display Value
 
 	CurrentValue *string `json:"currentValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -475,20 +375,10 @@ type AvailableHardwarePort struct {
 
 	Xpath       *XPath                          `json:"xpath,omitempty"`
 	TapSettings []*AvailableHardwareTapSettings `json:"tapSettings"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwarePort) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwarePort) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwarePort) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -517,20 +407,10 @@ type AvailableHardwareTapSettings struct {
 
 	Xpath     *XPath                        `json:"xpath,omitempty"`
 	Parameter []*AvailableHardwareParameter `json:"parameter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareTapSettings) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareTapSettings) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareTapSettings) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -573,20 +453,10 @@ type AvailableHardwareVirtualChassis struct {
 	DiscoveredAppliance []*AvailableHardwareDiscoveredAppliance `json:"discoveredAppliance"`
 	Hypervisor          []*AvailableHardwareHypervisor          `json:"hypervisor"`
 	IxVmCard            []*AvailableHardwareIxVmCard            `json:"ixVmCard"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *AvailableHardwareVirtualChassis) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *AvailableHardwareVirtualChassis) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *AvailableHardwareVirtualChassis) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -648,20 +518,10 @@ type Globals struct {
 	Testworkflow *GlobalsTestworkflow `json:"testworkflow,omitempty"`
 
 	Topology *GlobalsTopology `json:"topology,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Globals) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Globals) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Globals) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -713,20 +573,10 @@ type GlobalsAction struct {
 
 	Name  *string               `json:"name,omitempty"`
 	Field []*GlobalsActionField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsAction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsAction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsAction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -786,20 +636,10 @@ type GlobalsActionField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: Field value.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsActionField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsActionField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsActionField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -836,20 +676,10 @@ type GlobalsActionSet struct {
 
 	Name   *string          `json:"name,omitempty"`
 	Action []*GlobalsAction `json:"action"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsActionSet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsActionSet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsActionSet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -884,20 +714,10 @@ type GlobalsActionTemplate struct {
 
 	SavedInVersion *string          `json:"savedInVersion,omitempty"`
 	Action         []*GlobalsAction `json:"action"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsActionTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsActionTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsActionTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -928,20 +748,10 @@ type GlobalsActionsTemplate struct {
 	ActionTemplate []*GlobalsActionTemplate `json:"actionTemplate"`
 
 	Predefined *GlobalsPredefined `json:"predefined,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsActionsTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsActionsTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsActionsTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -985,20 +795,10 @@ type GlobalsAncp struct {
 
 	StopRate  *GlobalsStopRate    `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsAncp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsAncp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsAncp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1053,20 +853,10 @@ type GlobalsArpRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsArpRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsArpRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsArpRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1105,20 +895,10 @@ type GlobalsBfdRouter struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBfdRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBfdRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBfdRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1237,20 +1017,10 @@ type GlobalsBgpIpv4Peer struct {
 
 	StopRate  *GlobalsBgpIpv4PeerStopRate `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor         `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv4Peer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv4Peer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv4Peer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1525,20 +1295,10 @@ type GlobalsBgpIpv4PeerStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv4PeerStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv4PeerStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv4PeerStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1578,20 +1338,10 @@ type GlobalsBgpIpv4PeerStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv4PeerStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv4PeerStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv4PeerStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -1725,20 +1475,10 @@ type GlobalsBgpIpv6Peer struct {
 
 	StopRate  *GlobalsBgpIpv6PeerStopRate `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor         `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv6Peer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv6Peer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv6Peer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2013,20 +1753,10 @@ type GlobalsBgpIpv6PeerStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv6PeerStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv6PeerStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv6PeerStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2066,20 +1796,10 @@ type GlobalsBgpIpv6PeerStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBgpIpv6PeerStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBgpIpv6PeerStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBgpIpv6PeerStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2122,20 +1842,10 @@ type GlobalsBondedGre struct {
 	// WaitForLTE: If enabled then DSL will wait for LTE to start, otherwise DSL can start anytime.
 	WaitForLTE *Multivalue         `json:"waitForLTE,omitempty"`
 	TlvEditor  []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsBondedGre) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsBondedGre) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsBondedGre) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2196,20 +1906,10 @@ type GlobalsCfmBridge struct {
 	StartRate *GlobalsCfmBridgeStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsCfmBridgeStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsCfmBridge) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsCfmBridge) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsCfmBridge) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2257,20 +1957,10 @@ type GlobalsCfmBridgeStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsCfmBridgeStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsCfmBridgeStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsCfmBridgeStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2310,20 +2000,10 @@ type GlobalsCfmBridgeStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsCfmBridgeStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsCfmBridgeStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsCfmBridgeStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2370,20 +2050,10 @@ type GlobalsContainer struct {
 
 	Name   *string          `json:"name,omitempty"`
 	Object []*GlobalsObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsContainer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsContainer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsContainer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2412,20 +2082,10 @@ type GlobalsDefaults struct {
 
 	Xpath    *XPath             `json:"xpath,omitempty"`
 	Template []*GlobalsTemplate `json:"template"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDefaults) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDefaults) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDefaults) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2481,20 +2141,10 @@ type GlobalsDhcpv4client struct {
 
 	StopRate  *GlobalsStopRate    `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv4client) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv4client) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv4client) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2583,20 +2233,10 @@ type GlobalsDhcpv4relayAgent struct {
 
 	Name      *string             `json:"name,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv4relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv4relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv4relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2642,20 +2282,10 @@ type GlobalsDhcpv4server struct {
 
 	ReconfigureRate *GlobalsReconfigureRate `json:"reconfigureRate,omitempty"`
 	TlvEditor       []*GlobalsTlvEditor     `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv4server) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv4server) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv4server) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2767,20 +2397,10 @@ type GlobalsDhcpv6client struct {
 
 	StopRate  *GlobalsStopRate    `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv6client) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv6client) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv6client) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2924,20 +2544,10 @@ type GlobalsDhcpv6relayAgent struct {
 
 	Name      *string             `json:"name,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv6relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv6relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv6relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -2981,20 +2591,10 @@ type GlobalsDhcpv6server struct {
 
 	ReconfigureRate *GlobalsReconfigureRate `json:"reconfigureRate,omitempty"`
 	TlvEditor       []*GlobalsTlvEditor     `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDhcpv6server) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDhcpv6server) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDhcpv6server) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3104,20 +2704,10 @@ type GlobalsDotOneX struct {
 	UseVlanIdentify *Multivalue `json:"useVlanIdentify,omitempty"`
 	// WaitBeforeRun: The number of secs to wait before running the protocol.Maximum wait is 500
 	WaitBeforeRun *Multivalue `json:"waitBeforeRun,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsDotOneX) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsDotOneX) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsDotOneX) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3269,20 +2859,10 @@ type GlobalsECpriRe struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsECpriRe) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsECpriRe) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsECpriRe) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3329,20 +2909,10 @@ type GlobalsECpriRec struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsECpriRec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsECpriRec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsECpriRec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3389,20 +2959,10 @@ type GlobalsEcpriRec struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEcpriRec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEcpriRec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEcpriRec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3449,20 +3009,10 @@ type GlobalsEre struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEre) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEre) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEre) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3505,20 +3055,10 @@ type GlobalsEsmc struct {
 	StartRateAndFlowControl *GlobalsStartRateAndFlowControl `json:"startRateAndFlowControl,omitempty"`
 
 	StopRateAndFlowControl *GlobalsStopRateAndFlowControl `json:"stopRateAndFlowControl,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEsmc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEsmc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEsmc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3549,20 +3089,10 @@ type GlobalsEthernet struct {
 	StartRate *GlobalsEthernetStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsEthernetStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEthernet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEthernet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEthernet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3595,20 +3125,10 @@ type GlobalsEthernetStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEthernetStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEthernetStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEthernetStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3648,20 +3168,10 @@ type GlobalsEthernetStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsEthernetStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsEthernetStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsEthernetStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3719,20 +3229,10 @@ type GlobalsField struct {
 	// Value: Value represented as a multivalue object
 	Value       *Multivalue           `json:"value,omitempty"`
 	Restriction []*GlobalsRestriction `json:"restriction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3768,20 +3268,10 @@ type GlobalsFlowAggrMatchTemplate struct {
 	MatchTemplate []*GlobalsMatchTemplate `json:"matchTemplate"`
 
 	Predefined *GlobalsPredefined `json:"predefined,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsFlowAggrMatchTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsFlowAggrMatchTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsFlowAggrMatchTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3816,20 +3306,10 @@ type GlobalsFlowSetTemplate struct {
 	FlowTemplate []*GlobalsFlowTemplate `json:"flowTemplate"`
 
 	Predefined *GlobalsPredefined `json:"predefined,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsFlowSetTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsFlowSetTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsFlowSetTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3864,20 +3344,10 @@ type GlobalsFlowStatMatchTemplate struct {
 	MatchTemplate []*GlobalsMatchTemplate `json:"matchTemplate"`
 
 	Predefined *GlobalsPredefined `json:"predefined,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsFlowStatMatchTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsFlowStatMatchTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsFlowStatMatchTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3916,20 +3386,10 @@ type GlobalsFlowTemplate struct {
 
 	SavedInVersion *string               `json:"savedInVersion,omitempty"`
 	MatchAction    []*GlobalsMatchAction `json:"matchAction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsFlowTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsFlowTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsFlowTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -3965,20 +3425,10 @@ type GlobalsGeneve struct {
 
 	StopRate  *GlobalsStopRate    `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsGeneve) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsGeneve) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsGeneve) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4021,20 +3471,10 @@ type GlobalsGreoipv4 struct {
 	StartRate *GlobalsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsGreoipv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsGreoipv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsGreoipv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4065,20 +3505,10 @@ type GlobalsGreoipv6 struct {
 	StartRate *GlobalsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsGreoipv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsGreoipv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsGreoipv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4117,20 +3547,10 @@ type GlobalsIgmpHost struct {
 	RatePerInterval *Multivalue `json:"ratePerInterval,omitempty"`
 	// UnicastMode: Unicast Mode
 	UnicastMode *Multivalue `json:"unicastMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIgmpHost) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIgmpHost) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIgmpHost) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4187,20 +3607,10 @@ type GlobalsIgmpQuerier struct {
 	TimePeriod *Multivalue `json:"timePeriod,omitempty"`
 	// UnicastMode: Unicast Mode
 	UnicastMode *Multivalue `json:"unicastMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIgmpQuerier) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIgmpQuerier) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIgmpQuerier) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4253,20 +3663,10 @@ type GlobalsInstruction struct {
 	Name      *string                    `json:"name,omitempty"`
 	ActionSet []*GlobalsActionSet        `json:"actionSet"`
 	Field     []*GlobalsInstructionField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsInstruction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsInstruction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsInstruction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4338,20 +3738,10 @@ type GlobalsInstructionField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: Field value.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsInstructionField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsInstructionField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsInstructionField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4388,20 +3778,10 @@ type GlobalsInstructions struct {
 
 	Name        *string               `json:"name,omitempty"`
 	Instruction []*GlobalsInstruction `json:"instruction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsInstructions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsInstructions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsInstructions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4452,20 +3832,10 @@ type GlobalsIpv4 struct {
 	StartRate *GlobalsIpv4StartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIpv4StopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4537,20 +3907,10 @@ type GlobalsIpv4StartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv4StartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv4StartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv4StartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4590,20 +3950,10 @@ type GlobalsIpv4StopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv4StopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv4StopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv4StopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4659,20 +4009,10 @@ type GlobalsIpv6 struct {
 	StartRate *GlobalsIpv6StartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIpv6StopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4751,20 +4091,10 @@ type GlobalsIpv6Autoconfiguration struct {
 	StartRate *GlobalsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv6Autoconfiguration) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv6Autoconfiguration) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv6Autoconfiguration) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4805,20 +4135,10 @@ type GlobalsIpv6StartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv6StartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv6StartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv6StartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4858,20 +4178,10 @@ type GlobalsIpv6StopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIpv6StopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIpv6StopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIpv6StopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4921,20 +4231,10 @@ type GlobalsIsisFabricPathRouter struct {
 	StartRate *GlobalsIsisFabricPathRouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIsisFabricPathRouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisFabricPathRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisFabricPathRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisFabricPathRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -4997,20 +4297,10 @@ type GlobalsIsisFabricPathRouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisFabricPathRouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisFabricPathRouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisFabricPathRouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5050,20 +4340,10 @@ type GlobalsIsisFabricPathRouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisFabricPathRouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisFabricPathRouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisFabricPathRouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5157,20 +4437,10 @@ type GlobalsIsisL3Router struct {
 	StartRate *GlobalsIsisL3RouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIsisL3RouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisL3Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisL3Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisL3Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5343,20 +4613,10 @@ type GlobalsIsisL3RouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisL3RouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisL3RouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisL3RouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5396,20 +4656,10 @@ type GlobalsIsisL3RouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisL3RouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisL3RouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisL3RouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5459,20 +4709,10 @@ type GlobalsIsisSpbRouter struct {
 	StartRate *GlobalsIsisSpbRouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIsisSpbRouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisSpbRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisSpbRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisSpbRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5535,20 +4775,10 @@ type GlobalsIsisSpbRouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisSpbRouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisSpbRouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisSpbRouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5588,20 +4818,10 @@ type GlobalsIsisSpbRouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisSpbRouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisSpbRouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisSpbRouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5651,20 +4871,10 @@ type GlobalsIsisTrillRouter struct {
 	StartRate *GlobalsIsisTrillRouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsIsisTrillRouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisTrillRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisTrillRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisTrillRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5727,20 +4937,10 @@ type GlobalsIsisTrillRouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisTrillRouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisTrillRouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisTrillRouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5780,20 +4980,10 @@ type GlobalsIsisTrillRouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIsisTrillRouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIsisTrillRouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIsisTrillRouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5824,20 +5014,10 @@ type GlobalsIxnet struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsIxnet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsIxnet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsIxnet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5858,20 +5038,10 @@ type GlobalsLac struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLac) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLac) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLac) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5895,20 +5065,10 @@ type GlobalsLacp struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLacp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLacp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLacp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5927,20 +5087,10 @@ type GlobalsLagportlacp struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLagportlacp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLagportlacp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLagportlacp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -5959,20 +5109,10 @@ type GlobalsLagportstaticlag struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLagportstaticlag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLagportstaticlag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLagportstaticlag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6001,20 +5141,10 @@ type GlobalsLdpBasicRouter struct {
 	StartRate *GlobalsLdpBasicRouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsLdpBasicRouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6062,20 +5192,10 @@ type GlobalsLdpBasicRouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6115,20 +5235,10 @@ type GlobalsLdpBasicRouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6172,20 +5282,10 @@ type GlobalsLdpBasicRouterV6 struct {
 	StartRate *GlobalsLdpBasicRouterV6StartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsLdpBasicRouterV6StopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouterV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouterV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouterV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6233,20 +5333,10 @@ type GlobalsLdpBasicRouterV6StartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouterV6StartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouterV6StartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouterV6StartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6286,20 +5376,10 @@ type GlobalsLdpBasicRouterV6StopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpBasicRouterV6StopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpBasicRouterV6StopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpBasicRouterV6StopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6343,20 +5423,10 @@ type GlobalsLdpTargetedRouter struct {
 	StartRate *GlobalsLdpTargetedRouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsLdpTargetedRouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6404,20 +5474,10 @@ type GlobalsLdpTargetedRouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6457,20 +5517,10 @@ type GlobalsLdpTargetedRouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6514,20 +5564,10 @@ type GlobalsLdpTargetedRouterV6 struct {
 	StartRate *GlobalsLdpTargetedRouterV6StartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsLdpTargetedRouterV6StopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouterV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouterV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouterV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6575,20 +5615,10 @@ type GlobalsLdpTargetedRouterV6StartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouterV6StartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouterV6StartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouterV6StartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6628,20 +5658,10 @@ type GlobalsLdpTargetedRouterV6StopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLdpTargetedRouterV6StopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLdpTargetedRouterV6StopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLdpTargetedRouterV6StopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6696,20 +5716,10 @@ type GlobalsLength struct {
 	// Value: Value represented as a multivalue object
 	Value       *Multivalue           `json:"value,omitempty"`
 	Restriction []*GlobalsRestriction `json:"restriction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLength) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLength) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLength) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6750,20 +5760,10 @@ type GlobalsLicensing struct {
 	// Tier: Set or get the tier level, using the tier ID. Available IDs are: for mode = 'subscription'/'mixed': 'tier0','tier1','tier2','tier3','tier3-10g','tier-IxVerify-Cadence','tier-IxVerify-Mentor','tier-IxVerify-Synopsys', and for mode = 'perpetual': 'tier3-2014','tier3-10g-2017'.
 
 	Tier *string `json:"tier,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLicensing) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLicensing) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLicensing) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6783,20 +5783,10 @@ type GlobalsLightweightDhcpv6relayAgent struct {
 
 	Name      *string             `json:"name,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLightweightDhcpv6relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLightweightDhcpv6relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLightweightDhcpv6relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6829,20 +5819,10 @@ type GlobalsLns struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsLns) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsLns) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsLns) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6881,20 +5861,10 @@ type GlobalsMacsec struct {
 	StartRate *GlobalsMacsecStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsMacsecStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMacsec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMacsec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMacsec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -6947,20 +5917,10 @@ type GlobalsMacsecStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMacsecStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMacsecStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMacsecStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7000,20 +5960,10 @@ type GlobalsMacsecStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMacsecStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMacsecStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMacsecStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7062,20 +6012,10 @@ type GlobalsMatchAction struct {
 
 	Instructions  *GlobalsInstructions    `json:"instructions,omitempty"`
 	MatchCriteria []*GlobalsMatchCriteria `json:"matchCriteria"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMatchAction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMatchAction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMatchAction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7124,20 +6064,10 @@ type GlobalsMatchCriteria struct {
 	Name          *string                      `json:"name,omitempty"`
 	Field         []*GlobalsMatchCriteriaField `json:"field"`
 	MatchCriteria []*GlobalsMatchCriteria      `json:"matchCriteria"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMatchCriteria) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMatchCriteria) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMatchCriteria) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7209,20 +6139,10 @@ type GlobalsMatchCriteriaField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: Field value.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMatchCriteriaField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMatchCriteriaField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMatchCriteriaField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7250,20 +6170,10 @@ type GlobalsMatchTemplate struct {
 
 	SavedInVersion *string                 `json:"savedInVersion,omitempty"`
 	MatchCriteria  []*GlobalsMatchCriteria `json:"matchCriteria"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMatchTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMatchTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMatchTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7296,20 +6206,10 @@ type GlobalsMka struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMka) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMka) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMka) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7345,20 +6245,10 @@ type GlobalsMldHost struct {
 	TrafficClass *Multivalue `json:"trafficClass,omitempty"`
 	// UnicastMode: Unicast Mode
 	UnicastMode *Multivalue `json:"unicastMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMldHost) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMldHost) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMldHost) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7415,20 +6305,10 @@ type GlobalsMldQuerier struct {
 	TimePeriod *Multivalue `json:"timePeriod,omitempty"`
 	// UnicastMode: Unicast Mode
 	UnicastMode *Multivalue `json:"unicastMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMldQuerier) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMldQuerier) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMldQuerier) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7471,20 +6351,10 @@ type GlobalsMsrpListener struct {
 	StartRate *GlobalsMsrpListenerStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsMsrpListenerStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpListener) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpListener) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpListener) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7517,20 +6387,10 @@ type GlobalsMsrpListenerStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpListenerStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpListenerStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpListenerStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7570,20 +6430,10 @@ type GlobalsMsrpListenerStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpListenerStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpListenerStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpListenerStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7621,20 +6471,10 @@ type GlobalsMsrpTalker struct {
 	StartRate *GlobalsMsrpTalkerStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsMsrpTalkerStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpTalker) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpTalker) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpTalker) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7667,20 +6507,10 @@ type GlobalsMsrpTalkerStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpTalkerStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpTalkerStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpTalkerStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7720,20 +6550,10 @@ type GlobalsMsrpTalkerStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsMsrpTalkerStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsMsrpTalkerStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsMsrpTalkerStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7771,20 +6591,10 @@ type GlobalsNetconfClient struct {
 	StartRate *GlobalsNetconfClientStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsNetconfClientStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfClient) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfClient) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfClient) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7817,20 +6627,10 @@ type GlobalsNetconfClientStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfClientStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfClientStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfClientStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7870,20 +6670,10 @@ type GlobalsNetconfClientStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfClientStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfClientStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfClientStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7921,20 +6711,10 @@ type GlobalsNetconfServer struct {
 	StartRate *GlobalsNetconfServerStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsNetconfServerStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfServer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfServer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfServer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -7967,20 +6747,10 @@ type GlobalsNetconfServerStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfServerStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfServerStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfServerStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8020,20 +6790,10 @@ type GlobalsNetconfServerStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNetconfServerStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNetconfServerStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNetconfServerStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8075,20 +6835,10 @@ type GlobalsNsRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNsRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNsRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNsRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8131,20 +6881,10 @@ type GlobalsNtpclock struct {
 	StartRate *GlobalsNtpclockStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsNtpclockStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNtpclock) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNtpclock) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNtpclock) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8177,20 +6917,10 @@ type GlobalsNtpclockStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNtpclockStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNtpclockStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNtpclockStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8230,20 +6960,10 @@ type GlobalsNtpclockStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsNtpclockStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsNtpclockStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsNtpclockStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8283,20 +7003,10 @@ type GlobalsObject struct {
 	Field *GlobalsField `json:"field,omitempty"`
 
 	SubTlv *GlobalsSubTlv `json:"subTlv,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsObject) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsObject) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsObject) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8333,20 +7043,10 @@ type GlobalsOpenFlowChannel struct {
 	FlowStatMatchTemplate *GlobalsFlowStatMatchTemplate `json:"flowStatMatchTemplate,omitempty"`
 
 	PacketOutActionTemplate *GlobalsPacketOutActionTemplate `json:"packetOutActionTemplate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOpenFlowChannel) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOpenFlowChannel) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOpenFlowChannel) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8381,20 +7081,10 @@ type GlobalsOpenFlowController struct {
 	ActionsTemplate *GlobalsActionsTemplate `json:"actionsTemplate,omitempty"`
 
 	FlowSetTemplate *GlobalsFlowSetTemplate `json:"flowSetTemplate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOpenFlowController) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOpenFlowController) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOpenFlowController) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8435,20 +7125,10 @@ type GlobalsOspfv2Router struct {
 	StartRate *GlobalsOspfv2RouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsOspfv2RouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv2Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv2Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv2Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8506,20 +7186,10 @@ type GlobalsOspfv2RouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv2RouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv2RouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv2RouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8559,20 +7229,10 @@ type GlobalsOspfv2RouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv2RouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv2RouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv2RouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8612,20 +7272,10 @@ type GlobalsOspfv3Router struct {
 	StartRate *GlobalsOspfv3RouterStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsOspfv3RouterStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv3Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv3Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv3Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8663,20 +7313,10 @@ type GlobalsOspfv3RouterStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv3RouterStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv3RouterStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv3RouterStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8716,20 +7356,10 @@ type GlobalsOspfv3RouterStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOspfv3RouterStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOspfv3RouterStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOspfv3RouterStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8763,20 +7393,10 @@ type GlobalsOvsdbcontroller struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOvsdbcontroller) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOvsdbcontroller) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOvsdbcontroller) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8795,20 +7415,10 @@ type GlobalsOvsdbserver struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsOvsdbserver) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsOvsdbserver) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsOvsdbserver) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8827,20 +7437,10 @@ type GlobalsPacketOutActionTemplate struct {
 	ActionTemplate []*GlobalsActionTemplate `json:"actionTemplate"`
 
 	Predefined *GlobalsPredefined `json:"predefined,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPacketOutActionTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPacketOutActionTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPacketOutActionTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8887,20 +7487,10 @@ type GlobalsPcc struct {
 	StartRate *GlobalsPccStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsPccStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPcc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPcc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPcc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -8953,20 +7543,10 @@ type GlobalsPccStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPccStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPccStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPccStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9006,20 +7586,10 @@ type GlobalsPccStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPccStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPccStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPccStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9059,20 +7629,10 @@ type GlobalsPce struct {
 	StartRate *GlobalsPceStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsPceStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPce) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPce) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPce) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9110,20 +7670,10 @@ type GlobalsPceStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPceStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPceStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPceStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9163,20 +7713,10 @@ type GlobalsPceStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPceStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPceStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPceStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9228,20 +7768,10 @@ type GlobalsPimRouter struct {
 	RegisterMessagePerInterval *Multivalue `json:"registerMessagePerInterval,omitempty"`
 	// RegisterStopMessagePerInterval: Register Stop Messages Per Interval
 	RegisterStopMessagePerInterval *Multivalue `json:"registerStopMessagePerInterval,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9313,20 +7843,10 @@ type GlobalsPortDownRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPortDownRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPortDownRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPortDownRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9373,20 +7893,10 @@ type GlobalsPortUpRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPortUpRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPortUpRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPortUpRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9438,20 +7948,10 @@ type GlobalsPppoxclient struct {
 
 	StopRate  *GlobalsStopRate    `json:"stopRate,omitempty"`
 	TlvEditor []*GlobalsTlvEditor `json:"tlvEditor"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPppoxclient) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPppoxclient) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPppoxclient) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9509,20 +8009,10 @@ type GlobalsPppoxserver struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPppoxserver) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPppoxserver) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPppoxserver) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9539,20 +8029,10 @@ type GlobalsPredefined struct {
 
 	Xpath         *XPath                  `json:"xpath,omitempty"`
 	MatchTemplate []*GlobalsMatchTemplate `json:"matchTemplate"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPredefined) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPredefined) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPredefined) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9645,20 +8125,10 @@ type GlobalsPreferences struct {
 	// TransmitMode: Set the transmit mode in Default Port settings
 
 	TransmitMode *string `json:"transmitMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPreferences) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPreferences) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPreferences) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9691,20 +8161,10 @@ type GlobalsPtp struct {
 	StartRate *GlobalsPtpStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsPtpStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPtp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPtp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPtp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9762,20 +8222,10 @@ type GlobalsPtpStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPtpStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPtpStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPtpStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9815,20 +8265,10 @@ type GlobalsPtpStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsPtpStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsPtpStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsPtpStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9870,20 +8310,10 @@ type GlobalsReconfigureRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsReconfigureRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsReconfigureRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsReconfigureRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9925,20 +8355,10 @@ type GlobalsRestriction struct {
 	// SingleValue: Restricts the field to single value pattern without overlays
 
 	SingleValue *bool `json:"singleValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRestriction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRestriction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRestriction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -9965,20 +8385,10 @@ type GlobalsRsRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRsRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRsRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRsRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10017,20 +8427,10 @@ type GlobalsRsvpteIf struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRsvpteIf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRsvpteIf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRsvpteIf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10055,20 +8455,10 @@ type GlobalsRsvpteLsps struct {
 	StartRate *GlobalsRsvpteLspsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsRsvpteLspsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRsvpteLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRsvpteLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRsvpteLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10106,20 +8496,10 @@ type GlobalsRsvpteLspsStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRsvpteLspsStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRsvpteLspsStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRsvpteLspsStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10159,20 +8539,10 @@ type GlobalsRsvpteLspsStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsRsvpteLspsStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsRsvpteLspsStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsRsvpteLspsStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10218,20 +8588,10 @@ type GlobalsSessionLifetime struct {
 	ScaleMode *string `json:"scaleMode,omitempty"`
 	// UnlimitedRestarts: Allows each session to always be automatically restarted.
 	UnlimitedRestarts *Multivalue `json:"unlimitedRestarts,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsSessionLifetime) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsSessionLifetime) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsSessionLifetime) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10288,20 +8648,10 @@ type GlobalsStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10348,20 +8698,10 @@ type GlobalsStartRateAndFlowControl struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStartRateAndFlowControl) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStartRateAndFlowControl) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStartRateAndFlowControl) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10400,20 +8740,10 @@ type GlobalsStaticLag struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStaticLag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStaticLag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStaticLag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10436,20 +8766,10 @@ type GlobalsStaticMacsec struct {
 	StartRate *GlobalsStaticMacsecStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStaticMacsecStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStaticMacsec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStaticMacsec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStaticMacsec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10482,20 +8802,10 @@ type GlobalsStaticMacsecStartRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStaticMacsecStartRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStaticMacsecStartRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStaticMacsecStartRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10535,20 +8845,10 @@ type GlobalsStaticMacsecStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStaticMacsecStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStaticMacsecStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStaticMacsecStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10590,20 +8890,10 @@ type GlobalsStopRate struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStopRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStopRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStopRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10650,20 +8940,10 @@ type GlobalsStopRateAndFlowControl struct {
 	// ScaleMode: Indicates whether the control is specified per port or per device group.
 
 	ScaleMode *string `json:"scaleMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsStopRateAndFlowControl) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsStopRateAndFlowControl) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsStopRateAndFlowControl) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10720,20 +9000,10 @@ type GlobalsSubTlv struct {
 	Type_ *GlobalsType `json:"type,omitempty"`
 
 	Value *GlobalsValue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsSubTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsSubTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsSubTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10765,20 +9035,10 @@ type GlobalsTemplate struct {
 
 	Name *string       `json:"name,omitempty"`
 	Tlv  []*GlobalsTlv `json:"tlv"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10806,20 +9066,10 @@ type GlobalsTestworkflow struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsTestworkflow) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsTestworkflow) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsTestworkflow) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10858,20 +9108,10 @@ type GlobalsTlv struct {
 	Type_ *GlobalsType `json:"type,omitempty"`
 
 	Value *GlobalsValue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -10901,20 +9141,10 @@ type GlobalsTlvEditor struct {
 	Xpath    *XPath             `json:"xpath,omitempty"`
 	Defaults []*GlobalsDefaults `json:"defaults"`
 	Template []*GlobalsTemplate `json:"template"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsTlvEditor) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsTlvEditor) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsTlvEditor) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11092,20 +9322,10 @@ type GlobalsTopology struct {
 	Vxlan *GlobalsVxlan `json:"vxlan,omitempty"`
 
 	Vxlanv6 *GlobalsVxlanv6 `json:"vxlanv6,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsTopology) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsTopology) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsTopology) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11435,20 +9655,10 @@ type GlobalsType struct {
 
 	Name   *string          `json:"name,omitempty"`
 	Object []*GlobalsObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsType) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsType) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsType) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11480,20 +9690,10 @@ type GlobalsValue struct {
 
 	Name   *string          `json:"name,omitempty"`
 	Object []*GlobalsObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsValue) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsValue) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsValue) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11536,20 +9736,10 @@ type GlobalsVxlan struct {
 	StartRate *GlobalsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsVxlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsVxlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsVxlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11606,20 +9796,10 @@ type GlobalsVxlanv6 struct {
 	StartRate *GlobalsStartRate `json:"startRate,omitempty"`
 
 	StopRate *GlobalsStopRate `json:"stopRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *GlobalsVxlanv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *GlobalsVxlanv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *GlobalsVxlanv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11671,20 +9851,10 @@ type Ixnetwork struct {
 
 	Traffic *Traffic `json:"traffic,omitempty"`
 	Vport   []*Vport `json:"vport"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Ixnetwork) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Ixnetwork) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Ixnetwork) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11787,20 +9957,10 @@ type Lag struct {
 	LagMode *LagLagMode `json:"lagMode,omitempty"`
 
 	ProtocolStack *LagProtocolStack `json:"protocolStack,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Lag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Lag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Lag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11829,20 +9989,10 @@ type LagConnector struct {
 	ConnectedTo *string `json:"connectedTo,omitempty"`
 	// ConnectedToRefs: Track refs for ConnectedTo.
 	ConnectedToRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagConnector) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagConnector) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagConnector) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -11897,20 +10047,10 @@ type LagEthernet struct {
 	Vlan             []*LagVlan           `json:"vlan"`
 
 	VpnParameter *LagVpnParameter `json:"vpnParameter,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagEthernet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagEthernet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagEthernet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12003,20 +10143,10 @@ type LagLagMode struct {
 	Xpath *XPath `json:"xpath,omitempty"`
 	// LagProtocol: LAG Protocol
 	LagProtocol *Multivalue `json:"lagProtocol,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagLagMode) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagLagMode) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagLagMode) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12097,20 +10227,10 @@ type LagLagportlacp struct {
 	SupportRespondingToMarker *Multivalue `json:"supportRespondingToMarker,omitempty"`
 	// SynchronizationFlag: Synchronization Flag
 	SynchronizationFlag *Multivalue `json:"synchronizationFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagLagportlacp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagLagportlacp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagLagportlacp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12259,20 +10379,10 @@ type LagLagportstaticlag struct {
 	StackedLayers []string `json:"stackedLayers"`
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagLagportstaticlag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagLagportstaticlag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagLagportstaticlag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12303,20 +10413,10 @@ type LagPbbEVpnParameter struct {
 	// UsePbbEVpnParameters: Flag to determine whether optional PBB EVPN parameters are provided.
 
 	UsePbbEVpnParameters *bool `json:"usePbbEVpnParameters,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagPbbEVpnParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagPbbEVpnParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagPbbEVpnParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12346,20 +10446,10 @@ type LagProtocolStack struct {
 
 	Name     *string        `json:"name,omitempty"`
 	Ethernet []*LagEthernet `json:"ethernet"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagProtocolStack) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagProtocolStack) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagProtocolStack) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12400,20 +10490,10 @@ type LagTag struct {
 	// Name: specifies the name of the tag the entity will be part of
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagTag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagTag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagTag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12443,20 +10523,10 @@ type LagVlan struct {
 	Tpid *Multivalue `json:"tpid,omitempty"`
 	// VlanId: 12-bit VLAN ID in the VLAN tag.
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagVlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagVlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagVlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12492,20 +10562,10 @@ type LagVpnParameter struct {
 	// UseVpnParameters: Flag to determine whether optional VPN parameters are provided.
 
 	UseVpnParameters *bool `json:"useVpnParameters,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LagVpnParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LagVpnParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LagVpnParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12543,20 +10603,10 @@ type Locations struct {
 	SequenceId               *float32                             `json:"sequenceId,omitempty"`
 	FrontPanelResourceGroups []*LocationsFrontPanelResourceGroups `json:"frontPanelResourceGroups"`
 	Ports                    []*LocationsPorts                    `json:"ports"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Locations) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Locations) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Locations) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12596,20 +10646,10 @@ type LocationsFrontPanelResourceGroups struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LocationsFrontPanelResourceGroups) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LocationsFrontPanelResourceGroups) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LocationsFrontPanelResourceGroups) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12625,20 +10665,10 @@ type LocationsPorts struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *LocationsPorts) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *LocationsPorts) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *LocationsPorts) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12688,20 +10718,10 @@ type Multivalue struct {
 	Subset *MultivalueSubset `json:"subset,omitempty"`
 
 	ValueList *MultivalueValueList `json:"valueList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Multivalue) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Multivalue) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Multivalue) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12796,20 +10816,10 @@ type MultivalueAlternate struct {
 	// Value: The starting value used for the alternating pattern
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueAlternate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueAlternate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueAlternate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12834,20 +10844,10 @@ type MultivalueCounter struct {
 	// Step: The step value used in the counter pattern
 
 	Step *string `json:"step,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueCounter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueCounter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueCounter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12870,20 +10870,10 @@ type MultivalueCustom struct {
 
 	Step      *string                `json:"step,omitempty"`
 	Increment []*MultivalueIncrement `json:"increment"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueCustom) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueCustom) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueCustom) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12919,20 +10909,10 @@ type MultivalueCustomDistributed struct {
 	Mode *string `json:"mode,omitempty"`
 	// Values: An array of structures where each structure is a value and a weight. The type of weight is determined by the algorithm
 	Values []map[string]interface{} `json:"values,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueCustomDistributed) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueCustomDistributed) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueCustomDistributed) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12951,20 +10931,10 @@ type MultivalueDistributed struct {
 	// Value: The starting value used for the distributed pattern
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueDistributed) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueDistributed) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueDistributed) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -12987,20 +10957,10 @@ type MultivalueIncrement struct {
 
 	Value     *string                `json:"value,omitempty"`
 	Increment []*MultivalueIncrement `json:"increment"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueIncrement) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueIncrement) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueIncrement) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13034,20 +10994,10 @@ type MultivalueNest struct {
 	// Step: The value that will be used when stepping across the owner
 
 	Step *string `json:"step,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueNest) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueNest) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueNest) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13078,20 +11028,10 @@ type MultivalueOverlay struct {
 	// ValueStep: The step value of the overlay
 
 	ValueStep *string `json:"valueStep,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueOverlay) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueOverlay) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueOverlay) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13107,20 +11047,10 @@ type MultivalueRandom struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated otherwise a new resource will be created
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueRandom) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueRandom) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueRandom) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13148,20 +11078,10 @@ type MultivalueRepeatableRandom struct {
 	// Seed: The seed value
 
 	Seed *float32 `json:"seed,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueRepeatableRandom) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueRepeatableRandom) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueRepeatableRandom) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13189,20 +11109,10 @@ type MultivalueRepeatableRandomRange struct {
 	// Step: The step value
 
 	Step *string `json:"step,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueRepeatableRandomRange) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueRepeatableRandomRange) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueRepeatableRandomRange) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13220,20 +11130,10 @@ type MultivalueShared struct {
 	Xpath *XPath `json:"xpath,omitempty"`
 	// Source: The source object reference that this shared value is based on.
 	Source *Multivalue `json:"source,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueShared) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueShared) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueShared) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13257,20 +11157,10 @@ type MultivalueSingleValue struct {
 	// Value: The value used for the single value pattern
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueSingleValue) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueSingleValue) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueSingleValue) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13289,20 +11179,10 @@ type MultivalueString struct {
 	// Pattern: A custom string pattern
 
 	Pattern *string `json:"pattern,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueString) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueString) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueString) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13338,20 +11218,10 @@ type MultivalueSubset struct {
 	// Step: The step into the source
 
 	Step *float32 `json:"step,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueSubset) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueSubset) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueSubset) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13374,20 +11244,10 @@ type MultivalueValueList struct {
 	Xpath *XPath `json:"xpath,omitempty"`
 	// Values: A list of values representing the value list pattern
 	Values []string `json:"values"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *MultivalueValueList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *MultivalueValueList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *MultivalueValueList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13445,20 +11305,10 @@ type Statistics struct {
 
 	AutoRefresh *StatisticsAutoRefresh `json:"autoRefresh,omitempty"`
 	View        []*StatisticsView      `json:"view"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Statistics) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Statistics) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Statistics) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13505,20 +11355,10 @@ type StatisticsAdvancedCvFilters struct {
 	// SortingStats: TBD
 
 	SortingStats *string `json:"sortingStats,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAdvancedCvFilters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAdvancedCvFilters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAdvancedCvFilters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13548,20 +11388,10 @@ type StatisticsAdvancedFilter struct {
 	TrackingFilterId *string `json:"trackingFilterId,omitempty"`
 	// TrackingFilterIdRefs: Track refs for TrackingFilterId.
 	TrackingFilterIdRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAdvancedFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAdvancedFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAdvancedFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13588,20 +11418,10 @@ type StatisticsAllFlowsFilter struct {
 	// SortingCondition: TBD
 
 	SortingCondition *string `json:"sortingCondition,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAllFlowsFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAllFlowsFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAllFlowsFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13623,20 +11443,10 @@ type StatisticsAutoRefresh struct {
 	// MinRefreshInterval: TBD
 
 	MinRefreshInterval *float32 `json:"minRefreshInterval,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAutoRefresh) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAutoRefresh) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAutoRefresh) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13652,20 +11462,10 @@ type StatisticsAvailableAdvancedFilterOptions struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableAdvancedFilterOptions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableAdvancedFilterOptions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableAdvancedFilterOptions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13681,20 +11481,10 @@ type StatisticsAvailableAdvancedFilters struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableAdvancedFilters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableAdvancedFilters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableAdvancedFilters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13710,20 +11500,10 @@ type StatisticsAvailablePortFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailablePortFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailablePortFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailablePortFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13739,20 +11519,10 @@ type StatisticsAvailableProtocolFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableProtocolFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableProtocolFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableProtocolFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13768,20 +11538,10 @@ type StatisticsAvailableProtocolStackFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableProtocolStackFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableProtocolStackFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableProtocolStackFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13797,20 +11557,10 @@ type StatisticsAvailableStatisticFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableStatisticFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableStatisticFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableStatisticFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13826,20 +11576,10 @@ type StatisticsAvailableTargetRowFilters struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableTargetRowFilters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableTargetRowFilters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableTargetRowFilters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13855,20 +11595,10 @@ type StatisticsAvailableTrackingFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableTrackingFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableTrackingFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableTrackingFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13884,20 +11614,10 @@ type StatisticsAvailableTrafficItemFilter struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsAvailableTrafficItemFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsAvailableTrafficItemFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsAvailableTrafficItemFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13928,20 +11648,10 @@ type StatisticsData struct {
 	Egress   []*StatisticsEgress `json:"egress"`
 
 	EgressRxCondition *StatisticsEgressRxCondition `json:"egressRxCondition,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -13979,20 +11689,10 @@ type StatisticsDeadFlowsFilter struct {
 	// SortingCondition: TBD
 
 	SortingCondition *string `json:"sortingCondition,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsDeadFlowsFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsDeadFlowsFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsDeadFlowsFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14020,20 +11720,10 @@ type StatisticsDrillDown struct {
 
 	TargetRowIndex            *float32                               `json:"targetRowIndex,omitempty"`
 	AvailableTargetRowFilters []*StatisticsAvailableTargetRowFilters `json:"availableTargetRowFilters"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsDrillDown) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsDrillDown) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsDrillDown) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14068,20 +11758,10 @@ type StatisticsEgress struct {
 
 	CurrentPage   *float32                   `json:"currentPage,omitempty"`
 	FlowCondition []*StatisticsFlowCondition `json:"flowCondition"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsEgress) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsEgress) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsEgress) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14114,20 +11794,10 @@ type StatisticsEgressRxCondition struct {
 	Operator *string `json:"operator,omitempty"`
 	// Values: TBD
 	Values []float32 `json:"values"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsEgressRxCondition) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsEgressRxCondition) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsEgressRxCondition) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14151,20 +11821,10 @@ type StatisticsEnumerationFilter struct {
 	TrackingFilterId *string `json:"trackingFilterId,omitempty"`
 	// TrackingFilterIdRefs: Track refs for TrackingFilterId.
 	TrackingFilterIdRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsEnumerationFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsEnumerationFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsEnumerationFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14193,20 +11853,10 @@ type StatisticsFlowCondition struct {
 	TrackingFilterIdRefs []Href `json:"-"`
 	// Values: TBD
 	Values []float32 `json:"values"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsFlowCondition) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsFlowCondition) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsFlowCondition) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14223,20 +11873,10 @@ type StatisticsFormulaCatalog struct {
 
 	Xpath         *XPath                     `json:"xpath,omitempty"`
 	FormulaColumn []*StatisticsFormulaColumn `json:"formulaColumn"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsFormulaCatalog) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsFormulaCatalog) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsFormulaCatalog) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14270,20 +11910,10 @@ type StatisticsFormulaColumn struct {
 	// Formula: TBD
 
 	Formula *string `json:"formula,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsFormulaColumn) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsFormulaColumn) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsFormulaColumn) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14299,20 +11929,10 @@ type StatisticsInnerGlobalStats struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsInnerGlobalStats) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsInnerGlobalStats) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsInnerGlobalStats) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14349,20 +11969,10 @@ type StatisticsLayer23NextGenProtocolFilter struct {
 	ProtocolFilterIdsRefs          []Href                                      `json:"-"`
 	AdvancedFilter                 []*StatisticsAdvancedFilter                 `json:"advancedFilter"`
 	AvailableAdvancedFilterOptions []*StatisticsAvailableAdvancedFilterOptions `json:"availableAdvancedFilterOptions"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23NextGenProtocolFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23NextGenProtocolFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23NextGenProtocolFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14410,20 +12020,10 @@ type StatisticsLayer23ProtocolAuthAccessFilter struct {
 	ProtocolFilterIds []string `json:"protocolFilterIds"`
 	// ProtocolFilterIdsRefs: Track refs for ProtocolFilterIds.
 	ProtocolFilterIdsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23ProtocolAuthAccessFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23ProtocolAuthAccessFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23ProtocolAuthAccessFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14443,20 +12043,10 @@ type StatisticsLayer23ProtocolPortFilter struct {
 	PortFilterIds []string `json:"portFilterIds"`
 	// PortFilterIdsRefs: Track refs for PortFilterIds.
 	PortFilterIdsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23ProtocolPortFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23ProtocolPortFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23ProtocolPortFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14480,20 +12070,10 @@ type StatisticsLayer23ProtocolRoutingFilter struct {
 	ProtocolFilterIds []string `json:"protocolFilterIds"`
 	// ProtocolFilterIdsRefs: Track refs for ProtocolFilterIds.
 	ProtocolFilterIdsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23ProtocolRoutingFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23ProtocolRoutingFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23ProtocolRoutingFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14527,20 +12107,10 @@ type StatisticsLayer23ProtocolStackFilter struct {
 	SortingStatistic *string `json:"sortingStatistic,omitempty"`
 	// SortingStatisticRefs: Track refs for SortingStatistic.
 	SortingStatisticRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23ProtocolStackFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23ProtocolStackFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23ProtocolStackFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14586,20 +12156,10 @@ type StatisticsLayer23TrafficFlowDetectiveFilter struct {
 	LiveFlowsFilter *StatisticsLiveFlowsFilter   `json:"liveFlowsFilter,omitempty"`
 	StatisticFilter []*StatisticsStatisticFilter `json:"statisticFilter"`
 	TrackingFilter  []*StatisticsTrackingFilter  `json:"trackingFilter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23TrafficFlowDetectiveFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23TrafficFlowDetectiveFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23TrafficFlowDetectiveFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14672,20 +12232,10 @@ type StatisticsLayer23TrafficFlowFilter struct {
 	TrafficItemFilterIdsRefs []Href                         `json:"-"`
 	EnumerationFilter        []*StatisticsEnumerationFilter `json:"enumerationFilter"`
 	TrackingFilter           []*StatisticsTrackingFilter    `json:"trackingFilter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23TrafficFlowFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23TrafficFlowFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23TrafficFlowFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14729,20 +12279,10 @@ type StatisticsLayer23TrafficItemFilter struct {
 	TrafficItemFilterIds []string `json:"trafficItemFilterIds"`
 	// TrafficItemFilterIdsRefs: Track refs for TrafficItemFilterIds.
 	TrafficItemFilterIdsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23TrafficItemFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23TrafficItemFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23TrafficItemFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14762,20 +12302,10 @@ type StatisticsLayer23TrafficPortFilter struct {
 	PortFilterIds []string `json:"portFilterIds"`
 	// PortFilterIdsRefs: Track refs for PortFilterIds.
 	PortFilterIdsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer23TrafficPortFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer23TrafficPortFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer23TrafficPortFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14801,20 +12331,10 @@ type StatisticsLayer47AppLibraryTrafficFilter struct {
 
 	TopxValue      *float32                    `json:"topxValue,omitempty"`
 	AdvancedFilter []*StatisticsAdvancedFilter `json:"advancedFilter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLayer47AppLibraryTrafficFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLayer47AppLibraryTrafficFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLayer47AppLibraryTrafficFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14853,20 +12373,10 @@ type StatisticsLiveFlowsFilter struct {
 	// SortingCondition: TBD
 
 	SortingCondition *string `json:"sortingCondition,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsLiveFlowsFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsLiveFlowsFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsLiveFlowsFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14900,20 +12410,10 @@ type StatisticsPage struct {
 	Egress   []*StatisticsEgress `json:"egress"`
 
 	EgressRxCondition *StatisticsEgressRxCondition `json:"egressRxCondition,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsPage) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsPage) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsPage) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14957,20 +12457,10 @@ type StatisticsStatistic struct {
 	// ScaleFactor: TBD
 
 	ScaleFactor *float32 `json:"scaleFactor,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsStatistic) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsStatistic) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsStatistic) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -14997,20 +12487,10 @@ type StatisticsStatisticFilter struct {
 	// Value: TBD
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsStatisticFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsStatisticFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsStatisticFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15036,20 +12516,10 @@ type StatisticsTrackingFilter struct {
 	TrackingFilterIdRefs []Href `json:"-"`
 	// Value: TBD
 	Value []string `json:"value"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsTrackingFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsTrackingFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsTrackingFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15139,20 +12609,10 @@ type StatisticsView struct {
 
 	Page      *StatisticsPage        `json:"page,omitempty"`
 	Statistic []*StatisticsStatistic `json:"statistic"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *StatisticsView) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *StatisticsView) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *StatisticsView) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15351,20 +12811,10 @@ type Topology struct {
 	// VportsRefs: Track refs for Vports.
 	VportsRefs  []Href                 `json:"-"`
 	DeviceGroup []*TopologyDeviceGroup `json:"deviceGroup"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Topology) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Topology) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Topology) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15408,20 +12858,10 @@ type TopologyAction struct {
 
 	Name  *string                `json:"name,omitempty"`
 	Field []*TopologyActionField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyAction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyAction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyAction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15481,20 +12921,10 @@ type TopologyActionField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: The string value of the field.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyActionField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyActionField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyActionField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15531,20 +12961,10 @@ type TopologyActions struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Action []*TopologyAction `json:"action"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyActions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyActions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyActions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15576,20 +12996,10 @@ type TopologyActionsProfile struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Action []*TopologyAction `json:"action"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyActionsProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyActionsProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyActionsProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -15796,20 +13206,10 @@ type TopologyAdvancedLearnedInfoOptions struct {
 	VlanTpidFilterLM *Multivalue `json:"vlanTpidFilterLM,omitempty"`
 	// VlanTpidFilterLT: VLAN TPID
 	VlanTpidFilterLT *Multivalue `json:"vlanTpidFilterLT,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyAdvancedLearnedInfoOptions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyAdvancedLearnedInfoOptions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyAdvancedLearnedInfoOptions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16305,20 +13705,10 @@ type TopologyAncp struct {
 	TriggerAccessLoopEvents *Multivalue `json:"triggerAccessLoopEvents,omitempty"`
 	// UnlimitedRedial: Limit the Number of attempts to establish ANCP adjacency in case connection is lost
 	UnlimitedRedial *Multivalue `json:"unlimitedRedial,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyAncp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyAncp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyAncp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16414,20 +13804,10 @@ type TopologyAtoiTlvList struct {
 	Name *string `json:"name,omitempty"`
 	// TimeOfNextJump: When not zero, 'Time Of Next Jump' shall be the second portion of the PTP time at the next DST event, OR the next leap second.
 	TimeOfNextJump *Multivalue `json:"timeOfNextJump,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyAtoiTlvList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyAtoiTlvList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyAtoiTlvList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16484,20 +13864,10 @@ type TopologyAuxiliaryConnectionList struct {
 	Name *string `json:"name,omitempty"`
 	// UDPSrcPortNum: UDP Source Port Number
 	UDPSrcPortNum *Multivalue `json:"uDPSrcPortNum,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyAuxiliaryConnectionList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyAuxiliaryConnectionList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyAuxiliaryConnectionList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16546,20 +13916,10 @@ type TopologyBackupLspEroSubObjectsList struct {
 	PrefixLength *Multivalue `json:"prefixLength,omitempty"`
 	// Type_: Type
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBackupLspEroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBackupLspEroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBackupLspEroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16618,20 +13978,10 @@ type TopologyBands struct {
 	PrecedenceLevel *Multivalue `json:"precedenceLevel,omitempty"`
 	// Rate: This indicates the rate value above which the corresponding band may apply to packets. The default value is 1.
 	Rate *Multivalue `json:"rate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBands) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBands) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBands) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16703,20 +14053,10 @@ type TopologyBaseVidList struct {
 	UseFlagBit *Multivalue `json:"useFlagBit,omitempty"`
 
 	IsidList *TopologyIsidList `json:"isidList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBaseVidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBaseVidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBaseVidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16786,20 +14126,10 @@ type TopologyBfdRouter struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBfdRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBfdRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBfdRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -16871,20 +14201,10 @@ type TopologyBfdv4Interface struct {
 
 	Bfdv4Session *TopologyBfdv4Session  `json:"bfdv4Session,omitempty"`
 	LearnedInfo  []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBfdv4Interface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBfdv4Interface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBfdv4Interface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17011,20 +14331,10 @@ type TopologyBfdv4Session struct {
 	SessionType *Multivalue `json:"sessionType,omitempty"`
 	// SourceIp4: The source IP address used in BFD session
 	SourceIp4 *Multivalue `json:"sourceIp4,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBfdv4Session) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBfdv4Session) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBfdv4Session) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17146,20 +14456,10 @@ type TopologyBfdv6Interface struct {
 
 	Bfdv6Session *TopologyBfdv6Session  `json:"bfdv6Session,omitempty"`
 	LearnedInfo  []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBfdv6Interface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBfdv6Interface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBfdv6Interface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17284,20 +14584,10 @@ type TopologyBfdv6Session struct {
 	SessionType *Multivalue `json:"sessionType,omitempty"`
 	// SourceIp6: The source IP address used in BFD session
 	SourceIp6 *Multivalue `json:"sourceIp6,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBfdv6Session) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBfdv6Session) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBfdv6Session) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17370,20 +14660,10 @@ type TopologyBgp8277SrSegmentIdList struct {
 	Name *string `json:"name,omitempty"`
 	// SegmentId: SID or Segment ID, converts to label value by adding offset into SRGB Start Label Value.
 	SegmentId *Multivalue `json:"segmentId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgp8277SrSegmentIdList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgp8277SrSegmentIdList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgp8277SrSegmentIdList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17416,20 +14696,10 @@ type TopologyBgpAigpList struct {
 	Type_ *Multivalue `json:"type,omitempty"`
 	// Value: Value
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpAigpList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpAigpList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpAigpList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17462,20 +14732,10 @@ type TopologyBgpAsNumberList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpAsNumberList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpAsNumberList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpAsNumberList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17512,20 +14772,10 @@ type TopologyBgpAsPathSegmentList struct {
 	// SegmentType: SegmentType
 	SegmentType     *Multivalue                `json:"segmentType,omitempty"`
 	BgpAsNumberList []*TopologyBgpAsNumberList `json:"bgpAsNumberList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpAsPathSegmentList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpAsPathSegmentList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpAsPathSegmentList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17568,20 +14818,10 @@ type TopologyBgpClusterIdList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpClusterIdList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpClusterIdList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpClusterIdList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17611,20 +14851,10 @@ type TopologyBgpCommunitiesList struct {
 	Name *string `json:"name,omitempty"`
 	// Type_: Type
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17668,20 +14898,10 @@ type TopologyBgpCustomAfiSafiv4 struct {
 	Name *string `json:"name,omitempty"`
 	// SafiValue: User Defined SAFI value
 	SafiValue *Multivalue `json:"safiValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpCustomAfiSafiv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpCustomAfiSafiv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpCustomAfiSafiv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17735,20 +14955,10 @@ type TopologyBgpCustomAfiSafiv6 struct {
 	Name *string `json:"name,omitempty"`
 	// SafiValue: User Defined SAFI value
 	SafiValue *Multivalue `json:"safiValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpCustomAfiSafiv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpCustomAfiSafiv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpCustomAfiSafiv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -17835,20 +15045,10 @@ type TopologyBgpEpePeerLinkList struct {
 	// Weight: Weight of the SID for the purpose of load balancing
 	Weight     *Multivalue           `json:"weight,omitempty"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpEpePeerLinkList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpEpePeerLinkList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpEpePeerLinkList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -18031,20 +15231,10 @@ type TopologyBgpEpePeerList struct {
 
 	BgpEpePeerLinkList *TopologyBgpEpePeerLinkList  `json:"bgpEpePeerLinkList,omitempty"`
 	BgpEpePeerSetList  []*TopologyBgpEpePeerSetList `json:"bgpEpePeerSetList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpEpePeerList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpEpePeerList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpEpePeerList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -18200,20 +15390,10 @@ type TopologyBgpEpePeerSetList struct {
 	// Weight: Weight of SID for the purpose of load balancing
 
 	Weight *float32 `json:"weight,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpEpePeerSetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpEpePeerSetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpEpePeerSetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -18356,20 +15536,10 @@ type TopologyBgpEthernetSegmentV4 struct {
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 
 	Bgpv4BMacMappedIpList *TopologyBgpv4BMacMappedIpList `json:"bgpv4BMacMappedIpList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpEthernetSegmentV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpEthernetSegmentV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpEthernetSegmentV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -18793,20 +15963,10 @@ type TopologyBgpEthernetSegmentV6 struct {
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 
 	Bgpv6BMacMappedIpList *TopologyBgpv6BMacMappedIpList `json:"bgpv6BMacMappedIpList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpEthernetSegmentV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpEthernetSegmentV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpEthernetSegmentV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -19127,20 +16287,10 @@ type TopologyBgpExportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Export Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpExportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpExportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpExportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -19208,20 +16358,10 @@ type TopologyBgpExtendedCommunitiesList struct {
 	SubType *Multivalue `json:"subType,omitempty"`
 	// Type_: Type
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpExtendedCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpExtendedCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpExtendedCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -19440,20 +16580,10 @@ type TopologyBgpFlowSpecRangesList struct {
 	BgpCommunitiesList         []*TopologyBgpCommunitiesList         `json:"bgpCommunitiesList"`
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 	BgpLargeCommunitiesList    []*TopologyBgpLargeCommunitiesList    `json:"bgpLargeCommunitiesList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpFlowSpecRangesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpFlowSpecRangesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpFlowSpecRangesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -19972,20 +17102,10 @@ type TopologyBgpFlowSpecRangesListV4 struct {
 	BgpCommunitiesList         []*TopologyBgpCommunitiesList         `json:"bgpCommunitiesList"`
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 	BgpLargeCommunitiesList    []*TopologyBgpLargeCommunitiesList    `json:"bgpLargeCommunitiesList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpFlowSpecRangesListV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpFlowSpecRangesListV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpFlowSpecRangesListV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -20514,20 +17634,10 @@ type TopologyBgpFlowSpecRangesListV6 struct {
 	BgpCommunitiesList         []*TopologyBgpCommunitiesList         `json:"bgpCommunitiesList"`
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 	BgpLargeCommunitiesList    []*TopologyBgpLargeCommunitiesList    `json:"bgpLargeCommunitiesList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpFlowSpecRangesListV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpFlowSpecRangesListV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpFlowSpecRangesListV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -21084,20 +18194,10 @@ type TopologyBgpIPv4EvpnEvi struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv4EvpnEvi) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv4EvpnEvi) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv4EvpnEvi) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -21625,20 +18725,10 @@ type TopologyBgpIPv4EvpnPbb struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv4EvpnPbb) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv4EvpnPbb) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv4EvpnPbb) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -22166,20 +19256,10 @@ type TopologyBgpIPv4EvpnVpws struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv4EvpnVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv4EvpnVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv4EvpnVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -22709,20 +19789,10 @@ type TopologyBgpIPv4EvpnVxlan struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv4EvpnVxlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv4EvpnVxlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv4EvpnVxlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -23257,20 +20327,10 @@ type TopologyBgpIPv4EvpnVxlanVpws struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv4EvpnVxlanVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv4EvpnVxlanVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv4EvpnVxlanVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -23851,20 +20911,10 @@ type TopologyBgpIPv6EvpnEvi struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnEvi) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnEvi) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnEvi) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -24512,20 +21562,10 @@ type TopologyBgpIPv6EvpnPbb struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnPbb) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnPbb) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnPbb) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -24933,20 +21973,10 @@ type TopologyBgpIPv6EvpnPbbBroadcastDomainV6 struct {
 
 	UsebVlan  *bool                `json:"usebVlan,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnPbbBroadcastDomainV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnPbbBroadcastDomainV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnPbbBroadcastDomainV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -25259,20 +22289,10 @@ type TopologyBgpIPv6EvpnVpws struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -25962,20 +22982,10 @@ type TopologyBgpIPv6EvpnVxlan struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnVxlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnVxlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnVxlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -26388,20 +23398,10 @@ type TopologyBgpIPv6EvpnVxlanBroadcastDomainV6 struct {
 
 	UsebVlan  *bool                `json:"usebVlan,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnVxlanBroadcastDomainV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnVxlanBroadcastDomainV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnVxlanBroadcastDomainV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -26652,20 +23652,10 @@ type TopologyBgpIPv6EvpnVxlanVpws struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIPv6EvpnVxlanVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIPv6EvpnVxlanVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIPv6EvpnVxlanVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -27055,20 +24045,10 @@ type TopologyBgpImportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Import Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpImportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpImportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpImportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -27291,20 +24271,10 @@ type TopologyBgpIpRouteProperty struct {
 	GenerateRoutesParams *TopologyGenerateRoutesParams `json:"generateRoutesParams,omitempty"`
 
 	ImportBgpRoutesParams *TopologyImportBgpRoutesParams `json:"importBgpRoutesParams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpRouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpRouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpRouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -27827,20 +24797,10 @@ type TopologyBgpIpv4AdL2Vpn struct {
 	TypeVplsRt *Multivalue `json:"typeVplsRt,omitempty"`
 	// TypeVsiId: VSI ID
 	TypeVsiId *Multivalue `json:"typeVsiId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv4AdL2Vpn) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv4AdL2Vpn) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv4AdL2Vpn) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -28004,20 +24964,10 @@ type TopologyBgpIpv4L2Site struct {
 	Connector      *TopologyConnector        `json:"connector,omitempty"`
 	LabelBlockList []*TopologyLabelBlockList `json:"labelBlockList"`
 	Tag            []*TopologyTag            `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv4L2Site) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv4L2Site) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv4L2Site) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -28297,20 +25247,10 @@ type TopologyBgpIpv4MVrf struct {
 	Connector *TopologyConnector   `json:"connector,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
 	Tag       []*TopologyTag       `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv4MVrf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv4MVrf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv4MVrf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -28923,20 +25863,10 @@ type TopologyBgpIpv4Peer struct {
 	FlexAlgoColorMappingTemplate *TopologyFlexAlgoColorMappingTemplate `json:"flexAlgoColorMappingTemplate,omitempty"`
 	LearnedInfo                  []*TopologyLearnedInfo                `json:"learnedInfo"`
 	TlvProfile                   []*TopologyTlvProfile                 `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv4Peer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv4Peer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv4Peer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -29723,20 +26653,10 @@ type TopologyBgpIpv6AdL2Vpn struct {
 	TypeVplsRt *Multivalue `json:"typeVplsRt,omitempty"`
 	// TypeVsiId: VSI ID
 	TypeVsiId *Multivalue `json:"typeVsiId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv6AdL2Vpn) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv6AdL2Vpn) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv6AdL2Vpn) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -29894,20 +26814,10 @@ type TopologyBgpIpv6L2Site struct {
 	Connector      *TopologyConnector        `json:"connector,omitempty"`
 	LabelBlockList []*TopologyLabelBlockList `json:"labelBlockList"`
 	Tag            []*TopologyTag            `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv6L2Site) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv6L2Site) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv6L2Site) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -30114,20 +27024,10 @@ type TopologyBgpIpv6MVrf struct {
 	Connector *TopologyConnector   `json:"connector,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
 	Tag       []*TopologyTag       `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv6MVrf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv6MVrf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv6MVrf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -30664,20 +27564,10 @@ type TopologyBgpIpv6Peer struct {
 	FlexAlgoColorMappingTemplate *TopologyFlexAlgoColorMappingTemplate `json:"flexAlgoColorMappingTemplate,omitempty"`
 	LearnedInfo                  []*TopologyLearnedInfo                `json:"learnedInfo"`
 	TlvProfile                   []*TopologyTlvProfile                 `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv6Peer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv6Peer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv6Peer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -31644,20 +28534,10 @@ type TopologyBgpIpv6PeerBgpFlowSpecRangesList struct {
 	BgpCommunitiesList         []*TopologyBgpCommunitiesList         `json:"bgpCommunitiesList"`
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 	BgpLargeCommunitiesList    []*TopologyBgpLargeCommunitiesList    `json:"bgpLargeCommunitiesList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpIpv6PeerBgpFlowSpecRangesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpIpv6PeerBgpFlowSpecRangesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpIpv6PeerBgpFlowSpecRangesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32071,20 +28951,10 @@ type TopologyBgpL3VniExportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Export Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpL3VniExportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpL3VniExportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpL3VniExportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32138,20 +29008,10 @@ type TopologyBgpL3VniImportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Import Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpL3VniImportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpL3VniImportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpL3VniImportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32351,20 +29211,10 @@ type TopologyBgpL3VpnRouteProperty struct {
 	CMacProperties                  []*TopologyCMacProperties                  `json:"cMacProperties"`
 	EvpnIPv4PrefixRange             []*TopologyEvpnIPv4PrefixRange             `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange             []*TopologyEvpnIPv6PrefixRange             `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpL3VpnRouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpL3VpnRouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpL3VpnRouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32791,20 +29641,10 @@ type TopologyBgpLargeCommunitiesList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpLargeCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpLargeCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpLargeCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32836,20 +29676,10 @@ type TopologyBgpLsAsPathSegmentList struct {
 	// SegmentType: SegmentType
 	SegmentType     *Multivalue                `json:"segmentType,omitempty"`
 	BgpAsNumberList []*TopologyBgpAsNumberList `json:"bgpAsNumberList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpLsAsPathSegmentList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpLsAsPathSegmentList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpLsAsPathSegmentList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32892,20 +29722,10 @@ type TopologyBgpLsClusterIdList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpLsClusterIdList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpLsClusterIdList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpLsClusterIdList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -32935,20 +29755,10 @@ type TopologyBgpLsCommunitiesList struct {
 	Name *string `json:"name,omitempty"`
 	// Type_: Type
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpLsCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpLsCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpLsCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33006,20 +29816,10 @@ type TopologyBgpLsExtendedCommunitiesList struct {
 	SubType *Multivalue `json:"subType,omitempty"`
 	// Type_: Type
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpLsExtendedCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpLsExtendedCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpLsExtendedCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33156,20 +29956,10 @@ type TopologyBgpMVpnReceiverSitesIpv4 struct {
 	EvpnIPv4PrefixRange      []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange      []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
 	Tag                      []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpMVpnReceiverSitesIpv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpMVpnReceiverSitesIpv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpMVpnReceiverSitesIpv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33414,20 +30204,10 @@ type TopologyBgpMVpnReceiverSitesIpv6 struct {
 	EvpnIPv4PrefixRange      []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange      []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
 	Tag                      []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpMVpnReceiverSitesIpv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpMVpnReceiverSitesIpv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpMVpnReceiverSitesIpv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33646,20 +30426,10 @@ type TopologyBgpMVpnSenderSitesIpv4 struct {
 	EvpnIPv4PrefixRange    []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange    []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
 	Tag                    []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpMVpnSenderSitesIpv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpMVpnSenderSitesIpv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpMVpnSenderSitesIpv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33830,20 +30600,10 @@ type TopologyBgpMVpnSenderSitesIpv6 struct {
 	EvpnIPv4PrefixRange    []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange    []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
 	Tag                    []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpMVpnSenderSitesIpv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpMVpnSenderSitesIpv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpMVpnSenderSitesIpv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -33987,20 +30747,10 @@ type TopologyBgpNonVpnrrLargeCommunitiesList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpNonVpnrrLargeCommunitiesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpNonVpnrrLargeCommunitiesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpNonVpnrrLargeCommunitiesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34028,20 +30778,10 @@ type TopologyBgpSrgbRangeSubObjectsList struct {
 	SIDCount *Multivalue `json:"sIDCount,omitempty"`
 	// StartSID: Start Segment ID of the SRGB Block
 	StartSID *Multivalue `json:"startSID,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrgbRangeSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrgbRangeSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrgbRangeSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34155,20 +30895,10 @@ type TopologyBgpSrtePoliciesListV4 struct {
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 
 	BgpSRTEPoliciesTunnelEncapsulationListV4 *TopologyBgpSrtePoliciesTunnelEncapsulationListV4 `json:"bgpSRTEPoliciesTunnelEncapsulationListV4,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesListV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesListV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesListV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34484,20 +31214,10 @@ type TopologyBgpSrtePoliciesListV6 struct {
 	BgpExtendedCommunitiesList []*TopologyBgpExtendedCommunitiesList `json:"bgpExtendedCommunitiesList"`
 
 	BgpSRTEPoliciesTunnelEncapsulationListV6 *TopologyBgpSrtePoliciesTunnelEncapsulationListV6 `json:"bgpSRTEPoliciesTunnelEncapsulationListV6,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesListV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesListV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesListV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34743,20 +31463,10 @@ type TopologyBgpSrtePoliciesSegmentListV4 struct {
 	Weight *Multivalue `json:"weight,omitempty"`
 
 	BgpSRTEPoliciesSegmentsCollectionV4 *TopologyBgpSrtePoliciesSegmentsCollectionV4 `json:"bgpSRTEPoliciesSegmentsCollectionV4,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesSegmentListV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentListV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentListV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34819,20 +31529,10 @@ type TopologyBgpSrtePoliciesSegmentListV6 struct {
 	Weight *Multivalue `json:"weight,omitempty"`
 
 	BgpSRTEPoliciesSegmentsCollectionV6 *TopologyBgpSrtePoliciesSegmentsCollectionV6 `json:"bgpSRTEPoliciesSegmentsCollectionV6,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesSegmentListV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentListV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentListV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -34920,20 +31620,10 @@ type TopologyBgpSrtePoliciesSegmentsCollectionV4 struct {
 	TimeToLive *Multivalue `json:"timeToLive,omitempty"`
 	// TrafficClass: Traffic Class
 	TrafficClass *Multivalue `json:"trafficClass,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesSegmentsCollectionV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentsCollectionV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentsCollectionV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35092,20 +31782,10 @@ type TopologyBgpSrtePoliciesSegmentsCollectionV6 struct {
 	TimeToLive *Multivalue `json:"timeToLive,omitempty"`
 	// TrafficClass: Traffic Class
 	TrafficClass *Multivalue `json:"trafficClass,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesSegmentsCollectionV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentsCollectionV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesSegmentsCollectionV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35279,20 +31959,10 @@ type TopologyBgpSrtePoliciesTunnelEncapsulationListV4 struct {
 	UseAsMPLSLabel *Multivalue `json:"useAsMPLSLabel,omitempty"`
 
 	BgpSRTEPoliciesSegmentListV4 *TopologyBgpSrtePoliciesSegmentListV4 `json:"bgpSRTEPoliciesSegmentListV4,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35495,20 +32165,10 @@ type TopologyBgpSrtePoliciesTunnelEncapsulationListV6 struct {
 	UseAsMPLSLabel *Multivalue `json:"useAsMPLSLabel,omitempty"`
 
 	BgpSRTEPoliciesSegmentListV6 *TopologyBgpSrtePoliciesSegmentListV6 `json:"bgpSRTEPoliciesSegmentListV6,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpSrtePoliciesTunnelEncapsulationListV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35666,20 +32326,10 @@ type TopologyBgpUmhExportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Export Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpUmhExportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpUmhExportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpUmhExportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35733,20 +32383,10 @@ type TopologyBgpUmhImportRouteTargetList struct {
 	TargetIpAddress *Multivalue `json:"targetIpAddress,omitempty"`
 	// TargetType: Import Route Target Type
 	TargetType *Multivalue `json:"targetType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpUmhImportRouteTargetList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpUmhImportRouteTargetList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpUmhImportRouteTargetList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -35971,20 +32611,10 @@ type TopologyBgpV6IpRouteProperty struct {
 	GenerateRoutesParams *TopologyGenerateRoutesParams `json:"generateRoutesParams,omitempty"`
 
 	ImportBgpRoutesParams *TopologyImportBgpRoutesParams `json:"importBgpRoutesParams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpV6IpRouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpV6IpRouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpV6IpRouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -36673,20 +33303,10 @@ type TopologyBgpV6L3VpnRouteProperty struct {
 	CMacProperties                  []*TopologyCMacProperties                  `json:"cMacProperties"`
 	EvpnIPv4PrefixRange             []*TopologyEvpnIPv4PrefixRange             `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange             []*TopologyEvpnIPv6PrefixRange             `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpV6L3VpnRouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpV6L3VpnRouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpV6L3VpnRouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37277,20 +33897,10 @@ type TopologyBgpV6Vrf struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpV6Vrf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpV6Vrf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpV6Vrf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37419,20 +34029,10 @@ type TopologyBgpVrf struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpVrf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpVrf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpVrf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37528,20 +34128,10 @@ type TopologyBgpv4BMacMappedIpList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpv4BMacMappedIpList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpv4BMacMappedIpList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpv4BMacMappedIpList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37588,20 +34178,10 @@ type TopologyBgpv6BMacMappedIpList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBgpv6BMacMappedIpList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBgpv6BMacMappedIpList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBgpv6BMacMappedIpList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37670,20 +34250,10 @@ type TopologyBondedGre struct {
 	TunnelType *string               `json:"tunnelType,omitempty"`
 	Tag        []*TopologyTag        `json:"tag"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBondedGre) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBondedGre) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBondedGre) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37763,20 +34333,10 @@ type TopologyBridgeData struct {
 	Name *string `json:"name,omitempty"`
 	// SystemId: 6 Byte System Id in Hex format.
 	SystemId *Multivalue `json:"systemId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBridgeData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBridgeData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBridgeData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37833,20 +34393,10 @@ type TopologyBroadcastDomainV4 struct {
 
 	UsebVlan  *bool                `json:"usebVlan,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -37991,20 +34541,10 @@ type TopologyBroadcastDomainV4Vpws struct {
 	// VidNormalization: VID Normalization
 	VidNormalization *Multivalue          `json:"vidNormalization,omitempty"`
 	PnTLVList        []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV4Vpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV4Vpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV4Vpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -38189,20 +34729,10 @@ type TopologyBroadcastDomainV4VxlanVpws struct {
 	// VidNormalization: VID Normalization
 	VidNormalization *Multivalue          `json:"vidNormalization,omitempty"`
 	PnTLVList        []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV4VxlanVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV4VxlanVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV4VxlanVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -38395,20 +34925,10 @@ type TopologyBroadcastDomainV6 struct {
 
 	UsebVlan  *bool                `json:"usebVlan,omitempty"`
 	PnTLVList []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -38653,20 +35173,10 @@ type TopologyBroadcastDomainV6Vpws struct {
 	// VidNormalization: VID Normalization
 	VidNormalization *Multivalue          `json:"vidNormalization,omitempty"`
 	PnTLVList        []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV6Vpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV6Vpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV6Vpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -38951,20 +35461,10 @@ type TopologyBroadcastDomainV6VxlanVpws struct {
 	// VidNormalization: VID Normalization
 	VidNormalization *Multivalue          `json:"vidNormalization,omitempty"`
 	PnTLVList        []*TopologyPnTlvList `json:"pnTLVList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBroadcastDomainV6VxlanVpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBroadcastDomainV6VxlanVpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBroadcastDomainV6VxlanVpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -39113,20 +35613,10 @@ type TopologyBuckets struct {
 	Weight *Multivalue `json:"weight,omitempty"`
 
 	ActionsProfile *TopologyActionsProfile `json:"actionsProfile,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyBuckets) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyBuckets) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyBuckets) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -39322,20 +35812,10 @@ type TopologyCMacProperties struct {
 	CMacProperties             []*TopologyCMacProperties             `json:"cMacProperties"`
 	EvpnIPv4PrefixRange        []*TopologyEvpnIPv4PrefixRange        `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange        []*TopologyEvpnIPv6PrefixRange        `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCMacProperties) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCMacProperties) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCMacProperties) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -39779,20 +36259,10 @@ type TopologyCakCache struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCakCache) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCakCache) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCakCache) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -39824,20 +36294,10 @@ type TopologyCellTable struct {
 
 	Xpath *XPath         `json:"xpath,omitempty"`
 	Col   []*TopologyCol `json:"col"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCellTable) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCellTable) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCellTable) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -39907,20 +36367,10 @@ type TopologyCfmBridge struct {
 	Link *TopologyLink `json:"link,omitempty"`
 
 	MdLevels *TopologyMdLevels `json:"mdLevels,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmBridge) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmBridge) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmBridge) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -40025,20 +36475,10 @@ type TopologyCfmCustomTlvList struct {
 	Type_ *Multivalue `json:"type,omitempty"`
 	// Value: TLV Value
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmCustomTlvList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmCustomTlvList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmCustomTlvList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -40337,20 +36777,10 @@ type TopologyCfmMp struct {
 	StartCCMEmulatedMpParams *TopologyStartCcmEmulatedMpParams `json:"start_CCM_emulated_mpParams,omitempty"`
 
 	StopCCMEmulatedMpParams *TopologyStopCcmEmulatedMpParams `json:"stop_CCM_emulated_mpParams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmMp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmMp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmMp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -40946,20 +37376,10 @@ type TopologyCfmSimulatedLinks struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmSimulatedLinks) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmSimulatedLinks) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmSimulatedLinks) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -41213,20 +37633,10 @@ type TopologyCfmSimulatedMp struct {
 	StartCCMSimmulatedMpParams *TopologyStartCcmSimmulatedMpParams `json:"start_CCM_simmulated_mpParams,omitempty"`
 
 	StopCCMSimmulatedMpParams *TopologyStopCcmSimmulatedMpParams `json:"stop_CCM_simmulated_mpParams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmSimulatedMp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmSimulatedMp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmSimulatedMp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -41828,20 +38238,10 @@ type TopologyCfmSimulatedTopology struct {
 	ConfigMDLevelsParams *TopologyConfigMdLevelsParams `json:"configMDLevelsParams,omitempty"`
 
 	ConfigVLANParams *TopologyConfigVlanParams `json:"configVLANParams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCfmSimulatedTopology) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCfmSimulatedTopology) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCfmSimulatedTopology) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -41899,20 +38299,10 @@ type TopologyClusterData struct {
 	Vlan *Multivalue `json:"vlan,omitempty"`
 	// Vni: VNI
 	Vni *Multivalue `json:"vni,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyClusterData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyClusterData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyClusterData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -41973,20 +38363,10 @@ type TopologyClusterList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyClusterList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyClusterList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyClusterList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42009,20 +38389,10 @@ type TopologyCol struct {
 	Xpath     *XPath               `json:"xpath,omitempty"`
 	CellTable []*TopologyCellTable `json:"cellTable"`
 	Row       []*TopologyRow       `json:"row"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCol) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCol) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCol) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42077,20 +38447,10 @@ type TopologyCommandSnippetsData struct {
 	TransmissionBehaviour *Multivalue `json:"transmissionBehaviour,omitempty"`
 	// TransmissionCount: Number of times to transmit the Command Snippet.
 	TransmissionCount *Multivalue `json:"transmissionCount,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCommandSnippetsData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCommandSnippetsData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCommandSnippetsData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42145,20 +38505,10 @@ type TopologyConfigMaNamesParams struct {
 	// SmaFormat: Import only the best routes (provided route file has this information).
 
 	SmaFormat *string `json:"smaFormat,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyConfigMaNamesParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyConfigMaNamesParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyConfigMaNamesParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42249,20 +38599,10 @@ type TopologyConfigMdLevelsParams struct {
 	// NumMDLevels: Import only the best routes (provided route file has this information).
 
 	NumMDLevels *float32 `json:"numMDLevels,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyConfigMdLevelsParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyConfigMdLevelsParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyConfigMdLevelsParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42320,20 +38660,10 @@ type TopologyConfigVlanParams struct {
 	// VlanType: Import only the best routes (provided route file has this information).
 
 	VlanType *string `json:"vlanType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyConfigVlanParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyConfigVlanParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyConfigVlanParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42354,20 +38684,10 @@ type TopologyConnector struct {
 	ConnectedTo *string `json:"connectedTo,omitempty"`
 	// ConnectedToRefs: Track refs for ConnectedTo.
 	ConnectedToRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyConnector) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyConnector) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyConnector) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42390,20 +38710,10 @@ type TopologyContainer struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Object []*TopologyObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyContainer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyContainer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyContainer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42454,20 +38764,10 @@ type TopologyCustomTlv struct {
 	Type_ *Multivalue `json:"type,omitempty"`
 	// Value: TLV Value
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyCustomTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyCustomTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyCustomTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42558,20 +38858,10 @@ type TopologyDceMCastIpv4GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceMCastIpv4GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceMCastIpv4GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceMCastIpv4GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42667,20 +38957,10 @@ type TopologyDceMCastIpv6GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceMCastIpv6GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceMCastIpv6GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceMCastIpv6GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42776,20 +39056,10 @@ type TopologyDceMCastMacGroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceMCastMacGroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceMCastMacGroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceMCastMacGroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42878,20 +39148,10 @@ type TopologyDceNodeTopologyList struct {
 	TopologyId *Multivalue `json:"topologyId,omitempty"`
 
 	InterestedVlanList *TopologyDceNodeTopologyListInterestedVlanList `json:"interestedVlanList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceNodeTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceNodeTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceNodeTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -42963,20 +39223,10 @@ type TopologyDceNodeTopologyListInterestedVlanList struct {
 	VlanCount *Multivalue `json:"vlanCount,omitempty"`
 	// VlanIdIncr: Vlan Id Increment
 	VlanIdIncr *Multivalue `json:"vlanIdIncr,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceNodeTopologyListInterestedVlanList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceNodeTopologyListInterestedVlanList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceNodeTopologyListInterestedVlanList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43077,20 +39327,10 @@ type TopologyDceSimulatedMCastIpv4GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceSimulatedMCastIpv4GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceSimulatedMCastIpv4GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceSimulatedMCastIpv4GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43186,20 +39426,10 @@ type TopologyDceSimulatedMCastIpv6GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceSimulatedMCastIpv6GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceSimulatedMCastIpv6GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceSimulatedMCastIpv6GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43295,20 +39525,10 @@ type TopologyDceSimulatedMCastMacGroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceSimulatedMCastMacGroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceSimulatedMCastMacGroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceSimulatedMCastMacGroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43402,20 +39622,10 @@ type TopologyDceTopologyList struct {
 	InterestedVlanList *TopologyInterestedVlanList `json:"interestedVlanList,omitempty"`
 
 	NicknameRecordList *TopologyNicknameRecordList `json:"nicknameRecordList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDceTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDceTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDceTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43479,20 +39689,10 @@ type TopologyDefaultTlv struct {
 	Name *string `json:"name,omitempty"`
 
 	Value *TopologyValue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDefaultTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDefaultTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDefaultTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43517,20 +39717,10 @@ type TopologyDestIpv4Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDestIpv4Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDestIpv4Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDestIpv4Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43546,20 +39736,10 @@ type TopologyDestIpv6Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDestIpv6Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDestIpv6Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDestIpv6Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43608,20 +39788,10 @@ type TopologyDeviceGroup struct {
 	Ospfv3Router    []*TopologyOspfv3Router  `json:"ospfv3Router"`
 	PimRouter       []*TopologyPimRouter     `json:"pimRouter"`
 	RouterData      []*TopologyRouterData    `json:"routerData"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDeviceGroup) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDeviceGroup) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDeviceGroup) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43926,20 +40096,10 @@ type TopologyDhcp4RelayAgentTlvProfile struct {
 
 	Name       *string               `json:"name,omitempty"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp4RelayAgentTlvProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp4RelayAgentTlvProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp4RelayAgentTlvProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -43988,20 +40148,10 @@ type TopologyDhcp4ServerSessions struct {
 	Name *string `json:"name,omitempty"`
 	// PoolSize: The number of leases to be allocated per each server address.
 	PoolSize *Multivalue `json:"poolSize,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp4ServerSessions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp4ServerSessions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp4ServerSessions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44066,20 +40216,10 @@ type TopologyDhcp6Iana struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44111,20 +40251,10 @@ type TopologyDhcp6Iana1 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana1) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana1) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana1) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44156,20 +40286,10 @@ type TopologyDhcp6Iana2 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana2) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana2) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana2) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44201,20 +40321,10 @@ type TopologyDhcp6Iana3 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana3) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana3) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana3) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44246,20 +40356,10 @@ type TopologyDhcp6Iana4 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44291,20 +40391,10 @@ type TopologyDhcp6Iana5 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana5) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana5) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana5) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44336,20 +40426,10 @@ type TopologyDhcp6Iana6 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44381,20 +40461,10 @@ type TopologyDhcp6Iana7 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iana7) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iana7) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iana7) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44426,20 +40496,10 @@ type TopologyDhcp6Iapd struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44471,20 +40531,10 @@ type TopologyDhcp6Iapd1 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd1) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd1) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd1) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44516,20 +40566,10 @@ type TopologyDhcp6Iapd2 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd2) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd2) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd2) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44561,20 +40601,10 @@ type TopologyDhcp6Iapd3 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd3) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd3) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd3) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44606,20 +40636,10 @@ type TopologyDhcp6Iapd4 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44651,20 +40671,10 @@ type TopologyDhcp6Iapd5 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd5) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd5) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd5) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44696,20 +40706,10 @@ type TopologyDhcp6Iapd6 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44741,20 +40741,10 @@ type TopologyDhcp6Iapd7 struct {
 
 	Name *string        `json:"name,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6Iapd7) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6Iapd7) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6Iapd7) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44785,20 +40775,10 @@ type TopologyDhcp6LearnedInfo struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6LearnedInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6LearnedInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6LearnedInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44818,20 +40798,10 @@ type TopologyDhcp6RelayTlvProfile struct {
 
 	Name       *string               `json:"name,omitempty"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6RelayTlvProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6RelayTlvProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6RelayTlvProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -44918,20 +40888,10 @@ type TopologyDhcp6ServerSessions struct {
 	PrefixesPerIA *Multivalue `json:"prefixesPerIA,omitempty"`
 	// UseCustomTimes: >Use Custom Renew/Rebind Times instead of the ones computed from the valability times of the leases.
 	UseCustomTimes *Multivalue `json:"useCustomTimes,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcp6ServerSessions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcp6ServerSessions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcp6ServerSessions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -45132,20 +41092,10 @@ type TopologyDhcpv4client struct {
 	Tag            []*TopologyTag            `json:"tag"`
 	TlvProfile     []*TopologyTlvProfile     `json:"tlvProfile"`
 	Vxlan          []*TopologyVxlan          `json:"vxlan"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv4client) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv4client) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv4client) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -45420,20 +41370,10 @@ type TopologyDhcpv4relayAgent struct {
 	StackedLayersRefs []Href `json:"-"`
 
 	Dhcp4RelayAgentTlvProfile *TopologyDhcp4RelayAgentTlvProfile `json:"dhcp4RelayAgentTlvProfile,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv4relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv4relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv4relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -45489,20 +41429,10 @@ type TopologyDhcpv4server struct {
 
 	Dhcp4ServerSessions *TopologyDhcp4ServerSessions `json:"dhcp4ServerSessions,omitempty"`
 	TlvProfile          []*TopologyTlvProfile        `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv4server) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv4server) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv4server) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -45646,20 +41576,10 @@ type TopologyDhcpv6client struct {
 	Tag              []*TopologyTag            `json:"tag"`
 	TlvProfile       []*TopologyTlvProfile     `json:"tlvProfile"`
 	Vxlanv6          []*TopologyVxlanv6        `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv6client) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv6client) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv6client) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -45960,20 +41880,10 @@ type TopologyDhcpv6relayAgent struct {
 	Dhcp6RelayTlvProfile *TopologyDhcp6RelayTlvProfile `json:"dhcp6RelayTlvProfile,omitempty"`
 
 	LightweightDhcp6RelayTlvProfile *TopologyLightweightDhcp6RelayTlvProfile `json:"lightweightDhcp6RelayTlvProfile,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv6relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv6relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv6relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -46044,20 +41954,10 @@ type TopologyDhcpv6server struct {
 
 	Dhcp6ServerSessions *TopologyDhcp6ServerSessions `json:"dhcp6ServerSessions,omitempty"`
 	TlvProfile          []*TopologyTlvProfile        `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDhcpv6server) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDhcpv6server) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDhcpv6server) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -46216,20 +42116,10 @@ type TopologyDotOneX struct {
 	StaticMacsec                []*TopologyStaticMacsec                `json:"staticMacsec"`
 
 	Streams *TopologyStreams `json:"streams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDotOneX) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDotOneX) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDotOneX) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -46789,20 +42679,10 @@ type TopologyDslPools struct {
 
 	Connector  *TopologyConnector    `json:"connector,omitempty"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyDslPools) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyDslPools) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyDslPools) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -46943,20 +42823,10 @@ type TopologyECpriFaultSubObjectsList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyECpriFaultSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyECpriFaultSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyECpriFaultSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47058,20 +42928,10 @@ type TopologyECpriRe struct {
 
 	Connector                *TopologyConnector                  `json:"connector,omitempty"`
 	ECpriFaultSubObjectsList []*TopologyECpriFaultSubObjectsList `json:"eCpriFaultSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyECpriRe) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyECpriRe) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyECpriRe) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47242,20 +43102,10 @@ type TopologyECpriReRadioChannelsOrUsers struct {
 	Connector           *TopologyConnector             `json:"connector,omitempty"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyECpriReRadioChannelsOrUsers) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyECpriReRadioChannelsOrUsers) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyECpriReRadioChannelsOrUsers) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47402,20 +43252,10 @@ type TopologyECpriRec struct {
 
 	Connector                *TopologyConnector                  `json:"connector,omitempty"`
 	ECpriFaultSubObjectsList []*TopologyECpriFaultSubObjectsList `json:"eCpriFaultSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyECpriRec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyECpriRec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyECpriRec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47586,20 +43426,10 @@ type TopologyECpriRecRadioChannelsOrUsers struct {
 	Connector           *TopologyConnector             `json:"connector,omitempty"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyECpriRecRadioChannelsOrUsers) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyECpriRecRadioChannelsOrUsers) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyECpriRecRadioChannelsOrUsers) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47675,20 +43505,10 @@ type TopologyErrorInfo struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyErrorInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyErrorInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyErrorInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47744,20 +43564,10 @@ type TopologyEsmc struct {
 	Timeout *Multivalue `json:"timeout,omitempty"`
 	// TransmissionRate: Sets transmission rate in seconds. Default rate is 1 seconds.
 	TransmissionRate *Multivalue `json:"transmissionRate,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyEsmc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyEsmc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyEsmc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -47910,20 +43720,10 @@ type TopologyEthernet struct {
 	Vlan    []*TopologyVlan  `json:"vlan"`
 
 	VpnParameter *TopologyVpnParameter `json:"vpnParameter,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyEthernet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyEthernet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyEthernet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -48492,20 +44292,10 @@ type TopologyEvpnIPv4PrefixRange struct {
 	CMacProperties             []*TopologyCMacProperties             `json:"cMacProperties"`
 	EvpnIPv4PrefixRange        []*TopologyEvpnIPv4PrefixRange        `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange        []*TopologyEvpnIPv6PrefixRange        `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyEvpnIPv4PrefixRange) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyEvpnIPv4PrefixRange) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyEvpnIPv4PrefixRange) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -48907,20 +44697,10 @@ type TopologyEvpnIPv6PrefixRange struct {
 	CMacProperties             []*TopologyCMacProperties             `json:"cMacProperties"`
 	EvpnIPv4PrefixRange        []*TopologyEvpnIPv4PrefixRange        `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange        []*TopologyEvpnIPv6PrefixRange        `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyEvpnIPv6PrefixRange) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyEvpnIPv6PrefixRange) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyEvpnIPv6PrefixRange) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49238,20 +45018,10 @@ type TopologyExpectedInitiatedLspList struct {
 	// SymbolicPathName: This is used for generating the traffic for those LSPs from PCE for which the Symbolic Path Name is configured and matches the value.
 	SymbolicPathName *Multivalue    `json:"symbolicPathName,omitempty"`
 	Tag              []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyExpectedInitiatedLspList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyExpectedInitiatedLspList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyExpectedInitiatedLspList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49310,20 +45080,10 @@ type TopologyExternalLink struct {
 	// ToNodeIndex: Index of the target node as defined in toNetworkTopology
 
 	ToNodeIndex *float32 `json:"toNodeIndex,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyExternalLink) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyExternalLink) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyExternalLink) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49402,20 +45162,10 @@ type TopologyExternalRoutes struct {
 	UnusedBit7 *Multivalue `json:"unusedBit7,omitempty"`
 	// VFlag: V-Flag: Value flag. If set, then the SID carries an absolute value label value
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyExternalRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyExternalRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyExternalRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49605,20 +45355,10 @@ type TopologyField struct {
 	// Value: Value represented as a multivalue object
 	Value       *Multivalue            `json:"value,omitempty"`
 	Restriction []*TopologyRestriction `json:"restriction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49660,20 +45400,10 @@ type TopologyFlexAlgoColorMappingTemplate struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyFlexAlgoColorMappingTemplate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyFlexAlgoColorMappingTemplate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyFlexAlgoColorMappingTemplate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49708,20 +45438,10 @@ type TopologyFlowProfile struct {
 
 	Name        *string                `json:"name,omitempty"`
 	MatchAction []*TopologyMatchAction `json:"matchAction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyFlowProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyFlowProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyFlowProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49779,20 +45499,10 @@ type TopologyFlowSet struct {
 	Priority *Multivalue `json:"priority,omitempty"`
 
 	FlowProfile *TopologyFlowProfile `json:"flowProfile,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyFlowSet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyFlowSet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyFlowSet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49897,20 +45607,10 @@ type TopologyGenerateIpv6RoutesParams struct {
 	// SkipMcast: Do not include Multicast Address in the generated Address Range
 
 	SkipMcast *bool `json:"skipMcast,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGenerateIpv6RoutesParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGenerateIpv6RoutesParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGenerateIpv6RoutesParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -49989,20 +45689,10 @@ type TopologyGenerateRoutesParams struct {
 	// SkipMcast: Do not include Multicast Address in the generated Address Range
 
 	SkipMcast *bool `json:"skipMcast,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGenerateRoutesParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGenerateRoutesParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGenerateRoutesParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -50050,20 +45740,10 @@ type TopologyGeneve struct {
 	LdpTargetedRouter   []*TopologyLdpTargetedRouter   `json:"ldpTargetedRouter"`
 	LdpTargetedRouterV6 []*TopologyLdpTargetedRouterV6 `json:"ldpTargetedRouterV6"`
 	TlvProfile          []*TopologyTlvProfile          `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGeneve) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGeneve) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGeneve) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -50257,20 +45937,10 @@ type TopologyGreoipv4 struct {
 
 	Streams *TopologyStreams `json:"streams,omitempty"`
 	Tag     []*TopologyTag   `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGreoipv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGreoipv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGreoipv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -50699,20 +46369,10 @@ type TopologyGreoipv6 struct {
 
 	Streams *TopologyStreams `json:"streams,omitempty"`
 	Tag     []*TopologyTag   `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGreoipv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGreoipv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGreoipv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51105,20 +46765,10 @@ type TopologyGroups struct {
 	// OfChannel: The OF Channel to which the group belongs.
 	OfChannel *Multivalue        `json:"ofChannel,omitempty"`
 	Buckets   []*TopologyBuckets `json:"buckets"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyGroups) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyGroups) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyGroups) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51220,20 +46870,10 @@ type TopologyIPv4PseudoNodeRoutes struct {
 	// SIDIndexLabel: SID/Index/Label
 	SIDIndexLabel *Multivalue    `json:"sIDIndexLabel,omitempty"`
 	Tag           []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIPv4PseudoNodeRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIPv4PseudoNodeRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIPv4PseudoNodeRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51411,20 +47051,10 @@ type TopologyIPv6PseudoNodeRoutes struct {
 	// SIDIndexLabel: SID/Index/Label
 	SIDIndexLabel *Multivalue    `json:"sIDIndexLabel,omitempty"`
 	Tag           []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIPv6PseudoNodeRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIPv6PseudoNodeRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIPv6PseudoNodeRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51574,20 +47204,10 @@ type TopologyIPv6SegmentsList struct {
 	SID *Multivalue `json:"sID,omitempty"`
 	// SIDEnable: Enable This Segment
 	SIDEnable *Multivalue `json:"sIDEnable,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIPv6SegmentsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIPv6SegmentsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIPv6SegmentsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51658,20 +47278,10 @@ type TopologyIgmpHost struct {
 
 	Iptv *TopologyIptv  `json:"iptv,omitempty"`
 	Tag  []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIgmpHost) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIgmpHost) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIgmpHost) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51776,20 +47386,10 @@ type TopologyIgmpMcastIPv4GroupList struct {
 
 	IgmpUcastIPv4SourceList *TopologyIgmpUcastIPv4SourceList `json:"igmpUcastIPv4SourceList,omitempty"`
 	Tag                     []*TopologyTag                   `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIgmpMcastIPv4GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIgmpMcastIPv4GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIgmpMcastIPv4GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -51889,20 +47489,10 @@ type TopologyIgmpQuerier struct {
 	// VersionType: Version
 	VersionType *Multivalue            `json:"versionType,omitempty"`
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIgmpQuerier) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIgmpQuerier) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIgmpQuerier) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52011,20 +47601,10 @@ type TopologyIgmpUcastIPv4SourceList struct {
 	UcastAddrIncr *Multivalue `json:"ucastAddrIncr,omitempty"`
 	// UcastSrcAddrCnt: Source Address Count
 	UcastSrcAddrCnt *Multivalue `json:"ucastSrcAddrCnt,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIgmpUcastIPv4SourceList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIgmpUcastIPv4SourceList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIgmpUcastIPv4SourceList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52078,20 +47658,10 @@ type TopologyImportBgpRoutesParams struct {
 	// RouteLimit: Specify maximum routes(per port) that you want to import. Based on Card Memory, the Max Route Limit Per Port are: - 4GB or more => 2.0 million 2GB => 1.6 million 1GB => 0.8 million Less than 1GB => 0.5 million
 
 	RouteLimit *float32 `json:"routeLimit,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyImportBgpRoutesParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyImportBgpRoutesParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyImportBgpRoutesParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52116,20 +47686,10 @@ type TopologyInnerVlanList struct {
 	Tpid *Multivalue `json:"tpid,omitempty"`
 	// VlanId: 12-bit VLAN ID in the VLAN tag.
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInnerVlanList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInnerVlanList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInnerVlanList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52177,20 +47737,10 @@ type TopologyInstruction struct {
 	Name    *string                     `json:"name,omitempty"`
 	Actions []*TopologyActions          `json:"actions"`
 	Field   []*TopologyInstructionField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInstruction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInstruction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInstruction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52262,20 +47812,10 @@ type TopologyInstructionField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: The string value of the field.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInstructionField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInstructionField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInstructionField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52312,20 +47852,10 @@ type TopologyInstructions struct {
 
 	Name        *string                `json:"name,omitempty"`
 	Instruction []*TopologyInstruction `json:"instruction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInstructions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInstructions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInstructions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52402,20 +47932,10 @@ type TopologyInterAreaPrefix struct {
 	UnusedBit7 *Multivalue `json:"unusedBit7,omitempty"`
 	// VFlag: V-Flag: Value flag. If set, then the SID carries an absolute value label value
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInterAreaPrefix) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInterAreaPrefix) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInterAreaPrefix) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52579,20 +48099,10 @@ type TopologyInterAreaRouter struct {
 	ReservedBit7 *Multivalue `json:"reservedBit7,omitempty"`
 	// V6Bit: bit for excluding the router/link from IPv6 routing calculations. If clear, router/link is excluded
 	V6Bit *Multivalue `json:"v6Bit,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInterAreaRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInterAreaRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInterAreaRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52708,20 +48218,10 @@ type TopologyInterestedVlanList struct {
 	VlanCount *Multivalue `json:"vlanCount,omitempty"`
 	// VlanIdIncr: Vlan Id Increment
 	VlanIdIncr *Multivalue `json:"vlanIdIncr,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyInterestedVlanList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyInterestedVlanList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyInterestedVlanList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -52847,20 +48347,10 @@ type TopologyIntraAreaPrefix struct {
 	UnusedBit7 *Multivalue `json:"unusedBit7,omitempty"`
 	// VFlag: V-Flag: Value flag. If set, then the SID carries an absolute value label value
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIntraAreaPrefix) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIntraAreaPrefix) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIntraAreaPrefix) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -53006,20 +48496,10 @@ type TopologyIpVersion struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpVersion) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpVersion) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpVersion) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -53066,20 +48546,10 @@ type TopologyIptv struct {
 	ZapInterval *Multivalue `json:"zapInterval,omitempty"`
 	// ZapIntervalType: Specifies the wait interval type before changing the channels.
 	ZapIntervalType *Multivalue `json:"zapIntervalType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIptv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIptv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIptv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -53226,20 +48696,10 @@ type TopologyIpv4 struct {
 	RsvpteLsps            []*TopologyRsvpteLsps            `json:"rsvpteLsps"`
 	Tag                   []*TopologyTag                   `json:"tag"`
 	Vxlan                 []*TopologyVxlan                 `json:"vxlan"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -53726,20 +49186,10 @@ type TopologyIpv4Loopback struct {
 	RsvpteLsps        []*TopologyRsvpteLsps        `json:"rsvpteLsps"`
 	Tag               []*TopologyTag               `json:"tag"`
 	Vxlan             []*TopologyVxlan             `json:"vxlan"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv4Loopback) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv4Loopback) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv4Loopback) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -54009,20 +49459,10 @@ type TopologyIpv4NodeId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv4NodeId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv4NodeId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv4NodeId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -54074,20 +49514,10 @@ type TopologyIpv4PrefixPools struct {
 	LdpFECProperty               []*TopologyLdpFecProperty               `json:"ldpFECProperty"`
 	OspfRouteProperty            []*TopologyOspfRouteProperty            `json:"ospfRouteProperty"`
 	Tag                          []*TopologyTag                          `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv4PrefixPools) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv4PrefixPools) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv4PrefixPools) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -54378,20 +49808,10 @@ type TopologyIpv6 struct {
 	Ptp                     []*TopologyPtp                     `json:"ptp"`
 	Tag                     []*TopologyTag                     `json:"tag"`
 	Vxlanv6                 []*TopologyVxlanv6                 `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -54673,20 +50093,10 @@ type TopologyIpv6Autoconfiguration struct {
 	PimV6Interface    []*TopologyPimV6Interface `json:"pimV6Interface"`
 	Tag               []*TopologyTag            `json:"tag"`
 	Vxlanv6           []*TopologyVxlanv6        `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6Autoconfiguration) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6Autoconfiguration) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6Autoconfiguration) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -54829,20 +50239,10 @@ type TopologyIpv6Loopback struct {
 	PimV6Interface      []*TopologyPimV6Interface      `json:"pimV6Interface"`
 	Tag                 []*TopologyTag                 `json:"tag"`
 	Vxlanv6             []*TopologyVxlanv6             `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6Loopback) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6Loopback) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6Loopback) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55004,20 +50404,10 @@ type TopologyIpv6NodeId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6NodeId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6NodeId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6NodeId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55070,20 +50460,10 @@ type TopologyIpv6PrefixPools struct {
 	OspfRouteProperty            []*TopologyOspfRouteProperty            `json:"ospfRouteProperty"`
 	Ospfv3RouteProperty          []*TopologyOspfv3RouteProperty          `json:"ospfv3RouteProperty"`
 	Tag                          []*TopologyTag                          `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6PrefixPools) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6PrefixPools) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6PrefixPools) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55383,20 +50763,10 @@ type TopologyIpv6sr struct {
 	IPv6SegmentsList []*TopologyIPv6SegmentsList `json:"IPv6SegmentsList"`
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIpv6sr) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIpv6sr) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIpv6sr) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55509,20 +50879,10 @@ type TopologyIsidList struct {
 	TransmissionType *Multivalue `json:"transmissionType,omitempty"`
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55603,20 +50963,10 @@ type TopologyIsisAppSpecSrlgList struct {
 	UserDefAppBm *Multivalue `json:"userDefAppBm,omitempty"`
 	// UserDefAppBmLen: User Defined Application BM Length
 	UserDefAppBmLen *Multivalue `json:"userDefAppBmLen,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisAppSpecSrlgList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisAppSpecSrlgList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisAppSpecSrlgList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55686,20 +51036,10 @@ type TopologyIsisBierBsObjectList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisBierBsObjectList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisBierBsObjectList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisBierBsObjectList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55747,20 +51087,10 @@ type TopologyIsisBierSubDomainList struct {
 	// SubDomainId: Sub Domain Id
 	SubDomainId          *Multivalue                     `json:"subDomainId,omitempty"`
 	IsisBierBSObjectList []*TopologyIsisBierBsObjectList `json:"isisBierBSObjectList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisBierSubDomainList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisBierSubDomainList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisBierSubDomainList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55820,20 +51150,10 @@ type TopologyIsisDcePseudoIfaceAttPoint1Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisDcePseudoIfaceAttPoint1Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisDcePseudoIfaceAttPoint1Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisDcePseudoIfaceAttPoint1Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55866,20 +51186,10 @@ type TopologyIsisDcePseudoIfaceAttPoint2Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisDcePseudoIfaceAttPoint2Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisDcePseudoIfaceAttPoint2Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisDcePseudoIfaceAttPoint2Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55914,20 +51224,10 @@ type TopologyIsisDcePseudoNode struct {
 	Name *string `json:"name,omitempty"`
 	// Nickname: Nickname
 	Nickname *Multivalue `json:"nickname,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisDcePseudoNode) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisDcePseudoNode) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisDcePseudoNode) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -55997,20 +51297,10 @@ type TopologyIsisDceSimRouter struct {
 	DceSimulatedMCastIpv6GroupList *TopologyDceSimulatedMCastIpv6GroupList `json:"dceSimulatedMCastIpv6GroupList,omitempty"`
 
 	DceSimulatedMCastMacGroupList *TopologyDceSimulatedMCastMacGroupList `json:"dceSimulatedMCastMacGroupList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisDceSimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisDceSimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisDceSimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -56076,20 +51366,10 @@ type TopologyIsisDceSimulatedTopologyConfig struct {
 	Name *string `json:"name,omitempty"`
 
 	DceNodeTopologyList *TopologyDceNodeTopologyList `json:"dceNodeTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisDceSimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisDceSimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisDceSimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -56171,20 +51451,10 @@ type TopologyIsisFabricPath struct {
 
 	Connector   *TopologyConnector     `json:"connector,omitempty"`
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisFabricPath) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisFabricPath) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisFabricPath) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -56360,20 +51630,10 @@ type TopologyIsisFabricPathRouter struct {
 	DceMCastMacGroupList *TopologyDceMCastMacGroupList `json:"dceMCastMacGroupList,omitempty"`
 
 	DceTopologyList *TopologyDceTopologyList `json:"dceTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisFabricPathRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisFabricPathRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisFabricPathRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -56567,20 +51827,10 @@ type TopologyIsisFlexAlgorithmList struct {
 	Priority *Multivalue `json:"priority,omitempty"`
 	// ReservedBits: Reserved Bits
 	ReservedBits *Multivalue `json:"reservedBits,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisFlexAlgorithmList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisFlexAlgorithmList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisFlexAlgorithmList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -56864,20 +52114,10 @@ type TopologyIsisL3 struct {
 	IsisTrafficEngineeringProfileList *TopologyIsisTrafficEngineeringProfileList `json:"isisTrafficEngineeringProfileList,omitempty"`
 	LearnedInfo                       []*TopologyLearnedInfo                     `json:"learnedInfo"`
 	SrlgValueList                     []*TopologySrlgValueList                   `json:"srlgValueList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -57264,20 +52504,10 @@ type TopologyIsisL3PrefixesSrSid struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3PrefixesSrSid) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3PrefixesSrSid) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3PrefixesSrSid) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -57360,20 +52590,10 @@ type TopologyIsisL3PseudoIfaceAttPoint1Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3PseudoIfaceAttPoint1Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3PseudoIfaceAttPoint1Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3PseudoIfaceAttPoint1Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -57406,20 +52626,10 @@ type TopologyIsisL3PseudoIfaceAttPoint2Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3PseudoIfaceAttPoint2Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3PseudoIfaceAttPoint2Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3PseudoIfaceAttPoint2Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -57578,20 +52788,10 @@ type TopologyIsisL3PseudoInterface struct {
 	IsisTrillPseudoIfaceAttPoint1Config []*TopologyIsisTrillPseudoIfaceAttPoint1Config `json:"isisTrillPseudoIfaceAttPoint1Config"`
 	IsisTrillPseudoIfaceAttPoint2Config []*TopologyIsisTrillPseudoIfaceAttPoint2Config `json:"isisTrillPseudoIfaceAttPoint2Config"`
 	SrlgValueList                       []*TopologySrlgValueList                       `json:"srlgValueList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3PseudoInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3PseudoInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3PseudoInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -58166,20 +53366,10 @@ type TopologyIsisL3PseudoRouter struct {
 	IsisSRAlgorithmList            []*TopologyIsisSrAlgorithmList          `json:"isisSRAlgorithmList"`
 	IsisSRGBRangeSubObjectsList    []*TopologyIsisSrgbRangeSubObjectsList  `json:"isisSRGBRangeSubObjectsList"`
 	IsisSRLBDescriptorList         []*TopologyIsisSrlbDescriptorList       `json:"isisSRLBDescriptorList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3PseudoRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3PseudoRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3PseudoRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -58704,20 +53894,10 @@ type TopologyIsisL3RouteProperty struct {
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
 
 	IsisL3PrefixesSrSid *TopologyIsisL3PrefixesSrSid `json:"isisL3PrefixesSrSid,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3RouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3RouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3RouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -59222,20 +54402,10 @@ type TopologyIsisL3Router struct {
 
 	IsisSRv6LocatorEntryList *TopologyIsisSRv6LocatorEntryList `json:"isisSRv6LocatorEntryList,omitempty"`
 	Tag                      []*TopologyTag                    `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -59899,20 +55069,10 @@ type TopologyIsisL3SimulatedTopologyConfig struct {
 	IsisL3ipv4NodeRouteList *TopologyIsisL3ipv4NodeRouteList `json:"isisL3ipv4NodeRouteList,omitempty"`
 
 	IsisL3ipv6NodeRouteList *TopologyIsisL3ipv6NodeRouteList `json:"isisL3ipv6NodeRouteList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3SimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3SimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3SimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -59972,20 +55132,10 @@ type TopologyIsisL3ipv4NodeRouteList struct {
 	RouteOrigin *Multivalue `json:"routeOrigin,omitempty"`
 	// RouteStep: RouteStep
 	RouteStep *Multivalue `json:"routeStep,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3ipv4NodeRouteList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3ipv4NodeRouteList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3ipv4NodeRouteList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60067,20 +55217,10 @@ type TopologyIsisL3ipv6NodeRouteList struct {
 	RouteOrigin *Multivalue `json:"routeOrigin,omitempty"`
 	// RouteStep: RouteStep
 	RouteStep *Multivalue `json:"routeStep,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisL3ipv6NodeRouteList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisL3ipv6NodeRouteList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisL3ipv6NodeRouteList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60178,20 +55318,10 @@ type TopologyIsisMappingServerIpv4List struct {
 	VFlag *Multivalue `json:"vFlag,omitempty"`
 	// Weight: Weight
 	Weight *Multivalue `json:"weight,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisMappingServerIpv4List) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisMappingServerIpv4List) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisMappingServerIpv4List) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60329,20 +55459,10 @@ type TopologyIsisMappingServerIpv6List struct {
 	VFlag *Multivalue `json:"vFlag,omitempty"`
 	// Weight: Weight
 	Weight *Multivalue `json:"weight,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisMappingServerIpv6List) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisMappingServerIpv6List) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisMappingServerIpv6List) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60450,20 +55570,10 @@ type TopologyIsisMultiTopologyValuesList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisMultiTopologyValuesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisMultiTopologyValuesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisMultiTopologyValuesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60510,20 +55620,10 @@ type TopologyIsisPseudoAppSpecSrlgList struct {
 	UserDefAppBm *Multivalue `json:"userDefAppBm,omitempty"`
 	// UserDefAppBmLen: User Defined Application BM Length
 	UserDefAppBmLen *Multivalue `json:"userDefAppBmLen,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoAppSpecSrlgList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoAppSpecSrlgList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoAppSpecSrlgList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60631,20 +55731,10 @@ type TopologyIsisPseudoFlexAlgorithm struct {
 	Priority *Multivalue `json:"priority,omitempty"`
 	// ReservedBits: Reserved Bits
 	ReservedBits *Multivalue `json:"reservedBits,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoFlexAlgorithm) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoFlexAlgorithm) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoFlexAlgorithm) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60783,20 +55873,10 @@ type TopologyIsisPseudoInterface struct {
 	IsisSpbPseudoIfaceAttPoint2Config   []*TopologyIsisSpbPseudoIfaceAttPoint2Config   `json:"isisSpbPseudoIfaceAttPoint2Config"`
 	IsisTrillPseudoIfaceAttPoint1Config []*TopologyIsisTrillPseudoIfaceAttPoint1Config `json:"isisTrillPseudoIfaceAttPoint1Config"`
 	IsisTrillPseudoIfaceAttPoint2Config []*TopologyIsisTrillPseudoIfaceAttPoint2Config `json:"isisTrillPseudoIfaceAttPoint2Config"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -60920,20 +56000,10 @@ type TopologyIsisPseudoMultiTopologyValuesList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoMultiTopologyValuesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoMultiTopologyValuesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoMultiTopologyValuesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61030,20 +56100,10 @@ type TopologyIsisPseudoSRv6AdjSidList struct {
 	Weight *Multivalue `json:"weight,omitempty"`
 	// WeightTo: Weight
 	WeightTo *Multivalue `json:"weightTo,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoSRv6AdjSidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoSRv6AdjSidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoSRv6AdjSidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61258,20 +56318,10 @@ type TopologyIsisPseudoSRv6EndSidList struct {
 	Sid *Multivalue `json:"sid,omitempty"`
 	// SidName: SID Name
 	SidName *Multivalue `json:"sidName,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoSRv6EndSidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoSRv6EndSidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoSRv6EndSidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61390,20 +56440,10 @@ type TopologyIsisPseudoSRv6LocatorEntryList struct {
 	SidCount *float32 `json:"sidCount,omitempty"`
 
 	IsisPseudoSRv6EndSIDList *TopologyIsisPseudoSRv6EndSidList `json:"isisPseudoSRv6EndSIDList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoSRv6LocatorEntryList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoSRv6LocatorEntryList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoSRv6LocatorEntryList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61583,20 +56623,10 @@ type TopologyIsisPseudoTraffEngProfile struct {
 	UserDefAppBm *Multivalue `json:"userDefAppBm,omitempty"`
 	// UserDefAppBmLen: User Defined Application BM Length
 	UserDefAppBmLen *Multivalue `json:"userDefAppBmLen,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisPseudoTraffEngProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisPseudoTraffEngProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisPseudoTraffEngProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61852,20 +56882,10 @@ type TopologyIsisSRv6AdjSidList struct {
 	SFlag *Multivalue `json:"sFlag,omitempty"`
 	// Weight: Weight
 	Weight *Multivalue `json:"weight,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSRv6AdjSidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSRv6AdjSidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSRv6AdjSidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -61988,20 +57008,10 @@ type TopologyIsisSRv6EndSidList struct {
 	Sid *Multivalue `json:"sid,omitempty"`
 	// SidName: SID Name
 	SidName *Multivalue `json:"sidName,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSRv6EndSidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSRv6EndSidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSRv6EndSidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62115,20 +57125,10 @@ type TopologyIsisSRv6LocatorEntryList struct {
 	SidCount *float32 `json:"sidCount,omitempty"`
 
 	IsisSRv6EndSIDList *TopologyIsisSRv6EndSidList `json:"isisSRv6EndSIDList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSRv6LocatorEntryList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSRv6LocatorEntryList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSRv6LocatorEntryList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62234,20 +57234,10 @@ type TopologyIsisSegmentList struct {
 	NodeSystemID *Multivalue `json:"nodeSystemID,omitempty"`
 	// SegmentType: Segment Type
 	SegmentType *Multivalue `json:"segmentType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSegmentList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSegmentList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSegmentList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62328,20 +57318,10 @@ type TopologyIsisSpbBcb struct {
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href                 `json:"-"`
 	LearnedInfo       []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbBcb) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbBcb) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbBcb) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62489,20 +57469,10 @@ type TopologyIsisSpbBeb struct {
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href                 `json:"-"`
 	LearnedInfo       []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbBeb) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbBeb) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbBeb) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62615,20 +57585,10 @@ type TopologyIsisSpbMacCloudConfig struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbMacCloudConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbMacCloudConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbMacCloudConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62697,20 +57657,10 @@ type TopologyIsisSpbPseudoIfaceAttPoint1Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbPseudoIfaceAttPoint1Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbPseudoIfaceAttPoint1Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbPseudoIfaceAttPoint1Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62743,20 +57693,10 @@ type TopologyIsisSpbPseudoIfaceAttPoint2Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbPseudoIfaceAttPoint2Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbPseudoIfaceAttPoint2Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbPseudoIfaceAttPoint2Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62791,20 +57731,10 @@ type TopologyIsisSpbPseudoNode struct {
 	Name *string `json:"name,omitempty"`
 	// SpSourceId: SP Source Id
 	SpSourceId *Multivalue `json:"spSourceId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbPseudoNode) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbPseudoNode) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbPseudoNode) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -62897,20 +57827,10 @@ type TopologyIsisSpbRouter struct {
 	SpbTopologyCount *float32 `json:"spbTopologyCount,omitempty"`
 
 	SpbTopologyList *TopologySpbTopologyList `json:"spbTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63091,20 +58011,10 @@ type TopologyIsisSpbSimRouter struct {
 	Connector *TopologyConnector `json:"connector,omitempty"`
 
 	SpbSimEdgeTopologyList *TopologySpbSimEdgeTopologyList `json:"spbSimEdgeTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbSimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbSimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbSimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63164,20 +58074,10 @@ type TopologyIsisSpbSimulatedTopologyConfig struct {
 	SpbNodeTopologyCount *float32 `json:"spbNodeTopologyCount,omitempty"`
 
 	SpbNodeTopologyList *TopologySpbNodeTopologyList `json:"spbNodeTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSpbSimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSpbSimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSpbSimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63222,20 +58122,10 @@ type TopologyIsisSrAlgorithmList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSrAlgorithmList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSrAlgorithmList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSrAlgorithmList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63274,20 +58164,10 @@ type TopologyIsisSrTunnelList struct {
 	UsingHeadEndNodePrefix *Multivalue                `json:"usingHeadEndNodePrefix,omitempty"`
 	IsisSegmentList        []*TopologyIsisSegmentList `json:"isisSegmentList"`
 	Tag                    []*TopologyTag             `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSrTunnelList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSrTunnelList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSrTunnelList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63359,20 +58239,10 @@ type TopologyIsisSrgbRangeSubObjectsList struct {
 	SIDCount *Multivalue `json:"sIDCount,omitempty"`
 	// StartSIDLabel: Start SID/Label
 	StartSIDLabel *Multivalue `json:"startSIDLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSrgbRangeSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSrgbRangeSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSrgbRangeSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63405,20 +58275,10 @@ type TopologyIsisSrlbDescriptorList struct {
 	SIDCount *Multivalue `json:"sIDCount,omitempty"`
 	// StartSIDLabel: Start SID/Label
 	StartSIDLabel *Multivalue `json:"startSIDLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisSrlbDescriptorList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisSrlbDescriptorList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisSrlbDescriptorList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63471,20 +58331,10 @@ type TopologyIsisTrafficEngineering struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrafficEngineering) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrafficEngineering) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrafficEngineering) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63645,20 +58495,10 @@ type TopologyIsisTrafficEngineeringProfileList struct {
 	UserDefAppBm *Multivalue `json:"userDefAppBm,omitempty"`
 	// UserDefAppBmLen: User Defined Application BM Length
 	UserDefAppBmLen *Multivalue `json:"userDefAppBmLen,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrafficEngineeringProfileList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrafficEngineeringProfileList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrafficEngineeringProfileList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -63928,20 +58768,10 @@ type TopologyIsisTrill struct {
 
 	Connector   *TopologyConnector     `json:"connector,omitempty"`
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrill) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrill) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrill) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64060,20 +58890,10 @@ type TopologyIsisTrillPseudoIfaceAttPoint1Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillPseudoIfaceAttPoint1Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillPseudoIfaceAttPoint1Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillPseudoIfaceAttPoint1Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64106,20 +58926,10 @@ type TopologyIsisTrillPseudoIfaceAttPoint2Config struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillPseudoIfaceAttPoint2Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillPseudoIfaceAttPoint2Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillPseudoIfaceAttPoint2Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64154,20 +58964,10 @@ type TopologyIsisTrillPseudoNode struct {
 	Name *string `json:"name,omitempty"`
 	// Nickname: Nickname
 	Nickname *Multivalue `json:"nickname,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillPseudoNode) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillPseudoNode) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillPseudoNode) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64270,20 +59070,10 @@ type TopologyIsisTrillRouter struct {
 	TrillMCastMacGroupList *TopologyTrillMCastMacGroupList `json:"trillMCastMacGroupList,omitempty"`
 
 	TrillTopologyList *TopologyTrillTopologyList `json:"trillTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64484,20 +59274,10 @@ type TopologyIsisTrillSimRouter struct {
 	TrillSimulatedMCastIpv6GroupList *TopologyTrillSimulatedMCastIpv6GroupList `json:"trillSimulatedMCastIpv6GroupList,omitempty"`
 
 	TrillSimulatedMCastMacGroupList *TopologyTrillSimulatedMCastMacGroupList `json:"trillSimulatedMCastMacGroupList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillSimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillSimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillSimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64563,20 +59343,10 @@ type TopologyIsisTrillSimulatedTopologyConfig struct {
 	TrillNodeTopologyCount *float32 `json:"trillNodeTopologyCount,omitempty"`
 
 	TrillNodeTopologyList *TopologyTrillNodeTopologyList `json:"trillNodeTopologyList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillSimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillSimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillSimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64619,20 +59389,10 @@ type TopologyIsisTrillUCastMacConfig struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyIsisTrillUCastMacConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyIsisTrillUCastMacConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyIsisTrillUCastMacConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64700,20 +59460,10 @@ type TopologyLabelBlockList struct {
 	OffsetLabelBlock *Multivalue `json:"offsetLabelBlock,omitempty"`
 	// StartLabel: Label Start
 	StartLabel *Multivalue `json:"startLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLabelBlockList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLabelBlockList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLabelBlockList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -64826,20 +59576,10 @@ type TopologyLac struct {
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
 	Tag       []*TopologyTag     `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLac) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLac) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLac) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65066,20 +59806,10 @@ type TopologyLacp struct {
 	SupportRespondingToMarker *Multivalue `json:"supportRespondingToMarker,omitempty"`
 	// SynchronizationFlag: Synchronization Flag
 	SynchronizationFlag *Multivalue `json:"synchronizationFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLacp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLacp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLacp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65270,20 +60000,10 @@ type TopologyLagportlacp struct {
 	SupportRespondingToMarker *Multivalue `json:"supportRespondingToMarker,omitempty"`
 	// SynchronizationFlag: Synchronization Flag
 	SynchronizationFlag *Multivalue `json:"synchronizationFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLagportlacp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLagportlacp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLagportlacp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65432,20 +60152,10 @@ type TopologyLagportstaticlag struct {
 	StackedLayers []string `json:"stackedLayers"`
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLagportstaticlag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLagportstaticlag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLagportstaticlag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65536,20 +60246,10 @@ type TopologyLdpBasicRouter struct {
 	Ldppwvpls      []*TopologyLdppwvpls    `json:"ldppwvpls"`
 	Ldpvplsbgpad   []*TopologyLdpvplsbgpad `json:"ldpvplsbgpad"`
 	LearnedInfo    []*TopologyLearnedInfo  `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpBasicRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpBasicRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpBasicRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65770,20 +60470,10 @@ type TopologyLdpBasicRouterV6 struct {
 	Ldppwvpls      []*TopologyLdppwvpls    `json:"ldppwvpls"`
 	Ldpvplsbgpad   []*TopologyLdpvplsbgpad `json:"ldpvplsbgpad"`
 	LearnedInfo    []*TopologyLearnedInfo  `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpBasicRouterV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpBasicRouterV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpBasicRouterV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -65969,20 +60659,10 @@ type TopologyLdpConnectedInterface struct {
 	StackedLayers []string `json:"stackedLayers"`
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpConnectedInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpConnectedInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpConnectedInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66054,20 +60734,10 @@ type TopologyLdpFecProperty struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpFecProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpFecProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpFecProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66160,20 +60830,10 @@ type TopologyLdpIpv6FecProperty struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpIpv6FecProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpIpv6FecProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpIpv6FecProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66283,20 +60943,10 @@ type TopologyLdpLeafRangeV4 struct {
 	RootAddressStep *Multivalue           `json:"rootAddressStep,omitempty"`
 	LdpTLVList      []*TopologyLdpTlvList `json:"ldpTLVList"`
 	Tag             []*TopologyTag        `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpLeafRangeV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpLeafRangeV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpLeafRangeV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66424,20 +61074,10 @@ type TopologyLdpLeafRangeV6 struct {
 	RootAddressStep *Multivalue           `json:"rootAddressStep,omitempty"`
 	LdpTLVList      []*TopologyLdpTlvList `json:"ldpTLVList"`
 	Tag             []*TopologyTag        `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpLeafRangeV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpLeafRangeV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpLeafRangeV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66537,20 +61177,10 @@ type TopologyLdpLpbInterface struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpLpbInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpLpbInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpLpbInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66578,20 +61208,10 @@ type TopologyLdpPseudoRouter struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpPseudoRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpPseudoRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpPseudoRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66649,20 +61269,10 @@ type TopologyLdpRootRangeV4 struct {
 	StartGroupAddressV6 *Multivalue           `json:"startGroupAddressV6,omitempty"`
 	LdpTLVList          []*TopologyLdpTlvList `json:"ldpTLVList"`
 	Tag                 []*TopologyTag        `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpRootRangeV4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpRootRangeV4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpRootRangeV4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66794,20 +61404,10 @@ type TopologyLdpRootRangeV6 struct {
 	StartGroupAddressV6 *Multivalue           `json:"startGroupAddressV6,omitempty"`
 	LdpTLVList          []*TopologyLdpTlvList `json:"ldpTLVList"`
 	Tag                 []*TopologyTag        `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpRootRangeV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpRootRangeV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpRootRangeV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66912,20 +61512,10 @@ type TopologyLdpSimulatedTopologyConfig struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpSimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpSimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpSimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -66963,20 +61553,10 @@ type TopologyLdpTargetedIpv6Peer struct {
 	TargetedHelloInterval *Multivalue `json:"targetedHelloInterval,omitempty"`
 	// TargetedHoldTime: Targeted Hold Time
 	TargetedHoldTime *Multivalue `json:"targetedHoldTime,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpTargetedIpv6Peer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpTargetedIpv6Peer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpTargetedIpv6Peer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -67044,20 +61624,10 @@ type TopologyLdpTargetedPeer struct {
 	TargetedHelloInterval *Multivalue `json:"targetedHelloInterval,omitempty"`
 	// TargetedHoldTime: Targeted Hold Time
 	TargetedHoldTime *Multivalue `json:"targetedHoldTime,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpTargetedPeer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpTargetedPeer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpTargetedPeer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -67191,20 +61761,10 @@ type TopologyLdpTargetedRouter struct {
 	Ldppwvpls       []*TopologyLdppwvpls     `json:"ldppwvpls"`
 	Ldpvplsbgpad    []*TopologyLdpvplsbgpad  `json:"ldpvplsbgpad"`
 	LearnedInfo     []*TopologyLearnedInfo   `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpTargetedRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpTargetedRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpTargetedRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -67471,20 +62031,10 @@ type TopologyLdpTargetedRouterV6 struct {
 	Ldppwvpls       []*TopologyLdppwvpls     `json:"ldppwvpls"`
 	Ldpvplsbgpad    []*TopologyLdpvplsbgpad  `json:"ldpvplsbgpad"`
 	LearnedInfo     []*TopologyLearnedInfo   `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpTargetedRouterV6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpTargetedRouterV6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpTargetedRouterV6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -67681,20 +62231,10 @@ type TopologyLdpTlvList struct {
 	Type_ *Multivalue `json:"type,omitempty"`
 	// Value: Value
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpTlvList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpTlvList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpTlvList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -67849,20 +62389,10 @@ type TopologyLdpotherpws struct {
 	LdpBasicRouterV6    []*TopologyLdpBasicRouterV6    `json:"ldpBasicRouterV6"`
 	LdpTargetedRouter   []*TopologyLdpTargetedRouter   `json:"ldpTargetedRouter"`
 	LdpTargetedRouterV6 []*TopologyLdpTargetedRouterV6 `json:"ldpTargetedRouterV6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpotherpws) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpotherpws) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpotherpws) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -68264,20 +62794,10 @@ type TopologyLdppwvpls struct {
 	LdpTargetedRouterV6 []*TopologyLdpTargetedRouterV6 `json:"ldpTargetedRouterV6"`
 	Mpls                []*TopologyMpls                `json:"mpls"`
 	Tag                 []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdppwvpls) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdppwvpls) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdppwvpls) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -68560,20 +63080,10 @@ type TopologyLdpv6ConnectedInterface struct {
 	StackedLayers []string `json:"stackedLayers"`
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpv6ConnectedInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpv6ConnectedInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpv6ConnectedInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -68634,20 +63144,10 @@ type TopologyLdpv6LoopbackInterface struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpv6LoopbackInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpv6LoopbackInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpv6LoopbackInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -68765,20 +63265,10 @@ type TopologyLdpvplsbgpad struct {
 	LdpTargetedRouter   []*TopologyLdpTargetedRouter   `json:"ldpTargetedRouter"`
 	LdpTargetedRouterV6 []*TopologyLdpTargetedRouterV6 `json:"ldpTargetedRouterV6"`
 	Tag                 []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLdpvplsbgpad) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLdpvplsbgpad) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLdpvplsbgpad) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69071,20 +63561,10 @@ type TopologyLearnedInfo struct {
 	Xpath *XPath           `json:"xpath,omitempty"`
 	Col   []*TopologyCol   `json:"col"`
 	Table []*TopologyTable `json:"table"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLearnedInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLearnedInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLearnedInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69125,20 +63605,10 @@ type TopologyLearnedInfoUpdate struct {
 
 	Xpath                           *XPath                                     `json:"xpath,omitempty"`
 	MplsoamSbfdResponderLearnedInfo []*TopologyMplsoamSbfdResponderLearnedInfo `json:"mplsoamSbfdResponderLearnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLearnedInfoUpdate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLearnedInfoUpdate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLearnedInfoUpdate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69166,20 +63636,10 @@ type TopologyLearnedLspIndex struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLearnedLspIndex) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLearnedLspIndex) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLearnedLspIndex) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69195,20 +63655,10 @@ type TopologyLearnedMsgDbType struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLearnedMsgDbType) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLearnedMsgDbType) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLearnedMsgDbType) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69248,20 +63698,10 @@ type TopologyLength struct {
 	// Value: Value represented as a multivalue object
 	Value       *Multivalue            `json:"value,omitempty"`
 	Restriction []*TopologyRestriction `json:"restriction"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLength) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLength) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLength) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69297,20 +63737,10 @@ type TopologyLevel struct {
 	// NodeCount: Number of Nodes Per Level
 
 	NodeCount *float32 `json:"nodeCount,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLevel) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLevel) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLevel) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69330,20 +63760,10 @@ type TopologyLightweightDhcp6RelayTlvProfile struct {
 
 	Name       *string               `json:"name,omitempty"`
 	TlvProfile []*TopologyTlvProfile `json:"tlvProfile"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLightweightDhcp6RelayTlvProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLightweightDhcp6RelayTlvProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLightweightDhcp6RelayTlvProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69387,20 +63807,10 @@ type TopologyLightweightDhcpv6relayAgent struct {
 	StackedLayersRefs []Href `json:"-"`
 
 	LightweightDhcp6RelayTlvProfile *TopologyLightweightDhcp6RelayTlvProfile `json:"lightweightDhcp6RelayTlvProfile,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLightweightDhcpv6relayAgent) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLightweightDhcpv6relayAgent) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLightweightDhcpv6relayAgent) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69435,20 +63845,10 @@ type TopologyLink struct {
 	ToMp *Multivalue `json:"toMp,omitempty"`
 	// ToMpIndex: To MP Index
 	ToMpIndex *Multivalue `json:"toMpIndex,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLink) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLink) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLink) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69563,20 +63963,10 @@ type TopologyLinkLsaRoutes struct {
 	VFlag *Multivalue `json:"vFlag,omitempty"`
 	// XBit: bit for forwarding of IP multicast datagrams
 	XBit *Multivalue `json:"xBit,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLinkLsaRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLinkLsaRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLinkLsaRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69761,20 +64151,10 @@ type TopologyLinkTable struct {
 	FromNodeIndex []string `json:"fromNodeIndex"`
 	// ToNodeIndex: to node index.
 	ToNodeIndex []string `json:"toNodeIndex"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLinkTable) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLinkTable) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLinkTable) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -69866,20 +64246,10 @@ type TopologyLns struct {
 	LnsAuthCredentials *TopologyLnsAuthCredentials `json:"lnsAuthCredentials,omitempty"`
 	Pppoxserver        []*TopologyPppoxserver      `json:"pppoxserver"`
 	Tag                []*TopologyTag              `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLns) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLns) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLns) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70060,20 +64430,10 @@ type TopologyLnsAuthCredentials struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLnsAuthCredentials) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLnsAuthCredentials) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLnsAuthCredentials) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70099,20 +64459,10 @@ type TopologyLocalIntefaceId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLocalIntefaceId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLocalIntefaceId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLocalIntefaceId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70128,20 +64478,10 @@ type TopologyLocalIpv4Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLocalIpv4Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLocalIpv4Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLocalIpv4Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70157,20 +64497,10 @@ type TopologyLocalIpv6Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLocalIpv6Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLocalIpv6Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLocalIpv6Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70186,20 +64516,10 @@ type TopologyLocalNodeId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyLocalNodeId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyLocalNodeId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyLocalNodeId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70246,20 +64566,10 @@ type TopologyMacPools struct {
 	IsisTrillUCastMacConfig []*TopologyIsisTrillUCastMacConfig `json:"isisTrillUCastMacConfig"`
 	Tag                     []*TopologyTag                     `json:"tag"`
 	Vlan                    []*TopologyVlan                    `json:"vlan"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMacPools) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMacPools) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMacPools) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -70534,20 +64844,10 @@ type TopologyMacsec struct {
 	TxSakPool *TopologyTxSakPool `json:"txSakPool,omitempty"`
 	Vxlan     []*TopologyVxlan   `json:"vxlan"`
 	Vxlanv6   []*TopologyVxlanv6 `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMacsec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMacsec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMacsec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71070,20 +65370,10 @@ type TopologyManager struct {
 	Name *string `json:"name,omitempty"`
 	// TcpPort: Specify the TCP port for the Manager
 	TcpPort *Multivalue `json:"tcpPort,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyManager) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyManager) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyManager) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71133,20 +65423,10 @@ type TopologyMatchAction struct {
 	Instructions *TopologyInstructions `json:"instructions,omitempty"`
 
 	MatchCriteria *TopologyMatchCriteria `json:"matchCriteria,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMatchAction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMatchAction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMatchAction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71188,20 +65468,10 @@ type TopologyMatchCriteria struct {
 	Field []*TopologyMatchCriteriaField `json:"field"`
 
 	MatchCriteria *TopologyMatchCriteria `json:"matchCriteria,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMatchCriteria) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMatchCriteria) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMatchCriteria) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71265,20 +65535,10 @@ type TopologyMatchCriteriaField struct {
 	SizeType *string `json:"sizeType,omitempty"`
 	// Value: The string value of the field.
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMatchCriteriaField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMatchCriteriaField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMatchCriteriaField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71310,20 +65570,10 @@ type TopologyMdLevels struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMdLevels) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMdLevels) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMdLevels) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71379,20 +65629,10 @@ type TopologyMeters struct {
 
 	NumberOfBands *float32         `json:"numberOfBands,omitempty"`
 	Bands         []*TopologyBands `json:"bands"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMeters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMeters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMeters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71523,20 +65763,10 @@ type TopologyMka struct {
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
 
 	TxChannels *TopologyTxChannels `json:"txChannels,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMka) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMka) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMka) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71712,20 +65942,10 @@ type TopologyMldHost struct {
 
 	MldMcastIPv6GroupList *TopologyMldMcastIPv6GroupList `json:"mldMcastIPv6GroupList,omitempty"`
 	Tag                   []*TopologyTag                 `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMldHost) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMldHost) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMldHost) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71830,20 +66050,10 @@ type TopologyMldMcastIPv6GroupList struct {
 
 	MldUcastIPv6SourceList *TopologyMldUcastIPv6SourceList `json:"mldUcastIPv6SourceList,omitempty"`
 	Tag                    []*TopologyTag                  `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMldMcastIPv6GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMldMcastIPv6GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMldMcastIPv6GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -71943,20 +66153,10 @@ type TopologyMldQuerier struct {
 	// VersionType: Version
 	VersionType *Multivalue            `json:"versionType,omitempty"`
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMldQuerier) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMldQuerier) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMldQuerier) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72065,20 +66265,10 @@ type TopologyMldUcastIPv6SourceList struct {
 	UcastAddrIncr *Multivalue `json:"ucastAddrIncr,omitempty"`
 	// UcastSrcAddrCnt: Source Address Count
 	UcastSrcAddrCnt *Multivalue `json:"ucastSrcAddrCnt,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMldUcastIPv6SourceList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMldUcastIPv6SourceList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMldUcastIPv6SourceList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72182,20 +66372,10 @@ type TopologyMpls struct {
 	StaticLag             []*TopologyStaticLag             `json:"staticLag"`
 
 	Streams *TopologyStreams `json:"streams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMpls) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMpls) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMpls) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72561,20 +66741,10 @@ type TopologyMplsLabel struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMplsLabel) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMplsLabel) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMplsLabel) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72599,20 +66769,10 @@ type TopologyMplsLabelList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMplsLabelList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMplsLabelList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMplsLabelList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72723,20 +66883,10 @@ type TopologyMplsOam struct {
 	SbfdInitiator *TopologySbfdInitiator `json:"sbfdInitiator,omitempty"`
 
 	SbfdResponder *TopologySbfdResponder `json:"sbfdResponder,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMplsOam) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMplsOam) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMplsOam) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72924,20 +67074,10 @@ type TopologyMplsoamRouter struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMplsoamRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMplsoamRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMplsoamRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -72958,20 +67098,10 @@ type TopologyMplsoamSbfdResponderLearnedInfo struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMplsoamSbfdResponderLearnedInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMplsoamSbfdResponderLearnedInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMplsoamSbfdResponderLearnedInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73034,20 +67164,10 @@ type TopologyMsrpListener struct {
 	MsrpListenerDomains *TopologyMsrpListenerDomains `json:"msrpListenerDomains,omitempty"`
 
 	SubscribedStreams *TopologySubscribedStreams `json:"subscribedStreams,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMsrpListener) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMsrpListener) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMsrpListener) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73134,20 +67254,10 @@ type TopologyMsrpListenerDomains struct {
 	SrClassPriorityType *Multivalue `json:"srClassPriorityType,omitempty"`
 	// SrClassVid: VLAN ID that associated streams will be tagged with by Talker
 	SrClassVid *Multivalue `json:"srClassVid,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMsrpListenerDomains) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMsrpListenerDomains) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMsrpListenerDomains) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73221,20 +67331,10 @@ type TopologyMsrpTalker struct {
 	LearnedInfo       []*TopologyLearnedInfo `json:"learnedInfo"`
 
 	MsrpTalkerDomains *TopologyMsrpTalkerDomains `json:"msrpTalkerDomains,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMsrpTalker) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMsrpTalker) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMsrpTalker) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73307,20 +67407,10 @@ type TopologyMsrpTalkerDomains struct {
 	SrClassPriorityType *Multivalue `json:"srClassPriorityType,omitempty"`
 	// SrClassVid: VLAN ID that associated streams will be tagged with by Talker
 	SrClassVid *Multivalue `json:"srClassVid,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyMsrpTalkerDomains) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyMsrpTalkerDomains) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyMsrpTalkerDomains) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73356,20 +67446,10 @@ type TopologyNaiType struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNaiType) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNaiType) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNaiType) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73393,20 +67473,10 @@ type TopologyNetTopologyCustom struct {
 	LinkMultiplier *float32 `json:"linkMultiplier,omitempty"`
 
 	LinkTable *TopologyLinkTable `json:"linkTable,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyCustom) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyCustom) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyCustom) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73436,20 +67506,10 @@ type TopologyNetTopologyFatTree struct {
 
 	LinkMultiplier *float32         `json:"linkMultiplier,omitempty"`
 	Level          []*TopologyLevel `json:"level"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyFatTree) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyFatTree) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyFatTree) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73489,20 +67549,10 @@ type TopologyNetTopologyGrid struct {
 	// Rows: number of rows
 
 	Rows *float32 `json:"rows,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyGrid) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyGrid) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyGrid) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73533,20 +67583,10 @@ type TopologyNetTopologyHubNSpoke struct {
 	// NumberOfSecondLevelSpokes: Number of Second Level Spokes
 
 	NumberOfSecondLevelSpokes *float32 `json:"numberOfSecondLevelSpokes,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyHubNSpoke) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyHubNSpoke) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyHubNSpoke) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73571,20 +67611,10 @@ type TopologyNetTopologyLinear struct {
 	// Nodes: number of nodes
 
 	Nodes *float32 `json:"nodes,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyLinear) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyLinear) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyLinear) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73609,20 +67639,10 @@ type TopologyNetTopologyMesh struct {
 	// Nodes: number of nodes
 
 	Nodes *float32 `json:"nodes,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyMesh) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyMesh) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyMesh) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73647,20 +67667,10 @@ type TopologyNetTopologyRing struct {
 	// Nodes: number of nodes
 
 	Nodes *float32 `json:"nodes,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyRing) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyRing) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyRing) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73694,20 +67704,10 @@ type TopologyNetTopologyTree struct {
 	// UseTreeDepth: Use Tree Depth
 
 	UseTreeDepth *bool `json:"useTreeDepth,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetTopologyTree) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetTopologyTree) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetTopologyTree) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -73807,20 +67807,10 @@ type TopologyNetconfClient struct {
 
 	CommandSnippetsData *TopologyCommandSnippetsData `json:"commandSnippetsData,omitempty"`
 	LearnedInfo         []*TopologyLearnedInfo       `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetconfClient) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetconfClient) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetconfClient) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -74075,20 +68065,10 @@ type TopologyNetconfServer struct {
 	StackedLayersRefs []Href `json:"-"`
 	// UserName: Username for Username/Password mode and Username for Key-Based authentication mode if applicable.
 	UserName *Multivalue `json:"userName,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetconfServer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetconfServer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetconfServer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -74301,20 +68281,10 @@ type TopologyNetworkGroup struct {
 	NetworkTopology     *TopologyNetworkTopology       `json:"networkTopology,omitempty"`
 	OspfRouteProperty   []*TopologyOspfRouteProperty   `json:"ospfRouteProperty"`
 	Ospfv3RouteProperty []*TopologyOspfv3RouteProperty `json:"ospfv3RouteProperty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetworkGroup) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetworkGroup) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetworkGroup) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -74691,20 +68661,10 @@ type TopologyNetworkRangeInfo struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetworkRangeInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetworkRangeInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetworkRangeInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -74839,20 +68799,10 @@ type TopologyNetworkTopology struct {
 	SimInterface                  []*TopologySimInterface                  `json:"simInterface"`
 	SimRouter                     []*TopologySimRouter                     `json:"simRouter"`
 	SimRouterBridge               []*TopologySimRouterBridge               `json:"simRouterBridge"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNetworkTopology) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNetworkTopology) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNetworkTopology) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75055,20 +69005,10 @@ type TopologyNicknameRecordList struct {
 	Nickname *Multivalue `json:"nickname,omitempty"`
 	// Priority: Priority
 	Priority *Multivalue `json:"priority,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNicknameRecordList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNicknameRecordList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNicknameRecordList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75143,20 +69083,10 @@ type TopologyNssaRoutes struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: V-Flag: Value flag. If set, then the SID carries an absolute value label value
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNssaRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNssaRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNssaRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75292,20 +69222,10 @@ type TopologyNtpServers struct {
 	ServerIPAddress *Multivalue `json:"serverIPAddress,omitempty"`
 	// ServerIPv6Address: Server IPv6 Address
 	ServerIPv6Address *Multivalue `json:"serverIPv6Address,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNtpServers) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNtpServers) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNtpServers) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75414,20 +69334,10 @@ type TopologyNtpclock struct {
 	StackedLayersRefs []Href `json:"-"`
 
 	NtpServers *TopologyNtpServers `json:"ntpServers,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyNtpclock) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyNtpclock) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyNtpclock) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75488,20 +69398,10 @@ type TopologyOFSwitchLearnedInfoConfig struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOFSwitchLearnedInfoConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOFSwitchLearnedInfoConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOFSwitchLearnedInfoConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75524,20 +69424,10 @@ type TopologyObject struct {
 	Field               []*TopologyField               `json:"field"`
 	RepeatableContainer []*TopologyRepeatableContainer `json:"repeatableContainer"`
 	SubTlv              []*TopologySubTlv              `json:"subTlv"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyObject) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyObject) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyObject) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75612,20 +69502,10 @@ type TopologyOfHostData struct {
 	NumberOfHostsPerPort *float32 `json:"numberOfHostsPerPort,omitempty"`
 	// ParentSwitchPortName: Description of the parent Switch Port.
 	ParentSwitchPortName *Multivalue `json:"parentSwitchPortName,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOfHostData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOfHostData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOfHostData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75672,20 +69552,10 @@ type TopologyOfSwitchChannel struct {
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs       []Href                             `json:"-"`
 	AuxiliaryConnectionList []*TopologyAuxiliaryConnectionList `json:"auxiliaryConnectionList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOfSwitchChannel) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOfSwitchChannel) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOfSwitchChannel) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75783,20 +69653,10 @@ type TopologyOfSwitchPorts struct {
 	TransmissionDelay *Multivalue `json:"transmissionDelay,omitempty"`
 
 	OfSwitchQueues *TopologyOfSwitchQueues `json:"ofSwitchQueues,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOfSwitchPorts) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOfSwitchPorts) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOfSwitchPorts) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -75938,20 +69798,10 @@ type TopologyOfSwitchQueues struct {
 	QueueProperty *Multivalue `json:"queueProperty,omitempty"`
 	// SwitchIndex: Index of the OF Switch.
 	SwitchIndex *Multivalue `json:"switchIndex,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOfSwitchQueues) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOfSwitchQueues) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOfSwitchQueues) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -76056,20 +69906,10 @@ type TopologyOpenFlowChannel struct {
 	Groups        []*TopologyGroups `json:"groups"`
 	Meters        []*TopologyMeters `json:"meters"`
 	Tables        []*TopologyTables `json:"tables"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOpenFlowChannel) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOpenFlowChannel) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOpenFlowChannel) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -76283,20 +70123,10 @@ type TopologyOpenFlowController struct {
 	LearnedInfo       []*TopologyLearnedInfo       `json:"learnedInfo"`
 	LearnedInfoUpdate []*TopologyLearnedInfoUpdate `json:"learnedInfoUpdate"`
 	OpenFlowChannel   []*TopologyOpenFlowChannel   `json:"openFlowChannel"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOpenFlowController) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOpenFlowController) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOpenFlowController) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -76656,20 +70486,10 @@ type TopologyOpenFlowSwitch struct {
 	PacketInList     []*TopologyPacketInList     `json:"packetInList"`
 	SwitchGroupsList []*TopologySwitchGroupsList `json:"switchGroupsList"`
 	SwitchTablesList []*TopologySwitchTablesList `json:"switchTablesList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOpenFlowSwitch) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOpenFlowSwitch) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOpenFlowSwitch) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77032,20 +70852,10 @@ type TopologyOspfBierBsObjectList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfBierBsObjectList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfBierBsObjectList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfBierBsObjectList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77095,20 +70905,10 @@ type TopologyOspfBierSubDomainList struct {
 	// SubDomainId: It is a unique value which identifies the BIER sub-domain within the BIER domain
 	SubDomainId          *Multivalue                     `json:"subDomainId,omitempty"`
 	OspfBierBSObjectList []*TopologyOspfBierBsObjectList `json:"ospfBierBSObjectList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfBierSubDomainList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfBierSubDomainList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfBierSubDomainList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77237,20 +71037,10 @@ type TopologyOspfPseudoInterface struct {
 	// Weight: Weight
 	Weight        *Multivalue              `json:"weight,omitempty"`
 	SrlgValueList []*TopologySrlgValueList `json:"srlgValueList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77488,20 +71278,10 @@ type TopologyOspfPseudoRouter struct {
 	OspfSRAlgorithmList            []*TopologyOspfSrAlgorithmList            `json:"ospfSRAlgorithmList"`
 	OspfSRGBRangeSubObjectsList    []*TopologyOspfSrgbRangeSubObjectsList    `json:"ospfSRGBRangeSubObjectsList"`
 	OspfSRLBRangeSubObjectsList    []*TopologyOspfSrlbRangeSubObjectsList    `json:"ospfSRLBRangeSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77702,20 +71482,10 @@ type TopologyOspfPseudoRouterStubNetworks struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouterStubNetworks) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouterStubNetworks) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouterStubNetworks) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77825,20 +71595,10 @@ type TopologyOspfPseudoRouterStubRoutes struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouterStubRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouterStubRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouterStubRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -77952,20 +71712,10 @@ type TopologyOspfPseudoRouterSummaryRoutes struct {
 	SrcRouterId *Multivalue `json:"srcRouterId,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouterSummaryRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouterSummaryRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouterSummaryRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78085,20 +71835,10 @@ type TopologyOspfPseudoRouterType1ExtRoutes struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouterType1ExtRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouterType1ExtRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouterType1ExtRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78208,20 +71948,10 @@ type TopologyOspfPseudoRouterType2ExtRoutes struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfPseudoRouterType2ExtRoutes) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfPseudoRouterType2ExtRoutes) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfPseudoRouterType2ExtRoutes) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78363,20 +72093,10 @@ type TopologyOspfRouteProperty struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfRouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfRouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfRouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78563,20 +72283,10 @@ type TopologyOspfSimulatedTopologyConfig struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfSimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfSimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfSimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78602,20 +72312,10 @@ type TopologyOspfSrAlgorithmList struct {
 	Name *string `json:"name,omitempty"`
 	// OspfSrAlgorithm: SR Algorithm
 	OspfSrAlgorithm *Multivalue `json:"ospfSrAlgorithm,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfSrAlgorithmList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfSrAlgorithmList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfSrAlgorithmList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78663,20 +72363,10 @@ type TopologyOspfSrMappingServerList struct {
 	SidIndexLabel *Multivalue `json:"sidIndexLabel,omitempty"`
 	// VFlag: Value or Index Flag
 	VFlag *Multivalue `json:"vFlag,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfSrMappingServerList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfSrMappingServerList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfSrMappingServerList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78759,20 +72449,10 @@ type TopologyOspfSrgbRangeSubObjectsList struct {
 	SidCount *Multivalue `json:"sidCount,omitempty"`
 	// StartSIDLabel: Start SID/Label
 	StartSIDLabel *Multivalue `json:"startSIDLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfSrgbRangeSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfSrgbRangeSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfSrgbRangeSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78805,20 +72485,10 @@ type TopologyOspfSrlbRangeSubObjectsList struct {
 	SrlbSidCount *Multivalue `json:"srlbSidCount,omitempty"`
 	// SrlbStartSIDLabel: Start SID/Label
 	SrlbStartSIDLabel *Multivalue `json:"srlbStartSIDLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfSrlbRangeSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfSrlbRangeSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfSrlbRangeSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -78873,20 +72543,10 @@ type TopologyOspfTrafficEngineering struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfTrafficEngineering) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfTrafficEngineering) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfTrafficEngineering) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -79087,20 +72747,10 @@ type TopologyOspfv2 struct {
 
 	OspfTrafficEngineering *TopologyOspfTrafficEngineering `json:"ospfTrafficEngineering,omitempty"`
 	SrlgValueList          []*TopologySrlgValueList        `json:"srlgValueList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv2) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv2) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv2) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -79478,20 +73128,10 @@ type TopologyOspfv2Router struct {
 	OspfSRAlgorithmList         []*TopologyOspfSrAlgorithmList         `json:"ospfSRAlgorithmList"`
 	OspfSRGBRangeSubObjectsList []*TopologyOspfSrgbRangeSubObjectsList `json:"ospfSRGBRangeSubObjectsList"`
 	OspfSRLBRangeSubObjectsList []*TopologyOspfSrlbRangeSubObjectsList `json:"ospfSRLBRangeSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv2Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv2Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv2Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -79786,20 +73426,10 @@ type TopologyOspfv3 struct {
 
 	Connector   *TopologyConnector     `json:"connector,omitempty"`
 	LearnedInfo []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80007,20 +73637,10 @@ type TopologyOspfv3PseudoInterface struct {
 	VFlag *Multivalue `json:"vFlag,omitempty"`
 	// Weight: Weight of the SID for the purpose of load balancing
 	Weight *Multivalue `json:"weight,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3PseudoInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3PseudoInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3PseudoInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80119,20 +73739,10 @@ type TopologyOspfv3PseudoRouter struct {
 	LinkLsaRoutes                 []*TopologyLinkLsaRoutes                 `json:"linkLsaRoutes"`
 	NssaRoutes                    []*TopologyNssaRoutes                    `json:"nssaRoutes"`
 	Ospfv3SRGBRangeSubObjectsList []*TopologyOspfv3SrgbRangeSubObjectsList `json:"ospfv3SRGBRangeSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3PseudoRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3PseudoRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3PseudoRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80321,20 +73931,10 @@ type TopologyOspfv3RouteProperty struct {
 	CMacProperties      []*TopologyCMacProperties      `json:"cMacProperties"`
 	EvpnIPv4PrefixRange []*TopologyEvpnIPv4PrefixRange `json:"evpnIPv4PrefixRange"`
 	EvpnIPv6PrefixRange []*TopologyEvpnIPv6PrefixRange `json:"evpnIPv6PrefixRange"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3RouteProperty) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3RouteProperty) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3RouteProperty) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80514,20 +74114,10 @@ type TopologyOspfv3Router struct {
 	// VFlag: V-Flag: Value flag. If set, then the SID carries an absolute value label value
 	VFlag                         *Multivalue                              `json:"vFlag,omitempty"`
 	Ospfv3SRGBRangeSubObjectsList []*TopologyOspfv3SrgbRangeSubObjectsList `json:"ospfv3SRGBRangeSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3Router) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3Router) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3Router) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80680,20 +74270,10 @@ type TopologyOspfv3SimulatedTopologyConfig struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3SimulatedTopologyConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3SimulatedTopologyConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3SimulatedTopologyConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80721,20 +74301,10 @@ type TopologyOspfv3SrgbRangeSubObjectsList struct {
 	SidCount *Multivalue `json:"sidCount,omitempty"`
 	// StartSIDLabel: Start SID/Label
 	StartSIDLabel *Multivalue `json:"startSIDLabel,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOspfv3SrgbRangeSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOspfv3SrgbRangeSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOspfv3SrgbRangeSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -80864,20 +74434,10 @@ type TopologyOvsdbcontroller struct {
 	ClusterData *TopologyClusterData `json:"clusterData,omitempty"`
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOvsdbcontroller) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOvsdbcontroller) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOvsdbcontroller) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81059,20 +74619,10 @@ type TopologyOvsdbserver struct {
 	VxlanRefs []Href `json:"-"`
 
 	Manager *TopologyManager `json:"manager,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyOvsdbserver) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyOvsdbserver) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyOvsdbserver) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81142,20 +74692,10 @@ type TopologyPacketInList struct {
 	PhysicalInPort *Multivalue `json:"physicalInPort,omitempty"`
 	// SendPacketIn: If selected, the Switch starts sending PacketIn messages when the session comes up.
 	SendPacketIn *Multivalue `json:"sendPacketIn,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPacketInList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPacketInList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPacketInList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81206,20 +74746,10 @@ type TopologyPbbEVpnParameter struct {
 	// UsePbbEVpnParameters: Flag to determine whether optional PBB EVPN parameters are provided.
 
 	UsePbbEVpnParameters *bool `json:"usePbbEVpnParameters,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPbbEVpnParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPbbEVpnParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPbbEVpnParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81335,20 +74865,10 @@ type TopologyPcReplyLspParameters struct {
 	PceXroSubObjectsList     []*TopologyPceXroSubObjectsList     `json:"pceXroSubObjectsList"`
 	PcepEroSubObjectsList    []*TopologyPcepEroSubObjectsList    `json:"pcepEroSubObjectsList"`
 	PcepMetricSubObjectsList []*TopologyPcepMetricSubObjectsList `json:"pcepMetricSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcReplyLspParameters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcReplyLspParameters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcReplyLspParameters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81619,20 +75139,10 @@ type TopologyPcRequestMatchCriteria struct {
 	SrcIpv4Address *Multivalue `json:"srcIpv4Address,omitempty"`
 	// SrcIpv6Address: Source IPv6 Address
 	SrcIpv6Address *Multivalue `json:"srcIpv6Address,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcRequestMatchCriteria) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcRequestMatchCriteria) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcRequestMatchCriteria) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -81780,20 +75290,10 @@ type TopologyPcc struct {
 	PreEstablishedSrLsps *TopologyPreEstablishedSrLsps `json:"preEstablishedSrLsps,omitempty"`
 
 	RequestedLsps *TopologyRequestedLsps `json:"requestedLsps,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82035,20 +75535,10 @@ type TopologyPccGroup struct {
 	PcRequestMatchCriteria *TopologyPcRequestMatchCriteria `json:"pcRequestMatchCriteria,omitempty"`
 
 	PceInitiateLSPParameters *TopologyPceInitiateLspParameters `json:"pceInitiateLSPParameters,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPccGroup) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPccGroup) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPccGroup) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82243,20 +75733,10 @@ type TopologyPccLearnedLspDb struct {
 	SourceIpv6Address *TopologySourceIpv6Address `json:"sourceIpv6Address,omitempty"`
 
 	SymbolicPathName *TopologySymbolicPathName `json:"symbolicPathName,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPccLearnedLspDb) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPccLearnedLspDb) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPccLearnedLspDb) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82387,20 +75867,10 @@ type TopologyPccRequestedMetricSubObjectsList struct {
 	Name *string `json:"name,omitempty"`
 	// PFlagMetric: Metric P Flag
 	PFlagMetric *Multivalue `json:"pFlagMetric,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPccRequestedMetricSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPccRequestedMetricSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPccRequestedMetricSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82474,20 +75944,10 @@ type TopologyPce struct {
 	// TcpPort: PCEP operates over TCP using a registered TCP port (default - 4189). This allows the requirements of reliable messaging and flow control to be met without further protocol work. This control can be configured when user does not want to use the default one.
 	TcpPort  *Multivalue         `json:"tcpPort,omitempty"`
 	PccGroup []*TopologyPccGroup `json:"pccGroup"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPce) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPce) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPce) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82641,20 +76101,10 @@ type TopologyPceInitiateLspParameters struct {
 	PceInitiateXROobject     []*TopologyPceInitiateXrOobject     `json:"pceInitiateXROobject"`
 	PcepEroSubObjectsList    []*TopologyPcepEroSubObjectsList    `json:"pcepEroSubObjectsList"`
 	PcepMetricSubObjectsList []*TopologyPcepMetricSubObjectsList `json:"pcepMetricSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPceInitiateLspParameters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPceInitiateLspParameters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPceInitiateLspParameters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -82935,20 +76385,10 @@ type TopologyPceInitiateXrOobject struct {
 	SrlgId *Multivalue `json:"srlgId,omitempty"`
 	// SubObjectType: Using the Sub Object Type control user can configure which sub object needs to be included from the following options: IPv4 Prefix IPv6 Prefix Unnumbered Interface ID AS Number. SRLG
 	SubObjectType *Multivalue `json:"subObjectType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPceInitiateXrOobject) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPceInitiateXrOobject) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPceInitiateXrOobject) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83058,20 +76498,10 @@ type TopologyPceXroSubObjectsList struct {
 	SrlgId *Multivalue `json:"srlgId,omitempty"`
 	// SubObjectType: Using the Sub Object Type control user can configure which sub object needs to be included from the following options: IPv4 Prefix IPv6 Prefix Unnumbered Interface ID AS Number. SRLG
 	SubObjectType *Multivalue `json:"subObjectType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPceXroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPceXroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPceXroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83159,20 +76589,10 @@ type TopologyPcepBackupPcEs struct {
 	Name *string `json:"name,omitempty"`
 	// PceIpv4Address: IPv4 address of the backup PCE. This column is greyed out in case of PCCv6.
 	PceIpv4Address *Multivalue `json:"pceIpv4Address,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcepBackupPcEs) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcepBackupPcEs) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcepBackupPcEs) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83257,20 +76677,10 @@ type TopologyPcepEroSubObjectsList struct {
 	Tc *Multivalue `json:"tc,omitempty"`
 	// Ttl: This field is used to encode a time-to-live value. This control will be editable only if SID Type is MPLS Label 32bit.
 	Ttl *Multivalue `json:"ttl,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcepEroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcepEroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcepEroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83445,20 +76855,10 @@ type TopologyPcepIroSubObjectsList struct {
 	RouterId *Multivalue `json:"routerId,omitempty"`
 	// SubObjectType: Sub Object Type
 	SubObjectType *Multivalue `json:"subObjectType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcepIroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcepIroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcepIroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83525,20 +76925,10 @@ type TopologyPcepMetricSubObjectsList struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcepMetricSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcepMetricSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcepMetricSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83605,20 +76995,10 @@ type TopologyPcepXroSubObjectsList struct {
 	SrlgId *Multivalue `json:"srlgId,omitempty"`
 	// SubObjectType: Using the Sub Object Type control user can configure which sub object needs to be included from the following options: IPv4 Prefix IPv6 Prefix Unnumbered Interface ID AS Number. SRLG
 	SubObjectType *Multivalue `json:"subObjectType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPcepXroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPcepXroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPcepXroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83715,20 +77095,10 @@ type TopologyPimRouter struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83795,20 +77165,10 @@ type TopologyPimV4CandidateRPsList struct {
 	PriorityType *Multivalue `json:"priorityType,omitempty"`
 	// TriggeredCrpMessageCount: The number of times C-RP advertisements is sent to the newly elected Bootstrap Routers
 	TriggeredCrpMessageCount *Multivalue `json:"triggeredCrpMessageCount,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV4CandidateRPsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV4CandidateRPsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV4CandidateRPsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -83973,20 +77333,10 @@ type TopologyPimV4Interface struct {
 
 	PimV4SourcesList *TopologyPimV4SourcesList `json:"pimV4SourcesList,omitempty"`
 	Tag              []*TopologyTag            `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV4Interface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV4Interface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV4Interface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -84198,20 +77548,10 @@ type TopologyPimV4JoinPruneList struct {
 	// SwitchOverInterval: (in seconds) The time interval allowed for the switch from using the RP tree to using a Source-specific tree-from (*,G) to (S,G). The default value is 0.
 	SwitchOverInterval *Multivalue    `json:"switchOverInterval,omitempty"`
 	Tag                []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV4JoinPruneList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV4JoinPruneList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV4JoinPruneList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -84363,20 +77703,10 @@ type TopologyPimV4SourcesList struct {
 	// UdpSourcePort: The number of UDP Source Ports sending encapsulated UDP packets to MultiCast Groups (through Register Messages to the RP). The default is 3000 UDP Source Ports.
 	UdpSourcePort *Multivalue    `json:"udpSourcePort,omitempty"`
 	Tag           []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV4SourcesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV4SourcesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV4SourcesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -84510,20 +77840,10 @@ type TopologyPimV6CandidateRPsList struct {
 	PriorityType *Multivalue `json:"priorityType,omitempty"`
 	// TriggeredCrpMessageCount: The number of times C-RP advertisements is sent to the newly elected Bootstrap Routers
 	TriggeredCrpMessageCount *Multivalue `json:"triggeredCrpMessageCount,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV6CandidateRPsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV6CandidateRPsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV6CandidateRPsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -84688,20 +78008,10 @@ type TopologyPimV6Interface struct {
 
 	PimV6SourcesList *TopologyPimV6SourcesList `json:"pimV6SourcesList,omitempty"`
 	Tag              []*TopologyTag            `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV6Interface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV6Interface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV6Interface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -84913,20 +78223,10 @@ type TopologyPimV6JoinPruneList struct {
 	// SwitchOverInterval: (in seconds) The time interval allowed for the switch from using the RP tree to using a Source-specific tree-from (*,G) to (S,G). The default value is 0.
 	SwitchOverInterval *Multivalue    `json:"switchOverInterval,omitempty"`
 	Tag                []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV6JoinPruneList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV6JoinPruneList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV6JoinPruneList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -85078,20 +78378,10 @@ type TopologyPimV6SourcesList struct {
 	// UdpSourcePort: The number of UDP Source Ports sending encapsulated UDP packets to MultiCast Groups (through Register Messages to the RP). The default is 3000 UDP Source Ports.
 	UdpSourcePort *Multivalue    `json:"udpSourcePort,omitempty"`
 	Tag           []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPimV6SourcesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPimV6SourcesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPimV6SourcesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -85194,20 +78484,10 @@ type TopologyPlspId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPlspId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPlspId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPlspId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -85234,20 +78514,10 @@ type TopologyPnTlvList struct {
 	Type_ *Multivalue `json:"type,omitempty"`
 	// Value: Value
 	Value *Multivalue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPnTlvList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPnTlvList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPnTlvList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -85299,20 +78569,10 @@ type TopologyPppoxServerSessions struct {
 	// PapUser: User name when PAP Authentication is being used
 	PapUser *Multivalue    `json:"papUser,omitempty"`
 	Tag     []*TopologyTag `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPppoxServerSessions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPppoxServerSessions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPppoxServerSessions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -85569,20 +78829,10 @@ type TopologyPppoxclient struct {
 	TlvProfile     []*TopologyTlvProfile     `json:"tlvProfile"`
 	Vxlan          []*TopologyVxlan          `json:"vxlan"`
 	Vxlanv6        []*TopologyVxlanv6        `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPppoxclient) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPppoxclient) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPppoxclient) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -86459,20 +79709,10 @@ type TopologyPppoxserver struct {
 	PppoxServerSessions *TopologyPppoxServerSessions `json:"pppoxServerSessions,omitempty"`
 	Vxlan               []*TopologyVxlan             `json:"vxlan"`
 	Vxlanv6             []*TopologyVxlanv6           `json:"vxlanv6"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPppoxserver) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPppoxserver) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPppoxserver) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -87155,20 +80395,10 @@ type TopologyPreEstablishedSrLsps struct {
 	PcepEroSubObjectsList    []*TopologyPcepEroSubObjectsList    `json:"pcepEroSubObjectsList"`
 	PcepMetricSubObjectsList []*TopologyPcepMetricSubObjectsList `json:"pcepMetricSubObjectsList"`
 	Tag                      []*TopologyTag                      `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPreEstablishedSrLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPreEstablishedSrLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPreEstablishedSrLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -87702,20 +80932,10 @@ type TopologyPtp struct {
 	AtoiTLVList *TopologyAtoiTlvList `json:"atoiTLVList,omitempty"`
 
 	PtpNegBehaveList *TopologyPtpNegBehaveList `json:"ptpNegBehaveList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPtp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPtp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPtp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88417,20 +81637,10 @@ type TopologyPtpNegBehaveList struct {
 	PtpValueDisPattern *Multivalue `json:"ptpValueDisPattern,omitempty"`
 	// PtpValueDisPattern1: Pattern For Value Field
 	PtpValueDisPattern1 *Multivalue `json:"ptpValueDisPattern1,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyPtpNegBehaveList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyPtpNegBehaveList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyPtpNegBehaveList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88496,20 +81706,10 @@ type TopologyRemoteInterfaceId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRemoteInterfaceId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRemoteInterfaceId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRemoteInterfaceId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88525,20 +81725,10 @@ type TopologyRemoteIpv4Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRemoteIpv4Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRemoteIpv4Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRemoteIpv4Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88554,20 +81744,10 @@ type TopologyRemoteIpv6Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRemoteIpv6Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRemoteIpv6Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRemoteIpv6Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88583,20 +81763,10 @@ type TopologyRemoteNodeId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRemoteNodeId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRemoteNodeId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRemoteNodeId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88619,20 +81789,10 @@ type TopologyRepeatableContainer struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Object []*TopologyObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRepeatableContainer) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRepeatableContainer) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRepeatableContainer) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88660,20 +81820,10 @@ type TopologyRequestId struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRequestId) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRequestId) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRequestId) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -88803,20 +81953,10 @@ type TopologyRequestedLsps struct {
 	PcepIroSubObjectsList            []*TopologyPcepIroSubObjectsList            `json:"pcepIroSubObjectsList"`
 	PcepXroSubObjectsList            []*TopologyPcepXroSubObjectsList            `json:"pcepXroSubObjectsList"`
 	Tag                              []*TopologyTag                              `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRequestedLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRequestedLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRequestedLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89101,20 +82241,10 @@ type TopologyRestriction struct {
 	// SingleValue: Restricts the field to single value pattern without overlays
 
 	SingleValue *bool `json:"singleValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRestriction) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRestriction) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRestriction) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89139,20 +82269,10 @@ type TopologyRfc8277LabelStack struct {
 	// Name: Name of NGPF element, guaranteed to be unique in Scenario
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRfc8277LabelStack) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRfc8277LabelStack) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRfc8277LabelStack) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89188,20 +82308,10 @@ type TopologyRouterData struct {
 	Name *string `json:"name,omitempty"`
 	// RouterId: 4 Byte Router Id in dotted decimal format.
 	RouterId *Multivalue `json:"routerId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRouterData) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRouterData) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRouterData) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89222,20 +82332,10 @@ type TopologyRow struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRow) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRow) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRow) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89258,20 +82358,10 @@ type TopologyRsvpDetourSubObjectsList struct {
 	Name *string `json:"name,omitempty"`
 	// PlrId: PLR ID
 	PlrId *Multivalue `json:"plrId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpDetourSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpDetourSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpDetourSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89310,20 +82400,10 @@ type TopologyRsvpEroSubObjectsList struct {
 	PrefixLength *Multivalue `json:"prefixLength,omitempty"`
 	// Type_: Type: IP or AS
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpEroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpEroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpEroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89385,20 +82465,10 @@ type TopologyRsvpIngressRroSubObjectsList struct {
 	ProtectionInUse *Multivalue `json:"protectionInUse,omitempty"`
 	// Type_: Reservation Style
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpIngressRroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpIngressRroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpIngressRroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89497,20 +82567,10 @@ type TopologyRsvpP2PEgressLsps struct {
 	TimeoutMultiplier     *Multivalue                      `json:"timeoutMultiplier,omitempty"`
 	RsvpRROSubObjectsList []*TopologyRsvpRroSubObjectsList `json:"rsvpRROSubObjectsList"`
 	Tag                   []*TopologyTag                   `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpP2PEgressLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpP2PEgressLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpP2PEgressLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -89812,20 +82872,10 @@ type TopologyRsvpP2PIngressLsps struct {
 	RsvpEROSubObjectsList        []*TopologyRsvpEroSubObjectsList        `json:"rsvpEROSubObjectsList"`
 	RsvpIngressRROSubObjectsList []*TopologyRsvpIngressRroSubObjectsList `json:"rsvpIngressRROSubObjectsList"`
 	Tag                          []*TopologyTag                          `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpP2PIngressLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpP2PIngressLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpP2PIngressLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -90326,20 +83376,10 @@ type TopologyRsvpP2mpEgressLsps struct {
 	TypeP2mpId            *string                          `json:"typeP2mpId,omitempty"`
 	RsvpRroSubObjectsList []*TopologyRsvpRroSubObjectsList `json:"rsvpRroSubObjectsList"`
 	Tag                   []*TopologyTag                   `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpP2mpEgressLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpP2mpEgressLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpP2mpEgressLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -90584,20 +83624,10 @@ type TopologyRsvpP2mpIngressLsps struct {
 
 	RsvpP2mpIngressSubLsps *TopologyRsvpP2mpIngressSubLsps `json:"rsvpP2mpIngressSubLsps,omitempty"`
 	Tag                    []*TopologyTag                  `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpP2mpIngressLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpP2mpIngressLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpP2mpIngressLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -90913,20 +83943,10 @@ type TopologyRsvpP2mpIngressSubLsps struct {
 	// SendAsSero: Send As SERO
 	SendAsSero            *Multivalue                      `json:"sendAsSero,omitempty"`
 	RsvpEroSubObjectsList []*TopologyRsvpEroSubObjectsList `json:"rsvpEroSubObjectsList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpP2mpIngressSubLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpP2mpIngressSubLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpP2mpIngressSubLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91015,20 +84035,10 @@ type TopologyRsvpPcepExpectedInitiatedLsps struct {
 	SymbolicPathName             *Multivalue                             `json:"symbolicPathName,omitempty"`
 	RsvpIngressRROSubObjectsList []*TopologyRsvpIngressRroSubObjectsList `json:"rsvpIngressRROSubObjectsList"`
 	Tag                          []*TopologyTag                          `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpPcepExpectedInitiatedLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpPcepExpectedInitiatedLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpPcepExpectedInitiatedLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91109,20 +84119,10 @@ type TopologyRsvpRroSubObjectsList struct {
 	ProtectionInUse *Multivalue `json:"protectionInUse,omitempty"`
 	// Type_: Reservation Style
 	Type_ *Multivalue `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpRroSubObjectsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpRroSubObjectsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpRroSubObjectsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91265,20 +84265,10 @@ type TopologyRsvpteIf struct {
 	// UsingGatewayIp: Using Gateway IP
 	UsingGatewayIp *Multivalue            `json:"usingGatewayIp,omitempty"`
 	LearnedInfo    []*TopologyLearnedInfo `json:"learnedInfo"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpteIf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpteIf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpteIf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91507,20 +84497,10 @@ type TopologyRsvpteLsps struct {
 	RsvpP2mpIngressLsps *TopologyRsvpP2mpIngressLsps `json:"rsvpP2mpIngressLsps,omitempty"`
 
 	RsvpPcepExpectedInitiatedLsps *TopologyRsvpPcepExpectedInitiatedLsps `json:"rsvpPcepExpectedInitiatedLsps,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRsvpteLsps) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRsvpteLsps) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRsvpteLsps) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91572,20 +84552,10 @@ type TopologyRxSakPool struct {
 	RxSalt *Multivalue `json:"rxSalt,omitempty"`
 	// RxSsci: 4 bytes Short SCI for XPN cipher suites.
 	RxSsci *Multivalue `json:"rxSsci,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyRxSakPool) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyRxSakPool) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyRxSakPool) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91640,20 +84610,10 @@ type TopologySbfdInitiator struct {
 	// TxInterval: Tx Interval in Milli Seconds. Note: Initial transmission interval is set to maximum of 1s and configured Tx Interval. Once session comes up, the timer will auto-transition to the negotiated value i.e. maximum of local Tx Interval and recieved Rx Interval from Responder.
 	TxInterval    *Multivalue              `json:"txInterval,omitempty"`
 	MplsLabelList []*TopologyMplsLabelList `json:"mplsLabelList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySbfdInitiator) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySbfdInitiator) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySbfdInitiator) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91724,20 +84684,10 @@ type TopologySbfdResponder struct {
 	SBFDDiscriminator *Multivalue `json:"sBFDDiscriminator,omitempty"`
 	// SBFDState: Configures the S-BFD session state to be sent in Response Packets.
 	SBFDState *Multivalue `json:"sBFDState,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySbfdResponder) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySbfdResponder) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySbfdResponder) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91778,20 +84728,10 @@ type TopologySid struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySid) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySid) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySid) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91807,20 +84747,10 @@ type TopologySidType struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySidType) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySidType) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySidType) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91850,20 +84780,10 @@ type TopologySimInterface struct {
 	SimInterfaceEthernetConfig []*TopologySimInterfaceEthernetConfig `json:"simInterfaceEthernetConfig"`
 	SimInterfaceIPv4Config     []*TopologySimInterfaceIPv4Config     `json:"simInterfaceIPv4Config"`
 	SimInterfaceIPv6Config     []*TopologySimInterfaceIPv6Config     `json:"simInterfaceIPv6Config"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimInterface) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimInterface) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimInterface) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -91965,20 +84885,10 @@ type TopologySimInterfaceEthernetConfig struct {
 	VlanCount         *Multivalue                  `json:"vlanCount,omitempty"`
 	CfmSimulatedLinks []*TopologyCfmSimulatedLinks `json:"cfmSimulatedLinks"`
 	Vlan              []*TopologyVlan              `json:"vlan"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimInterfaceEthernetConfig) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimInterfaceEthernetConfig) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimInterfaceEthernetConfig) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92045,20 +84955,10 @@ type TopologySimInterfaceIPv4Config struct {
 	// ToIP: 4 Byte IP address in dotted decimal format.
 	ToIP                *Multivalue                    `json:"toIP,omitempty"`
 	OspfPseudoInterface []*TopologyOspfPseudoInterface `json:"ospfPseudoInterface"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimInterfaceIPv4Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimInterfaceIPv4Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimInterfaceIPv4Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92118,20 +85018,10 @@ type TopologySimInterfaceIPv6Config struct {
 	// ToIP: 128 Bits IPv6 address.
 	ToIP                  *Multivalue                      `json:"toIP,omitempty"`
 	Ospfv3PseudoInterface []*TopologyOspfv3PseudoInterface `json:"ospfv3PseudoInterface"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimInterfaceIPv6Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimInterfaceIPv6Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimInterfaceIPv6Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92195,20 +85085,10 @@ type TopologySimRouter struct {
 	OspfPseudoRouter   []*TopologyOspfPseudoRouter   `json:"ospfPseudoRouter"`
 	Ospfv3PseudoRouter []*TopologyOspfv3PseudoRouter `json:"ospfv3PseudoRouter"`
 	Tag                []*TopologyTag                `json:"tag"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimRouter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimRouter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimRouter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92318,20 +85198,10 @@ type TopologySimRouterBridge struct {
 	IsisDcePseudoNode   []*TopologyIsisDcePseudoNode   `json:"isisDcePseudoNode"`
 	IsisSpbPseudoNode   []*TopologyIsisSpbPseudoNode   `json:"isisSpbPseudoNode"`
 	IsisTrillPseudoNode []*TopologyIsisTrillPseudoNode `json:"isisTrillPseudoNode"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySimRouterBridge) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySimRouterBridge) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySimRouterBridge) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92414,20 +85284,10 @@ type TopologySourceIpv4Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySourceIpv4Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySourceIpv4Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySourceIpv4Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92443,20 +85303,10 @@ type TopologySourceIpv6Address struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySourceIpv6Address) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySourceIpv6Address) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySourceIpv6Address) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92494,20 +85344,10 @@ type TopologySpbNodeTopologyList struct {
 	Vbit *Multivalue `json:"vbit,omitempty"`
 
 	BaseVidList *TopologySpbNodeTopologyListBaseVidList `json:"baseVidList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbNodeTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbNodeTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbNodeTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92579,20 +85419,10 @@ type TopologySpbNodeTopologyListBaseVidList struct {
 	TopologyId *Multivalue `json:"topologyId,omitempty"`
 	// UseFlagBit: Use Flag Bit
 	UseFlagBit *Multivalue `json:"useFlagBit,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbNodeTopologyListBaseVidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbNodeTopologyListBaseVidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbNodeTopologyListBaseVidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92663,20 +85493,10 @@ type TopologySpbSimEdgeBaseVidList struct {
 	UseFlagBit *Multivalue `json:"useFlagBit,omitempty"`
 
 	SpbSimEdgeIsidList *TopologySpbSimEdgeIsidList `json:"spbSimEdgeIsidList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbSimEdgeBaseVidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbSimEdgeBaseVidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbSimEdgeBaseVidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92743,20 +85563,10 @@ type TopologySpbSimEdgeIsidList struct {
 	TransmissionType *Multivalue `json:"transmissionType,omitempty"`
 
 	Connector *TopologyConnector `json:"connector,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbSimEdgeIsidList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbSimEdgeIsidList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbSimEdgeIsidList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92825,20 +85635,10 @@ type TopologySpbSimEdgeTopologyList struct {
 	Vbit *Multivalue `json:"vbit,omitempty"`
 
 	SpbSimEdgeBaseVidList *TopologySpbSimEdgeBaseVidList `json:"spbSimEdgeBaseVidList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbSimEdgeTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbSimEdgeTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbSimEdgeTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -92929,20 +85729,10 @@ type TopologySpbTopologyList struct {
 	Vbit *Multivalue `json:"vbit,omitempty"`
 
 	BaseVidList *TopologyBaseVidList `json:"baseVidList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySpbTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySpbTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySpbTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93037,20 +85827,10 @@ type TopologySrlgValueList struct {
 	Name *string `json:"name,omitempty"`
 	// SrlgValue: This is the SRLG Value for the link between two mentioned interfaces.
 	SrlgValue *Multivalue `json:"srlgValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySrlgValueList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySrlgValueList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySrlgValueList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93071,20 +85851,10 @@ type TopologyStartCcmEmulatedMpParams struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStartCcmEmulatedMpParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStartCcmEmulatedMpParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStartCcmEmulatedMpParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93100,20 +85870,10 @@ type TopologyStartCcmSimmulatedMpParams struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStartCcmSimmulatedMpParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStartCcmSimmulatedMpParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStartCcmSimmulatedMpParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93147,20 +85907,10 @@ type TopologyStaticLag struct {
 	StackedLayers []string `json:"stackedLayers"`
 	// StackedLayersRefs: Track refs for StackedLayers.
 	StackedLayersRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStaticLag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStaticLag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStaticLag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93285,20 +86035,10 @@ type TopologyStaticMacsec struct {
 	RxSakPool *TopologyRxSakPool `json:"rxSakPool,omitempty"`
 
 	TxSakPool *TopologyTxSakPool `json:"txSakPool,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStaticMacsec) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStaticMacsec) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStaticMacsec) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93477,20 +86217,10 @@ type TopologyStopCcmEmulatedMpParams struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStopCcmEmulatedMpParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStopCcmEmulatedMpParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStopCcmEmulatedMpParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93506,20 +86236,10 @@ type TopologyStopCcmSimmulatedMpParams struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStopCcmSimmulatedMpParams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStopCcmSimmulatedMpParams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStopCcmSimmulatedMpParams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93579,20 +86299,10 @@ type TopologyStreams struct {
 	UniqueId *Multivalue `json:"uniqueId,omitempty"`
 	// VlanId: VLAN ID
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyStreams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyStreams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyStreams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93696,20 +86406,10 @@ type TopologySubTlv struct {
 	Name *string `json:"name,omitempty"`
 
 	Value *TopologyValue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySubTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySubTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySubTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93743,20 +86443,10 @@ type TopologySubscribedStreams struct {
 	Name *string `json:"name,omitempty"`
 	// StreamId: Stream ID to which the listener wants to subscribe to
 	StreamId *Multivalue `json:"streamId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySubscribedStreams) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySubscribedStreams) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySubscribedStreams) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -93828,20 +86518,10 @@ type TopologySwitchGroupsList struct {
 	SetNetwork *Multivalue `json:"setNetwork,omitempty"`
 	// SetQueue: Group Action:Set queue id when outputting to a port.
 	SetQueue *Multivalue `json:"setQueue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySwitchGroupsList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySwitchGroupsList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySwitchGroupsList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94011,20 +86691,10 @@ type TopologySwitchTablesList struct {
 	WriteSetFieldMiss *Multivalue `json:"writeSetFieldMiss,omitempty"`
 	// WriteSetFieldMissMask: Select the type of Write Set Field Miss mask capability that the table will support
 	WriteSetFieldMissMask *Multivalue `json:"writeSetFieldMissMask,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySwitchTablesList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySwitchTablesList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySwitchTablesList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94180,20 +86850,10 @@ type TopologySymbolicPathName struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologySymbolicPathName) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologySymbolicPathName) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologySymbolicPathName) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94210,20 +86870,10 @@ type TopologyTable struct {
 
 	Xpath *XPath         `json:"xpath,omitempty"`
 	Col   []*TopologyCol `json:"col"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTable) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTable) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTable) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94264,20 +86914,10 @@ type TopologyTables struct {
 	// TableName: Specify the name of the controller table.
 	TableName *Multivalue        `json:"tableName,omitempty"`
 	FlowSet   []*TopologyFlowSet `json:"flowSet"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTables) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTables) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTables) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94328,20 +86968,10 @@ type TopologyTag struct {
 	// Name: specifies the name of the tag the entity will be part of
 
 	Name *string `json:"name,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTag) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTag) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTag) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94381,20 +87011,10 @@ type TopologyTlv struct {
 	Type_ *TopologyType `json:"type,omitempty"`
 
 	Value *TopologyValue `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTlv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTlv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTlv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94429,20 +87049,10 @@ type TopologyTlvProfile struct {
 	Xpath      *XPath                `json:"xpath,omitempty"`
 	DefaultTlv []*TopologyDefaultTlv `json:"defaultTlv"`
 	Tlv        []*TopologyTlv        `json:"tlv"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTlvProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTlvProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTlvProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94507,20 +87117,10 @@ type TopologyTrillMCastIpv4GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillMCastIpv4GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillMCastIpv4GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillMCastIpv4GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94616,20 +87216,10 @@ type TopologyTrillMCastIpv6GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillMCastIpv6GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillMCastIpv6GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillMCastIpv6GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94725,20 +87315,10 @@ type TopologyTrillMCastMacGroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillMCastMacGroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillMCastMacGroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillMCastMacGroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94823,20 +87403,10 @@ type TopologyTrillNodeTopologyList struct {
 	TopologyId *Multivalue `json:"topologyId,omitempty"`
 
 	InterestedVlanList *TopologyTrillNodeTopologyListInterestedVlanList `json:"interestedVlanList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillNodeTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillNodeTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillNodeTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94894,20 +87464,10 @@ type TopologyTrillNodeTopologyListInterestedVlanList struct {
 	VlanCount *Multivalue `json:"vlanCount,omitempty"`
 	// VlanIdIncr: Vlan Id Increment
 	VlanIdIncr *Multivalue `json:"vlanIdIncr,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillNodeTopologyListInterestedVlanList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillNodeTopologyListInterestedVlanList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillNodeTopologyListInterestedVlanList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -94998,20 +87558,10 @@ type TopologyTrillSimulatedMCastIpv4GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillSimulatedMCastIpv4GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillSimulatedMCastIpv4GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillSimulatedMCastIpv4GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95107,20 +87657,10 @@ type TopologyTrillSimulatedMCastIpv6GroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillSimulatedMCastIpv6GroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillSimulatedMCastIpv6GroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillSimulatedMCastIpv6GroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95216,20 +87756,10 @@ type TopologyTrillSimulatedMCastMacGroupList struct {
 	UcastSrcCnt *Multivalue `json:"ucastSrcCnt,omitempty"`
 	// VlanId: Vlan Id
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillSimulatedMCastMacGroupList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillSimulatedMCastMacGroupList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillSimulatedMCastMacGroupList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95319,20 +87849,10 @@ type TopologyTrillTopologyList struct {
 	InterestedVlanList *TopologyTrillTopologyListInterestedVlanList `json:"interestedVlanList,omitempty"`
 
 	NicknameRecordList *TopologyTrillTopologyListNicknameRecordList `json:"nicknameRecordList,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillTopologyList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillTopologyList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillTopologyList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95392,20 +87912,10 @@ type TopologyTrillTopologyListInterestedVlanList struct {
 	VlanCount *Multivalue `json:"vlanCount,omitempty"`
 	// VlanIdIncr: Vlan Id Increment
 	VlanIdIncr *Multivalue `json:"vlanIdIncr,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillTopologyListInterestedVlanList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillTopologyListInterestedVlanList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillTopologyListInterestedVlanList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95477,20 +87987,10 @@ type TopologyTrillTopologyListNicknameRecordList struct {
 	Nickname *Multivalue `json:"nickname,omitempty"`
 	// Priority: Priority
 	Priority *Multivalue `json:"priority,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTrillTopologyListNicknameRecordList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTrillTopologyListNicknameRecordList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTrillTopologyListNicknameRecordList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95537,20 +88037,10 @@ type TopologyTxChannels struct {
 	StartingMessageNumber *Multivalue `json:"startingMessageNumber,omitempty"`
 	// SystemId: System Identifier component of the SCI field with which MACsec traffic is transmitted.
 	SystemId *Multivalue `json:"systemId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTxChannels) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTxChannels) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTxChannels) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95601,20 +88091,10 @@ type TopologyTxSakPool struct {
 	TxSalt *Multivalue `json:"txSalt,omitempty"`
 	// TxSsci: 4 bytes Short SCI for XPN cipher suites.
 	TxSsci *Multivalue `json:"txSsci,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyTxSakPool) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyTxSakPool) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyTxSakPool) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95670,20 +88150,10 @@ type TopologyType struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Object []*TopologyObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyType) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyType) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyType) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95715,20 +88185,10 @@ type TopologyValue struct {
 
 	Name   *string           `json:"name,omitempty"`
 	Object []*TopologyObject `json:"object"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyValue) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyValue) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyValue) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95765,20 +88225,10 @@ type TopologyVlan struct {
 	Tpid *Multivalue `json:"tpid,omitempty"`
 	// VlanId: 12-bit VLAN ID in the VLAN tag.
 	VlanId *Multivalue `json:"vlanId,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95814,20 +88264,10 @@ type TopologyVpnParameter struct {
 	// UseVpnParameters: Flag to determine whether optional VPN parameters are provided.
 
 	UseVpnParameters *bool `json:"useVpnParameters,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVpnParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVpnParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVpnParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -95894,20 +88334,10 @@ type TopologyVxlan struct {
 	LearnedInfo         []*TopologyLearnedInfo         `json:"learnedInfo"`
 
 	VxlanStaticInfo *TopologyVxlanStaticInfo `json:"vxlanStaticInfo,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVxlan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVxlan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVxlan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96064,20 +88494,10 @@ type TopologyVxlanIPv6StaticInfo struct {
 	RemoteVtepUnicastIpv6 *Multivalue `json:"remoteVtepUnicastIpv6,omitempty"`
 	// SuppressArp: Suppress Arp for VM IP, VM MAC pair.
 	SuppressArp *Multivalue `json:"suppressArp,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVxlanIPv6StaticInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVxlanIPv6StaticInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVxlanIPv6StaticInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96138,20 +88558,10 @@ type TopologyVxlanStaticInfo struct {
 	RemoteVtepIpv4 *Multivalue `json:"remoteVtepIpv4,omitempty"`
 	// SuppressArp: Suppress Arp for VM IP, VM MAC pair.
 	SuppressArp *Multivalue `json:"suppressArp,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVxlanStaticInfo) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVxlanStaticInfo) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVxlanStaticInfo) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96233,20 +88643,10 @@ type TopologyVxlanv6 struct {
 	LearnedInfo         []*TopologyLearnedInfo         `json:"learnedInfo"`
 
 	VxlanIPv6StaticInfo *TopologyVxlanIPv6StaticInfo `json:"vxlanIPv6StaticInfo,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TopologyVxlanv6) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TopologyVxlanv6) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TopologyVxlanv6) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96514,20 +88914,10 @@ type Traffic struct {
 
 	Statistics  *TrafficStatistics    `json:"statistics,omitempty"`
 	TrafficItem []*TrafficTrafficItem `json:"trafficItem"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Traffic) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Traffic) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Traffic) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96565,20 +88955,10 @@ type TrafficAdvancedSequenceChecking struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficAdvancedSequenceChecking) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficAdvancedSequenceChecking) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficAdvancedSequenceChecking) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96599,20 +88979,10 @@ type TrafficAppLibFlow struct {
 	Percentage *float32             `json:"percentage,omitempty"`
 	Connection []*TrafficConnection `json:"connection"`
 	Parameter  []*TrafficParameter  `json:"parameter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficAppLibFlow) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficAppLibFlow) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficAppLibFlow) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96667,20 +89037,10 @@ type TrafficAppLibProfile struct {
 
 	ObjectiveValue *float32             `json:"objectiveValue,omitempty"`
 	AppLibFlow     []*TrafficAppLibFlow `json:"appLibFlow"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficAppLibProfile) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficAppLibProfile) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficAppLibProfile) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96711,20 +89071,10 @@ type TrafficBool struct {
 	// Value: Parameter bool value.
 
 	Value *bool `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficBool) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficBool) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficBool) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96743,20 +89093,10 @@ type TrafficChoice struct {
 	// Value: Parameter choice selected value.
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficChoice) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficChoice) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficChoice) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96783,20 +89123,10 @@ type TrafficColumn struct {
 	Size *float32 `json:"size,omitempty"`
 	// Values: TBD
 	Values []string `json:"values"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficColumn) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficColumn) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficColumn) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96840,20 +89170,10 @@ type TrafficConfigElement struct {
 
 	TransmissionControl      *TrafficTransmissionControl        `json:"transmissionControl,omitempty"`
 	TransmissionDistribution []*TrafficTransmissionDistribution `json:"transmissionDistribution"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficConfigElement) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficConfigElement) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficConfigElement) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96926,20 +89246,10 @@ type TrafficConnection struct {
 
 	Xpath     *XPath              `json:"xpath,omitempty"`
 	Parameter []*TrafficParameter `json:"parameter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficConnection) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficConnection) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficConnection) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -96985,20 +89295,10 @@ type TrafficCounter struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficCounter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficCounter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficCounter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97029,20 +89329,10 @@ type TrafficCpdpConvergence struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficCpdpConvergence) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficCpdpConvergence) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficCpdpConvergence) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97061,20 +89351,10 @@ type TrafficDataIntegrity struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficDataIntegrity) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficDataIntegrity) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficDataIntegrity) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97102,20 +89382,10 @@ type TrafficDelayVariation struct {
 	// StatisticsMode: TBD
 
 	StatisticsMode *string `json:"statisticsMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficDelayVariation) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficDelayVariation) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficDelayVariation) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97135,20 +89405,10 @@ type TrafficDynamicUpdate struct {
 	EnabledDynamicUpdateFields []string `json:"enabledDynamicUpdateFields"`
 	// EnabledSessionAwareTrafficFields: TBD
 	EnabledSessionAwareTrafficFields []string `json:"enabledSessionAwareTrafficFields"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficDynamicUpdate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficDynamicUpdate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficDynamicUpdate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97181,20 +89441,10 @@ type TrafficEgress struct {
 	Offset *string `json:"offset,omitempty"`
 
 	FieldOffset *TrafficFieldOffset `json:"fieldOffset,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficEgress) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficEgress) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficEgress) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97228,20 +89478,10 @@ type TrafficEgressTracking struct {
 	Offset *string `json:"offset,omitempty"`
 
 	FieldOffset *TrafficFieldOffset `json:"fieldOffset,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficEgressTracking) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficEgressTracking) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficEgressTracking) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97299,20 +89539,10 @@ type TrafficEndpointSet struct {
 	TrafficGroups []string `json:"trafficGroups"`
 	// TrafficGroupsRefs: Track refs for TrafficGroups.
 	TrafficGroupsRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficEndpointSet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficEndpointSet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficEndpointSet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97331,20 +89561,10 @@ type TrafficErrorStats struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficErrorStats) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficErrorStats) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficErrorStats) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97413,20 +89633,10 @@ type TrafficField struct {
 	// ValueType: TBD
 
 	ValueType *string `json:"valueType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97443,20 +89653,10 @@ type TrafficFieldOffset struct {
 
 	Xpath *XPath          `json:"xpath,omitempty"`
 	Stack []*TrafficStack `json:"stack"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFieldOffset) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFieldOffset) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFieldOffset) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97493,20 +89693,10 @@ type TrafficFramePayload struct {
 	// Type_: TBD
 
 	Type_ *string `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFramePayload) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFramePayload) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFramePayload) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97540,20 +89730,10 @@ type TrafficFramePreemption struct {
 	// SmdType: Select the SMD type
 
 	SmdType *string `json:"smdType,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFramePreemption) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFramePreemption) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFramePreemption) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97584,20 +89764,10 @@ type TrafficFrameRate struct {
 	// Type_: TBD
 
 	Type_ *string `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFrameRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFrameRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFrameRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97619,20 +89789,10 @@ type TrafficFrameRateDistribution struct {
 	// StreamDistribution: TBD
 
 	StreamDistribution *string `json:"streamDistribution,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFrameRateDistribution) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFrameRateDistribution) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFrameRateDistribution) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97678,20 +89838,10 @@ type TrafficFrameSize struct {
 	WeightedPairs []float32 `json:"weightedPairs"`
 	// WeightedRangePairs: TBD
 	WeightedRangePairs []map[string]interface{} `json:"weightedRangePairs,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficFrameSize) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficFrameSize) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficFrameSize) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97710,20 +89860,10 @@ type TrafficHex struct {
 	// Value: Parameter hex value.
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficHex) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficHex) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficHex) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97786,20 +89926,10 @@ type TrafficHighLevelStream struct {
 
 	TransmissionControl *TrafficTransmissionControl `json:"transmissionControl,omitempty"`
 	Udf                 []*TrafficUdf               `json:"udf"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficHighLevelStream) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficHighLevelStream) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficHighLevelStream) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97886,20 +90016,10 @@ type TrafficInterArrivalTimeRate struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficInterArrivalTimeRate) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficInterArrivalTimeRate) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficInterArrivalTimeRate) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97918,20 +90038,10 @@ type TrafficIptv struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficIptv) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficIptv) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficIptv) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -97968,20 +90078,10 @@ type TrafficIpv4 struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficIpv4) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficIpv4) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficIpv4) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98000,20 +90100,10 @@ type TrafficL1Rates struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficL1Rates) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficL1Rates) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficL1Rates) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98035,20 +90125,10 @@ type TrafficLatency struct {
 	// Mode: TBD
 
 	Mode *string `json:"mode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficLatency) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficLatency) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficLatency) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98072,20 +90152,10 @@ type TrafficLatencyBin struct {
 	// NumberOfBins: TBD
 
 	NumberOfBins *float32 `json:"numberOfBins,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficLatencyBin) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficLatencyBin) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficLatencyBin) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98104,20 +90174,10 @@ type TrafficMisdirectedPerFlow struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficMisdirectedPerFlow) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficMisdirectedPerFlow) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficMisdirectedPerFlow) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98136,20 +90196,10 @@ type TrafficMultipleJoinLeaveLatency struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficMultipleJoinLeaveLatency) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficMultipleJoinLeaveLatency) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficMultipleJoinLeaveLatency) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98189,20 +90239,10 @@ type TrafficNestedCounter struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficNestedCounter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficNestedCounter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficNestedCounter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98221,20 +90261,10 @@ type TrafficNumber struct {
 	// Value: Parameter integer value.
 
 	Value *float32 `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficNumber) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficNumber) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficNumber) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98253,20 +90283,10 @@ type TrafficOneTimeJoinLeaveLatency struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficOneTimeJoinLeaveLatency) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficOneTimeJoinLeaveLatency) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficOneTimeJoinLeaveLatency) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98285,20 +90305,10 @@ type TrafficPacketLossDuration struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficPacketLossDuration) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficPacketLossDuration) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficPacketLossDuration) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98323,20 +90333,10 @@ type TrafficParameter struct {
 	Number []*TrafficNumber `json:"number"`
 	Range_ []*TrafficRange  `json:"range"`
 	String []*TrafficString `json:"string"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98427,20 +90427,10 @@ type TrafficPrbs struct {
 	// Enabled: TBD
 
 	Enabled *bool `json:"enabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficPrbs) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficPrbs) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficPrbs) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98462,20 +90452,10 @@ type TrafficRandom struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficRandom) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficRandom) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficRandom) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98497,20 +90477,10 @@ type TrafficRange struct {
 	// To: End range value.
 
 	To *float32 `json:"to,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficRange) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficRange) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficRange) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98534,20 +90504,10 @@ type TrafficRangeList struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficRangeList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficRangeList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficRangeList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98572,20 +90532,10 @@ type TrafficSequenceChecking struct {
 	// SequenceMode: TBD
 
 	SequenceMode *string `json:"sequenceMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficSequenceChecking) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficSequenceChecking) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficSequenceChecking) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98602,20 +90552,10 @@ type TrafficStack struct {
 
 	Xpath *XPath          `json:"xpath,omitempty"`
 	Field []*TrafficField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficStack) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficStack) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficStack) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98648,20 +90588,10 @@ type TrafficStackLink struct {
 	LinkedTo *string `json:"linkedTo,omitempty"`
 	// LinkedToRefs: Track refs for LinkedTo.
 	LinkedToRefs []Href `json:"-"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficStackLink) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficStackLink) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficStackLink) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98707,20 +90637,10 @@ type TrafficStatistics struct {
 	Prbs *TrafficPrbs `json:"prbs,omitempty"`
 
 	SequenceChecking *TrafficSequenceChecking `json:"sequenceChecking,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficStatistics) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficStatistics) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficStatistics) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98799,20 +90719,10 @@ type TrafficString struct {
 	// Value: Parameter string value.
 
 	Value *string `json:"value,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficString) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficString) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficString) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98832,20 +90742,10 @@ type TrafficTableUdf struct {
 
 	Enabled *bool            `json:"enabled,omitempty"`
 	Column  []*TrafficColumn `json:"column"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficTableUdf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficTableUdf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficTableUdf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -98893,20 +90793,10 @@ type TrafficTracking struct {
 	Egress *TrafficEgress `json:"egress,omitempty"`
 
 	LatencyBin *TrafficLatencyBin `json:"latencyBin,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficTracking) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficTracking) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficTracking) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99027,20 +90917,10 @@ type TrafficTrafficItem struct {
 	HighLevelStream          []*TrafficHighLevelStream          `json:"highLevelStream"`
 	Tracking                 []*TrafficTracking                 `json:"tracking"`
 	TransmissionDistribution []*TrafficTransmissionDistribution `json:"transmissionDistribution"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficTrafficItem) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficTrafficItem) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficTrafficItem) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99194,20 +91074,10 @@ type TrafficTransmissionControl struct {
 	// Type_: TBD
 
 	Type_ *string `json:"type,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficTransmissionControl) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficTransmissionControl) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficTransmissionControl) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99225,20 +91095,10 @@ type TrafficTransmissionDistribution struct {
 	Xpath *XPath `json:"xpath,omitempty"`
 	// Distributions: TBD
 	Distributions []string `json:"distributions"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficTransmissionDistribution) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficTransmissionDistribution) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficTransmissionDistribution) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99272,20 +91132,10 @@ type TrafficUdf struct {
 	Random        []*TrafficRandom        `json:"random"`
 	RangeList     []*TrafficRangeList     `json:"rangeList"`
 	ValueList     []*TrafficValueList     `json:"valueList"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficUdf) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficUdf) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficUdf) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99378,20 +91228,10 @@ type TrafficValueList struct {
 	// Width: TBD
 
 	Width *string `json:"width,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *TrafficValueList) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *TrafficValueList) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *TrafficValueList) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99455,20 +91295,10 @@ type Vport struct {
 
 	L1Config    *VportL1Config      `json:"l1Config,omitempty"`
 	TapSettings []*VportTapSettings `json:"tapSettings"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *Vport) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *Vport) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *Vport) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99609,20 +91439,10 @@ type VportAresOneFourHundredGigLan struct {
 	UseANResults *bool `json:"useANResults,omitempty"`
 
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportAresOneFourHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportAresOneFourHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportAresOneFourHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99737,20 +91557,10 @@ type VportAtlasFourHundredGigLan struct {
 	UseANResults *bool `json:"useANResults,omitempty"`
 
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportAtlasFourHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportAtlasFourHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportAtlasFourHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99812,20 +91622,10 @@ type VportAtm struct {
 	// TransmitClocking: TBD
 
 	TransmitClocking *string `json:"transmitClocking,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportAtm) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportAtm) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportAtm) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99906,20 +91706,10 @@ type VportCapture struct {
 	FilterPallette *VportFilterPallette `json:"filterPallette,omitempty"`
 
 	Trigger *VportTrigger `json:"trigger,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportCapture) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportCapture) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportCapture) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -99952,20 +91742,10 @@ type VportCurrentPacket struct {
 
 	Xpath *XPath        `json:"xpath,omitempty"`
 	Stack []*VportStack `json:"stack"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportCurrentPacket) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportCurrentPacket) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportCurrentPacket) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100002,20 +91782,10 @@ type VportDcc struct {
 	// TimeFill: TBD
 
 	TimeFill *string `json:"timeFill,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportDcc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportDcc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportDcc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100072,20 +91842,10 @@ type VportEthernet struct {
 	Oam *VportOam `json:"oam,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportEthernet) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportEthernet) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportEthernet) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100119,20 +91879,10 @@ type VportEthernetImpairment struct {
 	// Ppm: TBD
 
 	Ppm *float32 `json:"ppm,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportEthernetImpairment) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportEthernetImpairment) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportEthernetImpairment) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100163,20 +91913,10 @@ type VportEthernetvm struct {
 	// Speed: TBD
 
 	Speed *string `json:"speed,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportEthernetvm) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportEthernetvm) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportEthernetvm) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100234,20 +91974,10 @@ type VportFc struct {
 	// TxIgnoreRxLinkFaults: TBD
 
 	TxIgnoreRxLinkFaults *bool `json:"txIgnoreRxLinkFaults,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFc) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFc) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFc) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100280,20 +92010,10 @@ type VportFcoe struct {
 	// SupportDataCenterMode: TBD
 
 	SupportDataCenterMode *bool `json:"supportDataCenterMode,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFcoe) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFcoe) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFcoe) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100309,20 +92029,10 @@ type VportField struct {
 	// Xpath: If the resource identified by the xpath exists it will be updated
 
 	Xpath *XPath `json:"xpath,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportField) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportField) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportField) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100365,20 +92075,10 @@ type VportFilter struct {
 	// CaptureFilterSA: TBD
 
 	CaptureFilterSA *string `json:"captureFilterSA,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFilter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFilter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFilter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100442,20 +92142,10 @@ type VportFilterPalette struct {
 	// SourceAddress2Mask: TBD
 
 	SourceAddress2Mask *string `json:"sourceAddress2Mask,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFilterPalette) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFilterPalette) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFilterPalette) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100519,20 +92209,10 @@ type VportFilterPallette struct {
 	// PatternOffsetType2: TBD
 
 	PatternOffsetType2 *string `json:"patternOffsetType2,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFilterPallette) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFilterPallette) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFilterPallette) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100579,20 +92259,10 @@ type VportFortyGigLan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFortyGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFortyGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFortyGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100622,20 +92292,10 @@ type VportFramePreemption struct {
 	// IsSmdVREnabled: TBD
 
 	IsSmdVREnabled *bool `json:"isSmdVREnabled,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportFramePreemption) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportFramePreemption) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportFramePreemption) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100679,20 +92339,10 @@ type VportHundredGigLan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100805,20 +92455,10 @@ type VportKrakenFourHundredGigLan struct {
 	UseANResults *bool `json:"useANResults,omitempty"`
 
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportKrakenFourHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportKrakenFourHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportKrakenFourHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -100881,20 +92521,10 @@ type VportL1Config struct {
 	TenGigWan *VportTenGigWan `json:"tenGigWan,omitempty"`
 
 	UhdOneHundredGigLan *VportUhdOneHundredGigLan `json:"uhdOneHundredGigLan,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportL1Config) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportL1Config) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportL1Config) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101087,20 +92717,10 @@ type VportNovusHundredGigLan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportNovusHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportNovusHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportNovusHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101166,20 +92786,10 @@ type VportNovusTenGigLan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportNovusTenGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportNovusTenGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportNovusTenGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101236,20 +92846,10 @@ type VportOam struct {
 	// VendorSpecificInformation: TBD
 
 	VendorSpecificInformation *string `json:"vendorSpecificInformation,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportOam) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportOam) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportOam) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101268,20 +92868,10 @@ type VportParameter struct {
 	// CurrentValue: Parameter UI Display Value
 
 	CurrentValue *string `json:"currentValue,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportParameter) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportParameter) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportParameter) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101334,20 +92924,10 @@ type VportPos struct {
 	Dcc *VportDcc `json:"dcc,omitempty"`
 
 	Ppp *VportPpp `json:"ppp,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportPos) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportPos) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportPos) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101443,20 +93023,10 @@ type VportPpp struct {
 	// UseMagicNumber: TBD
 
 	UseMagicNumber *bool `json:"useMagicNumber,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportPpp) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportPpp) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportPpp) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101474,20 +93044,10 @@ type VportProtocolStack struct {
 	Xpath *XPath `json:"xpath,omitempty"`
 
 	Options *VportProtocolStackOptions `json:"options,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportProtocolStack) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportProtocolStack) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportProtocolStack) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101512,20 +93072,10 @@ type VportProtocolStackOptions struct {
 	McastSolicit *float32 `json:"mcast_solicit,omitempty"`
 
 	RetransTime *float32 `json:"retransTime,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportProtocolStackOptions) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportProtocolStackOptions) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportProtocolStackOptions) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101544,20 +93094,10 @@ type VportRxFilters struct {
 
 	FilterPalette *VportFilterPalette `json:"filterPalette,omitempty"`
 	Uds           []*VportUds         `json:"uds"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportRxFilters) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportRxFilters) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportRxFilters) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101590,20 +93130,10 @@ type VportStack struct {
 
 	Xpath *XPath        `json:"xpath,omitempty"`
 	Field []*VportField `json:"field"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportStack) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportStack) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportStack) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101632,20 +93162,10 @@ type VportTapSettings struct {
 
 	Xpath     *XPath            `json:"xpath,omitempty"`
 	Parameter []*VportParameter `json:"parameter"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTapSettings) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTapSettings) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTapSettings) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101746,20 +93266,10 @@ type VportTenFortyHundredGigLan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTenFortyHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTenFortyHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTenFortyHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101822,20 +93332,10 @@ type VportTenGigLan struct {
 	Oam *VportOam `json:"oam,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTenGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTenGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTenGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101903,20 +93403,10 @@ type VportTenGigWan struct {
 	Fcoe *VportFcoe `json:"fcoe,omitempty"`
 
 	TxLane *VportTxLane `json:"txLane,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTenGigWan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTenGigWan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTenGigWan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -101967,20 +93457,10 @@ type VportTrigger struct {
 	// CaptureTriggerSA: TBD
 
 	CaptureTriggerSA *string `json:"captureTriggerSA,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTrigger) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTrigger) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTrigger) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -102009,20 +93489,10 @@ type VportTxLane struct {
 	// SynchronizedSkewVal: TBD
 
 	SynchronizedSkewVal *float32 `json:"synchronizedSkewVal,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportTxLane) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportTxLane) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportTxLane) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -102062,20 +93532,10 @@ type VportUds struct {
 	// SourceAddressSelector: TBD
 
 	SourceAddressSelector *string `json:"sourceAddressSelector,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportUds) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportUds) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportUds) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.
@@ -102148,20 +93608,10 @@ type VportUhdOneHundredGigLan struct {
 	// UseANResults: TBD
 
 	UseANResults *bool `json:"useANResults,omitempty"`
-	// RestID represents the REST API path for a config object (if it is applicable to this object.)
-	RestID string `json:"-"`
 }
 
 func (n *VportUhdOneHundredGigLan) XPath() *XPath {
 	return n.Xpath
-}
-
-func (n *VportUhdOneHundredGigLan) setRestID(id string) {
-	n.RestID = id
-}
-
-func (n *VportUhdOneHundredGigLan) GetRestID() string {
-	return n.RestID
 }
 
 // updateXPaths recursively updates this structs XPath and those of its subconfig properties.

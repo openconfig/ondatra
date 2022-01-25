@@ -38,6 +38,11 @@ func TestSetUintRangeField(t *testing.T) {
 		ints *opb.UIntRange
 		want *ixconfig.TrafficField
 	}{{
+		desc: "default value",
+		want: &ixconfig.TrafficField{
+			Auto: ixconfig.Bool(true),
+		},
+	}, {
 		desc: "single value",
 		ints: &opb.UIntRange{Min: 4, Max: 4, Step: 1, Count: 1},
 		want: &ixconfig.TrafficField{

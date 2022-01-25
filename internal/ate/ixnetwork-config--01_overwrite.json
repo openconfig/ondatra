@@ -19,7 +19,8 @@
                "mcast_solicit": 8,
                "retransTime": 7000
             }
-         }
+         },
+         "xpath": "/vport[1]"
       },
       {
          "l1Config": {
@@ -40,7 +41,8 @@
                "mcast_solicit": 8,
                "retransTime": 7000
             }
-         }
+         },
+         "xpath": "/vport[2]"
       }
    ]
 }

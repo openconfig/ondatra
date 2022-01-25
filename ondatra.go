@@ -41,6 +41,7 @@ var (
 	reserveFn  = reserve
 	releaseFn  = release
 	runTestsFn = (*fixture).runTests
+	initFn     = binding.Init
 )
 
 // Binder is the generator for providing binding to the test.
@@ -48,30 +49,22 @@ type Binder func() (binding.Binding, error)
 
 // RunTests acquires the testbed of devices and runs the tests. Every device is
 // initialized with a baseline configuration that allows it to be managed.
-func RunTests(m *testing.M, binders ...Binder) {
+func RunTests(m *testing.M, binder Binder) {
 	// Careful to only exit at the very end, because exiting skips all pending defers.
-	if err := doRun(m, binders...); err != nil {
+	if err := doRun(m, binder); err != nil {
 		log.Exit(err)
 	}
 }
 
-func doRun(m *testing.M, binders ...Binder) (rerr error) {
+func doRun(m *testing.M, binder Binder) (rerr error) {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
-	if len(binders) > 1 {
-		return fmt.Errorf("found %d bindings, one or zero(deprecated) required", len(binders))
+	b, err := binder()
+	if err != nil {
+		return fmt.Errorf("failed to create binding: %w", err)
 	}
-	if len(binders) == 1 {
-		b, err := binders[0]()
-		if err != nil {
-			return fmt.Errorf("failed to create binding: %w", err)
-		}
-		binding.Init(b)
-	}
-	if !binding.IsSet() {
-		log.Warning("Binding is not set, this will likely cause a panic during test.")
-	}
+	initFn(b)
 	fmt.Println(actionMsg("Reserving the testbed"))
 	if err := reserveFn(*reservemain.TestbedPath, *reservemain.RunTime, *reservemain.WaitTime); err != nil {
 		return err

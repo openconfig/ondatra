@@ -88,6 +88,10 @@ func setList(field *ixconfig.TrafficField, vals []string) {
 }
 
 func setUintRangeField(field *ixconfig.TrafficField, r *opb.UIntRange) error {
+	if r == nil {
+		field.Auto = ixconfig.Bool(true)
+		return nil
+	}
 	if r.GetCount() == 0 {
 		return usererr.New("count in range is not set or zero")
 	}

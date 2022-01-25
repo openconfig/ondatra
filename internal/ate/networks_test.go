@@ -32,7 +32,7 @@ func TestAddNetworks(t *testing.T) {
 		net1Name = "someNet"
 		net2Name = "anotherNet"
 	)
-	baseClient := func(withBGPv4Peer, withBGPv6Peer bool) *IxiaCfgClient {
+	baseClient := func(withBGPv4Peer, withBGPv6Peer bool) *ixATE {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -53,7 +53,7 @@ func TestAddNetworks(t *testing.T) {
 			}}
 			ifc.ipv6 = ifc.deviceGroup.Ethernet[0].Ipv6[0]
 		}
-		return &IxiaCfgClient{
+		return &ixATE{
 			cfg:   cfg,
 			intfs: map[string]*intf{ifName: ifc},
 		}
