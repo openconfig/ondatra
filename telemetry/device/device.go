@@ -62,6 +62,7 @@ import (
 	"github.com/openconfig/ondatra/telemetry/ateflow"
 	"github.com/openconfig/ondatra/telemetry/gnmicollectormetadata"
 	"github.com/openconfig/ondatra/telemetry/interfaces"
+	"github.com/openconfig/ondatra/telemetry/keychain"
 	"github.com/openconfig/ondatra/telemetry/lacp"
 	"github.com/openconfig/ondatra/telemetry/lldp"
 	"github.com/openconfig/ondatra/telemetry/localrouting"
@@ -202,6 +203,40 @@ func (n *DevicePath) Interface(Name string) *interfaces.InterfacePath {
 	return &interfaces.InterfacePath{
 		NodePath: ygot.NewNodePath(
 			[]string{"interfaces", "interface"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// KeychainAny (list): List of defined keychains.
+// ----------------------------------------
+// Defining module: "openconfig-keychain"
+// Instantiating module: "openconfig-keychain"
+// Path from parent: "keychains/keychain"
+// Path from root: "/keychains/keychain"
+// Name (wildcarded): string
+func (n *DevicePath) KeychainAny() *keychain.KeychainPathAny {
+	return &keychain.KeychainPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"keychains", "keychain"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// Keychain (list): List of defined keychains.
+// ----------------------------------------
+// Defining module: "openconfig-keychain"
+// Instantiating module: "openconfig-keychain"
+// Path from parent: "keychains/keychain"
+// Path from root: "/keychains/keychain"
+// Name: string
+func (n *DevicePath) Keychain(Name string) *keychain.KeychainPath {
+	return &keychain.KeychainPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"keychains", "keychain"},
 			map[string]interface{}{"name": Name},
 			n,
 		),

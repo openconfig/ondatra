@@ -7747,6 +7747,266 @@ func (w *Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher) Await(t tes
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedKeychain is a *Keychain with a corresponding timestamp.
+type QualifiedKeychain struct {
+	*genutil.Metadata
+	val     *Keychain // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedKeychain) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Keychain sample, erroring out if not present.
+func (q *QualifiedKeychain) Val(t testing.TB) *Keychain {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Keychain sample.
+func (q *QualifiedKeychain) SetVal(v *Keychain) *QualifiedKeychain {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedKeychain) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionKeychain is a telemetry Collection whose Await method returns a slice of *Keychain samples.
+type CollectionKeychain struct {
+	W    *KeychainWatcher
+	Data []*QualifiedKeychain
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionKeychain) Await(t testing.TB) []*QualifiedKeychain {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// KeychainWatcher observes a stream of *Keychain samples.
+type KeychainWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedKeychain
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *KeychainWatcher) Await(t testing.TB) (*QualifiedKeychain, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedKeychain_Key is a *Keychain_Key with a corresponding timestamp.
+type QualifiedKeychain_Key struct {
+	*genutil.Metadata
+	val     *Keychain_Key // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedKeychain_Key) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Keychain_Key sample, erroring out if not present.
+func (q *QualifiedKeychain_Key) Val(t testing.TB) *Keychain_Key {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Keychain_Key sample.
+func (q *QualifiedKeychain_Key) SetVal(v *Keychain_Key) *QualifiedKeychain_Key {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedKeychain_Key) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionKeychain_Key is a telemetry Collection whose Await method returns a slice of *Keychain_Key samples.
+type CollectionKeychain_Key struct {
+	W    *Keychain_KeyWatcher
+	Data []*QualifiedKeychain_Key
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionKeychain_Key) Await(t testing.TB) []*QualifiedKeychain_Key {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Keychain_KeyWatcher observes a stream of *Keychain_Key samples.
+type Keychain_KeyWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedKeychain_Key
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Keychain_KeyWatcher) Await(t testing.TB) (*QualifiedKeychain_Key, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedKeychain_Key_ReceiveLifetime is a *Keychain_Key_ReceiveLifetime with a corresponding timestamp.
+type QualifiedKeychain_Key_ReceiveLifetime struct {
+	*genutil.Metadata
+	val     *Keychain_Key_ReceiveLifetime // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedKeychain_Key_ReceiveLifetime) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Keychain_Key_ReceiveLifetime sample, erroring out if not present.
+func (q *QualifiedKeychain_Key_ReceiveLifetime) Val(t testing.TB) *Keychain_Key_ReceiveLifetime {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Keychain_Key_ReceiveLifetime sample.
+func (q *QualifiedKeychain_Key_ReceiveLifetime) SetVal(v *Keychain_Key_ReceiveLifetime) *QualifiedKeychain_Key_ReceiveLifetime {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedKeychain_Key_ReceiveLifetime) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionKeychain_Key_ReceiveLifetime is a telemetry Collection whose Await method returns a slice of *Keychain_Key_ReceiveLifetime samples.
+type CollectionKeychain_Key_ReceiveLifetime struct {
+	W    *Keychain_Key_ReceiveLifetimeWatcher
+	Data []*QualifiedKeychain_Key_ReceiveLifetime
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionKeychain_Key_ReceiveLifetime) Await(t testing.TB) []*QualifiedKeychain_Key_ReceiveLifetime {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Keychain_Key_ReceiveLifetimeWatcher observes a stream of *Keychain_Key_ReceiveLifetime samples.
+type Keychain_Key_ReceiveLifetimeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedKeychain_Key_ReceiveLifetime
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Keychain_Key_ReceiveLifetimeWatcher) Await(t testing.TB) (*QualifiedKeychain_Key_ReceiveLifetime, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedKeychain_Key_SendLifetime is a *Keychain_Key_SendLifetime with a corresponding timestamp.
+type QualifiedKeychain_Key_SendLifetime struct {
+	*genutil.Metadata
+	val     *Keychain_Key_SendLifetime // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedKeychain_Key_SendLifetime) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Keychain_Key_SendLifetime sample, erroring out if not present.
+func (q *QualifiedKeychain_Key_SendLifetime) Val(t testing.TB) *Keychain_Key_SendLifetime {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Keychain_Key_SendLifetime sample.
+func (q *QualifiedKeychain_Key_SendLifetime) SetVal(v *Keychain_Key_SendLifetime) *QualifiedKeychain_Key_SendLifetime {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedKeychain_Key_SendLifetime) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionKeychain_Key_SendLifetime is a telemetry Collection whose Await method returns a slice of *Keychain_Key_SendLifetime samples.
+type CollectionKeychain_Key_SendLifetime struct {
+	W    *Keychain_Key_SendLifetimeWatcher
+	Data []*QualifiedKeychain_Key_SendLifetime
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionKeychain_Key_SendLifetime) Await(t testing.TB) []*QualifiedKeychain_Key_SendLifetime {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Keychain_Key_SendLifetimeWatcher observes a stream of *Keychain_Key_SendLifetime samples.
+type Keychain_Key_SendLifetimeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedKeychain_Key_SendLifetime
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Keychain_Key_SendLifetimeWatcher) Await(t testing.TB) (*QualifiedKeychain_Key_SendLifetime, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedLacp is a *Lacp with a corresponding timestamp.
 type QualifiedLacp struct {
 	*genutil.Metadata
@@ -8263,266 +8523,6 @@ type Lldp_Interface_CountersWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Lldp_Interface_CountersWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Counters, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface_Neighbor is a *Lldp_Interface_Neighbor with a corresponding timestamp.
-type QualifiedLldp_Interface_Neighbor struct {
-	*genutil.Metadata
-	val     *Lldp_Interface_Neighbor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface_Neighbor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface_Neighbor sample, erroring out if not present.
-func (q *QualifiedLldp_Interface_Neighbor) Val(t testing.TB) *Lldp_Interface_Neighbor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface_Neighbor sample.
-func (q *QualifiedLldp_Interface_Neighbor) SetVal(v *Lldp_Interface_Neighbor) *QualifiedLldp_Interface_Neighbor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface_Neighbor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface_Neighbor is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Neighbor samples.
-type CollectionLldp_Interface_Neighbor struct {
-	W    *Lldp_Interface_NeighborWatcher
-	Data []*QualifiedLldp_Interface_Neighbor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface_Neighbor) Await(t testing.TB) []*QualifiedLldp_Interface_Neighbor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_Interface_NeighborWatcher observes a stream of *Lldp_Interface_Neighbor samples.
-type Lldp_Interface_NeighborWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface_Neighbor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_Interface_NeighborWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Neighbor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface_Neighbor_Capability is a *Lldp_Interface_Neighbor_Capability with a corresponding timestamp.
-type QualifiedLldp_Interface_Neighbor_Capability struct {
-	*genutil.Metadata
-	val     *Lldp_Interface_Neighbor_Capability // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface_Neighbor_Capability) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface_Neighbor_Capability sample, erroring out if not present.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) Val(t testing.TB) *Lldp_Interface_Neighbor_Capability {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface_Neighbor_Capability sample.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) SetVal(v *Lldp_Interface_Neighbor_Capability) *QualifiedLldp_Interface_Neighbor_Capability {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface_Neighbor_Capability is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Neighbor_Capability samples.
-type CollectionLldp_Interface_Neighbor_Capability struct {
-	W    *Lldp_Interface_Neighbor_CapabilityWatcher
-	Data []*QualifiedLldp_Interface_Neighbor_Capability
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface_Neighbor_Capability) Await(t testing.TB) []*QualifiedLldp_Interface_Neighbor_Capability {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_Interface_Neighbor_CapabilityWatcher observes a stream of *Lldp_Interface_Neighbor_Capability samples.
-type Lldp_Interface_Neighbor_CapabilityWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface_Neighbor_Capability
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_Interface_Neighbor_CapabilityWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Neighbor_Capability, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface_Neighbor_Tlv is a *Lldp_Interface_Neighbor_Tlv with a corresponding timestamp.
-type QualifiedLldp_Interface_Neighbor_Tlv struct {
-	*genutil.Metadata
-	val     *Lldp_Interface_Neighbor_Tlv // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface_Neighbor_Tlv) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface_Neighbor_Tlv sample, erroring out if not present.
-func (q *QualifiedLldp_Interface_Neighbor_Tlv) Val(t testing.TB) *Lldp_Interface_Neighbor_Tlv {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface_Neighbor_Tlv sample.
-func (q *QualifiedLldp_Interface_Neighbor_Tlv) SetVal(v *Lldp_Interface_Neighbor_Tlv) *QualifiedLldp_Interface_Neighbor_Tlv {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface_Neighbor_Tlv) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface_Neighbor_Tlv is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Neighbor_Tlv samples.
-type CollectionLldp_Interface_Neighbor_Tlv struct {
-	W    *Lldp_Interface_Neighbor_TlvWatcher
-	Data []*QualifiedLldp_Interface_Neighbor_Tlv
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface_Neighbor_Tlv) Await(t testing.TB) []*QualifiedLldp_Interface_Neighbor_Tlv {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_Interface_Neighbor_TlvWatcher observes a stream of *Lldp_Interface_Neighbor_Tlv samples.
-type Lldp_Interface_Neighbor_TlvWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface_Neighbor_Tlv
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_Interface_Neighbor_TlvWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Neighbor_Tlv, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLocalRoutes is a *LocalRoutes with a corresponding timestamp.
-type QualifiedLocalRoutes struct {
-	*genutil.Metadata
-	val     *LocalRoutes // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLocalRoutes) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *LocalRoutes sample, erroring out if not present.
-func (q *QualifiedLocalRoutes) Val(t testing.TB) *LocalRoutes {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *LocalRoutes sample.
-func (q *QualifiedLocalRoutes) SetVal(v *LocalRoutes) *QualifiedLocalRoutes {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLocalRoutes) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLocalRoutes is a telemetry Collection whose Await method returns a slice of *LocalRoutes samples.
-type CollectionLocalRoutes struct {
-	W    *LocalRoutesWatcher
-	Data []*QualifiedLocalRoutes
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLocalRoutes) Await(t testing.TB) []*QualifiedLocalRoutes {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LocalRoutesWatcher observes a stream of *LocalRoutes samples.
-type LocalRoutesWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLocalRoutes
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LocalRoutesWatcher) Await(t testing.TB) (*QualifiedLocalRoutes, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

@@ -44,8 +44,8 @@ import (
 
 var (
 	// to be stubbed out by tests
-	fetchTopoFn = fetchTopology
-	sshExecFn   = sshExec
+	kneCmdFn  = kneCmd
+	sshExecFn = sshExec
 )
 
 // Bind implements the ondatra Binding interface for KNE
@@ -69,9 +69,13 @@ func New(cfg *Config) (*Bind, error) {
 // Reserve implements the binding Reserve method by finding nodes and links in
 // the topology specified in the config file that match the requested testbed.
 func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration) (*reservation.Reservation, error) {
-	topo, err := fetchTopoFn(b.cfg)
+	out, err := kneCmdFn(b.cfg, "topology", "service", b.cfg.TopoPath)
 	if err != nil {
 		return nil, err
+	}
+	topo := new(tpb.Topology)
+	if err := prototext.Unmarshal(out, topo); err != nil {
+		return nil, errors.Wrap(err, "error unmarshalling KNE topology proto")
 	}
 	sol, err := solver.Solve(tb, topo)
 	if err != nil {
@@ -79,26 +83,6 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	}
 	b.services = sol.Services
 	return sol.Reservation, nil
-}
-
-func fetchTopology(cfg *Config) (*tpb.Topology, error) {
-	args := []string{"topology", "service", cfg.TopoPath}
-	if cfg.KubecfgPath != "" {
-		args = append(args, fmt.Sprintf("--kubecfg=%s", cfg.KubecfgPath))
-	}
-	cmd := exec.Command(cfg.CLIPath, args...)
-	out, err := cmd.Output()
-	if err != nil {
-		if execErr, ok := err.(*exec.ExitError); ok {
-			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
-		}
-		return nil, errors.Wrapf(err, "error executing command %v", cmd)
-	}
-	topo := new(tpb.Topology)
-	if err := prototext.Unmarshal(out, topo); err != nil {
-		return nil, errors.Wrap(err, "error unmarshalling KNE topology proto")
-	}
-	return topo, nil
 }
 
 // Release is a no-op because there's need to reserve local VMs.
@@ -176,7 +160,9 @@ func (b *Bind) PushConfig(ctx context.Context, dut *reservation.DUT, config stri
 		return errors.New("KNEBind PushConfig does not yet support pushing OpenConfig")
 	}
 	if !opts.Append {
-		return errors.New("KNEBind PushConfig does not yet support config replace")
+		if _, err := kneCmdFn(b.cfg, "topology", "reset", b.cfg.TopoPath, dut.Name, "--push"); err != nil {
+			return err
+		}
 	}
 	_, err := b.dutExec(dut, "enable\nconfig terminal\n"+config)
 	return err
@@ -220,7 +206,22 @@ func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr err
 	var buf bytes.Buffer
 	session.Stdout = &buf
 	if err := session.Run(cmd); err != nil {
-		return "", errors.Wrapf(err, "could not execute '%s'", cmd)
+		return "", errors.Wrapf(err, "could not execute %q\noutput: %q", cmd, buf.String())
 	}
 	return buf.String(), nil
+}
+
+func kneCmd(cfg *Config, args ...string) ([]byte, error) {
+	if cfg.KubecfgPath != "" {
+		args = append(append([]string{}, args...), fmt.Sprintf("--kubecfg=%s", cfg.KubecfgPath))
+	}
+	cmd := exec.Command(cfg.CLIPath, args...)
+	out, err := cmd.Output()
+	if err != nil {
+		if execErr, ok := err.(*exec.ExitError); ok {
+			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
+		}
+		return nil, errors.Wrapf(err, "error executing command %v", cmd)
+	}
+	return out, nil
 }

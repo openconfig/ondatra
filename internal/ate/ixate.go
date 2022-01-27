@@ -193,7 +193,7 @@ func newIxATE(ctx context.Context, name string, ixn *binding.IxNetwork) (*ixATE,
 	ix.resetClientCfg()
 	// Merge the initial config to set global preferences like syslog streaming,
 	// but do not overwrite to avoid intefering with interactive debugging.
-	if err := ix.importConfig(ctx, ix.cfg, ix.cfg, false, time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg, false, time.Minute); err != nil {
 		return nil, fmt.Errorf("could not set minimal initial config for session: %w", err)
 	}
 	return ix, nil
@@ -265,7 +265,7 @@ func (ix *ixATE) resetClientCfg() {
 
 // importConfig is a wrapper around the config client ImportConfig method.
 // It writes configs as test artifacts before pushing.
-func (ix *ixATE) importConfig(ctx context.Context, cfg *ixconfig.Ixnetwork, node ixconfig.IxiaCfgNode, overwrite bool, timeout time.Duration) error {
+func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, overwrite bool, timeout time.Duration) error {
 	ix.cfgPushCount++
 	fileSuffix := ".json"
 	if overwrite {
@@ -289,7 +289,7 @@ func (ix *ixATE) importConfig(ctx context.Context, cfg *ixconfig.Ixnetwork, node
 	defer cancel()
 
 	for i := 0; i < importRetries; i++ {
-		err := ix.c.ImportConfig(importCtx, cfg, node, overwrite)
+		err := ix.c.ImportConfig(importCtx, ix.cfg, node, overwrite)
 		// If no error or if there is an error and the request did not timeout.
 		if err == nil || importCtx.Err() != context.DeadlineExceeded {
 			return err
@@ -489,7 +489,7 @@ func (ix *ixATE) updateTopology(ctx context.Context, ics []*opb.InterfaceConfig)
 		return err
 	}
 	// Full topology updates can take some time, use a 3 minute timeout.
-	if err := ix.importConfig(ctx, ix.cfg, ix.cfg, false, 3*time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg, false, 3*time.Minute); err != nil {
 		return err
 	}
 	return syncRouteTableFilesAndImportFn(ctx, ix)
@@ -501,14 +501,14 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	if err := ix.addPorts(top); err != nil {
 		return err
 	}
-	if err := ix.importConfig(ctx, ix.cfg, ix.cfg, true, time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg, true, time.Minute); err != nil {
 		return err
 	}
 	if lags := top.GetLags(); len(lags) > 0 {
 		if err := ix.addLAGs(lags); err != nil {
 			return err
 		}
-		if err := ix.importConfig(ctx, ix.cfg, ix.cfg, false, time.Minute); err != nil {
+		if err := ix.importConfig(ctx, ix.cfg, false, time.Minute); err != nil {
 			return err
 		}
 	}
@@ -956,7 +956,7 @@ func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 		return errors.Wrap(err, "could not compute traffic configuration")
 	}
 
-	if err := ix.importConfig(ctx, ix.cfg, ix.cfg.Traffic, false, time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg.Traffic, false, time.Minute); err != nil {
 		return errors.Wrap(err, "could not push traffic configuration")
 	}
 
@@ -1094,21 +1094,21 @@ func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceCo
 	for _, intf := range ix.intfs {
 		if v4 := intf.ipv4; v4 != nil {
 			for _, peer := range v4.BgpIpv4Peer {
-				if err := ix.importConfig(ctx, ix.cfg, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
 					return errors.Wrap(err, "could not update BGP v4 peer")
 				}
 			}
 		}
 		if v6 := intf.ipv6; v6 != nil {
 			for _, peer := range v6.BgpIpv6Peer {
-				if err := ix.importConfig(ctx, ix.cfg, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
 					return errors.Wrap(err, "could not update BGP v6 peer")
 				}
 			}
 		}
 		if v4lb := intf.ipv4Loopback; v4lb != nil {
 			for _, peer := range v4lb.BgpIpv4Peer {
-				if err := ix.importConfig(ctx, ix.cfg, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
 					return errors.Wrap(err, "could not update BGP v4 loopback peer")
 				}
 			}

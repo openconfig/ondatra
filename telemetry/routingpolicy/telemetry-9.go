@@ -16,352 +16,203 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a ONCE subscription.
+// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Lookup(t testing.TB) *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Lookup(t testing.TB) *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
-	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
-	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", goStruct, true, false)
+	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
+	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", goStruct, true, false)
 	if ok {
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, goStruct)
+		return convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t, md, goStruct)
 	}
-	return nil
+	return (&oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType{
+		Metadata: md,
+	}).SetVal(goStruct.GetMatchSetOptions())
 }
 
-// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a ONCE subscription,
+// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Get(t testing.TB) oc.E_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Get(t testing.TB) oc.E_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a ONCE subscription.
+// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Lookup(t testing.TB) []*oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPathAny) Lookup(t testing.TB) []*oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType
+	var data []*oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", goStruct, queryPath, true, false)
+		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, goStruct)
+		qv := convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a ONCE subscription.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Get(t testing.TB) []oc.E_BgpPolicy_BgpSetCommunityOptionType {
+// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a ONCE subscription.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPathAny) Get(t testing.TB) []oc.E_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.E_BgpPolicy_BgpSetCommunityOptionType
+	var data []oc.E_PolicyTypes_MatchSetOptionsRestrictedType
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
-	c := &oc.CollectionE_BgpPolicy_BgpSetCommunityOptionType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool {
+	c := &oc.CollectionE_PolicyTypes_MatchSetOptionsRestrictedType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool) *oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher {
+func watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool) *oc.E_PolicyTypes_MatchSetOptionsRestrictedTypeWatcher {
 	t.Helper()
-	w := &oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher{}
-	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+	w := &oc.E_PolicyTypes_MatchSetOptionsRestrictedTypeWatcher{}
+	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", gs, queryPath, true, false)
+		return convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType)
+		val, ok := qualVal.(*oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool) *oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool) *oc.E_PolicyTypes_MatchSetOptionsRestrictedTypeWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription,
+// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Await(t testing.TB, timeout time.Duration, val oc.E_BgpPolicy_BgpSetCommunityOptionType) *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Await(t testing.TB, timeout time.Duration, val oc.E_PolicyTypes_MatchSetOptionsRestrictedType) *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_BgpPolicy_BgpSetCommunityOptionType {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
-	c := &oc.CollectionE_BgpPolicy_BgpSetCommunityOptionType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool {
+	c := &oc.CollectionE_PolicyTypes_MatchSetOptionsRestrictedType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool) *oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType) bool) *oc.E_PolicyTypes_MatchSetOptionsRestrictedTypeWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/match-set-options to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath extracts the value of the leaf Options from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType.
-func convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity) *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType {
+// convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath extracts the value of the leaf MatchSetOptions from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType.
+func convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_MatchSetOptionsPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet) *oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType {
 	t.Helper()
-	qv := &oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType{
+	qv := &oc.QualifiedE_PolicyTypes_MatchSetOptionsRestrictedType{
 		Metadata: md,
 	}
-	val := parent.Options
+	val := parent.MatchSetOptions
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a ONCE subscription.
+// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Lookup(t testing.TB) *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", goStruct, false, false)
+	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
+	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", goStruct, true, false)
 	if ok {
-		return (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
-			Metadata: md,
-		}).SetVal(goStruct)
+		return convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a ONCE subscription,
+// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a ONCE subscription.
+// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Lookup(t testing.TB) []*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a ONCE subscription.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Get(t testing.TB) []*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
-	t.Helper()
-	c := &oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)))
-		return false
-	})
-	return c
-}
-
-func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher {
-	t.Helper()
-	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher{}
-	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", gs, queryPath, false, false)
-		return (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher {
-	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Await(t testing.TB, timeout time.Duration, val *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
-	t.Helper()
-	c := &oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher {
-	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", goStruct, true, false)
-	if ok {
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", goStruct, queryPath, true, false)
+		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, goStruct)
+		qv := convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a ONCE subscription.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a ONCE subscription.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -371,9 +222,9 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -383,14 +234,14 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
-func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
-	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
+	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet", gs, queryPath, true, false)
+		return convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -399,41 +250,41 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription,
+// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -443,338 +294,185 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/state/tag-set to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath extracts the value of the leaf ExtCommunitySetRef from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference
+// convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath extracts the value of the leaf TagSet from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) *oc.QualifiedString {
+func convertRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet_TagSetPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.ExtCommunitySetRef
+	val := parent.TagSet
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a ONCE subscription.
+// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", goStruct, true, false)
+	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement{}
+	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement", goStruct, true, false)
 	if ok {
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, goStruct)
+		return convertRoutingPolicy_PolicyDefinition_Statement_NamePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a ONCE subscription,
+// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Get(t testing.TB) uint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a ONCE subscription.
+// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint32
+	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", goStruct, queryPath, true, false)
+		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, goStruct)
+		qv := convertRoutingPolicy_PolicyDefinition_Statement_NamePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a ONCE subscription.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Get(t testing.TB) []uint32 {
+// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a ONCE subscription.
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint32
+	var data []string
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
-	c := &oc.CollectionUint32{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+func watch_RoutingPolicy_PolicyDefinition_Statement_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	w := &oc.Uint32Watcher{}
-	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
+	w := &oc.StringWatcher{}
+	gs := &oc.RoutingPolicy_PolicyDefinition_Statement{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement", gs, queryPath, true, false)
+		return convertRoutingPolicy_PolicyDefinition_Statement_NamePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint32)
+		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_NamePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription,
+// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
-	c := &oc.CollectionUint32{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_NamePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/state/name to the batch object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath extracts the value of the leaf SetLocalPref from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) *oc.QualifiedUint32 {
+// convertRoutingPolicy_PolicyDefinition_Statement_NamePath extracts the value of the leaf Name from its parent oc.RoutingPolicy_PolicyDefinition_Statement
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertRoutingPolicy_PolicyDefinition_Statement_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement) *oc.QualifiedString {
 	t.Helper()
-	qv := &oc.QualifiedUint32{
+	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.SetLocalPref
+	val := parent.Name
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Lookup(t testing.TB) *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-	md, ok := oc.Lookup(t, n, "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", goStruct, true, false)
-	if ok {
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Get(t testing.TB) oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Lookup(t testing.TB) []*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a ONCE subscription.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Get(t testing.TB) []oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	c := &oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher {
-	t.Helper()
-	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher{}
-	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher {
-	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Await(t testing.TB, timeout time.Duration, val oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	c := &oc.CollectionRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher {
-	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med to the batch object.
-func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath extracts the value of the leaf SetMed from its parent oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
-// and combines the update with an existing Metadata to return a *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union.
-func convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t testing.TB, md *genutil.Metadata, parent *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
-	t.Helper()
-	qv := &oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union{
-		Metadata: md,
-	}
-	val := parent.SetMed
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
 	}
 	return qv
 }

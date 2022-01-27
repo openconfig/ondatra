@@ -16,1117 +16,660 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Mpls", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t, md, goStruct)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t, md, goStruct)
+		qv := convertQos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool) *oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_UnionWatcher {
+func watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_UnionWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Mpls{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool) *oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union) bool) *oc.Qos_Classifier_Term_Conditions_Mpls_StartLabelValue_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_StartLabelValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/exceeding-pkts to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Classifier_Term_Conditions_Mpls_StartLabelValuePath extracts the value of the leaf StartLabelValue from its parent oc.Qos_Classifier_Term_Conditions_Mpls
-// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union.
-func convertQos_Classifier_Term_Conditions_Mpls_StartLabelValuePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Mpls) *oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union {
+// convertQos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath extracts the value of the leaf ExceedingPkts from its parent oc.Qos_Interface_Input_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_SchedulerPolicy_Scheduler_ExceedingPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedQos_Classifier_Term_Conditions_Mpls_StartLabelValue_Union{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.StartLabelValue
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Mpls", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/traffic-class to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TrafficClassPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Conditions_Mpls_TrafficClassPath extracts the value of the leaf TrafficClass from its parent oc.Qos_Classifier_Term_Conditions_Mpls
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_Classifier_Term_Conditions_Mpls_TrafficClassPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Mpls) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.TrafficClass
+	val := parent.ExceedingPkts
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Mpls", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Classifier_Term_Conditions_Mpls_TtlValuePath(t, md, goStruct)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Get(t testing.TB) uint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Get(t testing.TB) uint32 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint8
+	var data []*oc.QualifiedUint32
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Mpls{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Classifier_Term_Conditions_Mpls_TtlValuePath(t, md, goStruct)
+		qv := convertQos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePathAny) Get(t testing.TB) []uint8 {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint8
+	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
 	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Classifier_Term_Conditions_Mpls_TtlValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Mpls{}
+	w := &oc.Uint32Watcher{}
+	gs := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Mpls", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Mpls_TtlValuePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
+		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_TtlValuePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
 	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Mpls_TtlValuePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/mpls/state/ttl-value to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Mpls_TtlValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/sequence to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_SequencePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Classifier_Term_Conditions_Mpls_TtlValuePath extracts the value of the leaf TtlValue from its parent oc.Qos_Classifier_Term_Conditions_Mpls
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_Classifier_Term_Conditions_Mpls_TtlValuePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Mpls) *oc.QualifiedUint8 {
+// convertQos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath extracts the value of the leaf Sequence from its parent oc.Qos_Interface_Input_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertQos_Interface_Input_SchedulerPolicy_Scheduler_SequencePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_SchedulerPolicy_Scheduler) *oc.QualifiedUint32 {
 	t.Helper()
-	qv := &oc.QualifiedUint8{
+	qv := &oc.QualifiedUint32{
 		Metadata: md,
 	}
-	val := parent.TtlValue
+	val := parent.Sequence
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Transport {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Transport", goStruct, false, false)
+	goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return (&oc.QualifiedQos_Classifier_Term_Conditions_Transport{
-			Metadata: md,
-		}).SetVal(goStruct)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Transport {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Transport {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Transport
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", goStruct, queryPath, false, false)
+		goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedQos_Classifier_Term_Conditions_Transport{
-			Metadata: md,
-		}).SetVal(goStruct)
+		qv := convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Conditions_Transport {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term_Conditions_Transport
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Conditions_Transport{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term_Conditions_Transport)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Conditions_TransportPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool) *oc.Qos_Classifier_Term_Conditions_TransportWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_Conditions_TransportWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Conditions_Transport{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Transport)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool) *oc.Qos_Classifier_Term_Conditions_TransportWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_TransportPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Conditions_Transport) *oc.QualifiedQos_Classifier_Term_Conditions_Transport {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport to the batch object.
-func (n *Qos_Classifier_Term_Conditions_TransportPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport) bool) *oc.Qos_Classifier_Term_Conditions_TransportWatcher {
+func watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_TransportPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport to the batch object.
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Transport", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Conditions_Transport_DestinationPortPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Conditions_Transport_DestinationPortPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_Union
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport_DestinationPort_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Conditions_Transport_DestinationPortPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_UnionWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_UnionWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Transport{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Transport_DestinationPortPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_DestinationPortPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_Union) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport_DestinationPort_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_DestinationPort_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_DestinationPortPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-octets to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Classifier_Term_Conditions_Transport_DestinationPortPath extracts the value of the leaf DestinationPort from its parent oc.Qos_Classifier_Term_Conditions_Transport
-// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union.
-func convertQos_Classifier_Term_Conditions_Transport_DestinationPortPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Transport) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union {
+// convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath extracts the value of the leaf ViolatingOctets from its parent oc.Qos_Interface_Input_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedQos_Classifier_Term_Conditions_Transport_DestinationPort_Union{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.DestinationPort
+	val := parent.ViolatingOctets
 	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
+		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Transport", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Classifier_Term_Conditions_Transport_SourcePortPath(t, md, goStruct)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Classifier_Term_Conditions_Transport_SourcePortPath(t, md, goStruct)
+		qv := convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport_SourcePort_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Classifier_Term_Conditions_Transport_SourcePortPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_UnionWatcher {
+func watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_UnionWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Transport{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Transport_SourcePortPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_SourcePortPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Transport_SourcePort_Union{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union) bool) *oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_UnionWatcher {
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_SourcePortPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/schedulers/scheduler/state/violating-pkts to the batch object.
+func (n *Qos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Classifier_Term_Conditions_Transport_SourcePortPath extracts the value of the leaf SourcePort from its parent oc.Qos_Classifier_Term_Conditions_Transport
-// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union.
-func convertQos_Classifier_Term_Conditions_Transport_SourcePortPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Transport) *oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union {
+// convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath extracts the value of the leaf ViolatingPkts from its parent oc.Qos_Interface_Input_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_SchedulerPolicy_Scheduler_ViolatingPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedQos_Classifier_Term_Conditions_Transport_SourcePort_Union{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.SourcePort
+	val := parent.ViolatingPkts
 	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
+		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Lookup(t testing.TB) *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Transport", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input", goStruct, true, false)
 	if ok {
-		return convertQos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t, md, goStruct)
+		return convertQos_Interface_Input_UnicastBufferAllocationProfilePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Get(t testing.TB) []oc.E_PacketMatchTypes_TCP_FLAGS {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Lookup(t testing.TB) []*oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Transport{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Get(t testing.TB) [][]oc.E_PacketMatchTypes_TCP_FLAGS {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]oc.E_PacketMatchTypes_TCP_FLAGS
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PacketMatchTypes_TCP_FLAGSSlice {
-	t.Helper()
-	c := &oc.CollectionE_PacketMatchTypes_TCP_FLAGSSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool) *oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher {
-	t.Helper()
-	w := &oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Transport{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Transport", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool) *oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Await(t testing.TB, timeout time.Duration, val []oc.E_PacketMatchTypes_TCP_FLAGS) *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PacketMatchTypes_TCP_FLAGSSlice {
-	t.Helper()
-	c := &oc.CollectionE_PacketMatchTypes_TCP_FLAGSSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool) *oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Conditions_Transport_TcpFlagsPath extracts the value of the leaf TcpFlags from its parent oc.Qos_Classifier_Term_Conditions_Transport
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice.
-func convertQos_Classifier_Term_Conditions_Transport_TcpFlagsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Transport) *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice {
-	t.Helper()
-	qv := &oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice{
-		Metadata: md,
-	}
-	val := parent.TcpFlags
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_IdPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_IdPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_IdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Input{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Classifier_Term_IdPath(t, md, goStruct)
+		qv := convertQos_Interface_Input_UnicastBufferAllocationProfilePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a ONCE subscription.
-func (n *Qos_Classifier_Term_IdPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a ONCE subscription.
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -1136,9 +679,9 @@ func (n *Qos_Classifier_Term_IdPathAny) Get(t testing.TB) []string {
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_IdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -1148,14 +691,14 @@ func (n *Qos_Classifier_Term_IdPath) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
-func watch_Qos_Classifier_Term_IdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Qos_Interface_Input_UnicastBufferAllocationProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Classifier_Term{}
+	gs := &oc.Qos_Interface_Input{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_IdPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input", gs, queryPath, true, false)
+		return convertQos_Interface_Input_UnicastBufferAllocationProfilePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1164,41 +707,41 @@ func watch_Qos_Classifier_Term_IdPath(t testing.TB, n ygot.PathStruct, duration 
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_IdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_IdPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_UnicastBufferAllocationProfilePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_IdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/state/id to the batch object.
-func (n *Qos_Classifier_Term_IdPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_IdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -1208,226 +751,73 @@ func (n *Qos_Classifier_Term_IdPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/state/id with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_IdPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_UnicastBufferAllocationProfilePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/state/id to the batch object.
-func (n *Qos_Classifier_Term_IdPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/state/unicast-buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Classifier_Term_IdPath extracts the value of the leaf Id from its parent oc.Qos_Classifier_Term
+// convertQos_Interface_Input_UnicastBufferAllocationProfilePath extracts the value of the leaf UnicastBufferAllocationProfile from its parent oc.Qos_Interface_Input
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Classifier_Term_IdPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term) *oc.QualifiedString {
+func convertQos_Interface_Input_UnicastBufferAllocationProfilePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.Id
+	val := parent.UnicastBufferAllocationProfile
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/state/type with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Qos_Classifier_Type {
+func (n *Qos_Interface_Input_VoqInterfacePath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_Input_VoqInterface {
 	t.Helper()
-	goStruct := &oc.Qos_Classifier{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input_VoqInterface{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface", goStruct, false, false)
 	if ok {
-		return convertQos_Classifier_TypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_TypePath) Get(t testing.TB) oc.E_Qos_Classifier_Type {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/state/type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Qos_Classifier_Type {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_Qos_Classifier_Type
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_TypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/state/type with a ONCE subscription.
-func (n *Qos_Classifier_TypePathAny) Get(t testing.TB) []oc.E_Qos_Classifier_Type {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_Qos_Classifier_Type
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Qos_Classifier_Type {
-	t.Helper()
-	c := &oc.CollectionE_Qos_Classifier_Type{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Qos_Classifier_Type) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Qos_Classifier_Type) bool) *oc.E_Qos_Classifier_TypeWatcher {
-	t.Helper()
-	w := &oc.E_Qos_Classifier_TypeWatcher{}
-	gs := &oc.Qos_Classifier{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier", gs, queryPath, true, false)
-		return convertQos_Classifier_TypePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Qos_Classifier_Type)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Qos_Classifier_Type) bool) *oc.E_Qos_Classifier_TypeWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_TypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/state/type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_Qos_Classifier_Type) *oc.QualifiedE_Qos_Classifier_Type {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Qos_Classifier_Type) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/state/type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/state/type to the batch object.
-func (n *Qos_Classifier_TypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Qos_Classifier_Type {
-	t.Helper()
-	c := &oc.CollectionE_Qos_Classifier_Type{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Qos_Classifier_Type) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Qos_Classifier_Type) bool) *oc.E_Qos_Classifier_TypeWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_TypePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/state/type to the batch object.
-func (n *Qos_Classifier_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_TypePath extracts the value of the leaf Type from its parent oc.Qos_Classifier
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Qos_Classifier_Type.
-func convertQos_Classifier_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier) *oc.QualifiedE_Qos_Classifier_Type {
-	t.Helper()
-	qv := &oc.QualifiedE_Qos_Classifier_Type{
-		Metadata: md,
-	}
-	val := parent.Type
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/forwarding-groups/forwarding-group with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_ForwardingGroupPath) Lookup(t testing.TB) *oc.QualifiedQos_ForwardingGroup {
-	t.Helper()
-	goStruct := &oc.Qos_ForwardingGroup{}
-	md, ok := oc.Lookup(t, n, "Qos_ForwardingGroup", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_ForwardingGroup{
+		return (&oc.QualifiedQos_Interface_Input_VoqInterface{
 			Metadata: md,
 		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/forwarding-groups/forwarding-group with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_ForwardingGroupPath) Get(t testing.TB) *oc.Qos_ForwardingGroup {
+func (n *Qos_Interface_Input_VoqInterfacePath) Get(t testing.TB) *oc.Qos_Interface_Input_VoqInterface {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_ForwardingGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_ForwardingGroup {
+func (n *Qos_Interface_Input_VoqInterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_Input_VoqInterface {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedQos_ForwardingGroup
+	var data []*oc.QualifiedQos_Interface_Input_VoqInterface
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_ForwardingGroup{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_ForwardingGroup", goStruct, queryPath, false, false)
+		goStruct := &oc.Qos_Interface_Input_VoqInterface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedQos_ForwardingGroup{
+		qv := (&oc.QualifiedQos_Interface_Input_VoqInterface{
 			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
@@ -1435,262 +825,2396 @@ func (n *Qos_ForwardingGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_For
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a ONCE subscription.
-func (n *Qos_ForwardingGroupPathAny) Get(t testing.TB) []*oc.Qos_ForwardingGroup {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterfacePathAny) Get(t testing.TB) []*oc.Qos_Interface_Input_VoqInterface {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.Qos_ForwardingGroup
+	var data []*oc.Qos_Interface_Input_VoqInterface
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_ForwardingGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_ForwardingGroup {
+func (n *Qos_Interface_Input_VoqInterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_VoqInterface {
 	t.Helper()
-	c := &oc.CollectionQos_ForwardingGroup{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_ForwardingGroup) bool {
+	c := &oc.CollectionQos_Interface_Input_VoqInterface{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_VoqInterface) bool {
 		copy, err := ygot.DeepCopy(v.Val(t))
 		if err != nil {
 			t.Fatal(err)
 		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_ForwardingGroup{
+		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_Input_VoqInterface{
 			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_ForwardingGroup)))
+		}).SetVal(copy.(*oc.Qos_Interface_Input_VoqInterface)))
 		return false
 	})
 	return c
 }
 
-func watch_Qos_ForwardingGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_ForwardingGroup) bool) *oc.Qos_ForwardingGroupWatcher {
+func watch_Qos_Interface_Input_VoqInterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface) bool) *oc.Qos_Interface_Input_VoqInterfaceWatcher {
 	t.Helper()
-	w := &oc.Qos_ForwardingGroupWatcher{}
-	gs := &oc.Qos_ForwardingGroup{}
+	w := &oc.Qos_Interface_Input_VoqInterfaceWatcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface{}
 	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_ForwardingGroup", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_ForwardingGroup{
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Interface_Input_VoqInterface{
 			Metadata: md,
 		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_ForwardingGroup)
+		val, ok := qualVal.(*oc.QualifiedQos_Interface_Input_VoqInterface)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_ForwardingGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_ForwardingGroup) bool) *oc.Qos_ForwardingGroupWatcher {
+func (n *Qos_Interface_Input_VoqInterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface) bool) *oc.Qos_Interface_Input_VoqInterfaceWatcher {
 	t.Helper()
-	return watch_Qos_ForwardingGroupPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_VoqInterfacePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_ForwardingGroupPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_ForwardingGroup) *oc.QualifiedQos_ForwardingGroup {
+func (n *Qos_Interface_Input_VoqInterfacePath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_Input_VoqInterface) *oc.QualifiedQos_Interface_Input_VoqInterface {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_ForwardingGroup) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_Input_VoqInterface) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/forwarding-groups/forwarding-group failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/forwarding-groups/forwarding-group to the batch object.
-func (n *Qos_ForwardingGroupPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface to the batch object.
+func (n *Qos_Interface_Input_VoqInterfacePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_ForwardingGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_ForwardingGroup {
+func (n *Qos_Interface_Input_VoqInterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_VoqInterface {
 	t.Helper()
-	c := &oc.CollectionQos_ForwardingGroup{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_ForwardingGroup) bool {
+	c := &oc.CollectionQos_Interface_Input_VoqInterface{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_VoqInterface) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_ForwardingGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_ForwardingGroup) bool) *oc.Qos_ForwardingGroupWatcher {
+func (n *Qos_Interface_Input_VoqInterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface) bool) *oc.Qos_Interface_Input_VoqInterfaceWatcher {
 	t.Helper()
-	return watch_Qos_ForwardingGroupPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_VoqInterfacePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/forwarding-groups/forwarding-group to the batch object.
-func (n *Qos_ForwardingGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface to the batch object.
+func (n *Qos_Interface_Input_VoqInterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.Qos_ForwardingGroup{}
-	md, ok := oc.Lookup(t, n, "Qos_ForwardingGroup", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Input_VoqInterface{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface", goStruct, true, false)
 	if ok {
-		return convertQos_ForwardingGroup_FabricPriorityPath(t, md, goStruct)
+		return convertQos_Interface_Input_VoqInterface_NamePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Get(t testing.TB) uint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_ForwardingGroup_FabricPriorityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint8
+	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_ForwardingGroup{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_ForwardingGroup", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Input_VoqInterface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_ForwardingGroup_FabricPriorityPath(t, md, goStruct)
+		qv := convertQos_Interface_Input_VoqInterface_NamePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a ONCE subscription.
-func (n *Qos_ForwardingGroup_FabricPriorityPathAny) Get(t testing.TB) []uint8 {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_NamePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint8
+	var data []string
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_Qos_ForwardingGroup_FabricPriorityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func watch_Qos_Interface_Input_VoqInterface_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_ForwardingGroup{}
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_ForwardingGroup", gs, queryPath, true, false)
-		return convertQos_ForwardingGroup_FabricPriorityPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_NamePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
+		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_ForwardingGroup_FabricPriorityPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_VoqInterface_NamePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority to the batch object.
-func (n *Qos_ForwardingGroup_FabricPriorityPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_NamePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_ForwardingGroup_FabricPriorityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+func (n *Qos_Interface_Input_VoqInterface_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_ForwardingGroup_FabricPriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+func (n *Qos_Interface_Input_VoqInterface_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_ForwardingGroup_FabricPriorityPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Input_VoqInterface_NamePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/forwarding-groups/forwarding-group/state/fabric-priority to the batch object.
-func (n *Qos_ForwardingGroup_FabricPriorityPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/state/name to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_ForwardingGroup_FabricPriorityPath extracts the value of the leaf FabricPriority from its parent oc.Qos_ForwardingGroup
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_ForwardingGroup_FabricPriorityPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_ForwardingGroup) *oc.QualifiedUint8 {
+// convertQos_Interface_Input_VoqInterface_NamePath extracts the value of the leaf Name from its parent oc.Qos_Interface_Input_VoqInterface
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Interface_Input_VoqInterface_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface) *oc.QualifiedString {
 	t.Helper()
-	qv := &oc.QualifiedUint8{
+	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.FabricPriority
+	val := parent.Name
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Interface_Input_VoqInterface_Queue{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Get(t testing.TB) *oc.Qos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Interface_Input_VoqInterface_Queue
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Interface_Input_VoqInterface_Queue{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) Get(t testing.TB) []*oc.Qos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Interface_Input_VoqInterface_Queue
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Input_VoqInterface_Queue{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_Input_VoqInterface_Queue{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Interface_Input_VoqInterface_Queue)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_QueuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool) *oc.Qos_Interface_Input_VoqInterface_QueueWatcher {
+	t.Helper()
+	w := &oc.Qos_Interface_Input_VoqInterface_QueueWatcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Interface_Input_VoqInterface_Queue{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Interface_Input_VoqInterface_Queue)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool) *oc.Qos_Interface_Input_VoqInterface_QueueWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_QueuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedQos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_VoqInterface_Queue {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Input_VoqInterface_Queue{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_VoqInterface_Queue) bool) *oc.Qos_Interface_Input_VoqInterface_QueueWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_QueuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/avg-queue-len to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath extracts the value of the leaf AvgQueueLen from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_VoqInterface_Queue_AvgQueueLenPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.AvgQueueLen
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_DroppedPktsPath extracts the value of the leaf DroppedPkts from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_VoqInterface_Queue_DroppedPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.DroppedPkts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath extracts the value of the leaf MaxQueueLen from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MaxQueueLen
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_NamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_NamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_NamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/name to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_NamePath extracts the value of the leaf Name from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Interface_Input_VoqInterface_Queue_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-octets to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath extracts the value of the leaf TransmitOctets from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_VoqInterface_Queue_TransmitOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.TransmitOctets
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_VoqInterface_Queue", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a ONCE subscription.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Input_VoqInterface_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_VoqInterface_Queue", gs, queryPath, true, false)
+		return convertQos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/transmit-pkts to the batch object.
+func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Input_VoqInterface_Queue_TransmitPktsPath extracts the value of the leaf TransmitPkts from its parent oc.Qos_Interface_Input_VoqInterface_Queue
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Input_VoqInterface_Queue_TransmitPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_VoqInterface_Queue) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.TransmitPkts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/state/interface-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_InterfaceIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Interface{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_InterfaceIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/state/interface-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_InterfaceIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_InterfaceIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_InterfaceIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a ONCE subscription.
+func (n *Qos_Interface_InterfaceIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_InterfaceIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface", gs, queryPath, true, false)
+		return convertQos_Interface_InterfaceIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_InterfaceIdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/state/interface-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/state/interface-id to the batch object.
+func (n *Qos_Interface_InterfaceIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/state/interface-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/state/interface-id to the batch object.
+func (n *Qos_Interface_InterfaceIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_InterfaceIdPath extracts the value of the leaf InterfaceId from its parent oc.Qos_Interface
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Interface_InterfaceIdPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.InterfaceId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_InterfaceRefPath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_InterfaceRef {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_InterfaceRef", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_InterfaceRefPath) Get(t testing.TB) *oc.Qos_Interface_InterfaceRef {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_InterfaceRefPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_InterfaceRef {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Interface_InterfaceRef
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_InterfaceRef", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a ONCE subscription.
+func (n *Qos_Interface_InterfaceRefPathAny) Get(t testing.TB) []*oc.Qos_Interface_InterfaceRef {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Interface_InterfaceRef
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRefPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_InterfaceRef {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_InterfaceRef{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_InterfaceRef) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_InterfaceRef{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Interface_InterfaceRef)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_InterfaceRefPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_InterfaceRef) bool) *oc.Qos_Interface_InterfaceRefWatcher {
+	t.Helper()
+	w := &oc.Qos_Interface_InterfaceRefWatcher{}
+	gs := &oc.Qos_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_InterfaceRef", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Interface_InterfaceRef)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRefPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_InterfaceRef) bool) *oc.Qos_Interface_InterfaceRefWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRefPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/interface-ref with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_InterfaceRefPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_InterfaceRef) *oc.QualifiedQos_Interface_InterfaceRef {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_InterfaceRef) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/interface-ref failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref to the batch object.
+func (n *Qos_Interface_InterfaceRefPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRefPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_InterfaceRef {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_InterfaceRef{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_InterfaceRef) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_InterfaceRef) bool) *oc.Qos_Interface_InterfaceRefWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRefPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref to the batch object.
+func (n *Qos_Interface_InterfaceRefPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_InterfaceRef", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_InterfaceRef_InterfacePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_InterfaceRef_InterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_InterfaceRef", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_InterfaceRef_InterfacePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+func (n *Qos_Interface_InterfaceRef_InterfacePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_InterfaceRef_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_InterfaceRef", gs, queryPath, true, false)
+		return convertQos_Interface_InterfaceRef_InterfacePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface to the batch object.
+func (n *Qos_Interface_InterfaceRef_InterfacePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRef_InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRef_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref/state/interface to the batch object.
+func (n *Qos_Interface_InterfaceRef_InterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_InterfaceRef_InterfacePath extracts the value of the leaf Interface from its parent oc.Qos_Interface_InterfaceRef
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Interface_InterfaceRef_InterfacePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_InterfaceRef) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Interface
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_InterfaceRef", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_InterfaceRef_SubinterfacePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_InterfaceRef", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_InterfaceRef_SubinterfacePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_InterfaceRef_SubinterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.Qos_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_InterfaceRef", gs, queryPath, true, false)
+		return convertQos_Interface_InterfaceRef_SubinterfacePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface to the batch object.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Interface_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/interface-ref/state/subinterface to the batch object.
+func (n *Qos_Interface_InterfaceRef_SubinterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_InterfaceRef_SubinterfacePath extracts the value of the leaf Subinterface from its parent oc.Qos_Interface_InterfaceRef
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertQos_Interface_InterfaceRef_SubinterfacePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_InterfaceRef) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Subinterface
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_OutputPath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_Output {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Interface_Output{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_OutputPath) Get(t testing.TB) *oc.Qos_Interface_Output {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_OutputPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_Output {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Interface_Output
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Interface_Output{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output with a ONCE subscription.
+func (n *Qos_Interface_OutputPathAny) Get(t testing.TB) []*oc.Qos_Interface_Output {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Interface_Output
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_OutputPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Output {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Output{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Output) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_Output{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Interface_Output)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_OutputPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output) bool) *oc.Qos_Interface_OutputWatcher {
+	t.Helper()
+	w := &oc.Qos_Interface_OutputWatcher{}
+	gs := &oc.Qos_Interface_Output{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Interface_Output{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Interface_Output)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_OutputPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output) bool) *oc.Qos_Interface_OutputWatcher {
+	t.Helper()
+	return watch_Qos_Interface_OutputPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_OutputPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_Output) *oc.QualifiedQos_Interface_Output {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_Output) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output to the batch object.
+func (n *Qos_Interface_OutputPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_OutputPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Output {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Output{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Output) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_OutputPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output) bool) *oc.Qos_Interface_OutputWatcher {
+	t.Helper()
+	return watch_Qos_Interface_OutputPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output to the batch object.
+func (n *Qos_Interface_OutputPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Output_BufferAllocationProfilePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_BufferAllocationProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Output_BufferAllocationProfilePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a ONCE subscription.
+func (n *Qos_Interface_Output_BufferAllocationProfilePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_BufferAllocationProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Interface_Output{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output", gs, queryPath, true, false)
+		return convertQos_Interface_Output_BufferAllocationProfilePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_BufferAllocationProfilePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Output_BufferAllocationProfilePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_BufferAllocationProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_BufferAllocationProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_BufferAllocationProfilePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/state/buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Output_BufferAllocationProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Output_BufferAllocationProfilePath extracts the value of the leaf BufferAllocationProfile from its parent oc.Qos_Interface_Output
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Interface_Output_BufferAllocationProfilePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.BufferAllocationProfile
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_ClassifierPath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_Output_Classifier {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output_Classifier{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_Classifier", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Interface_Output_Classifier{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_ClassifierPath) Get(t testing.TB) *oc.Qos_Interface_Output_Classifier {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_ClassifierPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_Output_Classifier {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Interface_Output_Classifier
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output_Classifier{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_Classifier", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Interface_Output_Classifier{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a ONCE subscription.
+func (n *Qos_Interface_Output_ClassifierPathAny) Get(t testing.TB) []*oc.Qos_Interface_Output_Classifier {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Interface_Output_Classifier
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_ClassifierPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Output_Classifier {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Output_Classifier{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Output_Classifier) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_Output_Classifier{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Interface_Output_Classifier)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_ClassifierPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output_Classifier) bool) *oc.Qos_Interface_Output_ClassifierWatcher {
+	t.Helper()
+	w := &oc.Qos_Interface_Output_ClassifierWatcher{}
+	gs := &oc.Qos_Interface_Output_Classifier{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_Classifier", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Interface_Output_Classifier{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Interface_Output_Classifier)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_ClassifierPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output_Classifier) bool) *oc.Qos_Interface_Output_ClassifierWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_ClassifierPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_ClassifierPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_Output_Classifier) *oc.QualifiedQos_Interface_Output_Classifier {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_Output_Classifier) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier to the batch object.
+func (n *Qos_Interface_Output_ClassifierPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_ClassifierPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Output_Classifier {
+	t.Helper()
+	c := &oc.CollectionQos_Interface_Output_Classifier{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Output_Classifier) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_ClassifierPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Output_Classifier) bool) *oc.Qos_Interface_Output_ClassifierWatcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_ClassifierPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier to the batch object.
+func (n *Qos_Interface_Output_ClassifierPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
 }

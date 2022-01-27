@@ -16,48 +16,48 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Classifier_Term{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Classifier_Term", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_Classifier_Term_MatchedOctetsPath(t, md, goStruct)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Get(t testing.TB) uint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Classifier_Term{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Classifier_Term", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Classifier_Term_MatchedOctetsPath(t, md, goStruct)
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a ONCE subscription.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Get(t testing.TB) []uint64 {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []uint64
@@ -67,9 +67,9 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Get(t testing
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -79,14 +79,14 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Collect(t testin
 	return c
 }
 
-func watch_Qos_Interface_Input_Classifier_Term_MatchedOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
 	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Classifier_Term{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Classifier_Term", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Classifier_Term_MatchedOctetsPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -95,41 +95,41 @@ func watch_Qos_Interface_Input_Classifier_Term_MatchedOctetsPath(t testing.TB, n
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_Term_MatchedOctetsPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets to the batch object.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -139,78 +139,78 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Collect(t tes
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_Term_MatchedOctetsPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-octets to the batch object.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Classifier_Term_MatchedOctetsPath extracts the value of the leaf MatchedOctets from its parent oc.Qos_Interface_Input_Classifier_Term
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath extracts the value of the leaf ConformingOctets from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
 // and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Classifier_Term_MatchedOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Classifier_Term) *oc.QualifiedUint64 {
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
 	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.MatchedOctets
+	val := parent.ConformingOctets
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Classifier_Term{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Classifier_Term", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_Classifier_Term_MatchedPacketsPath(t, md, goStruct)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Get(t testing.TB) uint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Classifier_Term{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Classifier_Term", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Classifier_Term_MatchedPacketsPath(t, md, goStruct)
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a ONCE subscription.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Get(t testing.TB) []uint64 {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []uint64
@@ -220,9 +220,9 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Get(t testin
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -232,14 +232,14 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Collect(t testi
 	return c
 }
 
-func watch_Qos_Interface_Input_Classifier_Term_MatchedPacketsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
 	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Classifier_Term{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Classifier_Term", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Classifier_Term_MatchedPacketsPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -248,41 +248,41 @@ func watch_Qos_Interface_Input_Classifier_Term_MatchedPacketsPath(t testing.TB, 
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_Term_MatchedPacketsPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets to the batch object.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -292,231 +292,843 @@ func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Collect(t te
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_Term_MatchedPacketsPath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/terms/term/state/matched-packets to the batch object.
-func (n *Qos_Interface_Input_Classifier_Term_MatchedPacketsPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/conforming-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Classifier_Term_MatchedPacketsPath extracts the value of the leaf MatchedPackets from its parent oc.Qos_Interface_Input_Classifier_Term
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath extracts the value of the leaf ConformingPkts from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
 // and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Classifier_Term_MatchedPacketsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Classifier_Term) *oc.QualifiedUint64 {
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ConformingPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
 	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.MatchedPackets
+	val := parent.ConformingPkts
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Classifier_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Classifier{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Classifier", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_Classifier_TypePath(t, md, goStruct)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Classifier_TypePath) Get(t testing.TB) oc.E_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Classifier_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedE_Input_Classifier_Type
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Classifier{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Classifier", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Classifier_TypePath(t, md, goStruct)
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a ONCE subscription.
-func (n *Qos_Interface_Input_Classifier_TypePathAny) Get(t testing.TB) []oc.E_Input_Classifier_Type {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.E_Input_Classifier_Type
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionE_Input_Classifier_Type{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Input_Classifier_Type) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Interface_Input_Classifier_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Input_Classifier_Type) bool) *oc.E_Input_Classifier_TypeWatcher {
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.E_Input_Classifier_TypeWatcher{}
-	gs := &oc.Qos_Interface_Input_Classifier{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Classifier", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Classifier_TypePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Input_Classifier_Type)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Input_Classifier_Type) bool) *oc.E_Input_Classifier_TypeWatcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_TypePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Classifier_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_Input_Classifier_Type) *oc.QualifiedE_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Input_Classifier_Type) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type to the batch object.
-func (n *Qos_Interface_Input_Classifier_TypePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Classifier_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Input_Classifier_Type {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionE_Input_Classifier_Type{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Input_Classifier_Type) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Classifier_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Input_Classifier_Type) bool) *oc.E_Input_Classifier_TypeWatcher {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Classifier_TypePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/classifiers/classifier/state/type to the batch object.
-func (n *Qos_Interface_Input_Classifier_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Classifier_TypePath extracts the value of the leaf Type from its parent oc.Qos_Interface_Input_Classifier
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Input_Classifier_Type.
-func convertQos_Interface_Input_Classifier_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Classifier) *oc.QualifiedE_Input_Classifier_Type {
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath extracts the value of the leaf ExceedingOctets from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedE_Input_Classifier_Type{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.Type
+	val := parent.ExceedingOctets
 	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
+		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input", goStruct, true, false)
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_MulticastBufferAllocationProfilePath(t, md, goStruct)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Get(t testing.TB) string {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/exceeding-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath extracts the value of the leaf ExceedingPkts from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ExceedingPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.ExceedingPkts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/sequence to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_SequencePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath extracts the value of the leaf Sequence from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_SequencePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Sequence
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-octets to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath extracts the value of the leaf ViolatingOctets from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.ViolatingOctets
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a ONCE subscription.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_Interface_Output_SchedulerPolicy_Scheduler{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output_SchedulerPolicy_Scheduler", gs, queryPath, true, false)
+		return convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state/violating-pkts to the batch object.
+func (n *Qos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath extracts the value of the leaf ViolatingPkts from its parent oc.Qos_Interface_Output_SchedulerPolicy_Scheduler
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_Interface_Output_SchedulerPolicy_Scheduler_ViolatingPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output_SchedulerPolicy_Scheduler) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.ViolatingPkts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Interface_Output{}
+	md, ok := oc.Lookup(t, n, "Qos_Interface_Output", goStruct, true, false)
+	if ok {
+		return convertQos_Interface_Output_UnicastBufferAllocationProfilePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_Interface_Output{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Output", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_MulticastBufferAllocationProfilePath(t, md, goStruct)
+		qv := convertQos_Interface_Output_UnicastBufferAllocationProfilePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a ONCE subscription.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a ONCE subscription.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -526,9 +1138,9 @@ func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Get(t test
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -538,14 +1150,14 @@ func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Collect(t tes
 	return c
 }
 
-func watch_Qos_Interface_Input_MulticastBufferAllocationProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Qos_Interface_Output_UnicastBufferAllocationProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Interface_Input{}
+	gs := &oc.Qos_Interface_Output{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input", gs, queryPath, true, false)
-		return convertQos_Interface_Input_MulticastBufferAllocationProfilePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Output", gs, queryPath, true, false)
+		return convertQos_Interface_Output_UnicastBufferAllocationProfilePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -554,41 +1166,41 @@ func watch_Qos_Interface_Input_MulticastBufferAllocationProfilePath(t testing.TB
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_MulticastBufferAllocationProfilePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_UnicastBufferAllocationProfilePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile to the batch object.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -598,73 +1210,73 @@ func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Collect(t 
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_MulticastBufferAllocationProfilePath(t, n, timeout, predicate)
+	return watch_Qos_Interface_Output_UnicastBufferAllocationProfilePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/state/multicast-buffer-allocation-profile to the batch object.
-func (n *Qos_Interface_Input_MulticastBufferAllocationProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/interfaces/interface/output/state/unicast-buffer-allocation-profile to the batch object.
+func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_MulticastBufferAllocationProfilePath extracts the value of the leaf MulticastBufferAllocationProfile from its parent oc.Qos_Interface_Input
+// convertQos_Interface_Output_UnicastBufferAllocationProfilePath extracts the value of the leaf UnicastBufferAllocationProfile from its parent oc.Qos_Interface_Output
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Interface_Input_MulticastBufferAllocationProfilePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input) *oc.QualifiedString {
+func convertQos_Interface_Output_UnicastBufferAllocationProfilePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Output) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.MulticastBufferAllocationProfile
+	val := parent.UnicastBufferAllocationProfile
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_QueuePath) Lookup(t testing.TB) *oc.QualifiedQos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePath) Lookup(t testing.TB) *oc.QualifiedQos_QueueManagementProfile {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, false, false)
+	goStruct := &oc.Qos_QueueManagementProfile{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile", goStruct, false, false)
 	if ok {
-		return (&oc.QualifiedQos_Interface_Input_Queue{
+		return (&oc.QualifiedQos_QueueManagementProfile{
 			Metadata: md,
 		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_QueuePath) Get(t testing.TB) *oc.Qos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePath) Get(t testing.TB) *oc.Qos_QueueManagementProfile {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_QueuePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_QueueManagementProfile {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedQos_Interface_Input_Queue
+	var data []*oc.QualifiedQos_QueueManagementProfile
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, false, false)
+		goStruct := &oc.Qos_QueueManagementProfile{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedQos_Interface_Input_Queue{
+		qv := (&oc.QualifiedQos_QueueManagementProfile{
 			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
@@ -672,614 +1284,155 @@ func (n *Qos_Interface_Input_QueuePathAny) Lookup(t testing.TB) []*oc.QualifiedQ
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a ONCE subscription.
-func (n *Qos_Interface_Input_QueuePathAny) Get(t testing.TB) []*oc.Qos_Interface_Input_Queue {
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a ONCE subscription.
+func (n *Qos_QueueManagementProfilePathAny) Get(t testing.TB) []*oc.Qos_QueueManagementProfile {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Interface_Input_Queue
+	var data []*oc.Qos_QueueManagementProfile
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_QueuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile {
 	t.Helper()
-	c := &oc.CollectionQos_Interface_Input_Queue{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_Queue) bool {
+	c := &oc.CollectionQos_QueueManagementProfile{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile) bool {
 		copy, err := ygot.DeepCopy(v.Val(t))
 		if err != nil {
 			t.Fatal(err)
 		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Interface_Input_Queue{
+		c.Data = append(c.Data, (&oc.QualifiedQos_QueueManagementProfile{
 			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Interface_Input_Queue)))
+		}).SetVal(copy.(*oc.Qos_QueueManagementProfile)))
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Interface_Input_QueuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_Queue) bool) *oc.Qos_Interface_Input_QueueWatcher {
+func watch_Qos_QueueManagementProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile) bool) *oc.Qos_QueueManagementProfileWatcher {
 	t.Helper()
-	w := &oc.Qos_Interface_Input_QueueWatcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
+	w := &oc.Qos_QueueManagementProfileWatcher{}
+	gs := &oc.Qos_QueueManagementProfile{}
 	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Interface_Input_Queue{
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_QueueManagementProfile{
 			Metadata: md,
 		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Interface_Input_Queue)
+		val, ok := qualVal.(*oc.QualifiedQos_QueueManagementProfile)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_QueuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_Queue) bool) *oc.Qos_Interface_Input_QueueWatcher {
+func (n *Qos_QueueManagementProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile) bool) *oc.Qos_QueueManagementProfileWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_QueuePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfilePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_QueuePath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Interface_Input_Queue) *oc.QualifiedQos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_QueueManagementProfile) *oc.QualifiedQos_QueueManagementProfile {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Interface_Input_Queue) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_QueueManagementProfile) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue to the batch object.
-func (n *Qos_Interface_Input_QueuePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile to the batch object.
+func (n *Qos_QueueManagementProfilePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_QueuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Interface_Input_Queue {
+func (n *Qos_QueueManagementProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile {
 	t.Helper()
-	c := &oc.CollectionQos_Interface_Input_Queue{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Interface_Input_Queue) bool {
+	c := &oc.CollectionQos_QueueManagementProfile{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_QueuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Interface_Input_Queue) bool) *oc.Qos_Interface_Input_QueueWatcher {
+func (n *Qos_QueueManagementProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile) bool) *oc.Qos_QueueManagementProfileWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_QueuePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfilePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue to the batch object.
-func (n *Qos_Interface_Input_QueuePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile to the batch object.
+func (n *Qos_QueueManagementProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+func (n *Qos_QueueManagementProfile_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
+	goStruct := &oc.Qos_QueueManagementProfile{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_Queue_AvgQueueLenPath(t, md, goStruct)
+		return convertQos_QueueManagementProfile_NamePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Get(t testing.TB) uint64 {
+func (n *Qos_QueueManagementProfile_NamePath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Interface_Input_Queue_AvgQueueLenPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Interface_Input_Queue_AvgQueueLenPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_AvgQueueLenPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_AvgQueueLenPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len to the batch object.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_AvgQueueLenPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/avg-queue-len to the batch object.
-func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Interface_Input_Queue_AvgQueueLenPath extracts the value of the leaf AvgQueueLen from its parent oc.Qos_Interface_Input_Queue
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Queue_AvgQueueLenPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.AvgQueueLen
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
-	if ok {
-		return convertQos_Interface_Input_Queue_DroppedPktsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Interface_Input_Queue_DroppedPktsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Interface_Input_Queue_DroppedPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_DroppedPktsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_DroppedPktsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts to the batch object.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_DroppedPktsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts to the batch object.
-func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Interface_Input_Queue_DroppedPktsPath extracts the value of the leaf DroppedPkts from its parent oc.Qos_Interface_Input_Queue
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Queue_DroppedPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.DroppedPkts
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
-	if ok {
-		return convertQos_Interface_Input_Queue_MaxQueueLenPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Interface_Input_Queue_MaxQueueLenPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Interface_Input_Queue_MaxQueueLenPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_MaxQueueLenPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_MaxQueueLenPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len to the batch object.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Qos_Interface_Input_Queue_MaxQueueLenPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len to the batch object.
-func (n *Qos_Interface_Input_Queue_MaxQueueLenPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Interface_Input_Queue_MaxQueueLenPath extracts the value of the leaf MaxQueueLen from its parent oc.Qos_Interface_Input_Queue
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Queue_MaxQueueLenPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.MaxQueueLen
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
-	if ok {
-		return convertQos_Interface_Input_Queue_NamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_NamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Qos_QueueManagementProfile_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_QueueManagementProfile{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Queue_NamePath(t, md, goStruct)
+		qv := convertQos_QueueManagementProfile_NamePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_NamePathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_NamePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -1289,9 +1442,9 @@ func (n *Qos_Interface_Input_Queue_NamePathAny) Get(t testing.TB) []string {
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_QueueManagementProfile_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -1301,14 +1454,14 @@ func (n *Qos_Interface_Input_Queue_NamePath) Collect(t testing.TB, duration time
 	return c
 }
 
-func watch_Qos_Interface_Input_Queue_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Qos_QueueManagementProfile_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
+	gs := &oc.Qos_QueueManagementProfile{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_NamePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_NamePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1317,41 +1470,41 @@ func watch_Qos_Interface_Input_Queue_NamePath(t testing.TB, n ygot.PathStruct, d
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_QueueManagementProfile_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_NamePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_NamePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Qos_QueueManagementProfile_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name to the batch object.
-func (n *Qos_Interface_Input_Queue_NamePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name to the batch object.
+func (n *Qos_QueueManagementProfile_NamePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_QueueManagementProfile_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -1361,25 +1514,25 @@ func (n *Qos_Interface_Input_Queue_NamePathAny) Collect(t testing.TB, duration t
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_QueueManagementProfile_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_NamePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_NamePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/name to the batch object.
-func (n *Qos_Interface_Input_Queue_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/state/name to the batch object.
+func (n *Qos_QueueManagementProfile_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Queue_NamePath extracts the value of the leaf Name from its parent oc.Qos_Interface_Input_Queue
+// convertQos_QueueManagementProfile_NamePath extracts the value of the leaf Name from its parent oc.Qos_QueueManagementProfile
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Interface_Input_Queue_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedString {
+func convertQos_QueueManagementProfile_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
@@ -1391,201 +1544,660 @@ func convertQos_Interface_Input_Queue_NamePath(t testing.TB, md *genutil.Metadat
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *Qos_QueueManagementProfile_RedPath) Lookup(t testing.TB) *oc.QualifiedQos_QueueManagementProfile_Red {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
+	goStruct := &oc.Qos_QueueManagementProfile_Red{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red", goStruct, false, false)
 	if ok {
-		return convertQos_Interface_Input_Queue_QueueManagementProfilePath(t, md, goStruct)
+		return (&oc.QualifiedQos_QueueManagementProfile_Red{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Get(t testing.TB) string {
+func (n *Qos_QueueManagementProfile_RedPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Red {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Qos_QueueManagementProfile_RedPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_QueueManagementProfile_Red {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedQos_QueueManagementProfile_Red
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_QueueManagementProfile_Red{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Queue_QueueManagementProfilePath(t, md, goStruct)
+		qv := (&oc.QualifiedQos_QueueManagementProfile_Red{
+			Metadata: md,
+		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_RedPathAny) Get(t testing.TB) []*oc.Qos_QueueManagementProfile_Red {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []*oc.Qos_QueueManagementProfile_Red
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_QueueManagementProfile_RedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Red {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
+	c := &oc.CollectionQos_QueueManagementProfile_Red{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Red) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_QueueManagementProfile_Red{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_QueueManagementProfile_Red)))
 		return false
 	})
 	return c
 }
 
-func watch_Qos_Interface_Input_Queue_QueueManagementProfilePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Qos_QueueManagementProfile_RedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red) bool) *oc.Qos_QueueManagementProfile_RedWatcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w := &oc.Qos_QueueManagementProfile_RedWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Red{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_QueueManagementProfilePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_QueueManagementProfile_Red{
+			Metadata: md,
+		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedQos_QueueManagementProfile_Red)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_QueueManagementProfile_RedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red) bool) *oc.Qos_QueueManagementProfile_RedWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_QueueManagementProfilePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_RedPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Qos_QueueManagementProfile_RedPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_QueueManagementProfile_Red) *oc.QualifiedQos_QueueManagementProfile_Red {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_QueueManagementProfile_Red) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile to the batch object.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red to the batch object.
+func (n *Qos_QueueManagementProfile_RedPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Qos_QueueManagementProfile_RedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Red {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionQos_QueueManagementProfile_Red{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Red) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Qos_QueueManagementProfile_RedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red) bool) *oc.Qos_QueueManagementProfile_RedWatcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_QueueManagementProfilePath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_RedPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/queue-management-profile to the batch object.
-func (n *Qos_Interface_Input_Queue_QueueManagementProfilePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red to the batch object.
+func (n *Qos_QueueManagementProfile_RedPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Queue_QueueManagementProfilePath extracts the value of the leaf QueueManagementProfile from its parent oc.Qos_Interface_Input_Queue
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Interface_Input_Queue_QueueManagementProfilePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedString {
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Lookup(t testing.TB) *oc.QualifiedQos_QueueManagementProfile_Red_Uniform {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red_Uniform", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_QueueManagementProfile_Red_Uniform{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_QueueManagementProfile_Red_Uniform
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_QueueManagementProfile_Red_Uniform{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) Get(t testing.TB) []*oc.Qos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_QueueManagementProfile_Red_Uniform
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Red_Uniform{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_QueueManagementProfile_Red_Uniform{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_QueueManagementProfile_Red_Uniform)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Red_UniformPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool) *oc.Qos_QueueManagementProfile_Red_UniformWatcher {
+	t.Helper()
+	w := &oc.Qos_QueueManagementProfile_Red_UniformWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_QueueManagementProfile_Red_Uniform{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_QueueManagementProfile_Red_Uniform)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool) *oc.Qos_QueueManagementProfile_Red_UniformWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_UniformPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_QueueManagementProfile_Red_Uniform) *oc.QualifiedQos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform to the batch object.
+func (n *Qos_QueueManagementProfile_Red_UniformPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Red_Uniform {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Red_Uniform{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Red_Uniform) bool) *oc.Qos_QueueManagementProfile_Red_UniformWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_UniformPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform to the batch object.
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Red_Uniform_DropPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDrop())
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Red_Uniform_DropPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Red_Uniform_DropPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Red_Uniform_DropPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_DropPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_DropPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/drop to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_DropPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Red_Uniform_DropPath extracts the value of the leaf Drop from its parent oc.Qos_QueueManagementProfile_Red_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertQos_QueueManagementProfile_Red_Uniform_DropPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Red_Uniform) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
 		Metadata: md,
 	}
-	val := parent.QueueManagementProfile
+	val := parent.Drop
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a ONCE subscription.
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Lookup(t testing.TB) *oc.QualifiedBool {
 	t.Helper()
-	goStruct := &oc.Qos_Interface_Input_Queue{}
-	md, ok := oc.Lookup(t, n, "Qos_Interface_Input_Queue", goStruct, true, false)
+	goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red_Uniform", goStruct, true, false)
 	if ok {
-		return convertQos_Interface_Input_Queue_TransmitOctetsPath(t, md, goStruct)
+		return convertQos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t, md, goStruct)
 	}
-	return nil
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetEnableEcn())
 }
 
-// Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a ONCE subscription,
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Get(t testing.TB) uint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a ONCE subscription.
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Red_Uniform_EnableEcnPath extracts the value of the leaf EnableEcn from its parent oc.Qos_QueueManagementProfile_Red_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertQos_QueueManagementProfile_Red_Uniform_EnableEcnPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Red_Uniform) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.EnableEcn
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Interface_Input_Queue{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Interface_Input_Queue", goStruct, queryPath, true, false)
+		goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertQos_Interface_Input_Queue_TransmitOctetsPath(t, md, goStruct)
+		qv := convertQos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a ONCE subscription.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Get(t testing.TB) []uint64 {
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []uint64
@@ -1595,9 +2207,9 @@ func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Get(t testing.TB) []ui
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -1607,14 +2219,14 @@ func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Collect(t testing.TB, dur
 	return c
 }
 
-func watch_Qos_Interface_Input_Queue_TransmitOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func watch_Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
 	w := &oc.Uint64Watcher{}
-	gs := &oc.Qos_Interface_Input_Queue{}
+	gs := &oc.Qos_QueueManagementProfile_Red_Uniform{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Interface_Input_Queue", gs, queryPath, true, false)
-		return convertQos_Interface_Input_Queue_TransmitOctetsPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1623,41 +2235,41 @@ func watch_Qos_Interface_Input_Queue_TransmitOctetsPath(t testing.TB, n ygot.Pat
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_TransmitOctetsPath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a STREAM subscription,
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets to the batch object.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
 	c := &oc.CollectionUint64{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
@@ -1667,30 +2279,948 @@ func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Collect(t testing.TB, 
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_Interface_Input_Queue_TransmitOctetsPath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/transmit-octets to the batch object.
-func (n *Qos_Interface_Input_Queue_TransmitOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertQos_Interface_Input_Queue_TransmitOctetsPath extracts the value of the leaf TransmitOctets from its parent oc.Qos_Interface_Input_Queue
+// convertQos_QueueManagementProfile_Red_Uniform_MaxThresholdPath extracts the value of the leaf MaxThreshold from its parent oc.Qos_QueueManagementProfile_Red_Uniform
 // and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertQos_Interface_Input_Queue_TransmitOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Interface_Input_Queue) *oc.QualifiedUint64 {
+func convertQos_QueueManagementProfile_Red_Uniform_MaxThresholdPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Red_Uniform) *oc.QualifiedUint64 {
 	t.Helper()
 	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.TransmitOctets
+	val := parent.MaxThreshold
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Red_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Qos_QueueManagementProfile_Red_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Red_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold to the batch object.
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Red_Uniform_MinThresholdPath extracts the value of the leaf MinThreshold from its parent oc.Qos_QueueManagementProfile_Red_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertQos_QueueManagementProfile_Red_Uniform_MinThresholdPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Red_Uniform) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MinThreshold
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_WredPath) Lookup(t testing.TB) *oc.QualifiedQos_QueueManagementProfile_Wred {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Wred{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Wred", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_QueueManagementProfile_Wred{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_WredPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Wred {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_WredPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_QueueManagementProfile_Wred {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_QueueManagementProfile_Wred
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Wred{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Wred", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_QueueManagementProfile_Wred{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_WredPathAny) Get(t testing.TB) []*oc.Qos_QueueManagementProfile_Wred {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_QueueManagementProfile_Wred
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_WredPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Wred {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Wred{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Wred) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_QueueManagementProfile_Wred{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_QueueManagementProfile_Wred)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_WredPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred) bool) *oc.Qos_QueueManagementProfile_WredWatcher {
+	t.Helper()
+	w := &oc.Qos_QueueManagementProfile_WredWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Wred{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_QueueManagementProfile_Wred{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_QueueManagementProfile_Wred)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_WredPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred) bool) *oc.Qos_QueueManagementProfile_WredWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_WredPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_WredPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_QueueManagementProfile_Wred) *oc.QualifiedQos_QueueManagementProfile_Wred {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_QueueManagementProfile_Wred) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred to the batch object.
+func (n *Qos_QueueManagementProfile_WredPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_WredPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Wred {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Wred{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Wred) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_WredPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred) bool) *oc.Qos_QueueManagementProfile_WredWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_WredPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred to the batch object.
+func (n *Qos_QueueManagementProfile_WredPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Lookup(t testing.TB) *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Wred_Uniform", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_QueueManagementProfile_Wred_Uniform{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_QueueManagementProfile_Wred_Uniform
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_QueueManagementProfile_Wred_Uniform{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) Get(t testing.TB) []*oc.Qos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_QueueManagementProfile_Wred_Uniform
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Wred_Uniform{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_QueueManagementProfile_Wred_Uniform{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_QueueManagementProfile_Wred_Uniform)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Wred_UniformPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool) *oc.Qos_QueueManagementProfile_Wred_UniformWatcher {
+	t.Helper()
+	w := &oc.Qos_QueueManagementProfile_Wred_UniformWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_QueueManagementProfile_Wred_Uniform{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_QueueManagementProfile_Wred_Uniform)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool) *oc.Qos_QueueManagementProfile_Wred_UniformWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_UniformPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_QueueManagementProfile_Wred_Uniform) *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_QueueManagementProfile_Wred_Uniform {
+	t.Helper()
+	c := &oc.CollectionQos_QueueManagementProfile_Wred_Uniform{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_QueueManagementProfile_Wred_Uniform) bool) *oc.Qos_QueueManagementProfile_Wred_UniformWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_UniformPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Wred_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Wred_Uniform_DropPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDrop())
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Wred_Uniform_DropPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Wred_Uniform_DropPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Wred_Uniform_DropPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_DropPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_DropPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/drop to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_DropPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Wred_Uniform_DropPath extracts the value of the leaf Drop from its parent oc.Qos_QueueManagementProfile_Wred_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertQos_QueueManagementProfile_Wred_Uniform_DropPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Wred_Uniform) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Drop
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Wred_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetEnableEcn())
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/enable-ecn to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_EnableEcnPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Wred_Uniform_EnableEcnPath extracts the value of the leaf EnableEcn from its parent oc.Qos_QueueManagementProfile_Wred_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertQos_QueueManagementProfile_Wred_Uniform_EnableEcnPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Wred_Uniform) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.EnableEcn
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	md, ok := oc.Lookup(t, n, "Qos_QueueManagementProfile_Wred_Uniform", goStruct, true, false)
+	if ok {
+		return convertQos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a ONCE subscription.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
+		return convertQos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-drop-probability-percent to the batch object.
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath extracts the value of the leaf MaxDropProbabilityPercent from its parent oc.Qos_QueueManagementProfile_Wred_Uniform
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertQos_QueueManagementProfile_Wred_Uniform_MaxDropProbabilityPercentPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_QueueManagementProfile_Wred_Uniform) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.MaxDropProbabilityPercent
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

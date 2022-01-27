@@ -16,155 +16,304 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a ONCE subscription.
+// Lookup fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *LocalRoutes_Aggregate_PrefixPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *LocalRoutes_Static_NextHopPath) Lookup(t testing.TB) *oc.QualifiedLocalRoutes_Static_NextHop {
 	t.Helper()
-	goStruct := &oc.LocalRoutes_Aggregate{}
-	md, ok := oc.Lookup(t, n, "LocalRoutes_Aggregate", goStruct, true, false)
+	goStruct := &oc.LocalRoutes_Static_NextHop{}
+	md, ok := oc.Lookup(t, n, "LocalRoutes_Static_NextHop", goStruct, false, false)
 	if ok {
-		return convertLocalRoutes_Aggregate_PrefixPath(t, md, goStruct)
+		return (&oc.QualifiedLocalRoutes_Static_NextHop{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a ONCE subscription,
+// Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *LocalRoutes_Aggregate_PrefixPath) Get(t testing.TB) string {
+func (n *LocalRoutes_Static_NextHopPath) Get(t testing.TB) *oc.LocalRoutes_Static_NextHop {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a ONCE subscription.
+// Lookup fetches the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *LocalRoutes_Aggregate_PrefixPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *LocalRoutes_Static_NextHopPathAny) Lookup(t testing.TB) []*oc.QualifiedLocalRoutes_Static_NextHop {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedLocalRoutes_Static_NextHop
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.LocalRoutes_Aggregate{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "LocalRoutes_Aggregate", goStruct, queryPath, true, false)
+		goStruct := &oc.LocalRoutes_Static_NextHop{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "LocalRoutes_Static_NextHop", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := convertLocalRoutes_Aggregate_PrefixPath(t, md, goStruct)
+		qv := (&oc.QualifiedLocalRoutes_Static_NextHop{
+			Metadata: md,
+		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a ONCE subscription.
-func (n *LocalRoutes_Aggregate_PrefixPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a ONCE subscription.
+func (n *LocalRoutes_Static_NextHopPathAny) Get(t testing.TB) []*oc.LocalRoutes_Static_NextHop {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []*oc.LocalRoutes_Static_NextHop
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *LocalRoutes_Aggregate_PrefixPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *LocalRoutes_Static_NextHopPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionLocalRoutes_Static_NextHop {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
+	c := &oc.CollectionLocalRoutes_Static_NextHop{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLocalRoutes_Static_NextHop) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedLocalRoutes_Static_NextHop{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.LocalRoutes_Static_NextHop)))
 		return false
 	})
 	return c
 }
 
-func watch_LocalRoutes_Aggregate_PrefixPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_LocalRoutes_Static_NextHopPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop) bool) *oc.LocalRoutes_Static_NextHopWatcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.LocalRoutes_Aggregate{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w := &oc.LocalRoutes_Static_NextHopWatcher{}
+	gs := &oc.LocalRoutes_Static_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Aggregate", gs, queryPath, true, false)
-		return convertLocalRoutes_Aggregate_PrefixPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop", gs, queryPath, false, false)
+		return (&oc.QualifiedLocalRoutes_Static_NextHop{
+			Metadata: md,
+		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_NextHop)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *LocalRoutes_Aggregate_PrefixPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *LocalRoutes_Static_NextHopPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop) bool) *oc.LocalRoutes_Static_NextHopWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Aggregate_PrefixPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHopPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a STREAM subscription,
+// Await observes values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *LocalRoutes_Aggregate_PrefixPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *LocalRoutes_Static_NextHopPath) Await(t testing.TB, timeout time.Duration, val *oc.LocalRoutes_Static_NextHop) *oc.QualifiedLocalRoutes_Static_NextHop {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedLocalRoutes_Static_NextHop) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix to the batch object.
-func (n *LocalRoutes_Aggregate_PrefixPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop to the batch object.
+func (n *LocalRoutes_Static_NextHopPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *LocalRoutes_Aggregate_PrefixPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *LocalRoutes_Static_NextHopPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionLocalRoutes_Static_NextHop {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionLocalRoutes_Static_NextHop{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLocalRoutes_Static_NextHop) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *LocalRoutes_Aggregate_PrefixPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *LocalRoutes_Static_NextHopPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop) bool) *oc.LocalRoutes_Static_NextHopWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Aggregate_PrefixPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHopPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-local-routing/local-routes/local-aggregates/aggregate/state/prefix to the batch object.
-func (n *LocalRoutes_Aggregate_PrefixPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop to the batch object.
+func (n *LocalRoutes_Static_NextHopPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertLocalRoutes_Aggregate_PrefixPath extracts the value of the leaf Prefix from its parent oc.LocalRoutes_Aggregate
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertLocalRoutes_Aggregate_PrefixPath(t testing.TB, md *genutil.Metadata, parent *oc.LocalRoutes_Aggregate) *oc.QualifiedString {
+// Lookup fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Lookup(t testing.TB) *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd {
 	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
+	goStruct := &oc.LocalRoutes_Static_NextHop_EnableBfd{}
+	md, ok := oc.Lookup(t, n, "LocalRoutes_Static_NextHop_EnableBfd", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	val := parent.Prefix
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
+	return nil
+}
+
+// Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Get(t testing.TB) *oc.LocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPathAny) Lookup(t testing.TB) []*oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.LocalRoutes_Static_NextHop_EnableBfd{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "LocalRoutes_Static_NextHop_EnableBfd", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
 	}
-	return qv
+	return data
+}
+
+// Get fetches the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a ONCE subscription.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPathAny) Get(t testing.TB) []*oc.LocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.LocalRoutes_Static_NextHop_EnableBfd
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionLocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	c := &oc.CollectionLocalRoutes_Static_NextHop_EnableBfd{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.LocalRoutes_Static_NextHop_EnableBfd)))
+		return false
+	})
+	return c
+}
+
+func watch_LocalRoutes_Static_NextHop_EnableBfdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool) *oc.LocalRoutes_Static_NextHop_EnableBfdWatcher {
+	t.Helper()
+	w := &oc.LocalRoutes_Static_NextHop_EnableBfdWatcher{}
+	gs := &oc.LocalRoutes_Static_NextHop_EnableBfd{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop_EnableBfd", gs, queryPath, false, false)
+		return (&oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool) *oc.LocalRoutes_Static_NextHop_EnableBfdWatcher {
+	t.Helper()
+	return watch_LocalRoutes_Static_NextHop_EnableBfdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Await(t testing.TB, timeout time.Duration, val *oc.LocalRoutes_Static_NextHop_EnableBfd) *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd to the batch object.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionLocalRoutes_Static_NextHop_EnableBfd {
+	t.Helper()
+	c := &oc.CollectionLocalRoutes_Static_NextHop_EnableBfd{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop_EnableBfd) bool) *oc.LocalRoutes_Static_NextHop_EnableBfdWatcher {
+	t.Helper()
+	return watch_LocalRoutes_Static_NextHop_EnableBfdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/enable-bfd to the batch object.
+func (n *LocalRoutes_Static_NextHop_EnableBfdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
 }

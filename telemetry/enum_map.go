@@ -140,6 +140,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "IPV4"},
 		3: {Name: "IPV6"},
 		4: {Name: "MPLS"},
+		5: {Name: "VXLAN"},
 	},
 	"E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY": {
 		1: {Name: "CRITICAL", DefiningModule: "openconfig-alarm-types"},
@@ -883,6 +884,21 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "INTERNAL"},
 		2: {Name: "UNSUPPORTED"},
 	},
+	"E_KeychainTypes_CRYPTO_TYPE": {
+		1:  {Name: "AES_28_CMAC_96", DefiningModule: "openconfig-keychain-types"},
+		2:  {Name: "CRYPTO_NONE", DefiningModule: "openconfig-keychain-types"},
+		3:  {Name: "HMAC_MD5", DefiningModule: "openconfig-keychain-types"},
+		4:  {Name: "HMAC_SHA_1", DefiningModule: "openconfig-keychain-types"},
+		5:  {Name: "HMAC_SHA_1_12", DefiningModule: "openconfig-keychain-types"},
+		6:  {Name: "HMAC_SHA_1_20", DefiningModule: "openconfig-keychain-types"},
+		7:  {Name: "HMAC_SHA_1_96", DefiningModule: "openconfig-keychain-types"},
+		8:  {Name: "HMAC_SHA_256", DefiningModule: "openconfig-keychain-types"},
+		9:  {Name: "MD5", DefiningModule: "openconfig-keychain-types"},
+		10: {Name: "SHA_1", DefiningModule: "openconfig-keychain-types"},
+	},
+	"E_Keychain_Tolerance_Enum": {
+		1: {Name: "FOREVER"},
+	},
 	"E_Lacp_LacpActivityType": {
 		1: {Name: "ACTIVE"},
 		2: {Name: "PASSIVE"},
@@ -1325,15 +1341,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "ATTRIBUTE_LE", DefiningModule: "openconfig-policy-types"},
 	},
 	"E_PolicyTypes_INSTALL_PROTOCOL_TYPE": {
-		1: {Name: "BGP", DefiningModule: "openconfig-policy-types"},
-		2: {Name: "DIRECTLY_CONNECTED", DefiningModule: "openconfig-policy-types"},
-		3: {Name: "IGMP", DefiningModule: "openconfig-policy-types"},
-		4: {Name: "ISIS", DefiningModule: "openconfig-policy-types"},
-		5: {Name: "LOCAL_AGGREGATE", DefiningModule: "openconfig-policy-types"},
-		6: {Name: "OSPF", DefiningModule: "openconfig-policy-types"},
-		7: {Name: "OSPF3", DefiningModule: "openconfig-policy-types"},
-		8: {Name: "PIM", DefiningModule: "openconfig-policy-types"},
-		9: {Name: "STATIC", DefiningModule: "openconfig-policy-types"},
+		1:  {Name: "BGP", DefiningModule: "openconfig-policy-types"},
+		2:  {Name: "DIRECTLY_CONNECTED", DefiningModule: "openconfig-policy-types"},
+		3:  {Name: "GRIBI", DefiningModule: "openconfig-policy-types"},
+		4:  {Name: "IGMP", DefiningModule: "openconfig-policy-types"},
+		5:  {Name: "ISIS", DefiningModule: "openconfig-policy-types"},
+		6:  {Name: "LOCAL_AGGREGATE", DefiningModule: "openconfig-policy-types"},
+		7:  {Name: "OSPF", DefiningModule: "openconfig-policy-types"},
+		8:  {Name: "OSPF3", DefiningModule: "openconfig-policy-types"},
+		9:  {Name: "PIM", DefiningModule: "openconfig-policy-types"},
+		10: {Name: "STATIC", DefiningModule: "openconfig-policy-types"},
 	},
 	"E_PolicyTypes_MatchSetOptionsRestrictedType": {
 		1: {Name: "ANY"},
@@ -1842,6 +1859,12 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	},
 	"/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action": {
 		reflect.TypeOf((E_VlanTypes_VlanStackAction)(0)),
+	},
+	"/keychains/keychain/keys/key/state/crypto-algorithm": {
+		reflect.TypeOf((E_KeychainTypes_CRYPTO_TYPE)(0)),
+	},
+	"/keychains/keychain/state/tolerance": {
+		reflect.TypeOf((E_Keychain_Tolerance_Enum)(0)),
 	},
 	"/lacp/interfaces/interface/members/member/state/activity": {
 		reflect.TypeOf((E_Lacp_LacpActivityType)(0)),

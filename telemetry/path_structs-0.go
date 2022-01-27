@@ -13284,6 +13284,40 @@ func (n *DevicePath) Interface(Name string) *InterfacePath {
 	}
 }
 
+// KeychainAny (list): List of defined keychains.
+// ----------------------------------------
+// Defining module: "openconfig-keychain"
+// Instantiating module: "openconfig-keychain"
+// Path from parent: "keychains/keychain"
+// Path from root: "/keychains/keychain"
+// Name (wildcarded): string
+func (n *DevicePath) KeychainAny() *KeychainPathAny {
+	return &KeychainPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"keychains", "keychain"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// Keychain (list): List of defined keychains.
+// ----------------------------------------
+// Defining module: "openconfig-keychain"
+// Instantiating module: "openconfig-keychain"
+// Path from parent: "keychains/keychain"
+// Path from root: "/keychains/keychain"
+// Name: string
+func (n *DevicePath) Keychain(Name string) *KeychainPath {
+	return &KeychainPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"keychains", "keychain"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
 // Lacp (container): Configuration and operational state data for LACP protocol
 // operation on the aggregate interface
 // ----------------------------------------

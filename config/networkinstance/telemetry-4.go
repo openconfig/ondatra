@@ -15,6 +15,402 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath extracts the value of the leaf LspRefreshInterval from its parent oc.NetworkInstance_Protocol_Isis_Global_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Timers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.LspRefreshInterval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_Spf {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_Spf{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_Spf {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_Spf
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_Spf{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Replace(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Update(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath extracts the value of the leaf SpfFirstInterval from its parent oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.SpfFirstInterval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedUint64{
+		Metadata: md,
+	}).SetVal(goStruct.GetSpfHoldInterval())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_Spf", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Replace(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Update(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath extracts the value of the leaf SpfHoldInterval from its parent oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.SpfHoldInterval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-second-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfSecondIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
@@ -884,31 +1280,31 @@ func (n *NetworkInstance_Protocol_Isis_Interface_AuthenticationPath) BatchUpdate
 	b.BatchUpdate(t, n, val)
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) Lookup(t testing.TB) *oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Authentication", goStruct, true, true)
 	if ok {
-		return convertNetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath(t, md, goStruct)
+		return convertNetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath(t, md, goStruct)
 	}
 	return (&oc.QualifiedBool{
 		Metadata: md,
-	}).SetVal(goStruct.GetHelloAuthentication())
+	}).SetVal(goStruct.GetEnabled())
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) Get(t testing.TB) bool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
@@ -920,14 +1316,14 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticat
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPathAny) Get(t testing.TB) []bool {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPathAny) Get(t testing.TB) []bool {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []bool
@@ -937,189 +1333,98 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticat
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
-// convertNetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath extracts the value of the leaf HelloAuthentication from its parent oc.NetworkInstance_Protocol_Isis_Interface_Authentication
+// convertNetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Interface_Authentication
 // and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Interface_Authentication_HelloAuthenticationPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Authentication) *oc.QualifiedBool {
+func convertNetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Authentication) *oc.QualifiedBool {
 	t.Helper()
 	qv := &oc.QualifiedBool{
 		Metadata: md,
 	}
-	val := parent.HelloAuthentication
+	val := parent.Enabled
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Authentication_Key", goStruct, false, true)
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Authentication", goStruct, true, true)
 	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
+		return convertNetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Key {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Key
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Authentication_Key", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Authentication_Key", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Authentication_Key", goStruct, queryPath, true, true)
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Authentication", goStruct, queryPath, true, true)
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -1129,145 +1434,54 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPassword
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath extracts the value of the leaf AuthPassword from its parent oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Interface_Authentication_Key_AuthPasswordPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Key) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.AuthPassword
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Keychain {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Keychain {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Keychain
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Authentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain.
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain in the given batch object.
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain in the given batch object.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Replace(t, n, val)
+	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
-	b.BatchReplace(t, n, val)
+	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Update(t, n, val)
+	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Authentication_Keychain) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
-	b.BatchUpdate(t, n, val)
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath extracts the value of the leaf Keychain from its parent oc.NetworkInstance_Protocol_Isis_Interface_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Authentication) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Keychain
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/bfd with a ONCE subscription.
@@ -4210,31 +4424,31 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthenticationPath) 
 	b.BatchUpdate(t, n, val)
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) Lookup(t testing.TB) *oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication", goStruct, true, true)
 	if ok {
-		return convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath(t, md, goStruct)
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath(t, md, goStruct)
 	}
 	return (&oc.QualifiedBool{
 		Metadata: md,
-	}).SetVal(goStruct.GetHelloAuthentication())
+	}).SetVal(goStruct.GetEnabled())
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) Get(t testing.TB) bool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
@@ -4246,14 +4460,14 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Hello
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPathAny) Get(t testing.TB) []bool {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPathAny) Get(t testing.TB) []bool {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []bool
@@ -4263,189 +4477,98 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Hello
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/hello-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
-// convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath extracts the value of the leaf HelloAuthentication from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication
+// convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication
 // and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_HelloAuthenticationPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication) *oc.QualifiedBool {
+func convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication) *oc.QualifiedBool {
 	t.Helper()
 	qv := &oc.QualifiedBool{
 		Metadata: md,
 	}
-	val := parent.HelloAuthentication
+	val := parent.Enabled
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedString {
 	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key", goStruct, false, true)
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication", goStruct, true, true)
 	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Get(t testing.TB) string {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key", goStruct, queryPath, true, true)
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication", goStruct, queryPath, true, true)
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -4455,145 +4578,54 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_A
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath extracts the value of the leaf AuthPassword from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key_AuthPasswordPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Key) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.AuthPassword
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain.
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain in the given batch object.
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain in the given batch object.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Replace(t, n, val)
+	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
-	b.BatchReplace(t, n, val)
+	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Update(t, n, val)
+	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keychain) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
-	b.BatchUpdate(t, n, val)
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath extracts the value of the leaf Keychain from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Keychain
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/config/level-number with a ONCE subscription.
@@ -6989,31 +7021,31 @@ func (n *NetworkInstance_Protocol_Isis_Level_AuthenticationPath) BatchUpdate(t t
 	b.BatchUpdate(t, n, val)
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) Lookup(t testing.TB) *oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Lookup(t testing.TB) *oc.QualifiedBool {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
 	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath(t, md, goStruct)
+		return convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath(t, md, goStruct)
 	}
 	return (&oc.QualifiedBool{
 		Metadata: md,
-	}).SetVal(goStruct.GetCsnpAuthentication())
+	}).SetVal(goStruct.GetDisableCsnp())
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) Get(t testing.TB) bool {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
@@ -7025,14 +7057,14 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPa
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPathAny) Get(t testing.TB) []bool {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPathAny) Get(t testing.TB) []bool {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []bool
@@ -7042,189 +7074,407 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPa
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Update(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/csnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
-// convertNetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath extracts the value of the leaf CsnpAuthentication from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
+// convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath extracts the value of the leaf DisableCsnp from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
 // and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Level_Authentication_CsnpAuthenticationPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
+func convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
 	t.Helper()
 	qv := &oc.QualifiedBool{
 		Metadata: md,
 	}
-	val := parent.CsnpAuthentication
+	val := parent.DisableCsnp
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key with a ONCE subscription.
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Lookup(t testing.TB) *oc.QualifiedBool {
 	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication_Key", goStruct, false, true)
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
 	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
+		return convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath(t, md, goStruct)
 	}
-	return nil
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDisableLsp())
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key with a ONCE subscription,
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Key {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Key
+	var data []*oc.QualifiedBool
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication_Key", goStruct, queryPath, false, true)
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Key{
-			Metadata: md,
-		}).SetVal(goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPathAny) Get(t testing.TB) []bool {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key
+	var data []bool
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) Delete(t testing.TB) *gpb.SetResponse {
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Replace(t, n, val)
+	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
-	b.BatchReplace(t, n, val)
+	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Update(t testing.TB, val bool) *gpb.SetResponse {
 	t.Helper()
-	return genutil.Update(t, n, val)
+	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
 	t.Helper()
-	b.BatchUpdate(t, n, val)
+	b.BatchUpdate(t, n, &val)
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) Lookup(t testing.TB) *oc.QualifiedString {
+// convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath extracts the value of the leaf DisableLsp from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
 	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication_Key", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath(t, md, goStruct)
+	qv := &oc.QualifiedBool{
+		Metadata: md,
 	}
-	return nil
+	val := parent.DisableLsp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password with a ONCE subscription,
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDisablePsnp())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) Get(t testing.TB) string {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Get(t testing.TB) bool {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password with a ONCE subscription.
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath extracts the value of the leaf DisablePsnp from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DisablePsnp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetEnabled())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Enabled
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedString
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication_Key", goStruct, queryPath, true, true)
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
 		if !ok {
 			continue
 		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath(t, md, goStruct)
+		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -7234,347 +7484,50 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath
 	return data
 }
 
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/key/config/auth-password in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath extracts the value of the leaf AuthPassword from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Level_Authentication_Key_AuthPasswordPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Key) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.AuthPassword
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Keychain {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication_Keychain", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Keychain {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Keychain
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication_Keychain", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Authentication_Keychain{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain.
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Delete(t testing.TB) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Delete(t, n)
 }
 
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain in the given batch object.
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain in the given batch object.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
 	t.Helper()
 	b.BatchDelete(t, n)
 }
 
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/keychain in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Level_Authentication_Keychain) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetLspAuthentication())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Replace(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Update(t testing.TB, val string) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/lsp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
-// convertNetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath extracts the value of the leaf LspAuthentication from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Level_Authentication_LspAuthenticationPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
+// convertNetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath extracts the value of the leaf Keychain from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedString {
 	t.Helper()
-	qv := &oc.QualifiedBool{
+	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.LspAuthentication
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPsnpAuthentication())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Authentication{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Authentication", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/psnp-authentication in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath extracts the value of the leaf PsnpAuthentication from its parent oc.NetworkInstance_Protocol_Isis_Level_Authentication
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Level_Authentication_PsnpAuthenticationPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Authentication) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PsnpAuthentication
+	val := parent.Keychain
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
