@@ -24,6 +24,7 @@ import (
 	"sync"
 	"time"
 
+	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/credentials/local"
@@ -86,6 +87,7 @@ type Stats struct {
 
 type cfgClient interface {
 	Session() session
+	NodeID(ixconfig.IxiaCfgNode) (string, error)
 	LastImportedConfig() *ixconfig.Ixnetwork
 	UpdateIDs(context.Context, *ixconfig.Ixnetwork, ...ixconfig.IxiaCfgNode) error
 }
@@ -198,10 +200,11 @@ func (c *Client) Subscribe(ctx context.Context, opts ...grpc.CallOption) (gpb.GN
 	}, nil
 }
 
-func (c *Client) publishRoot(ctx context.Context, root string, path *gpb.Path) error {
+func (c *Client) publishRoot(ctx context.Context, root string, path *gpb.Path) (bool, error) {
 	reader := prefixToReader[root]
 	if reader == nil {
-		return nil
+		log.V(2).Info("No reader for path")
+		return true, nil
 	}
 
 	// Ensure we do not have concurrent writes to the same root.
@@ -213,18 +216,20 @@ func (c *Client) publishRoot(ctx context.Context, root string, path *gpb.Path) e
 	c.fresh.DeleteExpired()
 	ns, err := reader.read(ctx, c, path)
 	if err != nil {
-		return err
+		return false, err
 	}
+	hasData := len(ns) > 0
 	for _, n := range ns {
 		n.Prefix = &gpb.Path{
 			Target: c.target.Name(),
 			Origin: "openconfig",
 		}
+		log.V(2).Infof("Pushing notif to cache: %+v", n)
 		if err := c.target.GnmiUpdate(n); err != nil {
-			return errors.Wrapf(err, "failed to update gNMI cache for target %s", c.target.Name())
+			return false, errors.Wrapf(err, "failed to update gNMI cache for target %s", c.target.Name())
 		}
 	}
-	return nil
+	return hasData, nil
 }
 
 func (c *Client) readStats(ctx context.Context, cacheKey string, captions []string) (ygot.GoStruct, error) {
@@ -306,12 +311,15 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	if pi.isIPV4 {
 		opPath = bgpV4OpPath
 	}
-	restID := node.GetRestID()
-	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{restID}}, nil); err != nil {
+	nodeID, err := c.client.NodeID(node)
+	if err != nil {
+		return nil, err
+	}
+	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
 		return nil, errors.Wrap(err, "failed to run op")
 	}
 	table := &table{}
-	if err := c.client.Session().Get(ctx, path.Join(restID, "learnedInfo/1/table/1"), table); err != nil {
+	if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
 		return nil, errors.Wrap(err, "failed to get learned info")
 	}
 	return table, nil
@@ -460,7 +468,7 @@ func (s *subClient) Send(req *gpb.SubscribeRequest) error {
 	// For once subscriptions, need to make sure the data is fully populated
 	// before even sending the request; otherwise it might not be found.
 	if s.mode == gpb.SubscriptionList_ONCE {
-		if err := s.publishRoots(); err != nil {
+		if _, err := s.publishRoots(); err != nil {
 			return err
 		}
 	}
@@ -470,18 +478,48 @@ func (s *subClient) Send(req *gpb.SubscribeRequest) error {
 func (s *subClient) Recv() (*gpb.SubscribeResponse, error) {
 	// For non-once subscriptions, refresh the data on every receive.
 	if s.mode != gpb.SubscriptionList_ONCE {
-		if err := s.publishRoots(); err != nil {
+		hasData, err := s.publishRoots()
+		if err != nil {
 			return nil, err
 		}
+		if hasData {
+			return s.GNMI_SubscribeClient.Recv()
+		}
+		// If there's no data, keep trying get more in the background.
+		tick := time.NewTicker(50 * time.Millisecond)
+		done := make(chan struct{})
+		defer tick.Stop()
+		defer close(done)
+		go func() {
+			for {
+				select {
+				case <-done:
+					return
+				case <-tick.C:
+					data, err := s.publishRoots()
+					if err != nil {
+						log.Errorf("Failed to publish roots: %v", err)
+						return
+					}
+					if data {
+						return
+					}
+				}
+			}
+		}()
+
 	}
 	return s.GNMI_SubscribeClient.Recv()
 }
 
-func (s *subClient) publishRoots() error {
+func (s *subClient) publishRoots() (bool, error) {
+	var ret bool
 	for i, root := range s.roots {
-		if err := s.parent.publishRoot(s.Context(), root, s.paths[i]); err != nil {
-			return err
+		hasData, err := s.parent.publishRoot(s.Context(), root, s.paths[i])
+		ret = hasData || ret
+		if err != nil {
+			return false, err
 		}
 	}
-	return nil
+	return ret, nil
 }

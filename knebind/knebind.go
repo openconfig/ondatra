@@ -16,8 +16,10 @@
 package knebind
 
 import (
+	"bytes"
 	"crypto/tls"
 	"fmt"
+	"io"
 	"os/exec"
 	"sync"
 	"time"
@@ -26,14 +28,16 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"github.com/pkg/errors"
+	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/protobuf/encoding/prototext"
 
-	kpb "github.com/google/kne/proto/topo"
+	tpb "github.com/google/kne/proto/topo"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	gribipb "github.com/openconfig/gribi/v1/proto/service"
 	fluentgribi "github.com/openconfig/gribigo/fluent"
@@ -42,7 +46,9 @@ import (
 )
 
 var (
-	fetchTopo = fetchTopology // to be stubbed out by tests
+	// to be stubbed out by tests
+	kneCmdFn  = kneCmd
+	sshExecFn = sshExec
 )
 
 // Bind implements the ondatra Binding interface for KNE
@@ -66,9 +72,13 @@ func New(cfg *Config) (*Bind, error) {
 // Reserve implements the binding Reserve method by finding nodes and links in
 // the topology specified in the config file that match the requested testbed.
 func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration) (*reservation.Reservation, error) {
-	topo, err := fetchTopo(b.cfg)
+	out, err := kneCmdFn(b.cfg, "topology", "service", b.cfg.TopoPath)
 	if err != nil {
 		return nil, err
+	}
+	topo := new(tpb.Topology)
+	if err := prototext.Unmarshal(out, topo); err != nil {
+		return nil, errors.Wrap(err, "error unmarshalling KNE topology proto")
 	}
 	sol, err := solver.Solve(tb, topo)
 	if err != nil {
@@ -76,26 +86,6 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	}
 	b.services = sol.Services
 	return sol.Reservation, nil
-}
-
-func fetchTopology(cfg *Config) (*kpb.Topology, error) {
-	args := []string{"topology", "service", cfg.TopoPath}
-	if cfg.KubecfgPath != "" {
-		args = append(args, fmt.Sprintf("--kubecfg=%s", cfg.KubecfgPath))
-	}
-	cmd := exec.Command(cfg.CLIPath, args...)
-	out, err := cmd.Output()
-	if err != nil {
-		if execErr, ok := err.(*exec.ExitError); ok {
-			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
-		}
-		return nil, errors.Wrapf(err, "error executing command %v", cmd)
-	}
-	topo := new(kpb.Topology)
-	if err := prototext.Unmarshal(out, topo); err != nil {
-		return nil, errors.Wrap(err, "error unmarshalling KNE topology proto")
-	}
-	return topo, nil
 }
 
 // Release is a no-op because there's need to reserve local VMs.
@@ -145,7 +135,7 @@ func (b *Bind) dialGRPC(ctx context.Context, dut *reservation.DUT, serviceName s
 }
 
 // serviceAddr returns the external IP address of a KNE service.
-func serviceAddr(s *kpb.Service) string {
+func serviceAddr(s *tpb.Service) string {
 	return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside())
 }
 
@@ -175,4 +165,78 @@ func (c *passCred) GetRequestMetadata(ctx context.Context, uri ...string) (map[s
 
 func (c *passCred) RequireTransportSecurity() bool {
 	return true
+}
+
+func (b *Bind) PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *binding.ConfigOptions) error {
+	if dut.Vendor != opb.Device_ARISTA {
+		return errors.New("KNEBind PushConfig only supports Arista devices")
+	}
+	if opts.OpenConfig {
+		return errors.New("KNEBind PushConfig does not yet support pushing OpenConfig")
+	}
+	if !opts.Append {
+		if _, err := kneCmdFn(b.cfg, "topology", "reset", b.cfg.TopoPath, dut.Name, "--push"); err != nil {
+			return err
+		}
+	}
+	_, err := b.dutExec(dut, "enable\nconfig terminal\n"+config)
+	return err
+}
+
+func (b *Bind) dutExec(dut *reservation.DUT, cmd string) (_ string, rerr error) {
+	s, err := b.services.Lookup(dut.Name, "ssh")
+	if err != nil {
+		return "", err
+	}
+	addr := serviceAddr(s)
+	config := &ssh.ClientConfig{
+		User: b.cfg.Username,
+		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
+			if len(questions) > 0 {
+				return []string{b.cfg.Password}, nil
+			}
+			return nil, nil
+		})},
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+	}
+	return sshExecFn(addr, config, cmd)
+}
+
+func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr error) {
+	client, err := ssh.Dial("tcp", addr, cfg)
+	if err != nil {
+		return "", errors.Wrapf(err, "could not dial SSH server %s", addr)
+	}
+	defer closer.Close(&rerr, client.Close, "error closing SSH client")
+	session, err := client.NewSession()
+	if err != nil {
+		return "", errors.Wrap(err, "could not create ssh session")
+	}
+	defer closer.Close(&rerr, func() error {
+		if err := session.Close(); err != io.EOF {
+			return err
+		}
+		return nil
+	}, "error closing SSH session")
+	var buf bytes.Buffer
+	session.Stdout = &buf
+	if err := session.Run(cmd); err != nil {
+		return "", errors.Wrapf(err, "could not execute %q\noutput: %q", cmd, buf.String())
+	}
+	return buf.String(), nil
+}
+
+func kneCmd(cfg *Config, args ...string) ([]byte, error) {
+	if cfg.KubecfgPath != "" {
+		args = append(append([]string{}, args...), fmt.Sprintf("--kubecfg=%s", cfg.KubecfgPath))
+	}
+	cmd := exec.Command(cfg.CLIPath, args...)
+	out, err := cmd.Output()
+	if err != nil {
+		if execErr, ok := err.(*exec.ExitError); ok {
+			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
+		}
+		return nil, errors.Wrapf(err, "error executing command %v", cmd)
+	}
+	return out, nil
 }

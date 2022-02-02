@@ -138,7 +138,7 @@ func mka(mkapb *opb.MacSec_MKA) (*ixconfig.TopologyMka, error) {
 	}, nil
 }
 
-func (ix *IxiaCfgClient) addMACsecProtocol(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addMACsecProtocol(ifc *opb.InterfaceConfig) error {
 	macsec := ifc.GetEthernet().GetMacsec()
 	if macsec == nil {
 		return nil
@@ -176,7 +176,7 @@ func (ix *IxiaCfgClient) addMACsecProtocol(ifc *opb.InterfaceConfig) error {
 
 // addIPProtocols adds IxNetwork IP protocols, assuming the device group for the given interface already exsts.
 // Returns an error if the IP configuration does not validate.
-func (ix *IxiaCfgClient) addIPProtocols(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addIPProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
 	eth := intf.deviceGroup.Ethernet[0]
 	hasMacSec := len(eth.Macsec) > 0
@@ -231,7 +231,7 @@ func (ix *IxiaCfgClient) addIPProtocols(ifc *opb.InterfaceConfig) error {
 // addIPLoopbackProtocols adds IxNetwork IP loopback protocols, assuming the
 // device group for the given interface already exsts.
 // Returns an error if the IP configuration does not validate.
-func (ix *IxiaCfgClient) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
 	dg := intf.deviceGroup
 	if ipv4 := ifc.GetIpv4LoopbackCidr(); ipv4 != "" {
@@ -253,7 +253,7 @@ func (ix *IxiaCfgClient) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error 
 // addISISProtocols adds IxNetwork IS-IS protocols, assuming the device group for the given interface already exists.
 // Each interface config must apply to the same set of ports. Returns an error if the
 // interface configs are not validated as a set.
-func (ix *IxiaCfgClient) addISISProtocols(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 	isis := ifc.GetIsis()
 	if isis == nil {
 		return nil
@@ -295,6 +295,10 @@ func (ix *IxiaCfgClient) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return fmt.Errorf("unrecognized auth type %s", isis.GetAuthType())
 	}
 
+	areaID, err := areaIDToIxHex(isis.GetAreaId())
+	if err != nil {
+		return err
+	}
 	isisIntf := &ixconfig.TopologyIsisL3{
 		Name:                           ixconfig.String(fmt.Sprintf("IS-IS on %s", ifc.GetName())),
 		LevelType:                      ixconfig.MultivalueStr(level),
@@ -313,7 +317,7 @@ func (ix *IxiaCfgClient) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		EnableWideMetric:   ixconfig.MultivalueBool(isis.GetEnableWideMetric()),
 		EnableTE:           ixconfig.MultivalueBool(isis.GetEnableTe()),
 		DiscardLSPs:        ixconfig.MultivalueBool(isis.GetDiscardLsps()),
-		AreaAddresses:      ixconfig.MultivalueStr(isis.GetAreaId()),
+		AreaAddresses:      ixconfig.MultivalueStr(areaID),
 		TERouterId:         ixconfig.MultivalueStr(isis.GetTeRouterId()),
 	}
 
@@ -333,6 +337,13 @@ func (ix *IxiaCfgClient) addISISProtocols(ifc *opb.InterfaceConfig) error {
 	return nil
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 // isisSegmentRouting updates isisIntf/isisRtr based on the given segment routing config.
 func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.TopologyIsisL3Router, sr *opb.ISISSegmentRouting) {
 	if sr == nil || sr.GetEnable() == false {
@@ -350,7 +361,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	isisRtr.EFlag = ixconfig.MultivalueBool(sr.GetFlagExplicitNull())
 	isisRtr.VFlag = ixconfig.MultivalueBool(sr.GetFlagValue())
 	isisRtr.LFlag = ixconfig.MultivalueBool(sr.GetFlagLocal())
-	isisRtr.SRAlgorithmCount = ixconfig.NumberInt(len(sr.GetAlgorithms()))
+	isisRtr.SRAlgorithmCount = ixconfig.NumberInt(max(1, len(sr.GetAlgorithms())))
 	for _, alg := range sr.GetAlgorithms() {
 		isisRtr.IsisSRAlgorithmList = append(isisRtr.IsisSRAlgorithmList, &ixconfig.TopologyIsisSrAlgorithmList{
 			IsisSrAlgorithm: ixconfig.MultivalueUint32(alg),
@@ -362,7 +373,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 		lbCounts = append(lbCounts, srlb.GetSidCount())
 		lbLabels = append(lbLabels, srlb.GetSidStartLabel())
 	}
-	isisRtr.SrlbDescriptorCount = ixconfig.NumberInt(len(lbCounts))
+	isisRtr.SrlbDescriptorCount = ixconfig.NumberInt(max(1, len(lbCounts)))
 	for i := range lbCounts {
 		isisRtr.AdvertiseSRLB = ixconfig.MultivalueTrue()
 		isisRtr.IsisSRLBDescriptorList = append(isisRtr.IsisSRLBDescriptorList, &ixconfig.TopologyIsisSrlbDescriptorList{
@@ -410,25 +421,32 @@ func parseCIDR(cidr string) (string, uint32, bool, error) {
 	return strings.SplitN(cidr, "/", 2)[0], uint32(maskLen), strings.Contains(cidr, ":"), nil
 }
 
-func sysIDToIxHex(id string) (string, error) {
-	const idLen = 6
-	b, err := hex.DecodeString(strings.NewReplacer(":", "", ".", "", " ", "").Replace(id))
+func toIxHex(s string, lenBytes int) (string, error) {
+	b, err := hex.DecodeString(strings.NewReplacer(":", "", ".", "", " ", "").Replace(s))
 	if err != nil {
-		return "", usererr.Wrapf(err, "could not decode system ID %q as hex", id)
+		return "", usererr.Wrapf(err, "could not decode %q as hex", s)
 	}
-	if len(b) > idLen {
-		return "", usererr.New("system ID %q is too large (max size is 6 bytes)", id)
+	if len(b) > lenBytes {
+		return "", usererr.New("%q is too large (max size is %d bytes)", s, lenBytes)
 	}
 
-	words := make([]string, idLen)
-	fillLen := idLen - len(b)
+	words := make([]string, lenBytes)
+	fillLen := lenBytes - len(b)
 	for i := 0; i < len(b); i++ {
-		words[fillLen+i] = fmt.Sprintf("%x", b[i])
+		words[fillLen+i] = fmt.Sprintf("%02x", b[i])
 	}
 	for i := 0; i < fillLen; i++ {
 		words[i] = "00"
 	}
 	return strings.Join(words, " "), nil
+}
+
+func areaIDToIxHex(id string) (string, error) {
+	return toIxHex(id, 3)
+}
+
+func sysIDToIxHex(id string) (string, error) {
+	return toIxHex(id, 6)
 }
 
 func parseLink(toCIDR, fromCIDR string, asV6 bool) (string, string, uint32, error) {
@@ -495,12 +513,6 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 		var srlbDescriptorLists []*ixconfig.TopologyIsisSrlbDescriptorList
 		for j := 0; j < numSRLBRanges; j++ {
 			srlbDescriptorLists = append(srlbDescriptorLists, &ixconfig.TopologyIsisSrlbDescriptorList{})
-		}
-		max := func(a, b int) int {
-			if a > b {
-				return a
-			}
-			return b
 		}
 		ipv4Routes := &ixconfig.TopologyIPv4PseudoNodeRoutes{}
 		isisRtr := &ixconfig.TopologyIsisL3PseudoRouter{
@@ -753,7 +765,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 	return isisNetwGrps, nil
 }
 
-func (ix *IxiaCfgClient) addBGPProtocols(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	const maxNumPeersIxNetwork = 2
 	if ifc.GetBgp() == nil {
 		return nil
@@ -1493,10 +1505,10 @@ func appendUint64ToMultivalueList(mv *ixconfig.Multivalue, val uint64) *ixconfig
 
 // addISISProtocols adds IxNetwork RSVP protocols, assuming the IS-IS network
 // groups for the given interface already exist.
-func (ix *IxiaCfgClient) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
-	intf.ingressLSPs = make([]*ixconfig.TopologyRsvpP2PIngressLsps, 0, len(ifc.GetRsvp()))
-	for _, rsvp := range ifc.GetRsvp() {
+	intf.rsvpLSPs = make(map[string]*ixconfig.TopologyRsvpteLsps, len(ifc.GetRsvp()))
+	for rsvpIdx, rsvp := range ifc.GetRsvp() {
 		if intf.ipv4 == nil {
 			return usererr.New("could not find IPv4 config to configure RSVP interface for %q", ifc.GetName())
 		}
@@ -1562,17 +1574,24 @@ func (ix *IxiaCfgClient) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 				NumberOfRroSubObjects:        ixconfig.NumberInt(numRROs),
 				RsvpIngressRROSubObjectsList: rros,
 			}
-			intf.ingressLSPs = append(intf.ingressLSPs, ingressLSPs)
 		}
+		name := rsvp.GetName()
+		if name == "" {
+			name = fmt.Sprintf("RSVP LSPs %d for %s", rsvpIdx, ifc.GetName())
+		}
+		rsvpTELSPs := &ixconfig.TopologyRsvpteLsps{
+			Name:               ixconfig.String(name),
+			Active:             ixconfig.MultivalueTrue(),
+			EnableP2PEgress:    ixconfig.Bool(true),
+			IngressP2PLsps:     ixconfig.NumberInt(numIngressLSPs),
+			RsvpP2PEgressLsps:  &ixconfig.TopologyRsvpP2PEgressLsps{}, // Created only to use as a (non-nil) traffic endpoint.
+			RsvpP2PIngressLsps: ingressLSPs,
+		}
+		intf.rsvpLSPs[name] = rsvpTELSPs
 		dg := &ixconfig.TopologyDeviceGroup{
 			Multiplier: ixconfig.NumberInt(numLoopbacks),
 			Ipv4Loopback: []*ixconfig.TopologyIpv4Loopback{{
-				RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{{
-					Active:             ixconfig.MultivalueTrue(),
-					EnableP2PEgress:    ixconfig.Bool(true),
-					IngressP2PLsps:     ixconfig.NumberInt(numIngressLSPs),
-					RsvpP2PIngressLsps: ingressLSPs,
-				}},
+				RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{rsvpTELSPs},
 			}},
 		}
 		ng.DeviceGroup = append(ng.DeviceGroup, dg)

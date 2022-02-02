@@ -50,22 +50,16 @@ var (
 
 // Init initializes the Ondatra binding.
 func Init(b Binding) {
-	// TODO: Restore this check once binding init is standardized.
-	// if bind != nil {
-	// 	log.Fatal("binding already initialized")
-	// }
+	if bind != nil {
+		log.Fatalf("Binding already initialized")
+	}
 	bind = b
-}
-
-// IsSet returns if binding is set.
-func IsSet() bool {
-	return bind != nil
 }
 
 // Get gets the Ondatra binding.
 func Get() Binding {
 	if bind == nil {
-		log.Fatal("binding not set; did you pass a binding to ondatra.RunTests")
+		log.Exit("Binding not initialized. Did you forget to call ondatra.RunTests in TestMain?")
 	}
 	return bind
 }

@@ -32,6 +32,10 @@ message Traffic {
 message Lag {
   string name = 1;
   repeated string ports = 2;
+  message Lacp {
+    bool enabled = 1;
+  }
+  Lacp lacp = 3;
 }
 
 message InterfaceConfig {
@@ -422,6 +426,8 @@ message BgpAttributes {
 }
 
 message RsvpConfig {
+  string name = 6;
+  string interface_name = 7;
   string is_reachability_name = 2;
   message Loopback {
     string local_ip_cidr = 1;
@@ -448,7 +454,7 @@ message RsvpConfig {
   repeated Loopback loopbacks = 3;
   bool bundle_message_sending = 4;
   bool refresh_reduction = 5;
-  // NEXT ID: 6
+  // NEXT ID: 8
 }
 
 message Network {
@@ -491,8 +497,11 @@ message Flow {
 
   message Endpoint {
     string interface_name = 1;
-    // Network name is empty for interface endpoints.
-    string network_name = 2;
+    // Empty for interface endpoints.
+    oneof generated {
+      string network_name = 2;
+      string rsvp_name = 3;
+    }
   }
   repeated Endpoint src_endpoints = 10;
   repeated Endpoint dst_endpoints = 11;

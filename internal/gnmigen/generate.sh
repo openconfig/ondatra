@@ -44,6 +44,7 @@ COMMON_ARGS=(
   -generate_delete
   -generate_leaf_getters
   -structs_split_files_count=10
+  -generate_populate_defaults
 )
 
 YANG_FILES=(
@@ -177,7 +178,7 @@ go run internal/gnmigen/main/main.go \
   -split_pathstructs_by_module=true \
   -fake_root_helper_filename=device/root_helper.go \
   -fake_root_gnmi_filename=device/device_telem.go \
-  -telemetry_funcs_file_split=20 \
+  -telemetry_funcs_file_split=10 \
   -telemetry_types_file_split=10 \
   "${YANG_FILES[@]}"
 

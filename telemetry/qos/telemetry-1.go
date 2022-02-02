@@ -16,1526 +16,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/state/name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_NamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_NamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/state/name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_NamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/state/name with a ONCE subscription.
-func (n *Qos_Classifier_NamePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Classifier{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier", gs, queryPath, true, false)
-		return convertQos_Classifier_NamePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_NamePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/state/name failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/state/name to the batch object.
-func (n *Qos_Classifier_NamePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_NamePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/state/name to the batch object.
-func (n *Qos_Classifier_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_NamePath extracts the value of the leaf Name from its parent oc.Qos_Classifier
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Classifier_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Name
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_TermPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_Classifier_Term{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_TermPath) Get(t testing.TB) *oc.Qos_Classifier_Term {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_TermPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedQos_Classifier_Term{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription.
-func (n *Qos_Classifier_TermPathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_TermPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_TermPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term) bool) *oc.Qos_Classifier_TermWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_TermWatcher{}
-	gs := &oc.Qos_Classifier_Term{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_TermPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term) bool) *oc.Qos_Classifier_TermWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_TermPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_TermPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term) *oc.QualifiedQos_Classifier_Term {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term to the batch object.
-func (n *Qos_Classifier_TermPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_TermPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_TermPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term) bool) *oc.Qos_Classifier_TermWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_TermPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term to the batch object.
-func (n *Qos_Classifier_TermPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_ActionsPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Actions {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_Classifier_Term_Actions{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_ActionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_ActionsPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Actions {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term_Actions
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedQos_Classifier_Term_Actions{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription.
-func (n *Qos_Classifier_Term_ActionsPathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Actions {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term_Actions
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_ActionsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Actions {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Actions{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Actions) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Actions{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term_Actions)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_ActionsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions) bool) *oc.Qos_Classifier_Term_ActionsWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_ActionsWatcher{}
-	gs := &oc.Qos_Classifier_Term_Actions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Actions{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_ActionsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions) bool) *oc.Qos_Classifier_Term_ActionsWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_ActionsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_ActionsPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Actions) *oc.QualifiedQos_Classifier_Term_Actions {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Actions) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions to the batch object.
-func (n *Qos_Classifier_Term_ActionsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_ActionsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Actions {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Actions{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Actions) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_ActionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions) bool) *oc.Qos_Classifier_Term_ActionsWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_ActionsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions to the batch object.
-func (n *Qos_Classifier_Term_ActionsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions_Remark", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term_Actions_Remark
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription.
-func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term_Actions_Remark
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Actions_Remark{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term_Actions_Remark)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Actions_RemarkPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool) *oc.Qos_Classifier_Term_Actions_RemarkWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_Actions_RemarkWatcher{}
-	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions_Remark)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool) *oc.Qos_Classifier_Term_Actions_RemarkWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_RemarkPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Actions_Remark) *oc.QualifiedQos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark to the batch object.
-func (n *Qos_Classifier_Term_Actions_RemarkPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Actions_Remark {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Actions_Remark{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool) *oc.Qos_Classifier_Term_Actions_RemarkWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_RemarkPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark to the batch object.
-func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions_Remark", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a ONCE subscription.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Actions_Remark_SetDot1PPath extracts the value of the leaf SetDot1P from its parent oc.Qos_Classifier_Term_Actions_Remark
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Actions_Remark) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.SetDot1P
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions_Remark", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a ONCE subscription.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Actions_Remark_SetDscpPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDscpPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDscpPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Actions_Remark_SetDscpPath extracts the value of the leaf SetDscp from its parent oc.Qos_Classifier_Term_Actions_Remark
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Actions_Remark) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.SetDscp
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions_Remark", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions_Remark{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a ONCE subscription.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc to the batch object.
-func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath extracts the value of the leaf SetMplsTc from its parent oc.Qos_Classifier_Term_Actions_Remark
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Actions_Remark) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.SetMplsTc
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Actions{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Actions", goStruct, true, false)
-	if ok {
-		return convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Actions{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Actions", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a ONCE subscription.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Actions_TargetGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Qos_Classifier_Term_Actions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_TargetGroupPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group to the batch object.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_TargetGroupPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group to the batch object.
-func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertQos_Classifier_Term_Actions_TargetGroupPath extracts the value of the leaf TargetGroup from its parent oc.Qos_Classifier_Term_Actions
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertQos_Classifier_Term_Actions_TargetGroupPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Actions) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.TargetGroup
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_ConditionsPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_Classifier_Term_Conditions{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_ConditionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_ConditionsPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedQos_Classifier_Term_Conditions{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription.
-func (n *Qos_Classifier_Term_ConditionsPathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Conditions {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term_Conditions
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_ConditionsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Conditions{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term_Conditions)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_ConditionsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions) bool) *oc.Qos_Classifier_Term_ConditionsWatcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_ConditionsWatcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Conditions{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_ConditionsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions) bool) *oc.Qos_Classifier_Term_ConditionsWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_ConditionsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_ConditionsPath) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Conditions) *oc.QualifiedQos_Classifier_Term_Conditions {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions to the batch object.
-func (n *Qos_Classifier_Term_ConditionsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_ConditionsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_ConditionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions) bool) *oc.Qos_Classifier_Term_ConditionsWatcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_ConditionsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions to the batch object.
-func (n *Qos_Classifier_Term_ConditionsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
-	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription.
-func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Qos_Classifier_Term_Conditions_Ipv4
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv4{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Qos_Classifier_Term_Conditions_Ipv4)))
-		return false
-	})
-	return c
-}
-
-func watch_Qos_Classifier_Term_Conditions_Ipv4Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4Watcher {
-	t.Helper()
-	w := &oc.Qos_Classifier_Term_Conditions_Ipv4Watcher{}
-	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Ipv4Path(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv4 {
-	t.Helper()
-	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv4{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4Watcher {
-	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Ipv4Path(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 to the batch object.
-func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
 // Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/destination-address with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -1683,6 +163,3062 @@ func convertQos_Classifier_Term_Conditions_Ipv4_DestinationAddressPath(t testing
 		Metadata: md,
 	}
 	val := parent.DestinationAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv4_DscpPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv4_DscpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv4_DscpPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv4_DscpPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_DscpPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_DscpPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv4_DscpPath extracts the value of the leaf Dscp from its parent oc.Qos_Classifier_Term_Conditions_Ipv4
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertQos_Classifier_Term_Conditions_Ipv4_DscpPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Dscp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Lookup(t testing.TB) *oc.QualifiedUint8Slice {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Get(t testing.TB) []uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8Slice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8Slice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPathAny) Get(t testing.TB) [][]uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8Slice {
+	t.Helper()
+	c := &oc.CollectionUint8Slice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	w := &oc.Uint8SliceWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Await(t testing.TB, timeout time.Duration, val []uint8) *oc.QualifiedUint8Slice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8Slice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8Slice {
+	t.Helper()
+	c := &oc.CollectionUint8Slice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp-set to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv4_DscpSetPath extracts the value of the leaf DscpSet from its parent oc.Qos_Classifier_Term_Conditions_Ipv4
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8Slice.
+func convertQos_Classifier_Term_Conditions_Ipv4_DscpSetPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedUint8Slice {
+	t.Helper()
+	qv := &oc.QualifiedUint8Slice{
+		Metadata: md,
+	}
+	val := parent.DscpSet
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/hop-limit to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv4_HopLimitPath extracts the value of the leaf HopLimit from its parent oc.Qos_Classifier_Term_Conditions_Ipv4
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertQos_Classifier_Term_Conditions_Ipv4_HopLimitPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.HopLimit
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv4_Protocol_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_UnionWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_UnionWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv4_Protocol_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/protocol to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv4_ProtocolPath extracts the value of the leaf Protocol from its parent oc.Qos_Classifier_Term_Conditions_Ipv4
+// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union.
+func convertQos_Classifier_Term_Conditions_Ipv4_ProtocolPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
+	t.Helper()
+	qv := &oc.QualifiedQos_Classifier_Term_Conditions_Ipv4_Protocol_Union{
+		Metadata: md,
+	}
+	val := parent.Protocol
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv4", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv4_SourceAddressPath extracts the value of the leaf SourceAddress from its parent oc.Qos_Classifier_Term_Conditions_Ipv4
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_Ipv4_SourceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv4) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SourceAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv6{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv6{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Classifier_Term_Conditions_Ipv6
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv6{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv6{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Classifier_Term_Conditions_Ipv6)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6Watcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_Ipv6Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv6{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6Path(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv6 {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv6{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6Path(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath extracts the value of the leaf DestinationAddress from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.DestinationAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath extracts the value of the leaf DestinationFlowLabel from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertQos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.DestinationFlowLabel
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_DscpPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_DscpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_DscpPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_DscpPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DscpPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DscpPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_DscpPath extracts the value of the leaf Dscp from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertQos_Classifier_Term_Conditions_Ipv6_DscpPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Dscp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Lookup(t testing.TB) *oc.QualifiedUint8Slice {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Get(t testing.TB) []uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8Slice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8Slice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPathAny) Get(t testing.TB) [][]uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8Slice {
+	t.Helper()
+	c := &oc.CollectionUint8Slice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	w := &oc.Uint8SliceWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Await(t testing.TB, timeout time.Duration, val []uint8) *oc.QualifiedUint8Slice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8Slice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8Slice {
+	t.Helper()
+	c := &oc.CollectionUint8Slice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8Slice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/dscp-set to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_DscpSetPath extracts the value of the leaf DscpSet from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8Slice.
+func convertQos_Classifier_Term_Conditions_Ipv6_DscpSetPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedUint8Slice {
+	t.Helper()
+	qv := &oc.QualifiedUint8Slice{
+		Metadata: md,
+	}
+	val := parent.DscpSet
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/hop-limit to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_HopLimitPath extracts the value of the leaf HopLimit from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertQos_Classifier_Term_Conditions_Ipv6_HopLimitPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.HopLimit
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv6_Protocol_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_UnionWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_UnionWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_Union) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_Ipv6_Protocol_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union) bool) *oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/protocol to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_ProtocolPath extracts the value of the leaf Protocol from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union.
+func convertQos_Classifier_Term_Conditions_Ipv6_ProtocolPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
+	t.Helper()
+	qv := &oc.QualifiedQos_Classifier_Term_Conditions_Ipv6_Protocol_Union{
+		Metadata: md,
+	}
+	val := parent.Protocol
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_SourceAddressPath extracts the value of the leaf SourceAddress from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_Ipv6_SourceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SourceAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_Ipv6", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv6", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label to the batch object.
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath extracts the value of the leaf SourceFlowLabel from its parent oc.Qos_Classifier_Term_Conditions_Ipv6
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertQos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_Ipv6) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.SourceFlowLabel
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedQos_Classifier_Term_Conditions_L2{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2PathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Classifier_Term_Conditions_L2
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedQos_Classifier_Term_Conditions_L2{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2PathAny) Get(t testing.TB) []*oc.Qos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Qos_Classifier_Term_Conditions_L2
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_L2{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedQos_Classifier_Term_Conditions_L2{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Qos_Classifier_Term_Conditions_L2)))
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool) *oc.Qos_Classifier_Term_Conditions_L2Watcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_L2Watcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, false, false)
+		return (&oc.QualifiedQos_Classifier_Term_Conditions_L2{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_L2)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool) *oc.Qos_Classifier_Term_Conditions_L2Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2Path(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Await(t testing.TB, timeout time.Duration, val *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedQos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2Path) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_L2 {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_L2{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2) bool) *oc.Qos_Classifier_Term_Conditions_L2Watcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2Path(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2 to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2PathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac-mask to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacMaskPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_L2_DestinationMacMaskPath extracts the value of the leaf DestinationMacMask from its parent oc.Qos_Classifier_Term_Conditions_L2
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_L2_DestinationMacMaskPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.DestinationMacMask
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_L2_DestinationMacPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_L2_DestinationMacPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2_DestinationMacPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_L2_DestinationMacPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_DestinationMacPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_DestinationMacPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/destination-mac to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_DestinationMacPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_L2_DestinationMacPath extracts the value of the leaf DestinationMac from its parent oc.Qos_Classifier_Term_Conditions_L2
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_L2_DestinationMacPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.DestinationMac
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_L2_EthertypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePathAny) Lookup(t testing.TB) []*oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_L2_EthertypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePathAny) Get(t testing.TB) []oc.Qos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Qos_Classifier_Term_Conditions_L2_Ethertype_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_L2_Ethertype_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2_EthertypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool) *oc.Qos_Classifier_Term_Conditions_L2_Ethertype_UnionWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_L2_Ethertype_UnionWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_L2_EthertypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool) *oc.Qos_Classifier_Term_Conditions_L2_Ethertype_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_EthertypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Await(t testing.TB, timeout time.Duration, val oc.Qos_Classifier_Term_Conditions_L2_Ethertype_Union) *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	c := &oc.CollectionQos_Classifier_Term_Conditions_L2_Ethertype_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union) bool) *oc.Qos_Classifier_Term_Conditions_L2_Ethertype_UnionWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_EthertypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/ethertype to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_EthertypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_L2_EthertypePath extracts the value of the leaf Ethertype from its parent oc.Qos_Classifier_Term_Conditions_L2
+// and combines the update with an existing Metadata to return a *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union.
+func convertQos_Classifier_Term_Conditions_L2_EthertypePath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union {
+	t.Helper()
+	qv := &oc.QualifiedQos_Classifier_Term_Conditions_L2_Ethertype_Union{
+		Metadata: md,
+	}
+	val := parent.Ethertype
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac-mask to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacMaskPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_L2_SourceMacMaskPath extracts the value of the leaf SourceMacMask from its parent oc.Qos_Classifier_Term_Conditions_L2
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_L2_SourceMacMaskPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SourceMacMask
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+	md, ok := oc.Lookup(t, n, "Qos_Classifier_Term_Conditions_L2", goStruct, true, false)
+	if ok {
+		return convertQos_Classifier_Term_Conditions_L2_SourceMacPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Qos_Classifier_Term_Conditions_L2{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertQos_Classifier_Term_Conditions_L2_SourceMacPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a ONCE subscription.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Qos_Classifier_Term_Conditions_L2_SourceMacPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Qos_Classifier_Term_Conditions_L2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_L2", gs, queryPath, true, false)
+		return convertQos_Classifier_Term_Conditions_L2_SourceMacPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_SourceMacPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Qos_Classifier_Term_Conditions_L2_SourceMacPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/l2/state/source-mac to the batch object.
+func (n *Qos_Classifier_Term_Conditions_L2_SourceMacPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertQos_Classifier_Term_Conditions_L2_SourceMacPath extracts the value of the leaf SourceMac from its parent oc.Qos_Classifier_Term_Conditions_L2
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertQos_Classifier_Term_Conditions_L2_SourceMacPath(t testing.TB, md *genutil.Metadata, parent *oc.Qos_Classifier_Term_Conditions_L2) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SourceMac
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

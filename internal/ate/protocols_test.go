@@ -25,7 +25,7 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-func clientWithTopoCfg(ifName string) *IxiaCfgClient {
+func clientWithTopoCfg(ifName string) *ixATE {
 	cfg := &ixconfig.Ixnetwork{
 		Topology: []*ixconfig.Topology{{
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -33,7 +33,7 @@ func clientWithTopoCfg(ifName string) *IxiaCfgClient {
 			}},
 		}},
 	}
-	return &IxiaCfgClient{
+	return &ixATE{
 		cfg: cfg,
 		intfs: map[string]*intf{
 			ifName: &intf{deviceGroup: cfg.Topology[0].DeviceGroup[0]},
@@ -292,7 +292,7 @@ func TestAddMACsecProtocol(t *testing.T) {
 func TestAddIpProtocols(t *testing.T) {
 	const ifName = "someIntf"
 
-	clientWithTopo := func(ifName string, hasMacSec bool) *IxiaCfgClient {
+	clientWithTopo := func(ifName string, hasMacSec bool) *ixATE {
 		eth := &ixconfig.TopologyEthernet{}
 		if hasMacSec {
 			eth.Macsec = []*ixconfig.TopologyMacsec{{}}
@@ -302,7 +302,7 @@ func TestAddIpProtocols(t *testing.T) {
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{Ethernet: []*ixconfig.TopologyEthernet{eth}}},
 			}},
 		}
-		return &IxiaCfgClient{
+		return &ixATE{
 			cfg: cfg,
 			intfs: map[string]*intf{
 				ifName: &intf{deviceGroup: cfg.Topology[0].DeviceGroup[0]},
@@ -445,13 +445,13 @@ func TestAddIpProtocols(t *testing.T) {
 func TestAddIPLoopbackProtocols(t *testing.T) {
 	const ifName = "someIntf"
 
-	clientWithTopo := func() *IxiaCfgClient {
+	clientWithTopo := func() *ixATE {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{}},
 			}},
 		}
-		return &IxiaCfgClient{
+		return &ixATE{
 			cfg: cfg,
 			intfs: map[string]*intf{
 				ifName: &intf{deviceGroup: cfg.Topology[0].DeviceGroup[0]},
@@ -667,7 +667,7 @@ func TestISISReachability(t *testing.T) {
 				SystemId: "xyz",
 			}},
 		},
-		wantErr: "could not decode system ID",
+		wantErr: "could not decode",
 	}, {
 		desc: "invalid TE Router ID",
 		isr: &opb.ISReachability{
@@ -1345,7 +1345,7 @@ func TestISISReachability(t *testing.T) {
 
 func TestAddBGPProtocols(t *testing.T) {
 	const ifName = "someIntf"
-	baseClient := func(withIPv4, withIPv6, withIPv4Loopback bool) *IxiaCfgClient {
+	baseClient := func(withIPv4, withIPv6, withIPv4Loopback bool) *ixATE {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -1368,7 +1368,7 @@ func TestAddBGPProtocols(t *testing.T) {
 			dg.Ipv4Loopback = []*ixconfig.TopologyIpv4Loopback{{}}
 			ifc.ipv4Loopback = dg.Ipv4Loopback[0]
 		}
-		return &IxiaCfgClient{
+		return &ixATE{
 			cfg:   cfg,
 			intfs: map[string]*intf{ifName: ifc},
 		}
@@ -2056,7 +2056,7 @@ func TestAddRSVPProtocols(t *testing.T) {
 		isrName = "isr"
 	)
 
-	clientWithTopo := func(hasIPv4, hasISISNetwGrp bool, numISISNodes int) *IxiaCfgClient {
+	clientWithTopo := func(hasIPv4, hasISISNetwGrp bool, numISISNodes int) *ixATE {
 		var ipv4 *ixconfig.TopologyIpv4
 		if hasIPv4 {
 			ipv4 = &ixconfig.TopologyIpv4{}
@@ -2071,7 +2071,7 @@ func TestAddRSVPProtocols(t *testing.T) {
 				},
 			}
 		}
-		return &IxiaCfgClient{
+		return &ixATE{
 			intfs: map[string]*intf{
 				ifName: &intf{
 					ipv4: ipv4,
@@ -2151,9 +2151,11 @@ func TestAddRSVPProtocols(t *testing.T) {
 				Address: ixconfig.MultivalueStrList("1.1.1.1", "2.2.2.2"),
 				Prefix:  ixconfig.MultivalueUintList(32, 31),
 				RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{{
-					Active:          ixconfig.MultivalueTrue(),
-					EnableP2PEgress: ixconfig.Bool(true),
-					IngressP2PLsps:  ixconfig.NumberUint32(0),
+					Name:              ixconfig.String("RSVP LSPs 0 for someIntf"),
+					Active:            ixconfig.MultivalueTrue(),
+					EnableP2PEgress:   ixconfig.Bool(true),
+					IngressP2PLsps:    ixconfig.NumberUint32(0),
+					RsvpP2PEgressLsps: &ixconfig.TopologyRsvpP2PEgressLsps{},
 					RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
 						Active: ixconfig.MultivalueFalse(),
 					},
@@ -2281,9 +2283,11 @@ func TestAddRSVPProtocols(t *testing.T) {
 				Address: ixconfig.MultivalueStrList("1.1.1.1", "2.2.2.2"),
 				Prefix:  ixconfig.MultivalueUintList(32, 31),
 				RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{{
-					Active:          ixconfig.MultivalueTrue(),
-					EnableP2PEgress: ixconfig.Bool(true),
-					IngressP2PLsps:  ixconfig.NumberUint32(2),
+					Name:              ixconfig.String("RSVP LSPs 0 for someIntf"),
+					Active:            ixconfig.MultivalueTrue(),
+					EnableP2PEgress:   ixconfig.Bool(true),
+					IngressP2PLsps:    ixconfig.NumberUint32(2),
+					RsvpP2PEgressLsps: &ixconfig.TopologyRsvpP2PEgressLsps{},
 					RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
 						Active:                ixconfig.MultivalueTrue(),
 						NumberOfEroSubObjects: ixconfig.NumberUint32(2),

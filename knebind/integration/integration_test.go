@@ -29,13 +29,38 @@ func TestMain(m *testing.M) {
 	ondatra.RunTests(m, kinit.Init)
 }
 
+func TestConfig(t *testing.T) {
+	dut := ondatra.DUT(t, "dut1")
+	const config = `
+	  interface Ethernet1
+	    no switchport
+	    ip address 1.1.1.1/24
+	  !
+	  interface Ethernet2
+	    no switchport
+	    ip address 2.2.2.1/24
+	  !
+	  ip routing
+	  !
+	  router bgp 1111
+	    no bgp enforce-first-as
+	    neighbor 1.1.1.2 remote-as 2222
+	    neighbor 2.2.2.2 remote-as 3333
+	  !`
+	dut.Config().New().WithAristaText(config).Push(t)
+}
+
 func TestGNMI(t *testing.T) {
 	dut1 := ondatra.DUT(t, "dut1")
 	dut2 := ondatra.DUT(t, "dut2")
 	sys1 := dut1.Telemetry().System().Lookup(t)
+	if !sys1.IsPresent() {
+		t.Fatalf("No System telemetry for %v", dut1)
+	}
 	sys2 := dut2.Telemetry().System().Lookup(t)
-	t.Logf("dut1 system: %v", sys1)
-	t.Logf("dut2 system: %v", sys2)
+	if !sys2.IsPresent() {
+		t.Fatalf("No System telemetry for %v", dut2)
+	}
 }
 
 func TestGRIBISample(t *testing.T) {

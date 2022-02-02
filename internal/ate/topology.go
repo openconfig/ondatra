@@ -25,7 +25,7 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-func (ix *IxiaCfgClient) addPorts(top *opb.Topology) error {
+func (ix *ixATE) addPorts(top *opb.Topology) error {
 	ports := make(map[string]bool)
 	portToLag := make(map[string]*opb.Lag)
 	for _, ol := range top.GetLags() {
@@ -76,23 +76,36 @@ func (ix *IxiaCfgClient) addPorts(top *opb.Topology) error {
 	return nil
 }
 
-func (ix *IxiaCfgClient) addLAGs(lags []*opb.Lag) {
+func (ix *ixATE) addLAGs(lags []*opb.Lag) error {
+	portToLag := make(map[string]*opb.Lag)
 	for _, ol := range lags {
 		lag := &ixconfig.Lag{
-			Name: ixconfig.String(fmt.Sprintf("%s/%s", ix.name, ol.GetName())),
+			Name:    ixconfig.String(fmt.Sprintf("%s/%s", ix.name, ol.GetName())),
+			LagMode: &ixconfig.LagLagMode{},
 			ProtocolStack: &ixconfig.LagProtocolStack{
 				Multiplier: ixconfig.NumberFloat64(1),
 				Enabled:    ixconfig.MultivalueBool(true),
-				Ethernet: []*ixconfig.LagEthernet{{
-					Multiplier: ixconfig.NumberFloat64(1),
-					Lagportlacp: []*ixconfig.LagLagportlacp{{
-						Multiplier: ixconfig.NumberFloat64(1),
-					}},
-				}},
+				Ethernet:   []*ixconfig.LagEthernet{{Multiplier: ixconfig.NumberFloat64(1)}},
 			},
 		}
+		if ol.GetLacp().GetEnabled() {
+			lag.LagMode.LagProtocol = ixconfig.MultivalueStr("lacp")
+			lag.ProtocolStack.Ethernet[0].Lagportlacp = []*ixconfig.LagLagportlacp{{
+				Multiplier: ixconfig.NumberFloat64(1),
+			}}
+		} else {
+			lag.LagMode.LagProtocol = ixconfig.MultivalueStr("staticlag")
+			lag.ProtocolStack.Ethernet[0].Lagportstaticlag = []*ixconfig.LagLagportstaticlag{{
+				Multiplier: ixconfig.NumberFloat64(1),
+			}}
+		}
+
 		var vports []*ixconfig.Vport
 		for _, p := range ol.GetPorts() {
+			if prevLag, ok := portToLag[p]; ok {
+				return fmt.Errorf("port %s belongs to multiple LAGs: %s and %s", p, prevLag.GetName(), ol.GetName())
+			}
+			portToLag[p] = ol
 			vport := ix.ports[p]
 			vports = append(vports, vport)
 			lag.Vports = append(lag.Vports, vport.XPath().String())
@@ -107,11 +120,12 @@ func (ix *IxiaCfgClient) addLAGs(lags []*opb.Lag) {
 	sort.Slice(ix.cfg.Lag, func(i int, j int) bool {
 		return lags[i].GetName() <= lags[j].GetName()
 	})
+	return nil
 }
 
 // addTopology adds an IxNetwork topology with ports assigned and device groups created with ethernet configuration.
 // Each interface config must apply to the same set of ports.
-func (ix *IxiaCfgClient) addTopology(ifs []*opb.InterfaceConfig) {
+func (ix *ixATE) addTopology(ifs []*opb.InterfaceConfig) {
 	// Add an empty topology to the config.
 	var name string
 	var link ixconfig.IxiaCfgNode

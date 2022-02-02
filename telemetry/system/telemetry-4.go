@@ -16,43 +16,502 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/nice/max-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_Nice_MaxTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server_Tacacs", goStruct, false, false)
+	goStruct := &oc.System_Cpu_Nice{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Nice", goStruct, true, false)
 	if ok {
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+		return convertSystem_Cpu_Nice_MaxTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/nice/max-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Nice_MaxTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Nice_MaxTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Nice{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Nice", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Nice_MaxTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a ONCE subscription.
+func (n *System_Cpu_Nice_MaxTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MaxTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Nice_MaxTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_Nice{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Nice", gs, queryPath, true, false)
+		return convertSystem_Cpu_Nice_MaxTimePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MaxTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MaxTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Nice_MaxTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/nice/max-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/max-time to the batch object.
+func (n *System_Cpu_Nice_MaxTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MaxTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/max-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MaxTimePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/max-time to the batch object.
+func (n *System_Cpu_Nice_MaxTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Nice_MaxTimePath extracts the value of the leaf MaxTime from its parent oc.System_Cpu_Nice
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_Nice_MaxTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Nice) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MaxTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/nice/min with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_Nice_MinPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Nice{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Nice", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_Nice_MinPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/nice/min with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Nice_MinPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/nice/min with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Nice_MinPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Nice{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Nice", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Nice_MinPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/nice/min with a ONCE subscription.
+func (n *System_Cpu_Nice_MinPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/min with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MinPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Nice_MinPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_Nice{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Nice", gs, queryPath, true, false)
+		return convertSystem_Cpu_Nice_MinPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/min with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MinPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MinPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/nice/min with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Nice_MinPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/nice/min failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/min to the batch object.
+func (n *System_Cpu_Nice_MinPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/min with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MinPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/min with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MinPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/min to the batch object.
+func (n *System_Cpu_Nice_MinPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Nice_MinPath extracts the value of the leaf Min from its parent oc.System_Cpu_Nice
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_Nice_MinPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Nice) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Min
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/nice/min-time with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_Nice_MinTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Nice{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Nice", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_Nice_MinTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/nice/min-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Nice_MinTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Nice_MinTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Nice{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Nice", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Nice_MinTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a ONCE subscription.
+func (n *System_Cpu_Nice_MinTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MinTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Nice_MinTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_Nice{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Nice", gs, queryPath, true, false)
+		return convertSystem_Cpu_Nice_MinTimePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MinTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MinTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Nice_MinTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/nice/min-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/min-time to the batch object.
+func (n *System_Cpu_Nice_MinTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Nice_MinTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/nice/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Nice_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Nice_MinTimePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/nice/min-time to the batch object.
+func (n *System_Cpu_Nice_MinTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Nice_MinTimePath extracts the value of the leaf MinTime from its parent oc.System_Cpu_Nice
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_Nice_MinTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Nice) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MinTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_SoftwareInterruptPath) Lookup(t testing.TB) *oc.QualifiedSystem_Cpu_SoftwareInterrupt {
+	t.Helper()
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Cpu_SoftwareInterrupt{
 			Metadata: md,
 		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_SoftwareInterruptPath) Get(t testing.TB) *oc.System_Cpu_SoftwareInterrupt {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_SoftwareInterruptPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Cpu_SoftwareInterrupt {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs
+	var data []*oc.QualifiedSystem_Cpu_SoftwareInterrupt
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", goStruct, queryPath, false, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+		qv := (&oc.QualifiedSystem_Cpu_SoftwareInterrupt{
 			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
@@ -60,1070 +519,1221 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Lookup(t testing.TB) []*oc
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Get(t testing.TB) []*oc.System_Aaa_ServerGroup_Server_Tacacs {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterruptPathAny) Get(t testing.TB) []*oc.System_Cpu_SoftwareInterrupt {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.System_Aaa_ServerGroup_Server_Tacacs
+	var data []*oc.System_Cpu_SoftwareInterrupt
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_SoftwareInterruptPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_SoftwareInterrupt {
 	t.Helper()
-	c := &oc.CollectionSystem_Aaa_ServerGroup_Server_Tacacs{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool {
+	c := &oc.CollectionSystem_Cpu_SoftwareInterrupt{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool {
 		copy, err := ygot.DeepCopy(v.Val(t))
 		if err != nil {
 			t.Fatal(err)
 		}
-		c.Data = append(c.Data, (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Cpu_SoftwareInterrupt{
 			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.System_Aaa_ServerGroup_Server_Tacacs)))
+		}).SetVal(copy.(*oc.System_Cpu_SoftwareInterrupt)))
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_TacacsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool) *oc.System_Aaa_ServerGroup_Server_TacacsWatcher {
+func watch_System_Cpu_SoftwareInterruptPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool) *oc.System_Cpu_SoftwareInterruptWatcher {
 	t.Helper()
-	w := &oc.System_Aaa_ServerGroup_Server_TacacsWatcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w := &oc.System_Cpu_SoftwareInterruptWatcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Cpu_SoftwareInterrupt{
 			Metadata: md,
 		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs)
+		val, ok := qualVal.(*oc.QualifiedSystem_Cpu_SoftwareInterrupt)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool) *oc.System_Aaa_ServerGroup_Server_TacacsWatcher {
+func (n *System_Cpu_SoftwareInterruptPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool) *oc.System_Cpu_SoftwareInterruptWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TacacsPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterruptPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Aaa_ServerGroup_Server_Tacacs) *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_SoftwareInterruptPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedSystem_Cpu_SoftwareInterrupt {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs to the batch object.
-func (n *System_Aaa_ServerGroup_Server_TacacsPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt to the batch object.
+func (n *System_Cpu_SoftwareInterruptPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Aaa_ServerGroup_Server_Tacacs {
+func (n *System_Cpu_SoftwareInterruptPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_SoftwareInterrupt {
 	t.Helper()
-	c := &oc.CollectionSystem_Aaa_ServerGroup_Server_Tacacs{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool {
+	c := &oc.CollectionSystem_Cpu_SoftwareInterrupt{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool) *oc.System_Aaa_ServerGroup_Server_TacacsWatcher {
+func (n *System_Cpu_SoftwareInterruptPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_SoftwareInterrupt) bool) *oc.System_Cpu_SoftwareInterruptWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TacacsPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterruptPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs to the batch object.
-func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt to the batch object.
+func (n *System_Cpu_SoftwareInterruptPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server_Tacacs", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_AvgPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedUint16{
-		Metadata: md,
-	}).SetVal(goStruct.GetPort())
+	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Get(t testing.TB) uint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint16
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_AvgPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Get(t testing.TB) []uint16 {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_AvgPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint16
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_Tacacs_PortPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func watch_System_Cpu_SoftwareInterrupt_AvgPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_AvgPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_PortPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_AvgPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/avg to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_AvgPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+func (n *System_Cpu_SoftwareInterrupt_AvgPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func (n *System_Cpu_SoftwareInterrupt_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_PortPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_AvgPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/avg to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_AvgPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath extracts the value of the leaf Port from its parent oc.System_Aaa_ServerGroup_Server_Tacacs
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server_Tacacs) *oc.QualifiedUint16 {
+// convertSystem_Cpu_SoftwareInterrupt_AvgPath extracts the value of the leaf Avg from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_SoftwareInterrupt_AvgPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedUint16{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.Port
+	val := parent.Avg
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server_Tacacs", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_InstantPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Get(t testing.TB) string {
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_InstantPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_InstantPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_InstantPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_SoftwareInterrupt_InstantPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_InstantPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_InstantPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/instant to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_InstantPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_InstantPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_InstantPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/instant to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_InstantPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath extracts the value of the leaf SecretKeyHashed from its parent oc.System_Aaa_ServerGroup_Server_Tacacs
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server_Tacacs) *oc.QualifiedString {
+// convertSystem_Cpu_SoftwareInterrupt_InstantPath extracts the value of the leaf Instant from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_SoftwareInterrupt_InstantPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.SecretKeyHashed
+	val := parent.Instant
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server_Tacacs", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_IntervalPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Get(t testing.TB) string {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_IntervalPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_IntervalPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_SoftwareInterrupt_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_IntervalPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_IntervalPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/interval to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_IntervalPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/interval to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath extracts the value of the leaf SecretKey from its parent oc.System_Aaa_ServerGroup_Server_Tacacs
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server_Tacacs) *oc.QualifiedString {
+// convertSystem_Cpu_SoftwareInterrupt_IntervalPath extracts the value of the leaf Interval from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_SoftwareInterrupt_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.SecretKey
+	val := parent.Interval
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server_Tacacs", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_MaxPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Get(t testing.TB) string {
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_MaxPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_MaxPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_MaxPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_SoftwareInterrupt_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_MaxPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MaxPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/max failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/max to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MaxPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_SoftwareInterrupt_MaxPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_SoftwareInterrupt_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MaxPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address to the batch object.
-func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/max to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MaxPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath extracts the value of the leaf SourceAddress from its parent oc.System_Aaa_ServerGroup_Server_Tacacs
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server_Tacacs) *oc.QualifiedString {
+// convertSystem_Cpu_SoftwareInterrupt_MaxPath extracts the value of the leaf Max from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_SoftwareInterrupt_MaxPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.SourceAddress
+	val := parent.Max
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup_Server{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_MaxTimePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Get(t testing.TB) uint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint16
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup_Server{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_MaxTimePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Get(t testing.TB) []uint16 {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint16
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_Server_TimeoutPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func watch_System_Cpu_SoftwareInterrupt_MaxTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.System_Aaa_ServerGroup_Server{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_MaxTimePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TimeoutPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MaxTimePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout to the batch object.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TimeoutPath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MaxTimePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout to the batch object.
-func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/max-time to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MaxTimePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_Server_TimeoutPath extracts the value of the leaf Timeout from its parent oc.System_Aaa_ServerGroup_Server
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server) *oc.QualifiedUint16 {
+// convertSystem_Cpu_SoftwareInterrupt_MaxTimePath extracts the value of the leaf MaxTime from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_SoftwareInterrupt_MaxTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedUint16{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.Timeout
+	val := parent.MaxTime
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/state/type with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_TypePath) Lookup(t testing.TB) *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, true, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return convertSystem_Aaa_ServerGroup_TypePath(t, md, goStruct)
+		return convertSystem_Cpu_SoftwareInterrupt_MinPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/state/type with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_TypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Aaa_ServerGroup_TypePath(t, md, goStruct)
+		qv := convertSystem_Cpu_SoftwareInterrupt_MinPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_TypePathAny) Get(t testing.TB) []oc.E_AaaTypes_AAA_SERVER_TYPE {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_MinPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.E_AaaTypes_AAA_SERVER_TYPE
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionE_AaaTypes_AAA_SERVER_TYPE{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Aaa_ServerGroup_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool) *oc.E_AaaTypes_AAA_SERVER_TYPEWatcher {
+func watch_System_Cpu_SoftwareInterrupt_MinPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.E_AaaTypes_AAA_SERVER_TYPEWatcher{}
-	gs := &oc.System_Aaa_ServerGroup{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_TypePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_MinPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool) *oc.E_AaaTypes_AAA_SERVER_TYPEWatcher {
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_TypePath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MinPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Aaa_ServerGroup_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_AaaTypes_AAA_SERVER_TYPE) *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/aaa/server-groups/server-group/state/type failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/min failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/state/type to the batch object.
-func (n *System_Aaa_ServerGroup_TypePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/min to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MinPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Aaa_ServerGroup_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AaaTypes_AAA_SERVER_TYPE {
+func (n *System_Cpu_SoftwareInterrupt_MinPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionE_AaaTypes_AAA_SERVER_TYPE{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Aaa_ServerGroup_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool) *oc.E_AaaTypes_AAA_SERVER_TYPEWatcher {
+func (n *System_Cpu_SoftwareInterrupt_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_TypePath(t, n, timeout, predicate)
+	return watch_System_Cpu_SoftwareInterrupt_MinPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/aaa/server-groups/server-group/state/type to the batch object.
-func (n *System_Aaa_ServerGroup_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/min to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MinPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Aaa_ServerGroup_TypePath extracts the value of the leaf Type from its parent oc.System_Aaa_ServerGroup
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE.
-func convertSystem_Aaa_ServerGroup_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup) *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE {
+// convertSystem_Cpu_SoftwareInterrupt_MinPath extracts the value of the leaf Min from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_SoftwareInterrupt_MinPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.Type
+	val := parent.Min
 	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
+		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/alarms/alarm with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_AlarmPath) Lookup(t testing.TB) *oc.QualifiedSystem_Alarm {
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.System_Alarm{}
-	md, ok := oc.Lookup(t, n, "System_Alarm", goStruct, false, false)
+	goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_SoftwareInterrupt", goStruct, true, false)
 	if ok {
-		return (&oc.QualifiedSystem_Alarm{
+		return convertSystem_Cpu_SoftwareInterrupt_MinTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_SoftwareInterrupt{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_SoftwareInterrupt", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_SoftwareInterrupt_MinTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a ONCE subscription.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_SoftwareInterrupt_MinTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_SoftwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_SoftwareInterrupt", gs, queryPath, true, false)
+		return convertSystem_Cpu_SoftwareInterrupt_MinTimePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_SoftwareInterrupt_MinTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_SoftwareInterrupt_MinTimePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/software-interrupt/min-time to the batch object.
+func (n *System_Cpu_SoftwareInterrupt_MinTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_SoftwareInterrupt_MinTimePath extracts the value of the leaf MinTime from its parent oc.System_Cpu_SoftwareInterrupt
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_SoftwareInterrupt_MinTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_SoftwareInterrupt) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MinTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_TotalPath) Lookup(t testing.TB) *oc.QualifiedSystem_Cpu_Total {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Cpu_Total{
 			Metadata: md,
 		}).SetVal(goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/alarms/alarm with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_AlarmPath) Get(t testing.TB) *oc.System_Alarm {
+func (n *System_Cpu_TotalPath) Get(t testing.TB) *oc.System_Cpu_Total {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/alarms/alarm with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_AlarmPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Alarm {
+func (n *System_Cpu_TotalPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Cpu_Total {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedSystem_Alarm
+	var data []*oc.QualifiedSystem_Cpu_Total
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Alarm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Alarm", goStruct, queryPath, false, false)
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := (&oc.QualifiedSystem_Alarm{
+		qv := (&oc.QualifiedSystem_Cpu_Total{
 			Metadata: md,
 		}).SetVal(goStruct)
 		data = append(data, qv)
@@ -1131,719 +1741,1941 @@ func (n *System_AlarmPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Alarm {
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/alarms/alarm with a ONCE subscription.
-func (n *System_AlarmPathAny) Get(t testing.TB) []*oc.System_Alarm {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total with a ONCE subscription.
+func (n *System_Cpu_TotalPathAny) Get(t testing.TB) []*oc.System_Cpu_Total {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []*oc.System_Alarm
+	var data []*oc.System_Cpu_Total
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_AlarmPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Alarm {
+func (n *System_Cpu_TotalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_Total {
 	t.Helper()
-	c := &oc.CollectionSystem_Alarm{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Alarm) bool {
+	c := &oc.CollectionSystem_Cpu_Total{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_Total) bool {
 		copy, err := ygot.DeepCopy(v.Val(t))
 		if err != nil {
 			t.Fatal(err)
 		}
-		c.Data = append(c.Data, (&oc.QualifiedSystem_Alarm{
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Cpu_Total{
 			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.System_Alarm)))
+		}).SetVal(copy.(*oc.System_Cpu_Total)))
 		return false
 	})
 	return c
 }
 
-func watch_System_AlarmPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Alarm) bool) *oc.System_AlarmWatcher {
+func watch_System_Cpu_TotalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_Total) bool) *oc.System_Cpu_TotalWatcher {
 	t.Helper()
-	w := &oc.System_AlarmWatcher{}
-	gs := &oc.System_Alarm{}
+	w := &oc.System_Cpu_TotalWatcher{}
+	gs := &oc.System_Cpu_Total{}
 	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Alarm{
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Cpu_Total{
 			Metadata: md,
 		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedSystem_Alarm)
+		val, ok := qualVal.(*oc.QualifiedSystem_Cpu_Total)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_AlarmPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Alarm) bool) *oc.System_AlarmWatcher {
+func (n *System_Cpu_TotalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_Total) bool) *oc.System_Cpu_TotalWatcher {
 	t.Helper()
-	return watch_System_AlarmPath(t, n, timeout, predicate)
+	return watch_System_Cpu_TotalPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/alarms/alarm with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_AlarmPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Alarm) *oc.QualifiedSystem_Alarm {
+func (n *System_Cpu_TotalPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Cpu_Total) *oc.QualifiedSystem_Cpu_Total {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Alarm) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Cpu_Total) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/alarms/alarm failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm to the batch object.
-func (n *System_AlarmPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total to the batch object.
+func (n *System_Cpu_TotalPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_AlarmPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Alarm {
+func (n *System_Cpu_TotalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_Total {
 	t.Helper()
-	c := &oc.CollectionSystem_Alarm{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Alarm) bool {
+	c := &oc.CollectionSystem_Cpu_Total{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_Total) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_AlarmPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Alarm) bool) *oc.System_AlarmWatcher {
+func (n *System_Cpu_TotalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_Total) bool) *oc.System_Cpu_TotalWatcher {
 	t.Helper()
-	return watch_System_AlarmPath(t, n, timeout, predicate)
+	return watch_System_Cpu_TotalPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm to the batch object.
-func (n *System_AlarmPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total to the batch object.
+func (n *System_Cpu_TotalPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Lookup fetches the value at /openconfig-system/system/alarms/alarm/state/id with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/avg with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Alarm_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_Total_AvgPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Alarm{}
-	md, ok := oc.Lookup(t, n, "System_Alarm", goStruct, true, false)
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
 	if ok {
-		return convertSystem_Alarm_IdPath(t, md, goStruct)
+		return convertSystem_Cpu_Total_AvgPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/alarms/alarm/state/id with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/avg with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Alarm_IdPath) Get(t testing.TB) string {
+func (n *System_Cpu_Total_AvgPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/alarms/alarm/state/id with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/avg with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Alarm_IdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_Total_AvgPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Alarm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Alarm", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Alarm_IdPath(t, md, goStruct)
+		qv := convertSystem_Cpu_Total_AvgPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/alarms/alarm/state/id with a ONCE subscription.
-func (n *System_Alarm_IdPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/avg with a ONCE subscription.
+func (n *System_Cpu_Total_AvgPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/avg with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_IdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_AvgPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Alarm_IdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_Total_AvgPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Alarm{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_Total{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_IdPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_AvgPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_IdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_AvgPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_IdPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_AvgPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/avg with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Alarm_IdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_Total_AvgPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/alarms/alarm/state/id failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/avg failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/id to the batch object.
-func (n *System_Alarm_IdPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/avg to the batch object.
+func (n *System_Cpu_Total_AvgPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/avg with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_IdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_AvgPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_IdPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_AvgPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/id to the batch object.
-func (n *System_Alarm_IdPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/avg to the batch object.
+func (n *System_Cpu_Total_AvgPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Alarm_IdPath extracts the value of the leaf Id from its parent oc.System_Alarm
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Alarm_IdPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Alarm) *oc.QualifiedString {
+// convertSystem_Cpu_Total_AvgPath extracts the value of the leaf Avg from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_Total_AvgPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.Id
+	val := parent.Avg
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/alarms/alarm/state/resource with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/instant with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Alarm_ResourcePath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_Total_InstantPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Alarm{}
-	md, ok := oc.Lookup(t, n, "System_Alarm", goStruct, true, false)
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
 	if ok {
-		return convertSystem_Alarm_ResourcePath(t, md, goStruct)
+		return convertSystem_Cpu_Total_InstantPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/alarms/alarm/state/resource with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/instant with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Alarm_ResourcePath) Get(t testing.TB) string {
+func (n *System_Cpu_Total_InstantPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/alarms/alarm/state/resource with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/instant with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Alarm_ResourcePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_Total_InstantPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Alarm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Alarm", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Alarm_ResourcePath(t, md, goStruct)
+		qv := convertSystem_Cpu_Total_InstantPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/alarms/alarm/state/resource with a ONCE subscription.
-func (n *System_Alarm_ResourcePathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/instant with a ONCE subscription.
+func (n *System_Cpu_Total_InstantPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/instant with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_ResourcePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_InstantPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Alarm_ResourcePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_Total_InstantPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Alarm{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_Total{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_ResourcePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_InstantPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_ResourcePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_InstantPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_ResourcePath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_InstantPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/instant with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Alarm_ResourcePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_Total_InstantPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/alarms/alarm/state/resource failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/instant failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/resource to the batch object.
-func (n *System_Alarm_ResourcePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/instant to the batch object.
+func (n *System_Cpu_Total_InstantPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/instant with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_ResourcePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_InstantPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_ResourcePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_ResourcePath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_InstantPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/resource to the batch object.
-func (n *System_Alarm_ResourcePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/instant to the batch object.
+func (n *System_Cpu_Total_InstantPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Alarm_ResourcePath extracts the value of the leaf Resource from its parent oc.System_Alarm
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Alarm_ResourcePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Alarm) *oc.QualifiedString {
+// convertSystem_Cpu_Total_InstantPath extracts the value of the leaf Instant from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_Total_InstantPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.Resource
+	val := parent.Instant
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/alarms/alarm/state/severity with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Alarm_SeverityPath) Lookup(t testing.TB) *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 	t.Helper()
-	goStruct := &oc.System_Alarm{}
-	md, ok := oc.Lookup(t, n, "System_Alarm", goStruct, true, false)
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
 	if ok {
-		return convertSystem_Alarm_SeverityPath(t, md, goStruct)
+		return convertSystem_Cpu_Total_IntervalPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/alarms/alarm/state/severity with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/interval with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Alarm_SeverityPath) Get(t testing.TB) oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/alarms/alarm/state/severity with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Alarm_SeverityPathAny) Lookup(t testing.TB) []*oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY
+	var data []*oc.QualifiedUint64
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Alarm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Alarm", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Alarm_SeverityPath(t, md, goStruct)
+		qv := convertSystem_Cpu_Total_IntervalPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/alarms/alarm/state/severity with a ONCE subscription.
-func (n *System_Alarm_SeverityPathAny) Get(t testing.TB) []oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/interval with a ONCE subscription.
+func (n *System_Cpu_Total_IntervalPathAny) Get(t testing.TB) []uint64 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY
+	var data []uint64
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_SeverityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Alarm_SeverityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool) *oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher {
+func watch_System_Cpu_Total_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	w := &oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher{}
-	gs := &oc.System_Alarm{}
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_Total{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_SeverityPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_IntervalPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)
+		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_SeverityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool) *oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher {
+func (n *System_Cpu_Total_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Alarm_SeverityPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_IntervalPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/interval with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Alarm_SeverityPath) Await(t testing.TB, timeout time.Duration, val oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/alarms/alarm/state/severity failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/interval failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/severity to the batch object.
-func (n *System_Alarm_SeverityPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/interval to the batch object.
+func (n *System_Cpu_Total_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_SeverityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+func (n *System_Cpu_Total_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
 	t.Helper()
-	c := &oc.CollectionE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool {
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_SeverityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool) *oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher {
+func (n *System_Cpu_Total_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Alarm_SeverityPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_IntervalPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/severity to the batch object.
-func (n *System_Alarm_SeverityPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/interval to the batch object.
+func (n *System_Cpu_Total_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Alarm_SeverityPath extracts the value of the leaf Severity from its parent oc.System_Alarm
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY.
-func convertSystem_Alarm_SeverityPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Alarm) *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
+// convertSystem_Cpu_Total_IntervalPath extracts the value of the leaf Interval from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_Total_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint64 {
 	t.Helper()
-	qv := &oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY{
+	qv := &oc.QualifiedUint64{
 		Metadata: md,
 	}
-	val := parent.Severity
+	val := parent.Interval
 	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
+		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-system/system/alarms/alarm/state/text with a ONCE subscription.
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/max with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *System_Alarm_TextPath) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *System_Cpu_Total_MaxPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
 	t.Helper()
-	goStruct := &oc.System_Alarm{}
-	md, ok := oc.Lookup(t, n, "System_Alarm", goStruct, true, false)
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
 	if ok {
-		return convertSystem_Alarm_TextPath(t, md, goStruct)
+		return convertSystem_Cpu_Total_MaxPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-system/system/alarms/alarm/state/text with a ONCE subscription,
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/max with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Alarm_TextPath) Get(t testing.TB) string {
+func (n *System_Cpu_Total_MaxPath) Get(t testing.TB) uint8 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-system/system/alarms/alarm/state/text with a ONCE subscription.
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/max with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *System_Alarm_TextPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *System_Cpu_Total_MaxPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedString
+	var data []*oc.QualifiedUint8
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Alarm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Alarm", goStruct, queryPath, true, false)
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertSystem_Alarm_TextPath(t, md, goStruct)
+		qv := convertSystem_Cpu_Total_MaxPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-system/system/alarms/alarm/state/text with a ONCE subscription.
-func (n *System_Alarm_TextPathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/max with a ONCE subscription.
+func (n *System_Cpu_Total_MaxPathAny) Get(t testing.TB) []uint8 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []string
+	var data []uint8
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/max with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_TextPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_MaxPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_System_Alarm_TextPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_System_Cpu_Total_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.System_Alarm{}
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_Total{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_TextPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_MaxPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
+		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_TextPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_MaxPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_TextPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_MaxPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription,
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/max with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *System_Alarm_TextPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *System_Cpu_Total_MaxPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-system/system/alarms/alarm/state/text failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/max failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/text to the batch object.
-func (n *System_Alarm_TextPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/max to the batch object.
+func (n *System_Cpu_Total_MaxPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/max with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *System_Alarm_TextPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *System_Cpu_Total_MaxPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
 	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *System_Alarm_TextPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *System_Cpu_Total_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Alarm_TextPath(t, n, timeout, predicate)
+	return watch_System_Cpu_Total_MaxPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-system/system/alarms/alarm/state/text to the batch object.
-func (n *System_Alarm_TextPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/max to the batch object.
+func (n *System_Cpu_Total_MaxPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertSystem_Alarm_TextPath extracts the value of the leaf Text from its parent oc.System_Alarm
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Alarm_TextPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Alarm) *oc.QualifiedString {
+// convertSystem_Cpu_Total_MaxPath extracts the value of the leaf Max from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_Total_MaxPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint8 {
 	t.Helper()
-	qv := &oc.QualifiedString{
+	qv := &oc.QualifiedUint8{
 		Metadata: md,
 	}
-	val := parent.Text
+	val := parent.Max
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/max-time with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_Total_MaxTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_Total_MaxTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/max-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Total_MaxTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Total_MaxTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Total_MaxTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a ONCE subscription.
+func (n *System_Cpu_Total_MaxTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MaxTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Total_MaxTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_Total{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_MaxTimePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MaxTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MaxTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/max-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Total_MaxTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/max-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/max-time to the batch object.
+func (n *System_Cpu_Total_MaxTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MaxTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/max-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MaxTimePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/max-time to the batch object.
+func (n *System_Cpu_Total_MaxTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Total_MaxTimePath extracts the value of the leaf MaxTime from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_Total_MaxTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MaxTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/min with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_Total_MinPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_Total_MinPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/min with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Total_MinPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/min with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Total_MinPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Total_MinPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/min with a ONCE subscription.
+func (n *System_Cpu_Total_MinPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/min with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MinPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Total_MinPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_Total{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_MinPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/min with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MinPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MinPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/min with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Total_MinPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/min failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/min to the batch object.
+func (n *System_Cpu_Total_MinPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/min with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MinPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/min with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MinPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/min to the batch object.
+func (n *System_Cpu_Total_MinPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Total_MinPath extracts the value of the leaf Min from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_Total_MinPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Min
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/total/min-time with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_Total_MinTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_Total{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_Total", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_Total_MinTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/total/min-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_Total_MinTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_Total_MinTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_Total{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_Total", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_Total_MinTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a ONCE subscription.
+func (n *System_Cpu_Total_MinTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MinTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_Total_MinTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_Total{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_Total", gs, queryPath, true, false)
+		return convertSystem_Cpu_Total_MinTimePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MinTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MinTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/total/min-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_Total_MinTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/total/min-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/min-time to the batch object.
+func (n *System_Cpu_Total_MinTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_Total_MinTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/total/min-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_Total_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_Total_MinTimePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/total/min-time to the batch object.
+func (n *System_Cpu_Total_MinTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_Total_MinTimePath extracts the value of the leaf MinTime from its parent oc.System_Cpu_Total
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_Total_MinTimePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_Total) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.MinTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/user with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_UserPath) Lookup(t testing.TB) *oc.QualifiedSystem_Cpu_User {
+	t.Helper()
+	goStruct := &oc.System_Cpu_User{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_User", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedSystem_Cpu_User{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/user with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_UserPath) Get(t testing.TB) *oc.System_Cpu_User {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/user with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_UserPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Cpu_User {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Cpu_User
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_User", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Cpu_User{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/user with a ONCE subscription.
+func (n *System_Cpu_UserPathAny) Get(t testing.TB) []*oc.System_Cpu_User {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Cpu_User
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_UserPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_User {
+	t.Helper()
+	c := &oc.CollectionSystem_Cpu_User{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_User) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedSystem_Cpu_User{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.System_Cpu_User)))
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_UserPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_User) bool) *oc.System_Cpu_UserWatcher {
+	t.Helper()
+	w := &oc.System_Cpu_UserWatcher{}
+	gs := &oc.System_Cpu_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_User", gs, queryPath, false, false)
+		return (&oc.QualifiedSystem_Cpu_User{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Cpu_User)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_UserPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_User) bool) *oc.System_Cpu_UserWatcher {
+	t.Helper()
+	return watch_System_Cpu_UserPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/user with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_UserPath) Await(t testing.TB, timeout time.Duration, val *oc.System_Cpu_User) *oc.QualifiedSystem_Cpu_User {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedSystem_Cpu_User) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/user failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user to the batch object.
+func (n *System_Cpu_UserPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_UserPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionSystem_Cpu_User {
+	t.Helper()
+	c := &oc.CollectionSystem_Cpu_User{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedSystem_Cpu_User) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_UserPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_User) bool) *oc.System_Cpu_UserWatcher {
+	t.Helper()
+	return watch_System_Cpu_UserPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user to the batch object.
+func (n *System_Cpu_UserPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/user/avg with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_User_AvgPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_User{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_User_AvgPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/user/avg with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_User_AvgPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/user/avg with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_User_AvgPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_User_AvgPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/user/avg with a ONCE subscription.
+func (n *System_Cpu_User_AvgPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/avg with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_AvgPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_User_AvgPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_User", gs, queryPath, true, false)
+		return convertSystem_Cpu_User_AvgPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/avg with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_AvgPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_AvgPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/user/avg with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_User_AvgPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/user/avg failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/avg to the batch object.
+func (n *System_Cpu_User_AvgPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/avg with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_AvgPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/avg with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_AvgPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/avg to the batch object.
+func (n *System_Cpu_User_AvgPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_User_AvgPath extracts the value of the leaf Avg from its parent oc.System_Cpu_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_User_AvgPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_User) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Avg
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/user/instant with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_User_InstantPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_User{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_User_InstantPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/user/instant with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_User_InstantPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/user/instant with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_User_InstantPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_User_InstantPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/user/instant with a ONCE subscription.
+func (n *System_Cpu_User_InstantPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/instant with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_InstantPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_User_InstantPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_User", gs, queryPath, true, false)
+		return convertSystem_Cpu_User_InstantPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/instant with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_InstantPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_InstantPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/user/instant with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_User_InstantPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/user/instant failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/instant to the batch object.
+func (n *System_Cpu_User_InstantPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/instant with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_InstantPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/instant with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_InstantPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/instant to the batch object.
+func (n *System_Cpu_User_InstantPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_User_InstantPath extracts the value of the leaf Instant from its parent oc.System_Cpu_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_User_InstantPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_User) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Instant
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/user/interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_User_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_User{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_User_IntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/user/interval with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_User_IntervalPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/user/interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_User_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_User_IntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/user/interval with a ONCE subscription.
+func (n *System_Cpu_User_IntervalPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/interval with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_User_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.System_Cpu_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_User", gs, queryPath, true, false)
+		return convertSystem_Cpu_User_IntervalPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/interval with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_IntervalPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/user/interval with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_User_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/user/interval failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/interval to the batch object.
+func (n *System_Cpu_User_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/interval with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/interval with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_IntervalPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/interval to the batch object.
+func (n *System_Cpu_User_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_User_IntervalPath extracts the value of the leaf Interval from its parent oc.System_Cpu_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertSystem_Cpu_User_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_User) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.Interval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/cpus/cpu/state/user/max with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Cpu_User_MaxPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.System_Cpu_User{}
+	md, ok := oc.Lookup(t, n, "System_Cpu_User", goStruct, true, false)
+	if ok {
+		return convertSystem_Cpu_User_MaxPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/cpus/cpu/state/user/max with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Cpu_User_MaxPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/cpus/cpu/state/user/max with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Cpu_User_MaxPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Cpu_User{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Cpu_User", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Cpu_User_MaxPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/cpus/cpu/state/user/max with a ONCE subscription.
+func (n *System_Cpu_User_MaxPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/max with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_MaxPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_System_Cpu_User_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.System_Cpu_User{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_User", gs, queryPath, true, false)
+		return convertSystem_Cpu_User_MaxPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/max with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_MaxPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_MaxPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-system/system/cpus/cpu/state/user/max with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *System_Cpu_User_MaxPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-system/system/cpus/cpu/state/user/max failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/max to the batch object.
+func (n *System_Cpu_User_MaxPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-system/system/cpus/cpu/state/user/max with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *System_Cpu_User_MaxPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/user/max with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *System_Cpu_User_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_System_Cpu_User_MaxPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-system/system/cpus/cpu/state/user/max to the batch object.
+func (n *System_Cpu_User_MaxPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertSystem_Cpu_User_MaxPath extracts the value of the leaf Max from its parent oc.System_Cpu_User
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertSystem_Cpu_User_MaxPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Cpu_User) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Max
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

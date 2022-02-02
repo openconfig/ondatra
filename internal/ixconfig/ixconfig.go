@@ -27,7 +27,6 @@ package ixconfig
 import (
 	"golang.org/x/net/context"
 	"encoding/json"
-	"errors"
 	"fmt"
 
 	"github.com/mohae/deepcopy"
@@ -35,7 +34,6 @@ import (
 )
 
 type ixSession interface {
-	Get(context.Context, string, interface{}) error
 	Config() config
 }
 
@@ -55,9 +53,9 @@ func (sw *sessionWrapper) Config() config {
 
 // Client implements an API for interacting with an Ixia session using a JSON-based config representation.
 type Client struct {
-	sess          ixSession
-	lastImported  *Ixnetwork
-	xPathToRestID map[string]string
+	sess         ixSession
+	lastImported *Ixnetwork
+	xPathToID    map[string]string
 }
 
 // New returns a new Ixia config Client for a specific session for the given Ixia controller connection.
@@ -70,13 +68,18 @@ func (c *Client) Session() *ixweb.Session {
 	return c.sess.(*sessionWrapper).Session
 }
 
-// GetNode GETs the config object at its REST ID path and unmarshals the result into the given interface.
-// Returns an error if the REST ID of the node has not been set before calling this function.
-func (c *Client) GetNode(ctx context.Context, cfgNode IxiaCfgNode, v interface{}) error {
-	if cfgNode.GetRestID() == "" {
-		return errors.New("no REST ID set for specified config object")
+// NodeID returns the updated ID for the specified node. Returns an error if the
+// node is not part of an imported config or the node ID has not been updated.
+func (c *Client) NodeID(node IxiaCfgNode) (string, error) {
+	xp := node.XPath()
+	if xp == nil {
+		return "", fmt.Errorf("node of type %T not yet imported", node)
 	}
-	return c.sess.Get(ctx, cfgNode.GetRestID(), v)
+	id, ok := c.xPathToID[xp.String()]
+	if !ok {
+		return "", fmt.Errorf("node at %q has no updated ID", xp)
+	}
+	return id, nil
 }
 
 // ExportConfig exports the current full configuration of the IxNetwork session.
@@ -100,8 +103,7 @@ func (c *Client) ExportConfig(ctx context.Context) (*Ixnetwork, error) {
 // you cannot remove a config node from a list using this function with overwrite set to 'false'.)
 // All XPaths in the config are updated before this function returns.
 func (c *Client) ImportConfig(ctx context.Context, cfg *Ixnetwork, node IxiaCfgNode, overwrite bool) error {
-	// Clear the cache of REST IDs for config objects.
-	c.xPathToRestID = map[string]string{}
+	c.xPathToID = map[string]string{}
 	cfg.updateAllXPaths()
 
 	jsonCfg, err := json.Marshal(node)
@@ -124,10 +126,8 @@ func (c *Client) LastImportedConfig() *Ixnetwork {
 	return deepcopy.Copy(c.lastImported).(*Ixnetwork)
 }
 
-// UpdateIDs updates recorded REST API IDs for the target nodes, assuming
-// they correspond with the last imported cfg object.
-// It first queries a cache of IDs updated since the last config push, and only
-// queries the IxNetwork REST API for objects without a cached ID.
+// UpdateIDs updates recorded REST IDs for the target nodes in the config.
+// If the ID for the node is already updated, this is a noop for that node.
 // This query can be expensive if used with many different types of objects.
 func (c *Client) UpdateIDs(ctx context.Context, cfg *Ixnetwork, nodes ...IxiaCfgNode) error {
 	// Update XPaths because they may be lost as *Ixnetwork config objects
@@ -136,32 +136,19 @@ func (c *Client) UpdateIDs(ctx context.Context, cfg *Ixnetwork, nodes ...IxiaCfg
 	// config subobject that was never imported.
 	cfg.updateAllXPaths()
 
-	xpathToNode := make(map[string]IxiaCfgNode)
+	var xPathsMissing []string
 	for _, n := range nodes {
 		xp := n.XPath().String()
-		if id := c.xPathToRestID[xp]; id == "" {
-			// If there is no cached ID, add this node to the query list.
-			xpathToNode[xp] = n
-		} else {
-			// Set the node's ID if present in the cache.
-			n.setRestID(id)
+		if _, ok := c.xPathToID[xp]; !ok {
+			xPathsMissing = append(xPathsMissing, xp)
 		}
 	}
-	if len(xpathToNode) == 0 {
-		return nil
-	}
-
-	var xpaths []string
-	for xp := range xpathToNode {
-		xpaths = append(xpaths, xp)
-	}
-	newIDs, err := c.sess.Config().QueryIDs(ctx, xpaths...)
+	newIDs, err := c.sess.Config().QueryIDs(ctx, xPathsMissing...)
 	if err != nil {
 		return err
 	}
 	for xp, id := range newIDs {
-		xpathToNode[xp].setRestID(id)
-		c.xPathToRestID[xp] = id
+		c.xPathToID[xp] = id
 	}
 	return nil
 }

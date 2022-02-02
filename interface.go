@@ -126,8 +126,8 @@ func (i *Interface) BGP() *BGP {
 }
 
 // AddRSVP adds an RSVP config to the interface.
-func (i *Interface) AddRSVP() *RSVP {
-	rpb := &opb.RsvpConfig{}
+func (i *Interface) AddRSVP(name string) *RSVP {
+	rpb := &opb.RsvpConfig{Name: name, InterfaceName: i.pb.Name}
 	i.pb.Rsvp = append(i.pb.Rsvp, rpb)
 	return &RSVP{pb: rpb}
 }

@@ -124,16 +124,26 @@ func TestAddTraffic(t *testing.T) {
 		ifName     = "someIntf"
 		lagIfName  = "lagIntf"
 		netGrpName = "someNetGrp"
+		rsvpName   = "someRSVPCfg"
 		flowName   = "someFlow"
 	)
 	intfEPs := []*opb.Flow_Endpoint{{InterfaceName: ifName}}
 	lagIntfEPs := []*opb.Flow_Endpoint{{InterfaceName: lagIfName}}
-	netwEPs := []*opb.Flow_Endpoint{{InterfaceName: ifName, NetworkName: netGrpName}}
+	netwEPs := []*opb.Flow_Endpoint{{
+		InterfaceName: ifName,
+		Generated:     &opb.Flow_Endpoint_NetworkName{NetworkName: netGrpName},
+	}}
+	lspEPs := []*opb.Flow_Endpoint{{
+		InterfaceName: ifName,
+		Generated:     &opb.Flow_Endpoint_RsvpName{RsvpName: rsvpName},
+	}}
 	vportEPs := []string{"/vport[1]/protocols"}
 	lagEPs := []string{"/lag[1]"}
 	devGrpEPs := []string{"/topology[1]/deviceGroup[1]"}
 	netGrpEPs := []string{"/topology[1]/deviceGroup[1]/networkGroup[1]"}
-	baseClient := func(hasNetGrp bool) *IxiaCfgClient {
+	egressLSPEPs := []string{"/topology[1]/deviceGroup[1]/networkGroup[2]/deviceGroup[1]/ipv4Loopback[1]/rsvpteLsps[1]/rsvpP2PEgressLsps"}
+	ingressLSPEPs := []string{"/topology[1]/deviceGroup[1]/networkGroup[2]/deviceGroup[1]/ipv4Loopback[1]/rsvpteLsps[1]/rsvpP2PIngressLsps"}
+	baseClient := func() *ixATE {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -147,19 +157,34 @@ func TestAddTraffic(t *testing.T) {
 			Vport: []*ixconfig.Vport{{Name: ixconfig.String("vport")}},
 			Lag:   []*ixconfig.Lag{{Name: ixconfig.String("lag")}},
 		}
-		var ng *ixconfig.TopologyNetworkGroup
-		if hasNetGrp {
-			ng = &ixconfig.TopologyNetworkGroup{Name: ixconfig.String(netGrpName)}
-			cfg.Topology[0].DeviceGroup[0].NetworkGroup = []*ixconfig.TopologyNetworkGroup{ng}
+		dg := cfg.Topology[0].DeviceGroup[0]
+		// Normal network group
+		ng := &ixconfig.TopologyNetworkGroup{Name: ixconfig.String(netGrpName)}
+		dg.NetworkGroup = append(dg.NetworkGroup, ng)
+		// RSVP configuration
+		rsvpLSP := &ixconfig.TopologyRsvpteLsps{
+			RsvpP2PEgressLsps:  &ixconfig.TopologyRsvpP2PEgressLsps{},
+			RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{},
 		}
+		rsvpNg := &ixconfig.TopologyNetworkGroup{
+			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				Ipv4Loopback: []*ixconfig.TopologyIpv4Loopback{{
+					RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{rsvpLSP},
+				}},
+			}},
+		}
+		dg.NetworkGroup = append(dg.NetworkGroup, rsvpNg)
 		updateXPaths(cfg)
-		return &IxiaCfgClient{
+		return &ixATE{
 			cfg: cfg,
 			intfs: map[string]*intf{
 				ifName: &intf{
-					deviceGroup: cfg.Topology[0].DeviceGroup[0],
+					deviceGroup: dg,
 					netToNetworkGroup: map[string]*ixconfig.TopologyNetworkGroup{
 						netGrpName: ng,
+					},
+					rsvpLSPs: map[string]*ixconfig.TopologyRsvpteLsps{
+						rsvpName: rsvpLSP,
 					},
 					link: cfg.Vport[0],
 				},
@@ -174,7 +199,6 @@ func TestAddTraffic(t *testing.T) {
 	tests := []struct {
 		desc                                    string
 		flow                                    *opb.Flow
-		cfgHasNetGrp                            bool
 		wantTrafficType                         trafficType
 		wantSrcEPs, wantDstEPs                  []string
 		wantStackCount                          int
@@ -270,7 +294,6 @@ func TestAddTraffic(t *testing.T) {
 			DstEndpoints: netwEPs,
 			Headers:      []*opb.Header{{Type: &opb.Header_Eth{&opb.EthernetHeader{}}}},
 		},
-		cfgHasNetGrp:    true,
 		wantTrafficType: ethTraffic,
 		wantSrcEPs:      netGrpEPs,
 		wantDstEPs:      netGrpEPs,
@@ -307,6 +330,33 @@ func TestAddTraffic(t *testing.T) {
 		wantSrcEPs:      devGrpEPs,
 		wantDstEPs:      devGrpEPs,
 		wantStackCount:  2,
+	}, {
+		desc: "non-IP lsp traffic flow",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: lspEPs,
+			DstEndpoints: lspEPs,
+			Headers:      []*opb.Header{{Type: &opb.Header_Eth{&opb.EthernetHeader{}}}},
+		},
+		wantErr: true,
+	}, {
+		desc: "lsp traffic flow",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: lspEPs,
+			DstEndpoints: lspEPs,
+			Headers: []*opb.Header{{
+				Type: &opb.Header_Eth{&opb.EthernetHeader{}},
+			}, {
+				Type: &opb.Header_Mpls{&opb.MplsHeader{}},
+			}, {
+				Type: &opb.Header_Ipv4{&opb.Ipv4Header{}},
+			}},
+		},
+		wantTrafficType: ipv4Traffic,
+		wantSrcEPs:      ingressLSPEPs,
+		wantDstEPs:      egressLSPEPs,
+		wantStackCount:  3,
 	}, {
 		desc: "attempted ingress tracking by endpoint for raw traffic flow",
 		flow: &opb.Flow{
@@ -465,7 +515,7 @@ func TestAddTraffic(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			c := baseClient(test.cfgHasNetGrp)
+			c := baseClient()
 			gotErr := c.addTraffic([]*opb.Flow{test.flow})
 			if (gotErr != nil) != test.wantErr {
 				t.Fatalf("addTraffic: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)

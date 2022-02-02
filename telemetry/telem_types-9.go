@@ -12,71 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedE_Vlan_Status is a E_Vlan_Status with a corresponding timestamp.
-type QualifiedE_Vlan_Status struct {
-	*genutil.Metadata
-	val     E_Vlan_Status // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Vlan_Status) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Vlan_Status sample, erroring out if not present.
-func (q *QualifiedE_Vlan_Status) Val(t testing.TB) E_Vlan_Status {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Vlan_Status sample.
-func (q *QualifiedE_Vlan_Status) SetVal(v E_Vlan_Status) *QualifiedE_Vlan_Status {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Vlan_Status) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Vlan_Status is a telemetry Collection whose Await method returns a slice of E_Vlan_Status samples.
-type CollectionE_Vlan_Status struct {
-	W    *E_Vlan_StatusWatcher
-	Data []*QualifiedE_Vlan_Status
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Vlan_Status) Await(t testing.TB) []*QualifiedE_Vlan_Status {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Vlan_StatusWatcher observes a stream of E_Vlan_Status samples.
-type E_Vlan_StatusWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Vlan_Status
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Vlan_StatusWatcher) Await(t testing.TB) (*QualifiedE_Vlan_Status, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedFlow_IngressTracking_MplsLabel_Union is a Flow_IngressTracking_MplsLabel_Union with a corresponding timestamp.
 type QualifiedFlow_IngressTracking_MplsLabel_Union struct {
 	*genutil.Metadata
@@ -333,6 +268,71 @@ type Interface_Subinterface_Vlan_VlanId_UnionWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Interface_Subinterface_Vlan_VlanId_UnionWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_VlanId_Union, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedKeychain_Tolerance_Union is a Keychain_Tolerance_Union with a corresponding timestamp.
+type QualifiedKeychain_Tolerance_Union struct {
+	*genutil.Metadata
+	val     Keychain_Tolerance_Union // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedKeychain_Tolerance_Union) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the Keychain_Tolerance_Union sample, erroring out if not present.
+func (q *QualifiedKeychain_Tolerance_Union) Val(t testing.TB) Keychain_Tolerance_Union {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the Keychain_Tolerance_Union sample.
+func (q *QualifiedKeychain_Tolerance_Union) SetVal(v Keychain_Tolerance_Union) *QualifiedKeychain_Tolerance_Union {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedKeychain_Tolerance_Union) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionKeychain_Tolerance_Union is a telemetry Collection whose Await method returns a slice of Keychain_Tolerance_Union samples.
+type CollectionKeychain_Tolerance_Union struct {
+	W    *Keychain_Tolerance_UnionWatcher
+	Data []*QualifiedKeychain_Tolerance_Union
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionKeychain_Tolerance_Union) Await(t testing.TB) []*QualifiedKeychain_Tolerance_Union {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Keychain_Tolerance_UnionWatcher observes a stream of Keychain_Tolerance_Union samples.
+type Keychain_Tolerance_UnionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedKeychain_Tolerance_Union
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Keychain_Tolerance_UnionWatcher) Await(t testing.TB) (*QualifiedKeychain_Tolerance_Union, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

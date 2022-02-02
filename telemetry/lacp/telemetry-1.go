@@ -16,205 +16,199 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/interval with a ONCE subscription.
+// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Lacp_Interface_IntervalPath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPath) Lookup(t testing.TB) *oc.QualifiedLacp_Interface_Member {
 	t.Helper()
-	goStruct := &oc.Lacp_Interface{}
-	md, ok := oc.Lookup(t, n, "Lacp_Interface", goStruct, true, false)
+	goStruct := &oc.Lacp_Interface_Member{}
+	md, ok := oc.Lookup(t, n, "Lacp_Interface_Member", goStruct, false, false)
 	if ok {
-		return convertLacp_Interface_IntervalPath(t, md, goStruct)
+		return (&oc.QualifiedLacp_Interface_Member{
+			Metadata: md,
+		}).SetVal(goStruct)
 	}
-	return (&oc.QualifiedE_Lacp_LacpPeriodType{
-		Metadata: md,
-	}).SetVal(goStruct.GetInterval())
+	return nil
 }
 
-// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/interval with a ONCE subscription,
+// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Lacp_Interface_IntervalPath) Get(t testing.TB) oc.E_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPath) Get(t testing.TB) *oc.Lacp_Interface_Member {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a ONCE subscription.
+// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Lacp_Interface_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedE_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPathAny) Lookup(t testing.TB) []*oc.QualifiedLacp_Interface_Member {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedE_Lacp_LacpPeriodType
+	var data []*oc.QualifiedLacp_Interface_Member
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Lacp_Interface{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface", goStruct, queryPath, true, false)
+		goStruct := &oc.Lacp_Interface_Member{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface_Member", goStruct, queryPath, false, false)
 		if !ok {
 			continue
 		}
-		qv := convertLacp_Interface_IntervalPath(t, md, goStruct)
+		qv := (&oc.QualifiedLacp_Interface_Member{
+			Metadata: md,
+		}).SetVal(goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a ONCE subscription.
-func (n *Lacp_Interface_IntervalPathAny) Get(t testing.TB) []oc.E_Lacp_LacpPeriodType {
+// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a ONCE subscription.
+func (n *Lacp_Interface_MemberPathAny) Get(t testing.TB) []*oc.Lacp_Interface_Member {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []oc.E_Lacp_LacpPeriodType
+	var data []*oc.Lacp_Interface_Member
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Lacp_Interface_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionLacp_Interface_Member {
 	t.Helper()
-	c := &oc.CollectionE_Lacp_LacpPeriodType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Lacp_LacpPeriodType) bool {
-		c.Data = append(c.Data, v)
+	c := &oc.CollectionLacp_Interface_Member{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLacp_Interface_Member) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedLacp_Interface_Member{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Lacp_Interface_Member)))
 		return false
 	})
 	return c
 }
 
-func watch_Lacp_Interface_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpPeriodType) bool) *oc.E_Lacp_LacpPeriodTypeWatcher {
+func watch_Lacp_Interface_MemberPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLacp_Interface_Member) bool) *oc.Lacp_Interface_MemberWatcher {
 	t.Helper()
-	w := &oc.E_Lacp_LacpPeriodTypeWatcher{}
-	gs := &oc.Lacp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w := &oc.Lacp_Interface_MemberWatcher{}
+	gs := &oc.Lacp_Interface_Member{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface", gs, queryPath, true, false)
-		return convertLacp_Interface_IntervalPath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member", gs, queryPath, false, false)
+		return (&oc.QualifiedLacp_Interface_Member{
+			Metadata: md,
+		}).SetVal(gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpPeriodType)
+		val, ok := qualVal.(*oc.QualifiedLacp_Interface_Member)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Lacp_Interface_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpPeriodType) bool) *oc.E_Lacp_LacpPeriodTypeWatcher {
+func (n *Lacp_Interface_MemberPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLacp_Interface_Member) bool) *oc.Lacp_Interface_MemberWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_IntervalPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_MemberPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription,
+// Await observes values at /openconfig-lacp/lacp/interfaces/interface/members/member with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Lacp_Interface_IntervalPath) Await(t testing.TB, timeout time.Duration, val oc.E_Lacp_LacpPeriodType) *oc.QualifiedE_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPath) Await(t testing.TB, timeout time.Duration, val *oc.Lacp_Interface_Member) *oc.QualifiedLacp_Interface_Member {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Lacp_LacpPeriodType) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedLacp_Interface_Member) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/state/interval failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/members/member failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-lacp/lacp/interfaces/interface/state/interval to the batch object.
-func (n *Lacp_Interface_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member to the batch object.
+func (n *Lacp_Interface_MemberPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Lacp_Interface_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpPeriodType {
+func (n *Lacp_Interface_MemberPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionLacp_Interface_Member {
 	t.Helper()
-	c := &oc.CollectionE_Lacp_LacpPeriodType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Lacp_LacpPeriodType) bool {
+	c := &oc.CollectionLacp_Interface_Member{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedLacp_Interface_Member) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Lacp_Interface_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpPeriodType) bool) *oc.E_Lacp_LacpPeriodTypeWatcher {
+func (n *Lacp_Interface_MemberPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLacp_Interface_Member) bool) *oc.Lacp_Interface_MemberWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_IntervalPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_MemberPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-lacp/lacp/interfaces/interface/state/interval to the batch object.
-func (n *Lacp_Interface_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member to the batch object.
+func (n *Lacp_Interface_MemberPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertLacp_Interface_IntervalPath extracts the value of the leaf Interval from its parent oc.Lacp_Interface
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Lacp_LacpPeriodType.
-func convertLacp_Interface_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.Lacp_Interface) *oc.QualifiedE_Lacp_LacpPeriodType {
-	t.Helper()
-	qv := &oc.QualifiedE_Lacp_LacpPeriodType{
-		Metadata: md,
-	}
-	val := parent.Interval
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a ONCE subscription.
+// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Lacp_Interface_LacpModePath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_LacpActivityType {
 	t.Helper()
-	goStruct := &oc.Lacp_Interface{}
-	md, ok := oc.Lookup(t, n, "Lacp_Interface", goStruct, true, false)
+	goStruct := &oc.Lacp_Interface_Member{}
+	md, ok := oc.Lookup(t, n, "Lacp_Interface_Member", goStruct, true, false)
 	if ok {
-		return convertLacp_Interface_LacpModePath(t, md, goStruct)
+		return convertLacp_Interface_Member_ActivityPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedE_Lacp_LacpActivityType{
-		Metadata: md,
-	}).SetVal(goStruct.GetLacpMode())
+	return nil
 }
 
-// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a ONCE subscription,
+// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Lacp_Interface_LacpModePath) Get(t testing.TB) oc.E_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPath) Get(t testing.TB) oc.E_Lacp_LacpActivityType {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a ONCE subscription.
+// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Lacp_Interface_LacpModePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPathAny) Lookup(t testing.TB) []*oc.QualifiedE_Lacp_LacpActivityType {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
 	var data []*oc.QualifiedE_Lacp_LacpActivityType
 	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Lacp_Interface{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface", goStruct, queryPath, true, false)
+		goStruct := &oc.Lacp_Interface_Member{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface_Member", goStruct, queryPath, true, false)
 		if !ok {
 			continue
 		}
-		qv := convertLacp_Interface_LacpModePath(t, md, goStruct)
+		qv := convertLacp_Interface_Member_ActivityPath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a ONCE subscription.
-func (n *Lacp_Interface_LacpModePathAny) Get(t testing.TB) []oc.E_Lacp_LacpActivityType {
+// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a ONCE subscription.
+func (n *Lacp_Interface_Member_ActivityPathAny) Get(t testing.TB) []oc.E_Lacp_LacpActivityType {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []oc.E_Lacp_LacpActivityType
@@ -224,9 +218,9 @@ func (n *Lacp_Interface_LacpModePathAny) Get(t testing.TB) []oc.E_Lacp_LacpActiv
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Lacp_Interface_LacpModePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpActivityType {
 	t.Helper()
 	c := &oc.CollectionE_Lacp_LacpActivityType{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Lacp_LacpActivityType) bool {
@@ -236,14 +230,14 @@ func (n *Lacp_Interface_LacpModePath) Collect(t testing.TB, duration time.Durati
 	return c
 }
 
-func watch_Lacp_Interface_LacpModePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
+func watch_Lacp_Interface_Member_ActivityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
 	t.Helper()
 	w := &oc.E_Lacp_LacpActivityTypeWatcher{}
-	gs := &oc.Lacp_Interface{}
+	gs := &oc.Lacp_Interface_Member{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface", gs, queryPath, true, false)
-		return convertLacp_Interface_LacpModePath(t, md, gs), nil
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member", gs, queryPath, true, false)
+		return convertLacp_Interface_Member_ActivityPath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpActivityType)
 		w.LastVal = val
@@ -252,41 +246,41 @@ func watch_Lacp_Interface_LacpModePath(t testing.TB, n ygot.PathStruct, duration
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Lacp_Interface_LacpModePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
+func (n *Lacp_Interface_Member_ActivityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_LacpModePath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_ActivityPath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription,
+// Await observes values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Lacp_Interface_LacpModePath) Await(t testing.TB, timeout time.Duration, val oc.E_Lacp_LacpActivityType) *oc.QualifiedE_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPath) Await(t testing.TB, timeout time.Duration, val oc.E_Lacp_LacpActivityType) *oc.QualifiedE_Lacp_LacpActivityType {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Lacp_LacpActivityType) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode to the batch object.
-func (n *Lacp_Interface_LacpModePath) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity to the batch object.
+func (n *Lacp_Interface_Member_ActivityPath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Lacp_Interface_LacpModePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpActivityType {
+func (n *Lacp_Interface_Member_ActivityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Lacp_LacpActivityType {
 	t.Helper()
 	c := &oc.CollectionE_Lacp_LacpActivityType{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Lacp_LacpActivityType) bool {
@@ -296,32 +290,338 @@ func (n *Lacp_Interface_LacpModePathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Lacp_Interface_LacpModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
+func (n *Lacp_Interface_Member_ActivityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_LacpModePath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_ActivityPath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode to the batch object.
-func (n *Lacp_Interface_LacpModePathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/activity to the batch object.
+func (n *Lacp_Interface_Member_ActivityPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertLacp_Interface_LacpModePath extracts the value of the leaf LacpMode from its parent oc.Lacp_Interface
+// convertLacp_Interface_Member_ActivityPath extracts the value of the leaf Activity from its parent oc.Lacp_Interface_Member
 // and combines the update with an existing Metadata to return a *oc.QualifiedE_Lacp_LacpActivityType.
-func convertLacp_Interface_LacpModePath(t testing.TB, md *genutil.Metadata, parent *oc.Lacp_Interface) *oc.QualifiedE_Lacp_LacpActivityType {
+func convertLacp_Interface_Member_ActivityPath(t testing.TB, md *genutil.Metadata, parent *oc.Lacp_Interface_Member) *oc.QualifiedE_Lacp_LacpActivityType {
 	t.Helper()
 	qv := &oc.QualifiedE_Lacp_LacpActivityType{
 		Metadata: md,
 	}
-	val := parent.LacpMode
+	val := parent.Activity
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Lacp_Interface_Member_AggregatablePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Lacp_Interface_Member{}
+	md, ok := oc.Lookup(t, n, "Lacp_Interface_Member", goStruct, true, false)
+	if ok {
+		return convertLacp_Interface_Member_AggregatablePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Lacp_Interface_Member_AggregatablePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Lacp_Interface_Member_AggregatablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Lacp_Interface_Member{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface_Member", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertLacp_Interface_Member_AggregatablePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a ONCE subscription.
+func (n *Lacp_Interface_Member_AggregatablePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Lacp_Interface_Member_AggregatablePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Lacp_Interface_Member_AggregatablePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Lacp_Interface_Member{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member", gs, queryPath, true, false)
+		return convertLacp_Interface_Member_AggregatablePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Lacp_Interface_Member_AggregatablePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Lacp_Interface_Member_AggregatablePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Lacp_Interface_Member_AggregatablePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable to the batch object.
+func (n *Lacp_Interface_Member_AggregatablePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Lacp_Interface_Member_AggregatablePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Lacp_Interface_Member_AggregatablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Lacp_Interface_Member_AggregatablePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/aggregatable to the batch object.
+func (n *Lacp_Interface_Member_AggregatablePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertLacp_Interface_Member_AggregatablePath extracts the value of the leaf Aggregatable from its parent oc.Lacp_Interface_Member
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertLacp_Interface_Member_AggregatablePath(t testing.TB, md *genutil.Metadata, parent *oc.Lacp_Interface_Member) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Aggregatable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Lacp_Interface_Member_CollectingPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Lacp_Interface_Member{}
+	md, ok := oc.Lookup(t, n, "Lacp_Interface_Member", goStruct, true, false)
+	if ok {
+		return convertLacp_Interface_Member_CollectingPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Lacp_Interface_Member_CollectingPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Lacp_Interface_Member_CollectingPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Lacp_Interface_Member{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Lacp_Interface_Member", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertLacp_Interface_Member_CollectingPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a ONCE subscription.
+func (n *Lacp_Interface_Member_CollectingPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Lacp_Interface_Member_CollectingPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Lacp_Interface_Member_CollectingPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Lacp_Interface_Member{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member", gs, queryPath, true, false)
+		return convertLacp_Interface_Member_CollectingPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Lacp_Interface_Member_CollectingPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Lacp_Interface_Member_CollectingPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Lacp_Interface_Member_CollectingPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting to the batch object.
+func (n *Lacp_Interface_Member_CollectingPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Lacp_Interface_Member_CollectingPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Lacp_Interface_Member_CollectingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Lacp_Interface_Member_CollectingPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/collecting to the batch object.
+func (n *Lacp_Interface_Member_CollectingPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertLacp_Interface_Member_CollectingPath extracts the value of the leaf Collecting from its parent oc.Lacp_Interface_Member
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertLacp_Interface_Member_CollectingPath(t testing.TB, md *genutil.Metadata, parent *oc.Lacp_Interface_Member) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Collecting
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
 	}
 	return qv
 }

@@ -83,9 +83,13 @@ func (at *ATETopology) Interfaces() map[string]*Interface {
 }
 
 // AddLAG adds and returns a new LAG.
+// By default the LAG has LACP enabled.
 func (at *ATETopology) AddLAG() *LAG {
 	lagCount = lagCount + 1
-	lpb := &opb.Lag{Name: fmt.Sprintf("lag%d", lagCount)}
+	lpb := &opb.Lag{
+		Name: fmt.Sprintf("lag%d", lagCount),
+		Lacp: &opb.Lag_Lacp{Enabled: true},
+	}
 	at.top.Lags = append(at.top.Lags, lpb)
 	return &LAG{pb: lpb}
 }

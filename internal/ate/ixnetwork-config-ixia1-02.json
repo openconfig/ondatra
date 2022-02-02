@@ -25,7 +25,8 @@
                   }
                ],
                "multiplier": 1,
-               "name": "Device Group on intf"
+               "name": "Device Group on intf",
+               "xpath": "/topology[1]/deviceGroup[1]"
             }
          ],
          "name": "Topology on 12/1",

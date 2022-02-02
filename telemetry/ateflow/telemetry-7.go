@@ -16,335 +16,182 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a ONCE subscription.
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Flow_IngressTracking_Counters{}
-	md, ok := oc.Lookup(t, n, "Flow_IngressTracking_Counters", goStruct, true, false)
-	if ok {
-		return convertFlow_IngressTracking_Counters_OutOctetsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Flow_IngressTracking_Counters_OutOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Flow_IngressTracking_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertFlow_IngressTracking_Counters_OutOctetsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a ONCE subscription.
-func (n *Flow_IngressTracking_Counters_OutOctetsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Flow_IngressTracking_Counters_OutOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Flow_IngressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking_Counters", gs, queryPath, true, false)
-		return convertFlow_IngressTracking_Counters_OutOctetsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Flow_IngressTracking_Counters_OutOctetsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets to the batch object.
-func (n *Flow_IngressTracking_Counters_OutOctetsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_Counters_OutOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Flow_IngressTracking_Counters_OutOctetsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-octets to the batch object.
-func (n *Flow_IngressTracking_Counters_OutOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertFlow_IngressTracking_Counters_OutOctetsPath extracts the value of the leaf OutOctets from its parent oc.Flow_IngressTracking_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertFlow_IngressTracking_Counters_OutOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OutOctets
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Flow_IngressTracking_Counters{}
-	md, ok := oc.Lookup(t, n, "Flow_IngressTracking_Counters", goStruct, true, false)
-	if ok {
-		return convertFlow_IngressTracking_Counters_OutPktsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Flow_IngressTracking_Counters_OutPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Flow_IngressTracking_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertFlow_IngressTracking_Counters_OutPktsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a ONCE subscription.
-func (n *Flow_IngressTracking_Counters_OutPktsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Flow_IngressTracking_Counters_OutPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Flow_IngressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking_Counters", gs, queryPath, true, false)
-		return convertFlow_IngressTracking_Counters_OutPktsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Flow_IngressTracking_Counters_OutPktsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts to the batch object.
-func (n *Flow_IngressTracking_Counters_OutPktsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_Counters_OutPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_Counters_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Flow_IngressTracking_Counters_OutPktsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/counters/out-pkts to the batch object.
-func (n *Flow_IngressTracking_Counters_OutPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertFlow_IngressTracking_Counters_OutPktsPath extracts the value of the leaf OutPkts from its parent oc.Flow_IngressTracking_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertFlow_IngressTracking_Counters_OutPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OutPkts
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Flow_IngressTracking_DstIpv4Path) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *Flow_IngressTracking_MplsLabelPath) Lookup(t testing.TB) *oc.QualifiedFlow_IngressTracking_MplsLabel_Union {
 	t.Helper()
 	goStruct := &oc.Flow_IngressTracking{}
 	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
 	if ok {
-		return convertFlow_IngressTracking_DstIpv4Path(t, md, goStruct)
+		return convertFlow_IngressTracking_MplsLabelPath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a ONCE subscription,
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Flow_IngressTracking_DstIpv4Path) Get(t testing.TB) string {
+func (n *Flow_IngressTracking_MplsLabelPath) Get(t testing.TB) oc.Flow_IngressTracking_MplsLabel_Union {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a ONCE subscription.
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Flow_IngressTracking_DstIpv4PathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Flow_IngressTracking_MplsLabelPathAny) Lookup(t testing.TB) []*oc.QualifiedFlow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFlow_IngressTracking_MplsLabel_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_IngressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_IngressTracking_MplsLabelPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a ONCE subscription.
+func (n *Flow_IngressTracking_MplsLabelPathAny) Get(t testing.TB) []oc.Flow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Flow_IngressTracking_MplsLabel_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_MplsLabelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFlow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	c := &oc.CollectionFlow_IngressTracking_MplsLabel_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_IngressTracking_MplsLabelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool) *oc.Flow_IngressTracking_MplsLabel_UnionWatcher {
+	t.Helper()
+	w := &oc.Flow_IngressTracking_MplsLabel_UnionWatcher{}
+	gs := &oc.Flow_IngressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
+		return convertFlow_IngressTracking_MplsLabelPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFlow_IngressTracking_MplsLabel_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_MplsLabelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool) *oc.Flow_IngressTracking_MplsLabel_UnionWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_MplsLabelPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_IngressTracking_MplsLabelPath) Await(t testing.TB, timeout time.Duration, val oc.Flow_IngressTracking_MplsLabel_Union) *oc.QualifiedFlow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label to the batch object.
+func (n *Flow_IngressTracking_MplsLabelPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_MplsLabelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFlow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	c := &oc.CollectionFlow_IngressTracking_MplsLabel_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_MplsLabelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFlow_IngressTracking_MplsLabel_Union) bool) *oc.Flow_IngressTracking_MplsLabel_UnionWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_MplsLabelPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label to the batch object.
+func (n *Flow_IngressTracking_MplsLabelPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_IngressTracking_MplsLabelPath extracts the value of the leaf MplsLabel from its parent oc.Flow_IngressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedFlow_IngressTracking_MplsLabel_Union.
+func convertFlow_IngressTracking_MplsLabelPath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedFlow_IngressTracking_MplsLabel_Union {
+	t.Helper()
+	qv := &oc.QualifiedFlow_IngressTracking_MplsLabel_Union{
+		Metadata: md,
+	}
+	val := parent.MplsLabel
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_IngressTracking_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Flow_IngressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_IngressTracking_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_IngressTracking_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_IngressTracking_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
@@ -356,14 +203,14 @@ func (n *Flow_IngressTracking_DstIpv4PathAny) Lookup(t testing.TB) []*oc.Qualifi
 		if !ok {
 			continue
 		}
-		qv := convertFlow_IngressTracking_DstIpv4Path(t, md, goStruct)
+		qv := convertFlow_IngressTracking_NamePath(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a ONCE subscription.
-func (n *Flow_IngressTracking_DstIpv4PathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a ONCE subscription.
+func (n *Flow_IngressTracking_NamePathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -373,9 +220,9 @@ func (n *Flow_IngressTracking_DstIpv4PathAny) Get(t testing.TB) []string {
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_DstIpv4Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Flow_IngressTracking_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -385,14 +232,14 @@ func (n *Flow_IngressTracking_DstIpv4Path) Collect(t testing.TB, duration time.D
 	return c
 }
 
-func watch_Flow_IngressTracking_DstIpv4Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Flow_IngressTracking_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow_IngressTracking{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
-		return convertFlow_IngressTracking_DstIpv4Path(t, md, gs), nil
+		return convertFlow_IngressTracking_NamePath(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -401,41 +248,41 @@ func watch_Flow_IngressTracking_DstIpv4Path(t testing.TB, n ygot.PathStruct, dur
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_DstIpv4Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Flow_IngressTracking_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_IngressTracking_DstIpv4Path(t, n, timeout, predicate)
+	return watch_Flow_IngressTracking_NamePath(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a STREAM subscription,
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Flow_IngressTracking_DstIpv4Path) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Flow_IngressTracking_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 to the batch object.
-func (n *Flow_IngressTracking_DstIpv4Path) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name to the batch object.
+func (n *Flow_IngressTracking_NamePath) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_DstIpv4PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Flow_IngressTracking_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -445,59 +292,365 @@ func (n *Flow_IngressTracking_DstIpv4PathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_DstIpv4PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Flow_IngressTracking_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_IngressTracking_DstIpv4Path(t, n, timeout, predicate)
+	return watch_Flow_IngressTracking_NamePath(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv4 to the batch object.
-func (n *Flow_IngressTracking_DstIpv4PathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/name to the batch object.
+func (n *Flow_IngressTracking_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertFlow_IngressTracking_DstIpv4Path extracts the value of the leaf DstIpv4 from its parent oc.Flow_IngressTracking
+// convertFlow_IngressTracking_NamePath extracts the value of the leaf Name from its parent oc.Flow_IngressTracking
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertFlow_IngressTracking_DstIpv4Path(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
+func convertFlow_IngressTracking_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.DstIpv4
+	val := parent.Name
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a ONCE subscription.
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *Flow_IngressTracking_DstIpv6Path) Lookup(t testing.TB) *oc.QualifiedString {
+func (n *Flow_IngressTracking_OutFrameRatePath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
 	t.Helper()
 	goStruct := &oc.Flow_IngressTracking{}
 	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
 	if ok {
-		return convertFlow_IngressTracking_DstIpv6Path(t, md, goStruct)
+		return convertFlow_IngressTracking_OutFrameRatePath(t, md, goStruct)
 	}
 	return nil
 }
 
-// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a ONCE subscription,
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a ONCE subscription,
 // failing the test fatally is no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *Flow_IngressTracking_DstIpv6Path) Get(t testing.TB) string {
+func (n *Flow_IngressTracking_OutFrameRatePath) Get(t testing.TB) float32 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
-// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a ONCE subscription.
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *Flow_IngressTracking_DstIpv6PathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+func (n *Flow_IngressTracking_OutFrameRatePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_IngressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_IngressTracking_OutFrameRatePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a ONCE subscription.
+func (n *Flow_IngressTracking_OutFrameRatePathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_OutFrameRatePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_IngressTracking_OutFrameRatePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.Flow_IngressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
+		return convertFlow_IngressTracking_OutFrameRatePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_OutFrameRatePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_OutFrameRatePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_IngressTracking_OutFrameRatePath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate to the batch object.
+func (n *Flow_IngressTracking_OutFrameRatePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_OutFrameRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_OutFrameRatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_OutFrameRatePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-frame-rate to the batch object.
+func (n *Flow_IngressTracking_OutFrameRatePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_IngressTracking_OutFrameRatePath extracts the value of the leaf OutFrameRate from its parent oc.Flow_IngressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertFlow_IngressTracking_OutFrameRatePath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.OutFrameRate
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_IngressTracking_OutRatePath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.Flow_IngressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_IngressTracking_OutRatePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_IngressTracking_OutRatePath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_IngressTracking_OutRatePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_IngressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_IngressTracking_OutRatePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a ONCE subscription.
+func (n *Flow_IngressTracking_OutRatePathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_OutRatePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_IngressTracking_OutRatePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.Flow_IngressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
+		return convertFlow_IngressTracking_OutRatePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_OutRatePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_OutRatePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_IngressTracking_OutRatePath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate to the batch object.
+func (n *Flow_IngressTracking_OutRatePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_OutRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_OutRatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_OutRatePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/out-rate to the batch object.
+func (n *Flow_IngressTracking_OutRatePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_IngressTracking_OutRatePath extracts the value of the leaf OutRate from its parent oc.Flow_IngressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertFlow_IngressTracking_OutRatePath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.OutRate
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_IngressTracking_SrcIpv4Path) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Flow_IngressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_IngressTracking_SrcIpv4Path(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_IngressTracking_SrcIpv4Path) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_IngressTracking_SrcIpv4PathAny) Lookup(t testing.TB) []*oc.QualifiedString {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
@@ -509,14 +662,14 @@ func (n *Flow_IngressTracking_DstIpv6PathAny) Lookup(t testing.TB) []*oc.Qualifi
 		if !ok {
 			continue
 		}
-		qv := convertFlow_IngressTracking_DstIpv6Path(t, md, goStruct)
+		qv := convertFlow_IngressTracking_SrcIpv4Path(t, md, goStruct)
 		data = append(data, qv)
 	}
 	return data
 }
 
-// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a ONCE subscription.
-func (n *Flow_IngressTracking_DstIpv6PathAny) Get(t testing.TB) []string {
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a ONCE subscription.
+func (n *Flow_IngressTracking_SrcIpv4PathAny) Get(t testing.TB) []string {
 	t.Helper()
 	fulldata := n.Lookup(t)
 	var data []string
@@ -526,9 +679,9 @@ func (n *Flow_IngressTracking_DstIpv6PathAny) Get(t testing.TB) []string {
 	return data
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_DstIpv6Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Flow_IngressTracking_SrcIpv4Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -538,14 +691,14 @@ func (n *Flow_IngressTracking_DstIpv6Path) Collect(t testing.TB, duration time.D
 	return c
 }
 
-func watch_Flow_IngressTracking_DstIpv6Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func watch_Flow_IngressTracking_SrcIpv4Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow_IngressTracking{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
-		return convertFlow_IngressTracking_DstIpv6Path(t, md, gs), nil
+		return convertFlow_IngressTracking_SrcIpv4Path(t, md, gs), nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -554,41 +707,41 @@ func watch_Flow_IngressTracking_DstIpv6Path(t testing.TB, n ygot.PathStruct, dur
 	return w
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_DstIpv6Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Flow_IngressTracking_SrcIpv4Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_IngressTracking_DstIpv6Path(t, n, timeout, predicate)
+	return watch_Flow_IngressTracking_SrcIpv4Path(t, n, timeout, predicate)
 }
 
-// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a STREAM subscription,
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a STREAM subscription,
 // blocking until a value that is deep equal to the specified val is received
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *Flow_IngressTracking_DstIpv6Path) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+func (n *Flow_IngressTracking_SrcIpv4Path) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
 	t.Helper()
 	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
-		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 failed: want %v, last got %v", val, got)
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 failed: want %v, last got %v", val, got)
 	}
 	return got
 }
 
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 to the batch object.
-func (n *Flow_IngressTracking_DstIpv6Path) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 to the batch object.
+func (n *Flow_IngressTracking_SrcIpv4Path) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a STREAM subscription.
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Flow_IngressTracking_DstIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+func (n *Flow_IngressTracking_SrcIpv4PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
 	t.Helper()
 	c := &oc.CollectionString{}
 	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
@@ -598,30 +751,336 @@ func (n *Flow_IngressTracking_DstIpv6PathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
-// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 with a STREAM subscription,
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Flow_IngressTracking_DstIpv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+func (n *Flow_IngressTracking_SrcIpv4PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_IngressTracking_DstIpv6Path(t, n, timeout, predicate)
+	return watch_Flow_IngressTracking_SrcIpv4Path(t, n, timeout, predicate)
 }
 
-// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/dst-ipv6 to the batch object.
-func (n *Flow_IngressTracking_DstIpv6PathAny) Batch(t testing.TB, b *oc.Batch) {
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv4 to the batch object.
+func (n *Flow_IngressTracking_SrcIpv4PathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }
 
-// convertFlow_IngressTracking_DstIpv6Path extracts the value of the leaf DstIpv6 from its parent oc.Flow_IngressTracking
+// convertFlow_IngressTracking_SrcIpv4Path extracts the value of the leaf SrcIpv4 from its parent oc.Flow_IngressTracking
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertFlow_IngressTracking_DstIpv6Path(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
+func convertFlow_IngressTracking_SrcIpv4Path(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
 	}
-	val := parent.DstIpv6
+	val := parent.SrcIpv4
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_IngressTracking_SrcIpv6Path) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Flow_IngressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_IngressTracking_SrcIpv6Path(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_IngressTracking_SrcIpv6Path) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_IngressTracking_SrcIpv6PathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_IngressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_IngressTracking_SrcIpv6Path(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a ONCE subscription.
+func (n *Flow_IngressTracking_SrcIpv6PathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_SrcIpv6Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_IngressTracking_SrcIpv6Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Flow_IngressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
+		return convertFlow_IngressTracking_SrcIpv6Path(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_SrcIpv6Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_SrcIpv6Path(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_IngressTracking_SrcIpv6Path) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 to the batch object.
+func (n *Flow_IngressTracking_SrcIpv6Path) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_SrcIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_SrcIpv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_SrcIpv6Path(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-ipv6 to the batch object.
+func (n *Flow_IngressTracking_SrcIpv6PathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_IngressTracking_SrcIpv6Path extracts the value of the leaf SrcIpv6 from its parent oc.Flow_IngressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertFlow_IngressTracking_SrcIpv6Path(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SrcIpv6
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_IngressTracking_SrcPortPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Flow_IngressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_IngressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_IngressTracking_SrcPortPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_IngressTracking_SrcPortPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_IngressTracking_SrcPortPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_IngressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_IngressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_IngressTracking_SrcPortPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a ONCE subscription.
+func (n *Flow_IngressTracking_SrcPortPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_SrcPortPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_IngressTracking_SrcPortPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Flow_IngressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_IngressTracking", gs, queryPath, true, false)
+		return convertFlow_IngressTracking_SrcPortPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_SrcPortPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_SrcPortPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_IngressTracking_SrcPortPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port to the batch object.
+func (n *Flow_IngressTracking_SrcPortPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_IngressTracking_SrcPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_IngressTracking_SrcPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Flow_IngressTracking_SrcPortPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/src-port to the batch object.
+func (n *Flow_IngressTracking_SrcPortPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_IngressTracking_SrcPortPath extracts the value of the leaf SrcPort from its parent oc.Flow_IngressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertFlow_IngressTracking_SrcPortPath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_IngressTracking) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SrcPort
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

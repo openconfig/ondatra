@@ -46,7 +46,7 @@ var (
 )
 
 // addNetworks adds IxNetwork network groups for the given interface config.
-func (ix *IxiaCfgClient) addNetworks(ifc *opb.InterfaceConfig) error {
+func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
 	intf.netToNetworkGroup = make(map[string]*ixconfig.TopologyNetworkGroup)
 	intf.netToRouteTables = make(map[string]*routeTables)
