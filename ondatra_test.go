@@ -21,7 +21,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/binding"
 )
 
 func TestReserveOnRun(t *testing.T) {
@@ -74,15 +74,15 @@ func TestReserveOnRun(t *testing.T) {
 					sigc <- test.sig
 				}
 			}
-			var initCalled bool
-			initFn = func(b binding.Binding) {
-				initCalled = true
+			var initBindCalled bool
+			initBindFn = func(b binding.Binding) {
+				initBindCalled = true
 			}
 			fakeBinder := func() (binding.Binding, error) { return nil, nil }
 			if gotErr := doRun(nil, fakeBinder); (gotErr != nil) != (test.wantErr != "") {
 				t.Fatalf("doRun: got err %v, wanted err? %t", gotErr, test.wantErr != "")
 			}
-			if !initCalled {
+			if !initBindCalled {
 				t.Errorf("doRun did not initialize the binding")
 			}
 			wantReleased := test.reservErr == nil

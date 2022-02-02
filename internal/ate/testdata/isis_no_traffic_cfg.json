@@ -137,6 +137,11 @@
                 "singleValue": {
                   "value": "0.0.0.0"
                 }
+              },
+              "rtrcapId": {
+                "singleValue": {
+                  "value": "0.0.0.1"
+                }
               }
             }
           ],

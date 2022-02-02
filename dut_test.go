@@ -40,8 +40,7 @@ import (
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 	"github.com/openconfig/ondatra/fakes/fakestreamclient"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/negtest"
 
 )
@@ -55,7 +54,7 @@ func initDUTFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.ConfigPusher = func(_ context.Context, _ *reservation.DUT, config string, opts *binding.ConfigOptions) error {
+	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, opts *binding.ConfigOptions) error {
 		gotConfig = config
 		gotOpts = opts
 		return nil
@@ -93,14 +92,6 @@ func TestPushConfig(t *testing.T) {
 			WithCiscoText("Cisco config").
 			WithJuniperText("Juniper config"),
 		wantConfig: "Openconfig",
-		wantOpts:   &binding.ConfigOptions{OpenConfig: true},
-	}, {
-		desc: "correct openconfig file",
-		config: dutArista.Config().New().
-			WithOpenConfigFile(filepath.Join("testdata", "example_config_1.txt")).
-			WithCiscoText("Cisco config").
-			WithJuniperFile(filepath.Join("testdata", "example_config_2.txt")),
-		wantConfig: "example_config_1",
 		wantOpts:   &binding.ConfigOptions{OpenConfig: true},
 	}, {
 		desc: "openconfig override",
@@ -211,7 +202,7 @@ func TestAppendConfig(t *testing.T) {
 func TestGNMI(t *testing.T) {
 	initDUTFakes(t)
 	want := struct{ gpb.GNMIClient }{}
-	fakeBind.GNMIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
+	fakeBind.GNMIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return want, nil
 	}
 	if got := DUT(t, "dut").RawAPIs().GNMI().New(t); got != want {
@@ -222,7 +213,7 @@ func TestGNMI(t *testing.T) {
 func TestGNMIError(t *testing.T) {
 	initDUTFakes(t)
 	wantErr := "bad gnmi"
-	fakeBind.GNMIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
+	fakeBind.GNMIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return nil, errors.New(wantErr)
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
@@ -324,7 +315,7 @@ func TestGNOI(t *testing.T) {
 		waveRtr:      struct{ wpb.WavelengthRouterClient }{},
 		custom:       struct{}{},
 	}
-	fakeBind.GNOIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
+	fakeBind.GNOIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return bgnoi, nil
 	}
 	gnoi := DUT(t, "dut").RawAPIs().GNOI().New(t)
@@ -375,7 +366,7 @@ func TestGNOI(t *testing.T) {
 func TestGNOIError(t *testing.T) {
 	initDUTFakes(t)
 	wantErr := "bad gnoi"
-	fakeBind.GNOIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
+	fakeBind.GNOIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return nil, errors.New(wantErr)
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
@@ -391,10 +382,10 @@ func TestStreamingClient(t *testing.T) {
 	initDUTFakes(t)
 	fCLI := fakestreamclient.New()
 	fConsole := fakestreamclient.New()
-	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeBind.CLIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeBind.ConsoleDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeBind.ConsoleDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
 	cliClient := DUT(t, "dut").RawAPIs().CLI(t)
@@ -449,10 +440,10 @@ func TestSendCommand(t *testing.T) {
 	initDUTFakes(t)
 	fCLI := &fakestreamclient.FakeStreamClient{}
 	fConsole := &fakestreamclient.FakeStreamClient{}
-	fakeBind.CLIDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeBind.CLIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeBind.ConsoleDialer = func(context.Context, *reservation.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeBind.ConsoleDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
 	cliClient := DUT(t, "dut").RawAPIs().CLI(t)

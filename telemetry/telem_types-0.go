@@ -1637,6 +1637,136 @@ func (w *Component_IntegratedCircuitWatcher) Await(t testing.TB) (*QualifiedComp
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity is a *Component_IntegratedCircuit_BackplaneFacingCapacity with a corresponding timestamp.
+type QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity struct {
+	*genutil.Metadata
+	val     *Component_IntegratedCircuit_BackplaneFacingCapacity // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_IntegratedCircuit_BackplaneFacingCapacity sample, erroring out if not present.
+func (q *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) Val(t testing.TB) *Component_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_IntegratedCircuit_BackplaneFacingCapacity sample.
+func (q *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) SetVal(v *Component_IntegratedCircuit_BackplaneFacingCapacity) *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity is a telemetry Collection whose Await method returns a slice of *Component_IntegratedCircuit_BackplaneFacingCapacity samples.
+type CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity struct {
+	W    *Component_IntegratedCircuit_BackplaneFacingCapacityWatcher
+	Data []*QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity) Await(t testing.TB) []*QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacityWatcher observes a stream of *Component_IntegratedCircuit_BackplaneFacingCapacity samples.
+type Component_IntegratedCircuit_BackplaneFacingCapacityWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_IntegratedCircuit_BackplaneFacingCapacityWatcher) Await(t testing.TB) (*QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_IntegratedCircuit_Memory is a *Component_IntegratedCircuit_Memory with a corresponding timestamp.
+type QualifiedComponent_IntegratedCircuit_Memory struct {
+	*genutil.Metadata
+	val     *Component_IntegratedCircuit_Memory // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_IntegratedCircuit_Memory) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_IntegratedCircuit_Memory sample, erroring out if not present.
+func (q *QualifiedComponent_IntegratedCircuit_Memory) Val(t testing.TB) *Component_IntegratedCircuit_Memory {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_IntegratedCircuit_Memory sample.
+func (q *QualifiedComponent_IntegratedCircuit_Memory) SetVal(v *Component_IntegratedCircuit_Memory) *QualifiedComponent_IntegratedCircuit_Memory {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_IntegratedCircuit_Memory) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_IntegratedCircuit_Memory is a telemetry Collection whose Await method returns a slice of *Component_IntegratedCircuit_Memory samples.
+type CollectionComponent_IntegratedCircuit_Memory struct {
+	W    *Component_IntegratedCircuit_MemoryWatcher
+	Data []*QualifiedComponent_IntegratedCircuit_Memory
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_IntegratedCircuit_Memory) Await(t testing.TB) []*QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_IntegratedCircuit_MemoryWatcher observes a stream of *Component_IntegratedCircuit_Memory samples.
+type Component_IntegratedCircuit_MemoryWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_IntegratedCircuit_Memory
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_IntegratedCircuit_MemoryWatcher) Await(t testing.TB) (*QualifiedComponent_IntegratedCircuit_Memory, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedComponent_Memory is a *Component_Memory with a corresponding timestamp.
 type QualifiedComponent_Memory struct {
 	*genutil.Metadata
@@ -8393,136 +8523,6 @@ type Lldp_CountersWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Lldp_CountersWatcher) Await(t testing.TB) (*QualifiedLldp_Counters, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface is a *Lldp_Interface with a corresponding timestamp.
-type QualifiedLldp_Interface struct {
-	*genutil.Metadata
-	val     *Lldp_Interface // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface sample, erroring out if not present.
-func (q *QualifiedLldp_Interface) Val(t testing.TB) *Lldp_Interface {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface sample.
-func (q *QualifiedLldp_Interface) SetVal(v *Lldp_Interface) *QualifiedLldp_Interface {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface is a telemetry Collection whose Await method returns a slice of *Lldp_Interface samples.
-type CollectionLldp_Interface struct {
-	W    *Lldp_InterfaceWatcher
-	Data []*QualifiedLldp_Interface
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface) Await(t testing.TB) []*QualifiedLldp_Interface {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_InterfaceWatcher observes a stream of *Lldp_Interface samples.
-type Lldp_InterfaceWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_InterfaceWatcher) Await(t testing.TB) (*QualifiedLldp_Interface, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface_Counters is a *Lldp_Interface_Counters with a corresponding timestamp.
-type QualifiedLldp_Interface_Counters struct {
-	*genutil.Metadata
-	val     *Lldp_Interface_Counters // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface_Counters) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface_Counters sample, erroring out if not present.
-func (q *QualifiedLldp_Interface_Counters) Val(t testing.TB) *Lldp_Interface_Counters {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface_Counters sample.
-func (q *QualifiedLldp_Interface_Counters) SetVal(v *Lldp_Interface_Counters) *QualifiedLldp_Interface_Counters {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface_Counters) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface_Counters is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Counters samples.
-type CollectionLldp_Interface_Counters struct {
-	W    *Lldp_Interface_CountersWatcher
-	Data []*QualifiedLldp_Interface_Counters
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface_Counters) Await(t testing.TB) []*QualifiedLldp_Interface_Counters {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_Interface_CountersWatcher observes a stream of *Lldp_Interface_Counters samples.
-type Lldp_Interface_CountersWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface_Counters
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_Interface_CountersWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Counters, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

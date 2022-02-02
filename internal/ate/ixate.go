@@ -31,11 +31,11 @@ import (
 	log "github.com/golang/glog"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
-	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
-	"github.com/openconfig/ondatra/internal/ixweb"
-	"github.com/openconfig/ondatra/internal/usererr"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -60,6 +60,7 @@ var (
 	macRE         = regexp.MustCompile(`^([0-9a-f]{2}:){5}([0-9a-f]{2})$`)
 	resolveMacsFn = resolveMacs
 
+	// TODO: Lower timeouts after chassis hardware upgrades.
 	peersImportTimeout   = time.Minute
 	trafficImportTimeout = 3 * time.Minute
 	topoImportTimeout    = 3 * time.Minute
@@ -166,6 +167,7 @@ type intf struct {
 	ipv4              *ixconfig.TopologyIpv4
 	ipv6              *ixconfig.TopologyIpv6
 	ipv4Loopback      *ixconfig.TopologyIpv4Loopback
+	ipv6Loopback      *ixconfig.TopologyIpv6Loopback
 	rsvpLSPs          map[string]*ixconfig.TopologyRsvpteLsps
 	link              ixconfig.IxiaCfgNode
 	isrToNetworkGroup map[string]*ixconfig.TopologyNetworkGroup
@@ -489,7 +491,7 @@ func (ix *ixATE) updateTopology(ctx context.Context, ics []*opb.InterfaceConfig)
 		return err
 	}
 	// Full topology updates can take some time, use a 3 minute timeout.
-	if err := ix.importConfig(ctx, ix.cfg, false, 3*time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg, false, topoImportTimeout); err != nil {
 		return err
 	}
 	return syncRouteTableFilesAndImportFn(ctx, ix)
@@ -501,14 +503,14 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	if err := ix.addPorts(top); err != nil {
 		return err
 	}
-	if err := ix.importConfig(ctx, ix.cfg, true, time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg, true, topoImportTimeout); err != nil {
 		return err
 	}
 	if lags := top.GetLags(); len(lags) > 0 {
 		if err := ix.addLAGs(lags); err != nil {
 			return err
 		}
-		if err := ix.importConfig(ctx, ix.cfg, false, time.Minute); err != nil {
+		if err := ix.importConfig(ctx, ix.cfg, false, topoImportTimeout); err != nil {
 			return err
 		}
 	}
@@ -612,22 +614,43 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 		ProtocolActionsInProgress []string
 		Status                    string
 	}{}
-	started := func() (bool, error) {
+	started := func() (bool, error, bool) {
 		if err := ix.c.Session().Get(ctx, "globals/topology", &topo); err != nil {
-			return false, errors.Wrap(err, "could not fetch global topology to check protocol status")
+			return false, errors.Wrap(err, "could not fetch global topology to check protocol status"), false
 		}
-		return topo.Status == "started" && len(topo.ProtocolActionsInProgress) == 0, nil
+		if topo.Status == "started" && len(topo.ProtocolActionsInProgress) == 0 {
+			return true, nil, false
+		}
+		// TODO: Remove IS-IS/Lag check after Ixias updated to 9.20update1
+		for _, intf := range ix.intfs {
+			// Checks for the known index out of bounds error if there is any IS-IS config on any LAG.
+			// Still returns 'false' as the 'started' result for the function to trigger the retry
+			// loop to ensure protocols start.
+			if strings.Contains(intf.link.XPath().String(), "lag") && len(intf.isrToNetworkGroup) > 0 {
+				var appErrs []struct{ Name string }
+				if err := ix.c.Session().Get(ctx, "globals/appErrors/error", &appErrs); err != nil {
+					return false, errors.Wrapf(err, "could not fetch global errors"), false
+				}
+				for _, e := range appErrs {
+					if strings.Contains(e.Name, "Index was outside the bounds of the array") {
+						log.Warning("Ignoring protocol status error because of known 'Index was outside the bounds of the array' issue configuring IS-IS on LAGs")
+						return false, nil, true
+					}
+				}
+			}
+		}
+		return false, nil, false
 	}
 	// Wait for protocols to start.
-	start, err := started()
+	start, err, isrAndLagErr := started()
 	for i := 0; i < maxRetriesProtocols && err == nil && !start; i++ {
 		sleepFn(retryWait)
-		start, err = started()
+		start, err, isrAndLagErr = started()
 	}
 	if err != nil {
 		return err
 	}
-	if !start {
+	if !start && !isrAndLagErr {
 		return errors.New("protocols did not start in time")
 	}
 
@@ -956,7 +979,7 @@ func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 		return errors.Wrap(err, "could not compute traffic configuration")
 	}
 
-	if err := ix.importConfig(ctx, ix.cfg.Traffic, false, time.Minute); err != nil {
+	if err := ix.importConfig(ctx, ix.cfg.Traffic, false, trafficImportTimeout); err != nil {
 		return errors.Wrap(err, "could not push traffic configuration")
 	}
 
@@ -1094,22 +1117,29 @@ func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceCo
 	for _, intf := range ix.intfs {
 		if v4 := intf.ipv4; v4 != nil {
 			for _, peer := range v4.BgpIpv4Peer {
-				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
 					return errors.Wrap(err, "could not update BGP v4 peer")
 				}
 			}
 		}
 		if v6 := intf.ipv6; v6 != nil {
 			for _, peer := range v6.BgpIpv6Peer {
-				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
 					return errors.Wrap(err, "could not update BGP v6 peer")
 				}
 			}
 		}
 		if v4lb := intf.ipv4Loopback; v4lb != nil {
 			for _, peer := range v4lb.BgpIpv4Peer {
-				if err := ix.importConfig(ctx, peer, false, time.Minute); err != nil {
+				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
 					return errors.Wrap(err, "could not update BGP v4 loopback peer")
+				}
+			}
+		}
+		if v6lb := intf.ipv6Loopback; v6lb != nil {
+			for _, peer := range v6lb.BgpIpv6Peer {
+				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
+					return errors.Wrap(err, "could not update BGP v6 loopback peer")
 				}
 			}
 		}

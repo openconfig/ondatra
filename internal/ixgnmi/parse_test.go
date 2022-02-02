@@ -18,7 +18,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 )
 
 func TestParsePortStats(t *testing.T) {

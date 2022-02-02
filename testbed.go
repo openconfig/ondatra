@@ -19,7 +19,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -33,7 +33,7 @@ func release() error {
 	return testbed.Release(context.Background())
 }
 
-func checkRes(t testing.TB) *reservation.Reservation {
+func checkRes(t testing.TB) *binding.Reservation {
 	t.Helper()
 	res, err := testbed.Reservation()
 	if err != nil {
@@ -45,7 +45,7 @@ func checkRes(t testing.TB) *reservation.Reservation {
 // DUT returns the DUT in the testbed with a given id.
 func DUT(t testing.TB, id string) *DUTDevice {
 	t.Helper()
-	rd, err := checkRes(t).DUT(id)
+	rd, err := testbed.DUT(checkRes(t), id)
 	if err != nil {
 		t.Fatalf("DUT(t, %s): %v", id, err)
 	}
@@ -63,7 +63,7 @@ func DUTs(t testing.TB) map[string]*DUTDevice {
 	return m
 }
 
-func newDUT(id string, res *reservation.DUT) *DUTDevice {
+func newDUT(id string, res *binding.DUT) *DUTDevice {
 	return &DUTDevice{&Device{
 		id:       id,
 		res:      res,
@@ -74,7 +74,7 @@ func newDUT(id string, res *reservation.DUT) *DUTDevice {
 // ATE returns the ATE in the testbed with a given id.
 func ATE(t testing.TB, id string) *ATEDevice {
 	t.Helper()
-	ra, err := checkRes(t).ATE(id)
+	ra, err := testbed.ATE(checkRes(t), id)
 	if err != nil {
 		t.Fatalf("ATE(t, %s): %v", id, err)
 	}
@@ -92,7 +92,7 @@ func ATEs(t testing.TB) map[string]*ATEDevice {
 	return m
 }
 
-func newATE(id string, res *reservation.ATE) *ATEDevice {
+func newATE(id string, res *binding.ATE) *ATEDevice {
 	return &ATEDevice{Device: &Device{
 		id:       id,
 		res:      res,

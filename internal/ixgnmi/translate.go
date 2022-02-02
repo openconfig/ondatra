@@ -24,7 +24,7 @@ import (
 	log "github.com/golang/glog"
 	"github.com/pkg/errors"
 	"github.com/openconfig/ygot/ygot"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/telemetry"
 )
 

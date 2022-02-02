@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -60,6 +61,248 @@ package telemetry
 import (
 	"github.com/openconfig/ygot/ygot"
 )
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/restart-timer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/restart-timer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbour
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbour
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RestartTimer (leaf): Time interval in seconds after which the BGP session
+// is re-established after being torn down due to exceeding
+// the max-prefix limit.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/restart-timer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/restart-timer"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) RestartTimer() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "restart-timer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RestartTimer (leaf): Time interval in seconds after which the BGP session
+// is re-established after being torn down due to exceeding
+// the max-prefix limit.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/restart-timer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/restart-timer"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) RestartTimer() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "restart-timer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbour before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbour before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
 
 // NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit YANG schema element.
 type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath struct {
@@ -16187,346 +16430,6 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_UseMultiplePaths_IbgpPat
 	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_UseMultiplePaths_Ibgp_MaximumPathsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "maximum-paths"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny struct {
-	*ygot.NodePath
-}
-
-// DefaultExportPolicy (leaf): explicitly set a default policy if no policy definition
-// in the export policy chain is satisfied.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/default-export-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) DefaultExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "default-export-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// DefaultExportPolicy (leaf): explicitly set a default policy if no policy definition
-// in the export policy chain is satisfied.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/default-export-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) DefaultExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "default-export-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// DefaultImportPolicy (leaf): explicitly set a default policy if no policy definition
-// in the import policy chain is satisfied.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/default-import-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) DefaultImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "default-import-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// DefaultImportPolicy (leaf): explicitly set a default policy if no policy definition
-// in the import policy chain is satisfied.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/default-import-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) DefaultImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "default-import-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExportPolicy (leaf): list of policy names in sequence to be applied on
-// sending a routing update in the current context, e.g.,
-// for the current peer group, neighbor, address family,
-// etc.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/export-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) ExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "export-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExportPolicy (leaf): list of policy names in sequence to be applied on
-// sending a routing update in the current context, e.g.,
-// for the current peer group, neighbor, address family,
-// etc.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/export-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) ExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "export-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ImportPolicy (leaf): list of policy names in sequence to be applied on
-// receiving a routing update in the current context, e.g.,
-// for the current peer group, neighbor, address family,
-// etc.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/import-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) ImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "import-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ImportPolicy (leaf): list of policy names in sequence to be applied on
-// receiving a routing update in the current context, e.g.,
-// for the current peer group, neighbor, address family,
-// etc.
-// ----------------------------------------
-// Defining module: "openconfig-routing-policy"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/import-policy"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) ImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "import-policy"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny struct {
-	*ygot.NodePath
-}
-
-// AllowOwnAs (leaf): Specify the number of occurrences of the local BGP speaker's
-// AS that can occur within the AS_PATH before it is rejected.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/allow-own-as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) AllowOwnAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "allow-own-as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AllowOwnAs (leaf): Specify the number of occurrences of the local BGP speaker's
-// AS that can occur within the AS_PATH before it is rejected.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/allow-own-as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) AllowOwnAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "allow-own-as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// DisablePeerAsFilter (leaf): When set to true, the system advertises routes to a peer
-// even if the peer's AS was in the AS path.  The default
-// behavior (false) suppresses advertisements to peers if
-// their AS number is in the AS path of the route.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/disable-peer-as-filter"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) DisablePeerAsFilter() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "disable-peer-as-filter"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// DisablePeerAsFilter (leaf): When set to true, the system advertises routes to a peer
-// even if the peer's AS was in the AS path.  The default
-// behavior (false) suppresses advertisements to peers if
-// their AS number is in the AS path of the route.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/disable-peer-as-filter"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) DisablePeerAsFilter() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "disable-peer-as-filter"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ReplacePeerAs (leaf): Replace occurrences of the peer's AS in the AS_PATH
-// with the local autonomous system number
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/replace-peer-as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) ReplacePeerAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "replace-peer-as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ReplacePeerAs (leaf): Replace occurrences of the peer's AS in the AS_PATH
-// with the local autonomous system number
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/replace-peer-as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) ReplacePeerAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "replace-peer-as"},
 			map[string]interface{}{},
 			n,
 		),

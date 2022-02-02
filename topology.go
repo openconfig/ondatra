@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/reservation"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -29,7 +29,7 @@ var lagCount uint32
 
 // Topology is an ATE topology API.
 type Topology struct {
-	ate *reservation.ATE
+	ate *binding.ATE
 }
 
 func (tp *Topology) String() string {
@@ -43,7 +43,7 @@ func (tp *Topology) New() *ATETopology {
 
 // ATETopology is an ATE topology.
 type ATETopology struct {
-	ate *reservation.ATE
+	ate *binding.ATE
 	top *opb.Topology
 }
 

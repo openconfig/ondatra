@@ -27,13 +27,14 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/internal/usererr"
+	"github.com/openconfig/ondatra/internal/testbed"
 
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
+	opb "github.com/openconfig/ondatra/proto"
 )
 
 const (
@@ -43,16 +44,16 @@ const (
 
 var (
 	mu    sync.Mutex
-	gnois = make(map[*reservation.DUT]binding.GNOIClients)
+	gnois = make(map[*binding.DUT]binding.GNOIClients)
 )
 
 // NewGNOI creates a gNOI client for the specified DUT.
-func NewGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, error) {
-	return binding.Get().DialGNOI(ctx, dut, grpc.WithBlock())
+func NewGNOI(ctx context.Context, dut *binding.DUT) (binding.GNOIClients, error) {
+	return testbed.Bind().DialGNOI(ctx, dut, grpc.WithBlock())
 }
 
 // FetchGNOI fetches a cached gNOI client for the given DUT.
-func FetchGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, error) {
+func FetchGNOI(ctx context.Context, dut *binding.DUT) (binding.GNOIClients, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	gnoi, ok := gnois[dut]
@@ -70,7 +71,7 @@ func FetchGNOI(ctx context.Context, dut *reservation.DUT) (binding.GNOIClients, 
 // Install executes an install operation.
 // The gNOI install scenarios are documented on the Install function here:
 // https://github.com/openconfig/gnoi/blob/master/os/os.proto
-func Install(ctx context.Context, dev reservation.Device, version string, standby bool, reader io.Reader) error {
+func Install(ctx context.Context, dev binding.Device, version string, standby bool, reader io.Reader) error {
 	dut, err := checkDUT(dev, "ping")
 	if err != nil {
 		return err
@@ -169,7 +170,7 @@ func awaitPackageInstall(ic ospb.OS_InstallClient) (*ospb.Validated, error) {
 }
 
 // Ping executes the ping command from target device to a specified destination.
-func Ping(ctx context.Context, dev reservation.Device, dest string, count int32) error {
+func Ping(ctx context.Context, dev binding.Device, dest string, count int32) error {
 	dut, err := checkDUT(dev, "ping")
 	if err != nil {
 		return err
@@ -209,44 +210,73 @@ func Ping(ctx context.Context, dev reservation.Device, dest string, count int32)
 }
 
 // SetInterfaceState sets the state of a specified interface on a device.
-func SetInterfaceState(ctx context.Context, dev reservation.Device, intf string, enabled *bool) error {
+func SetInterfaceState(ctx context.Context, dev binding.Device, intf string, enabled *bool) error {
 	if intf == "" {
 		return errors.Errorf("no interface provided in set interface state operation on device %v", dev)
 	}
 	if enabled == nil {
 		return errors.Errorf("no enabled state provided in set interface state operation on device %v", dev)
 	}
-	if dut, ok := dev.(*reservation.DUT); ok {
+	if dut, ok := dev.(*binding.DUT); ok {
 		return setDUTInterfaceState(ctx, dut, intf, *enabled)
 	}
-	return ate.SetInterfaceState(ctx, dev.(*reservation.ATE), intf, *enabled)
+	return ate.SetInterfaceState(ctx, dev.(*binding.ATE), intf, *enabled)
 }
 
-func setDUTInterfaceState(ctx context.Context, dut *reservation.DUT, intf string, enabled bool) error {
-	const ocFormat = `{
-   "interfaces": {
-      "interface": [
-         {
-            "config": {
-               "enabled": %v,
-               "name": "%s",
-               "type": "ethernetCsmacd"
-            },
-            "name": "%s"
-         }
-      ]
-   }
-}`
-	ocCfg := fmt.Sprintf(ocFormat, enabled, intf, intf)
-	opts := &binding.ConfigOptions{OpenConfig: true, Append: true}
-	if err := binding.Get().PushConfig(ctx, dut, ocCfg, opts); err != nil {
+var (
+	enableConfigs = map[opb.Device_Vendor]string{
+		opb.Device_ARISTA: `
+		  interface %s
+        no shutdown
+      !`,
+		opb.Device_CISCO: `
+		  interface %s
+        no shutdown
+      !`,
+		opb.Device_JUNIPER: `
+		  interfaces {
+		    %s {
+	        delete: disable;
+	      }
+	    }`,
+	}
+	disableConfigs = map[opb.Device_Vendor]string{
+		opb.Device_ARISTA: `
+		  interface %s
+        shutdown
+      !`,
+		opb.Device_CISCO: `
+		  interface %s
+        shutdown
+      !`,
+		opb.Device_JUNIPER: `
+		  interfaces {
+		    %s {
+	        disable;
+	      }
+	    }`,
+	}
+)
+
+func setDUTInterfaceState(ctx context.Context, dut *binding.DUT, intf string, enabled bool) error {
+	configs := disableConfigs
+	if enabled {
+		configs = enableConfigs
+	}
+	cfgFormat, ok := configs[dut.Vendor]
+	if !ok {
+		return fmt.Errorf("SetInterfaceState not yet supported for vendor %v", dut.Vendor)
+	}
+	cfg := fmt.Sprintf(cfgFormat, intf)
+	opts := &binding.ConfigOptions{Append: true}
+	if err := testbed.Bind().PushConfig(ctx, dut, cfg, opts); err != nil {
 		return errors.Wrap(err, "failed to set interface state")
 	}
 	return nil
 }
 
 // Reboot reboots a device.
-func Reboot(ctx context.Context, dev reservation.Device, timeout time.Duration) error {
+func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) error {
 	dut, err := checkDUT(dev, "restart routing")
 	if err != nil {
 		return err
@@ -295,7 +325,7 @@ func Reboot(ctx context.Context, dev reservation.Device, timeout time.Duration) 
 }
 
 // KillProcess kills a process on a device, and optionally restarts it.
-func KillProcess(ctx context.Context, dev reservation.Device, req *spb.KillProcessRequest) error {
+func KillProcess(ctx context.Context, dev binding.Device, req *spb.KillProcessRequest) error {
 	dut, err := checkDUT(dev, "restart routing")
 	if err != nil {
 		return err
@@ -308,9 +338,9 @@ func KillProcess(ctx context.Context, dev reservation.Device, req *spb.KillProce
 	return err
 }
 
-func checkDUT(dev reservation.Device, op string) (*reservation.DUT, error) {
-	if _, ok := dev.(*reservation.ATE); ok {
+func checkDUT(dev binding.Device, op string) (*binding.DUT, error) {
+	if _, ok := dev.(*binding.ATE); ok {
 		return nil, errors.Errorf("%s operation not supported on ATEs: %v", op, dev)
 	}
-	return dev.(*reservation.DUT), nil
+	return dev.(*binding.DUT), nil
 }

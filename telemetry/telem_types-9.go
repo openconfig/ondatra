@@ -12,6 +12,136 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_VlanTypes_VlanStackAction is a E_VlanTypes_VlanStackAction with a corresponding timestamp.
+type QualifiedE_VlanTypes_VlanStackAction struct {
+	*genutil.Metadata
+	val     E_VlanTypes_VlanStackAction // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_VlanTypes_VlanStackAction) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_VlanTypes_VlanStackAction sample, erroring out if not present.
+func (q *QualifiedE_VlanTypes_VlanStackAction) Val(t testing.TB) E_VlanTypes_VlanStackAction {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_VlanTypes_VlanStackAction sample.
+func (q *QualifiedE_VlanTypes_VlanStackAction) SetVal(v E_VlanTypes_VlanStackAction) *QualifiedE_VlanTypes_VlanStackAction {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_VlanTypes_VlanStackAction) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_VlanTypes_VlanStackAction is a telemetry Collection whose Await method returns a slice of E_VlanTypes_VlanStackAction samples.
+type CollectionE_VlanTypes_VlanStackAction struct {
+	W    *E_VlanTypes_VlanStackActionWatcher
+	Data []*QualifiedE_VlanTypes_VlanStackAction
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_VlanTypes_VlanStackAction) Await(t testing.TB) []*QualifiedE_VlanTypes_VlanStackAction {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_VlanTypes_VlanStackActionWatcher observes a stream of E_VlanTypes_VlanStackAction samples.
+type E_VlanTypes_VlanStackActionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_VlanTypes_VlanStackAction
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_VlanTypes_VlanStackActionWatcher) Await(t testing.TB) (*QualifiedE_VlanTypes_VlanStackAction, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Vlan_Status is a E_Vlan_Status with a corresponding timestamp.
+type QualifiedE_Vlan_Status struct {
+	*genutil.Metadata
+	val     E_Vlan_Status // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Vlan_Status) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Vlan_Status sample, erroring out if not present.
+func (q *QualifiedE_Vlan_Status) Val(t testing.TB) E_Vlan_Status {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Vlan_Status sample.
+func (q *QualifiedE_Vlan_Status) SetVal(v E_Vlan_Status) *QualifiedE_Vlan_Status {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Vlan_Status) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Vlan_Status is a telemetry Collection whose Await method returns a slice of E_Vlan_Status samples.
+type CollectionE_Vlan_Status struct {
+	W    *E_Vlan_StatusWatcher
+	Data []*QualifiedE_Vlan_Status
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Vlan_Status) Await(t testing.TB) []*QualifiedE_Vlan_Status {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Vlan_StatusWatcher observes a stream of E_Vlan_Status samples.
+type E_Vlan_StatusWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Vlan_Status
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Vlan_StatusWatcher) Await(t testing.TB) (*QualifiedE_Vlan_Status, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedFlow_IngressTracking_MplsLabel_Union is a Flow_IngressTracking_MplsLabel_Union with a corresponding timestamp.
 type QualifiedFlow_IngressTracking_MplsLabel_Union struct {
 	*genutil.Metadata

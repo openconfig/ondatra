@@ -31,9 +31,9 @@ import (
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/closer"
 	"golang.org/x/sys/unix"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/internal/reservemain"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/flags"
+	"github.com/openconfig/ondatra/internal/testbed"
 )
 
 var (
@@ -41,7 +41,7 @@ var (
 	reserveFn  = reserve
 	releaseFn  = release
 	runTestsFn = (*fixture).runTests
-	initFn     = binding.Init
+	initBindFn = testbed.InitBind
 )
 
 // Binder is the generator for providing binding to the test.
@@ -64,9 +64,9 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 	if err != nil {
 		return fmt.Errorf("failed to create binding: %w", err)
 	}
-	initFn(b)
+	initBindFn(b)
 	fmt.Println(actionMsg("Reserving the testbed"))
-	if err := reserveFn(*reservemain.TestbedPath, *reservemain.RunTime, *reservemain.WaitTime); err != nil {
+	if err := reserveFn(*flags.TestbedPath, *flags.RunTime, *flags.WaitTime); err != nil {
 		return err
 	}
 	go fnAfterSignal(releaseFn, unix.SIGINT, unix.SIGTERM)
@@ -74,7 +74,7 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		fmt.Println(actionMsg("Releasing the testbed"))
 		return releaseFn()
 	}, "error releasing testbed")
-	runTestsFn(new(fixture), m, *reservemain.RunTime)
+	runTestsFn(new(fixture), m, *flags.RunTime)
 	return nil
 }
 
@@ -103,7 +103,7 @@ func (f *fixture) runTests(m *testing.M, timeout time.Duration) {
 		fn := *fnPtr
 		*fnPtr = func(t *testing.T) {
 			f.testStarted(t, timeout)
-			binding.Get().SetTestMetadata(&binding.TestMetadata{TestName: t.Name()})
+			testbed.Bind().SetTestMetadata(&binding.TestMetadata{TestName: t.Name()})
 			defer func() {
 				if r := recover(); r != nil {
 					f.failEarly(fmt.Sprintf("Ondatra test panicked: %v, stack :%s", r, debug.Stack()))
@@ -138,7 +138,7 @@ func (f *fixture) failEarly(msg string) {
 	f.fatalFn(msg)
 }
 
-func logAction(t testing.TB, format string, dev reservation.Device) {
+func logAction(t testing.TB, format string, dev binding.Device) {
 	t.Helper()
 	t.Log(actionMsg(fmt.Sprintf(format, dev.Dimensions().Name)))
 }

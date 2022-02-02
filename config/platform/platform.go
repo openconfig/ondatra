@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -710,6 +711,100 @@ type Component_IntegratedCircuitPath struct {
 
 // Component_IntegratedCircuitPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit YANG schema element.
 type Component_IntegratedCircuitPathAny struct {
+	*ygot.NodePath
+}
+
+// BackplaneFacingCapacity (container): This container allows a particular INTEGRATED_CIRCUIT to report its
+// available backplane-facing bandwidth. Where an integrated circuit is connected
+// by one or more links to the system's backplane, the capacity is the total cross-
+// sectional bandwidth available from the input ports of the integrated circuit
+// across the fabric. The capacity should also reflect the operational status of
+// the links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "backplane-facing-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity"
+func (n *Component_IntegratedCircuitPath) BackplaneFacingCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacityPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"backplane-facing-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BackplaneFacingCapacity (container): This container allows a particular INTEGRATED_CIRCUIT to report its
+// available backplane-facing bandwidth. Where an integrated circuit is connected
+// by one or more links to the system's backplane, the capacity is the total cross-
+// sectional bandwidth available from the input ports of the integrated circuit
+// across the fabric. The capacity should also reflect the operational status of
+// the links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "backplane-facing-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity"
+func (n *Component_IntegratedCircuitPathAny) BackplaneFacingCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"backplane-facing-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Memory (container): Container for integrated circuit memory.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "memory"
+// Path from root: "/components/component/integrated-circuit/memory"
+func (n *Component_IntegratedCircuitPath) Memory() *Component_IntegratedCircuit_MemoryPath {
+	return &Component_IntegratedCircuit_MemoryPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"memory"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Memory (container): Container for integrated circuit memory.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "memory"
+// Path from root: "/components/component/integrated-circuit/memory"
+func (n *Component_IntegratedCircuitPathAny) Memory() *Component_IntegratedCircuit_MemoryPathAny {
+	return &Component_IntegratedCircuit_MemoryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"memory"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacityPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacityPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacityPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_MemoryPath represents the /openconfig-platform/components/component/integrated-circuit/memory YANG schema element.
+type Component_IntegratedCircuit_MemoryPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_MemoryPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/memory YANG schema element.
+type Component_IntegratedCircuit_MemoryPathAny struct {
 	*ygot.NodePath
 }
 

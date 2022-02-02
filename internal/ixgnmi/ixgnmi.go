@@ -35,7 +35,7 @@ import (
 	gcache "github.com/openconfig/gnmi/cache"
 	"github.com/openconfig/gnmi/subscribe"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"

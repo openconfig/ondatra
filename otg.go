@@ -20,12 +20,12 @@ import (
 	"testing"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
 type OTG struct {
-	ate *reservation.ATE
+	ate *binding.ATE
 	api gosnappi.GosnappiApi
 }
 

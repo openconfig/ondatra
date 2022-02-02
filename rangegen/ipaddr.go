@@ -37,20 +37,20 @@ type network struct {
 // parseCIDR returns the network represented by the given CIDR.
 // Returns an error if the CIDR is not valid.
 func parseCIDR(cidr string) (*network, error) {
-	_, netw, err := net.ParseCIDR(cidr)
+	ip, netw, err := net.ParseCIDR(cidr)
 	if err != nil {
 		return nil, err
 	}
 	maskLen, _ := netw.Mask.Size()
 	if strings.Contains(cidr, ":") {
 		return &network{
-			ip:      netw.IP,
+			ip:      ip,
 			maskLen: uint(maskLen),
 			isIPv6:  true,
 		}, nil
 	}
 	return &network{
-		ip:      netw.IP.To4(),
+		ip:      ip.To4(),
 		maskLen: uint(maskLen),
 	}, nil
 }

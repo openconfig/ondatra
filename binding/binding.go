@@ -12,18 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package binding holds the server binding interface.
+// Package binding holds the Ondatra binding interface.
 package binding
 
 import (
 	"golang.org/x/net/context"
+	"fmt"
 	"io"
 	"time"
 
-	log "github.com/golang/glog"
 	"google.golang.org/grpc"
-	"github.com/openconfig/ondatra/internal/ixweb"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding/ixweb"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	bpb "github.com/openconfig/gnoi/bgp"
@@ -44,27 +43,7 @@ import (
 
 )
 
-var (
-	bind Binding
-)
-
-// Init initializes the Ondatra binding.
-func Init(b Binding) {
-	if bind != nil {
-		log.Fatalf("Binding already initialized")
-	}
-	bind = b
-}
-
-// Get gets the Ondatra binding.
-func Get() Binding {
-	if bind == nil {
-		log.Exit("Binding not initialized. Did you forget to call ondatra.RunTests in TestMain?")
-	}
-	return bind
-}
-
-// Binding is a strategy interface for Ondatra server implementations.
+// Binding is a strategy interface for Ondatra vendor implementations.
 //
 // The framework enforces that at most testbed is reserved at a time, so
 // implementations can assume that these methods are never called out of order,
@@ -91,7 +70,7 @@ type Binding interface {
 	// resources to become available. Given a zero waitTime, the implementation
 	// must choose a reasonable duration. The framework has already checked that
 	// the waitTime is not negative.
-	Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTime time.Duration) (*reservation.Reservation, error)
+	Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTime time.Duration) (*Reservation, error)
 
 	// Release releases the reserved testbed.
 	Release(ctx context.Context) error
@@ -103,30 +82,30 @@ type Binding interface {
 	// If the openconfig option is true, the config is in openconfig JSON syntax.
 	// If the append option is true, the config is appended to the existing config;
 	// otherwise the existing config is replaced with the provided config.
-	PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *ConfigOptions) error
+	PushConfig(ctx context.Context, dut *DUT, config string, opts *ConfigOptions) error
 
 	// DialGNMI creates a client connection to the specified DUT's gNMI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error)
+	DialGNMI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error)
 
 	// DialGNOI creates a client connection to the specified DUT's gNOI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialGNOI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (GNOIClients, error)
+	DialGNOI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (GNOIClients, error)
 
 	// DialP4RT creates a client connection to the specified DUT's P4RT endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+	DialP4RT(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 
 	// DialConsole creates a client connection to the specified DUT's Console endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialConsole(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
+	DialConsole(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (StreamClient, error)
 
 	// DialCLI creates a client connection to the specified DUT's CLI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
-	DialCLI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (StreamClient, error)
+	DialCLI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (StreamClient, error)
 
 	// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
-	DialIxNetwork(ctx context.Context, ate *reservation.ATE) (*IxNetwork, error)
+	DialIxNetwork(ctx context.Context, ate *ATE) (*IxNetwork, error)
 
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
@@ -136,6 +115,69 @@ type Binding interface {
 
 	// SetTestMetadata sets the metadata for the currently running test.
 	SetTestMetadata(md *TestMetadata) error
+}
+
+// Reservation holds the reserved DUTs and ATEs as an id map.
+type Reservation struct {
+	ID   string
+	DUTs map[string]*DUT
+	ATEs map[string]*ATE
+}
+
+// Device is a reserved DUT or ATE.
+type Device interface {
+	Dimensions() *Dims
+}
+
+// Dims contains the dimensions of reserved DUT or ATE.
+type Dims struct {
+	Name            string
+	Vendor          opb.Device_Vendor
+	HardwareModel   string
+	SoftwareVersion string
+	Ports           map[string]*Port
+}
+
+func (d *Dims) String() string {
+	return fmt.Sprintf("Dims%+v", *d)
+}
+
+// DUT is a reserved DUT
+type DUT struct {
+	*Dims
+}
+
+// Dimensions returns the dimensions of the device.
+func (d *DUT) Dimensions() *Dims {
+	return d.Dims
+}
+
+func (d *DUT) String() string {
+	return fmt.Sprintf("DUT%+v", *d)
+}
+
+// ATE is a reserved ATE.
+type ATE struct {
+	*Dims
+}
+
+// Dimensions returns the dimensions of the device.
+func (a *ATE) Dimensions() *Dims {
+	return a.Dims
+}
+
+func (a *ATE) String() string {
+	return fmt.Sprintf("ATE%+v", *a)
+}
+
+// Port is a reserved Port.
+type Port struct {
+	Name  string
+	Speed opb.Port_Speed
+}
+
+func (p *Port) String() string {
+	return fmt.Sprintf("Port%+v", *p)
 }
 
 // ConfigOptions is a set of options for the config push.

@@ -31,7 +31,7 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -687,7 +687,7 @@ func TestValidateProtocolStart(t *testing.T) {
 	ipv4XP := parseXPath(t, "/fake/xpath/ipv4")
 	ipv6XP := parseXPath(t, "/fake/xpath/ipv6")
 	lspXP := parseXPath(t, "/fake/xpath/lsp")
-	baseClient := func() *ixATE {
+	baseClient := func(withIsisAndLAG bool) *ixATE {
 		lsp := &ixconfig.TopologyRsvpteLsps{
 			RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
 				Xpath:  lspXP,
@@ -709,21 +709,37 @@ func TestValidateProtocolStart(t *testing.T) {
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{dg},
 			}},
+			Lag:   []*ixconfig.Lag{{}},
+			Vport: []*ixconfig.Vport{{}},
 		}
+		updateXPaths(cfg) // Only needed for IS-IS/LAG test case
+
+		var isr map[string]*ixconfig.TopologyNetworkGroup
+		var link ixconfig.IxiaCfgNode
+		link = cfg.Vport[0]
+		if withIsisAndLAG {
+			link = cfg.Lag[0]
+			isr = map[string]*ixconfig.TopologyNetworkGroup{"isr": nil}
+		}
+
 		return &ixATE{
 			cfg: cfg,
 			intfs: map[string]*intf{
 				"someIntf": &intf{
-					deviceGroup: dg,
-					rsvpLSPs:    map[string]*ixconfig.TopologyRsvpteLsps{"lspName": lsp},
+					deviceGroup:       dg,
+					rsvpLSPs:          map[string]*ixconfig.TopologyRsvpteLsps{"lspName": lsp},
+					link:              link,
+					isrToNetworkGroup: isr,
 				},
 			},
 		}
 	}
 	tests := []struct {
 		desc           string
+		withIsisAndLAG bool
 		topoStatus     string
 		topoErr        error
+		errorsResult   string
 		idErr          error
 		protocolStatus string
 		protocolErr    error
@@ -777,13 +793,20 @@ func TestValidateProtocolStart(t *testing.T) {
 		topoStatus:     "started",
 		protocolStatus: "up",
 		lspStatus:      "up",
+	}, {
+		desc:           "index out of bounds with IS-IS and LAG",
+		withIsisAndLAG: true,
+		topoStatus:     "notStarted",
+		errorsResult:   `[{"Name": "Index was outside the bounds of the array"}]`,
+		protocolStatus: "up",
+		lspStatus:      "up",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
 			sleepFn = func(time.Duration) {}
 
-			c := baseClient()
+			c := baseClient(test.withIsisAndLAG)
 			c.c = &fakeCfgClient{
 				xPathToID: map[string]string{
 					ethXP.String():  ethID,
@@ -794,11 +817,12 @@ func TestValidateProtocolStart(t *testing.T) {
 				updateIDErr: test.idErr,
 				session: &fakeSession{
 					getRsps: map[string]string{
-						"globals/topology": fmt.Sprintf(`{"status": "%s"}`, test.topoStatus),
-						ethID:              fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
-						ipv4ID:             fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
-						ipv6ID:             fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
-						lspID:              fmt.Sprintf(`{"state": ["%s"]}`, test.lspStatus),
+						"globals/topology":        fmt.Sprintf(`{"status": "%s"}`, test.topoStatus),
+						"globals/appErrors/error": test.errorsResult,
+						ethID:                     fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						ipv4ID:                    fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						ipv6ID:                    fmt.Sprintf(`{"sessionStatus": ["%s"]}`, test.protocolStatus),
+						lspID:                     fmt.Sprintf(`{"state": ["%s"]}`, test.lspStatus),
 					},
 					getErrs: map[string]error{
 						"globals/topology": test.topoErr,
@@ -1659,6 +1683,22 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 		},
 		importErrs: []error{errors.New("error pushing config")},
 		wantErr:    "could not update BGP v4 loopback peer",
+	}, {
+		desc: "BGP v6 loopback peer config failure",
+		ifc: &opb.InterfaceConfig{
+			Name:             intfName,
+			Link:             &opb.InterfaceConfig_Port{port},
+			Ethernet:         &opb.EthernetConfig{Mtu: 1500},
+			Ipv6LoopbackCidr: "cafe:beef::1/128",
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{
+					PeerAddress: "cafe::1",
+					OnLoopback:  true,
+				}},
+			},
+		},
+		importErrs: []error{errors.New("error pushing config")},
+		wantErr:    "could not update BGP v6 loopback peer",
 	}, {
 		desc: "config apply failure",
 		ifc: &opb.InterfaceConfig{

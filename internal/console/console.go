@@ -19,11 +19,11 @@ import (
 	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/testbed"
 )
 
 // NewConsole creates a console client for the specified DUT.
-func NewConsole(ctx context.Context, dut *reservation.DUT) (binding.StreamClient, error) {
-	return binding.Get().DialConsole(ctx, dut, grpc.WithBlock())
+func NewConsole(ctx context.Context, dut *binding.DUT) (binding.StreamClient, error) {
+	return testbed.Bind().DialConsole(ctx, dut, grpc.WithBlock())
 }

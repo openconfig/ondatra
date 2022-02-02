@@ -30,7 +30,7 @@ import (
 	"fmt"
 
 	"github.com/mohae/deepcopy"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 )
 
 type ixSession interface {

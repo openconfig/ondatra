@@ -30,9 +30,9 @@ import (
 	"github.com/openconfig/ygot/util"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/fakegnmi"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/internal/reservation"
 	"github.com/openconfig/ondatra/negtest"
 	"github.com/openconfig/ondatra/telemetry/device"
 	"github.com/openconfig/ondatra/telemetry/interfaces"
@@ -53,7 +53,7 @@ func initTelemetryFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.GNMIDialer = func(ctx context.Context, _ *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	fakeBind.GNMIDialer = func(ctx context.Context, _ *binding.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return fakeGNMI.Dial(ctx, opts...)
 	}
 }
@@ -2109,10 +2109,31 @@ func TestWatch(t *testing.T) {
 		desc                 string
 		stub                 func(s *fakegnmi.Stubber)
 		inPortKey            string
+		predicate            func(*telemetry.QualifiedUint64) bool
 		wantSubscriptionPath *gpb.Path
 		wantQualified        *telemetry.QualifiedUint64
 		wantStatus           bool
 	}{{
+		desc: "no values at path",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Sync()
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.Add(time.Minute).UnixNano(),
+				})
+		},
+		predicate: func(val *telemetry.QualifiedUint64) bool {
+			return !val.IsPresent()
+		},
+		inPortKey:            staticPortName,
+		wantSubscriptionPath: staticOctetsPath,
+		wantStatus:           true,
+		wantQualified: &telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Path: staticOctetsPath,
+			},
+		},
+	}, {
 		desc: "values and predicate never true",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(
@@ -2133,6 +2154,12 @@ func TestWatch(t *testing.T) {
 					&gpb.Notification{
 						Timestamp: startTime.Add(time.Minute).UnixNano(),
 					})
+		},
+		predicate: func(val *telemetry.QualifiedUint64) bool {
+			if val.IsPresent() {
+				return val.Val(t) > 100
+			}
+			return false
 		},
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: staticOctetsPath,
@@ -2171,6 +2198,12 @@ func TestWatch(t *testing.T) {
 						Timestamp: startTime.Add(time.Minute).UnixNano(),
 					})
 		},
+		predicate: func(val *telemetry.QualifiedUint64) bool {
+			if val.IsPresent() {
+				return val.Val(t) > 100
+			}
+			return false
+		},
 		inPortKey:            staticPortName,
 		wantSubscriptionPath: staticOctetsPath,
 		wantStatus:           true,
@@ -2185,15 +2218,12 @@ func TestWatch(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got, predStatus := dut.Telemetry().Interface(tt.inPortKey).Counters().OutOctets().Watch(t, time.Second, func(val *telemetry.QualifiedUint64) bool {
-				if val.IsPresent() {
-					return val.Val(t) > 100
-				}
-				return false
-			}).Await(t)
+			got, predStatus := dut.Telemetry().Interface(tt.inPortKey).Counters().OutOctets().Watch(t, time.Second, tt.predicate).Await(t)
 			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
-			checkJustReceived(t, got.RecvTimestamp)
-			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
 
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)

@@ -21,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/negtest"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -32,7 +32,7 @@ func TestReserveErrors(t *testing.T) {
 
 	tests := []struct {
 		name, tbProto string
-		res           *reservation.Reservation
+		res           *binding.Reservation
 		wantErr       string
 	}{{
 		name:    "Bad testbed proto",
@@ -41,24 +41,24 @@ func TestReserveErrors(t *testing.T) {
 	}, {
 		name:    "Nonexistent device ID",
 		tbProto: `duts{id:"gaga"}`,
-		res:     &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
 		wantErr: "gaga",
 	}, {
 		name:    "Nonexistent port ID",
 		tbProto: `duts{id:"dut" ports{id:"gaga"}}`,
-		res: &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{
-			&reservation.Dims{Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
+		res: &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{
+			&binding.Dims{Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
 		}}},
 		wantErr: "gaga",
 	}, {
 		name:    "Disallowed device ID",
 		tbProto: `duts{id:"$^&#(#"}`,
-		res:     &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
 		wantErr: "invalid testbed ID",
 	}, {
 		name:    "Disallowed port ID",
 		tbProto: `duts{id:"dut" ports{id:"$^&#(#"}}`,
-		res:     &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{&reservation.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
 		wantErr: "invalid testbed ID",
 	}, {
 		name:    "Duplicate port ID",
@@ -99,8 +99,8 @@ func TestReserveErrors(t *testing.T) {
 	}, {
 		name:    "No device name",
 		tbProto: `duts{id:"dut"}`,
-		res: &reservation.Reservation{DUTs: map[string]*reservation.DUT{"dut": &reservation.DUT{
-			&reservation.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
+		res: &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{
+			&binding.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
 		}}},
 		wantErr: "no name",
 	}}

@@ -37,7 +37,7 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/gnmi/errlist"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -52,6 +52,8 @@ type DataPoint struct {
 	Timestamp time.Time
 	// time the update was received by the test
 	RecvTimestamp time.Time
+	// Sync indicates whether the received datapoint was gNMI sync response.
+	Sync bool
 }
 
 func (d *DataPoint) String() string {
@@ -298,10 +300,17 @@ func PathStructToString(ps ygot.PathStruct) string {
 // *ComplianceError stores the compliance errors.
 func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStruct, queryPath *gpb.Path, schema *ytypes.Schema, isLeaf, reverseShadowPaths bool) ([]*DataPoint, *ComplianceErrors, error) {
 	queryPathStr := pathToString(queryPath)
-	if isLeaf && len(data) > 1 {
-		return nil, &ComplianceErrors{PathErrors: []*TelemetryError{{
-			Err: fmt.Errorf("got multiple (%d) data points for leaf node at path %s: %v", len(data), queryPathStr, data),
-		}}}, nil
+	if isLeaf {
+		switch {
+		case len(data) > 2:
+			return nil, &ComplianceErrors{PathErrors: []*TelemetryError{{
+				Err: fmt.Errorf("got multiple (%d) data points for leaf node at path %s: %v", len(data), queryPathStr, data),
+			}}}, nil
+		case len(data) == 2 && data[1].Sync == false:
+			return nil, &ComplianceErrors{PathErrors: []*TelemetryError{{
+				Err: fmt.Errorf("got multiple (%d) data points for leaf node at path %s: %v", len(data), queryPathStr, data),
+			}}}, nil
+		}
 	}
 
 	var unmarshalledDatapoints []*DataPoint
@@ -318,6 +327,10 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 		var gcopts []ytypes.GetOrCreateNodeOpt
 		if reverseShadowPaths {
 			gcopts = append(gcopts, &ytypes.PreferShadowPath{})
+		}
+		// Sync datapoints don't contain path nor values.
+		if dp.Sync {
+			continue
 		}
 
 		// 1a. Check for path compliance by doing a prefix-match, since
@@ -496,7 +509,7 @@ func watch(ctx context.Context, n ygot.PathStruct, paths []*gpb.Path, duration t
 // they are evaluated once per notification, after the first sync is received.
 func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, path *gpb.Path, isLeaf bool, converter ConvertFunc, pred Predicate) error {
 	var recvData []*DataPoint
-	var initialSync bool
+	var hasSynced bool
 	var sync bool
 	var err error
 
@@ -508,15 +521,19 @@ func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, 
 		if mode == gpb.SubscriptionList_ONCE && sync {
 			return nil
 		}
-		initialSync = initialSync || sync || isLeaf
-		// Skip conversion and predicate until first sync with data for non-leaves.
-		if !initialSync || len(recvData) == 0 {
+		firstSync := !hasSynced && (sync || isLeaf)
+		hasSynced = hasSynced || sync || isLeaf
+		// Skip conversion and predicate until first sync for non-leaves.
+		if !hasSynced {
 			continue
 		}
 		var datas [][]*DataPoint
 		if isLeaf {
 			for _, datum := range recvData {
-				datas = append(datas, []*DataPoint{datum})
+				// Only add a sync datapoint on the first sync, if there are no other values.
+				if (len(recvData) == 1 && firstSync) || !datum.Sync {
+					datas = append(datas, []*DataPoint{datum})
+				}
 			}
 		} else {
 			datas = [][]*DataPoint{recvData}
@@ -569,12 +586,12 @@ func batchSet(ctx context.Context, origin string, target string, customData map[
 	return setVals(ctx, dev, opts, origin, target, req)
 }
 
-func resolveBatch(ctx context.Context, target string, customData map[string]interface{}) (reservation.Device, *requestOpts, error) {
+func resolveBatch(ctx context.Context, target string, customData map[string]interface{}) (binding.Device, *requestOpts, error) {
 	res, err := testbed.Reservation()
 	if err != nil {
 		return nil, nil, err
 	}
-	dev, err := res.Device(target)
+	dev, err := testbed.Device(res, target)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -650,7 +667,7 @@ func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperatio
 	return response, path, err
 }
 
-func setVals(ctx context.Context, dev reservation.Device, opts *requestOpts, origin, target string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
+func setVals(ctx context.Context, dev binding.Device, opts *requestOpts, origin, target string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
 	// TODO: Is there any value in setting the target here?
 	req.Prefix = &gpb.Path{Origin: origin}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
@@ -679,7 +696,7 @@ func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]interface{}, error) {
 
 // resolve resolves a path struct to a path, device, and request options.
 // The returned requestOpts contains the gnmi Client to use.
-func resolve(ctx context.Context, n ygot.PathStruct) (*gpb.Path, reservation.Device, *requestOpts, error) {
+func resolve(ctx context.Context, n ygot.PathStruct) (*gpb.Path, binding.Device, *requestOpts, error) {
 	path, customData, err := ResolvePath(n)
 	if err != nil {
 		return path, nil, nil, err
@@ -897,6 +914,10 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 		return data, false, nil
 	case *gpb.SubscribeResponse_SyncResponse:
 		log.V(2).Infof("Received gNMI SyncResponse.")
+		data = append(data, &DataPoint{
+			RecvTimestamp: recvTS,
+			Sync:          true,
+		})
 		return data, true, nil
 	default:
 		return data, false, errors.Errorf("unexpected response: %v (%T)", v, v)

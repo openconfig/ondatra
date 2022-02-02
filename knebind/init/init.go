@@ -21,7 +21,7 @@ import (
 	"flag"
 
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind"
 )
 

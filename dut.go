@@ -20,14 +20,13 @@ import (
 	"testing"
 
 	"github.com/openconfig/ondatra/config/device"
-	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/cli"
 	"github.com/openconfig/ondatra/internal/console"
 	"github.com/openconfig/ondatra/internal/dut"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/operations"
 	"github.com/openconfig/ondatra/internal/p4rt"
-	"github.com/openconfig/ondatra/internal/reservation"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -46,14 +45,14 @@ func (d *DUTDevice) Config() *Config {
 	// TODO: Add field to root node in ygot instead of using custom data.
 	dev.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
-		dut:        d.res.(*reservation.DUT),
+		dut:        d.res.(*binding.DUT),
 		DevicePath: dev,
 	}
 }
 
 // Config is the DUT configuration API.
 type Config struct {
-	dut *reservation.DUT
+	dut *binding.DUT
 	*device.DevicePath
 }
 
@@ -70,7 +69,7 @@ func (a *Config) New() *DUTConfig {
 
 // DUTConfig is a configuration of a device under test.
 type DUTConfig struct {
-	dut *reservation.DUT
+	dut *binding.DUT
 	cfg *dut.Config
 }
 
@@ -121,13 +120,6 @@ func (c *DUTConfig) WithJuniperFile(path string) *DUTConfig {
 	return c
 }
 
-// WithOpenConfigFile sets the openconfig to be pushed to a device
-// if no vendor-specific configuration has been set.
-func (c *DUTConfig) WithOpenConfigFile(path string) *DUTConfig {
-	c.cfg.Open = dut.ConfigFile(path)
-	return c
-}
-
 // WithVarValue replaces each occurrence of {{ var "key" }} in the pushed config
 // with the specified value.
 func (c *DUTConfig) WithVarValue(key, value string) *DUTConfig {
@@ -165,12 +157,12 @@ func (c *DUTConfig) Append(t testing.TB) {
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
 func (d *DUTDevice) RawAPIs() *RawAPIs {
-	return &RawAPIs{dut: d.res.(*reservation.DUT)}
+	return &RawAPIs{dut: d.res.(*binding.DUT)}
 }
 
 // RawAPIs provides access to raw DUT protocols APIs.
 type RawAPIs struct {
-	dut *reservation.DUT
+	dut *binding.DUT
 }
 
 // GNMI provides access to either a new or default gNMI client.
@@ -185,12 +177,12 @@ func (r *RawAPIs) GNOI() *GNOIAPI {
 
 // GNMIAPI provides access for creating a default or new gNMI client on the DUT.
 type GNMIAPI struct {
-	dut *reservation.DUT
+	dut *binding.DUT
 }
 
 // GNOIAPI provides access for creating a default or new gNOI client on the DUT.
 type GNOIAPI struct {
-	dut *reservation.DUT
+	dut *binding.DUT
 }
 
 // New returns a new gNMI client on the DUT. This client will not be cached.

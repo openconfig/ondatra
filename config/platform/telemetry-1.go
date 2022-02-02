@@ -15,6 +15,188 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Lookup(t testing.TB) *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Get(t testing.TB) []*oc.Component_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity in the given batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Replace(t testing.TB, val *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity in the given batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Update(t testing.TB, val *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity in the given batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_MemoryPath) Lookup(t testing.TB) *oc.QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_Memory{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_Memory", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_MemoryPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_Memory {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_IntegratedCircuit_Memory
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_Memory{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_Memory", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Get(t testing.TB) []*oc.Component_IntegratedCircuit_Memory {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_IntegratedCircuit_Memory
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/integrated-circuit/memory.
+func (n *Component_IntegratedCircuit_MemoryPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/integrated-circuit/memory in the given batch object.
+func (n *Component_IntegratedCircuit_MemoryPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/integrated-circuit/memory.
+func (n *Component_IntegratedCircuit_MemoryPath) Replace(t testing.TB, val *oc.Component_IntegratedCircuit_Memory) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/integrated-circuit/memory in the given batch object.
+func (n *Component_IntegratedCircuit_MemoryPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_IntegratedCircuit_Memory) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/integrated-circuit/memory.
+func (n *Component_IntegratedCircuit_MemoryPath) Update(t testing.TB, val *oc.Component_IntegratedCircuit_Memory) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/integrated-circuit/memory in the given batch object.
+func (n *Component_IntegratedCircuit_MemoryPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_IntegratedCircuit_Memory) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/config/name with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -585,208 +767,6 @@ func convertComponent_Port_BreakoutMode_Group_IndexPath(t testing.TB, md *genuti
 		Metadata: md,
 	}
 	val := parent.Index
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Component_Port_BreakoutMode_Group{}
-	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, true)
-	if ok {
-		return convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Port_BreakoutMode_Group{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath extracts the value of the leaf NumBreakouts from its parent oc.Component_Port_BreakoutMode_Group
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.NumBreakouts
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Component_Port_BreakoutMode_Group{}
-	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, true)
-	if ok {
-		return convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Port_BreakoutMode_Group{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath extracts the value of the leaf NumPhysicalChannels from its parent oc.Component_Port_BreakoutMode_Group
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.NumPhysicalChannels
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

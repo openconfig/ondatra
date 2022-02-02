@@ -32,8 +32,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 
 	tpb "github.com/google/kne/proto/topo"
@@ -68,7 +67,7 @@ func New(cfg *Config) (*Bind, error) {
 
 // Reserve implements the binding Reserve method by finding nodes and links in
 // the topology specified in the config file that match the requested testbed.
-func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration) (*reservation.Reservation, error) {
+func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration) (*binding.Reservation, error) {
 	out, err := kneCmdFn(b.cfg, "topology", "service", b.cfg.TopoPath)
 	if err != nil {
 		return nil, err
@@ -95,7 +94,7 @@ func (b *Bind) SetTestMetadata(_ *binding.TestMetadata) error {
 	return nil
 }
 
-func (b *Bind) DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+func (b *Bind) DialGNMI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	conn, err := b.dialGRPC(ctx, dut, "gnmi", opts...)
 	if err != nil {
 		return nil, err
@@ -103,7 +102,7 @@ func (b *Bind) DialGNMI(ctx context.Context, dut *reservation.DUT, opts ...grpc.
 	return gpb.NewGNMIClient(conn), nil
 }
 
-func (b *Bind) DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
+func (b *Bind) DialP4RT(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	conn, err := b.dialGRPC(ctx, dut, "p4rt", opts...)
 	if err != nil {
 		return nil, err
@@ -111,7 +110,7 @@ func (b *Bind) DialP4RT(ctx context.Context, dut *reservation.DUT, opts ...grpc.
 	return p4pb.NewP4RuntimeClient(conn), nil
 }
 
-func (b *Bind) dialGRPC(ctx context.Context, dut *reservation.DUT, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (b *Bind) dialGRPC(ctx context.Context, dut *binding.DUT, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	s, err := b.services.Lookup(dut.Name, serviceName)
 	if err != nil {
 		return nil, err
@@ -152,7 +151,7 @@ func (c *passCred) RequireTransportSecurity() bool {
 	return true
 }
 
-func (b *Bind) PushConfig(ctx context.Context, dut *reservation.DUT, config string, opts *binding.ConfigOptions) error {
+func (b *Bind) PushConfig(ctx context.Context, dut *binding.DUT, config string, opts *binding.ConfigOptions) error {
 	if dut.Vendor != opb.Device_ARISTA {
 		return errors.New("KNEBind PushConfig only supports Arista devices")
 	}
@@ -168,7 +167,7 @@ func (b *Bind) PushConfig(ctx context.Context, dut *reservation.DUT, config stri
 	return err
 }
 
-func (b *Bind) dutExec(dut *reservation.DUT, cmd string) (_ string, rerr error) {
+func (b *Bind) dutExec(dut *binding.DUT, cmd string) (_ string, rerr error) {
 	s, err := b.services.Lookup(dut.Name, "ssh")
 	if err != nil {
 		return "", err
