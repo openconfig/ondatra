@@ -20,9 +20,9 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/pborman/uuid"
+	"github.com/pkg/errors"
 
 	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -44,6 +44,8 @@ var (
 		tpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
 		tpb.Node_IXIA_TG:      opb.Device_IXIA,
 		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
+		tpb.Node_CISCO_XRD:    opb.Device_CISCO,
+		tpb.Node_CISCO_E8000:  opb.Device_CISCO,
 	}
 )
 
