@@ -16,159 +16,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-platform/components/component/state/id with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Component{}
-	md, ok := oc.Lookup(t, n, "Component", goStruct, true, false)
-	if ok {
-		return convertComponent_IdPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_IdPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/id with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_IdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_IdPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/id with a ONCE subscription.
-func (n *Component_IdPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/id with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_IdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_IdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Component{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component", gs, queryPath, true, false)
-		return convertComponent_IdPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/id with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_IdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_IdPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/id with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_IdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/id failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/id to the batch object.
-func (n *Component_IdPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/id with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_IdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/id with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_IdPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/id to the batch object.
-func (n *Component_IdPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_IdPath extracts the value of the leaf Id from its parent oc.Component
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertComponent_IdPath(t testing.TB, md *genutil.Metadata, parent *oc.Component) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Id
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_IntegratedCircuitPath) Lookup(t testing.TB) *oc.QualifiedComponent_IntegratedCircuit {
@@ -318,6 +165,1379 @@ func (n *Component_IntegratedCircuitPathAny) Watch(t testing.TB, timeout time.Du
 func (n *Component_IntegratedCircuitPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Lookup(t testing.TB) *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Get(t testing.TB) []*oc.Component_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	c := &oc.CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_IntegratedCircuit_BackplaneFacingCapacity)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_BackplaneFacingCapacityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool) *oc.Component_IntegratedCircuit_BackplaneFacingCapacityWatcher {
+	t.Helper()
+	w := &oc.Component_IntegratedCircuit_BackplaneFacingCapacityWatcher{}
+	gs := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", gs, queryPath, false, false)
+		return (&oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool) *oc.Component_IntegratedCircuit_BackplaneFacingCapacityWatcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacityPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity {
+	t.Helper()
+	c := &oc.CollectionComponent_IntegratedCircuit_BackplaneFacingCapacity{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_BackplaneFacingCapacity) bool) *oc.Component_IntegratedCircuit_BackplaneFacingCapacityWatcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacityPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath extracts the value of the leaf AvailablePct from its parent oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertComponent_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.AvailablePct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath extracts the value of the leaf ConsumedCapacity from its parent oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.ConsumedCapacity
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath extracts the value of the leaf TotalOperationalCapacity from its parent oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.TotalOperationalCapacity
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a ONCE subscription.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_BackplaneFacingCapacity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_BackplaneFacingCapacity", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total to the batch object.
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalPath extracts the value of the leaf Total from its parent oc.Component_IntegratedCircuit_BackplaneFacingCapacity
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_BackplaneFacingCapacity_TotalPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_BackplaneFacingCapacity) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.Total
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_MemoryPath) Lookup(t testing.TB) *oc.QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_Memory{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_Memory", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_MemoryPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_Memory {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_IntegratedCircuit_Memory
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_Memory{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_Memory", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Get(t testing.TB) []*oc.Component_IntegratedCircuit_Memory {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_IntegratedCircuit_Memory
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_MemoryPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	c := &oc.CollectionComponent_IntegratedCircuit_Memory{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_IntegratedCircuit_Memory) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_IntegratedCircuit_Memory)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_MemoryPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_Memory) bool) *oc.Component_IntegratedCircuit_MemoryWatcher {
+	t.Helper()
+	w := &oc.Component_IntegratedCircuit_MemoryWatcher{}
+	gs := &oc.Component_IntegratedCircuit_Memory{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_Memory", gs, queryPath, false, false)
+		return (&oc.QualifiedComponent_IntegratedCircuit_Memory{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_IntegratedCircuit_Memory)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_MemoryPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_Memory) bool) *oc.Component_IntegratedCircuit_MemoryWatcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_MemoryPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/memory with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_MemoryPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_IntegratedCircuit_Memory) *oc.QualifiedComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_IntegratedCircuit_Memory) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/memory failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory to the batch object.
+func (n *Component_IntegratedCircuit_MemoryPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_IntegratedCircuit_Memory {
+	t.Helper()
+	c := &oc.CollectionComponent_IntegratedCircuit_Memory{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_IntegratedCircuit_Memory) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_IntegratedCircuit_Memory) bool) *oc.Component_IntegratedCircuit_MemoryWatcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_MemoryPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory to the batch object.
+func (n *Component_IntegratedCircuit_MemoryPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_Memory{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_Memory", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_Memory{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_Memory", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a ONCE subscription.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_Memory{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_Memory", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_Memory_CorrectedParityErrorsPath extracts the value of the leaf CorrectedParityErrors from its parent oc.Component_IntegratedCircuit_Memory
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_Memory_CorrectedParityErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_Memory) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.CorrectedParityErrors
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_Memory{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_Memory", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_Memory_TotalParityErrorsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_Memory{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_Memory", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_Memory_TotalParityErrorsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a ONCE subscription.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_Memory_TotalParityErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_Memory{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_Memory", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_Memory_TotalParityErrorsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_TotalParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_TotalParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_Memory_TotalParityErrorsPath extracts the value of the leaf TotalParityErrors from its parent oc.Component_IntegratedCircuit_Memory
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_Memory_TotalParityErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_Memory) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.TotalParityErrors
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_IntegratedCircuit_Memory{}
+	md, ok := oc.Lookup(t, n, "Component_IntegratedCircuit_Memory", goStruct, true, false)
+	if ok {
+		return convertComponent_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_IntegratedCircuit_Memory{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_IntegratedCircuit_Memory", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a ONCE subscription.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_IntegratedCircuit_Memory{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_IntegratedCircuit_Memory", gs, queryPath, true, false)
+		return convertComponent_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors to the batch object.
+func (n *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_IntegratedCircuit_Memory_UncorrectedParityErrorsPath extracts the value of the leaf UncorrectedParityErrors from its parent oc.Component_IntegratedCircuit_Memory
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_IntegratedCircuit_Memory_UncorrectedParityErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_IntegratedCircuit_Memory) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.UncorrectedParityErrors
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-platform/components/component/state/location with a ONCE subscription.
@@ -2148,1075 +3368,4 @@ func (n *Component_Pcie_CorrectableErrorsPathAny) Watch(t testing.TB, timeout ti
 func (n *Component_Pcie_CorrectableErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath extracts the value of the leaf AdvisoryNonFatalErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.AdvisoryNonFatalErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_BadDllpErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_BadDllpErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_BadDllpErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_BadDllpErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_BadDllpErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_BadDllpErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_BadDllpErrorsPath extracts the value of the leaf BadDllpErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_BadDllpErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.BadDllpErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_BadTlpErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_BadTlpErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_BadTlpErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_BadTlpErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_BadTlpErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_BadTlpErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_BadTlpErrorsPath extracts the value of the leaf BadTlpErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_BadTlpErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.BadTlpErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath extracts the value of the leaf HdrLogOverflowErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.HdrLogOverflowErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_InternalErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_InternalErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_InternalErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_InternalErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_InternalErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_InternalErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_InternalErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_InternalErrorsPath extracts the value of the leaf InternalErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_InternalErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.InternalErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_ReceiverErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_ReceiverErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_ReceiverErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_ReceiverErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_ReceiverErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_ReceiverErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_ReceiverErrorsPath extracts the value of the leaf ReceiverErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_ReceiverErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.ReceiverErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Pcie_CorrectableErrors{}
-	md, ok := oc.Lookup(t, n, "Component_Pcie_CorrectableErrors", goStruct, true, false)
-	if ok {
-		return convertComponent_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Pcie_CorrectableErrors{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_CorrectableErrors", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a ONCE subscription.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Pcie_CorrectableErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_CorrectableErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors to the batch object.
-func (n *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Pcie_CorrectableErrors_RelayRolloverErrorsPath extracts the value of the leaf RelayRolloverErrors from its parent oc.Component_Pcie_CorrectableErrors
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Pcie_CorrectableErrors_RelayRolloverErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_CorrectableErrors) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.RelayRolloverErrors
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
 }

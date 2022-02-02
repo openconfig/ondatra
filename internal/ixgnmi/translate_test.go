@@ -21,7 +21,7 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"

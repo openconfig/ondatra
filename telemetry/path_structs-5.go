@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -60,6 +61,216 @@ package telemetry
 import (
 	"github.com/openconfig/ygot/ygot"
 )
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny struct {
+	*ygot.NodePath
+}
+
+// Received (container): Number of IGMP membership queries received.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath) Received() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Received (container): Number of IGMP membership queries received.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny) Received() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sent (container): Number of IGMP membership queries sent.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "sent"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/sent"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath) Sent() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sent"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sent (container): Number of IGMP membership queries sent.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "sent"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/sent"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny) Sent() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPathAny {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"sent"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3 YANG schema element.
+type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny struct {
+	*ygot.NodePath
+}
+
+// V1 (leaf): IGMP v1.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v1"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V1() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v1"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// V1 (leaf): IGMP v1.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v1"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V1() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v1"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// V2 (leaf): IGMP v2.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V2() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// V2 (leaf): IGMP v2.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V2() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// V3 (leaf): IGMP v3.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v3"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V3() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v3"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// V3 (leaf): IGMP v3.
+// ----------------------------------------
+// Defining module: "openconfig-igmp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/v3"
+// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3"
+func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V3() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny {
+	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "v3"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
 
 // NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/sent YANG schema element.
 type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath struct {
@@ -18051,190 +18262,6 @@ func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neig
 	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "min-delay"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny struct {
-	*ygot.NodePath
-}
-
-// Bandwidth (leaf): Residual bandwidth on a link,forwarding adjacency
-// [RFC4206], or bundled link in IEEE floating-point
-// format with units of bytes per second. For a link or
-// forwarding adjacency, residual bandwidth is defined to
-// be the Maximum Bandwidth [RFC5305] minus the bandwidth
-// currently allocated to RSVP-TE label switched paths.
-// For a bundled link, residual bandwidth is defined to
-// be the sum of the component link residual
-// bandwidths.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/bandwidth"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Bandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "bandwidth"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Bandwidth (leaf): Residual bandwidth on a link,forwarding adjacency
-// [RFC4206], or bundled link in IEEE floating-point
-// format with units of bytes per second. For a link or
-// forwarding adjacency, residual bandwidth is defined to
-// be the Maximum Bandwidth [RFC5305] minus the bandwidth
-// currently allocated to RSVP-TE label switched paths.
-// For a bundled link, residual bandwidth is defined to
-// be the sum of the component link residual
-// bandwidths.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/bandwidth"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Bandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "bandwidth"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// Bandwidth (leaf): The amount of bandwidth reservable in this
-// direction on this link. Note that for
-// oversubscription purposes, this can be greater than
-// the bandwidth of the link. It contains eight 32-bit
-// IEEE floating point numbers(one for each priority).
-// The units are bytes (not bits!) per second. The
-// values correspond to the bandwidth that can be
-// reserved with a setup priority of 0 through 7,
-// arranged in increasing order with priority 0
-// occurring at the start of the sub-TLV, and priority
-// 7 at the end of the sub-TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/bandwidth"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPath) Bandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "bandwidth"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Bandwidth (leaf): The amount of bandwidth reservable in this
-// direction on this link. Note that for
-// oversubscription purposes, this can be greater than
-// the bandwidth of the link. It contains eight 32-bit
-// IEEE floating point numbers(one for each priority).
-// The units are bytes (not bits!) per second. The
-// values correspond to the bandwidth that can be
-// reserved with a setup priority of 0 through 7,
-// arranged in increasing order with priority 0
-// occurring at the start of the sub-TLV, and priority
-// 7 at the end of the sub-TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/bandwidth"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Bandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "bandwidth"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Priority (leaf): Setup priority level of 0 through 7 to be used by
-// Unreserved Bandwidth sub-TLV 11.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/priority"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPath) Priority() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Priority (leaf): Setup priority level of 0 through 7 to be used by
-// Unreserved Bandwidth sub-TLV 11.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/priority"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Priority() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "priority"},
 			map[string]interface{}{},
 			n,
 		),

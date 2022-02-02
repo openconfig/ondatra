@@ -20,7 +20,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/internal/usererr"
+	"github.com/openconfig/ondatra/binding/usererr"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

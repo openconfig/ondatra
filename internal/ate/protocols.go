@@ -23,7 +23,7 @@ import (
 	"strings"
 
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/internal/usererr"
+	"github.com/openconfig/ondatra/binding/usererr"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -235,17 +235,28 @@ func (ix *ixATE) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
 	dg := intf.deviceGroup
 	if ipv4 := ifc.GetIpv4LoopbackCidr(); ipv4 != "" {
-		ip, netw, err := net.ParseCIDR(ipv4)
-		if err != nil {
-			return usererr.Wrapf(err, "could not parse %q as an IPv4 CIDR address", ipv4)
+		ip, mask, isV6, err := parseCIDR(ipv4)
+		if err != nil || isV6 {
+			return usererr.New("invalid IPv4 CIDR address: %q", ipv4)
 		}
-		mask, _ := netw.Mask.Size()
 		dg.Ipv4Loopback = append(dg.Ipv4Loopback, &ixconfig.TopologyIpv4Loopback{
 			Name:    ixconfig.String(fmt.Sprintf("IPv4 loopback on %s", ifc.GetName())),
-			Address: ixconfig.MultivalueStr(ip.String()),
-			Prefix:  ixconfig.MultivalueUint32(uint32(mask)),
+			Address: ixconfig.MultivalueStr(ip),
+			Prefix:  ixconfig.MultivalueUint32(mask),
 		})
 		intf.ipv4Loopback = dg.Ipv4Loopback[0]
+	}
+	if ipv6 := ifc.GetIpv6LoopbackCidr(); ipv6 != "" {
+		ip, mask, isV6, err := parseCIDR(ipv6)
+		if err != nil || !isV6 {
+			return usererr.New("invalid IPv6 CIDR address: %q", ipv6)
+		}
+		dg.Ipv6Loopback = append(dg.Ipv6Loopback, &ixconfig.TopologyIpv6Loopback{
+			Name:    ixconfig.String(fmt.Sprintf("IPv6 loopback on %s", ifc.GetName())),
+			Address: ixconfig.MultivalueStr(ip),
+			Prefix:  ixconfig.MultivalueUint32(mask),
+		})
+		intf.ipv6Loopback = dg.Ipv6Loopback[0]
 	}
 	return nil
 }
@@ -319,6 +330,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		DiscardLSPs:        ixconfig.MultivalueBool(isis.GetDiscardLsps()),
 		AreaAddresses:      ixconfig.MultivalueStr(areaID),
 		TERouterId:         ixconfig.MultivalueStr(isis.GetTeRouterId()),
+		RtrcapId:           ixconfig.MultivalueStr(isis.GetCapabilityRouterId()),
 	}
 
 	isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting())
@@ -546,11 +558,20 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			isisRtr.EnableIpV6TE = appendBoolToMultivalueList(isisRtr.EnableIpV6TE, node.GetEnableTe())
 			isisRtr.EnableWideMetric = appendBoolToMultivalueList(isisRtr.EnableWideMetric, node.GetEnableWideMetric())
 			isisRtr.EnableWMforTEinNetworkGroup = appendBoolToMultivalueList(isisRtr.EnableWMforTEinNetworkGroup, node.GetEnableWideMetric())
-			teRtrID := "0.0.0.0"
-			if node.GetTeRouterId() != "" {
-				ip, isV6 := parseIP(node.GetTeRouterId())
+			capRtrID := "0.0.0.0"
+			if id := node.GetCapabilityRouterId(); id != "" {
+				ip, isV6 := parseIP(id)
 				if ip == nil || isV6 {
-					return nil, usererr.New("invalid TE router ID: %q", node.GetTeRouterId())
+					return nil, usererr.New("invalid capability router ID: %q", id)
+				}
+				capRtrID = ip.String()
+			}
+			isisRtr.RtrcapId = appendStrToMultivalueList(isisRtr.RtrcapId, capRtrID)
+			teRtrID := "0.0.0.0"
+			if id := node.GetTeRouterId(); id != "" {
+				ip, isV6 := parseIP(id)
+				if ip == nil || isV6 {
+					return nil, usererr.New("invalid TE router ID: %q", id)
 				}
 				teRtrID = ip.String()
 			}
@@ -773,7 +794,7 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	if peerCount := len(ifc.GetBgp().GetBgpPeers()); peerCount > maxNumPeersIxNetwork {
 		return usererr.New("specified number of peers %d exceeds maximum of %d for IxNetwork device group", peerCount, maxNumPeersIxNetwork)
 	}
-	v4Peers, v6Peers, v4LoopbackPeers, err := splitBGPPeers(ifc.GetBgp().GetBgpPeers())
+	v4Peers, v6Peers, v4LoopbackPeers, v6LoopbackPeers, err := splitBGPPeers(ifc.GetBgp().GetBgpPeers())
 	if err != nil {
 		return err
 	}
@@ -808,28 +829,39 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 		}
 		intf.ipv4Loopback.BgpIpv4Peer = peers
 	}
+	if len(v6LoopbackPeers) > 0 {
+		if intf.ipv6Loopback == nil {
+			return usererr.New("specified V6 loopback peers without IPv6 loopback configured on interface %q", ifc.GetName())
+		}
+		peers, err := bgpV6Peers(v6LoopbackPeers)
+		if err != nil {
+			return err
+		}
+		intf.ipv6Loopback.BgpIpv6Peer = peers
+	}
 	return nil
 }
 
-func splitBGPPeers(peers []*opb.BgpPeer) ([]*opb.BgpPeer, []*opb.BgpPeer, []*opb.BgpPeer, error) {
-	var v4Peers, v6Peers, v4LoopbackPeers []*opb.BgpPeer
+func splitBGPPeers(peers []*opb.BgpPeer) ([]*opb.BgpPeer, []*opb.BgpPeer, []*opb.BgpPeer, []*opb.BgpPeer, error) {
+	var v4Peers, v6Peers, v4LoopbackPeers, v6LoopbackPeers []*opb.BgpPeer
 	for _, peer := range peers {
 		ip, isV6 := parseIP(peer.GetPeerAddress())
 		if ip == nil {
-			return nil, nil, nil, usererr.New("invalid peer address %q", peer.GetPeerAddress())
+			return nil, nil, nil, nil, usererr.New("invalid peer address %q", peer.GetPeerAddress())
 		}
 		if peer.GetOnLoopback() {
 			if isV6 {
-				return nil, nil, nil, fmt.Errorf("IPv6 loopbacks not supported (saw peer with address %v configured on loopback)", peer.GetPeerAddress())
+				v6LoopbackPeers = append(v6LoopbackPeers, peer)
+			} else {
+				v4LoopbackPeers = append(v4LoopbackPeers, peer)
 			}
-			v4LoopbackPeers = append(v4LoopbackPeers, peer)
 		} else if isV6 {
 			v6Peers = append(v6Peers, peer)
 		} else {
 			v4Peers = append(v4Peers, peer)
 		}
 	}
-	return v4Peers, v6Peers, v4LoopbackPeers, nil
+	return v4Peers, v6Peers, v4LoopbackPeers, v6LoopbackPeers, nil
 }
 
 func bgpType(pt opb.BgpPeer_Type) *ixconfig.Multivalue {

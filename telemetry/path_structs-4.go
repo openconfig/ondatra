@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -60,6 +61,346 @@ package telemetry
 import (
 	"github.com/openconfig/ygot/ygot"
 )
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny struct {
+	*ygot.NodePath
+}
+
+// DefaultExportPolicy (leaf): explicitly set a default policy if no policy definition
+// in the export policy chain is satisfied.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/default-export-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) DefaultExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-export-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DefaultExportPolicy (leaf): explicitly set a default policy if no policy definition
+// in the export policy chain is satisfied.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/default-export-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-export-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) DefaultExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultExportPolicyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-export-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DefaultImportPolicy (leaf): explicitly set a default policy if no policy definition
+// in the import policy chain is satisfied.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/default-import-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) DefaultImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-import-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DefaultImportPolicy (leaf): explicitly set a default policy if no policy definition
+// in the import policy chain is satisfied.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/default-import-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/default-import-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) DefaultImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_DefaultImportPolicyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-import-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExportPolicy (leaf): list of policy names in sequence to be applied on
+// sending a routing update in the current context, e.g.,
+// for the current peer group, neighbor, address family,
+// etc.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/export-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) ExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "export-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExportPolicy (leaf): list of policy names in sequence to be applied on
+// sending a routing update in the current context, e.g.,
+// for the current peer group, neighbor, address family,
+// etc.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/export-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/export-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) ExportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ExportPolicyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "export-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ImportPolicy (leaf): list of policy names in sequence to be applied on
+// receiving a routing update in the current context, e.g.,
+// for the current peer group, neighbor, address family,
+// etc.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/import-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPath) ImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "import-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ImportPolicy (leaf): list of policy names in sequence to be applied on
+// receiving a routing update in the current context, e.g.,
+// for the current peer group, neighbor, address family,
+// etc.
+// ----------------------------------------
+// Defining module: "openconfig-routing-policy"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/import-policy"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/apply-policy/state/import-policy"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicyPathAny) ImportPolicy() *NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_ApplyPolicy_ImportPolicyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "import-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny struct {
+	*ygot.NodePath
+}
+
+// AllowOwnAs (leaf): Specify the number of occurrences of the local BGP speaker's
+// AS that can occur within the AS_PATH before it is rejected.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/allow-own-as"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) AllowOwnAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "allow-own-as"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AllowOwnAs (leaf): Specify the number of occurrences of the local BGP speaker's
+// AS that can occur within the AS_PATH before it is rejected.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/allow-own-as"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/allow-own-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) AllowOwnAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_AllowOwnAsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "allow-own-as"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DisablePeerAsFilter (leaf): When set to true, the system advertises routes to a peer
+// even if the peer's AS was in the AS path.  The default
+// behavior (false) suppresses advertisements to peers if
+// their AS number is in the AS path of the route.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/disable-peer-as-filter"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) DisablePeerAsFilter() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "disable-peer-as-filter"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DisablePeerAsFilter (leaf): When set to true, the system advertises routes to a peer
+// even if the peer's AS was in the AS path.  The default
+// behavior (false) suppresses advertisements to peers if
+// their AS number is in the AS path of the route.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/disable-peer-as-filter"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/disable-peer-as-filter"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) DisablePeerAsFilter() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_DisablePeerAsFilterPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "disable-peer-as-filter"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReplacePeerAs (leaf): Replace occurrences of the peer's AS in the AS_PATH
+// with the local autonomous system number
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/replace-peer-as"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPath) ReplacePeerAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "replace-peer-as"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReplacePeerAs (leaf): Replace occurrences of the peer's AS in the AS_PATH
+// with the local autonomous system number
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/replace-peer-as"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/as-path-options/state/replace-peer-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptionsPathAny) ReplacePeerAs() *NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AsPathOptions_ReplacePeerAsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "replace-peer-as"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
 
 // NetworkInstance_Protocol_Bgp_PeerGroup_EbgpMultihopPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/ebgp-multihop YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_EbgpMultihopPath struct {
@@ -28475,216 +28816,6 @@ func (n *NetworkInstance_Protocol_Igmp_Interface_CountersPathAny) Reports() *Net
 	return &NetworkInstance_Protocol_Igmp_Interface_Counters_ReportsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"reports"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny struct {
-	*ygot.NodePath
-}
-
-// Received (container): Number of IGMP membership queries received.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath) Received() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Received (container): Number of IGMP membership queries received.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny) Received() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Sent (container): Number of IGMP membership queries sent.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "sent"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/sent"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPath) Sent() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"sent"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Sent (container): Number of IGMP membership queries sent.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "sent"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/sent"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_QueriesPathAny) Sent() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPathAny {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_SentPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"sent"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3 YANG schema element.
-type NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny struct {
-	*ygot.NodePath
-}
-
-// V1 (leaf): IGMP v1.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v1"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V1() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v1"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// V1 (leaf): IGMP v1.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v1"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v1"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V1() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V1PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v1"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// V2 (leaf): IGMP v2.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v2"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V2() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v2"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// V2 (leaf): IGMP v2.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v2"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v2"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V2() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V2PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v2"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// V3 (leaf): IGMP v3.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v3"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPath) V3() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v3"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// V3 (leaf): IGMP v3.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/v3"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface/counters/queries/received/state/v3"
-func (n *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_ReceivedPathAny) V3() *NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny {
-	return &NetworkInstance_Protocol_Igmp_Interface_Counters_Queries_Received_V3PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "v3"},
 			map[string]interface{}{},
 			n,
 		),

@@ -20,9 +20,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/binding"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/fakebind"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/internal/testbed"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -33,40 +33,46 @@ var (
 
 	fakeTBPath = filepath.Join("testdata", "testbed.pb.txt")
 
-	fakeRes = &reservation.Reservation{
-		DUTs: map[string]*reservation.DUT{
-			"dut": &reservation.DUT{&reservation.Dims{
+	fakeRes = &binding.Reservation{
+		DUTs: map[string]*binding.DUT{
+			"dut": &binding.DUT{&binding.Dims{
 				Name:            "pf01.xxx01",
 				Vendor:          opb.Device_ARISTA,
 				HardwareModel:   "aristaModel",
 				SoftwareVersion: "aristaVersion",
-				Ports: map[string]*reservation.Port{
-					"port1": &reservation.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
-					"port2": &reservation.Port{Name: "Et4/5/6", Speed: opb.Port_S_100GB},
+				Ports: map[string]*binding.Port{
+					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+					"port2": &binding.Port{Name: "Et4/5/6", Speed: opb.Port_S_100GB},
 				},
 			}},
-			"dut_cisco": &reservation.DUT{&reservation.Dims{
+			"dut_cisco": &binding.DUT{&binding.Dims{
 				Name:            "pf02.xxx01",
 				Vendor:          opb.Device_CISCO,
 				HardwareModel:   "ciscoModel",
 				SoftwareVersion: "ciscoVersion",
+				Ports: map[string]*binding.Port{
+					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+				},
 			}},
-			"dut_juniper": &reservation.DUT{&reservation.Dims{
+			"dut_juniper": &binding.DUT{&binding.Dims{
 				Name:            "pf03.xxx01",
 				Vendor:          opb.Device_JUNIPER,
 				HardwareModel:   "juniperModel",
 				SoftwareVersion: "juniperVersion",
+				Ports: map[string]*binding.Port{
+					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+				},
 			}},
 		},
-		ATEs: map[string]*reservation.ATE{
-			"ate": &reservation.ATE{&reservation.Dims{
+		ATEs: map[string]*binding.ATE{
+			"ate": &binding.ATE{&binding.Dims{
 				Name:            "ix1",
 				Vendor:          opb.Device_IXIA,
 				HardwareModel:   "ixiaModel",
 				SoftwareVersion: "ixiaVersion",
-				Ports: map[string]*reservation.Port{
-					"port1": &reservation.Port{Name: "1/1", Speed: opb.Port_S_10GB},
-					"port2": &reservation.Port{Name: "1/2", Speed: opb.Port_S_100GB},
+				Ports: map[string]*binding.Port{
+					"port1": &binding.Port{Name: "1/1", Speed: opb.Port_S_10GB},
+					"port2": &binding.Port{Name: "1/2", Speed: opb.Port_S_100GB},
 				},
 			}},
 		},
@@ -80,7 +86,7 @@ func initFakeBinding(t *testing.T) {
 	defer mu.Unlock()
 	if fakeBind == nil {
 		fakeBind = &fakebind.Binding{}
-		binding.Init(fakeBind)
+		testbed.InitBind(fakeBind)
 	} else {
 		fakeBind.Reset()
 	}

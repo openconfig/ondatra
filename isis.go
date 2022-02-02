@@ -130,9 +130,15 @@ func (i *ISIS) WithTEEnabled(enabled bool) *ISIS {
 	return i
 }
 
-// WithTERouterID sets the router id.
+// WithTERouterID sets the TE router id.
 func (i *ISIS) WithTERouterID(routerID string) *ISIS {
 	i.pb.TeRouterId = routerID
+	return i
+}
+
+// WithCapabilityRouterID sets the ISIS capability router id.
+func (i *ISIS) WithCapabilityRouterID(routerID string) *ISIS {
+	i.pb.CapabilityRouterId = routerID
 	return i
 }
 
@@ -302,6 +308,12 @@ func (node *ISISNode) WithWideMetricEnabled(enabled bool) *ISISNode {
 // WithTERouterID sets the TE router ID for the node.
 func (node *ISISNode) WithTERouterID(id string) *ISISNode {
 	node.pb.TeRouterId = id
+	return node
+}
+
+// WithCapabilityRouterID sets the capability router ID for the node.
+func (node *ISISNode) WithCapabilityRouterID(id string) *ISISNode {
+	node.pb.CapabilityRouterId = id
 	return node
 }
 

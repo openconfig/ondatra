@@ -12,6 +12,136 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedLldp_Interface is a *Lldp_Interface with a corresponding timestamp.
+type QualifiedLldp_Interface struct {
+	*genutil.Metadata
+	val     *Lldp_Interface // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLldp_Interface) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lldp_Interface sample, erroring out if not present.
+func (q *QualifiedLldp_Interface) Val(t testing.TB) *Lldp_Interface {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lldp_Interface sample.
+func (q *QualifiedLldp_Interface) SetVal(v *Lldp_Interface) *QualifiedLldp_Interface {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLldp_Interface) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLldp_Interface is a telemetry Collection whose Await method returns a slice of *Lldp_Interface samples.
+type CollectionLldp_Interface struct {
+	W    *Lldp_InterfaceWatcher
+	Data []*QualifiedLldp_Interface
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLldp_Interface) Await(t testing.TB) []*QualifiedLldp_Interface {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lldp_InterfaceWatcher observes a stream of *Lldp_Interface samples.
+type Lldp_InterfaceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLldp_Interface
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lldp_InterfaceWatcher) Await(t testing.TB) (*QualifiedLldp_Interface, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLldp_Interface_Counters is a *Lldp_Interface_Counters with a corresponding timestamp.
+type QualifiedLldp_Interface_Counters struct {
+	*genutil.Metadata
+	val     *Lldp_Interface_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLldp_Interface_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lldp_Interface_Counters sample, erroring out if not present.
+func (q *QualifiedLldp_Interface_Counters) Val(t testing.TB) *Lldp_Interface_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lldp_Interface_Counters sample.
+func (q *QualifiedLldp_Interface_Counters) SetVal(v *Lldp_Interface_Counters) *QualifiedLldp_Interface_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLldp_Interface_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLldp_Interface_Counters is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Counters samples.
+type CollectionLldp_Interface_Counters struct {
+	W    *Lldp_Interface_CountersWatcher
+	Data []*QualifiedLldp_Interface_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLldp_Interface_Counters) Await(t testing.TB) []*QualifiedLldp_Interface_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lldp_Interface_CountersWatcher observes a stream of *Lldp_Interface_Counters samples.
+type Lldp_Interface_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLldp_Interface_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lldp_Interface_CountersWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedLldp_Interface_Neighbor is a *Lldp_Interface_Neighbor with a corresponding timestamp.
 type QualifiedLldp_Interface_Neighbor struct {
 	*genutil.Metadata
@@ -8393,136 +8523,6 @@ type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounterWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass sample.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass samples.
-type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass struct {
-	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher
-	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass samples.
-type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes is a *NetworkInstance_Mpls_TeGlobalAttributes with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributesWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributesWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes samples.
-type NetworkInstance_Mpls_TeGlobalAttributesWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributesWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

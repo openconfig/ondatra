@@ -20,7 +20,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/internal/ixweb"
+	"github.com/openconfig/ondatra/binding/ixweb"
 )
 
 func parseRow(r ixweb.StatRow, nameKey string, strKeys []string, intKeys []string, floatKeys []string) (map[string]*uint64, map[string]*float32, error) {

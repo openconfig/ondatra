@@ -15,6 +15,208 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Component_Port_BreakoutMode_Group{}
+	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, true)
+	if ok {
+		return convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Port_BreakoutMode_Group{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath extracts the value of the leaf NumBreakouts from its parent oc.Component_Port_BreakoutMode_Group
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.NumBreakouts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.Component_Port_BreakoutMode_Group{}
+	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, true)
+	if ok {
+		return convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Port_BreakoutMode_Group{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels in the given batch object.
+func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath extracts the value of the leaf NumPhysicalChannels from its parent oc.Component_Port_BreakoutMode_Group
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.NumPhysicalChannels
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/power-supply with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_PowerSupplyPath) Lookup(t testing.TB) *oc.QualifiedComponent_PowerSupply {
@@ -579,196 +781,4 @@ func (n *Component_StoragePath) Update(t testing.TB, val *oc.Component_Storage) 
 func (n *Component_StoragePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Storage) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_SubcomponentPath) Lookup(t testing.TB) *oc.QualifiedComponent_Subcomponent {
-	t.Helper()
-	goStruct := &oc.Component_Subcomponent{}
-	md, ok := oc.Lookup(t, n, "Component_Subcomponent", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedComponent_Subcomponent{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_SubcomponentPath) Get(t testing.TB) *oc.Component_Subcomponent {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_SubcomponentPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Subcomponent {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Subcomponent
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Subcomponent{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Subcomponent", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Subcomponent{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription.
-func (n *Component_SubcomponentPathAny) Get(t testing.TB) []*oc.Component_Subcomponent {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Subcomponent
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/subcomponents/subcomponent.
-func (n *Component_SubcomponentPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/subcomponents/subcomponent in the given batch object.
-func (n *Component_SubcomponentPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/subcomponents/subcomponent.
-func (n *Component_SubcomponentPath) Replace(t testing.TB, val *oc.Component_Subcomponent) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/subcomponents/subcomponent in the given batch object.
-func (n *Component_SubcomponentPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Subcomponent) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/subcomponents/subcomponent.
-func (n *Component_SubcomponentPath) Update(t testing.TB, val *oc.Component_Subcomponent) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/subcomponents/subcomponent in the given batch object.
-func (n *Component_SubcomponentPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Subcomponent) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Subcomponent_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Component_Subcomponent{}
-	md, ok := oc.Lookup(t, n, "Component_Subcomponent", goStruct, true, true)
-	if ok {
-		return convertComponent_Subcomponent_NamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Subcomponent_NamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Subcomponent_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Subcomponent{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Subcomponent", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Subcomponent_NamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription.
-func (n *Component_Subcomponent_NamePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/subcomponents/subcomponent/config/name.
-func (n *Component_Subcomponent_NamePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/subcomponents/subcomponent/config/name in the given batch object.
-func (n *Component_Subcomponent_NamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/subcomponents/subcomponent/config/name.
-func (n *Component_Subcomponent_NamePath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/subcomponents/subcomponent/config/name in the given batch object.
-func (n *Component_Subcomponent_NamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/subcomponents/subcomponent/config/name.
-func (n *Component_Subcomponent_NamePath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/subcomponents/subcomponent/config/name in the given batch object.
-func (n *Component_Subcomponent_NamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertComponent_Subcomponent_NamePath extracts the value of the leaf Name from its parent oc.Component_Subcomponent
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertComponent_Subcomponent_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Subcomponent) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Name
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
 }

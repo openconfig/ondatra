@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -1983,6 +1984,414 @@ type Component_IntegratedCircuitPath struct {
 // Component_IntegratedCircuitPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit YANG schema element.
 type Component_IntegratedCircuitPathAny struct {
 	*ygot.NodePath
+}
+
+// BackplaneFacingCapacity (container): This container allows a particular INTEGRATED_CIRCUIT to report its
+// available backplane-facing bandwidth. Where an integrated circuit is connected
+// by one or more links to the system's backplane, the capacity is the total cross-
+// sectional bandwidth available from the input ports of the integrated circuit
+// across the fabric. The capacity should also reflect the operational status of
+// the links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "backplane-facing-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity"
+func (n *Component_IntegratedCircuitPath) BackplaneFacingCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacityPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"backplane-facing-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BackplaneFacingCapacity (container): This container allows a particular INTEGRATED_CIRCUIT to report its
+// available backplane-facing bandwidth. Where an integrated circuit is connected
+// by one or more links to the system's backplane, the capacity is the total cross-
+// sectional bandwidth available from the input ports of the integrated circuit
+// across the fabric. The capacity should also reflect the operational status of
+// the links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "backplane-facing-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity"
+func (n *Component_IntegratedCircuitPathAny) BackplaneFacingCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"backplane-facing-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Memory (container): Container for integrated circuit memory.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "memory"
+// Path from root: "/components/component/integrated-circuit/memory"
+func (n *Component_IntegratedCircuitPath) Memory() *Component_IntegratedCircuit_MemoryPath {
+	return &Component_IntegratedCircuit_MemoryPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"memory"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Memory (container): Container for integrated circuit memory.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "memory"
+// Path from root: "/components/component/integrated-circuit/memory"
+func (n *Component_IntegratedCircuitPathAny) Memory() *Component_IntegratedCircuit_MemoryPathAny {
+	return &Component_IntegratedCircuit_MemoryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"memory"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacityPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacityPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacityPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath represents the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity YANG schema element.
+type Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny struct {
+	*ygot.NodePath
+}
+
+// AvailablePct (leaf): Percentage of the total backplane-facing capacity that is currently available to the front
+// panel ports taking into account failures and/or degradation within the system.
+//
+// In the case that there is more backplane-facing capacity available than the front-panel
+// ports consume, this value may be greater than 100%.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/available-pct"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) AvailablePct() *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "available-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AvailablePct (leaf): Percentage of the total backplane-facing capacity that is currently available to the front
+// panel ports taking into account failures and/or degradation within the system.
+//
+// In the case that there is more backplane-facing capacity available than the front-panel
+// ports consume, this value may be greater than 100%.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/available-pct"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/available-pct"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) AvailablePct() *Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_AvailablePctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "available-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ConsumedCapacity (leaf): Backplane-facing capacity that is consumed by front-panel ports that are connected
+// to the integrated circuit and are operationally up.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/consumed-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) ConsumedCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "consumed-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ConsumedCapacity (leaf): Backplane-facing capacity that is consumed by front-panel ports that are connected
+// to the integrated circuit and are operationally up.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/consumed-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/consumed-capacity"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) ConsumedCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_ConsumedCapacityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "consumed-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Total (leaf): Total backplane-facing capacity that is available in the presence
+// of no link failures or degradation.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/total"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Total() *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Total (leaf): Total backplane-facing capacity that is available in the presence
+// of no link failures or degradation.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/total"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) Total() *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_TotalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalOperationalCapacity (leaf): Total backplane-facing capacity that is currently available based
+// on the active links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total-operational-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) TotalOperationalCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total-operational-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalOperationalCapacity (leaf): Total backplane-facing capacity that is currently available based
+// on the active links.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total-operational-capacity"
+// Path from root: "/components/component/integrated-circuit/backplane-facing-capacity/state/total-operational-capacity"
+func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPathAny) TotalOperationalCapacity() *Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny {
+	return &Component_IntegratedCircuit_BackplaneFacingCapacity_TotalOperationalCapacityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total-operational-capacity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_IntegratedCircuit_MemoryPath represents the /openconfig-platform/components/component/integrated-circuit/memory YANG schema element.
+type Component_IntegratedCircuit_MemoryPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_MemoryPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/memory YANG schema element.
+type Component_IntegratedCircuit_MemoryPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath represents the /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/memory/state/corrected-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_TotalParityErrorsPath represents the /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_TotalParityErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/memory/state/total-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath represents the /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/memory/state/uncorrected-parity-errors YANG schema element.
+type Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// CorrectedParityErrors (leaf): Number of corrected parity errors. Single bit ECC errors can be
+// detected and corrected by most integrated circuits.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/corrected-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/corrected-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPath) CorrectedParityErrors() *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath {
+	return &Component_IntegratedCircuit_Memory_CorrectedParityErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "corrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CorrectedParityErrors (leaf): Number of corrected parity errors. Single bit ECC errors can be
+// detected and corrected by most integrated circuits.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/corrected-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/corrected-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPathAny) CorrectedParityErrors() *Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny {
+	return &Component_IntegratedCircuit_Memory_CorrectedParityErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "corrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalParityErrors (leaf): Total number of parity errors. This includes both the corrected and
+// uncorrected parity errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/total-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPath) TotalParityErrors() *Component_IntegratedCircuit_Memory_TotalParityErrorsPath {
+	return &Component_IntegratedCircuit_Memory_TotalParityErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalParityErrors (leaf): Total number of parity errors. This includes both the corrected and
+// uncorrected parity errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/total-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/total-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPathAny) TotalParityErrors() *Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny {
+	return &Component_IntegratedCircuit_Memory_TotalParityErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "total-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UncorrectedParityErrors (leaf): Number of uncorrected parity errors. Multi-bit ECC errors can be
+// detected but cannot be corrected by most integrated circuits.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/uncorrected-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/uncorrected-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPath) UncorrectedParityErrors() *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath {
+	return &Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "uncorrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UncorrectedParityErrors (leaf): Number of uncorrected parity errors. Multi-bit ECC errors can be
+// detected but cannot be corrected by most integrated circuits.
+// ----------------------------------------
+// Defining module: "openconfig-platform-integrated-circuit"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/uncorrected-parity-errors"
+// Path from root: "/components/component/integrated-circuit/memory/state/uncorrected-parity-errors"
+func (n *Component_IntegratedCircuit_MemoryPathAny) UncorrectedParityErrors() *Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny {
+	return &Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "uncorrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
 // Component_MemoryPath represents the /openconfig-platform/components/component/state/memory YANG schema element.

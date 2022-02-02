@@ -15,10 +15,10 @@
 package usererr
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pkg/errors"
-	"golang.org/x/xerrors"
 )
 
 func TestIn(t *testing.T) {
@@ -39,12 +39,12 @@ func TestIn(t *testing.T) {
 		err:    errors.Wrap(New("foo"), "bar"),
 		wantIn: true,
 	}, {
-		name:   "wrapped with xerrors %w",
-		err:    xerrors.Errorf("foo: %w", New("bar")),
+		name:   "wrapped with fmt %w",
+		err:    fmt.Errorf("foo: %w", New("bar")),
 		wantIn: true,
 	}, {
 		name:   "wrapped multiple times",
-		err:    errors.Wrap(xerrors.Errorf("foo: %w", New("bar")), "baz"),
+		err:    errors.Wrap(fmt.Errorf("foo: %w", New("bar")), "baz"),
 		wantIn: true,
 	}, {
 		name:   "not user err",
@@ -52,7 +52,7 @@ func TestIn(t *testing.T) {
 		wantIn: false,
 	}, {
 		name:   "not user error - wrapped",
-		err:    errors.Wrap(xerrors.Errorf("foo: %w", errors.New("bar")), "baz"),
+		err:    errors.Wrap(fmt.Errorf("foo: %w", errors.New("bar")), "baz"),
 		wantIn: false,
 	}}
 	for _, tt := range tests {

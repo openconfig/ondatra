@@ -48,12 +48,13 @@ message InterfaceConfig {
   IpConfig ipv4 = 5;
   IpConfig ipv6 = 6;
   string ipv4_loopback_cidr = 11;
+  string ipv6_loopback_cidr = 13;
   ISISConfig isis = 7;
   BgpConfig bgp = 8;
   repeated RsvpConfig rsvp = 12;
   repeated Network networks = 9;
   bool enable_lacp = 10;
-  // NEXT ID: 13
+  // NEXT ID: 14
 }
 
 message EthernetConfig {
@@ -169,6 +170,8 @@ message ISISConfig {
   uint32 dead_interval_sec = 16;
   // IS-IS segment routing configuration.
   ISISSegmentRouting segment_routing = 17;
+  // the capability router id.
+  string capability_router_id = 18;
 }
 
 message ISISSegmentRouting {
@@ -245,6 +248,7 @@ message ISReachability {
       IPReachability reachability = 3;
     }
     Routes routes_ipv4 = 10;
+    string capability_router_id = 11;
   }
   repeated Node nodes = 1;
   string name = 2;

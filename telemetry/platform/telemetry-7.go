@@ -16,6 +16,312 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/connector-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Transceiver_ConnectorTypePath) Lookup(t testing.TB) *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	goStruct := &oc.Component_Transceiver{}
+	md, ok := oc.Lookup(t, n, "Component_Transceiver", goStruct, true, false)
+	if ok {
+		return convertComponent_Transceiver_ConnectorTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/transceiver/state/connector-type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Transceiver_ConnectorTypePath) Get(t testing.TB) oc.E_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/transceiver/state/connector-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Transceiver_ConnectorTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Transceiver{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Transceiver_ConnectorTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/transceiver/state/connector-type with a ONCE subscription.
+func (n *Component_Transceiver_ConnectorTypePathAny) Get(t testing.TB) []oc.E_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_TransportTypes_FIBER_CONNECTOR_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/connector-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_ConnectorTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_TransportTypes_FIBER_CONNECTOR_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_ConnectorTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool) *oc.E_TransportTypes_FIBER_CONNECTOR_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_TransportTypes_FIBER_CONNECTOR_TYPEWatcher{}
+	gs := &oc.Component_Transceiver{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver", gs, queryPath, true, false)
+		return convertComponent_Transceiver_ConnectorTypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/connector-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_ConnectorTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool) *oc.E_TransportTypes_FIBER_CONNECTOR_TYPEWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_ConnectorTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/transceiver/state/connector-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Transceiver_ConnectorTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_TransportTypes_FIBER_CONNECTOR_TYPE) *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/state/connector-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/connector-type to the batch object.
+func (n *Component_Transceiver_ConnectorTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/connector-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_ConnectorTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_TransportTypes_FIBER_CONNECTOR_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/connector-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_ConnectorTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE) bool) *oc.E_TransportTypes_FIBER_CONNECTOR_TYPEWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_ConnectorTypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/connector-type to the batch object.
+func (n *Component_Transceiver_ConnectorTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Transceiver_ConnectorTypePath extracts the value of the leaf ConnectorType from its parent oc.Component_Transceiver
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE.
+func convertComponent_Transceiver_ConnectorTypePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver) *oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_TransportTypes_FIBER_CONNECTOR_TYPE{
+		Metadata: md,
+	}
+	val := parent.ConnectorType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/date-code with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Transceiver_DateCodePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Component_Transceiver{}
+	md, ok := oc.Lookup(t, n, "Component_Transceiver", goStruct, true, false)
+	if ok {
+		return convertComponent_Transceiver_DateCodePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/transceiver/state/date-code with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Transceiver_DateCodePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/transceiver/state/date-code with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Transceiver_DateCodePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Transceiver{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Transceiver_DateCodePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/transceiver/state/date-code with a ONCE subscription.
+func (n *Component_Transceiver_DateCodePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/date-code with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_DateCodePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_DateCodePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Component_Transceiver{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver", gs, queryPath, true, false)
+		return convertComponent_Transceiver_DateCodePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/date-code with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_DateCodePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_DateCodePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/transceiver/state/date-code with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Transceiver_DateCodePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/state/date-code failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/date-code to the batch object.
+func (n *Component_Transceiver_DateCodePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/date-code with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_DateCodePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/date-code with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_DateCodePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_DateCodePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/date-code to the batch object.
+func (n *Component_Transceiver_DateCodePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Transceiver_DateCodePath extracts the value of the leaf DateCode from its parent oc.Component_Transceiver
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertComponent_Transceiver_DateCodePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.DateCode
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/enabled with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Transceiver_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
@@ -3072,155 +3378,4 @@ func convertComponent_Transceiver_InputPower_MinTimePath(t testing.TB, md *genut
 		qv.SetVal(*val)
 	}
 	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Lookup(t testing.TB) *oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_LaserBiasCurrent{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_LaserBiasCurrent", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Get(t testing.TB) *oc.Component_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_LaserBiasCurrentPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Transceiver_LaserBiasCurrent
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_LaserBiasCurrent{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_LaserBiasCurrent", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
-func (n *Component_Transceiver_LaserBiasCurrentPathAny) Get(t testing.TB) []*oc.Component_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Transceiver_LaserBiasCurrent
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_LaserBiasCurrent{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Component_Transceiver_LaserBiasCurrent)))
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_LaserBiasCurrentPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
-	t.Helper()
-	w := &oc.Component_Transceiver_LaserBiasCurrentWatcher{}
-	gs := &oc.Component_Transceiver_LaserBiasCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_LaserBiasCurrent", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_LaserBiasCurrent)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_LaserBiasCurrentPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Transceiver_LaserBiasCurrent) *oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/state/laser-bias-current failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/state/laser-bias-current to the batch object.
-func (n *Component_Transceiver_LaserBiasCurrentPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_LaserBiasCurrentPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_LaserBiasCurrent {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_LaserBiasCurrent{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_LaserBiasCurrentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_LaserBiasCurrentPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/state/laser-bias-current to the batch object.
-func (n *Component_Transceiver_LaserBiasCurrentPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
 }

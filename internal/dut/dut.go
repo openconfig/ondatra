@@ -23,9 +23,9 @@ import (
 	"text/template"
 
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/internal/binding"
-	"github.com/openconfig/ondatra/internal/reservation"
-	"github.com/openconfig/ondatra/internal/usererr"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/testbed"
+	"github.com/openconfig/ondatra/binding/usererr"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -74,7 +74,7 @@ func (f ConfigFile) Get() (string, error) {
 }
 
 // PushConfig pushes config to a DUT.
-func PushConfig(ctx context.Context, dut *reservation.DUT, cfg *Config, append bool) error {
+func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, append bool) error {
 	prov, ok := cfg.VC[dut.Vendor]
 	if !ok {
 		if cfg.Open == nil {
@@ -92,7 +92,7 @@ func PushConfig(ctx context.Context, dut *reservation.DUT, cfg *Config, append b
 		return err
 	}
 	opts := &binding.ConfigOptions{OpenConfig: openConfig, Append: append}
-	return binding.Get().PushConfig(ctx, dut, config, opts)
+	return testbed.Bind().PushConfig(ctx, dut, config, opts)
 }
 
 // interpolateConfig substitutes templated variables in device config text.
@@ -100,10 +100,10 @@ func PushConfig(ctx context.Context, dut *reservation.DUT, cfg *Config, append b
 // - {{ port "<portID>" }}: replaced with the physical port name
 // - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
 // - {{ var "<key>" }}: returns the value for the key in the vars map
-func interpolateConfig(dut *reservation.DUT, config string, vars map[string]string) (string, error) {
+func interpolateConfig(dut *binding.DUT, config string, vars map[string]string) (string, error) {
 	funcMap := map[string]interface{}{
 		"port": func(portID string) (string, error) {
-			port, err := dut.Port(portID)
+			port, err := testbed.Port(dut.Dims, portID)
 			if err != nil {
 				return "", usererr.Wrap(err)
 			}

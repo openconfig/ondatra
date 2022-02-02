@@ -22,7 +22,7 @@ import (
 	log "github.com/golang/glog"
 	"github.com/pkg/errors"
 	"github.com/pborman/uuid"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/binding"
 
 	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -106,10 +106,10 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 		return nil, err
 	}
 
-	res := &reservation.Reservation{
+	res := &binding.Reservation{
 		ID:   uuid.New(),
-		DUTs: make(map[string]*reservation.DUT),
-		ATEs: make(map[string]*reservation.ATE),
+		DUTs: make(map[string]*binding.DUT),
+		ATEs: make(map[string]*binding.ATE),
 	}
 	sm := ServiceMap{}
 
@@ -143,7 +143,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 
 // Solution is the result of a Solve that provides a Reservation and a ServiceMap.
 type Solution struct {
-	Reservation *reservation.Reservation
+	Reservation *binding.Reservation
 	Services    ServiceMap
 }
 
@@ -189,23 +189,23 @@ func (a *assign) String() string {
 	return sb.String()
 }
 
-func (a *assign) resolveDUT(dev *opb.Device) (*reservation.DUT, error) {
+func (a *assign) resolveDUT(dev *opb.Device) (*binding.DUT, error) {
 	dims, err := a.resolveDims(dev)
 	if err != nil {
 		return nil, err
 	}
-	return &reservation.DUT{dims}, nil
+	return &binding.DUT{dims}, nil
 }
 
-func (a *assign) resolveATE(dev *opb.Device) (*reservation.ATE, error) {
+func (a *assign) resolveATE(dev *opb.Device) (*binding.ATE, error) {
 	dims, err := a.resolveDims(dev)
 	if err != nil {
 		return nil, err
 	}
-	return &reservation.ATE{dims}, nil
+	return &binding.ATE{dims}, nil
 }
 
-func (a *assign) resolveDims(dev *opb.Device) (*reservation.Dims, error) {
+func (a *assign) resolveDims(dev *opb.Device) (*binding.Dims, error) {
 	node, ok := a.dev2Node[dev]
 	if !ok {
 		return nil, fmt.Errorf("node %q not resolved", dev.GetId())
@@ -215,16 +215,16 @@ func (a *assign) resolveDims(dev *opb.Device) (*reservation.Dims, error) {
 		return nil, errors.Errorf("no known device vendor for node type: %v", node.GetType())
 	}
 	typeName := tpb.Node_Type_name[int32(node.GetType())]
-	dims := &reservation.Dims{
+	dims := &binding.Dims{
 		Name:   node.GetName(),
 		Vendor: vendor,
 		// TODO: Determine appropriate hardware model and software version
 		HardwareModel:   typeName,
 		SoftwareVersion: typeName,
-		Ports:           make(map[string]*reservation.Port),
+		Ports:           make(map[string]*binding.Port),
 	}
 	for _, p := range dev.GetPorts() {
-		dims.Ports[p.GetId()] = &reservation.Port{Name: a.port2Intf[p].vendorName}
+		dims.Ports[p.GetId()] = &binding.Port{Name: a.port2Intf[p].vendorName}
 	}
 	return dims, nil
 }

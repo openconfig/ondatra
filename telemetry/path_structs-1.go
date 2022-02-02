@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
+	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
 	- public/release/models/platform/openconfig-platform-software.yang
 	- public/release/models/platform/openconfig-platform-transceiver.yang
 	- public/release/models/platform/openconfig-platform.yang
@@ -60,6 +61,318 @@ package telemetry
 import (
 	"github.com/openconfig/ygot/ygot"
 )
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/priority-decrement YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/priority-decrement YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface YANG schema element.
+type Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// PriorityDecrement (leaf): Set the value to subtract from priority when
+// the tracked interface goes down
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/priority-decrement"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/priority-decrement"
+func (n *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPath) PriorityDecrement() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPath {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "priority-decrement"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PriorityDecrement (leaf): Set the value to subtract from priority when
+// the tracked interface goes down
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/priority-decrement"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/priority-decrement"
+func (n *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPathAny) PriorityDecrement() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPathAny {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "priority-decrement"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TrackInterface (leaf): Sets a list of one or more interfaces that should
+// be tracked for up/down events to dynamically change the
+// priority state of the VRRP group, and potentially
+// change the mastership if the tracked interface going
+// down lowers the priority sufficiently.  Any of the tracked
+// interfaces going down will cause the priority to be lowered.
+// Some implementations may only support a single
+// tracked interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/track-interface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface"
+func (n *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPath) TrackInterface() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "track-interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TrackInterface (leaf): Sets a list of one or more interfaces that should
+// be tracked for up/down events to dynamically change the
+// priority state of the VRRP group, and potentially
+// change the mastership if the tracked interface going
+// down lowers the priority sufficiently.  Any of the tracked
+// interfaces going down will cause the priority to be lowered.
+// Some implementations may only support a single
+// tracked interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/track-interface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface"
+func (n *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTrackingPathAny) TrackInterface() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "track-interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface_Subinterface_Ipv6_AutoconfPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf YANG schema element.
+type Interface_Subinterface_Ipv6_AutoconfPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_AutoconfPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf YANG schema element.
+type Interface_Subinterface_Ipv6_AutoconfPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-global-addresses YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-global-addresses YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-temporary-addresses YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-temporary-addresses YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-preferred-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-preferred-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-valid-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-valid-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePathAny struct {
+	*ygot.NodePath
+}
+
+// CreateGlobalAddresses (leaf): [adapted from IETF IP model RFC 7277]
+//
+// If enabled, the host creates global addresses as
+// described in RFC 4862.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/create-global-addresses"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-global-addresses"
+func (n *Interface_Subinterface_Ipv6_AutoconfPath) CreateGlobalAddresses() *Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPath {
+	return &Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "create-global-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CreateGlobalAddresses (leaf): [adapted from IETF IP model RFC 7277]
+//
+// If enabled, the host creates global addresses as
+// described in RFC 4862.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/create-global-addresses"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-global-addresses"
+func (n *Interface_Subinterface_Ipv6_AutoconfPathAny) CreateGlobalAddresses() *Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPathAny {
+	return &Interface_Subinterface_Ipv6_Autoconf_CreateGlobalAddressesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "create-global-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CreateTemporaryAddresses (leaf): [adapted from IETF IP model RFC 7277]
+//
+// If enabled, the host creates temporary addresses as
+// described in RFC 4941.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/create-temporary-addresses"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-temporary-addresses"
+func (n *Interface_Subinterface_Ipv6_AutoconfPath) CreateTemporaryAddresses() *Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPath {
+	return &Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "create-temporary-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CreateTemporaryAddresses (leaf): [adapted from IETF IP model RFC 7277]
+//
+// If enabled, the host creates temporary addresses as
+// described in RFC 4941.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/create-temporary-addresses"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/create-temporary-addresses"
+func (n *Interface_Subinterface_Ipv6_AutoconfPathAny) CreateTemporaryAddresses() *Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPathAny {
+	return &Interface_Subinterface_Ipv6_Autoconf_CreateTemporaryAddressesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "create-temporary-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TemporaryPreferredLifetime (leaf): [adapted from IETF IP model RFC 7277]
+//
+// The time period during which the temporary address is
+// preferred.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/temporary-preferred-lifetime"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_AutoconfPath) TemporaryPreferredLifetime() *Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePath {
+	return &Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "temporary-preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TemporaryPreferredLifetime (leaf): [adapted from IETF IP model RFC 7277]
+//
+// The time period during which the temporary address is
+// preferred.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/temporary-preferred-lifetime"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_AutoconfPathAny) TemporaryPreferredLifetime() *Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePathAny {
+	return &Interface_Subinterface_Ipv6_Autoconf_TemporaryPreferredLifetimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "temporary-preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TemporaryValidLifetime (leaf): [adapted from IETF IP model RFC 7277]
+//
+// The time period during which the temporary address
+// is valid.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/temporary-valid-lifetime"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_AutoconfPath) TemporaryValidLifetime() *Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePath {
+	return &Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "temporary-valid-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TemporaryValidLifetime (leaf): [adapted from IETF IP model RFC 7277]
+//
+// The time period during which the temporary address
+// is valid.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/temporary-valid-lifetime"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf/state/temporary-valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_AutoconfPathAny) TemporaryValidLifetime() *Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePathAny {
+	return &Interface_Subinterface_Ipv6_Autoconf_TemporaryValidLifetimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "temporary-valid-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
 
 // Interface_Subinterface_Ipv6_CountersPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters YANG schema element.
 type Interface_Subinterface_Ipv6_CountersPath struct {
@@ -24836,528 +25149,6 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidt
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "underflow-threshold"},
 			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny struct {
-	*ygot.NodePath
-}
-
-// Bytes (leaf): Number of bytes that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "bytes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Bytes() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"bytes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Bytes (leaf): Number of bytes that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "bytes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Bytes() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"bytes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CurrentPathTime (leaf): Indicates the time the LSP switched onto its
-// current path. The value is reset upon a LSP path
-// change.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "current-path-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) CurrentPathTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"current-path-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CurrentPathTime (leaf): Indicates the time the LSP switched onto its
-// current path. The value is reset upon a LSP path
-// change.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "current-path-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) CurrentPathTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"current-path-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextReoptimizationTime (leaf): Indicates the next scheduled time the LSP
-// will be reoptimized.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "next-reoptimization-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) NextReoptimizationTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"next-reoptimization-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextReoptimizationTime (leaf): Indicates the next scheduled time the LSP
-// will be reoptimized.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "next-reoptimization-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) NextReoptimizationTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"next-reoptimization-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OnlineTime (leaf): Indication of the time the label switched path
-// transitioned to an Oper Up or in-service state.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "online-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) OnlineTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"online-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OnlineTime (leaf): Indication of the time the label switched path
-// transitioned to an Oper Up or in-service state.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "online-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) OnlineTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"online-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Packets (leaf): Number of pacets that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "packets"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Packets() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"packets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Packets (leaf): Number of pacets that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "packets"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Packets() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"packets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathChanges (leaf): Number of path changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) PathChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathChanges (leaf): Number of path changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) PathChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// StateChanges (leaf): Number of state changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) StateChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// StateChanges (leaf): Number of state changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) StateChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny struct {
-	*ygot.NodePath
-}
-
-// Destination (leaf): P2P tunnel destination address
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/destination"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) Destination() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "destination"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Destination (leaf): P2P tunnel destination address
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/destination"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) Destination() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "destination"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PPrimaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PPrimaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PPrimaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PPrimaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PSecondaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PSecondaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": Name},
 			n,
 		),
 	}

@@ -22,10 +22,10 @@ import (
 	"testing"
 
 	"google.golang.org/grpc"
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/binding"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/openconfig/ondatra/internal/testbed"
 	"github.com/openconfig/ondatra/telemetry/device"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -35,7 +35,7 @@ import (
 // Device represents a network device.
 type Device struct {
 	id  string
-	res reservation.Device
+	res binding.Device
 	// clientFn is the func used by the telemetry library to get the gnmi client for a DUT.
 	clientFn func(context.Context) (gpb.GNMIClient, error)
 }
@@ -121,14 +121,14 @@ func (d *Device) Ports() []*Port {
 }
 
 func (d *Device) port(id string) (*Port, error) {
-	rp, err := d.res.Dimensions().Port(id)
+	rp, err := testbed.Port(d.res.Dimensions(), id)
 	if err != nil {
 		return nil, err
 	}
 	return d.newPort(id, rp), nil
 }
 
-func (d *Device) newPort(id string, res *reservation.Port) *Port {
+func (d *Device) newPort(id string, res *binding.Port) *Port {
 	return &Port{dev: d, id: id, res: res}
 }
 
@@ -141,7 +141,7 @@ func (d *Device) Operations() *Operations {
 type Port struct {
 	dev *Device
 	id  string
-	res *reservation.Port
+	res *binding.Port
 }
 
 func (p *Port) String() string {
@@ -182,15 +182,15 @@ func (p *Port) Speed() Speed {
 
 var (
 	gnmisMu sync.Mutex
-	gnmis   = make(map[reservation.Device]gpb.GNMIClient)
+	gnmis   = make(map[binding.Device]gpb.GNMIClient)
 )
 
 // newGNMI creates a new gNMI client for the specified Device.
-func newGNMI(ctx context.Context, dev reservation.Device) (gpb.GNMIClient, error) {
+func newGNMI(ctx context.Context, dev binding.Device) (gpb.GNMIClient, error) {
 	dialGNMI := func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-		return binding.Get().DialGNMI(ctx, dev.(*reservation.DUT), opts...)
+		return testbed.Bind().DialGNMI(ctx, dev.(*binding.DUT), opts...)
 	}
-	if rATE, ok := dev.(*reservation.ATE); ok {
+	if rATE, ok := dev.(*binding.ATE); ok {
 		dialGNMI = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return ate.DialGNMI(ctx, rATE, opts...)
 		}
@@ -202,7 +202,7 @@ func newGNMI(ctx context.Context, dev reservation.Device) (gpb.GNMIClient, error
 
 // fetchGNMI fetches the gNMI client for the given device.
 // If a GNMIClient is provided it will be just returned as is and not cached.
-func fetchGNMI(ctx context.Context, dev reservation.Device, c gpb.GNMIClient) (gpb.GNMIClient, error) {
+func fetchGNMI(ctx context.Context, dev binding.Device, c gpb.GNMIClient) (gpb.GNMIClient, error) {
 	if c != nil {
 		return c, nil
 	}

@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/internal/usererr"
+	"github.com/openconfig/ondatra/binding/usererr"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -84,7 +84,7 @@ func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 		if (intf.ipv4 != nil && len(intf.ipv4.BgpIpv4Peer) > 0) || (intf.ipv4Loopback != nil && len(intf.ipv4Loopback.BgpIpv4Peer) > 0) {
 			hasBGPv4Peer = true
 		}
-		if intf.ipv6 != nil && len(intf.ipv6.BgpIpv6Peer) > 0 {
+		if (intf.ipv6 != nil && len(intf.ipv6.BgpIpv6Peer) > 0) || (intf.ipv6Loopback != nil && len(intf.ipv6Loopback.BgpIpv6Peer) > 0) {
 			hasBGPv6Peer = true
 		}
 		if netCfg.GetImportedBgpRoutes() != nil {

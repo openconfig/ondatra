@@ -20,16 +20,15 @@ import (
 	"testing"
 
 	log "github.com/golang/glog"
-
+	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/reservation"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 // Traffic is ATE Traffic API.
 type Traffic struct {
-	ate *reservation.ATE
+	ate *binding.ATE
 }
 
 func (tr *Traffic) String() string {

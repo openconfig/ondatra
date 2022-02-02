@@ -85,6 +85,11 @@ func TestCIDRRange(t *testing.T) {
 		count:    3,
 		wantNets: []string{"10.10.10.0/25", "10.10.10.128/25", "10.10.11.0/25"},
 	}, {
+		desc:     "IPv4 iteration from middle of network",
+		cidr:     "10.10.10.1/32",
+		count:    3,
+		wantNets: []string{"10.10.10.1/32", "10.10.10.2/32", "10.10.10.3/32"},
+	}, {
 		desc:    "IPv6 network range overflow",
 		cidr:    "ffff::/16",
 		count:   2,
@@ -94,6 +99,11 @@ func TestCIDRRange(t *testing.T) {
 		cidr:     "aaaa::/17",
 		count:    3,
 		wantNets: []string{"aaaa::/17", "aaaa:8000::/17", "aaab::/17"},
+	}, {
+		desc:     "IPv6 iteration from middle of network",
+		cidr:     "aaaa:0001::/17",
+		count:    3,
+		wantNets: []string{"aaaa:1::/17", "aaaa:8001::/17", "aaab:1::/17"},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
