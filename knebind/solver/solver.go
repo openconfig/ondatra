@@ -20,35 +20,37 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/internal/reservation"
+	"github.com/pborman/uuid"
+	"github.com/pkg/errors"
 
-	tpb "github.com/google/kne/proto/topo"
+	kpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 var (
-	ateTypes = map[tpb.Node_Type]bool{
-		tpb.Node_IXIA_TG: true,
+	ateTypes = map[kpb.Node_Type]bool{
+		kpb.Node_IXIA_TG: true,
 	}
 
 	// type2VendorMap maps the KNE node type to the Ondatra vendor.
-	type2VendorMap = map[tpb.Node_Type]opb.Device_Vendor{
-		tpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
+	type2VendorMap = map[kpb.Node_Type]opb.Device_Vendor{
+		kpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
 		// TODO: when Ondatra supports the OS dimension, use it to
 		// distinguish CSR from CXR and CEVO from VMX.
-		tpb.Node_CISCO_CSR:    opb.Device_CISCO,
-		tpb.Node_CISCO_CXR:    opb.Device_CISCO,
-		tpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
-		tpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
-		tpb.Node_IXIA_TG:      opb.Device_IXIA,
-		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
+		kpb.Node_CISCO_CSR:    opb.Device_CISCO,
+		kpb.Node_CISCO_CXR:    opb.Device_CISCO,
+		kpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
+		kpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
+		kpb.Node_IXIA_TG:      opb.Device_IXIA,
+		kpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
+		kpb.Node_CISCO_XRD:    opb.Device_CISCO,
+		kpb.Node_CISCO_E8000:  opb.Device_CISCO,
 	}
 )
 
 // Solve creates a new Reservation from a desired testbed and an available topology.
-func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
+func Solve(tb *opb.Testbed, topo *kpb.Topology) (*Solution, error) {
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {
 		return nil, errors.Errorf("Not enough nodes in KNE topology for specified testbed: "+
@@ -63,7 +65,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 		topology:   topo,
 		id2Dev:     make(map[string]*opb.Device),
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
-		node2Intfs: make(map[*tpb.Node]map[string]*intf),
+		node2Intfs: make(map[*kpb.Node]map[string]*intf),
 		intf2Intf:  make(map[*intf]*intf),
 	}
 
@@ -76,7 +78,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 		}
 		s.dev2Ports[dev] = ports
 	}
-	name2Node := make(map[string]*tpb.Node)
+	name2Node := make(map[string]*kpb.Node)
 	for _, node := range s.topology.GetNodes() {
 		name2Node[node.GetName()] = node
 		s.node2Intfs[node] = make(map[string]*intf)
@@ -148,10 +150,10 @@ type Solution struct {
 }
 
 // ServiceMap is a map of maps that relates device names to service names to KNE service details.
-type ServiceMap map[string]map[string]*tpb.Service
+type ServiceMap map[string]map[string]*kpb.Service
 
 // Lookup returns the KNE service details for a given device and service name.
-func (s ServiceMap) Lookup(device, service string) (*tpb.Service, error) {
+func (s ServiceMap) Lookup(device, service string) (*kpb.Service, error) {
 	n, ok := s[device]
 	if !ok {
 		return nil, fmt.Errorf("device %q not found in topology", device)
@@ -164,12 +166,12 @@ func (s ServiceMap) Lookup(device, service string) (*tpb.Service, error) {
 }
 
 // Update updates the service mapping for a device.
-func (s ServiceMap) Update(device string, services map[string]*tpb.Service) {
+func (s ServiceMap) Update(device string, services map[string]*kpb.Service) {
 	s[device] = services
 }
 
 type assign struct {
-	dev2Node  map[*opb.Device]*tpb.Node
+	dev2Node  map[*opb.Device]*kpb.Node
 	port2Intf map[*opb.Port]*intf
 }
 
@@ -214,7 +216,7 @@ func (a *assign) resolveDims(dev *opb.Device) (*reservation.Dims, error) {
 	if !ok {
 		return nil, errors.Errorf("no known device vendor for node type: %v", node.GetType())
 	}
-	typeName := tpb.Node_Type_name[int32(node.GetType())]
+	typeName := kpb.Node_Type_name[int32(node.GetType())]
 	dims := &reservation.Dims{
 		Name:   node.GetName(),
 		Vendor: vendor,
@@ -229,12 +231,12 @@ func (a *assign) resolveDims(dev *opb.Device) (*reservation.Dims, error) {
 	return dims, nil
 }
 
-func (a *assign) resolveServices(dev *opb.Device) (map[string]*tpb.Service, error) {
+func (a *assign) resolveServices(dev *opb.Device) (map[string]*kpb.Service, error) {
 	node, ok := a.dev2Node[dev]
 	if !ok {
 		return nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
-	sm := map[string]*tpb.Service{}
+	sm := map[string]*kpb.Service{}
 	for _, s := range node.GetServices() {
 		sm[s.GetName()] = s
 	}
@@ -243,17 +245,17 @@ func (a *assign) resolveServices(dev *opb.Device) (map[string]*tpb.Service, erro
 
 type solver struct {
 	testbed    *opb.Testbed
-	topology   *tpb.Topology
+	topology   *kpb.Topology
 	id2Dev     map[string]*opb.Device
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
-	node2Intfs map[*tpb.Node]map[string]*intf
+	node2Intfs map[*kpb.Node]map[string]*intf
 	intf2Intf  map[*intf]*intf
 }
 
 func (s *solver) solve() (*assign, error) {
 	// Find all the matching device->node assignments, and
 	// for each of those, all the port->intf assignments.
-	dev2Node2Port2Intfs := make(map[*opb.Device]map[*tpb.Node]map[*opb.Port][]*intf)
+	dev2Node2Port2Intfs := make(map[*opb.Device]map[*kpb.Node]map[*opb.Port][]*intf)
 	for _, dut := range s.testbed.GetDuts() {
 		node2Port2Intfs, err := s.nodeMatches(dut, false)
 		if err != nil {
@@ -282,7 +284,7 @@ func (s *solver) solve() (*assign, error) {
 		hasNodeCombo = true
 		port2Intfs := make(map[interface{}][]interface{})
 		for dut, node := range dev2Node {
-			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
+			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*kpb.Node)] {
 				for _, i := range intfs {
 					port2Intfs[port] = append(port2Intfs[port], i)
 				}
@@ -306,8 +308,8 @@ func (s *solver) solve() (*assign, error) {
 	return nil, errors.Errorf("No KNE topology matches the testbed")
 }
 
-func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*tpb.Node]map[*opb.Port][]*intf, error) {
-	node2Port2Intfs := make(map[*tpb.Node]map[*opb.Port][]*intf)
+func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*kpb.Node]map[*opb.Port][]*intf, error) {
+	node2Port2Intfs := make(map[*kpb.Node]map[*opb.Port][]*intf)
 	for _, node := range s.topology.GetNodes() {
 		if isATE != ateTypes[node.GetType()] {
 			continue
@@ -324,7 +326,7 @@ func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*tpb.Node]map[*op
 	return node2Port2Intfs, nil
 }
 
-func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) (bool, map[*opb.Port][]*intf) {
+func (s *solver) devMatch(dev *opb.Device, node *kpb.Node) (bool, map[*opb.Port][]*intf) {
 	if dev.GetHardwareModel() != "" && dev.GetHardwareModel() != hardwareModel(node) {
 		return false, nil
 	}
@@ -383,11 +385,11 @@ func (s *solver) linksMatch(a *assign) bool {
 	return true
 }
 
-func hardwareModel(node *tpb.Node) string {
-	return tpb.Node_Type_name[int32(node.GetType())]
+func hardwareModel(node *kpb.Node) string {
+	return kpb.Node_Type_name[int32(node.GetType())]
 }
 
-func softwareVersion(node *tpb.Node) string {
+func softwareVersion(node *kpb.Node) string {
 	return hardwareModel(node)
 }
 
@@ -433,11 +435,11 @@ func genRecurse(
 
 func newAssign(dev2Node, port2Intf map[interface{}]interface{}) *assign {
 	a := &assign{
-		dev2Node:  make(map[*opb.Device]*tpb.Node),
+		dev2Node:  make(map[*opb.Device]*kpb.Node),
 		port2Intf: make(map[*opb.Port]*intf),
 	}
 	for d, n := range dev2Node {
-		a.dev2Node[d.(*opb.Device)] = n.(*tpb.Node)
+		a.dev2Node[d.(*opb.Device)] = n.(*kpb.Node)
 	}
 	for p, i := range port2Intf {
 		a.port2Intf[p.(*opb.Port)] = i.(*intf)
