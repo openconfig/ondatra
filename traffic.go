@@ -361,6 +361,20 @@ func (t *Transmission) WithPatternBurst() *Transmission {
 	return t
 }
 
+// WithPatternFixedPacketCount configures the transmission to send a specified number of packets.
+func (t *Transmission) WithPatternFixedPacketCount(packetsCount uint32) *Transmission {
+	t.pb.Pattern = opb.Transmission_FIXED_FRAME_COUNT
+	t.pb.FrameCount = packetsCount
+	return t
+}
+
+// WithPatternFixedDuration configures the transmission to send a specified number of seconds.
+func (t *Transmission) WithPatternFixedDuration(secs uint32) *Transmission {
+	t.pb.Pattern = opb.Transmission_FIXED_DURATION
+	t.pb.DurationSecs = secs
+	return t
+}
+
 // WithMinGapBytes sets the minimum gap between transmitted packets.
 func (t *Transmission) WithMinGapBytes(minPacketGapBytes uint32) *Transmission {
 	t.pb.MinGapBytes = minPacketGapBytes

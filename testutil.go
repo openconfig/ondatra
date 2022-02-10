@@ -18,10 +18,10 @@ import (
 	"path/filepath"
 	"sync"
 	"testing"
-	"time"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/fakebind"
+	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -99,7 +99,7 @@ func initFakeBinding(t *testing.T) {
 // Reserves the fake testbed.
 func reserveFakeTestbed(t *testing.T) {
 	t.Helper()
-	if err := reserve(fakeTBPath, time.Hour, 0); err != nil {
+	if err := reserve(&flags.Values{TestbedPath: fakeTBPath}); err != nil {
 		t.Fatalf("Failed to reserve testbed: %v", err)
 	}
 }

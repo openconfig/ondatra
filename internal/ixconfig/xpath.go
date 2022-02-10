@@ -55,6 +55,19 @@ type XPath struct {
 	index uint64
 }
 
+func (xp *XPath) copyXPath() *XPath {
+	if xp == nil {
+		return nil
+	}
+	return &XPath{
+		parentXPath:  xp.parentXPath,
+		objectName:   xp.objectName,
+		alias:        xp.alias,
+		isMultivalue: xp.isMultivalue,
+		index:        xp.index,
+	}
+}
+
 // String returns the XPath as would appear in an IxNetwork JSON config.
 func (xp *XPath) String() string {
 	if xp.isMultivalue {

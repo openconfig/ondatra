@@ -835,6 +835,58 @@ func TestTransmissionControl(t *testing.T) {
 			InterBurstGapUnits:  ixconfig.String("nanoseconds"),
 			InterBurstGap:       ixconfig.NumberUint32(30),
 		},
+	}, {
+		desc: "burst packet count set for fixed frame count",
+		transmissionPB: &opb.Transmission{
+			Pattern:         opb.Transmission_FIXED_FRAME_COUNT,
+			PacketsPerBurst: 1,
+		},
+		wantErr: "burst packet count should not be set",
+	}, {
+		desc: "burst gap set for fixed fixed frame count",
+		transmissionPB: &opb.Transmission{
+			Pattern:       opb.Transmission_FIXED_FRAME_COUNT,
+			InterburstGap: &opb.Transmission_Bytes{Bytes: 64},
+		},
+		wantErr: "burst gap should not be set",
+	}, {
+		desc: "burst packet count set for duration transmission",
+		transmissionPB: &opb.Transmission{
+			Pattern:         opb.Transmission_FIXED_DURATION,
+			PacketsPerBurst: 1,
+		},
+		wantErr: "burst packet count should not be set",
+	}, {
+		desc: "burst gap set for duration transmission",
+		transmissionPB: &opb.Transmission{
+			Pattern:       opb.Transmission_FIXED_DURATION,
+			InterburstGap: &opb.Transmission_Bytes{Bytes: 64},
+		},
+		wantErr: "burst gap should not be set",
+	}, {
+		desc: "fixed frame count",
+		transmissionPB: &opb.Transmission{
+			Pattern:     opb.Transmission_FIXED_FRAME_COUNT,
+			MinGapBytes: 64,
+			FrameCount:  1000,
+		},
+		wantTransmission: &ixconfig.TrafficTransmissionControl{
+			Type_:       ixconfig.String("fixedFrameCount"),
+			MinGapBytes: ixconfig.NumberUint32(64),
+			FrameCount:  ixconfig.NumberUint32(1000),
+		},
+	}, {
+		desc: "fixed duration",
+		transmissionPB: &opb.Transmission{
+			Pattern:      opb.Transmission_FIXED_DURATION,
+			MinGapBytes:  64,
+			DurationSecs: 100,
+		},
+		wantTransmission: &ixconfig.TrafficTransmissionControl{
+			Type_:       ixconfig.String("fixedDuration"),
+			MinGapBytes: ixconfig.NumberUint32(64),
+			Duration:    ixconfig.NumberUint32(100),
+		},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

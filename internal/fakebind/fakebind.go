@@ -24,6 +24,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -33,11 +34,13 @@ var _ binding.Binding = &Binding{}
 // Binding is a fake testbed binding comprised of stub implementations.
 type Binding struct {
 	Reservation   *binding.Reservation
+	ResvFetcher   func(context.Context, string) (*binding.Reservation, error)
 	ConfigPusher  func(context.Context, *binding.DUT, string, *binding.ConfigOptions) error
 	CLIDialer     func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
 	ConsoleDialer func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
 	GNMIDialer    func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
 	GNOIDialer    func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
+	GRIBIDialer     func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error)
 	P4RTDialer      func(context.Context, *binding.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 	IxNetworkDialer func(context.Context, *binding.ATE) (*binding.IxNetwork, error)
 }
@@ -45,6 +48,7 @@ type Binding struct {
 // Reset zeros out all the stub implementations.
 func (b *Binding) Reset() {
 	b.Reservation = nil
+	b.ResvFetcher = nil
 	b.ConfigPusher = nil
 	b.CLIDialer = nil
 	b.ConsoleDialer = nil
@@ -54,10 +58,14 @@ func (b *Binding) Reset() {
 	b.IxNetworkDialer = nil
 }
 
-// Reserve reserves a new fake testbed, reading the definition from the given path.
-// If the path is a plain filename, interprets it relative to the target directory.
-func (b *Binding) Reserve(_ context.Context, _ *opb.Testbed, _, _ time.Duration) (*binding.Reservation, error) {
+// Reserve returns b.Reservation.
+func (b *Binding) Reserve(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
 	return b.Reservation, nil
+}
+
+// FetchReservation delegates to b.ResvFetcher.
+func (b *Binding) FetchReservation(ctx context.Context, id string) (*binding.Reservation, error) {
+	return b.ResvFetcher(ctx, id)
 }
 
 // Release is a noop.
@@ -83,6 +91,11 @@ func (b *Binding) DialGNMI(ctx context.Context, dut *binding.DUT, opts ...grpc.D
 // DialGNOI creates a client connection to the fake GNOI server.
 func (b *Binding) DialGNOI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (binding.GNOIClients, error) {
 	return b.GNOIDialer(ctx, dut, opts...)
+}
+
+// DialGRIBI creates a client connection to the fake GRIBI server.
+func (b *Binding) DialGRIBI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
+	return b.GRIBIDialer(ctx, dut, opts...)
 }
 
 // DialP4RT creates a client connection to the fake P4RT server.

@@ -15,13 +15,14 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/negtest"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -107,7 +108,7 @@ func TestReserveErrors(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			fakeBind.Reservation = test.res
-			err := reserve(writeTemp(t, test.tbProto), time.Hour, 0)
+			err := reserve(&flags.Values{TestbedPath: writeTemp(t, test.tbProto)})
 			if err == nil {
 				release()
 				t.Fatalf("Reserve unexpectedly succeeded, must fail")
@@ -122,10 +123,11 @@ func TestReserveErrors(t *testing.T) {
 
 func TestDoubleReserveFails(t *testing.T) {
 	initFakeBinding(t)
-	if err := reserve(fakeTBPath, time.Hour, 0); err != nil {
+	fv := &flags.Values{TestbedPath: fakeTBPath}
+	if err := reserve(fv); err != nil {
 		t.Fatalf("First Reserve() call failed: %v", err)
 	}
-	if err := reserve(fakeTBPath, time.Hour, 0); err == nil {
+	if err := reserve(fv); err == nil {
 		t.Errorf("Second Reserve() call succeeded, but must fail")
 	}
 	if err := release(); err != nil {
@@ -135,7 +137,7 @@ func TestDoubleReserveFails(t *testing.T) {
 
 func TestReserve(t *testing.T) {
 	initFakeBinding(t)
-	if err := reserve(fakeTBPath, time.Hour, 0); err != nil {
+	if err := reserve(&flags.Values{TestbedPath: fakeTBPath}); err != nil {
 		t.Fatal(err)
 	}
 
@@ -238,6 +240,20 @@ func TestReserve(t *testing.T) {
 			t.Errorf("Port(%q) failed with message %q, want %q", pid, got, pid)
 		}
 	})
+}
+
+func TestFetch(t *testing.T) {
+	initFakeBinding(t)
+	fakeBind.ResvFetcher = func(context.Context, string) (*binding.Reservation, error) {
+		return fakeRes, nil
+	}
+	if err := reserve(&flags.Values{TestbedPath: fakeTBPath, ResvID: "1234"}); err != nil {
+		t.Error(err)
+	}
+	// Just spot-check the reservation is correct.
+	if duts := DUTs(t); len(duts) == 0 {
+		t.Errorf("No DUTS reserved")
+	}
 }
 
 func writeTemp(t *testing.T, c string) string {
