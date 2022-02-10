@@ -38,6 +38,7 @@ import (
 	otpb "github.com/openconfig/gnoi/otdr"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
+	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 
@@ -70,10 +71,18 @@ type Binding interface {
 	// resources to become available. Given a zero waitTime, the implementation
 	// must choose a reasonable duration. The framework has already checked that
 	// the waitTime is not negative.
-	Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTime time.Duration) (*Reservation, error)
+	//
+	// The 'partial' map gives a partial mapping of device and port IDs in the
+	// testbed to concrete names to constrain the topology that is reserved.
+	Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTime time.Duration, partial map[string]string) (*Reservation, error)
 
 	// Release releases the reserved testbed.
+	// It is not called if the reservation was fetched.
 	Release(ctx context.Context) error
+
+	// FetchReservation looks up and returns the pre-existing reservation with
+	// the specified ID.
+	FetchReservation(ctx context.Context, id string) (*Reservation, error)
 
 	// PushConfig sets config on the specified device.
 	// The following Go template functions are allowed in config:
@@ -91,6 +100,10 @@ type Binding interface {
 	// DialGNOI creates a client connection to the specified DUT's gNOI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialGNOI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (GNOIClients, error)
+
+	// DialGRIBI creates a client connection to the specified DUT's gRIBI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGRIBI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error)
 
 	// DialP4RT creates a client connection to the specified DUT's P4RT endpoint.
 	// Implementations must append transport security options necessary to reach the server.

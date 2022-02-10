@@ -17,16 +17,16 @@ package ondatra
 import (
 	"golang.org/x/net/context"
 	"testing"
-	"time"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-func reserve(testbedPath string, runTime, waitTime time.Duration) error {
-	return testbed.Reserve(context.Background(), testbedPath, runTime, waitTime)
+func reserve(fv *flags.Values) error {
+	return testbed.Reserve(context.Background(), fv)
 }
 
 func release() error {

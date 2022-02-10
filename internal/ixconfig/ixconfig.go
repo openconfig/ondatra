@@ -29,7 +29,6 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/mohae/deepcopy"
 	"github.com/openconfig/ondatra/binding/ixweb"
 )
 
@@ -115,7 +114,7 @@ func (c *Client) ImportConfig(ctx context.Context, cfg *Ixnetwork, node IxiaCfgN
 	}
 
 	// Record the config that was pushed.
-	c.lastImported = deepcopy.Copy(cfg).(*Ixnetwork)
+	c.lastImported = cfg.Copy()
 	return nil
 }
 
@@ -123,7 +122,7 @@ func (c *Client) ImportConfig(ctx context.Context, cfg *Ixnetwork, node IxiaCfgN
 // client. Returns 'nil' if there has not been a config push. A new copy of the
 // last config is returned on every invocation and does not have its XPaths set.
 func (c *Client) LastImportedConfig() *Ixnetwork {
-	return deepcopy.Copy(c.lastImported).(*Ixnetwork)
+	return c.lastImported.Copy()
 }
 
 // UpdateIDs updates recorded REST IDs for the target nodes in the config.

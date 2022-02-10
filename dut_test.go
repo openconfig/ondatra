@@ -39,8 +39,9 @@ import (
 	otpb "github.com/openconfig/gnoi/otdr"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
-	"github.com/openconfig/ondatra/fakes/fakestreamclient"
+	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakes/fakestreamclient"
 	"github.com/openconfig/ondatra/negtest"
 
 )
@@ -70,7 +71,17 @@ func TestPushConfig(t *testing.T) {
 		wantConfig string
 		wantOpts   *binding.ConfigOptions
 	}{{
-		desc: "correct config text",
+		desc:       "correct text",
+		config:     dutArista.Config().New().WithText("generated"),
+		wantConfig: "generated",
+		wantOpts:   &binding.ConfigOptions{},
+	}, {
+		desc:       "correct file",
+		config:     dutArista.Config().New().WithFile(filepath.Join("testdata", "example_config_1.txt")),
+		wantConfig: "example_config_1",
+		wantOpts:   &binding.ConfigOptions{},
+	}, {
+		desc: "correct per-vendor text",
 		config: dutArista.Config().New().
 			WithAristaText("Arista config").
 			WithCiscoText("Cisco config").
@@ -78,27 +89,12 @@ func TestPushConfig(t *testing.T) {
 		wantConfig: "Arista config",
 		wantOpts:   &binding.ConfigOptions{},
 	}, {
-		desc: "correct config file",
+		desc: "correct per-vendor file",
 		config: dutArista.Config().New().
 			WithAristaFile(filepath.Join("testdata", "example_config_1.txt")).
 			WithCiscoText("Cisco config").
 			WithJuniperFile(filepath.Join("testdata", "example_config_2.txt")),
 		wantConfig: "example_config_1",
-		wantOpts:   &binding.ConfigOptions{},
-	}, {
-		desc: "correct openconfig",
-		config: dutArista.Config().New().
-			WithOpenConfigText("Openconfig").
-			WithCiscoText("Cisco config").
-			WithJuniperText("Juniper config"),
-		wantConfig: "Openconfig",
-		wantOpts:   &binding.ConfigOptions{OpenConfig: true},
-	}, {
-		desc: "openconfig override",
-		config: dutArista.Config().New().
-			WithOpenConfigText("Openconfig").
-			WithAristaText("Arista config"),
-		wantConfig: "Arista config",
 		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "port template",
@@ -153,7 +149,13 @@ func TestPushConfigErrors(t *testing.T) {
 	}{{
 		desc:         "no config",
 		config:       dutArista.Config().New().WithCiscoText("gaga"),
-		wantFatalMsg: "vendor",
+		wantFatalMsg: "no config",
+	}, {
+		desc: "all-vendor and per-vendor",
+		config: dutArista.Config().New().
+			WithText("text1").
+			WithAristaText("text2"),
+		wantFatalMsg: "all-vendor and per-vendor",
 	}, {
 		desc:         "template function does not exist",
 		config:       dutArista.Config().New().WithAristaText(`{{ qwerty "port1" }}`),
@@ -375,6 +377,68 @@ func TestGNOIError(t *testing.T) {
 	})
 	if !strings.Contains(gotErr, wantErr) {
 		t.Errorf("GNOI(t) got err %v, want %v", gotErr, wantErr)
+	}
+}
+
+func TestGRIBI(t *testing.T) {
+	initDUTFakes(t)
+	tests := []struct {
+		desc string
+		want struct{ grpb.GRIBIClient }
+		f    func(testing.TB) grpb.GRIBIClient
+	}{{
+		desc: "New GRIBI Client",
+		want: struct{ grpb.GRIBIClient }{},
+		f:    DUT(t, "dut_cisco").RawAPIs().GRIBI().New,
+	}, {
+		desc: "Default GRIBI Client",
+		want: struct{ grpb.GRIBIClient }{},
+		f:    DUT(t, "dut_cisco").RawAPIs().GRIBI().Default,
+	}}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			fakeBind.GRIBIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error) {
+				return test.want, nil
+			}
+
+			if got := test.f(t); got != test.want {
+				t.Errorf("GRIBI Client got %v, want %v", got, test.want)
+			}
+		})
+	}
+}
+
+func TestGRIBIError(t *testing.T) {
+	initDUTFakes(t)
+	tests := []struct {
+		desc    string
+		wantErr string
+		f       func(testing.TB) grpb.GRIBIClient
+	}{{
+		desc:    "New GRIBI Client",
+		wantErr: "bad gribi",
+		f:       DUT(t, "dut").RawAPIs().GRIBI().New,
+	}, {
+		desc:    "Default GRIBI Client",
+		wantErr: "bad gribi",
+		f:       DUT(t, "dut").RawAPIs().GRIBI().Default,
+	}}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			fakeBind.GRIBIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error) {
+				return nil, errors.New(test.wantErr)
+			}
+
+			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+				test.f(t)
+			})
+
+			if !strings.Contains(gotErr, test.wantErr) {
+				t.Errorf("GRIBI Client got err %v, want %v", gotErr, test.wantErr)
+			}
+		})
 	}
 }
 

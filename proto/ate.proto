@@ -578,6 +578,8 @@ message Transmission {
     PATTERN_UNSPECIFIED = 0;
     CONTINUOUS = 1;
     BURST = 2;
+    FIXED_FRAME_COUNT = 3;
+    FIXED_DURATION = 4;
   }
   Pattern pattern = 1;
   uint32 min_gap_bytes = 2;
@@ -586,6 +588,8 @@ message Transmission {
     uint32 nanoseconds = 4;
     uint32 bytes = 5;
   }
+  uint32 frame_count = 6;
+  uint32 duration_secs = 7;
 }
 
 message EgressTracking {

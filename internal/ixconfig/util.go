@@ -24,6 +24,11 @@ func (cfg *Ixnetwork) updateAllXPaths() {
 	cfg.updateXPaths(&XPath{parentXPath: "/"})
 }
 
+// Copy returns a new deep copy of the IxNetwork config.
+func (cfg *Ixnetwork) Copy() *Ixnetwork {
+	return cfg.copyCfg()
+}
+
 func removeNilsMap(m map[string]interface{}) {
 	var removeNils func(interface{})
 	removeNils = func(v interface{}) {

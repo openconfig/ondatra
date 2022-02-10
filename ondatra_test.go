@@ -22,9 +22,13 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/flags"
 )
 
 func TestReserveOnRun(t *testing.T) {
+	flagParseFn = func() (*flags.Values, error) {
+		return &flags.Values{}, nil
+	}
 	origRunTests := runTestsFn
 	defer func() {
 		reserveFn = reserve
@@ -52,7 +56,7 @@ func TestReserveOnRun(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			reserveFn = func(_ string, _, _ time.Duration) error {
+			reserveFn = func(*flags.Values) error {
 				return test.reservErr
 			}
 			var releaseMu sync.Mutex

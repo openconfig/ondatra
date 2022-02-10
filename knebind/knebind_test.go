@@ -257,7 +257,7 @@ func TestReserve(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			gotRes, err := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute)
+			gotRes, err := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute, nil)
 			if err != nil {
 				t.Fatalf("Reserve() got error: %v", err)
 			}
@@ -414,7 +414,7 @@ func TestReserveErrors(t *testing.T) {
 			kneCmdFn = func(cfg *Config, args ...string) ([]byte, error) {
 				return []byte(tt.topo), nil
 			}
-			res, gotErr := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute)
+			res, gotErr := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute, nil)
 			if diff := errdiff.Substring(gotErr, tt.wantErr); diff != "" {
 				t.Fatalf("Reserve() got unexpected error diff: %s", diff)
 			}
@@ -456,6 +456,23 @@ func TestServices(t *testing.T) {
 			t.Helper()
 			if _, err := b.DialGNMI(context.Background(), d); err == nil {
 				t.Fatalf("DialGNMI() got unexpected error: %v", err)
+			}
+		},
+	}, {
+		desc: "missing gribi",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{Id: "dut1"}},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+        type: ARISTA_CEOS
+		  }
+		`,
+		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
+			t.Helper()
+			if _, err := b.DialGRIBI(context.Background(), d); err == nil {
+				t.Fatalf("DialGRIBI() got unexpected error: %v", err)
 			}
 		},
 	}, {
@@ -512,12 +529,23 @@ func TestServices(t *testing.T) {
 						outside_ip: "1.1.1.1"
 					}
 				}
+				services {
+				  key: 4242
+					value {
+					  name: "gribi"
+						outside: 4242
+						outside_ip: "1.1.1.1"
+					}
+				}
 		  }
 		`,
 		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
 			t.Helper()
 			if _, err := b.DialGNMI(context.Background(), d); err != nil {
 				t.Fatalf("DialGNMI() got unexpected error: %v", err)
+			}
+			if _, err := b.DialGRIBI(context.Background(), d); err != nil {
+				t.Fatalf("DialGRIBI() got unexpected error: %v", err)
 			}
 			if _, err := b.DialP4RT(context.Background(), d); err != nil {
 				t.Fatalf("DialP4RT() got unexpected error: %v", err)
@@ -529,7 +557,7 @@ func TestServices(t *testing.T) {
 			kneCmdFn = func(cfg *Config, args ...string) ([]byte, error) {
 				return []byte(tt.topo), nil
 			}
-			res, err := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute)
+			res, err := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute, nil)
 			if err != nil {
 				t.Fatalf("Reserve() failed: %v", err)
 			}

@@ -32,6 +32,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
+	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 
@@ -67,7 +68,10 @@ func New(cfg *Config) (*Bind, error) {
 
 // Reserve implements the binding Reserve method by finding nodes and links in
 // the topology specified in the config file that match the requested testbed.
-func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration) (*binding.Reservation, error) {
+func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration, partial map[string]string) (*binding.Reservation, error) {
+	if len(partial) > 0 {
+		return nil, errors.New("KNEBind Reserve does not yet support partial mappings")
+	}
 	out, err := kneCmdFn(b.cfg, "topology", "service", b.cfg.TopoPath)
 	if err != nil {
 		return nil, err
@@ -100,6 +104,14 @@ func (b *Bind) DialGNMI(ctx context.Context, dut *binding.DUT, opts ...grpc.Dial
 		return nil, err
 	}
 	return gpb.NewGNMIClient(conn), nil
+}
+
+func (b *Bind) DialGRIBI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
+	conn, err := b.dialGRPC(ctx, dut, "gribi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return grpb.NewGRIBIClient(conn), nil
 }
 
 func (b *Bind) DialP4RT(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {

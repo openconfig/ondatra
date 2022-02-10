@@ -27,7 +27,6 @@ import (
 	"time"
 	"unsafe"
 
-	"flag"
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/closer"
 	"golang.org/x/sys/unix"
@@ -37,14 +36,15 @@ import (
 )
 
 var (
-	sigc       = make(chan os.Signal, 1)
-	reserveFn  = reserve
-	releaseFn  = release
-	runTestsFn = (*fixture).runTests
-	initBindFn = testbed.InitBind
+	sigc        = make(chan os.Signal, 1)
+	reserveFn   = reserve
+	releaseFn   = release
+	runTestsFn  = (*fixture).runTests
+	flagParseFn = flags.Parse
+	initBindFn  = testbed.InitBind
 )
 
-// Binder is the generator for providing binding to the test.
+// Binder creates the binding for the test.
 type Binder func() (binding.Binding, error)
 
 // RunTests acquires the testbed of devices and runs the tests. Every device is
@@ -57,8 +57,9 @@ func RunTests(m *testing.M, binder Binder) {
 }
 
 func doRun(m *testing.M, binder Binder) (rerr error) {
-	if !flag.Parsed() {
-		flag.Parse()
+	fv, err := flagParseFn()
+	if err != nil {
+		return err
 	}
 	b, err := binder()
 	if err != nil {
@@ -66,7 +67,7 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 	}
 	initBindFn(b)
 	fmt.Println(actionMsg("Reserving the testbed"))
-	if err := reserveFn(*flags.TestbedPath, *flags.RunTime, *flags.WaitTime); err != nil {
+	if err := reserveFn(fv); err != nil {
 		return err
 	}
 	go fnAfterSignal(releaseFn, unix.SIGINT, unix.SIGTERM)
@@ -74,7 +75,7 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		fmt.Println(actionMsg("Releasing the testbed"))
 		return releaseFn()
 	}, "error releasing testbed")
-	runTestsFn(new(fixture), m, *flags.RunTime)
+	runTestsFn(new(fixture), m, fv.RunTime)
 	return nil
 }
 

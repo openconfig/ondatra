@@ -24,7 +24,6 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/mohae/deepcopy"
 )
 
 type fakeSession struct {
@@ -253,7 +252,7 @@ func TestUpdateIDsOfLastImported(t *testing.T) {
 			},
 		}},
 		xPathToID:    map[string]string{fakeXPath: fakeID},
-		lastImported: deepcopy.Copy(cfg).(*Ixnetwork),
+		lastImported: cfg.Copy(),
 	}
 
 	lastCfg := c.LastImportedConfig()

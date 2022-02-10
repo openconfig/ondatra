@@ -19,8 +19,8 @@ import (
 	"path"
 
 	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/binding/usererr"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -474,6 +474,30 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 			EnableInterBurstGap: ixconfig.Bool(true),
 			InterBurstGap:       ixconfig.NumberUint32(burstGap),
 			InterBurstGapUnits:  ixconfig.String(burstGapUnits),
+		}, nil
+	case opb.Transmission_FIXED_FRAME_COUNT:
+		if tc.GetPacketsPerBurst() != 0 {
+			return nil, usererr.New("burst packet count should not be set for fixed packet count transmissions")
+		}
+		if tc.GetInterburstGap() != nil {
+			return nil, usererr.New("burst gap should not be set for fixed packet count transmissions")
+		}
+		return &ixconfig.TrafficTransmissionControl{
+			Type_:       ixconfig.String("fixedFrameCount"),
+			MinGapBytes: ixconfig.NumberUint32(tc.GetMinGapBytes()),
+			FrameCount:  ixconfig.NumberUint32(tc.GetFrameCount()),
+		}, nil
+	case opb.Transmission_FIXED_DURATION:
+		if tc.GetPacketsPerBurst() != 0 {
+			return nil, usererr.New("burst packet count should not be set for fixed duration transmissions")
+		}
+		if tc.GetInterburstGap() != nil {
+			return nil, usererr.New("burst gap should not be set for fixed duration transmissions")
+		}
+		return &ixconfig.TrafficTransmissionControl{
+			Type_:       ixconfig.String("fixedDuration"),
+			MinGapBytes: ixconfig.NumberUint32(tc.GetMinGapBytes()),
+			Duration:    ixconfig.NumberUint32(tc.GetDurationSecs()),
 		}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized transmission pattern %v", tcp)

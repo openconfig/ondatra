@@ -7,11 +7,11 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/google/go-cmp v0.5.6
 	github.com/google/kne v0.0.0-20210909173245-efe949af4d64
-	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/open-traffic-generator/snappi/gosnappi v0.7.6
 	github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d
 	github.com/openconfig/gnoi v0.0.0-20211102203610-1ece8ed91a0d
 	github.com/openconfig/goyang v0.4.0
+	github.com/openconfig/gribi v0.1.1-0.20210423184541-ce37eb4ba92f
 	github.com/openconfig/ygot v0.14.0
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
