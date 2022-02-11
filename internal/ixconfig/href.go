@@ -18,7 +18,5 @@ package ixconfig
 type IxiaCfgNode interface {
 	// XPath returns the current XPath of the config node.
 	XPath() *XPath
+	copyCfg(map[any]any) IxiaCfgNode
 }
-
-// Href represents a pointer to a different config object.
-type Href struct{}

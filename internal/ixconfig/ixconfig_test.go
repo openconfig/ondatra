@@ -163,7 +163,7 @@ func TestUpdateIDs(t *testing.T) {
 		Topology: []*Topology{topology},
 	}
 
-	cfg.updateAllXPaths() // Needed for mapping XPaths to expected IDs.
+	cfg.updateAllXPathsAndRefs() // Needed for mapping XPaths to expected IDs.
 	topologyXPath := topology.XPath().String()
 	deviceGroupXPath := deviceGroup.XPath().String()
 
@@ -240,7 +240,7 @@ func TestUpdateIDsOfLastImported(t *testing.T) {
 			DeviceGroup: []*TopologyDeviceGroup{{}},
 		}},
 	}
-	cfg.updateAllXPaths()
+	cfg.updateAllXPathsAndRefs()
 	topoXPath := cfg.Topology[0].XPath().String()
 	deviceGroupXPath := cfg.Topology[0].DeviceGroup[0].XPath().String()
 

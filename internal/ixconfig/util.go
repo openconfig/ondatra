@@ -16,17 +16,20 @@ package ixconfig
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
-// updateAllXPaths is a convenience function for updating XPaths from the root of the config.
-func (cfg *Ixnetwork) updateAllXPaths() {
+// updateAllXPathsAndRefs is a convenience function for updating XPaths and
+// refs from the root of the config.
+func (cfg *Ixnetwork) updateAllXPathsAndRefs() {
 	cfg.updateXPaths(&XPath{parentXPath: "/"})
+	cfg.updateRefs()
 }
 
 // Copy returns a new deep copy of the IxNetwork config.
 func (cfg *Ixnetwork) Copy() *Ixnetwork {
-	return cfg.copyCfg()
+	return (cfg.copyCfg(map[any]any{})).(*Ixnetwork)
 }
 
 func removeNilsMap(m map[string]interface{}) {
@@ -72,3 +75,21 @@ func (cfg *Ixnetwork) MarshalJSON() ([]byte, error) {
 	}
 	return b, nil
 }
+
+// ResolvedJSON returns the JSON representation of the config node with XPaths
+// and object references resolved. It does not modify the the original config.
+func (cfg *Ixnetwork) ResolvedJSON(node IxiaCfgNode) (string, error) {
+	origToCopy := map[any]any{}
+	cpy := (cfg.copyCfg(origToCopy)).(*Ixnetwork)
+	cpy.updateAllXPathsAndRefs()
+	nodeCpy, ok := origToCopy[node]
+	if !ok {
+		return "", errors.New("could not find provided config node from root config")
+	}
+	nodeJson, err := json.Marshal(nodeCpy)
+	if err != nil {
+		return "", fmt.Errorf("could not marshal node to JSON: %w", err)
+	}
+	return string(nodeJson), nil
+}
+
