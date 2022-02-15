@@ -16,7 +16,6 @@ package ixconfig
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -29,7 +28,7 @@ func (cfg *Ixnetwork) updateAllXPathsAndRefs() {
 
 // Copy returns a new deep copy of the IxNetwork config.
 func (cfg *Ixnetwork) Copy() *Ixnetwork {
-	return (cfg.copyCfg(map[any]any{})).(*Ixnetwork)
+	return (cfg.copyCfg(map[interface{}]interface{}{})).(*Ixnetwork)
 }
 
 func removeNilsMap(m map[string]interface{}) {
@@ -76,20 +75,15 @@ func (cfg *Ixnetwork) MarshalJSON() ([]byte, error) {
 	return b, nil
 }
 
-// ResolvedJSON returns the JSON representation of the config node with XPaths
-// and object references resolved. It does not modify the the original config.
-func (cfg *Ixnetwork) ResolvedJSON(node IxiaCfgNode) (string, error) {
-	origToCopy := map[any]any{}
+// ResolvedConfig returns a copy of the config node with XPaths updated and
+// object references resolved. It does not modify the original config.
+func (cfg *Ixnetwork) ResolvedConfig(node IxiaCfgNode) (IxiaCfgNode, error) {
+	origToCopy := map[interface{}]interface{}{}
 	cpy := (cfg.copyCfg(origToCopy)).(*Ixnetwork)
 	cpy.updateAllXPathsAndRefs()
-	nodeCpy, ok := origToCopy[node]
+	nodeCpy, ok := (origToCopy[node]).(IxiaCfgNode)
 	if !ok {
-		return "", errors.New("could not find provided config node from root config")
+		return nil, fmt.Errorf("could not find provided config at %q node from root config", node.XPath().String())
 	}
-	nodeJson, err := json.Marshal(nodeCpy)
-	if err != nil {
-		return "", fmt.Errorf("could not marshal node to JSON: %w", err)
-	}
-	return string(nodeJson), nil
+	return nodeCpy, nil
 }
-

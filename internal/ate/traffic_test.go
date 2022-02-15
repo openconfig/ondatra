@@ -154,7 +154,10 @@ func TestAddTraffic(t *testing.T) {
 					Ethernet: []*ixconfig.TopologyEthernet{{}},
 				}},
 			}},
-			Vport: []*ixconfig.Vport{{Name: ixconfig.String("vport")}},
+			Vport: []*ixconfig.Vport{{
+				Name: ixconfig.String("vport"),
+				Protocols: &ixconfig.VportProtocols{},
+			}},
 			Lag:   []*ixconfig.Lag{{Name: ixconfig.String("lag")}},
 		}
 		dg := cfg.Topology[0].DeviceGroup[0]
@@ -174,7 +177,6 @@ func TestAddTraffic(t *testing.T) {
 			}},
 		}
 		dg.NetworkGroup = append(dg.NetworkGroup, rsvpNg)
-		updateXPaths(cfg)
 		return &ixATE{
 			cfg: cfg,
 			intfs: map[string]*intf{
@@ -524,7 +526,11 @@ func TestAddTraffic(t *testing.T) {
 				return
 			}
 
-			ti := c.cfg.Traffic.TrafficItem[0]
+			tiCfg, err := c.cfg.ResolvedConfig(c.cfg.Traffic.TrafficItem[0])
+			if err != nil {
+				t.Fatalf("could not resolve xpaths/references for traffic config: %v", err)
+			}
+			ti := tiCfg.(*ixconfig.TrafficTrafficItem)
 			if gotTrafficType := *(ti.TrafficType); test.wantTrafficType != trafficType(gotTrafficType) {
 				t.Errorf("addTraffic: unexpected traffic type for traffic item: got %q, want %q",
 					gotTrafficType, test.wantTrafficType)

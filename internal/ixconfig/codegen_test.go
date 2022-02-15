@@ -137,7 +137,7 @@ func TestCopy(t *testing.T) {
 func TestRefUpdate(t *testing.T) {
 	cfg := &Ixnetwork{
 		Topology: []*Topology{{
-			Name:   String("someName"),
+			Name: String("someName"),
 			DeviceGroup: []*TopologyDeviceGroup{{
 				Enabled: MultivalueTrue(),
 			}},

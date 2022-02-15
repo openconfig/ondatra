@@ -20,6 +20,7 @@
                "retransTime": 7000
             }
          },
+         "protocols": {},
          "xpath": "/vport[1]"
       },
       {
@@ -42,6 +43,7 @@
                "retransTime": 7000
             }
          },
+         "protocols": {},
          "xpath": "/vport[2]"
       }
    ]

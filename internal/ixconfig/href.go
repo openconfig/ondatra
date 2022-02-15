@@ -18,5 +18,5 @@ package ixconfig
 type IxiaCfgNode interface {
 	// XPath returns the current XPath of the config node.
 	XPath() *XPath
-	copyCfg(map[any]any) IxiaCfgNode
+	copyCfg(map[interface{}]interface{}) IxiaCfgNode
 }

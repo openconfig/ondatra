@@ -48,16 +48,16 @@ import (
 
 var (
 	gotConfig string
-	gotOpts   *binding.ConfigOptions
+	gotReset  bool
 )
 
 func initDUTFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, opts *binding.ConfigOptions) error {
+	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, reset bool) error {
 		gotConfig = config
-		gotOpts = opts
+		gotReset = reset
 		return nil
 	}
 }
@@ -69,17 +69,14 @@ func TestPushConfig(t *testing.T) {
 		desc       string
 		config     *DUTConfig
 		wantConfig string
-		wantOpts   *binding.ConfigOptions
 	}{{
 		desc:       "correct text",
 		config:     dutArista.Config().New().WithText("generated"),
 		wantConfig: "generated",
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc:       "correct file",
 		config:     dutArista.Config().New().WithFile(filepath.Join("testdata", "example_config_1.txt")),
 		wantConfig: "example_config_1",
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "correct per-vendor text",
 		config: dutArista.Config().New().
@@ -87,7 +84,6 @@ func TestPushConfig(t *testing.T) {
 			WithCiscoText("Cisco config").
 			WithJuniperText("Juniper config"),
 		wantConfig: "Arista config",
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "correct per-vendor file",
 		config: dutArista.Config().New().
@@ -95,45 +91,40 @@ func TestPushConfig(t *testing.T) {
 			WithCiscoText("Cisco config").
 			WithJuniperFile(filepath.Join("testdata", "example_config_2.txt")),
 		wantConfig: "example_config_1",
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "port template",
 		config: dutArista.Config().New().
 			WithAristaText(`reconfigure {{ port "port1" }} and {{ port "port2" }}`),
 		wantConfig: "reconfigure Et1/2/3 and Et4/5/6",
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "secrets template",
 		config: dutArista.Config().New().
 			WithAristaText(`shh {{ secrets "hello" "there" }} wink`),
 		wantConfig: `shh {{ secrets "hello" "there" }} wink`,
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "var template",
 		config: dutArista.Config().New().
 			WithAristaText(`hello {{ var "foo" }} there`).
 			WithVarValue("foo", "bar"),
 		wantConfig: `hello bar there`,
-		wantOpts:   &binding.ConfigOptions{},
 	}, {
 		desc: "var map template",
 		config: dutArista.Config().New().
 			WithAristaText(`hello {{ var "x" }} and {{ var "y" }}`).
 			WithVarMap(map[string]string{"x": "apple", "y": "orange"}),
 		wantConfig: `hello apple and orange`,
-		wantOpts:   &binding.ConfigOptions{},
 	}}
 
 	for _, tt := range testsPass {
 		t.Run(tt.desc, func(t *testing.T) {
 			gotConfig = ""
-			gotOpts = nil
+			gotReset = false
 			tt.config.Push(t)
 			if diff := cmp.Diff(tt.wantConfig, gotConfig); diff != "" {
 				t.Errorf("Push(t) got unexpected config diff(-want,+got):\n %s", diff)
 			}
-			if diff := cmp.Diff(tt.wantOpts, gotOpts); diff != "" {
-				t.Errorf("Push(t) got unexpected options diff(-want,+got):\n %s", diff)
+			if !gotReset {
+				t.Errorf("Push(t) got unexpected reset %v, want true", gotReset)
 			}
 		})
 	}
@@ -189,15 +180,14 @@ func TestPushConfigErrors(t *testing.T) {
 func TestAppendConfig(t *testing.T) {
 	initDUTFakes(t)
 	gotConfig = ""
-	gotOpts = nil
+	gotReset = false
 	wantConfig := "arista config"
-	wantOpts := &binding.ConfigOptions{Append: true}
 	DUT(t, "dut").Config().New().WithAristaText(wantConfig).Append(t)
 	if gotConfig != wantConfig {
 		t.Errorf("Append(t) got pushed config %v, want %v", gotConfig, wantConfig)
 	}
-	if !cmp.Equal(gotOpts, wantOpts) {
-		t.Errorf("Append(t) got pushed options %v, want %v", gotOpts, wantOpts)
+	if gotReset {
+		t.Errorf("Append(t) got unexpected reset %v, want false", gotReset)
 	}
 }
 

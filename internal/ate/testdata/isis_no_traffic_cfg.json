@@ -5,144 +5,198 @@
         {
           "enabled": {
             "singleValue": {
-              "value": "true"
-            }
+              "value": "true",
+              "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1] enabled']/singleValue"
+            },
+            "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1] enabled']"
           },
           "ethernet": [
             {
               "enableVlans": {
                 "singleValue": {
-                  "value": "false"
-                }
+                  "value": "false",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] enableVlans']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] enableVlans']"
               },
               "ipv4": [
                 {
                   "address": {
                     "singleValue": {
-                      "value": "192.168.31.2"
-                    }
+                      "value": "192.168.31.2",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] address']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] address']"
                   },
                   "gatewayIp": {
                     "singleValue": {
-                      "value": "192.168.31.1"
-                    }
+                      "value": "192.168.31.1",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] gatewayIp']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] gatewayIp']"
                   },
                   "name": "IPv4 on intf",
                   "prefix": {
                     "singleValue": {
-                      "value": "30"
-                    }
+                      "value": "30",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] prefix']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] prefix']"
                   },
                   "resolveGateway": {
                     "singleValue": {
-                      "value": "true"
-                    }
-                  }
+                      "value": "true",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] resolveGateway']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1] resolveGateway']"
+                  },
+                  "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]/ipv4[1]"
                 }
               ],
               "isisL3": [
                 {
                   "authType": {
                     "singleValue": {
-                      "value": "md5"
-                    }
+                      "value": "md5",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] authType']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] authType']"
                   },
                   "circuitTranmitPasswordOrMD5Key": {
                     "singleValue": {
-                      "value": "md5password"
-                    }
+                      "value": "md5password",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] circuitTranmitPasswordOrMD5Key']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] circuitTranmitPasswordOrMD5Key']"
                   },
                   "enable3WayHandshake": {
                     "singleValue": {
-                      "value": "true"
-                    }
+                      "value": "true",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] enable3WayHandshake']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] enable3WayHandshake']"
                   },
                   "enableAdjSID": {
                     "singleValue": {
-                      "value": "false"
-                    }
+                      "value": "false",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] enableAdjSID']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] enableAdjSID']"
                   },
                   "interfaceMetric": {
                     "singleValue": {
-                      "value": "10"
-                    }
+                      "value": "10",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] interfaceMetric']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] interfaceMetric']"
                   },
                   "level2DeadInterval": {
                     "singleValue": {
-                      "value": "30"
-                    }
+                      "value": "30",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2DeadInterval']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2DeadInterval']"
                   },
                   "level2HelloInterval": {
                     "singleValue": {
-                      "value": "10"
-                    }
+                      "value": "10",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2HelloInterval']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2HelloInterval']"
                   },
                   "level2Priority": {
                     "singleValue": {
-                      "value": "0"
-                    }
+                      "value": "0",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2Priority']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] level2Priority']"
                   },
                   "levelType": {
                     "singleValue": {
-                      "value": "level2"
-                    }
+                      "value": "level2",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] levelType']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] levelType']"
                   },
                   "name": "IS-IS on intf",
                   "networkType": {
                     "singleValue": {
-                      "value": "pointpoint"
-                    }
-                  }
+                      "value": "pointpoint",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] networkType']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1] networkType']"
+                  },
+                  "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1]"
                 }
               ],
-              "mac": {},
+              "mac": {
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mac']"
+              },
               "mtu": {
                 "singleValue": {
-                  "value": "9000"
-                }
+                  "value": "9000",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mtu']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mtu']"
               },
-              "name": "Ethernet on 12/1"
+              "name": "Ethernet on 12/1",
+              "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]"
             }
           ],
           "isisL3Router": [
             {
               "areaAddresses": {
                 "singleValue": {
-                  "value": "49 00 01"
-                }
+                  "value": "49 00 01",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaAddresses']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaAddresses']"
               },
               "discardLSPs": {
                 "singleValue": {
-                  "value": "false"
-                }
+                  "value": "false",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] discardLSPs']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] discardLSPs']"
               },
               "enableHelloPadding": {
                 "singleValue": {
-                  "value": "true"
-                }
+                  "value": "true",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableHelloPadding']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableHelloPadding']"
               },
-	      "enableSR": false,
+              "enableSR": false,
               "enableTE": {
                 "singleValue": {
-                  "value": "false"
-                }
+                  "value": "false",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableTE']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableTE']"
               },
               "enableWideMetric": {
                 "singleValue": {
-                  "value": "true"
-                }
+                  "value": "true",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableWideMetric']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] enableWideMetric']"
               },
               "name": "IS-IS Router on intf",
-              "tERouterId": {
-                "singleValue": {
-                  "value": "0.0.0.0"
-                }
-              },
               "rtrcapId": {
                 "singleValue": {
-                  "value": "0.0.0.1"
-                }
-              }
+                  "value": "0.0.0.1",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] rtrcapId']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] rtrcapId']"
+              },
+              "tERouterId": {
+                "singleValue": {
+                  "value": "0.0.0.0",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] tERouterId']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] tERouterId']"
+              },
+              "xpath": "/topology[1]/deviceGroup[1]/isisL3Router[1]"
             }
           ],
           "multiplier": 1,
@@ -155,76 +209,106 @@
                     {
                       "algorithm": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] algorithm']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] algorithm']"
                       },
                       "configureSIDIndexLabel": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']"
                       },
                       "eFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] eFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] eFlag']"
                       },
                       "lFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] lFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] lFlag']"
                       },
                       "metric": {
                         "singleValue": {
-                          "value": "10"
-                        }
+                          "value": "10",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] metric']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] metric']"
                       },
                       "nFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] nFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] nFlag']"
                       },
                       "pFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] pFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] pFlag']"
                       },
                       "rFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] rFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] rFlag']"
                       },
                       "routeOrigin": {
                         "singleValue": {
-                          "value": "internal"
-                        }
+                          "value": "internal",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']"
                       },
                       "sIDIndexLabel": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']"
                       },
                       "vFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
-                      }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] vFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1] vFlag']"
+                      },
+                      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/isisL3RouteProperty[1]"
                     }
                   ],
                   "networkAddress": {
                     "singleValue": {
-                      "value": "30.0.0.0"
-                    }
+                      "value": "30.0.0.0",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] networkAddress']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] networkAddress']"
                   },
                   "numberOfAddressesAsy": {
                     "singleValue": {
-                      "value": "15000"
-                    }
+                      "value": "15000",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] numberOfAddressesAsy']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] numberOfAddressesAsy']"
                   },
                   "prefixLength": {
                     "singleValue": {
-                      "value": "30"
-                    }
-                  }
+                      "value": "30",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] prefixLength']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1] prefixLength']"
+                  },
+                  "xpath": "/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]"
                 }
               ],
               "name": "net1",
@@ -237,76 +321,106 @@
                     {
                       "algorithm": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] algorithm']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] algorithm']"
                       },
                       "configureSIDIndexLabel": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']"
                       },
                       "eFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] eFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] eFlag']"
                       },
                       "lFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] lFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] lFlag']"
                       },
                       "metric": {
                         "singleValue": {
-                          "value": "10"
-                        }
+                          "value": "10",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] metric']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] metric']"
                       },
                       "nFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] nFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] nFlag']"
                       },
                       "pFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] pFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] pFlag']"
                       },
                       "rFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] rFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] rFlag']"
                       },
                       "routeOrigin": {
                         "singleValue": {
-                          "value": "internal"
-                        }
+                          "value": "internal",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']"
                       },
                       "sIDIndexLabel": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']"
                       },
                       "vFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
-                      }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] vFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1] vFlag']"
+                      },
+                      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/isisL3RouteProperty[1]"
                     }
                   ],
                   "networkAddress": {
                     "singleValue": {
-                      "value": "40.0.0.0"
-                    }
+                      "value": "40.0.0.0",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] networkAddress']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] networkAddress']"
                   },
                   "numberOfAddressesAsy": {
                     "singleValue": {
-                      "value": "35000"
-                    }
+                      "value": "35000",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] numberOfAddressesAsy']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] numberOfAddressesAsy']"
                   },
                   "prefixLength": {
                     "singleValue": {
-                      "value": "30"
-                    }
-                  }
+                      "value": "30",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] prefixLength']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1] prefixLength']"
+                  },
+                  "xpath": "/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]"
                 }
               ],
               "name": "net2",
@@ -319,76 +433,106 @@
                     {
                       "algorithm": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] algorithm']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] algorithm']"
                       },
                       "configureSIDIndexLabel": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] configureSIDIndexLabel']"
                       },
                       "eFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] eFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] eFlag']"
                       },
                       "lFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] lFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] lFlag']"
                       },
                       "metric": {
                         "singleValue": {
-                          "value": "10"
-                        }
+                          "value": "10",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] metric']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] metric']"
                       },
                       "nFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] nFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] nFlag']"
                       },
                       "pFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] pFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] pFlag']"
                       },
                       "rFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] rFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] rFlag']"
                       },
                       "routeOrigin": {
                         "singleValue": {
-                          "value": "internal"
-                        }
+                          "value": "internal",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] routeOrigin']"
                       },
                       "sIDIndexLabel": {
                         "singleValue": {
-                          "value": "0"
-                        }
+                          "value": "0",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] sIDIndexLabel']"
                       },
                       "vFlag": {
                         "singleValue": {
-                          "value": "false"
-                        }
-                      }
+                          "value": "false",
+                          "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] vFlag']/singleValue"
+                        },
+                        "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1] vFlag']"
+                      },
+                      "xpath": "/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/isisL3RouteProperty[1]"
                     }
                   ],
                   "networkAddress": {
                     "singleValue": {
-                      "value": "2001:4860:0:1::444:1"
-                    }
+                      "value": "2001:4860:0:1::444:1",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] networkAddress']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] networkAddress']"
                   },
                   "numberOfAddressesAsy": {
                     "singleValue": {
-                      "value": "15000"
-                    }
+                      "value": "15000",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] numberOfAddressesAsy']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] numberOfAddressesAsy']"
                   },
                   "prefixLength": {
                     "singleValue": {
-                      "value": "126"
-                    }
-                  }
+                      "value": "126",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] prefixLength']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1] prefixLength']"
+                  },
+                  "xpath": "/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]"
                 }
               ],
               "name": "net3",
@@ -401,31 +545,42 @@
       "name": "Topology on 12/1",
       "vports": [
         "/vport[1]"
-      ]
+      ],
+      "xpath": "/topology[1]"
     }
   ],
   "vport": [
     {
-      "l1config": {
+      "l1Config": {
         "aresOneFourHundredGigLan": {
-          "autoInstrumentation": "floating"
+          "autoInstrumentation": "floating",
+          "xpath": "/vport[1]/l1Config/aresOneFourHundredGigLan"
         },
         "novusHundredGigLan": {
-          "autoInstrumentation": "floating"
+          "autoInstrumentation": "floating",
+          "xpath": "/vport[1]/l1Config/novusHundredGigLan"
         },
         "novusTenGigLan": {
-          "autoInstrumentation": "floating"
-        }
+          "autoInstrumentation": "floating",
+          "xpath": "/vport[1]/l1Config/novusTenGigLan"
+        },
+        "xpath": "/vport[1]/l1Config"
       },
       "location": "192.168.1.1;12;1",
       "name": "ixia1/12/1",
+      "protocols": {
+        "xpath": "/vport[1]/protocols"
+      },
       "protocolStack": {
         "options": {
           "mcast_solicit": 8,
-          "retransTime": 7000
-        }
+          "retransTime": 7000,
+          "xpath": "/vport[1]/protocolStack/options"
+        },
+        "xpath": "/vport[1]/protocolStack"
       },
       "xpath": "/vport[1]"
     }
-  ]
+  ],
+  "xpath": "/"
 }

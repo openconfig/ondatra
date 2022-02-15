@@ -19,8 +19,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/binding/usererr"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -57,6 +57,7 @@ func (ix *ixATE) addPorts(top *opb.Topology) error {
 			Name:     ixconfig.String(fmt.Sprintf("%s/%s", ix.name, port)),
 			Location: ixconfig.String(fmt.Sprintf("%s;%s", ix.chassisHost, strings.ReplaceAll(port, "/", ";"))),
 			L1Config: &ixconfig.VportL1Config{},
+			Protocols: &ixconfig.VportProtocols{}, // Used as the target for traffic endpoints
 			ProtocolStack: &ixconfig.VportProtocolStack{
 				Options: &ixconfig.VportProtocolStackOptions{
 					// (b/192980845) Configure more neighbor solicitations spaced further apart to workaround IPv6 failures behind LACP.
@@ -108,7 +109,7 @@ func (ix *ixATE) addLAGs(lags []*opb.Lag) error {
 			portToLag[p] = ol
 			vport := ix.ports[p]
 			vports = append(vports, vport)
-			lag.Vports = append(lag.Vports, vport.XPath().String())
+			lag.AppendVportsRef(vport)
 		}
 		// Alphabetize ports so that a particular reservation produces the same config.
 		sort.Strings(lag.Vports)
@@ -136,12 +137,12 @@ func (ix *ixATE) addTopology(ifs []*opb.InterfaceConfig) {
 		name = v.Port
 		link = ix.ports[name]
 		linkPorts = []*ixconfig.Vport{link.(*ixconfig.Vport)}
-		topo.Vports = []string{link.XPath().String()}
+		topo.SetVportsRefs([]ixconfig.IxiaCfgNode{link})
 	case *opb.InterfaceConfig_Lag:
 		name = v.Lag
 		link = ix.lags[name]
 		linkPorts = ix.lagPorts[link.(*ixconfig.Lag)]
-		topo.Ports = []string{link.XPath().String()}
+		topo.SetPortsRefs([]ixconfig.IxiaCfgNode{link})
 	}
 	topo.Name = ixconfig.String(fmt.Sprintf("Topology on %s", name))
 

@@ -47,6 +47,7 @@ func TestAddPorts(t *testing.T) {
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
 			},
+			Protocols: &ixconfig.VportProtocols{},
 			ProtocolStack: &ixconfig.VportProtocolStack{
 				Options: &ixconfig.VportProtocolStackOptions{
 					McastSolicit: ixconfig.NumberUint32(8),
@@ -67,6 +68,7 @@ func TestAddPorts(t *testing.T) {
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
 			},
+			Protocols: &ixconfig.VportProtocols{},
 			ProtocolStack: &ixconfig.VportProtocolStack{
 				Options: &ixconfig.VportProtocolStackOptions{
 					McastSolicit: ixconfig.NumberUint32(8),
@@ -162,24 +164,27 @@ func TestAddLAGs(t *testing.T) {
 			Name:  "staticLAG",
 			Ports: []string{"1/1", "2/2"},
 		}},
-		wantCfg: &ixconfig.Ixnetwork{
-			Vport: []*ixconfig.Vport{vport1, vport2},
-			Lag: []*ixconfig.Lag{{
-				Name:    ixconfig.String("ixia1/staticLAG"),
-				LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("staticlag")},
-				ProtocolStack: &ixconfig.LagProtocolStack{
-					Enabled: ixconfig.MultivalueBool(true),
-					Ethernet: []*ixconfig.LagEthernet{{
-						Multiplier: ixconfig.NumberFloat64(1),
-						Lagportstaticlag: []*ixconfig.LagLagportstaticlag{{
+		wantCfg: func() *ixconfig.Ixnetwork {
+			cfg := &ixconfig.Ixnetwork{
+				Vport: []*ixconfig.Vport{vport1, vport2},
+				Lag: []*ixconfig.Lag{{
+					Name:    ixconfig.String("ixia1/staticLAG"),
+					LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("staticlag")},
+					ProtocolStack: &ixconfig.LagProtocolStack{
+						Enabled: ixconfig.MultivalueBool(true),
+						Ethernet: []*ixconfig.LagEthernet{{
 							Multiplier: ixconfig.NumberFloat64(1),
+							Lagportstaticlag: []*ixconfig.LagLagportstaticlag{{
+								Multiplier: ixconfig.NumberFloat64(1),
+							}},
 						}},
-					}},
-					Multiplier: ixconfig.NumberFloat64(1),
-				},
-				Vports: []string{"/vport[1]", "/vport[2]"},
-			}},
-		},
+						Multiplier: ixconfig.NumberFloat64(1),
+					},
+				}},
+			}
+			cfg.Lag[0].SetVportsRefs([]ixconfig.IxiaCfgNode{vport1, vport2})
+			return cfg
+		}(),
 	}, {
 		desc: "lacp",
 		lags: []*opb.Lag{{
@@ -187,24 +192,27 @@ func TestAddLAGs(t *testing.T) {
 			Ports: []string{"1/1", "2/2"},
 			Lacp:  &opb.Lag_Lacp{Enabled: true},
 		}},
-		wantCfg: &ixconfig.Ixnetwork{
-			Vport: []*ixconfig.Vport{vport1, vport2},
-			Lag: []*ixconfig.Lag{{
-				Name:    ixconfig.String("ixia1/lacpLAG"),
-				LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("lacp")},
-				ProtocolStack: &ixconfig.LagProtocolStack{
-					Enabled: ixconfig.MultivalueBool(true),
-					Ethernet: []*ixconfig.LagEthernet{{
-						Multiplier: ixconfig.NumberFloat64(1),
-						Lagportlacp: []*ixconfig.LagLagportlacp{{
+		wantCfg: func() *ixconfig.Ixnetwork{
+			cfg := &ixconfig.Ixnetwork{
+				Vport: []*ixconfig.Vport{vport1, vport2},
+				Lag: []*ixconfig.Lag{{
+					Name:    ixconfig.String("ixia1/lacpLAG"),
+					LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("lacp")},
+					ProtocolStack: &ixconfig.LagProtocolStack{
+						Enabled: ixconfig.MultivalueBool(true),
+						Ethernet: []*ixconfig.LagEthernet{{
 							Multiplier: ixconfig.NumberFloat64(1),
+							Lagportlacp: []*ixconfig.LagLagportlacp{{
+								Multiplier: ixconfig.NumberFloat64(1),
+							}},
 						}},
-					}},
-					Multiplier: ixconfig.NumberFloat64(1),
-				},
-				Vports: []string{"/vport[1]", "/vport[2]"},
-			}},
-		},
+						Multiplier: ixconfig.NumberFloat64(1),
+					},
+				}},
+			}
+			cfg.Lag[0].SetVportsRefs([]ixconfig.IxiaCfgNode{vport1, vport2})
+			return cfg
+		}(),
 	}, {
 		desc: "port in multiple lags",
 		lags: []*opb.Lag{{
@@ -232,7 +240,6 @@ func TestAddLAGs(t *testing.T) {
 				lags:     make(map[string]*ixconfig.Lag),
 				lagPorts: make(map[*ixconfig.Lag][]*ixconfig.Vport),
 			}
-			updateXPaths(c.cfg)
 
 			err := c.addLAGs(test.lags)
 			if (err == nil) != (test.wantErr == "") || err != nil && !strings.Contains(err.Error(), test.wantErr) {
@@ -241,7 +248,15 @@ func TestAddLAGs(t *testing.T) {
 			if err != nil {
 				return
 			}
-			if diff := jsonCfgDiff(t, test.wantCfg, c.cfg); diff != "" {
+			wantCfg, err := test.wantCfg.ResolvedConfig(test.wantCfg)
+			if err != nil {
+				t.Fatalf("could not get resolved expected cfg: %v", err)
+			}
+			gotCfg, err := c.cfg.ResolvedConfig(c.cfg)
+			if err != nil {
+				t.Fatalf("could not get resolved cfg: %v", err)
+			}
+			if diff := jsonCfgDiff(t, wantCfg, gotCfg); diff != "" {
 				t.Errorf("addLAGs: Incorrect config generated: diff (-want +got)\n%s", diff)
 			}
 		})
@@ -268,7 +283,6 @@ func TestAddTopologies(t *testing.T) {
 			Vport: []*ixconfig.Vport{vport},
 			Lag:   []*ixconfig.Lag{lag},
 		}
-		updateXPaths(cfg)
 		return &ixATE{
 			cfg:   cfg,
 			ports: map[string]*ixconfig.Vport{port: vport},

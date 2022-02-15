@@ -144,24 +144,20 @@ func (c *DUTConfig) WithVarMap(m map[string]string) *DUTConfig {
 	return c
 }
 
-// Push replaces the config on the device with the specified config, prepended with the device's base config.
-// It pushes vendor config to the device if it has been set; otherwise, it attempts to push openconfig.
-// If neither vendor config nor openconfig has been specified, it fails the test.
+// Push resets the device to its base config and appends the specified config.
 func (c *DUTConfig) Push(t testing.TB) {
 	t.Helper()
 	logAction(t, "Pushing config to %s", c.dut)
-	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, false); err != nil {
+	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, true); err != nil {
 		t.Fatalf("Push(t) on %s: %v", c.dut, err)
 	}
 }
 
-// Append appends the specific config to the device's current config.
-// It pushes vendor config to the device if it has been set; otherwise, it attempts to push openconfig.
-// If neither vendor config nor openconfig has been specified, it fails the test.
+// Append appends the specified config to the current config.
 func (c *DUTConfig) Append(t testing.TB) {
 	t.Helper()
 	logAction(t, "Appending config to %s", c.dut)
-	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, true); err != nil {
+	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, false); err != nil {
 		t.Fatalf("Append(t) on %s: %v", c.dut, err)
 	}
 }

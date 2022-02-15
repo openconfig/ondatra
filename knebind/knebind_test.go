@@ -595,33 +595,25 @@ func TestPushConfig(t *testing.T) {
 	tests := []struct {
 		desc      string
 		dut       *binding.DUT
-		opts      *binding.ConfigOptions
+		reset     bool
 		sshErr    error
 		wantReset bool
 		wantErr   string
 	}{{
-		desc:      "replace success",
-		dut:       &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
-		opts:      &binding.ConfigOptions{},
-		wantReset: true,
-	}, {
-		desc: "append success",
+		desc: "success",
 		dut:  &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
-		opts: &binding.ConfigOptions{Append: true},
+	}, {
+		desc:      "reset success",
+		dut:       &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		reset:     true,
+		wantReset: true,
 	}, {
 		desc:    "only arista support",
 		dut:     &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_CISCO}},
-		opts:    &binding.ConfigOptions{Append: true},
 		wantErr: "supports Arista",
-	}, {
-		desc:    "no openconfig support",
-		dut:     &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
-		opts:    &binding.ConfigOptions{OpenConfig: true},
-		wantErr: "OpenConfig",
 	}, {
 		desc:    "ssh error",
 		dut:     &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
-		opts:    &binding.ConfigOptions{Append: true},
 		sshErr:  errors.New("ssh error"),
 		wantErr: "ssh error",
 	}}
@@ -629,7 +621,7 @@ func TestPushConfig(t *testing.T) {
 		t.Run(tt.desc, func(t *testing.T) {
 			sshErr = tt.sshErr
 			gotReset = false
-			err := bind.PushConfig(context.Background(), tt.dut, "my config", tt.opts)
+			err := bind.PushConfig(context.Background(), tt.dut, "my config", tt.reset)
 			if (err == nil) != (tt.wantErr == "") || (err != nil && !strings.Contains(err.Error(), tt.wantErr)) {
 				t.Errorf("PushConfig got error %v, want %v", err, tt.wantErr)
 			}

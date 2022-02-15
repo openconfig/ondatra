@@ -125,7 +125,11 @@ func (c *fakeCfgClient) ImportConfig(ctx context.Context, cfg *ixconfig.Ixnetwor
 	if importErr != nil {
 		return importErr
 	}
-	c.lastImportCfg = node
+	var err error
+	c.lastImportCfg, err = cfg.ResolvedConfig(node)
+	if err != nil {
+		return fmt.Errorf("Error resolving xpaths/refs for config node: %w", err)
+	}
 	return updateXPaths(cfg)
 }
 

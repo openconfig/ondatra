@@ -163,14 +163,11 @@ func (c *passCred) RequireTransportSecurity() bool {
 	return true
 }
 
-func (b *Bind) PushConfig(ctx context.Context, dut *binding.DUT, config string, opts *binding.ConfigOptions) error {
+func (b *Bind) PushConfig(ctx context.Context, dut *binding.DUT, config string, reset bool) error {
 	if dut.Vendor != opb.Device_ARISTA {
 		return errors.New("KNEBind PushConfig only supports Arista devices")
 	}
-	if opts.OpenConfig {
-		return errors.New("KNEBind PushConfig does not yet support pushing OpenConfig")
-	}
-	if !opts.Append {
+	if reset {
 		if _, err := kneCmdFn(b.cfg, "topology", "reset", b.cfg.TopoPath, dut.Name, "--push"); err != nil {
 			return err
 		}

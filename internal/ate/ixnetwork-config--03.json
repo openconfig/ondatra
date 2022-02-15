@@ -446,14 +446,10 @@
          "egressTracking": null,
          "endpointSet": [
             {
-               "destinations": [
-                  "/topology[2]/deviceGroup[1]"
-               ],
+               "destinations": null,
                "fullyMeshedEndpoints": [],
                "name": "ipv6FlowLabels1",
-               "sources": [
-                  "/topology[1]/deviceGroup[1]"
-               ],
+               "sources": null,
                "trafficGroups": []
             }
          ],
