@@ -40,9 +40,11 @@ var (
 		// distinguish CSR from CXR and CEVO from VMX.
 		tpb.Node_CISCO_CSR:    opb.Device_CISCO,
 		tpb.Node_CISCO_CXR:    opb.Device_CISCO,
+		tpb.Node_CISCO_E8000:  opb.Device_CISCO,
+		tpb.Node_CISCO_XRD:    opb.Device_CISCO,
+		tpb.Node_IXIA_TG:      opb.Device_IXIA,
 		tpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
 		tpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
-		tpb.Node_IXIA_TG:      opb.Device_IXIA,
 		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
 	}
 )

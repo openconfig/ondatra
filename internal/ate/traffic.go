@@ -16,7 +16,6 @@ package ate
 
 import (
 	"fmt"
-	"path"
 
 	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding/usererr"
@@ -120,17 +119,18 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	if hdrs.eth.GetBadCrc() {
 		crc = ixconfig.String("badCrc")
 	}
+	epSet := &ixconfig.TrafficEndpointSet{
+		Name:         ixconfig.String(f.GetName()),
+		// Following two values are explicitly set to reduce warnings from config push.
+		FullyMeshedEndpoints: []string{},
+		TrafficGroups:        []string{},
+	}
+	epSet.SetSourcesRefs(srcs)
+	epSet.SetDestinationsRefs(dsts)
 	ti := &ixconfig.TrafficTrafficItem{
 		Name:        ixconfig.String(f.GetName()),
 		TrafficType: ixconfig.String(string(trafType)),
-		EndpointSet: []*ixconfig.TrafficEndpointSet{{
-			Name:         ixconfig.String(f.GetName()),
-			Sources:      srcs,
-			Destinations: dsts,
-			// Following two values are explicitly set to reduce warnings from config push.
-			FullyMeshedEndpoints: []string{},
-			TrafficGroups:        []string{},
-		}},
+		EndpointSet: []*ixconfig.TrafficEndpointSet{epSet},
 		RouteMesh: ixconfig.String("fullMesh"),
 		ConfigElement: []*ixconfig.TrafficConfigElement{{
 			FrameRate:           fr,
@@ -302,61 +302,61 @@ func ipv6Addr(intf *intf) string {
 	return ""
 }
 
-func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, _ bool) ([]string, error) {
+func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, _ bool) ([]ixconfig.IxiaCfgNode, error) {
 	visited := make(map[ixconfig.IxiaCfgNode]bool)
-	var paths []string
+	var nodes []ixconfig.IxiaCfgNode
 	for _, ep := range eps {
 		if vl := intfs[ep.GetInterfaceName()].link; !visited[vl] {
-			var p string
+			var n ixconfig.IxiaCfgNode
 			switch v := vl.(type) {
 			case *ixconfig.Vport:
-				p = path.Join(v.XPath().String(), "protocols")
+				n = v.Protocols
 			case *ixconfig.Lag:
-				p = v.XPath().String()
+				n = v
 			default:
 				return nil, errors.Errorf("configured link on interface %q is not a Vport or Lag", ep.GetInterfaceName())
 			}
-			paths = append(paths, p)
+			nodes = append(nodes, n)
 			visited[vl] = true
 		}
 	}
-	return paths, nil
+	return nodes, nil
 }
 
-func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP bool) ([]string, error) {
-	visited := make(map[string]bool)
-	var paths []string
+func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP bool) ([]ixconfig.IxiaCfgNode, error) {
+	visited := make(map[ixconfig.IxiaCfgNode]bool)
+	var nodes []ixconfig.IxiaCfgNode
 	for _, ep := range eps {
-		var p string
+		var n ixconfig.IxiaCfgNode
 		intf, _ := intfs[ep.GetInterfaceName()]
 		switch ept := ep.GetGenerated().(type) {
 		case nil:
-			p = intf.deviceGroup.XPath().String()
+			n = intf.deviceGroup
 		case *opb.Flow_Endpoint_NetworkName:
 			netg, ok := intf.netToNetworkGroup[ep.GetNetworkName()]
 			if !ok {
 				return nil, usererr.New("no network group associated with endpoint %v", ep)
 			}
-			p = netg.XPath().String()
+			n = netg
 		case *opb.Flow_Endpoint_RsvpName:
 			rsvp, ok := intf.rsvpLSPs[ep.GetRsvpName()]
 			if !ok {
 				return nil, usererr.New("no RSVP config associated with endpoint %v", ep)
 			}
 			// LSPs are unidirectional, so need to distinguish between src/dest endpoints.
-			p = rsvp.RsvpP2PEgressLsps.XPath().String()
+			n = rsvp.RsvpP2PEgressLsps
 			if isSrcEP {
-				p = rsvp.RsvpP2PIngressLsps.XPath().String()
+				n = rsvp.RsvpP2PIngressLsps
 			}
 		default:
 			return nil, usererr.New("unrecognized endpoint type %T", ept)
 		}
-		if !visited[p] {
-			paths = append(paths, p)
-			visited[p] = true
+		if !visited[n] {
+			nodes = append(nodes, n)
+			visited[n] = true
 		}
 	}
-	return paths, nil
+	return nodes, nil
 }
 
 func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficFrameRate, map[string]interface{}, error) {

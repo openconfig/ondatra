@@ -35,7 +35,7 @@ var _ binding.Binding = &Binding{}
 type Binding struct {
 	Reservation   *binding.Reservation
 	ResvFetcher   func(context.Context, string) (*binding.Reservation, error)
-	ConfigPusher  func(context.Context, *binding.DUT, string, *binding.ConfigOptions) error
+	ConfigPusher  func(context.Context, *binding.DUT, string, bool) error
 	CLIDialer     func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
 	ConsoleDialer func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
 	GNMIDialer    func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
@@ -79,8 +79,8 @@ func (b *Binding) DialATEGNMI(ctx context.Context, ate *binding.ATE, opts ...grp
 }
 
 // PushConfig delegates to b.ConfigPusher.
-func (b *Binding) PushConfig(ctx context.Context, dut *binding.DUT, config string, opts *binding.ConfigOptions) error {
-	return b.ConfigPusher(ctx, dut, config, opts)
+func (b *Binding) PushConfig(ctx context.Context, dut *binding.DUT, config string, reset bool) error {
+	return b.ConfigPusher(ctx, dut, config, reset)
 }
 
 // DialGNMI creates a client connection to the fake GNMI server.

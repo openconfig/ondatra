@@ -84,14 +84,12 @@ type Binding interface {
 	// the specified ID.
 	FetchReservation(ctx context.Context, id string) (*Reservation, error)
 
-	// PushConfig sets config on the specified device.
+	// PushConfig adds config to the specified device. If reset is true, the
+	// device is reset to its base config before the specified config is added.
 	// The following Go template functions are allowed in config:
 	// - {{ port "<portID>" }}: replaced with the physical port name
 	// - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
-	// If the openconfig option is true, the config is in openconfig JSON syntax.
-	// If the append option is true, the config is appended to the existing config;
-	// otherwise the existing config is replaced with the provided config.
-	PushConfig(ctx context.Context, dut *DUT, config string, opts *ConfigOptions) error
+	PushConfig(ctx context.Context, dut *DUT, config string, reset bool) error
 
 	// DialGNMI creates a client connection to the specified DUT's gNMI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
@@ -191,11 +189,6 @@ type Port struct {
 
 func (p *Port) String() string {
 	return fmt.Sprintf("Port%+v", *p)
-}
-
-// ConfigOptions is a set of options for the config push.
-type ConfigOptions struct {
-	OpenConfig, Append bool
 }
 
 // IxNetwork provides information for an IxNetwork session.

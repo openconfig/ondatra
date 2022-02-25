@@ -366,7 +366,7 @@ func TestPingErrors(t *testing.T) {
 func TestSetInterfaceState(t *testing.T) {
 	initOperationFakes(t)
 	var gotConfig string
-	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, _ *binding.ConfigOptions) error {
+	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, _ bool) error {
 		gotConfig = config
 		return nil
 	}

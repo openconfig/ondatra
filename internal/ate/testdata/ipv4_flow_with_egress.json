@@ -1,7 +1,9 @@
 {
+  "xpath": "/traffic",
   "useRfc5952": true,
   "trafficItem": [
     {
+      "xpath": "/traffic/trafficItem[1]",
       "egressEnabled": true,
       "name": "ipv4Traffic",
       "routeMesh": "fullMesh",
@@ -9,6 +11,7 @@
       "appLibProfile": null,
       "configElement": [
         {
+          "xpath": "/traffic/trafficItem[1]/configElement[1]",
           "stack": [
             {
               "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-1']",
@@ -629,6 +632,7 @@
       "dynamicUpdate": null,
       "egressTracking": [
         {
+          "xpath": "/traffic/trafficItem[1]/egressTracking[1]",
           "customOffsetBits": 128,
           "customWidthBits": 4,
           "encapsulation": "Any: Use Custom Settings"
@@ -636,6 +640,7 @@
       ],
       "endpointSet": [
         {
+          "xpath": "/traffic/trafficItem[1]/endpointSet[1]",
           "destinations": [
             "/topology[2]/deviceGroup[1]"
           ],
@@ -650,6 +655,7 @@
       "highLevelStream": null,
       "tracking": [
         {
+          "xpath": "/traffic/trafficItem[1]/tracking",
           "trackBy": [
             "trackingenabled0"
           ],
@@ -660,3 +666,4 @@
     }
   ]
 }
+

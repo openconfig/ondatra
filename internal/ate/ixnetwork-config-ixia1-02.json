@@ -29,10 +29,7 @@
                "xpath": "/topology[1]/deviceGroup[1]"
             }
          ],
-         "name": "Topology on 12/1",
-         "vports": [
-            "/vport[1]"
-         ]
+         "name": "Topology on 12/1"
       }
    ],
    "vport": [
@@ -79,6 +76,7 @@
                "retransTime": 7000
             }
          },
+         "protocols": {},
          "xpath": "/vport[1]"
       }
    ]

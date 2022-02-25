@@ -268,8 +268,7 @@ func setDUTInterfaceState(ctx context.Context, dut *binding.DUT, intf string, en
 		return fmt.Errorf("SetInterfaceState not yet supported for vendor %v", dut.Vendor)
 	}
 	cfg := fmt.Sprintf(cfgFormat, intf)
-	opts := &binding.ConfigOptions{Append: true}
-	if err := testbed.Bind().PushConfig(ctx, dut, cfg, opts); err != nil {
+	if err := testbed.Bind().PushConfig(ctx, dut, cfg, false); err != nil {
 		return errors.Wrap(err, "failed to set interface state")
 	}
 	return nil

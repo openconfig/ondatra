@@ -103,7 +103,7 @@ func (c *Client) ExportConfig(ctx context.Context) (*Ixnetwork, error) {
 // All XPaths in the config are updated before this function returns.
 func (c *Client) ImportConfig(ctx context.Context, cfg *Ixnetwork, node IxiaCfgNode, overwrite bool) error {
 	c.xPathToID = map[string]string{}
-	cfg.updateAllXPaths()
+	cfg.updateAllXPathsAndRefs()
 
 	jsonCfg, err := json.Marshal(node)
 	if err != nil {
@@ -133,7 +133,7 @@ func (c *Client) UpdateIDs(ctx context.Context, cfg *Ixnetwork, nodes ...IxiaCfg
 	// are copied around (such as a config returned from
 	// 'LastImportedConfig' or a user may have constructed a read-only
 	// config subobject that was never imported.
-	cfg.updateAllXPaths()
+	cfg.updateAllXPathsAndRefs()
 
 	var xPathsMissing []string
 	for _, n := range nodes {

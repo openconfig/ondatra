@@ -74,7 +74,7 @@ func (f ConfigFile) Get() (string, error) {
 }
 
 // PushConfig pushes config to a DUT.
-func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, append bool) error {
+func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, reset bool) error {
 	if cfg.AllVendor != nil && len(cfg.PerVendor) > 0 {
 		return errors.New("cannot specify both all-vendor and per-vendor config")
 	}
@@ -94,8 +94,7 @@ func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, append bool)
 	if err != nil {
 		return err
 	}
-	opts := &binding.ConfigOptions{Append: append}
-	return testbed.Bind().PushConfig(ctx, dut, config, opts)
+	return testbed.Bind().PushConfig(ctx, dut, config, reset)
 }
 
 // interpolateConfig substitutes templated variables in device config text.
