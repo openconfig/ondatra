@@ -37,13 +37,13 @@ func TestAddPorts(t *testing.T) {
 			Name:     ixconfig.String(fmt.Sprintf("%s/1/1", ixiaName)),
 			Location: ixconfig.String(fmt.Sprintf("%s;1;1", chassisHost)),
 			L1Config: &ixconfig.VportL1Config{
-				AresOneFourHundredGigLan: &ixconfig.VportAresOneFourHundredGigLan{
+				AresOneFourHundredGigLan: &ixconfig.VportL1ConfigAresOneFourHundredGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
-				NovusHundredGigLan: &ixconfig.VportNovusHundredGigLan{
+				NovusHundredGigLan: &ixconfig.VportL1ConfigNovusHundredGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
-				NovusTenGigLan: &ixconfig.VportNovusTenGigLan{
+				NovusTenGigLan: &ixconfig.VportL1ConfigNovusTenGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
 			},
@@ -58,13 +58,13 @@ func TestAddPorts(t *testing.T) {
 			Name:     ixconfig.String(fmt.Sprintf("%s/2/2", ixiaName)),
 			Location: ixconfig.String(fmt.Sprintf("%s;2;2", chassisHost)),
 			L1Config: &ixconfig.VportL1Config{
-				AresOneFourHundredGigLan: &ixconfig.VportAresOneFourHundredGigLan{
+				AresOneFourHundredGigLan: &ixconfig.VportL1ConfigAresOneFourHundredGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
-				NovusHundredGigLan: &ixconfig.VportNovusHundredGigLan{
+				NovusHundredGigLan: &ixconfig.VportL1ConfigNovusHundredGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
-				NovusTenGigLan: &ixconfig.VportNovusTenGigLan{
+				NovusTenGigLan: &ixconfig.VportL1ConfigNovusTenGigLan{
 					AutoInstrumentation: ixconfig.String(portInstrumentation),
 				},
 			},
@@ -192,7 +192,7 @@ func TestAddLAGs(t *testing.T) {
 			Ports: []string{"1/1", "2/2"},
 			Lacp:  &opb.Lag_Lacp{Enabled: true},
 		}},
-		wantCfg: func() *ixconfig.Ixnetwork{
+		wantCfg: func() *ixconfig.Ixnetwork {
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{vport1, vport2},
 				Lag: []*ixconfig.Lag{{

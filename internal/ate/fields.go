@@ -54,13 +54,13 @@ func uintToHexStr(v uint32) *string {
 	return &s
 }
 
-func setSingleValue(field *ixconfig.TrafficField, val *string) {
+func setSingleValue(field *ixconfig.TrafficTrafficItemConfigElementStackField, val *string) {
 	field.ValueType = ixconfig.String("singleValue")
 	field.Auto = ixconfig.Bool(false)
 	field.SingleValue = val
 }
 
-func setRandomRange(field *ixconfig.TrafficField, min, max, step *string, count uint32) {
+func setRandomRange(field *ixconfig.TrafficTrafficItemConfigElementStackField, min, max, step *string, count uint32) {
 	field.ValueType = ixconfig.String("repeatableRandomRange")
 	field.Auto = ixconfig.Bool(false)
 	field.FullMesh = ixconfig.Bool(false)
@@ -71,7 +71,7 @@ func setRandomRange(field *ixconfig.TrafficField, min, max, step *string, count 
 	field.StepValue = step
 }
 
-func setIncrement(field *ixconfig.TrafficField, start, step *string, count uint32) {
+func setIncrement(field *ixconfig.TrafficTrafficItemConfigElementStackField, start, step *string, count uint32) {
 	field.ValueType = ixconfig.String("increment")
 	field.Auto = ixconfig.Bool(false)
 	field.FullMesh = ixconfig.Bool(false)
@@ -80,14 +80,14 @@ func setIncrement(field *ixconfig.TrafficField, start, step *string, count uint3
 	field.StepValue = step
 }
 
-func setList(field *ixconfig.TrafficField, vals []string) {
+func setList(field *ixconfig.TrafficTrafficItemConfigElementStackField, vals []string) {
 	field.ValueType = ixconfig.String("valueList")
 	field.Auto = ixconfig.Bool(false)
 	field.FullMesh = ixconfig.Bool(false)
 	field.ValueList = vals
 }
 
-func setUintRangeField(field *ixconfig.TrafficField, r *opb.UIntRange) error {
+func setUintRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField, r *opb.UIntRange) error {
 	if r == nil {
 		field.Auto = ixconfig.Bool(true)
 		return nil
@@ -130,7 +130,7 @@ func setUintRangeField(field *ixconfig.TrafficField, r *opb.UIntRange) error {
 	return nil
 }
 
-func setAddrRangeField(field *ixconfig.TrafficField, t addrType, r *opb.AddressRange) error {
+func setAddrRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField, t addrType, r *opb.AddressRange) error {
 	step, err := addrRangeToStep(r, t)
 	if err != nil {
 		return err

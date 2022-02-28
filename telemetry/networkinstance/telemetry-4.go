@@ -16,6 +16,312 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Lookup(t testing.TB) *oc.QualifiedBinary {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Get(t testing.TB) oc.Binary {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePathAny) Lookup(t testing.TB) []*oc.QualifiedBinary {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBinary
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePathAny) Get(t testing.TB) []oc.Binary {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Binary
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
+	t.Helper()
+	c := &oc.CollectionBinary{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	w := &oc.BinaryWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBinary)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Await(t testing.TB, timeout time.Duration, val oc.Binary) *oc.QualifiedBinary {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBinary) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
+	t.Helper()
+	c := &oc.CollectionBinary{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/attr-value to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath extracts the value of the leaf AttrValue from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute
+// and combines the update with an existing Metadata to return a *oc.QualifiedBinary.
+func convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_AttrValuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute) *oc.QualifiedBinary {
+	t.Helper()
+	qv := &oc.QualifiedBinary{
+		Metadata: md,
+	}
+	val := parent.AttrValue
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/extended to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath extracts the value of the leaf Extended from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_ExtendedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Extended
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/unknown-attributes/unknown-attribute/state/optional with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4SrtePolicy_LocRib_Route_UnknownAttribute_OptionalPath) Lookup(t testing.TB) *oc.QualifiedBool {
@@ -43229,312 +43535,6 @@ func convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_Ex
 		Metadata: md,
 	}
 	val := parent.ExtCommunityIndex
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Lookup(t testing.TB) *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Get(t testing.TB) oc.E_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPathAny) Lookup(t testing.TB) []*oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPathAny) Get(t testing.TB) []oc.E_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_RibBgpTypes_INVALID_ROUTE_REASON
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	c := &oc.CollectionE_RibBgpTypes_INVALID_ROUTE_REASON{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool) *oc.E_RibBgpTypes_INVALID_ROUTE_REASONWatcher {
-	t.Helper()
-	w := &oc.E_RibBgpTypes_INVALID_ROUTE_REASONWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool) *oc.E_RibBgpTypes_INVALID_ROUTE_REASONWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Await(t testing.TB, timeout time.Duration, val oc.E_RibBgpTypes_INVALID_ROUTE_REASON) *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	c := &oc.CollectionE_RibBgpTypes_INVALID_ROUTE_REASON{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON) bool) *oc.E_RibBgpTypes_INVALID_ROUTE_REASONWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath extracts the value of the leaf InvalidReason from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON.
-func convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_InvalidReasonPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route) *oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON {
-	t.Helper()
-	qv := &oc.QualifiedE_RibBgpTypes_INVALID_ROUTE_REASON{
-		Metadata: md,
-	}
-	val := parent.InvalidReason
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath extracts the value of the leaf LastModified from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route_LastModifiedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_LocRib_Route) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.LastModified
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

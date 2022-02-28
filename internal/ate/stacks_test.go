@@ -29,7 +29,7 @@ type wantField struct {
 	name        string
 	wantVal     *string
 	wantValList []string
-	toField     func(*ixconfig.TrafficStack) *ixconfig.TrafficField
+	toField     func(*ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField
 }
 
 func TestHeaderStacks(t *testing.T) {
@@ -54,6 +54,7 @@ func TestHeaderStacks(t *testing.T) {
 	tests := []struct {
 		desc       string
 		hdr        *opb.Header
+		srcVLAN    bool
 		wantFields [][]wantField
 	}{{
 		desc: "ethernet header",
@@ -69,21 +70,21 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "src addr",
 				wantVal: ixconfig.String(srcMacAddr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					e := ixconfig.EthernetStack(*s)
 					return (&e).SourceAddress()
 				},
 			}, {
 				name:    "dst addr",
 				wantVal: ixconfig.String(dstMacAddr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					e := ixconfig.EthernetStack(*s)
 					return (&e).DestinationAddress()
 				},
 			}},
 		},
 	}, {
-		desc: "ethernet header w/ vlan",
+		desc: "ethernet header w/ vlan id",
 		hdr: &opb.Header{
 			Type: &opb.Header_Eth{
 				&opb.EthernetHeader{
@@ -97,14 +98,14 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "src addr",
 				wantVal: ixconfig.String(srcMacAddr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					e := ixconfig.EthernetStack(*s)
 					return (&e).SourceAddress()
 				},
 			}, {
 				name:    "dst addr",
 				wantVal: ixconfig.String(dstMacAddr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					e := ixconfig.EthernetStack(*s)
 					return (&e).DestinationAddress()
 				},
@@ -112,7 +113,42 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "vlanId",
 				wantVal: ixconfig.String(strconv.Itoa(vlanID)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					v := ixconfig.VlanStack(*s)
+					return (&v).VlanTagVlanID()
+				},
+			}},
+		},
+	}, {
+		desc: "ethernet header w/ src vlan",
+		hdr: &opb.Header{
+			Type: &opb.Header_Eth{
+				&opb.EthernetHeader{
+					SrcAddr: &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
+					DstAddr: &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
+				},
+			},
+		},
+		srcVLAN: true,
+		wantFields: [][]wantField{
+			[]wantField{{
+				name:    "src addr",
+				wantVal: ixconfig.String(srcMacAddr),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					e := ixconfig.EthernetStack(*s)
+					return (&e).SourceAddress()
+				},
+			}, {
+				name:    "dst addr",
+				wantVal: ixconfig.String(dstMacAddr),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					e := ixconfig.EthernetStack(*s)
+					return (&e).DestinationAddress()
+				},
+			}},
+			[]wantField{{
+				name: "vlanId",
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					v := ixconfig.VlanStack(*s)
 					return (&v).VlanTagVlanID()
 				},
@@ -132,14 +168,14 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "key",
 				wantVal: ixconfig.String(strconv.Itoa(key)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					g := ixconfig.GreStack(*s)
 					return (&g).KeyHolderKey()
 				},
 			}, {
 				name:    "sequence",
 				wantVal: ixconfig.String(strconv.Itoa(seq)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					g := ixconfig.GreStack(*s)
 					return (&g).SequenceHolderSequenceNum()
 				},
@@ -163,42 +199,42 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "traffic class",
 				wantVal: ixconfig.String("4"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).PriorityRaw()
 				},
 			}, {
 				name:    "don't fragment",
 				wantVal: ixconfig.String("1"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).FlagsFragment()
 				},
 			}, {
 				name:    "ttl",
 				wantVal: ixconfig.String(strconv.Itoa(ttl)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).Ttl()
 				},
 			}, {
 				name:    "header checksum",
 				wantVal: ixconfig.String("ff60"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).Checksum()
 				},
 			}, {
 				name:    "src addr",
 				wantVal: ixconfig.String(srcIpv4Addr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).SrcIp()
 				},
 			}, {
 				name:    "dst addr",
 				wantVal: ixconfig.String(dstIpv4Addr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).DstIp()
 				},
@@ -221,35 +257,35 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "traffic class",
 				wantVal: ixconfig.String("4"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv6Stack(*s)
 					return (&ip).VersionTrafficClassFlowLabelTrafficClass()
 				},
 			}, {
 				name:    "flow label",
 				wantVal: ixconfig.String(strconv.Itoa(label)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv6Stack(*s)
 					return (&ip).VersionTrafficClassFlowLabelFlowLabel()
 				},
 			}, {
 				name:    "hop limit",
 				wantVal: ixconfig.String(strconv.Itoa(hopLimit)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv6Stack(*s)
 					return (&ip).HopLimit()
 				},
 			}, {
 				name:    "src addr",
 				wantVal: ixconfig.String(srcIpv6Addr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv6Stack(*s)
 					return (&ip).SrcIP()
 				},
 			}, {
 				name:    "dst addr",
 				wantVal: ixconfig.String(dstIpv6Addr),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv6Stack(*s)
 					return (&ip).DstIP()
 				},
@@ -270,21 +306,21 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "label",
 				wantVal: ixconfig.String(strconv.Itoa(label)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					m := ixconfig.MplsStack(*s)
 					return (&m).Value()
 				},
 			}, {
 				name:    "experimental",
 				wantVal: ixconfig.String(strconv.Itoa(exp)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					m := ixconfig.MplsStack(*s)
 					return (&m).Experimental()
 				},
 			}, {
 				name:    "ttl",
 				wantVal: ixconfig.String(strconv.Itoa(ttl)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					m := ixconfig.MplsStack(*s)
 					return (&m).Ttl()
 				},
@@ -304,14 +340,14 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "src port",
 				wantVal: ixconfig.String(strconv.Itoa(srcPort)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					t := ixconfig.TcpStack(*s)
 					return (&t).SrcPort()
 				},
 			}, {
 				name:    "dst port",
 				wantVal: ixconfig.String(strconv.Itoa(dstPort)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					t := ixconfig.TcpStack(*s)
 					return (&t).DstPort()
 				},
@@ -331,14 +367,14 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "src port",
 				wantVal: ixconfig.String(strconv.Itoa(srcPort)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					u := ixconfig.UdpStack(*s)
 					return (&u).SrcPort()
 				},
 			}, {
 				name:    "dst port",
 				wantVal: ixconfig.String(strconv.Itoa(dstPort)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					u := ixconfig.UdpStack(*s)
 					return (&u).DstPort()
 				},
@@ -362,21 +398,21 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "message type",
 				wantVal: ixconfig.String(strconv.Itoa(5)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv1Stack(*s)
 					return (&i).MessageType()
 				},
 			}, {
 				name:    "code",
 				wantVal: ixconfig.String(strconv.Itoa(2)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv1Stack(*s)
 					return (&i).CodeOptionsRedirectMessageOptions()
 				},
 			}, {
 				name:    "ip address",
 				wantVal: ixconfig.String("192.168.1.2"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv1Stack(*s)
 					return (&i).Next4BytesGatewayInternetAddress()
 				},
@@ -401,28 +437,28 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "message type",
 				wantVal: ixconfig.String(strconv.Itoa(13)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv2Stack(*s)
 					return (&i).MessageType()
 				},
 			}, {
 				name:    "id",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv2Stack(*s)
 					return (&i).Identifier()
 				},
 			}, {
 				name:    "sequence",
 				wantVal: ixconfig.String(strconv.Itoa(2)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv2Stack(*s)
 					return (&i).SequenceNumber()
 				},
 			}, {
 				name:    "originate timestamp",
 				wantVal: ixconfig.String(strconv.Itoa(3)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Icmpv2Stack(*s)
 					return (&i).NextFieldsFieldsForTimeStampMsgOrigTmpStmp1()
 				},
@@ -453,63 +489,63 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "router ID",
 				wantVal: ixconfig.String("10.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).Ospfv2PacketHeaderRouterID()
 				},
 			}, {
 				name:    "area ID",
 				wantVal: ixconfig.String("11.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).Ospfv2PacketHeaderAreaID()
 				},
 			}, {
 				name:    "mask",
 				wantVal: ixconfig.String("255.255.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).NetworkMask()
 				},
 			}, {
 				name:    "hello interval",
 				wantVal: ixconfig.String(strconv.Itoa(10)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).HelloInterval()
 				},
 			}, {
 				name:    "router priority",
 				wantVal: ixconfig.String(strconv.Itoa(0)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).RouterPriority()
 				},
 			}, {
 				name:    "router dead interval",
 				wantVal: ixconfig.String(strconv.Itoa(40)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).RouterDeadInterval()
 				},
 			}, {
 				name:    "designated router",
 				wantVal: ixconfig.String("1.1.1.1"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).DesignatedRouterID()
 				},
 			}, {
 				name:    "backup designated router",
 				wantVal: ixconfig.String("2.2.2.2"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).BackupDesignatedRouterID()
 				},
 			}, {
 				name:        "neighbors",
 				wantValList: []string{"3.3.3.3", "4.4.4.4"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2HelloStack(*s)
 					return (&i).HelloNeighborListNeighborRouterID()
 				},
@@ -538,35 +574,35 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "router ID",
 				wantVal: ixconfig.String("10.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2DatabaseDescriptionStack(*s)
 					return (&i).Ospfv2PacketHeaderRouterID()
 				},
 			}, {
 				name:    "area ID",
 				wantVal: ixconfig.String("11.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2DatabaseDescriptionStack(*s)
 					return (&i).Ospfv2PacketHeaderAreaID()
 				},
 			}, {
 				name:    "mtu",
 				wantVal: ixconfig.String(strconv.Itoa(1500)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2DatabaseDescriptionStack(*s)
 					return (&i).DatabaseDescriptionBodyInterfaceMTU()
 				},
 			}, {
 				name:    "flags",
 				wantVal: ixconfig.String("7"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2DatabaseDescriptionStack(*s)
 					return (&i).DatabaseDescriptionBodyDatabaseDescriptionFlags()
 				},
 			}, {
 				name:    "sequence",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2DatabaseDescriptionStack(*s)
 					return (&i).DatabaseDescriptionBodyDdSequenceNumber()
 				},
@@ -593,35 +629,35 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "router ID",
 				wantVal: ixconfig.String("10.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSARequestStack(*s)
 					return (&i).Ospfv2PacketHeaderRouterID()
 				},
 			}, {
 				name:    "area ID",
 				wantVal: ixconfig.String("11.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSARequestStack(*s)
 					return (&i).Ospfv2PacketHeaderAreaID()
 				},
 			}, {
 				name:    "link state type",
 				wantVal: ixconfig.String(strconv.Itoa(2)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSARequestStack(*s)
 					return (&i).LinkStateRequestBodyRequestedLSAsListRequestedLSADescriptionLinkStateType()
 				},
 			}, {
 				name:    "link state ID",
 				wantVal: ixconfig.String("1.1.1.1"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSARequestStack(*s)
 					return (&i).LinkStateRequestBodyRequestedLSAsListRequestedLSADescriptionLinkStateID()
 				},
 			}, {
 				name:    "advertising router",
 				wantVal: ixconfig.String("2.2.2.2"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSARequestStack(*s)
 					return (&i).LinkStateRequestBodyRequestedLSAsListRequestedLSADescriptionLinkStateAdvertisingRouter()
 				},
@@ -662,49 +698,49 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "router ID",
 				wantVal: ixconfig.String("10.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).Ospfv2PacketHeaderRouterID()
 				},
 			}, {
 				name:    "area ID",
 				wantVal: ixconfig.String("11.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).Ospfv2PacketHeaderAreaID()
 				},
 			}, {
 				name:        "ages",
 				wantValList: []string{"1", "10"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).LinkStateUpdateBodyLsaListLinkStateAdvertisementVariableHeaderLinkStateAge()
 				},
 			}, {
 				name:        "types",
 				wantValList: []string{"1", "2"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).LinkStateUpdateBodyLsaListLinkStateAdvertisementVariableHeaderLinkStateType()
 				},
 			}, {
 				name:        "ids",
 				wantValList: []string{"1.1.1.1", "3.3.3.3"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).LinkStateUpdateBodyLsaListLinkStateAdvertisementVariableHeaderLinkStateID()
 				},
 			}, {
 				name:        "advertising routers",
 				wantValList: []string{"2.2.2.2", "4.4.4.4"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).LinkStateUpdateBodyLsaListLinkStateAdvertisementVariableHeaderLinkStateAdvertisingRouter()
 				},
 			}, {
 				name:        "sequence numbers",
 				wantValList: []string{"2", "20"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAUpdateStack(*s)
 					return (&i).LinkStateUpdateBodyLsaListLinkStateAdvertisementVariableHeaderLinkStateSequenceNumber()
 				},
@@ -741,49 +777,49 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "router ID",
 				wantVal: ixconfig.String("10.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).Ospfv2PacketHeaderRouterID()
 				},
 			}, {
 				name:    "area ID",
 				wantVal: ixconfig.String("11.0.0.0"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).Ospfv2PacketHeaderAreaID()
 				},
 			}, {
 				name:        "ages",
 				wantValList: []string{"1", "10"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).LinkStateAdvertisementHeaderVariableHeaderLinkStateAge()
 				},
 			}, {
 				name:        "types",
 				wantValList: []string{"1", "2"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).LinkStateAdvertisementHeaderVariableHeaderLinkStateType()
 				},
 			}, {
 				name:        "ids",
 				wantValList: []string{"1.1.1.1", "3.3.3.3"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).LinkStateAdvertisementHeaderVariableHeaderLinkStateID()
 				},
 			}, {
 				name:        "advertising routers",
 				wantValList: []string{"2.2.2.2", "4.4.4.4"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).LinkStateAdvertisementHeaderVariableHeaderLinkStateAdvertisingRouter()
 				},
 			}, {
 				name:        "sequence numbers",
 				wantValList: []string{"2", "20"},
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.Ospfv2LSAAcknowledgementStack(*s)
 					return (&i).LinkStateAdvertisementHeaderVariableHeaderLinkStateSequenceNumber()
 				},
@@ -805,28 +841,28 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "version",
 				wantVal: ixconfig.String(strconv.Itoa(0)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.RsvpStack(*s)
 					return (&i).Version()
 				},
 			}, {
 				name:    "refresh reduction capable",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.RsvpStack(*s)
 					return (&i).Flag()
 				},
 			}, {
 				name:    "message type",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.RsvpStack(*s)
 					return (&i).MessegeType()
 				},
 			}, {
 				name:    "ttl",
 				wantVal: ixconfig.String(strconv.Itoa(60)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.RsvpStack(*s)
 					return (&i).Ttl()
 				},
@@ -847,14 +883,14 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "version",
 				wantVal: ixconfig.String(strconv.Itoa(2)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.PimHelloMessageStack(*s)
 					return (&i).Version()
 				},
 			}, {
 				name:    "message type",
 				wantVal: ixconfig.String(strconv.Itoa(0)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.PimHelloMessageStack(*s)
 					return (&i).Type()
 				},
@@ -882,42 +918,42 @@ func TestHeaderStacks(t *testing.T) {
 			[]wantField{{
 				name:    "lsr ID",
 				wantVal: ixconfig.String("1.1.1.1"),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).LsrID()
 				},
 			}, {
 				name:    "label space",
 				wantVal: ixconfig.String(strconv.Itoa(2)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).LabelSpace()
 				},
 			}, {
 				name:    "message ID",
 				wantVal: ixconfig.String(strconv.Itoa(3)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).MessageID()
 				},
 			}, {
 				name:    "hold time secs",
 				wantVal: ixconfig.String(strconv.Itoa(15)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).CommonHelloParametersTLVHoldTime()
 				},
 			}, {
 				name:    "targeted",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).CommonHelloParametersTLVTBit()
 				},
 			}, {
 				name:    "request targeted",
 				wantVal: ixconfig.String(strconv.Itoa(1)),
-				toField: func(s *ixconfig.TrafficStack) *ixconfig.TrafficField {
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					i := ixconfig.LdpHelloStack(*s)
 					return (&i).CommonHelloParametersTLVRBit()
 				},
@@ -926,7 +962,7 @@ func TestHeaderStacks(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			stacks, err := headerStacks(test.hdr, 0)
+			stacks, err := headerStacks(test.hdr, 0, test.srcVLAN)
 			if err != nil {
 				t.Fatalf("headerStacks(%v): unexpected error %v", test.hdr, err)
 			}
@@ -938,8 +974,8 @@ func TestHeaderStacks(t *testing.T) {
 				for _, wf := range test.wantFields[i] {
 					field := wf.toField(s)
 					if wf.wantVal != nil {
-						if *(field.ValueType) != "singleValue" {
-							t.Fatalf("headerStacks(%v): invalid value type %q for field %q, wanted 'singleValue'", test.hdr, *(field.ValueType), wf.name)
+						if field.ValueType == nil || *(field.ValueType) != "singleValue" {
+							t.Fatalf("headerStacks(%v): invalid value type %v for field %q, wanted 'singleValue'", test.hdr, field.ValueType, wf.name)
 						}
 						wantVals[wf.name] = wf.wantVal
 						gotVals[wf.name] = field.SingleValue
@@ -979,7 +1015,7 @@ func TestHeaderStacksError(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			stacks, err := headerStacks(test.hdr, test.idx)
+			stacks, err := headerStacks(test.hdr, test.idx, false)
 			if err == nil {
 				t.Fatalf("headerStacks(%v): unexpectedly succeeded %v", test.hdr, stacks)
 			}

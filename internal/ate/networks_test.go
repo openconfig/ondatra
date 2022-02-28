@@ -32,7 +32,7 @@ func TestAddNetworks(t *testing.T) {
 		net1Name = "someNet"
 		net2Name = "anotherNet"
 	)
-	baseClient := func(withBGPv4Peer, withBGPv6Peer bool) *ixATE {
+	baseClient := func(withISIS, withBGPv4Peer, withBGPv6Peer bool) *ixATE {
 		cfg := &ixconfig.Ixnetwork{
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
@@ -41,6 +41,9 @@ func TestAddNetworks(t *testing.T) {
 			}},
 		}
 		ifc := &intf{deviceGroup: cfg.Topology[0].DeviceGroup[0]}
+		if withISIS {
+			ifc.deviceGroup.Ethernet[0].IsisL3 = []*ixconfig.TopologyIsisL3{{}}
+		}
 		if withBGPv4Peer {
 			ifc.deviceGroup.Ethernet[0].Ipv4 = []*ixconfig.TopologyIpv4{{
 				BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{{}},
@@ -59,12 +62,12 @@ func TestAddNetworks(t *testing.T) {
 		}
 	}
 	tests := []struct {
-		desc                         string
-		withBGPv4Peer, withBGPv6Peer bool
-		ifc                          *opb.InterfaceConfig
-		wantErr                      bool
-		wantNgs                      []*ixconfig.TopologyNetworkGroup
-		wantRouteTables              map[string]*routeTables
+		desc                                   string
+		withISIS, withBGPv4Peer, withBGPv6Peer bool
+		ifc                                    *opb.InterfaceConfig
+		wantErr                                bool
+		wantNgs                                []*ixconfig.TopologyNetworkGroup
+		wantRouteTables                        map[string]*routeTables
 	}{{
 		desc: "MAC Pool",
 		ifc: &opb.InterfaceConfig{
@@ -159,6 +162,50 @@ func TestAddNetworks(t *testing.T) {
 			}},
 		}},
 	}, {
+		desc: "IS-IS and BGP attributes on the same IPv4 network",
+		ifc: &opb.InterfaceConfig{
+			Name: ifName,
+			Networks: []*opb.Network{{
+				Name:          net1Name,
+				InterfaceName: ifName,
+				Ipv4: &opb.NetworkIp{
+					AddressCidr: "10.0.0.0/8",
+					Count:       1,
+				},
+				Isis: &opb.IPReachability{
+					RouteOrigin: opb.IPReachability_INTERNAL,
+				},
+				BgpAttributes: &opb.BgpAttributes{
+					Active:     true,
+					Origin:     opb.BgpAttributes_ORIGIN_IGP,
+					AsnSetMode: opb.BgpAsnSetMode_ASN_SET_MODE_DO_NOT_INCLUDE,
+				},
+			}},
+		},
+		wantErr: true,
+	}, {
+		desc: "IS-IS and BGP attributes on the same IPv6 network",
+		ifc: &opb.InterfaceConfig{
+			Name: ifName,
+			Networks: []*opb.Network{{
+				Name:          net1Name,
+				InterfaceName: ifName,
+				Ipv4: &opb.NetworkIp{
+					AddressCidr: "10.0.0.0/8",
+					Count:       1,
+				},
+				Isis: &opb.IPReachability{
+					RouteOrigin: opb.IPReachability_INTERNAL,
+				},
+				BgpAttributes: &opb.BgpAttributes{
+					Active:     true,
+					Origin:     opb.BgpAttributes_ORIGIN_IGP,
+					AsnSetMode: opb.BgpAsnSetMode_ASN_SET_MODE_DO_NOT_INCLUDE,
+				},
+			}},
+		},
+		wantErr: true,
+	}, {
 		desc: "IS-IS and BGP pools",
 		ifc: &opb.InterfaceConfig{
 			Name: ifName,
@@ -194,9 +241,11 @@ func TestAddNetworks(t *testing.T) {
 				},
 			}},
 		},
+		withISIS: true,
 		wantNgs: []*ixconfig.TopologyNetworkGroup{{
 			Name: ixconfig.String(net1Name),
 			Ipv4PrefixPools: []*ixconfig.TopologyIpv4PrefixPools{{
+				Connector:            &ixconfig.TopologyConnector{},
 				NetworkAddress:       ixconfig.MultivalueStr("10.0.0.0"),
 				PrefixLength:         ixconfig.MultivalueUint32(8),
 				NumberOfAddressesAsy: ixconfig.MultivalueUint32(1),
@@ -219,6 +268,7 @@ func TestAddNetworks(t *testing.T) {
 				}},
 			}},
 			Ipv6PrefixPools: []*ixconfig.TopologyIpv6PrefixPools{{
+				Connector:            &ixconfig.TopologyConnector{},
 				NetworkAddress:       ixconfig.MultivalueStr("2001:0:0:4860:10::"),
 				PrefixLength:         ixconfig.MultivalueUint32(104),
 				NumberOfAddressesAsy: ixconfig.MultivalueUint32(1),
@@ -440,7 +490,7 @@ func TestAddNetworks(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			c := baseClient(test.withBGPv4Peer, test.withBGPv6Peer)
+			c := baseClient(test.withISIS, test.withBGPv4Peer, test.withBGPv6Peer)
 			gotErr := c.addNetworks(test.ifc)
 			if (gotErr != nil) != test.wantErr {
 				t.Errorf("addNetworks: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)

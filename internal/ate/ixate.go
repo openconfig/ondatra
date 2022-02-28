@@ -176,6 +176,7 @@ type intf struct {
 	ethMac            string
 	resolvedIpv4Mac   string
 	resolvedIpv6Mac   string
+	hasVLAN           bool
 }
 
 func (i *intf) String() string {
@@ -608,7 +609,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 	maxRetriesProtocols := 5
 	if len(ix.routeTableToIxFile) > 0 {
 		// Protocols may need extra time to start on large-scale route imports.
-		maxRetriesProtocols = 15
+		maxRetriesProtocols = 30
 	}
 	topo := struct {
 		ProtocolActionsInProgress []string

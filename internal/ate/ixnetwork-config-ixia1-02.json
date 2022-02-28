@@ -63,7 +63,6 @@
             },
             "uhdOneHundredGigLan": {
                "enableRsFec": false,
-               "enableRsFecStats": false,
                "forceDisableFEC": true,
                "ieeeL1Defaults": false
             }

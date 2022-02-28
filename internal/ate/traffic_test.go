@@ -598,7 +598,7 @@ func TestFrameRate(t *testing.T) {
 	tests := []struct {
 		desc             string
 		frameRatePB      *opb.FrameRate
-		wantFrameRate    *ixconfig.TrafficFrameRate
+		wantFrameRate    *ixconfig.TrafficTrafficItemConfigElementFrameRate
 		wantFrameRateMap map[string]interface{}
 	}{{
 		desc: "no frame rate set",
@@ -607,7 +607,7 @@ func TestFrameRate(t *testing.T) {
 		frameRatePB: &opb.FrameRate{
 			Type: &opb.FrameRate_Percent{Percent: 50},
 		},
-		wantFrameRate: &ixconfig.TrafficFrameRate{
+		wantFrameRate: &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("percentLineRate"),
 			Rate:  ixconfig.NumberFloat64(50),
 		},
@@ -619,7 +619,7 @@ func TestFrameRate(t *testing.T) {
 		frameRatePB: &opb.FrameRate{
 			Type: &opb.FrameRate_Bps{Bps: 1024},
 		},
-		wantFrameRate: &ixconfig.TrafficFrameRate{
+		wantFrameRate: &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_:            ixconfig.String("bitsPerSecond"),
 			BitRateUnitsType: ixconfig.String("bitsPerSec"),
 			Rate:             ixconfig.NumberUint64(1024),
@@ -633,7 +633,7 @@ func TestFrameRate(t *testing.T) {
 		frameRatePB: &opb.FrameRate{
 			Type: &opb.FrameRate_Fps{Fps: 1000},
 		},
-		wantFrameRate: &ixconfig.TrafficFrameRate{
+		wantFrameRate: &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("framesPerSecond"),
 			Rate:  ixconfig.NumberUint64(1000),
 		},
@@ -648,7 +648,7 @@ func TestFrameRate(t *testing.T) {
 				t.Fatalf("frameRate: unexpected err: %v", gotErr)
 			}
 			if diff := jsonCfgDiff(t, test.wantFrameRate, gotFrameRate); diff != "" {
-				t.Errorf("frameRate: unexpected TrafficFrameRate diff (-want/+got): %s", diff)
+				t.Errorf("frameRate: unexpected TrafficTrafficItemConfigElementFrameRate diff (-want/+got): %s", diff)
 			}
 			if diff := cmp.Diff(test.wantFrameRateMap, gotFrameRateMap); diff != "" {
 				t.Errorf("frameRate: unexpected frame rate data map (-want/+got): %s", diff)
@@ -661,7 +661,7 @@ func TestFrameSize(t *testing.T) {
 	tests := []struct {
 		desc             string
 		frameSizePB      *opb.FrameSize
-		wantFrameSize    *ixconfig.TrafficFrameSize
+		wantFrameSize    *ixconfig.TrafficTrafficItemConfigElementFrameSize
 		wantFrameSizeMap map[string]interface{}
 		wantErr          string
 	}{{
@@ -681,7 +681,7 @@ func TestFrameSize(t *testing.T) {
 				ImixPreset: opb.FrameSize_IMIX_DEFAULT,
 			},
 		},
-		wantFrameSize: &ixconfig.TrafficFrameSize{
+		wantFrameSize: &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 			Type_:              ixconfig.String("presetDistribution"),
 			PresetDistribution: ixconfig.String(`"imix"`),
 			QuadGaussian:       []float32{},
@@ -693,7 +693,7 @@ func TestFrameSize(t *testing.T) {
 	}, {
 		desc:        "fixed frame size",
 		frameSizePB: &opb.FrameSize{Type: &opb.FrameSize_Fixed{Fixed: 1500}},
-		wantFrameSize: &ixconfig.TrafficFrameSize{
+		wantFrameSize: &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 			Type_:         ixconfig.String("fixed"),
 			FixedSize:     ixconfig.NumberUint32(1500),
 			QuadGaussian:  []float32{},
@@ -709,7 +709,7 @@ func TestFrameSize(t *testing.T) {
 				Random: &opb.FrameSize_Random{Min: 64, Max: 512},
 			},
 		},
-		wantFrameSize: &ixconfig.TrafficFrameSize{
+		wantFrameSize: &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 			Type_:         ixconfig.String("random"),
 			RandomMin:     ixconfig.NumberUint32(64),
 			RandomMax:     ixconfig.NumberUint32(512),
@@ -735,7 +735,7 @@ func TestFrameSize(t *testing.T) {
 				},
 			},
 		},
-		wantFrameSize: &ixconfig.TrafficFrameSize{
+		wantFrameSize: &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 			Type_:         ixconfig.String("weightedPairs"),
 			QuadGaussian:  []float32{},
 			WeightedPairs: []float32{82, 35, 125, 22},
@@ -751,7 +751,7 @@ func TestFrameSize(t *testing.T) {
 				t.Errorf("frameSize: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 			if diff := jsonCfgDiff(t, test.wantFrameSize, gotFrameSize); diff != "" {
-				t.Errorf("frameSize: unexpected TrafficFrameSize diff (-want/+got): %s", diff)
+				t.Errorf("frameSize: unexpected TrafficTrafficItemConfigElementFrameSize diff (-want/+got): %s", diff)
 			}
 			if diff := cmp.Diff(test.wantFrameSizeMap, gotFrameSizeMap); diff != "" {
 				t.Errorf("frameSize: unexpected frame size data map (-want/+got): %s", diff)
@@ -764,7 +764,7 @@ func TestTransmissionControl(t *testing.T) {
 	tests := []struct {
 		desc             string
 		transmissionPB   *opb.Transmission
-		wantTransmission *ixconfig.TrafficTransmissionControl
+		wantTransmission *ixconfig.TrafficTrafficItemConfigElementTransmissionControl
 		wantErr          string
 	}{{
 		desc: "default",
@@ -794,7 +794,7 @@ func TestTransmissionControl(t *testing.T) {
 			Pattern:     opb.Transmission_CONTINUOUS,
 			MinGapBytes: 64,
 		},
-		wantTransmission: &ixconfig.TrafficTransmissionControl{
+		wantTransmission: &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("continuous"),
 			MinGapBytes: ixconfig.NumberUint32(64),
 		},
@@ -818,7 +818,7 @@ func TestTransmissionControl(t *testing.T) {
 			PacketsPerBurst: 100,
 			InterburstGap:   &opb.Transmission_Bytes{Bytes: 64},
 		},
-		wantTransmission: &ixconfig.TrafficTransmissionControl{
+		wantTransmission: &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:               ixconfig.String("custom"),
 			EnableInterBurstGap: ixconfig.Bool(true),
 			MinGapBytes:         ixconfig.NumberUint32(0),
@@ -833,7 +833,7 @@ func TestTransmissionControl(t *testing.T) {
 			PacketsPerBurst: 100,
 			InterburstGap:   &opb.Transmission_Nanoseconds{Nanoseconds: 30},
 		},
-		wantTransmission: &ixconfig.TrafficTransmissionControl{
+		wantTransmission: &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:               ixconfig.String("custom"),
 			EnableInterBurstGap: ixconfig.Bool(true),
 			MinGapBytes:         ixconfig.NumberUint32(0),
@@ -876,7 +876,7 @@ func TestTransmissionControl(t *testing.T) {
 			MinGapBytes: 64,
 			FrameCount:  1000,
 		},
-		wantTransmission: &ixconfig.TrafficTransmissionControl{
+		wantTransmission: &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedFrameCount"),
 			MinGapBytes: ixconfig.NumberUint32(64),
 			FrameCount:  ixconfig.NumberUint32(1000),
@@ -888,7 +888,7 @@ func TestTransmissionControl(t *testing.T) {
 			MinGapBytes:  64,
 			DurationSecs: 100,
 		},
-		wantTransmission: &ixconfig.TrafficTransmissionControl{
+		wantTransmission: &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedDuration"),
 			MinGapBytes: ixconfig.NumberUint32(64),
 			Duration:    ixconfig.NumberUint32(100),
@@ -901,7 +901,7 @@ func TestTransmissionControl(t *testing.T) {
 				t.Errorf("transmissionControl: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 			if diff := jsonCfgDiff(t, test.wantTransmission, gotTransmission); diff != "" {
-				t.Errorf("transmissionControl: unexpected TrafficTransmissionControl diff (-want/+got): %s", diff)
+				t.Errorf("transmissionControl: unexpected TrafficTrafficItemConfigElementTransmissionControl diff (-want/+got): %s", diff)
 			}
 		})
 	}

@@ -119,8 +119,8 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	if hdrs.eth.GetBadCrc() {
 		crc = ixconfig.String("badCrc")
 	}
-	epSet := &ixconfig.TrafficEndpointSet{
-		Name:         ixconfig.String(f.GetName()),
+	epSet := &ixconfig.TrafficTrafficItemEndpointSet{
+		Name: ixconfig.String(f.GetName()),
 		// Following two values are explicitly set to reduce warnings from config push.
 		FullyMeshedEndpoints: []string{},
 		TrafficGroups:        []string{},
@@ -130,9 +130,9 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	ti := &ixconfig.TrafficTrafficItem{
 		Name:        ixconfig.String(f.GetName()),
 		TrafficType: ixconfig.String(string(trafType)),
-		EndpointSet: []*ixconfig.TrafficEndpointSet{epSet},
-		RouteMesh: ixconfig.String("fullMesh"),
-		ConfigElement: []*ixconfig.TrafficConfigElement{{
+		EndpointSet: []*ixconfig.TrafficTrafficItemEndpointSet{epSet},
+		RouteMesh:   ixconfig.String("fullMesh"),
+		ConfigElement: []*ixconfig.TrafficTrafficItemConfigElement{{
 			FrameRate:           fr,
 			FrameSize:           fs,
 			TransmissionControl: tc,
@@ -147,21 +147,25 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	if trackFlow {
 		ix.ingressTrackingFlows = append(ix.ingressTrackingFlows, f.GetName())
 	}
-	ti.Tracking = []*ixconfig.TrafficTracking{ingressTracking}
+	ti.Tracking = []*ixconfig.TrafficTrafficItemTracking{ingressTracking}
 
 	if f.GetEgressTracking() != nil {
 		ix.egressTrackingFlows = append(ix.egressTrackingFlows, f.GetName())
 		ti.EgressEnabled = ixconfig.Bool(true)
-		ti.EgressTracking = []*ixconfig.TrafficEgressTracking{{
+		ti.EgressTracking = []*ixconfig.TrafficTrafficItemEgressTracking{{
 			Encapsulation:    ixconfig.String("Any: Use Custom Settings"),
 			CustomOffsetBits: ixconfig.NumberUint32(f.GetEgressTracking().GetCustomOffset()),
 			CustomWidthBits:  ixconfig.NumberUint32(f.GetEgressTracking().GetCustomWidth()),
 		}}
 	}
 
-	stacks := make([]*ixconfig.TrafficStack, 0)
+	var hasSrcVLAN bool
+	for _, ep := range srcEPs {
+		hasSrcVLAN = hasSrcVLAN || ix.intfs[ep.GetInterfaceName()].hasVLAN
+	}
+	stacks := make([]*ixconfig.TrafficTrafficItemConfigElementStack, 0)
 	for _, hdr := range f.GetHeaders() {
-		s, err := headerStacks(hdr, len(stacks))
+		s, err := headerStacks(hdr, len(stacks), hasSrcVLAN)
 		if err != nil {
 			return errors.Wrapf(err, "could not add header for flow %q", f.GetName())
 		}
@@ -359,19 +363,19 @@ func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP
 	return nodes, nil
 }
 
-func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficFrameRate, map[string]interface{}, error) {
+func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFrameRate, map[string]interface{}, error) {
 	if fr == nil || fr.Type == nil {
 		return nil, nil, nil
 	}
 
 	switch frt := fr.Type.(type) {
 	case *opb.FrameRate_Percent:
-		return &ixconfig.TrafficFrameRate{
+		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("percentLineRate"),
 			Rate:  ixconfig.NumberFloat64(fr.GetPercent()),
 		}, map[string]interface{}{"rate": fr.GetPercent()}, nil
 	case *opb.FrameRate_Bps:
-		return &ixconfig.TrafficFrameRate{
+		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 				Type_:            ixconfig.String("bitsPerSecond"),
 				BitRateUnitsType: ixconfig.String("bitsPerSec"),
 				Rate:             ixconfig.NumberUint64(fr.GetBps()),
@@ -380,7 +384,7 @@ func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficFrameRate, map[string]interf
 				"rate":             fr.GetBps(),
 			}, nil
 	case *opb.FrameRate_Fps:
-		return &ixconfig.TrafficFrameRate{
+		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("framesPerSecond"),
 			Rate:  ixconfig.NumberUint64(fr.GetFps()),
 		}, map[string]interface{}{"rate": fr.GetFps()}, nil
@@ -389,12 +393,12 @@ func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficFrameRate, map[string]interf
 	}
 }
 
-func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficFrameSize, map[string]interface{}, error) {
+func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficTrafficItemConfigElementFrameSize, map[string]interface{}, error) {
 	if fs == nil || fs.Type == nil {
 		return nil, nil, nil
 	}
 
-	tfs := &ixconfig.TrafficFrameSize{
+	tfs := &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 		// Set the following values to reduce warnings on traffic config import.
 		WeightedPairs: []float32{},
 		QuadGaussian:  []float32{},
@@ -432,7 +436,7 @@ func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficFrameSize, map[string]interf
 	return tfs, fsMap, nil
 }
 
-func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionControl, error) {
+func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTrafficItemConfigElementTransmissionControl, error) {
 	if tc == nil {
 		return nil, nil
 	}
@@ -444,7 +448,7 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 		if tc.GetInterburstGap() != nil {
 			return nil, usererr.New("burst gap should not be set for continuous transmissions")
 		}
-		return &ixconfig.TrafficTransmissionControl{
+		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("continuous"),
 			MinGapBytes: ixconfig.NumberUint32(tc.GetMinGapBytes()),
 		}, nil
@@ -467,7 +471,7 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 		default:
 			return nil, fmt.Errorf("unrecognized burst gap type %T", ibg)
 		}
-		return &ixconfig.TrafficTransmissionControl{
+		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:               ixconfig.String("custom"),
 			MinGapBytes:         ixconfig.NumberUint32(tc.GetMinGapBytes()),
 			BurstPacketCount:    ixconfig.NumberUint32(tc.GetPacketsPerBurst()),
@@ -482,7 +486,7 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 		if tc.GetInterburstGap() != nil {
 			return nil, usererr.New("burst gap should not be set for fixed packet count transmissions")
 		}
-		return &ixconfig.TrafficTransmissionControl{
+		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedFrameCount"),
 			MinGapBytes: ixconfig.NumberUint32(tc.GetMinGapBytes()),
 			FrameCount:  ixconfig.NumberUint32(tc.GetFrameCount()),
@@ -494,7 +498,7 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 		if tc.GetInterburstGap() != nil {
 			return nil, usererr.New("burst gap should not be set for fixed duration transmissions")
 		}
-		return &ixconfig.TrafficTransmissionControl{
+		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedDuration"),
 			MinGapBytes: ixconfig.NumberUint32(tc.GetMinGapBytes()),
 			Duration:    ixconfig.NumberUint32(tc.GetDurationSecs()),
@@ -504,8 +508,8 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTransmissionCon
 	}
 }
 
-func ingressTrackingCfg(f *opb.Flow, trafType trafficType) (*ixconfig.TrafficTracking, bool, error) {
-	tracking := &ixconfig.TrafficTracking{
+func ingressTrackingCfg(f *opb.Flow, trafType trafficType) (*ixconfig.TrafficTrafficItemTracking, bool, error) {
+	tracking := &ixconfig.TrafficTrafficItemTracking{
 		TrackBy: []string{"trackingenabled0"},
 		// Set this value to reduce warnings on traffic config push.
 		Values: []string{},
