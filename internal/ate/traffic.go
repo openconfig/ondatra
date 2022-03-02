@@ -139,6 +139,9 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 			Crc:                 crc,
 		}},
 	}
+	if trafType == rawTraffic {
+		ti.RawTrafficRxPortsBehavior = ixconfig.String("loadBalanced")
+	}
 
 	ingressTracking, trackFlow, err := ingressTrackingCfg(f, trafType)
 	if err != nil {
@@ -543,6 +546,9 @@ func ingressTrackingCfg(f *opb.Flow, trafType trafficType) (*ixconfig.TrafficTra
 	}
 	if filter.GetDstIpv6() {
 		tracking.TrackBy = append(tracking.TrackBy, "ipv6DestIp0")
+	}
+	if filter.GetVlanId() {
+		tracking.TrackBy = append(tracking.TrackBy, "vlanVlanId0")
 	}
 	return tracking, len(tracking.TrackBy) > 1, nil
 }

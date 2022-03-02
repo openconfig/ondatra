@@ -155,11 +155,10 @@ func parsePortCPUStats(t ixweb.StatTable) ([]*portCPURow, error) {
 
 type flowRow struct {
 	trafficItem                                       string
-	rxBytes, txFrames, rxFrames                       *uint64
+	rxBytes, txFrames, rxFrames, mplsLabel, vlanID    *uint64
 	lossPct, txRate, rxRate, txFrameRate, rxFrameRate *float32
 	// Optional ingress-tracking fields.
 	rxPort, txPort, srcIPv4, dstIPv4, srcIPv6, dstIPv6 string
-	mplsLabel                                          *uint64
 }
 
 func (r *flowRow) String() string {
@@ -189,9 +188,10 @@ func parseFlowStatsHelp(t ixweb.StatTable, overrideNameKey string) ([]*flowRow, 
 		dstIPv4Key   = "IPv4 :Destination Address"
 		srcIPv6Key   = "IPv6 :Source Address"
 		dstIPv6Key   = "IPv6 :Destination Address"
+		vlanIDKey    = "VLAN:VLAN-ID"
 	)
 	strKeys := []string{rxPortKey, txPortKey, srcIPv4Key, dstIPv4Key, srcIPv6Key, dstIPv6Key}
-	intKeys := []string{rxBytesKey, txFramesKey, rxFramesKey, mplsLabelKey}
+	intKeys := []string{rxBytesKey, txFramesKey, rxFramesKey, mplsLabelKey, vlanIDKey}
 	floatKeys := []string{lossPctKey, txRateKey, rxRateKey, txFrameRateKey, rxFrameRateKey}
 
 	nameKey := trafficItemKey
@@ -223,6 +223,7 @@ func parseFlowStatsHelp(t ixweb.StatTable, overrideNameKey string) ([]*flowRow, 
 			dstIPv4:   row[dstIPv4Key],
 			srcIPv6:   row[srcIPv6Key],
 			dstIPv6:   row[dstIPv6Key],
+			vlanID:    intVals[vlanIDKey],
 		})
 	}
 	return flowRows, nil

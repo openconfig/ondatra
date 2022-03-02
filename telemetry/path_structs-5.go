@@ -1826,6 +1826,16 @@ type NetworkInstance_Protocol_Isis_Global_FastFloodingPathAny struct {
 	*ygot.NodePath
 }
 
+// NetworkInstance_Protocol_Isis_Global_HelloPaddingPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding YANG schema element.
+type NetworkInstance_Protocol_Isis_Global_HelloPaddingPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding YANG schema element.
+type NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny struct {
+	*ygot.NodePath
+}
+
 // NetworkInstance_Protocol_Isis_Global_IidTlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/iid-tlv YANG schema element.
 type NetworkInstance_Protocol_Isis_Global_IidTlvPath struct {
 	*ygot.NodePath
@@ -2202,6 +2212,38 @@ func (n *NetworkInstance_Protocol_Isis_GlobalPathAny) GracefulRestart() *Network
 	return &NetworkInstance_Protocol_Isis_Global_GracefulRestartPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"graceful-restart"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HelloPadding (leaf): Controls the padding type for IS-IS Hello PDUs on a global level.
+// ----------------------------------------
+// Defining module: "openconfig-isis"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/hello-padding"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding"
+func (n *NetworkInstance_Protocol_Isis_GlobalPath) HelloPadding() *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath {
+	return &NetworkInstance_Protocol_Isis_Global_HelloPaddingPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hello-padding"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HelloPadding (leaf): Controls the padding type for IS-IS Hello PDUs on a global level.
+// ----------------------------------------
+// Defining module: "openconfig-isis"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/hello-padding"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding"
+func (n *NetworkInstance_Protocol_Isis_GlobalPathAny) HelloPadding() *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny {
+	return &NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hello-padding"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5394,7 +5436,7 @@ func (n *NetworkInstance_Protocol_Isis_InterfacePathAny) Enabled() *NetworkInsta
 	}
 }
 
-// HelloPadding (leaf): This leaf controls padding type for IS-IS Hello PDUs.
+// HelloPadding (leaf): Controls the padding type for IS-IS Hello PDUs.
 // ----------------------------------------
 // Defining module: "openconfig-isis"
 // Instantiating module: "openconfig-network-instance"
@@ -5410,7 +5452,7 @@ func (n *NetworkInstance_Protocol_Isis_InterfacePath) HelloPadding() *NetworkIns
 	}
 }
 
-// HelloPadding (leaf): This leaf controls padding type for IS-IS Hello PDUs.
+// HelloPadding (leaf): Controls the padding type for IS-IS Hello PDUs.
 // ----------------------------------------
 // Defining module: "openconfig-isis"
 // Instantiating module: "openconfig-network-instance"

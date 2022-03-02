@@ -30540,6 +30540,161 @@ func convertNetworkInstance_Protocol_Isis_Global_GracefulRestart_HelperOnlyPath(
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Lookup(t testing.TB) *oc.QualifiedE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedE_IsisTypes_HelloPaddingType{
+		Metadata: md,
+	}).SetVal(goStruct.GetHelloPadding())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Get(t testing.TB) oc.E_IsisTypes_HelloPaddingType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_IsisTypes_HelloPaddingType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny) Get(t testing.TB) []oc.E_IsisTypes_HelloPaddingType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_IsisTypes_HelloPaddingType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	c := &oc.CollectionE_IsisTypes_HelloPaddingType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_HelloPaddingType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_HelloPaddingType) bool) *oc.E_IsisTypes_HelloPaddingTypeWatcher {
+	t.Helper()
+	w := &oc.E_IsisTypes_HelloPaddingTypeWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Global{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IsisTypes_HelloPaddingType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_HelloPaddingType) bool) *oc.E_IsisTypes_HelloPaddingTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisTypes_HelloPaddingType) *oc.QualifiedE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisTypes_HelloPaddingType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	c := &oc.CollectionE_IsisTypes_HelloPaddingType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_HelloPaddingType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_HelloPaddingType) bool) *oc.E_IsisTypes_HelloPaddingTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Global_HelloPaddingPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Global_HelloPaddingPath extracts the value of the leaf HelloPadding from its parent oc.NetworkInstance_Protocol_Isis_Global
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisTypes_HelloPaddingType.
+func convertNetworkInstance_Protocol_Isis_Global_HelloPaddingPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global) *oc.QualifiedE_IsisTypes_HelloPaddingType {
+	t.Helper()
+	qv := &oc.QualifiedE_IsisTypes_HelloPaddingType{
+		Metadata: md,
+	}
+	val := parent.HelloPadding
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/state/iid-tlv with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Global_IidTlvPath) Lookup(t testing.TB) *oc.QualifiedBool {
@@ -43372,159 +43527,6 @@ func convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencySta
 		Metadata: md,
 	}
 	val := parent.AdjacencyState
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Lookup(t testing.TB) *oc.QualifiedE_IsisTypes_LevelType {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Get(t testing.TB) oc.E_IsisTypes_LevelType {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisTypes_LevelType {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_IsisTypes_LevelType
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Get(t testing.TB) []oc.E_IsisTypes_LevelType {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_IsisTypes_LevelType
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_LevelType {
-	t.Helper()
-	c := &oc.CollectionE_IsisTypes_LevelType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_LevelType) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
-	t.Helper()
-	w := &oc.E_IsisTypes_LevelTypeWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_IsisTypes_LevelType)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisTypes_LevelType) *oc.QualifiedE_IsisTypes_LevelType {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisTypes_LevelType) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_LevelType {
-	t.Helper()
-	c := &oc.CollectionE_IsisTypes_LevelType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_LevelType) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath extracts the value of the leaf AdjacencyType from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisTypes_LevelType.
-func convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency) *oc.QualifiedE_IsisTypes_LevelType {
-	t.Helper()
-	qv := &oc.QualifiedE_IsisTypes_LevelType{
-		Metadata: md,
-	}
-	val := parent.AdjacencyType
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
 	}

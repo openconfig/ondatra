@@ -155,10 +155,10 @@ func TestAddTraffic(t *testing.T) {
 				}},
 			}},
 			Vport: []*ixconfig.Vport{{
-				Name: ixconfig.String("vport"),
+				Name:      ixconfig.String("vport"),
 				Protocols: &ixconfig.VportProtocols{},
 			}},
-			Lag:   []*ixconfig.Lag{{Name: ixconfig.String("lag")}},
+			Lag: []*ixconfig.Lag{{Name: ixconfig.String("lag")}},
 		}
 		dg := cfg.Topology[0].DeviceGroup[0]
 		// Normal network group
@@ -544,6 +544,10 @@ func TestAddTraffic(t *testing.T) {
 			gotDstEPs := ti.EndpointSet[0].Destinations
 			if diff := cmp.Diff(test.wantDstEPs, gotDstEPs); diff != "" {
 				t.Errorf("addTraffic: unexpected destination endpoints diff: %s", diff)
+			}
+
+			if test.wantTrafficType == rawTraffic && (ti.RawTrafficRxPortsBehavior == nil || *(ti.RawTrafficRxPortsBehavior) != "loadBalanced") {
+				t.Error("addTraffic: unexpected loadBalanced RxPortsBehavior setting for rawTraffic: got: false, want: true")
 			}
 
 			// The len check is not '> 0' because TrackBy always includes at least one element to enable tracking.

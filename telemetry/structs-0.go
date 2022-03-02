@@ -9712,6 +9712,7 @@ type Flow struct {
 	SrcIpv4         *string                                            `path:"state/src-ipv4" module:"openconfig-ate-flow/openconfig-ate-flow"`
 	SrcIpv6         *string                                            `path:"state/src-ipv6" module:"openconfig-ate-flow/openconfig-ate-flow"`
 	SrcPort         *string                                            `path:"state/src-port" module:"openconfig-ate-flow/openconfig-ate-flow"`
+	VlanId          *uint16                                            `path:"state/vlan-id" module:"openconfig-ate-flow/openconfig-ate-flow"`
 }
 
 // IsYANGGoStruct ensures that Flow implements the yang.GoStruct
@@ -9728,6 +9729,7 @@ type Flow_IngressTracking_Key struct {
 	DstIpv4   string                               `path:"dst-ipv4"`
 	SrcIpv6   string                               `path:"src-ipv6"`
 	DstIpv6   string                               `path:"dst-ipv6"`
+	VlanId    uint16                               `path:"vlan-id"`
 }
 
 // NewEgressTracking creates a new entry in the EgressTracking list of the
@@ -9850,7 +9852,7 @@ func (t *Flow) AppendEgressTracking(v *Flow_EgressTracking) error {
 // NewIngressTracking creates a new entry in the IngressTracking list of the
 // Flow struct. The keys of the list are populated from the input
 // arguments.
-func (t *Flow) NewIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string) (*Flow_IngressTracking, error) {
+func (t *Flow) NewIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string, VlanId uint16) (*Flow_IngressTracking, error) {
 
 	// Initialise the list within the receiver struct if it has not already been
 	// created.
@@ -9866,6 +9868,7 @@ func (t *Flow) NewIngressTracking(SrcPort string, DstPort string, MplsLabel Flow
 		DstIpv4:   DstIpv4,
 		SrcIpv6:   SrcIpv6,
 		DstIpv6:   DstIpv6,
+		VlanId:    VlanId,
 	}
 
 	// Ensure that this key has not already been used in the
@@ -9883,6 +9886,7 @@ func (t *Flow) NewIngressTracking(SrcPort string, DstPort string, MplsLabel Flow
 		DstIpv4:   &DstIpv4,
 		SrcIpv6:   &SrcIpv6,
 		DstIpv6:   &DstIpv6,
+		VlanId:    &VlanId,
 	}
 
 	return t.IngressTracking[key], nil
@@ -9907,6 +9911,7 @@ func (t *Flow) RenameIngressTracking(oldK, newK Flow_IngressTracking_Key) error 
 	e.DstIpv4 = &newK.DstIpv4
 	e.SrcIpv6 = &newK.SrcIpv6
 	e.DstIpv6 = &newK.DstIpv6
+	e.VlanId = &newK.VlanId
 
 	t.IngressTracking[newK] = e
 	delete(t.IngressTracking, oldK)
@@ -9916,7 +9921,7 @@ func (t *Flow) RenameIngressTracking(oldK, newK Flow_IngressTracking_Key) error 
 // GetOrCreateIngressTracking retrieves the value with the specified keys from
 // the receiver Flow. If the entry does not exist, then it is created.
 // It returns the existing or new list member.
-func (t *Flow) GetOrCreateIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string) *Flow_IngressTracking {
+func (t *Flow) GetOrCreateIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string, VlanId uint16) *Flow_IngressTracking {
 
 	key := Flow_IngressTracking_Key{
 		SrcPort:   SrcPort,
@@ -9926,6 +9931,7 @@ func (t *Flow) GetOrCreateIngressTracking(SrcPort string, DstPort string, MplsLa
 		DstIpv4:   DstIpv4,
 		SrcIpv6:   SrcIpv6,
 		DstIpv6:   DstIpv6,
+		VlanId:    VlanId,
 	}
 
 	if v, ok := t.IngressTracking[key]; ok {
@@ -9933,7 +9939,7 @@ func (t *Flow) GetOrCreateIngressTracking(SrcPort string, DstPort string, MplsLa
 	}
 	// Panic if we receive an error, since we should have retrieved an existing
 	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewIngressTracking(SrcPort, DstPort, MplsLabel, SrcIpv4, DstIpv4, SrcIpv6, DstIpv6)
+	v, err := t.NewIngressTracking(SrcPort, DstPort, MplsLabel, SrcIpv4, DstIpv4, SrcIpv6, DstIpv6, VlanId)
 	if err != nil {
 		panic(fmt.Sprintf("GetOrCreateIngressTracking got unexpected error: %v", err))
 	}
@@ -9944,7 +9950,7 @@ func (t *Flow) GetOrCreateIngressTracking(SrcPort string, DstPort string, MplsLa
 // the IngressTracking map field of Flow. If the receiver is nil, or
 // the specified key is not present in the list, nil is returned such that Get*
 // methods may be safely chained.
-func (t *Flow) GetIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string) *Flow_IngressTracking {
+func (t *Flow) GetIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string, VlanId uint16) *Flow_IngressTracking {
 
 	if t == nil {
 		return nil
@@ -9958,6 +9964,7 @@ func (t *Flow) GetIngressTracking(SrcPort string, DstPort string, MplsLabel Flow
 		DstIpv4:   DstIpv4,
 		SrcIpv6:   SrcIpv6,
 		DstIpv6:   DstIpv6,
+		VlanId:    VlanId,
 	}
 
 	if lm, ok := t.IngressTracking[key]; ok {
@@ -9969,7 +9976,7 @@ func (t *Flow) GetIngressTracking(SrcPort string, DstPort string, MplsLabel Flow
 // DeleteIngressTracking deletes the value with the specified keys from
 // the receiver Flow. If there is no such element, the function
 // is a no-op.
-func (t *Flow) DeleteIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string) {
+func (t *Flow) DeleteIngressTracking(SrcPort string, DstPort string, MplsLabel Flow_IngressTracking_MplsLabel_Union, SrcIpv4 string, DstIpv4 string, SrcIpv6 string, DstIpv6 string, VlanId uint16) {
 	key := Flow_IngressTracking_Key{
 		SrcPort:   SrcPort,
 		DstPort:   DstPort,
@@ -9978,6 +9985,7 @@ func (t *Flow) DeleteIngressTracking(SrcPort string, DstPort string, MplsLabel F
 		DstIpv4:   DstIpv4,
 		SrcIpv6:   SrcIpv6,
 		DstIpv6:   DstIpv6,
+		VlanId:    VlanId,
 	}
 
 	delete(t.IngressTracking, key)
@@ -10012,6 +10020,10 @@ func (t *Flow) AppendIngressTracking(v *Flow_IngressTracking) error {
 		return fmt.Errorf("invalid nil key for DstIpv6")
 	}
 
+	if v.VlanId == nil {
+		return fmt.Errorf("invalid nil key for VlanId")
+	}
+
 	key := Flow_IngressTracking_Key{
 		SrcPort:   *v.SrcPort,
 		DstPort:   *v.DstPort,
@@ -10020,6 +10032,7 @@ func (t *Flow) AppendIngressTracking(v *Flow_IngressTracking) error {
 		DstIpv4:   *v.DstIpv4,
 		SrcIpv6:   *v.SrcIpv6,
 		DstIpv6:   *v.DstIpv6,
+		VlanId:    *v.VlanId,
 	}
 
 	// Initialise the list within the receiver struct if it has not already been
@@ -10278,6 +10291,22 @@ func (t *Flow) GetSrcPort() string {
 		return ""
 	}
 	return *t.SrcPort
+}
+
+// GetVlanId retrieves the value of the leaf VlanId from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if VlanId is set, it can
+// safely use t.GetVlanId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.VlanId == nil' before retrieving the leaf's value.
+func (t *Flow) GetVlanId() uint16 {
+	if t == nil || t.VlanId == nil {
+		return 0
+	}
+	return *t.VlanId
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Flow
@@ -10702,6 +10731,7 @@ type Flow_IngressTracking struct {
 	SrcIpv4        *string                                         `path:"state/src-ipv4|src-ipv4" module:"openconfig-ate-flow/openconfig-ate-flow|openconfig-ate-flow" shadow-path:"src-ipv4" shadow-module:"openconfig-ate-flow"`
 	SrcIpv6        *string                                         `path:"state/src-ipv6|src-ipv6" module:"openconfig-ate-flow/openconfig-ate-flow|openconfig-ate-flow" shadow-path:"src-ipv6" shadow-module:"openconfig-ate-flow"`
 	SrcPort        *string                                         `path:"state/src-port|src-port" module:"openconfig-ate-flow/openconfig-ate-flow|openconfig-ate-flow" shadow-path:"src-port" shadow-module:"openconfig-ate-flow"`
+	VlanId         *uint16                                         `path:"state/vlan-id|vlan-id" module:"openconfig-ate-flow/openconfig-ate-flow|openconfig-ate-flow" shadow-path:"vlan-id" shadow-module:"openconfig-ate-flow"`
 }
 
 // IsYANGGoStruct ensures that Flow_IngressTracking implements the yang.GoStruct
@@ -11070,6 +11100,22 @@ func (t *Flow_IngressTracking) GetSrcPort() string {
 	return *t.SrcPort
 }
 
+// GetVlanId retrieves the value of the leaf VlanId from the Flow_IngressTracking
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if VlanId is set, it can
+// safely use t.GetVlanId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.VlanId == nil' before retrieving the leaf's value.
+func (t *Flow_IngressTracking) GetVlanId() uint16 {
+	if t == nil || t.VlanId == nil {
+		return 0
+	}
+	return *t.VlanId
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the Flow_IngressTracking
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -11110,6 +11156,10 @@ func (t *Flow_IngressTracking) ΛListKeyMap() (map[string]interface{}, error) {
 		return nil, fmt.Errorf("nil value for key SrcPort")
 	}
 
+	if t.VlanId == nil {
+		return nil, fmt.Errorf("nil value for key VlanId")
+	}
+
 	return map[string]interface{}{
 		"dst-ipv4":   *t.DstIpv4,
 		"dst-ipv6":   *t.DstIpv6,
@@ -11118,6 +11168,7 @@ func (t *Flow_IngressTracking) ΛListKeyMap() (map[string]interface{}, error) {
 		"src-ipv4":   *t.SrcIpv4,
 		"src-ipv6":   *t.SrcIpv6,
 		"src-port":   *t.SrcPort,
+		"vlan-id":    *t.VlanId,
 	}, nil
 }
 

@@ -2347,6 +2347,9 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	"/network-instances/network-instance/protocols/protocol/isis/global/lsp-bit/overload-bit/reset-triggers/reset-trigger/state/reset-trigger": {
 		reflect.TypeOf((E_IsisTypes_OVERLOAD_RESET_TRIGGER_TYPE)(0)),
 	},
+	"/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding": {
+		reflect.TypeOf((E_IsisTypes_HelloPaddingType)(0)),
+	},
 	"/network-instances/network-instance/protocols/protocol/isis/global/state/level-capability": {
 		reflect.TypeOf((E_IsisTypes_LevelType)(0)),
 	},

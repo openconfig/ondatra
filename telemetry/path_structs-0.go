@@ -15519,6 +15519,16 @@ type Flow_SrcPortPathAny struct {
 	*ygot.NodePath
 }
 
+// Flow_VlanIdPath represents the /openconfig-ate-flow/flows/flow/state/vlan-id YANG schema element.
+type Flow_VlanIdPath struct {
+	*ygot.NodePath
+}
+
+// Flow_VlanIdPathAny represents the wildcard version of the /openconfig-ate-flow/flows/flow/state/vlan-id YANG schema element.
+type Flow_VlanIdPathAny struct {
+	*ygot.NodePath
+}
+
 // Counters (container): Counters that correspond to the individual flow.
 // ----------------------------------------
 // Defining module: "openconfig-ate-flow"
@@ -15836,7 +15846,7 @@ func (n *FlowPath) IngressTrackingAny() *Flow_IngressTrackingPathAny {
 	return &Flow_IngressTrackingPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"ingress-tracking", "ingress-tracking"},
-			map[string]interface{}{"src-port": "*", "dst-port": "*", "mpls-label": "*", "src-ipv4": "*", "dst-ipv4": "*", "src-ipv6": "*", "dst-ipv6": "*"},
+			map[string]interface{}{"src-port": "*", "dst-port": "*", "mpls-label": "*", "src-ipv4": "*", "dst-ipv4": "*", "src-ipv6": "*", "dst-ipv6": "*", "vlan-id": "*"},
 			n,
 		),
 	}
@@ -15855,7 +15865,7 @@ func (n *FlowPathAny) IngressTrackingAny() *Flow_IngressTrackingPathAny {
 	return &Flow_IngressTrackingPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"ingress-tracking", "ingress-tracking"},
-			map[string]interface{}{"src-port": "*", "dst-port": "*", "mpls-label": "*", "src-ipv4": "*", "dst-ipv4": "*", "src-ipv6": "*", "dst-ipv6": "*"},
+			map[string]interface{}{"src-port": "*", "dst-port": "*", "mpls-label": "*", "src-ipv4": "*", "dst-ipv4": "*", "src-ipv6": "*", "dst-ipv6": "*", "vlan-id": "*"},
 			n,
 		),
 	}
@@ -15907,6 +15917,13 @@ func (n *Flow_IngressTrackingPathAny) WithSrcIpv6(SrcIpv6 string) *Flow_IngressT
 // DstIpv6: string
 func (n *Flow_IngressTrackingPathAny) WithDstIpv6(DstIpv6 string) *Flow_IngressTrackingPathAny {
 	ygot.ModifyKey(n.NodePath, "dst-ipv6", DstIpv6)
+	return n
+}
+
+// WithVlanId sets Flow_IngressTrackingPathAny's key "vlan-id" to the specified value.
+// VlanId: uint16
+func (n *Flow_IngressTrackingPathAny) WithVlanId(VlanId uint16) *Flow_IngressTrackingPathAny {
+	ygot.ModifyKey(n.NodePath, "vlan-id", VlanId)
 	return n
 }
 
@@ -16168,6 +16185,38 @@ func (n *FlowPathAny) SrcPort() *Flow_SrcPortPathAny {
 	return &Flow_SrcPortPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "src-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// VlanId (leaf): The VLAN ID of the traffic header.
+// ----------------------------------------
+// Defining module: "openconfig-ate-flow"
+// Instantiating module: "openconfig-ate-flow"
+// Path from parent: "state/vlan-id"
+// Path from root: "/flows/flow/state/vlan-id"
+func (n *FlowPath) VlanId() *Flow_VlanIdPath {
+	return &Flow_VlanIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// VlanId (leaf): The VLAN ID of the traffic header.
+// ----------------------------------------
+// Defining module: "openconfig-ate-flow"
+// Instantiating module: "openconfig-ate-flow"
+// Path from parent: "state/vlan-id"
+// Path from root: "/flows/flow/state/vlan-id"
+func (n *FlowPathAny) VlanId() *Flow_VlanIdPathAny {
+	return &Flow_VlanIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan-id"},
 			map[string]interface{}{},
 			n,
 		),
@@ -16992,6 +17041,16 @@ type Flow_IngressTracking_SrcPortPathAny struct {
 	*ygot.NodePath
 }
 
+// Flow_IngressTracking_VlanIdPath represents the /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/vlan-id YANG schema element.
+type Flow_IngressTracking_VlanIdPath struct {
+	*ygot.NodePath
+}
+
+// Flow_IngressTracking_VlanIdPathAny represents the wildcard version of the /openconfig-ate-flow/flows/flow/ingress-tracking/ingress-tracking/state/vlan-id YANG schema element.
+type Flow_IngressTracking_VlanIdPathAny struct {
+	*ygot.NodePath
+}
+
 // Counters (container): Counters that correspond to the flow by ingress tracking filter.
 // ----------------------------------------
 // Defining module: "openconfig-ate-flow"
@@ -17554,6 +17613,38 @@ func (n *Flow_IngressTrackingPathAny) SrcPort() *Flow_IngressTracking_SrcPortPat
 	return &Flow_IngressTracking_SrcPortPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "src-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// VlanId (leaf): The VLAN ID of the traffic header.
+// ----------------------------------------
+// Defining module: "openconfig-ate-flow"
+// Instantiating module: "openconfig-ate-flow"
+// Path from parent: "state/vlan-id"
+// Path from root: "/flows/flow/ingress-tracking/ingress-tracking/state/vlan-id"
+func (n *Flow_IngressTrackingPath) VlanId() *Flow_IngressTracking_VlanIdPath {
+	return &Flow_IngressTracking_VlanIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// VlanId (leaf): The VLAN ID of the traffic header.
+// ----------------------------------------
+// Defining module: "openconfig-ate-flow"
+// Instantiating module: "openconfig-ate-flow"
+// Path from parent: "state/vlan-id"
+// Path from root: "/flows/flow/ingress-tracking/ingress-tracking/state/vlan-id"
+func (n *Flow_IngressTrackingPathAny) VlanId() *Flow_IngressTracking_VlanIdPathAny {
+	return &Flow_IngressTracking_VlanIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan-id"},
 			map[string]interface{}{},
 			n,
 		),

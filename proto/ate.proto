@@ -522,6 +522,7 @@ message Flow {
     bool src_ipv6 = 6;
     bool dst_ipv6 = 7;
     bool ports = 8;
+    bool vlan_id = 9;
   }
   IngressTrackingFilters ingress_tracking_filters = 50;
   FrameSize frame_size = 51;

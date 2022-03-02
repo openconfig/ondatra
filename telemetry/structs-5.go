@@ -1683,6 +1683,7 @@ type NetworkInstance_Protocol_Isis_Global struct {
 	AuthenticationCheck           *bool                                                                                    `path:"state/authentication-check" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/authentication-check" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	FastFlooding                  *bool                                                                                    `path:"state/fast-flooding" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/fast-flooding" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	GracefulRestart               *NetworkInstance_Protocol_Isis_Global_GracefulRestart                                    `path:"graceful-restart" module:"openconfig-network-instance"`
+	HelloPadding                  E_IsisTypes_HelloPaddingType                                                             `path:"state/hello-padding" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/hello-padding" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	IidTlv                        *bool                                                                                    `path:"state/iid-tlv" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/iid-tlv" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Instance                      *string                                                                                  `path:"state/instance" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/instance" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	InterLevelPropagationPolicies *NetworkInstance_Protocol_Isis_Global_InterLevelPropagationPolicies                      `path:"inter-level-propagation-policies" module:"openconfig-network-instance"`
@@ -2166,6 +2167,22 @@ func (t *NetworkInstance_Protocol_Isis_Global) GetFastFlooding() bool {
 	return *t.FastFlooding
 }
 
+// GetHelloPadding retrieves the value of the leaf HelloPadding from the NetworkInstance_Protocol_Isis_Global
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if HelloPadding is set, it can
+// safely use t.GetHelloPadding() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.HelloPadding == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Global) GetHelloPadding() E_IsisTypes_HelloPaddingType {
+	if t == nil || t.HelloPadding == 0 {
+		return IsisTypes_HelloPaddingType_STRICT
+	}
+	return t.HelloPadding
+}
+
 // GetIidTlv retrieves the value of the leaf IidTlv from the NetworkInstance_Protocol_Isis_Global
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -2293,6 +2310,9 @@ func (t *NetworkInstance_Protocol_Isis_Global) PopulateDefaults() {
 	if t.FastFlooding == nil {
 		var v bool = true
 		t.FastFlooding = &v
+	}
+	if t.HelloPadding == 0 {
+		t.HelloPadding = IsisTypes_HelloPaddingType_STRICT
 	}
 	if t.IidTlv == nil {
 		var v bool = false
