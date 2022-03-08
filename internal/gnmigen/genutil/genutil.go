@@ -18,6 +18,7 @@ package genutil
 import (
 	"golang.org/x/net/context"
 	"fmt"
+	"io"
 	"reflect"
 	"sort"
 	"strings"
@@ -837,6 +838,13 @@ func receiveAll(sub gpb.GNMI_SubscribeClient, deletesExpected bool, mode gpb.Sub
 		var sync bool
 		data, sync, err = receive(sub, data, deletesExpected)
 		if err != nil {
+			if mode == gpb.SubscriptionList_ONCE && err == io.EOF {
+				// TODO: It is unclear whether "subscribe ONCE stream closed without sync_response"
+				// should be an error, so tolerate both scenarios.
+				// See https://github.com/openconfig/reference/pull/156
+				log.V(1).Infof("subscribe ONCE stream closed without sync_response.")
+				break
+			}
 			// DeadlineExceeded is expected when collections are complete.
 			if st, ok := status.FromError(err); ok && st.Code() == codes.DeadlineExceeded {
 				break

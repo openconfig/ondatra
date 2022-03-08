@@ -54,9 +54,9 @@ func (ix *ixATE) addPorts(top *opb.Topology) error {
 	sort.Strings(portList)
 	for _, port := range portList {
 		vport := &ixconfig.Vport{
-			Name:     ixconfig.String(fmt.Sprintf("%s/%s", ix.name, port)),
-			Location: ixconfig.String(fmt.Sprintf("%s;%s", ix.chassisHost, strings.ReplaceAll(port, "/", ";"))),
-			L1Config: &ixconfig.VportL1Config{},
+			Name:      ixconfig.String(fmt.Sprintf("%s/%s", ix.name, port)),
+			Location:  ixconfig.String(fmt.Sprintf("%s;%s", ix.chassisHost, strings.ReplaceAll(port, "/", ";"))),
+			L1Config:  &ixconfig.VportL1Config{},
 			Protocols: &ixconfig.VportProtocols{}, // Used as the target for traffic endpoints
 			ProtocolStack: &ixconfig.VportProtocolStack{
 				Options: &ixconfig.VportProtocolStackOptions{
@@ -203,56 +203,56 @@ func (ix *ixATE) addTopology(ifs []*opb.InterfaceConfig) {
 				atlasFourHundredGigLan(p.L1Config).EnableRsFecStats = ixconfig.Bool(false)
 				krakenFourHundredGigLan(p.L1Config).EnableRsFecStats = ixconfig.Bool(false)
 				novusHundredGigLan(p.L1Config).EnableRsFecStats = ixconfig.Bool(false)
-				uhdOneHundredGigLan(p.L1Config).EnableRsFecStats = ixconfig.Bool(false)
 			}
 		}
 		dg.Ethernet = append(dg.Ethernet, topoEth)
 		ix.intfs[ifc.GetName()] = &intf{
 			deviceGroup: dg,
 			link:        link,
+			hasVLAN:     enableVlan,
 		}
 	}
 	ix.cfg.Topology = append(ix.cfg.Topology, topo)
 }
 
-func aresOneFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportAresOneFourHundredGigLan {
+func aresOneFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigAresOneFourHundredGigLan {
 	if l1.AresOneFourHundredGigLan == nil {
-		l1.AresOneFourHundredGigLan = &ixconfig.VportAresOneFourHundredGigLan{}
+		l1.AresOneFourHundredGigLan = &ixconfig.VportL1ConfigAresOneFourHundredGigLan{}
 	}
 	return l1.AresOneFourHundredGigLan
 }
 
-func atlasFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportAtlasFourHundredGigLan {
+func atlasFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigAtlasFourHundredGigLan {
 	if l1.AtlasFourHundredGigLan == nil {
-		l1.AtlasFourHundredGigLan = &ixconfig.VportAtlasFourHundredGigLan{}
+		l1.AtlasFourHundredGigLan = &ixconfig.VportL1ConfigAtlasFourHundredGigLan{}
 	}
 	return l1.AtlasFourHundredGigLan
 }
 
-func krakenFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportKrakenFourHundredGigLan {
+func krakenFourHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigKrakenFourHundredGigLan {
 	if l1.KrakenFourHundredGigLan == nil {
-		l1.KrakenFourHundredGigLan = &ixconfig.VportKrakenFourHundredGigLan{}
+		l1.KrakenFourHundredGigLan = &ixconfig.VportL1ConfigKrakenFourHundredGigLan{}
 	}
 	return l1.KrakenFourHundredGigLan
 }
 
-func novusHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportNovusHundredGigLan {
+func novusHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigNovusHundredGigLan {
 	if l1.NovusHundredGigLan == nil {
-		l1.NovusHundredGigLan = &ixconfig.VportNovusHundredGigLan{}
+		l1.NovusHundredGigLan = &ixconfig.VportL1ConfigNovusHundredGigLan{}
 	}
 	return l1.NovusHundredGigLan
 }
 
-func novusTenGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportNovusTenGigLan {
+func novusTenGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigNovusTenGigLan {
 	if l1.NovusTenGigLan == nil {
-		l1.NovusTenGigLan = &ixconfig.VportNovusTenGigLan{}
+		l1.NovusTenGigLan = &ixconfig.VportL1ConfigNovusTenGigLan{}
 	}
 	return l1.NovusTenGigLan
 }
 
-func uhdOneHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportUhdOneHundredGigLan {
+func uhdOneHundredGigLan(l1 *ixconfig.VportL1Config) *ixconfig.VportL1ConfigUhdOneHundredGigLan {
 	if l1.UhdOneHundredGigLan == nil {
-		l1.UhdOneHundredGigLan = &ixconfig.VportUhdOneHundredGigLan{}
+		l1.UhdOneHundredGigLan = &ixconfig.VportL1ConfigUhdOneHundredGigLan{}
 	}
 	return l1.UhdOneHundredGigLan
 }

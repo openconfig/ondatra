@@ -36,16 +36,16 @@ func TestSetUintRangeField(t *testing.T) {
 	tests := []struct {
 		desc string
 		ints *opb.UIntRange
-		want *ixconfig.TrafficField
+		want *ixconfig.TrafficTrafficItemConfigElementStackField
 	}{{
 		desc: "default value",
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto: ixconfig.Bool(true),
 		},
 	}, {
 		desc: "single value",
 		ints: &opb.UIntRange{Min: 4, Max: 4, Step: 1, Count: 1},
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:        ixconfig.Bool(false),
 			ValueType:   ixconfig.String("singleValue"),
 			SingleValue: ixconfig.String("4"),
@@ -53,7 +53,7 @@ func TestSetUintRangeField(t *testing.T) {
 	}, {
 		desc: "nonrandom range",
 		ints: &opb.UIntRange{Min: 4, Max: 100, Step: 5, Count: 20},
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("increment"),
@@ -64,7 +64,7 @@ func TestSetUintRangeField(t *testing.T) {
 	}, {
 		desc: "nonrandom range, default step",
 		ints: &opb.UIntRange{Min: 1, Max: 10, Count: 5},
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("increment"),
@@ -75,7 +75,7 @@ func TestSetUintRangeField(t *testing.T) {
 	}, {
 		desc: "random range",
 		ints: &opb.UIntRange{Min: 4, Max: 100, Step: 5, Count: 20, Random: true},
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("repeatableRandomRange"),
@@ -88,7 +88,7 @@ func TestSetUintRangeField(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			field := &ixconfig.TrafficField{}
+			field := &ixconfig.TrafficTrafficItemConfigElementStackField{}
 			if err := setUintRangeField(field, test.ints); err != nil {
 				t.Fatalf("setUintRangeField(<field>, %v): unexpected error: %v", test.ints, err)
 			}
@@ -123,7 +123,7 @@ func TestSetUintRangeFieldErrors(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			if err := setUintRangeField(&ixconfig.TrafficField{}, test.ints); err == nil || !strings.Contains(err.Error(), test.wantErr) {
+			if err := setUintRangeField(&ixconfig.TrafficTrafficItemConfigElementStackField{}, test.ints); err == nil || !strings.Contains(err.Error(), test.wantErr) {
 				t.Errorf("setUintRangeField(<field>, %v): got error %v, want error %q", test.ints, err, test.wantErr)
 			}
 		})
@@ -135,12 +135,12 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc  string
 		addrs *opb.AddressRange
 		at    addrType
-		want  *ixconfig.TrafficField
+		want  *ixconfig.TrafficTrafficItemConfigElementStackField
 	}{{
 		desc:  "single MAC-48",
 		addrs: &opb.AddressRange{Min: "01:02:03:04:05:06", Max: "01:02:03:04:05:06", Step: "00:00:00:00:00:01", Count: 1},
 		at:    mac48AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:        ixconfig.Bool(false),
 			ValueType:   ixconfig.String("singleValue"),
 			SingleValue: ixconfig.String("01:02:03:04:05:06"),
@@ -149,7 +149,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "single IPv4",
 		addrs: &opb.AddressRange{Min: "1.2.3.4", Max: "1.2.3.4", Step: "0.0.0.1", Count: 1},
 		at:    ipv4AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:        ixconfig.Bool(false),
 			ValueType:   ixconfig.String("singleValue"),
 			SingleValue: ixconfig.String("1.2.3.4"),
@@ -158,7 +158,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "single IPv6",
 		addrs: &opb.AddressRange{Min: "1:2:3:4:5:6:7:8", Max: "1:2:3:4:5:6:7:8", Step: "::1", Count: 1},
 		at:    ipv6AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:        ixconfig.Bool(false),
 			ValueType:   ixconfig.String("singleValue"),
 			SingleValue: ixconfig.String("1:2:3:4:5:6:7:8"),
@@ -167,7 +167,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "nonrandom MAC-48",
 		addrs: &opb.AddressRange{Min: "00:00:00:00:00:01", Max: "00:00:00:00:01:00", Count: 20},
 		at:    mac48AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("increment"),
@@ -179,7 +179,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "nonrandom IPv4",
 		addrs: &opb.AddressRange{Min: "0.0.0.1", Max: "0.0.1.0", Count: 20},
 		at:    ipv4AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("increment"),
@@ -191,7 +191,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "nonrandom IPv6",
 		addrs: &opb.AddressRange{Min: "0:0:0:0:0:0:0:1", Max: "0:0:0:0:0:0:1:0", Count: 20},
 		at:    ipv6AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("increment"),
@@ -203,7 +203,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "random MAC-48",
 		addrs: &opb.AddressRange{Min: "01:02:03:04:05:06", Max: "02:03:04:05:06:07", Count: 20, Random: true},
 		at:    mac48AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("repeatableRandomRange"),
@@ -217,7 +217,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "random IPv4",
 		addrs: &opb.AddressRange{Min: "1.2.3.4", Max: "2.3.4.5", Count: 20, Random: true},
 		at:    ipv4AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("repeatableRandomRange"),
@@ -231,7 +231,7 @@ func TestSetAddrRangeField(t *testing.T) {
 		desc:  "random IPv6",
 		addrs: &opb.AddressRange{Min: "1:2:3:4:5:6:7:8", Max: "2:3:4:5:6:7:8:9", Count: 20, Random: true},
 		at:    ipv6AddrType,
-		want: &ixconfig.TrafficField{
+		want: &ixconfig.TrafficTrafficItemConfigElementStackField{
 			Auto:       ixconfig.Bool(false),
 			FullMesh:   ixconfig.Bool(false),
 			ValueType:  ixconfig.String("repeatableRandomRange"),
@@ -244,7 +244,7 @@ func TestSetAddrRangeField(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			field := &ixconfig.TrafficField{}
+			field := &ixconfig.TrafficTrafficItemConfigElementStackField{}
 			if err := setAddrRangeField(field, test.at, test.addrs); err != nil {
 				t.Fatalf("setAddrRangeField(<field>, %q, %v): unexpected error: %v", test.at, test.addrs, err)
 			}
@@ -358,7 +358,7 @@ func TestAddrRangeToTrafficValueErrors(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			if err := setAddrRangeField(&ixconfig.TrafficField{}, test.at, test.addrs); err == nil || !strings.Contains(err.Error(), test.wantErr) {
+			if err := setAddrRangeField(&ixconfig.TrafficTrafficItemConfigElementStackField{}, test.at, test.addrs); err == nil || !strings.Contains(err.Error(), test.wantErr) {
 				t.Errorf("setAddrRangeField(<field>, %q, %v): got error %v, want error %q", test.addrs, test.at, err, test.wantErr)
 			}
 		})

@@ -12,201 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedQos_SchedulerPolicy_Scheduler_Output is a *Qos_SchedulerPolicy_Scheduler_Output with a corresponding timestamp.
 type QualifiedQos_SchedulerPolicy_Scheduler_Output struct {
 	*genutil.Metadata
@@ -8523,6 +8328,266 @@ type E_EvpnTypes_EsiTypeWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_EvpnTypes_EsiTypeWatcher) Await(t testing.TB) (*QualifiedE_EvpnTypes_EsiType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_ExplicitRouteObject_Type is a E_ExplicitRouteObject_Type with a corresponding timestamp.
+type QualifiedE_ExplicitRouteObject_Type struct {
+	*genutil.Metadata
+	val     E_ExplicitRouteObject_Type // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_ExplicitRouteObject_Type) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_ExplicitRouteObject_Type sample, erroring out if not present.
+func (q *QualifiedE_ExplicitRouteObject_Type) Val(t testing.TB) E_ExplicitRouteObject_Type {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_ExplicitRouteObject_Type sample.
+func (q *QualifiedE_ExplicitRouteObject_Type) SetVal(v E_ExplicitRouteObject_Type) *QualifiedE_ExplicitRouteObject_Type {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_ExplicitRouteObject_Type) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_ExplicitRouteObject_Type is a telemetry Collection whose Await method returns a slice of E_ExplicitRouteObject_Type samples.
+type CollectionE_ExplicitRouteObject_Type struct {
+	W    *E_ExplicitRouteObject_TypeWatcher
+	Data []*QualifiedE_ExplicitRouteObject_Type
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_ExplicitRouteObject_Type) Await(t testing.TB) []*QualifiedE_ExplicitRouteObject_Type {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_ExplicitRouteObject_TypeWatcher observes a stream of E_ExplicitRouteObject_Type samples.
+type E_ExplicitRouteObject_TypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_ExplicitRouteObject_Type
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_ExplicitRouteObject_TypeWatcher) Await(t testing.TB) (*QualifiedE_ExplicitRouteObject_Type, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_ExtendedPrefix_AddressFamily is a E_ExtendedPrefix_AddressFamily with a corresponding timestamp.
+type QualifiedE_ExtendedPrefix_AddressFamily struct {
+	*genutil.Metadata
+	val     E_ExtendedPrefix_AddressFamily // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_ExtendedPrefix_AddressFamily) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_ExtendedPrefix_AddressFamily sample, erroring out if not present.
+func (q *QualifiedE_ExtendedPrefix_AddressFamily) Val(t testing.TB) E_ExtendedPrefix_AddressFamily {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_ExtendedPrefix_AddressFamily sample.
+func (q *QualifiedE_ExtendedPrefix_AddressFamily) SetVal(v E_ExtendedPrefix_AddressFamily) *QualifiedE_ExtendedPrefix_AddressFamily {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_ExtendedPrefix_AddressFamily) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_ExtendedPrefix_AddressFamily is a telemetry Collection whose Await method returns a slice of E_ExtendedPrefix_AddressFamily samples.
+type CollectionE_ExtendedPrefix_AddressFamily struct {
+	W    *E_ExtendedPrefix_AddressFamilyWatcher
+	Data []*QualifiedE_ExtendedPrefix_AddressFamily
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_ExtendedPrefix_AddressFamily) Await(t testing.TB) []*QualifiedE_ExtendedPrefix_AddressFamily {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_ExtendedPrefix_AddressFamilyWatcher observes a stream of E_ExtendedPrefix_AddressFamily samples.
+type E_ExtendedPrefix_AddressFamilyWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_ExtendedPrefix_AddressFamily
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_ExtendedPrefix_AddressFamilyWatcher) Await(t testing.TB) (*QualifiedE_ExtendedPrefix_AddressFamily, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_ExtendedPrefix_RouteType is a E_ExtendedPrefix_RouteType with a corresponding timestamp.
+type QualifiedE_ExtendedPrefix_RouteType struct {
+	*genutil.Metadata
+	val     E_ExtendedPrefix_RouteType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_ExtendedPrefix_RouteType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_ExtendedPrefix_RouteType sample, erroring out if not present.
+func (q *QualifiedE_ExtendedPrefix_RouteType) Val(t testing.TB) E_ExtendedPrefix_RouteType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_ExtendedPrefix_RouteType sample.
+func (q *QualifiedE_ExtendedPrefix_RouteType) SetVal(v E_ExtendedPrefix_RouteType) *QualifiedE_ExtendedPrefix_RouteType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_ExtendedPrefix_RouteType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_ExtendedPrefix_RouteType is a telemetry Collection whose Await method returns a slice of E_ExtendedPrefix_RouteType samples.
+type CollectionE_ExtendedPrefix_RouteType struct {
+	W    *E_ExtendedPrefix_RouteTypeWatcher
+	Data []*QualifiedE_ExtendedPrefix_RouteType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_ExtendedPrefix_RouteType) Await(t testing.TB) []*QualifiedE_ExtendedPrefix_RouteType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_ExtendedPrefix_RouteTypeWatcher observes a stream of E_ExtendedPrefix_RouteType samples.
+type E_ExtendedPrefix_RouteTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_ExtendedPrefix_RouteType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_ExtendedPrefix_RouteTypeWatcher) Await(t testing.TB) (*QualifiedE_ExtendedPrefix_RouteType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Global_SummaryRouteCostMode is a E_Global_SummaryRouteCostMode with a corresponding timestamp.
+type QualifiedE_Global_SummaryRouteCostMode struct {
+	*genutil.Metadata
+	val     E_Global_SummaryRouteCostMode // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Global_SummaryRouteCostMode) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Global_SummaryRouteCostMode sample, erroring out if not present.
+func (q *QualifiedE_Global_SummaryRouteCostMode) Val(t testing.TB) E_Global_SummaryRouteCostMode {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Global_SummaryRouteCostMode sample.
+func (q *QualifiedE_Global_SummaryRouteCostMode) SetVal(v E_Global_SummaryRouteCostMode) *QualifiedE_Global_SummaryRouteCostMode {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Global_SummaryRouteCostMode) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Global_SummaryRouteCostMode is a telemetry Collection whose Await method returns a slice of E_Global_SummaryRouteCostMode samples.
+type CollectionE_Global_SummaryRouteCostMode struct {
+	W    *E_Global_SummaryRouteCostModeWatcher
+	Data []*QualifiedE_Global_SummaryRouteCostMode
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Global_SummaryRouteCostMode) Await(t testing.TB) []*QualifiedE_Global_SummaryRouteCostMode {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Global_SummaryRouteCostModeWatcher observes a stream of E_Global_SummaryRouteCostMode samples.
+type E_Global_SummaryRouteCostModeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Global_SummaryRouteCostMode
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Global_SummaryRouteCostModeWatcher) Await(t testing.TB) (*QualifiedE_Global_SummaryRouteCostMode, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

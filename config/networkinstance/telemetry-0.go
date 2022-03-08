@@ -22576,3 +22576,94 @@ func (n *NetworkInstance_Mpls_Lsps_StaticLspPath) BatchUpdate(t testing.TB, b *c
 	t.Helper()
 	b.BatchUpdate(t, n, val)
 }
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_StaticLsp_Egress", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_StaticLsp_Egress", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Replace(t testing.TB, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Update(t testing.TB, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
+func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}

@@ -29,9 +29,9 @@ import (
 	log "github.com/golang/glog"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/encoding/prototext"
+	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
-	"github.com/openconfig/ondatra/binding/ixweb"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -1196,12 +1196,12 @@ func TestUpdateFlows(t *testing.T) {
 			Traffic: &ixconfig.Traffic{
 				TrafficItem: []*ixconfig.TrafficTrafficItem{{
 					Xpath: tiXP,
-					ConfigElement: []*ixconfig.TrafficConfigElement{{
-						FrameSize: &ixconfig.TrafficFrameSize{
+					ConfigElement: []*ixconfig.TrafficTrafficItemConfigElement{{
+						FrameSize: &ixconfig.TrafficTrafficItemConfigElementFrameSize{
 							Type_:     ixconfig.String("fixed"),
 							FixedSize: ixconfig.NumberInt(1000),
 						},
-						FrameRate: &ixconfig.TrafficFrameRate{
+						FrameRate: &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 							Type_: ixconfig.String("percentLineRate"),
 							Rate:  ixconfig.NumberUint32(20),
 						},

@@ -5,7 +5,6 @@
          "name": "ipv6FlowLabels1",
          "routeMesh": "fullMesh",
          "trafficType": "ipv6",
-         "appLibProfile": null,
          "configElement": [
             {
                "frameRate": {

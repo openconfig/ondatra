@@ -295,6 +295,7 @@ func ingressTrackingFromFlowStats(flow *telemetry.Flow, row *flowRow) *telemetry
 		row.dstIPv4,
 		row.srcIPv6,
 		row.dstIPv6,
+		vlanIDFromUint(row.vlanID),
 	)
 }
 
@@ -320,6 +321,13 @@ func mplsLabelFromUint(label *uint64) telemetry.Flow_IngressTracking_MplsLabel_U
 		return telemetry.MplsTypes_MplsLabel_Enum_UNSET
 	}
 	return telemetry.UnionUint32(labelNum)
+}
+
+func vlanIDFromUint(id *uint64) uint16 {
+	if id == nil {
+		return 0
+	}
+	return uint16(*id)
 }
 
 // Strips off the Ixia name from the port name.

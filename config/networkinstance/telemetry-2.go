@@ -22500,3 +22500,94 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath(t tes
 	}
 	return qv
 }
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}

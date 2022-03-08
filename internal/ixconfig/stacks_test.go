@@ -22,7 +22,7 @@ import (
 func TestEthernetStack(t *testing.T) {
 	stack := NewEthernetStack(0)
 	wantStackAlias := "ethernet-1"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"ethernet.header.sourceAddress-2":      stack.SourceAddress(),
 		"ethernet.header.destinationAddress-1": stack.DestinationAddress(),
 	}
@@ -43,7 +43,7 @@ func TestEthernetStack(t *testing.T) {
 func TestVlanStack(t *testing.T) {
 	stack := NewVlanStack(1)
 	wantStackAlias := "vlan-2"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"vlan.header.vlanTag.vlanID-3": stack.VlanTagVlanID(),
 	}
 	if !strings.Contains(stack.Xpath.String(), wantStackAlias) {
@@ -63,7 +63,7 @@ func TestVlanStack(t *testing.T) {
 func TestGreStack(t *testing.T) {
 	stack := NewGreStack(1)
 	wantStackAlias := "gre-2"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"gre.header.keyHolder.key-11":              stack.KeyHolderKey(),
 		"gre.header.sequenceHolder.sequenceNum-13": stack.SequenceHolderSequenceNum(),
 	}
@@ -84,7 +84,7 @@ func TestGreStack(t *testing.T) {
 func TestIpv4Stack(t *testing.T) {
 	stack := NewIpv4Stack(2)
 	wantStackAlias := "ipv4-3"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"ipv4.header.priority.raw-3":    stack.PriorityRaw(),
 		"ipv4.header.flags.fragment-21": stack.FlagsFragment(),
 		"ipv4.header.ttl-24":            stack.Ttl(),
@@ -108,7 +108,7 @@ func TestIpv4Stack(t *testing.T) {
 func TestIpv6Stack(t *testing.T) {
 	stack := NewIpv6Stack(2)
 	wantStackAlias := "ipv6-3"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"ipv6.header.versionTrafficClassFlowLabel.trafficClass-2": stack.VersionTrafficClassFlowLabelTrafficClass(),
 		"ipv6.header.versionTrafficClassFlowLabel.flowLabel-3":    stack.VersionTrafficClassFlowLabelFlowLabel(),
 		"ipv6.header.hopLimit-6":                                  stack.HopLimit(),
@@ -132,7 +132,7 @@ func TestIpv6Stack(t *testing.T) {
 func TestMplsStack(t *testing.T) {
 	stack := NewMplsStack(1)
 	wantStackAlias := "mpls-2"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"mpls.label.value-1":        stack.Value(),
 		"mpls.label.experimental-2": stack.Experimental(),
 		"mpls.label.ttl-4":          stack.Ttl(),
@@ -154,7 +154,7 @@ func TestMplsStack(t *testing.T) {
 func TestTcpStack(t *testing.T) {
 	stack := NewTcpStack(3)
 	wantStackAlias := "tcp-4"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"tcp.header.srcPort-1":        stack.SrcPort(),
 		"tcp.header.dstPort-2":        stack.DstPort(),
 		"tcp.header.sequenceNumber-3": stack.SequenceNumber(),
@@ -176,7 +176,7 @@ func TestTcpStack(t *testing.T) {
 func TestUdpStack(t *testing.T) {
 	stack := NewUdpStack(3)
 	wantStackAlias := "udp-4"
-	wantFieldAliases := map[string]*TrafficField{
+	wantFieldAliases := map[string]*TrafficTrafficItemConfigElementStackField{
 		"udp.header.srcPort-1": stack.SrcPort(),
 		"udp.header.dstPort-2": stack.DstPort(),
 	}

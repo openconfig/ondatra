@@ -16,6 +16,465 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Lookup(t testing.TB) *oc.QualifiedE_IsisTypes_LevelType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Get(t testing.TB) oc.E_IsisTypes_LevelType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisTypes_LevelType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_IsisTypes_LevelType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Get(t testing.TB) []oc.E_IsisTypes_LevelType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_IsisTypes_LevelType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_LevelType {
+	t.Helper()
+	c := &oc.CollectionE_IsisTypes_LevelType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_LevelType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
+	t.Helper()
+	w := &oc.E_IsisTypes_LevelTypeWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IsisTypes_LevelType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisTypes_LevelType) *oc.QualifiedE_IsisTypes_LevelType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisTypes_LevelType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisTypes_LevelType {
+	t.Helper()
+	c := &oc.CollectionE_IsisTypes_LevelType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisTypes_LevelType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisTypes_LevelType) bool) *oc.E_IsisTypes_LevelTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath extracts the value of the leaf AdjacencyType from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisTypes_LevelType.
+func convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AdjacencyTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency) *oc.QualifiedE_IsisTypes_LevelType {
+	t.Helper()
+	qv := &oc.QualifiedE_IsisTypes_LevelType{
+		Metadata: md,
+	}
+	val := parent.AdjacencyType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Get(t testing.TB) []string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedStringSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPathAny) Get(t testing.TB) [][]string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Await(t testing.TB, timeout time.Duration, val []string) *oc.QualifiedStringSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedStringSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath extracts the value of the leaf AreaAddress from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency
+// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
+func convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_AreaAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency) *oc.QualifiedStringSlice {
+	t.Helper()
+	qv := &oc.QualifiedStringSlice{
+		Metadata: md,
+	}
+	val := parent.AreaAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Interface_Level_Adjacency", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/dis-system-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath extracts the value of the leaf DisSystemId from its parent oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Isis_Interface_Level_Adjacency_DisSystemIdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Interface_Level_Adjacency) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.DisSystemId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/local-extended-circuit-id with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Adjacency_LocalExtendedCircuitIdPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -43018,463 +43477,4 @@ func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4SrlgPathAny) Watch(t te
 func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4SrlgPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Lookup(t testing.TB) *oc.QualifiedE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Get(t testing.TB) []oc.E_Ipv4Srlg_Flags {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPathAny) Lookup(t testing.TB) []*oc.QualifiedE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_Ipv4Srlg_FlagsSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPathAny) Get(t testing.TB) [][]oc.E_Ipv4Srlg_Flags {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]oc.E_Ipv4Srlg_Flags
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	c := &oc.CollectionE_Ipv4Srlg_FlagsSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool) *oc.E_Ipv4Srlg_FlagsSliceWatcher {
-	t.Helper()
-	w := &oc.E_Ipv4Srlg_FlagsSliceWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Ipv4Srlg_FlagsSlice)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool) *oc.E_Ipv4Srlg_FlagsSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Await(t testing.TB, timeout time.Duration, val []oc.E_Ipv4Srlg_Flags) *oc.QualifiedE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	c := &oc.CollectionE_Ipv4Srlg_FlagsSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Ipv4Srlg_FlagsSlice) bool) *oc.E_Ipv4Srlg_FlagsSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/flags to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath extracts the value of the leaf Flags from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Ipv4Srlg_FlagsSlice.
-func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_FlagsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg) *oc.QualifiedE_Ipv4Srlg_FlagsSlice {
-	t.Helper()
-	qv := &oc.QualifiedE_Ipv4Srlg_FlagsSlice{
-		Metadata: md,
-	}
-	val := parent.Flags
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
-	t.Helper()
-	c := &oc.CollectionUint32{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
-	t.Helper()
-	w := &oc.Uint32Watcher{}
-	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint32)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
-	t.Helper()
-	c := &oc.CollectionUint32{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/instance-number to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath extracts the value of the leaf InstanceNumber from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_InstanceNumberPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.InstanceNumber
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/ipv4-srlgs/ipv4-srlg/state/ipv4-interface-address to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath extracts the value of the leaf Ipv4InterfaceAddress from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg_Ipv4InterfaceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4Srlg) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Ipv4InterfaceAddress
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
 }

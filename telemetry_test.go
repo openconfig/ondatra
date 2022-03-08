@@ -363,6 +363,25 @@ func TestGet(t *testing.T) {
 				Path:      statusPath,
 			}}).SetVal(telemetry.Interface_OperStatus_UP),
 	}, {
+		desc: "no sync response",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Update: []*gpb.Update{{
+						Path: statusPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_StringVal{StringVal: "UP"}},
+					}},
+					Timestamp: 100,
+				})
+		},
+		inPortKey:            staticPortName,
+		wantSubscriptionPath: statusPath,
+		wantQualified: (&telemetry.QualifiedE_Interface_OperStatus{
+			Metadata: &genutil.Metadata{
+				Timestamp: time.Unix(0, 100),
+				Path:      statusPath,
+			}}).SetVal(telemetry.Interface_OperStatus_UP),
+	}, {
 		desc: "one notification with interpolation",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(

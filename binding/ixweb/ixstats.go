@@ -31,7 +31,7 @@ import (
 )
 
 const (
-	viewReadyAttempts = 12
+	viewReadyAttempts = 30
 
 	// EgressStatsCaption is the name of the egress statistics view.
 	EgressStatsCaption = "EgressStatView"

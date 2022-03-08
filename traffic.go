@@ -276,6 +276,15 @@ func (f *Flow) WithIngressTrackingByDstIPV6(enable bool) *Flow {
 	return f
 }
 
+// WithIngressTrackingByVLANID enables ingress tracking by VLAN ID.
+func (f *Flow) WithIngressTrackingByVLANID(enable bool) *Flow {
+	if f.pb.IngressTrackingFilters == nil {
+		f.pb.IngressTrackingFilters = &opb.Flow_IngressTrackingFilters{}
+	}
+	f.pb.IngressTrackingFilters.VlanId = enable
+	return f
+}
+
 // WithFrameSize sets the frame size for this flow to a fixed value.
 // To generate a range of frame sizes, use FrameSizeRange() instead.
 func (f *Flow) WithFrameSize(n uint32) *Flow {

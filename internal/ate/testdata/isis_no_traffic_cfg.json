@@ -205,6 +205,10 @@
             {
               "ipv4PrefixPools": [
                 {
+                  "connector": {
+                    "connectedTo": "/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1]",
+                    "xpath": "/topology[1]/deviceGroup[1]/networkGroup[1]/ipv4PrefixPools[1]/connector"
+                  },
                   "isisL3RouteProperty": [
                     {
                       "algorithm": {
@@ -317,6 +321,10 @@
             {
               "ipv4PrefixPools": [
                 {
+                  "connector": {
+                    "connectedTo": "/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1]",
+                    "xpath": "/topology[1]/deviceGroup[1]/networkGroup[2]/ipv4PrefixPools[1]/connector"
+                  },
                   "isisL3RouteProperty": [
                     {
                       "algorithm": {
@@ -429,6 +437,10 @@
             {
               "ipv6PrefixPools": [
                 {
+                  "connector": {
+                    "connectedTo": "/topology[1]/deviceGroup[1]/ethernet[1]/isisL3[1]",
+                    "xpath": "/topology[1]/deviceGroup[1]/networkGroup[3]/ipv6PrefixPools[1]/connector"
+                  },
                   "isisL3RouteProperty": [
                     {
                       "algorithm": {

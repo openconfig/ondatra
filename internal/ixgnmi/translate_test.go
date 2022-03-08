@@ -513,12 +513,13 @@ func TestTranslateFlowStats(t *testing.T) {
 			"IPv6 :Source Address":      "1::",
 			"IPv6 :Destination Address": "EE::",
 			"IPv4 :Precedence":          "3",
+			"VLAN:VLAN-ID":              "1",
 		}},
 		itFlows: []string{"traffic1"},
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
-			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::")
+			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
 			it.Counters = &telemetry.Flow_IngressTracking_Counters{
 				InOctets: ygot.Uint64(100),
 				InPkts:   ygot.Uint64(10),
@@ -627,6 +628,7 @@ func TestTranslateEgressStats(t *testing.T) {
 			"IPv6 :Source Address":      "1::",
 			"IPv6 :Destination Address": "EE::",
 			"IPv4 :Precedence":          "3",
+			"VLAN:VLAN-ID":              "1",
 		}, {
 			"Egress Tracking": "1",
 			"Loss %":          "2.1",
@@ -642,7 +644,7 @@ func TestTranslateEgressStats(t *testing.T) {
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
-			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::")
+			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
 			it.Filter = ygot.String("MyFilter")
 			et := it.GetOrCreateEgressTracking("1")
 			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{

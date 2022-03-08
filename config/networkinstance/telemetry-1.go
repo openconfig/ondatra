@@ -15,97 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_StaticLsp_Egress", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_StaticLsp_Egress", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Replace(t testing.TB, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) Update(t testing.TB, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress in the given batch object.
-func (n *NetworkInstance_Mpls_Lsps_StaticLsp_EgressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Mpls_Lsps_StaticLsp_Egress) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/config/incoming-label with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Mpls_Lsps_StaticLsp_Egress_IncomingLabelPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_StaticLsp_Egress_IncomingLabel_Union {
@@ -12509,6 +12418,212 @@ func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePa
 		Metadata: md,
 	}
 	val := parent.DecapsulateGre
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDecapsulateGue())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-gue in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath extracts the value of the leaf DecapsulateGue from its parent oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DecapsulateGue
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDecapsulateMplsInUdp())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/decapsulate-mpls-in-udp in the given batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath extracts the value of the leaf DecapsulateMplsInUdp from its parent oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DecapsulateMplsInUdp
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

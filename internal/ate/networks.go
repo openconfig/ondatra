@@ -19,8 +19,8 @@ import (
 	"net"
 	"strings"
 
-	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/binding/usererr"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -52,11 +52,14 @@ func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 	intf.netToRouteTables = make(map[string]*routeTables)
 	dg := intf.deviceGroup
 
-	hasIsisCfg := false
+	var isisL3 *ixconfig.TopologyIsisL3
+	if isisL3s := intf.deviceGroup.Ethernet[0].IsisL3; len(isisL3s) > 0 {
+		isisL3 = isisL3s[0]
+	}
 	hasBgpCfg := false
 	for _, netCfg := range ifc.GetNetworks() {
-		if netCfg.GetIsis() != nil {
-			hasIsisCfg = true
+		if netCfg.GetIsis() != nil && isisL3 == nil {
+			return usererr.New("cannot add IS-IS attributes for network group %q without IS-IS configured", netCfg.GetName())
 		}
 		if netCfg.GetBgpAttributes() != nil {
 			hasBgpCfg = true
@@ -93,12 +96,12 @@ func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 				return err
 			}
 		} else {
-			v4Pools, err = ipv4Pools(netCfg, hasIsisCfg, hasBgpCfg)
+			v4Pools, err = ipv4Pools(netCfg, isisL3, hasBgpCfg)
 			if err != nil {
 				return err
 			}
 
-			v6Pools, err = ipv6Pools(netCfg, hasIsisCfg, hasBgpCfg)
+			v6Pools, err = ipv6Pools(netCfg, isisL3, hasBgpCfg)
 			if err != nil {
 				return err
 			}
@@ -404,14 +407,13 @@ func bgpV6RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpV6IpRoutePrope
 	return brp, nil
 }
 
-func ipv4Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.TopologyIpv4PrefixPools, error) {
+func ipv4Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg bool) ([]*ixconfig.TopologyIpv4PrefixPools, error) {
 	isis := netCfg.GetIsis()
 	bgp := netCfg.GetBgpAttributes()
 	ipv4 := netCfg.GetIpv4()
 	if ipv4 == nil {
 		return nil, nil
 	}
-
 	if ipv4.GetAddressCidr() == "" {
 		return nil, usererr.New("need address defined for IP V4 network group %q", netCfg.GetName())
 	}
@@ -421,6 +423,11 @@ func ipv4Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 	}
 	mask, _ := netw.Mask.Size()
 
+	if isis != nil && bgp != nil {
+		return nil, usererr.New("cannot set both IS-IS and BGP attributes for IPv4 network group %q (use multiple network groups if needed)", netCfg.GetName())
+	}
+
+	var connector *ixconfig.TopologyConnector
 	var irps []*ixconfig.TopologyIsisL3RouteProperty
 	if isis != nil {
 		irp, err := isisRouteProp(isis)
@@ -428,8 +435,10 @@ func ipv4Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 			return nil, err
 		}
 		irps = []*ixconfig.TopologyIsisL3RouteProperty{irp}
-	} else if hasIsisCfg {
-		// IS-IS route config needs to be present if configured on _any_ network for this interface.
+		connector = &ixconfig.TopologyConnector{}
+		connector.SetConnectedToRef(isisL3)
+	} else if isisL3 != nil {
+		// IS-IS route config needs to be present if configured on this interface.
 		// Otherwise, Ixnetwork will autocreate an active config.
 		irps = []*ixconfig.TopologyIsisL3RouteProperty{{
 			Name:   ixconfig.String(fmt.Sprintf("%s IS-IS Inactive", netCfg.GetName())),
@@ -454,6 +463,7 @@ func ipv4Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 	}
 
 	return []*ixconfig.TopologyIpv4PrefixPools{{
+		Connector:            connector,
 		NetworkAddress:       ixconfig.MultivalueStr(ip.String()),
 		PrefixLength:         ixconfig.MultivalueUint32(uint32(mask)),
 		NumberOfAddressesAsy: ixconfig.MultivalueUint32(ipv4.GetCount()),
@@ -462,7 +472,7 @@ func ipv4Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 	}}, nil
 }
 
-func ipv6Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.TopologyIpv6PrefixPools, error) {
+func ipv6Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg bool) ([]*ixconfig.TopologyIpv6PrefixPools, error) {
 	isis := netCfg.GetIsis()
 	bgp := netCfg.GetBgpAttributes()
 	ipv6 := netCfg.GetIpv6()
@@ -478,6 +488,11 @@ func ipv6Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 	}
 	mask, _ := netw.Mask.Size()
 
+	if isis != nil && bgp != nil {
+		return nil, usererr.New("cannot set both IS-IS and BGP attributes for IPv6 network group %q (use multiple network groups if needed)", netCfg.GetName())
+	}
+
+	var connector *ixconfig.TopologyConnector
 	var irps []*ixconfig.TopologyIsisL3RouteProperty
 	if isis != nil {
 		irp, err := isisRouteProp(isis)
@@ -485,8 +500,10 @@ func ipv6Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 			return nil, err
 		}
 		irps = []*ixconfig.TopologyIsisL3RouteProperty{irp}
-	} else if hasIsisCfg {
-		// IS-IS route config needs to be present if configured on _any_ network for this interface.
+		connector = &ixconfig.TopologyConnector{}
+		connector.SetConnectedToRef(isisL3)
+	} else if isisL3 != nil {
+		// IS-IS route config needs to be present if configured on this interface.
 		// Otherwise, Ixnetwork will autocreate an active config.
 		irps = []*ixconfig.TopologyIsisL3RouteProperty{{
 			Name:   ixconfig.String(fmt.Sprintf("%s IS-IS Inactive", netCfg.GetName())),
@@ -511,6 +528,7 @@ func ipv6Pools(netCfg *opb.Network, hasIsisCfg, hasBgpCfg bool) ([]*ixconfig.Top
 	}
 
 	return []*ixconfig.TopologyIpv6PrefixPools{{
+		Connector:            connector,
 		NetworkAddress:       ixconfig.MultivalueStr(ip.String()),
 		PrefixLength:         ixconfig.MultivalueUint32(uint32(mask)),
 		NumberOfAddressesAsy: ixconfig.MultivalueUint32(ipv6.GetCount()),

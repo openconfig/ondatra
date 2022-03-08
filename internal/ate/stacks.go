@@ -24,16 +24,16 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-func headerStacks(hdr *opb.Header, idx int) ([]*ixconfig.TrafficStack, error) {
+func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	switch v := hdr.Type.(type) {
 	case *opb.Header_Eth:
 		s, err := ethStack(v.Eth, idx)
 		if err != nil {
 			return nil, err
 		}
-		stacks := []*ixconfig.TrafficStack{s}
-		if v.Eth.GetVlanId() != 0 {
-			s, err := vlanStack(v.Eth.GetVlanId(), idx)
+		stacks := []*ixconfig.TrafficTrafficItemConfigElementStack{s}
+		if hasSrcVLAN || v.Eth.GetVlanId() != 0 {
+			s, err := vlanStack(v.Eth.GetVlanId(), idx+1)
 			if err != nil {
 				return nil, err
 			}
@@ -45,79 +45,79 @@ func headerStacks(hdr *opb.Header, idx int) ([]*ixconfig.TrafficStack, error) {
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Ipv4:
 		s, err := ipv4Stack(v.Ipv4, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Ipv6:
 		s, err := ipv6Stack(v.Ipv6, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Mpls:
 		s, err := mplsStack(v.Mpls, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Tcp:
 		s, err := tcpStack(v.Tcp, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Udp:
 		s, err := udpStack(v.Udp, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Http:
 		s, err := httpStack(v.Http, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Icmp:
 		s, err := icmpStack(v.Icmp, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Ospf:
 		s, err := ospfStack(v.Ospf, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Rsvp:
 		s, err := rsvpStack(v.Rsvp, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Pim:
 		s, err := pimStack(v.Pim, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	case *opb.Header_Ldp:
 		s, err := ldpStack(v.Ldp, idx)
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficStack{s}, nil
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized header type: %v", hdr)
 	}
 }
 
-func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficStack, error) {
+func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	if eth.GetBadCrc() && idx != 0 {
 		return nil, errors.Errorf("can only set a bad CRC on the initial ethernet header: %v", eth)
 	}
@@ -132,23 +132,25 @@ func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficStack, error) 
 			return nil, errors.Wrap(err, "could not set destination MAC address")
 		}
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func vlanStack(vlanID uint32, idx int) (*ixconfig.TrafficStack, error) {
+func vlanStack(vlanID uint32, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewVlanStack(idx)
-	setSingleValue(stack.VlanTagVlanID(), uintToStr(vlanID))
-	return stack.TrafficStack(), nil
+	if vlanID > 0 {
+		setSingleValue(stack.VlanTagVlanID(), uintToStr(vlanID))
+	}
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func greStack(gre *opb.GreHeader, idx int) (*ixconfig.TrafficStack, error) {
+func greStack(gre *opb.GreHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewGreStack(idx)
 	setSingleValue(stack.KeyHolderKey(), uintToStr(gre.GetKey()))
 	setSingleValue(stack.SequenceHolderSequenceNum(), uintToStr(gre.GetSeq()))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficStack, error) {
+func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewIpv4Stack(idx)
 	ds := (ipv4.GetDscp() << 2) | ipv4.GetEcn()
 	tc := stack.PriorityRaw()
@@ -173,10 +175,10 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficStack, error) {
 			return nil, errors.Wrap(err, "could not set IPv4 destination address")
 		}
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficStack, error) {
+func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewIpv6Stack(idx)
 	ds := (ipv6.GetDscp() << 2) | ipv6.GetEcn()
 	tc := stack.VersionTrafficClassFlowLabelTrafficClass()
@@ -199,20 +201,20 @@ func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficStack, error) {
 			return nil, errors.Wrap(err, "could not set IPv6 destination address")
 		}
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func mplsStack(mpls *opb.MplsHeader, idx int) (*ixconfig.TrafficStack, error) {
+func mplsStack(mpls *opb.MplsHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewMplsStack(idx)
 	if err := setUintRangeField(stack.Value(), mpls.GetLabel()); err != nil {
 		return nil, errors.Wrap(err, "could not set MPLS label")
 	}
 	setSingleValue(stack.Experimental(), uintToStr(mpls.GetExp()))
 	setSingleValue(stack.Ttl(), uintToStr(mpls.GetTtl()))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func tcpStack(tcp *opb.TcpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func tcpStack(tcp *opb.TcpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewTcpStack(idx)
 	if tcp.GetSrcPort() != nil {
 		if err := setUintRangeField(stack.SrcPort(), tcp.GetSrcPort()); err != nil {
@@ -225,10 +227,10 @@ func tcpStack(tcp *opb.TcpHeader, idx int) (*ixconfig.TrafficStack, error) {
 		}
 	}
 	setSingleValue(stack.SequenceNumber(), uintToStr(tcp.GetSeq()))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func udpStack(udp *opb.UdpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func udpStack(udp *opb.UdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewUdpStack(idx)
 	if udp.GetSrcPort() != nil {
 		if err := setUintRangeField(stack.SrcPort(), udp.GetSrcPort()); err != nil {
@@ -240,14 +242,14 @@ func udpStack(udp *opb.UdpHeader, idx int) (*ixconfig.TrafficStack, error) {
 			return nil, errors.Wrap(err, "could not set UDP destination port")
 		}
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func httpStack(http *opb.HttpHeader, idx int) (*ixconfig.TrafficStack, error) {
-	return ixconfig.NewHTTP_GETStack(idx).TrafficStack(), nil
+func httpStack(http *opb.HttpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	return ixconfig.NewHTTP_GETStack(idx).TrafficTrafficItemConfigElementStack(), nil
 }
 
-func icmpStack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func icmpStack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	switch icmp.Type.(type) {
 	case *opb.IcmpHeader_DestinationUnreachable_,
 		*opb.IcmpHeader_RedirectMessage_,
@@ -285,7 +287,7 @@ var redirectToCode = map[opb.IcmpHeader_RedirectMessage_Code]uint32{
 	opb.IcmpHeader_RedirectMessage_TOS_AND_HOST:    3,
 }
 
-func icmpV1Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func icmpV1Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewIcmpv1Stack(idx)
 	switch ih := icmp.Type.(type) {
 	case *opb.IcmpHeader_DestinationUnreachable_:
@@ -328,10 +330,10 @@ func icmpV1Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficStack, error) 
 		// Should not happen as header validity is checked in icmpStack function
 		return nil, fmt.Errorf("invalid ICMP header type for IxNetwork icmpV1 stack: %v", icmp)
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func icmpV2Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func icmpV2Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewIcmpv2Stack(idx)
 	switch ih := icmp.Type.(type) {
 	case *opb.IcmpHeader_EchoReply_:
@@ -354,17 +356,17 @@ func icmpV2Stack(icmp *opb.IcmpHeader, idx int) (*ixconfig.TrafficStack, error) 
 		// Should not happen as header validity is checked in icmpStack function
 		return nil, fmt.Errorf("invalid ICMP header type for IxNetwork icmpV2 stack: %v", icmp)
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-type ospfTrafficStack interface {
-	Ospfv2PacketHeaderRouterID() *ixconfig.TrafficField
-	Ospfv2PacketHeaderAreaID() *ixconfig.TrafficField
-	TrafficStack() *ixconfig.TrafficStack
+type ospfTrafficTrafficItemConfigElementStack interface {
+	Ospfv2PacketHeaderRouterID() *ixconfig.TrafficTrafficItemConfigElementStackField
+	Ospfv2PacketHeaderAreaID() *ixconfig.TrafficTrafficItemConfigElementStackField
+	TrafficTrafficItemConfigElementStack() *ixconfig.TrafficTrafficItemConfigElementStack
 }
 
-func ospfStack(ospf *opb.OspfHeader, idx int) (*ixconfig.TrafficStack, error) {
-	var stack ospfTrafficStack
+func ospfStack(ospf *opb.OspfHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	var stack ospfTrafficTrafficItemConfigElementStack
 	var err error
 	switch o := ospf.Type.(type) {
 	case *opb.OspfHeader_Hello_:
@@ -397,10 +399,10 @@ func ospfStack(ospf *opb.OspfHeader, idx int) (*ixconfig.TrafficStack, error) {
 		}
 		setSingleValue(stack.Ospfv2PacketHeaderAreaID(), ixconfig.String(aID))
 	}
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func ospfHello(hello *opb.OspfHeader_Hello, idx int) (ospfTrafficStack, error) {
+func ospfHello(hello *opb.OspfHeader_Hello, idx int) (ospfTrafficTrafficItemConfigElementStack, error) {
 	const ipv4BitLen = 8 * net.IPv4len
 	stack := ixconfig.NewOspfv2HelloStack(idx)
 	if hello.GetNetworkMaskLength() > ipv4BitLen {
@@ -432,7 +434,7 @@ func ospfHello(hello *opb.OspfHeader_Hello, idx int) (ospfTrafficStack, error) {
 	return stack, nil
 }
 
-func ospfDBD(dbd *opb.OspfHeader_DatabaseDescription, idx int) ospfTrafficStack {
+func ospfDBD(dbd *opb.OspfHeader_DatabaseDescription, idx int) ospfTrafficTrafficItemConfigElementStack {
 	stack := ixconfig.NewOspfv2DatabaseDescriptionStack(idx)
 	setSingleValue(stack.DatabaseDescriptionBodyInterfaceMTU(), uintToStr(dbd.GetMtu()))
 	var flags uint32
@@ -458,7 +460,7 @@ var linkStateTypeToNum = map[opb.OspfHeader_LinkStateType]uint32{
 	opb.OspfHeader_LINK_STATE_TYPE_AS_EXTERNAL:     5,
 }
 
-func ospfLSR(lsr *opb.OspfHeader_LinkStateRequest, idx int) (ospfTrafficStack, error) {
+func ospfLSR(lsr *opb.OspfHeader_LinkStateRequest, idx int) (ospfTrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewOspfv2LSARequestStack(idx)
 	lst := lsr.GetType()
 	typeNum, ok := linkStateTypeToNum[lst]
@@ -483,7 +485,7 @@ func ospfLSR(lsr *opb.OspfHeader_LinkStateRequest, idx int) (ospfTrafficStack, e
 	return stack, nil
 }
 
-func ospfLSU(lsu *opb.OspfHeader_LinkStateUpdate, idx int) (ospfTrafficStack, error) {
+func ospfLSU(lsu *opb.OspfHeader_LinkStateUpdate, idx int) (ospfTrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewOspfv2LSAUpdateStack(idx)
 	var ages, types, idRtrs, advRtrs, seqs []string
 	for _, adv := range lsu.GetAdvertisements() {
@@ -524,7 +526,7 @@ func ospfLSU(lsu *opb.OspfHeader_LinkStateUpdate, idx int) (ospfTrafficStack, er
 	return stack, nil
 }
 
-func ospfLSA(lsa *opb.OspfHeader_LinkStateAck, idx int) (ospfTrafficStack, error) {
+func ospfLSA(lsa *opb.OspfHeader_LinkStateAck, idx int) (ospfTrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewOspfv2LSAAcknowledgementStack(idx)
 	var ages, types, idRtrs, advRtrs, seqs []string
 	for _, hdr := range lsa.GetHeaders() {
@@ -568,7 +570,7 @@ var rsvpMessageTypeToNum = map[opb.RsvpHeader_MessageType]uint32{
 	opb.RsvpHeader_RESV: 2,
 }
 
-func rsvpStack(rsvp *opb.RsvpHeader, idx int) (*ixconfig.TrafficStack, error) {
+func rsvpStack(rsvp *opb.RsvpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewRsvpStack(idx)
 	setSingleValue(stack.Version(), uintToStr(rsvp.GetVersion()))
 	var rrc uint32
@@ -582,17 +584,17 @@ func rsvpStack(rsvp *opb.RsvpHeader, idx int) (*ixconfig.TrafficStack, error) {
 	}
 	setSingleValue(stack.MessegeType(), uintToStr(typeNum))
 	setSingleValue(stack.Ttl(), uintToStr(rsvp.GetTtl()))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-type pimTrafficStack interface {
-	Version() *ixconfig.TrafficField
-	Type() *ixconfig.TrafficField
-	TrafficStack() *ixconfig.TrafficStack
+type pimTrafficTrafficItemConfigElementStack interface {
+	Version() *ixconfig.TrafficTrafficItemConfigElementStackField
+	Type() *ixconfig.TrafficTrafficItemConfigElementStackField
+	TrafficTrafficItemConfigElementStack() *ixconfig.TrafficTrafficItemConfigElementStack
 }
 
-func pimStack(pim *opb.PimHeader, idx int) (*ixconfig.TrafficStack, error) {
-	var stack pimTrafficStack
+func pimStack(pim *opb.PimHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	var stack pimTrafficTrafficItemConfigElementStack
 	var msgType uint32
 	switch pim.Type.(type) {
 	case *opb.PimHeader_Hello_:
@@ -603,18 +605,18 @@ func pimStack(pim *opb.PimHeader, idx int) (*ixconfig.TrafficStack, error) {
 	}
 	setSingleValue(stack.Version(), uintToStr(2))
 	setSingleValue(stack.Type(), uintToStr(msgType))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-type ldpTrafficStack interface {
-	LsrID() *ixconfig.TrafficField
-	LabelSpace() *ixconfig.TrafficField
-	MessageID() *ixconfig.TrafficField
-	TrafficStack() *ixconfig.TrafficStack
+type ldpTrafficTrafficItemConfigElementStack interface {
+	LsrID() *ixconfig.TrafficTrafficItemConfigElementStackField
+	LabelSpace() *ixconfig.TrafficTrafficItemConfigElementStackField
+	MessageID() *ixconfig.TrafficTrafficItemConfigElementStackField
+	TrafficTrafficItemConfigElementStack() *ixconfig.TrafficTrafficItemConfigElementStack
 }
 
-func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficStack, error) {
-	var stack ldpTrafficStack
+func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	var stack ldpTrafficTrafficItemConfigElementStack
 	switch l := ldp.Type.(type) {
 	case *opb.LdpHeader_Hello_:
 		var targeted, reqTargeted uint32
@@ -639,5 +641,5 @@ func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficStack, error) {
 	setSingleValue(stack.LsrID(), ixconfig.String(ldp.GetLsrId()))
 	setSingleValue(stack.LabelSpace(), uintToStr(ldp.GetLabelSpace()))
 	setSingleValue(stack.MessageID(), uintToStr(ldp.GetMessageId()))
-	return stack.TrafficStack(), nil
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
