@@ -844,6 +844,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "IPV4", DefiningModule: "openconfig-isis-types"},
 		2: {Name: "IPV6", DefiningModule: "openconfig-isis-types"},
 	},
+	"E_IsisTypes_AUTH_MODE": {
+		1: {Name: "MD5", DefiningModule: "openconfig-isis-types"},
+		2: {Name: "TEXT", DefiningModule: "openconfig-isis-types"},
+	},
 	"E_IsisTypes_AdaptiveTimerType": {
 		1: {Name: "LINEAR"},
 		2: {Name: "EXPONENTIAL"},
@@ -884,6 +888,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Isis_IsisMetricFlags": {
 		1: {Name: "INTERNAL"},
 		2: {Name: "UNSUPPORTED"},
+	},
+	"E_KeychainTypes_AUTH_TYPE": {
+		1: {Name: "KEYCHAIN", DefiningModule: "openconfig-keychain-types"},
+		2: {Name: "SIMPLE_KEY", DefiningModule: "openconfig-keychain-types"},
 	},
 	"E_KeychainTypes_CRYPTO_TYPE": {
 		1:  {Name: "AES_28_CMAC_96", DefiningModule: "openconfig-keychain-types"},
@@ -1304,6 +1312,19 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "DISABLED", DefiningModule: "openconfig-platform-types"},
 		3: {Name: "INACTIVE", DefiningModule: "openconfig-platform-types"},
 	},
+	"E_PlatformTypes_COMPONENT_REBOOT_REASON": {
+		1: {Name: "REBOOT_CRITICAL_ERROR", DefiningModule: "openconfig-platform-types"},
+		2: {Name: "REBOOT_POWER_FAILURE", DefiningModule: "openconfig-platform-types"},
+		3: {Name: "REBOOT_USER_INITIATED", DefiningModule: "openconfig-platform-types"},
+	},
+	"E_PlatformTypes_ComponentRedundantRole": {
+		1: {Name: "PRIMARY"},
+		2: {Name: "SECONDARY"},
+	},
+	"E_PlatformTypes_ComponentRedundantRoleSwitchoverReasonTrigger": {
+		1: {Name: "USER_INITIATED"},
+		2: {Name: "SYSTEM_INITIATED"},
+	},
 	"E_PlatformTypes_FEC_MODE_TYPE": {
 		1: {Name: "FEC_AUTO", DefiningModule: "openconfig-platform-types"},
 		2: {Name: "FEC_DISABLED", DefiningModule: "openconfig-platform-types"},
@@ -1716,8 +1737,17 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	"/components/component/software-module/state/module-type": {
 		reflect.TypeOf((E_PlatformSoftware_SOFTWARE_MODULE_TYPE)(0)),
 	},
+	"/components/component/state/last-reboot-reason": {
+		reflect.TypeOf((E_PlatformTypes_COMPONENT_REBOOT_REASON)(0)),
+	},
+	"/components/component/state/last-switchover-reason/trigger": {
+		reflect.TypeOf((E_PlatformTypes_ComponentRedundantRoleSwitchoverReasonTrigger)(0)),
+	},
 	"/components/component/state/oper-status": {
 		reflect.TypeOf((E_PlatformTypes_COMPONENT_OPER_STATUS)(0)),
+	},
+	"/components/component/state/redundant-role": {
+		reflect.TypeOf((E_PlatformTypes_ComponentRedundantRole)(0)),
 	},
 	"/components/component/state/temperature/alarm-severity": {
 		reflect.TypeOf((E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)(0)),
@@ -2365,6 +2395,12 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af/state/safi-name": {
 		reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
 	},
+	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/state/auth-mode": {
+		reflect.TypeOf((E_IsisTypes_AUTH_MODE)(0)),
+	},
+	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/state/auth-type": {
+		reflect.TypeOf((E_KeychainTypes_AUTH_TYPE)(0)),
+	},
 	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-state": {
 		reflect.TypeOf((E_IsisTypes_IsisInterfaceAdjState)(0)),
 	},
@@ -2399,11 +2435,23 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/state/safi-name": {
 		reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
 	},
+	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/state/auth-mode": {
+		reflect.TypeOf((E_IsisTypes_AUTH_MODE)(0)),
+	},
+	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/state/auth-type": {
+		reflect.TypeOf((E_KeychainTypes_AUTH_TYPE)(0)),
+	},
 	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/state/circuit-type": {
 		reflect.TypeOf((E_IsisTypes_CircuitType)(0)),
 	},
 	"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/state/hello-padding": {
 		reflect.TypeOf((E_IsisTypes_HelloPaddingType)(0)),
+	},
+	"/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/state/auth-mode": {
+		reflect.TypeOf((E_IsisTypes_AUTH_MODE)(0)),
+	},
+	"/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/state/auth-type": {
+		reflect.TypeOf((E_KeychainTypes_AUTH_TYPE)(0)),
 	},
 	"/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/state/flags": {
 		reflect.TypeOf((E_Lsp_Flags)(0)),

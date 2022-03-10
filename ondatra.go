@@ -28,9 +28,10 @@ import (
 	"unsafe"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/internal/closer"
 	"golang.org/x/sys/unix"
+	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/testbed"
 )
@@ -66,15 +67,16 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		return fmt.Errorf("failed to create binding: %w", err)
 	}
 	initBindFn(b)
-	fmt.Println(actionMsg("Reserving the testbed"))
+	debugger.TestStarted(fv.Debug)
 	if err := reserveFn(fv); err != nil {
 		return err
 	}
 	go fnAfterSignal(releaseFn, unix.SIGINT, unix.SIGTERM)
 	defer closer.Close(&rerr, func() error {
-		fmt.Println(actionMsg("Releasing the testbed"))
+		debugger.TestCasesDone()
 		return releaseFn()
 	}, "error releasing testbed")
+	debugger.ReservationComplete()
 	runTestsFn(new(fixture), m, fv.RunTime)
 	return nil
 }
@@ -137,13 +139,4 @@ func (f *fixture) failEarly(msg string) {
 	defer f.mu.Unlock()
 	f.earlyFail = true
 	f.fatalFn(msg)
-}
-
-func logAction(t testing.TB, format string, dev binding.Device) {
-	t.Helper()
-	t.Log(actionMsg(fmt.Sprintf(format, dev.Dimensions().Name)))
-}
-
-func actionMsg(msg string) string {
-	return fmt.Sprintf("*** %s", msg)
 }

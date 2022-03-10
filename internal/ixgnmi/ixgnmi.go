@@ -25,7 +25,6 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
@@ -34,8 +33,9 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	gcache "github.com/openconfig/gnmi/cache"
 	"github.com/openconfig/gnmi/subscribe"
-	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -44,15 +44,16 @@ import (
 const (
 	ribOCPath = "/network-instances/network-instance/protocols/protocol/bgp/rib"
 
-	portStatsCaption    = "Port Statistics"
-	portCPUStatsCaption = "Port CPU Statistics"
-	flowStatsCaption    = "Flow Statistics"
+	portStatsCaption        = "Port Statistics"
+	portCPUStatsCaption     = "Port CPU Statistics"
+	trafficItemStatsCaption = "Traffic Item Statistics"
+	flowStatsCaption        = "Flow Statistics"
 )
 
 var (
 	prefixToReader = map[string]*prefixReader{
 		"/components": statViewReader(portCPUStatsCaption),
-		"/flows":      statViewReader(flowStatsCaption, ixweb.EgressStatsCaption),
+		"/flows":      statViewReader(trafficItemStatsCaption, flowStatsCaption, ixweb.EgressStatsCaption),
 		"/interfaces": statViewReader(portStatsCaption),
 		ribOCPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
 			n, err := c.pathToOCRIB(ctx, p)

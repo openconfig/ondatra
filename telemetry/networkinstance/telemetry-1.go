@@ -16,2917 +16,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath extracts the value of the leaf SecondaryPath from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.SecondaryPath
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath extracts the value of the leaf CspfMetric from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.CspfMetric
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Lookup(t testing.TB) *oc.QualifiedE_Mpls_CspfTieBreaking {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedE_Mpls_CspfTieBreaking{
-		Metadata: md,
-	}).SetVal(goStruct.GetCspfTiebreaker())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Get(t testing.TB) oc.E_Mpls_CspfTieBreaking {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny) Lookup(t testing.TB) []*oc.QualifiedE_Mpls_CspfTieBreaking {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_Mpls_CspfTieBreaking
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny) Get(t testing.TB) []oc.E_Mpls_CspfTieBreaking {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_Mpls_CspfTieBreaking
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_CspfTieBreaking {
-	t.Helper()
-	c := &oc.CollectionE_Mpls_CspfTieBreaking{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_CspfTieBreaking) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_CspfTieBreaking) bool) *oc.E_Mpls_CspfTieBreakingWatcher {
-	t.Helper()
-	w := &oc.E_Mpls_CspfTieBreakingWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Mpls_CspfTieBreaking)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_CspfTieBreaking) bool) *oc.E_Mpls_CspfTieBreakingWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Await(t testing.TB, timeout time.Duration, val oc.E_Mpls_CspfTieBreaking) *oc.QualifiedE_Mpls_CspfTieBreaking {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Mpls_CspfTieBreaking) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_CspfTieBreaking {
-	t.Helper()
-	c := &oc.CollectionE_Mpls_CspfTieBreaking{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_CspfTieBreaking) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_CspfTieBreaking) bool) *oc.E_Mpls_CspfTieBreakingWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath extracts the value of the leaf CspfTiebreaker from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Mpls_CspfTieBreaking.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedE_Mpls_CspfTieBreaking {
-	t.Helper()
-	qv := &oc.QualifiedE_Mpls_CspfTieBreaking{
-		Metadata: md,
-	}
-	val := parent.CspfTiebreaker
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath extracts the value of the leaf ExplicitPathName from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.ExplicitPathName
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedUint8{
-		Metadata: md,
-	}).SetVal(goStruct.GetHoldPriority())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath extracts the value of the leaf HoldPriority from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.HoldPriority
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath extracts the value of the leaf Name from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Name
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Lookup(t testing.TB) *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD{
-		Metadata: md,
-	}).SetVal(goStruct.GetPathComputationMethod())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Get(t testing.TB) oc.E_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny) Lookup(t testing.TB) []*oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny) Get(t testing.TB) []oc.E_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_MplsTypes_PATH_COMPUTATION_METHOD
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	c := &oc.CollectionE_MplsTypes_PATH_COMPUTATION_METHOD{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool) *oc.E_MplsTypes_PATH_COMPUTATION_METHODWatcher {
-	t.Helper()
-	w := &oc.E_MplsTypes_PATH_COMPUTATION_METHODWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool) *oc.E_MplsTypes_PATH_COMPUTATION_METHODWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Await(t testing.TB, timeout time.Duration, val oc.E_MplsTypes_PATH_COMPUTATION_METHOD) *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	c := &oc.CollectionE_MplsTypes_PATH_COMPUTATION_METHOD{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD) bool) *oc.E_MplsTypes_PATH_COMPUTATION_METHODWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath extracts the value of the leaf PathComputationMethod from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD {
-	t.Helper()
-	qv := &oc.QualifiedE_MplsTypes_PATH_COMPUTATION_METHOD{
-		Metadata: md,
-	}
-	val := parent.PathComputationMethod
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath extracts the value of the leaf PathComputationServer from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.PathComputationServer
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedUint64{
-		Metadata: md,
-	}).SetVal(goStruct.GetMetricUpperBound())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath extracts the value of the leaf MetricUpperBound from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.MetricUpperBound
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Lookup(t testing.TB) *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Get(t testing.TB) oc.E_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny) Get(t testing.TB) []oc.E_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_MplsTypes_PATH_METRIC_TYPE
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	c := &oc.CollectionE_MplsTypes_PATH_METRIC_TYPE{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool) *oc.E_MplsTypes_PATH_METRIC_TYPEWatcher {
-	t.Helper()
-	w := &oc.E_MplsTypes_PATH_METRIC_TYPEWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool) *oc.E_MplsTypes_PATH_METRIC_TYPEWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_MplsTypes_PATH_METRIC_TYPE) *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	c := &oc.CollectionE_MplsTypes_PATH_METRIC_TYPE{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE) bool) *oc.E_MplsTypes_PATH_METRIC_TYPEWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint) *oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE {
-	t.Helper()
-	qv := &oc.QualifiedE_MplsTypes_PATH_METRIC_TYPE{
-		Metadata: md,
-	}
-	val := parent.Type
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath extracts the value of the leaf Preference from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.Preference
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath extracts the value of the leaf RetryTimer from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.RetryTimer
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedUint8{
-		Metadata: md,
-	}).SetVal(goStruct.GetSetupPriority())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath extracts the value of the leaf SetupPriority from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.SetupPriority
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath extracts the value of the leaf SpfMetric from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.SpfMetric
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath extracts the value of the leaf UseCspf from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.UseCspf
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Get(t testing.TB) []string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedStringSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPathAny) Get(t testing.TB) [][]string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
-	t.Helper()
-	c := &oc.CollectionStringSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
-	t.Helper()
-	w := &oc.StringSliceWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", gs, queryPath, true, false)
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedStringSlice)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Await(t testing.TB, timeout time.Duration, val []string) *oc.QualifiedStringSlice {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedStringSlice) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
-	t.Helper()
-	c := &oc.CollectionStringSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/exclude-group to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath extracts the value of the leaf ExcludeGroup from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups
-// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_ExcludeGroupPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) *oc.QualifiedStringSlice {
-	t.Helper()
-	qv := &oc.QualifiedStringSlice{
-		Metadata: md,
-	}
-	val := parent.ExcludeGroup
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
@@ -43561,6 +40650,5804 @@ func convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_Sid
 	val := parent.MplsLabel
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a ONCE subscription.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets to the batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-octets to the batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath extracts the value of the leaf OutOctets from its parent oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OutOctets
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a ONCE subscription.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts to the batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/segment-routing/interfaces/interface/sid-counters/sid-counter/state/out-pkts to the batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath extracts the value of the leaf OutPkts from its parent oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_OutPktsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OutPkts
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_TeGlobalAttributes
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Mpls_TeGlobalAttributes)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributesPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributesWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Mpls_TeGlobalAttributesWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributesWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributesPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_TeGlobalAttributes) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributesWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributesPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributesPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/admin-group-name to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath extracts the value of the leaf AdminGroupName from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_AdminGroupNamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.AdminGroupName
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/mpls-admin-groups/admin-group/state/bit-position to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath extracts the value of the leaf BitPosition from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup_BitPositionPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.BitPosition
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_SrlgPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_SrlgPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/cost to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath extracts the value of the leaf Cost from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_CostPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Cost
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Lookup(t testing.TB) *oc.QualifiedE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedE_Mpls_MplsSrlgFloodingType{
+		Metadata: md,
+	}).SetVal(goStruct.GetFloodingType())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Get(t testing.TB) oc.E_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_Mpls_MplsSrlgFloodingType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePathAny) Get(t testing.TB) []oc.E_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_Mpls_MplsSrlgFloodingType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	c := &oc.CollectionE_Mpls_MplsSrlgFloodingType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool) *oc.E_Mpls_MplsSrlgFloodingTypeWatcher {
+	t.Helper()
+	w := &oc.E_Mpls_MplsSrlgFloodingTypeWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Mpls_MplsSrlgFloodingType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool) *oc.E_Mpls_MplsSrlgFloodingTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_Mpls_MplsSrlgFloodingType) *oc.QualifiedE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	c := &oc.CollectionE_Mpls_MplsSrlgFloodingType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_MplsSrlgFloodingType) bool) *oc.E_Mpls_MplsSrlgFloodingTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/flooding-type to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath extracts the value of the leaf FloodingType from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_Mpls_MplsSrlgFloodingType.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_FloodingTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *oc.QualifiedE_Mpls_MplsSrlgFloodingType {
+	t.Helper()
+	qv := &oc.QualifiedE_Mpls_MplsSrlgFloodingType{
+		Metadata: md,
+	}
+	val := parent.FloodingType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/from-address to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath extracts the value of the leaf FromAddress from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_FromAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.FromAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/static-srlg-members/members-list/state/to-address to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath extracts the value of the leaf ToAddress from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList_ToAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.ToAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/name to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath extracts the value of the leaf Name from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_Srlg", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/srlgs/srlg/state/value to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath extracts the value of the leaf Value from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_Srlg_ValuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Value
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) bool) *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/cleanup-delay to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath extracts the value of the leaf CleanupDelay from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_CleanupDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.CleanupDelay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/install-delay to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath extracts the value of the leaf InstallDelay from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_InstallDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.InstallDelay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a ONCE subscription.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers", gs, queryPath, true, false)
+		return convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/te-global-attributes/te-lsp-timers/state/reoptimize-timer to the batch object.
+func (n *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath extracts the value of the leaf ReoptimizeTimer from its parent oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers_ReoptimizeTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.ReoptimizeTimer
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/state/mtu with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_MtuPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_MtuPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/state/mtu with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_MtuPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_MtuPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_MtuPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a ONCE subscription.
+func (n *NetworkInstance_MtuPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_MtuPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_MtuPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance", gs, queryPath, true, false)
+		return convertNetworkInstance_MtuPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_MtuPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_MtuPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_MtuPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/state/mtu failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/state/mtu to the batch object.
+func (n *NetworkInstance_MtuPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_MtuPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/state/mtu with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_MtuPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_MtuPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/state/mtu to the batch object.
+func (n *NetworkInstance_MtuPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_MtuPath extracts the value of the leaf Mtu from its parent oc.NetworkInstance
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_MtuPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.Mtu
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/state/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/state/name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/state/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/state/name with a ONCE subscription.
+func (n *NetworkInstance_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance", gs, queryPath, true, false)
+		return convertNetworkInstance_NamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_NamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/state/name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/state/name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/state/name to the batch object.
+func (n *NetworkInstance_NamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_NamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/state/name to the batch object.
+func (n *NetworkInstance_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_NamePath extracts the value of the leaf Name from its parent oc.NetworkInstance
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwardingPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwardingPath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwardingPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwardingPathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwardingPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwardingPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding) bool) *oc.NetworkInstance_PolicyForwardingWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwardingWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwardingPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding) bool) *oc.NetworkInstance_PolicyForwardingWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwardingPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwardingPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding) *oc.QualifiedNetworkInstance_PolicyForwarding {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding to the batch object.
+func (n *NetworkInstance_PolicyForwardingPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwardingPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwardingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding) bool) *oc.NetworkInstance_PolicyForwardingWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwardingPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding to the batch object.
+func (n *NetworkInstance_PolicyForwardingPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_InterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_Interface
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_InterfacePathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_Interface
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Interface{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_Interface)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool) *oc.NetworkInstance_PolicyForwarding_InterfaceWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_InterfaceWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_Interface)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool) *oc.NetworkInstance_PolicyForwarding_InterfaceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_InterfacePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_Interface) *oc.QualifiedNetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_InterfacePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Interface {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Interface{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface) bool) *oc.NetworkInstance_PolicyForwarding_InterfaceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_InterfacePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_InterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-forwarding-policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath extracts the value of the leaf ApplyForwardingPolicy from its parent oc.NetworkInstance_PolicyForwarding_Interface
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_Interface_ApplyForwardingPolicyPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Interface) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.ApplyForwardingPolicy
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/apply-vrf-selection-policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath extracts the value of the leaf ApplyVrfSelectionPolicy from its parent oc.NetworkInstance_PolicyForwarding_Interface
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_Interface_ApplyVrfSelectionPolicyPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Interface) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.ApplyVrfSelectionPolicy
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/state/interface-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Interface_InterfaceIdPath extracts the value of the leaf InterfaceId from its parent oc.NetworkInstance_PolicyForwarding_Interface
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_Interface_InterfaceIdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Interface) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.InterfaceId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool) *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool) *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef) *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) bool) *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRefPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRefPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/interface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath extracts the value of the leaf Interface from its parent oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_InterfacePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Interface
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Interface_InterfaceRef", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/interfaces/interface/interface-ref/state/subinterface to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath extracts the value of the leaf Subinterface from its parent oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_PolicyForwarding_Interface_InterfaceRef_SubinterfacePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Interface_InterfaceRef) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Subinterface
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_PathSelectionGroup
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_PathSelectionGroup)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_PathSelectionGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool) *oc.NetworkInstance_PolicyForwarding_PathSelectionGroupWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroupWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool) *oc.NetworkInstance_PolicyForwarding_PathSelectionGroupWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroupPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_PathSelectionGroup) *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_PathSelectionGroup {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_PathSelectionGroup) bool) *oc.NetworkInstance_PolicyForwarding_PathSelectionGroupWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroupPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/group-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath extracts the value of the leaf GroupId from its parent oc.NetworkInstance_PolicyForwarding_PathSelectionGroup
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_PathSelectionGroup_GroupIdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_PathSelectionGroup) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.GroupId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Get(t testing.TB) []string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedStringSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPathAny) Get(t testing.TB) [][]string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_PathSelectionGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_PathSelectionGroup", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Await(t testing.TB, timeout time.Duration, val []string) *oc.QualifiedStringSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedStringSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/path-selection-groups/path-selection-group/state/mpls-lsp to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath extracts the value of the leaf MplsLsp from its parent oc.NetworkInstance_PolicyForwarding_PathSelectionGroup
+// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
+func convertNetworkInstance_PolicyForwarding_PathSelectionGroup_MplsLspPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_PathSelectionGroup) *oc.QualifiedStringSlice {
+	t.Helper()
+	qv := &oc.QualifiedStringSlice{
+		Metadata: md,
+	}
+	val := parent.MplsLsp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_PolicyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_PolicyPathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_Policy
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_Policy)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_PolicyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool) *oc.NetworkInstance_PolicyForwarding_PolicyWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_PolicyWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_Policy)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool) *oc.NetworkInstance_PolicyForwarding_PolicyWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PolicyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_Policy) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PolicyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_PolicyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_PolicyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy) bool) *oc.NetworkInstance_PolicyForwarding_PolicyWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_PolicyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy to the batch object.
+func (n *NetworkInstance_PolicyForwarding_PolicyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/state/policy-id to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_PolicyIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_PolicyIdPath extracts the value of the leaf PolicyId from its parent oc.NetworkInstance_PolicyForwarding_Policy
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_PolicyForwarding_Policy_PolicyIdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.PolicyId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_Policy_Rule
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_RulePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool) *oc.NetworkInstance_PolicyForwarding_Policy_RuleWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_Policy_RuleWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy_Rule{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool) *oc.NetworkInstance_PolicyForwarding_Policy_RuleWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_RulePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_Policy_Rule) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule) bool) *oc.NetworkInstance_PolicyForwarding_Policy_RuleWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_RulePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Get(t testing.TB) *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Get(t testing.TB) []*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool) *oc.NetworkInstance_PolicyForwarding_Policy_Rule_ActionWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_ActionWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool) *oc.NetworkInstance_PolicyForwarding_Policy_Rule_ActionWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule_Action {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_PolicyForwarding_Policy_Rule_Action) bool) *oc.NetworkInstance_PolicyForwarding_Policy_Rule_ActionWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDecapsulateGre())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gre to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath extracts the value of the leaf DecapsulateGre from its parent oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGrePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DecapsulateGre
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDecapsulateGue())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath extracts the value of the leaf DecapsulateGue from its parent oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DecapsulateGue
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetDecapsulateMplsInUdp())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a ONCE subscription.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_PolicyForwarding_Policy_Rule_Action", gs, queryPath, true, false)
+		return convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-mpls-in-udp to the batch object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath extracts the value of the leaf DecapsulateMplsInUdp from its parent oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateMplsInUdpPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.DecapsulateMplsInUdp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
 	}
 	return qv
 }

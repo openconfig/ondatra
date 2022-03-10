@@ -16,6 +16,1073 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/power-supply with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_PowerSupplyPath) Lookup(t testing.TB) *oc.QualifiedComponent_PowerSupply {
+	t.Helper()
+	goStruct := &oc.Component_PowerSupply{}
+	md, ok := oc.Lookup(t, n, "Component_PowerSupply", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_PowerSupply{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/power-supply with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_PowerSupplyPath) Get(t testing.TB) *oc.Component_PowerSupply {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/power-supply with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_PowerSupplyPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_PowerSupply {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_PowerSupply
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_PowerSupply{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_PowerSupply", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_PowerSupply{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/power-supply with a ONCE subscription.
+func (n *Component_PowerSupplyPathAny) Get(t testing.TB) []*oc.Component_PowerSupply {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_PowerSupply
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/power-supply with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_PowerSupplyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_PowerSupply {
+	t.Helper()
+	c := &oc.CollectionComponent_PowerSupply{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_PowerSupply) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_PowerSupply{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_PowerSupply)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_PowerSupplyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_PowerSupply) bool) *oc.Component_PowerSupplyWatcher {
+	t.Helper()
+	w := &oc.Component_PowerSupplyWatcher{}
+	gs := &oc.Component_PowerSupply{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_PowerSupply", gs, queryPath, false, false)
+		return (&oc.QualifiedComponent_PowerSupply{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_PowerSupply)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/power-supply with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_PowerSupplyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_PowerSupply) bool) *oc.Component_PowerSupplyWatcher {
+	t.Helper()
+	return watch_Component_PowerSupplyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/power-supply with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_PowerSupplyPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_PowerSupply) *oc.QualifiedComponent_PowerSupply {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_PowerSupply) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/power-supply failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/power-supply to the batch object.
+func (n *Component_PowerSupplyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/power-supply with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_PowerSupplyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_PowerSupply {
+	t.Helper()
+	c := &oc.CollectionComponent_PowerSupply{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_PowerSupply) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/power-supply with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_PowerSupplyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_PowerSupply) bool) *oc.Component_PowerSupplyWatcher {
+	t.Helper()
+	return watch_Component_PowerSupplyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/power-supply to the batch object.
+func (n *Component_PowerSupplyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/properties/property with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_PropertyPath) Lookup(t testing.TB) *oc.QualifiedComponent_Property {
+	t.Helper()
+	goStruct := &oc.Component_Property{}
+	md, ok := oc.Lookup(t, n, "Component_Property", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_Property{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/properties/property with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_PropertyPath) Get(t testing.TB) *oc.Component_Property {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/properties/property with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_PropertyPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Property {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Property
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Property{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Property", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_Property{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/properties/property with a ONCE subscription.
+func (n *Component_PropertyPathAny) Get(t testing.TB) []*oc.Component_Property {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_Property
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_PropertyPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Property {
+	t.Helper()
+	c := &oc.CollectionComponent_Property{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Property) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_Property{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_Property)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_PropertyPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Property) bool) *oc.Component_PropertyWatcher {
+	t.Helper()
+	w := &oc.Component_PropertyWatcher{}
+	gs := &oc.Component_Property{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Property", gs, queryPath, false, false)
+		return (&oc.QualifiedComponent_Property{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Property)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_PropertyPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Property) bool) *oc.Component_PropertyWatcher {
+	t.Helper()
+	return watch_Component_PropertyPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/properties/property with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_PropertyPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Property) *oc.QualifiedComponent_Property {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Property) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/properties/property failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property to the batch object.
+func (n *Component_PropertyPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_PropertyPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Property {
+	t.Helper()
+	c := &oc.CollectionComponent_Property{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Property) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_PropertyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Property) bool) *oc.Component_PropertyWatcher {
+	t.Helper()
+	return watch_Component_PropertyPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property to the batch object.
+func (n *Component_PropertyPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/properties/property/state/configurable with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Property_ConfigurablePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Component_Property{}
+	md, ok := oc.Lookup(t, n, "Component_Property", goStruct, true, false)
+	if ok {
+		return convertComponent_Property_ConfigurablePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/properties/property/state/configurable with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Property_ConfigurablePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/properties/property/state/configurable with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Property_ConfigurablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Property{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Property", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Property_ConfigurablePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/properties/property/state/configurable with a ONCE subscription.
+func (n *Component_Property_ConfigurablePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/configurable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_ConfigurablePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Property_ConfigurablePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Component_Property{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Property", gs, queryPath, true, false)
+		return convertComponent_Property_ConfigurablePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/configurable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_ConfigurablePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Component_Property_ConfigurablePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/properties/property/state/configurable with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Property_ConfigurablePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/properties/property/state/configurable failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/configurable to the batch object.
+func (n *Component_Property_ConfigurablePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/configurable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_ConfigurablePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/configurable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_ConfigurablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Component_Property_ConfigurablePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/configurable to the batch object.
+func (n *Component_Property_ConfigurablePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Property_ConfigurablePath extracts the value of the leaf Configurable from its parent oc.Component_Property
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertComponent_Property_ConfigurablePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Property) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Configurable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/properties/property/state/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Property_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.Component_Property{}
+	md, ok := oc.Lookup(t, n, "Component_Property", goStruct, true, false)
+	if ok {
+		return convertComponent_Property_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/properties/property/state/name with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Property_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/properties/property/state/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Property_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Property{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Property", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Property_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/properties/property/state/name with a ONCE subscription.
+func (n *Component_Property_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_NamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Property_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.Component_Property{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Property", gs, queryPath, true, false)
+		return convertComponent_Property_NamePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_NamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Component_Property_NamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/properties/property/state/name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Property_NamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/properties/property/state/name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/name to the batch object.
+func (n *Component_Property_NamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_Component_Property_NamePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/name to the batch object.
+func (n *Component_Property_NamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Property_NamePath extracts the value of the leaf Name from its parent oc.Component_Property
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertComponent_Property_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Property) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/properties/property/state/value with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Property_ValuePath) Lookup(t testing.TB) *oc.QualifiedComponent_Property_Value_Union {
+	t.Helper()
+	goStruct := &oc.Component_Property{}
+	md, ok := oc.Lookup(t, n, "Component_Property", goStruct, true, false)
+	if ok {
+		return convertComponent_Property_ValuePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/properties/property/state/value with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Property_ValuePath) Get(t testing.TB) oc.Component_Property_Value_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/properties/property/state/value with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Property_ValuePathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Property_Value_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Property_Value_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Property{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Property", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Property_ValuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/properties/property/state/value with a ONCE subscription.
+func (n *Component_Property_ValuePathAny) Get(t testing.TB) []oc.Component_Property_Value_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Component_Property_Value_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_ValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Property_Value_Union {
+	t.Helper()
+	c := &oc.CollectionComponent_Property_Value_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Property_Value_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Property_ValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Property_Value_Union) bool) *oc.Component_Property_Value_UnionWatcher {
+	t.Helper()
+	w := &oc.Component_Property_Value_UnionWatcher{}
+	gs := &oc.Component_Property{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Property", gs, queryPath, true, false)
+		return convertComponent_Property_ValuePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Property_Value_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_ValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Property_Value_Union) bool) *oc.Component_Property_Value_UnionWatcher {
+	t.Helper()
+	return watch_Component_Property_ValuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/properties/property/state/value with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Property_ValuePath) Await(t testing.TB, timeout time.Duration, val oc.Component_Property_Value_Union) *oc.QualifiedComponent_Property_Value_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Property_Value_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/properties/property/state/value failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/value to the batch object.
+func (n *Component_Property_ValuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/properties/property/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Property_ValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Property_Value_Union {
+	t.Helper()
+	c := &oc.CollectionComponent_Property_Value_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Property_Value_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/properties/property/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Property_ValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Property_Value_Union) bool) *oc.Component_Property_Value_UnionWatcher {
+	t.Helper()
+	return watch_Component_Property_ValuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/properties/property/state/value to the batch object.
+func (n *Component_Property_ValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Property_ValuePath extracts the value of the leaf Value from its parent oc.Component_Property
+// and combines the update with an existing Metadata to return a *oc.QualifiedComponent_Property_Value_Union.
+func convertComponent_Property_ValuePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Property) *oc.QualifiedComponent_Property_Value_Union {
+	t.Helper()
+	qv := &oc.QualifiedComponent_Property_Value_Union{
+		Metadata: md,
+	}
+	val := parent.Value
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/state/redundant-role with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_RedundantRolePath) Lookup(t testing.TB) *oc.QualifiedE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	goStruct := &oc.Component{}
+	md, ok := oc.Lookup(t, n, "Component", goStruct, true, false)
+	if ok {
+		return convertComponent_RedundantRolePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/state/redundant-role with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_RedundantRolePath) Get(t testing.TB) oc.E_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/state/redundant-role with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_RedundantRolePathAny) Lookup(t testing.TB) []*oc.QualifiedE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_PlatformTypes_ComponentRedundantRole
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_RedundantRolePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/state/redundant-role with a ONCE subscription.
+func (n *Component_RedundantRolePathAny) Get(t testing.TB) []oc.E_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_PlatformTypes_ComponentRedundantRole
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/redundant-role with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_RedundantRolePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	c := &oc.CollectionE_PlatformTypes_ComponentRedundantRole{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_RedundantRolePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool) *oc.E_PlatformTypes_ComponentRedundantRoleWatcher {
+	t.Helper()
+	w := &oc.E_PlatformTypes_ComponentRedundantRoleWatcher{}
+	gs := &oc.Component{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component", gs, queryPath, true, false)
+		return convertComponent_RedundantRolePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_PlatformTypes_ComponentRedundantRole)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/redundant-role with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_RedundantRolePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool) *oc.E_PlatformTypes_ComponentRedundantRoleWatcher {
+	t.Helper()
+	return watch_Component_RedundantRolePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/state/redundant-role with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_RedundantRolePath) Await(t testing.TB, timeout time.Duration, val oc.E_PlatformTypes_ComponentRedundantRole) *oc.QualifiedE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/state/redundant-role failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/state/redundant-role to the batch object.
+func (n *Component_RedundantRolePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/redundant-role with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_RedundantRolePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	c := &oc.CollectionE_PlatformTypes_ComponentRedundantRole{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/redundant-role with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_RedundantRolePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PlatformTypes_ComponentRedundantRole) bool) *oc.E_PlatformTypes_ComponentRedundantRoleWatcher {
+	t.Helper()
+	return watch_Component_RedundantRolePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/state/redundant-role to the batch object.
+func (n *Component_RedundantRolePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_RedundantRolePath extracts the value of the leaf RedundantRole from its parent oc.Component
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_PlatformTypes_ComponentRedundantRole.
+func convertComponent_RedundantRolePath(t testing.TB, md *genutil.Metadata, parent *oc.Component) *oc.QualifiedE_PlatformTypes_ComponentRedundantRole {
+	t.Helper()
+	qv := &oc.QualifiedE_PlatformTypes_ComponentRedundantRole{
+		Metadata: md,
+	}
+	val := parent.RedundantRole
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/state/removable with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_RemovablePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Component{}
+	md, ok := oc.Lookup(t, n, "Component", goStruct, true, false)
+	if ok {
+		return convertComponent_RemovablePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/state/removable with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_RemovablePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/state/removable with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_RemovablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_RemovablePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/state/removable with a ONCE subscription.
+func (n *Component_RemovablePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/removable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_RemovablePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_RemovablePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.Component{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component", gs, queryPath, true, false)
+		return convertComponent_RemovablePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/removable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_RemovablePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Component_RemovablePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/state/removable with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_RemovablePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/state/removable failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/state/removable to the batch object.
+func (n *Component_RemovablePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/removable with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_RemovablePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/removable with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_RemovablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_Component_RemovablePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/state/removable to the batch object.
+func (n *Component_RemovablePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_RemovablePath extracts the value of the leaf Removable from its parent oc.Component
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertComponent_RemovablePath(t testing.TB, md *genutil.Metadata, parent *oc.Component) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Removable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/state/serial-no with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_SerialNoPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -2911,1071 +3978,4 @@ func (n *Component_TransceiverPathAny) Watch(t testing.TB, timeout time.Duration
 func (n *Component_TransceiverPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_ChannelPath) Lookup(t testing.TB) *oc.QualifiedComponent_Transceiver_Channel {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedComponent_Transceiver_Channel{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_ChannelPath) Get(t testing.TB) *oc.Component_Transceiver_Channel {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_ChannelPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Transceiver_Channel {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Transceiver_Channel
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Transceiver_Channel{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription.
-func (n *Component_Transceiver_ChannelPathAny) Get(t testing.TB) []*oc.Component_Transceiver_Channel {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Transceiver_Channel
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_ChannelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_Channel {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_Channel{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_Channel) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedComponent_Transceiver_Channel{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Component_Transceiver_Channel)))
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_ChannelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel) bool) *oc.Component_Transceiver_ChannelWatcher {
-	t.Helper()
-	w := &oc.Component_Transceiver_ChannelWatcher{}
-	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_Channel{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_ChannelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel) bool) *oc.Component_Transceiver_ChannelWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_ChannelPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_ChannelPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Transceiver_Channel) *oc.QualifiedComponent_Transceiver_Channel {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Transceiver_Channel) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel to the batch object.
-func (n *Component_Transceiver_ChannelPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_ChannelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_Channel {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_Channel{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_Channel) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_ChannelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel) bool) *oc.Component_Transceiver_ChannelWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_ChannelPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel to the batch object.
-func (n *Component_Transceiver_ChannelPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_AssociatedOpticalChannelPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_AssociatedOpticalChannelPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a ONCE subscription.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_AssociatedOpticalChannelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_AssociatedOpticalChannelPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_AssociatedOpticalChannelPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel to the batch object.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_AssociatedOpticalChannelPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/associated-optical-channel to the batch object.
-func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_AssociatedOpticalChannelPath extracts the value of the leaf AssociatedOpticalChannel from its parent oc.Component_Transceiver_Channel
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertComponent_Transceiver_Channel_AssociatedOpticalChannelPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.AssociatedOpticalChannel
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_DescriptionPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_DescriptionPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_DescriptionPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_DescriptionPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_DescriptionPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a ONCE subscription.
-func (n *Component_Transceiver_Channel_DescriptionPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_DescriptionPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_DescriptionPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_DescriptionPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_DescriptionPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_DescriptionPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_DescriptionPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description to the batch object.
-func (n *Component_Transceiver_Channel_DescriptionPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_DescriptionPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_DescriptionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_DescriptionPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/description to the batch object.
-func (n *Component_Transceiver_Channel_DescriptionPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_DescriptionPath extracts the value of the leaf Description from its parent oc.Component_Transceiver_Channel
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertComponent_Transceiver_Channel_DescriptionPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Description
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_IndexPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_IndexPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_IndexPath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_IndexPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_IndexPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a ONCE subscription.
-func (n *Component_Transceiver_Channel_IndexPathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_IndexPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_IndexPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_IndexPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_IndexPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_IndexPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_IndexPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index to the batch object.
-func (n *Component_Transceiver_Channel_IndexPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_IndexPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_IndexPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_IndexPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/index to the batch object.
-func (n *Component_Transceiver_Channel_IndexPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_IndexPath extracts the value of the leaf Index from its parent oc.Component_Transceiver_Channel
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertComponent_Transceiver_Channel_IndexPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.Index
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_InputPowerPath) Lookup(t testing.TB) *oc.QualifiedComponent_Transceiver_Channel_InputPower {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_InputPower", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedComponent_Transceiver_Channel_InputPower{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_InputPowerPath) Get(t testing.TB) *oc.Component_Transceiver_Channel_InputPower {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_InputPowerPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Transceiver_Channel_InputPower {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Transceiver_Channel_InputPower
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_InputPower", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Transceiver_Channel_InputPower{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a ONCE subscription.
-func (n *Component_Transceiver_Channel_InputPowerPathAny) Get(t testing.TB) []*oc.Component_Transceiver_Channel_InputPower {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Transceiver_Channel_InputPower
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPowerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_Channel_InputPower {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_Channel_InputPower{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedComponent_Transceiver_Channel_InputPower{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Component_Transceiver_Channel_InputPower)))
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_InputPowerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool) *oc.Component_Transceiver_Channel_InputPowerWatcher {
-	t.Helper()
-	w := &oc.Component_Transceiver_Channel_InputPowerWatcher{}
-	gs := &oc.Component_Transceiver_Channel_InputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_InputPower", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_Channel_InputPower{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_InputPower)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPowerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool) *oc.Component_Transceiver_Channel_InputPowerWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPowerPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_InputPowerPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Transceiver_Channel_InputPower) *oc.QualifiedComponent_Transceiver_Channel_InputPower {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power to the batch object.
-func (n *Component_Transceiver_Channel_InputPowerPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPowerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_Channel_InputPower {
-	t.Helper()
-	c := &oc.CollectionComponent_Transceiver_Channel_InputPower{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPowerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_InputPower) bool) *oc.Component_Transceiver_Channel_InputPowerWatcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPowerPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power to the batch object.
-func (n *Component_Transceiver_Channel_InputPowerPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_InputPower", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_InputPower_AvgPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_InputPower_AvgPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_InputPower", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_InputPower_AvgPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a ONCE subscription.
-func (n *Component_Transceiver_Channel_InputPower_AvgPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_InputPower_AvgPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	w := &oc.Float64Watcher{}
-	gs := &oc.Component_Transceiver_Channel_InputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_InputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_InputPower_AvgPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPower_AvgPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg to the batch object.
-func (n *Component_Transceiver_Channel_InputPower_AvgPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPower_AvgPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPower_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPower_AvgPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/avg to the batch object.
-func (n *Component_Transceiver_Channel_InputPower_AvgPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_InputPower_AvgPath extracts the value of the leaf Avg from its parent oc.Component_Transceiver_Channel_InputPower
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertComponent_Transceiver_Channel_InputPower_AvgPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_InputPower) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.Avg
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_InputPower", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_InputPower_InstantPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_InputPower_InstantPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel_InputPower{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_InputPower", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_InputPower_InstantPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a ONCE subscription.
-func (n *Component_Transceiver_Channel_InputPower_InstantPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_InputPower_InstantPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	w := &oc.Float64Watcher{}
-	gs := &oc.Component_Transceiver_Channel_InputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_InputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_InputPower_InstantPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPower_InstantPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant to the batch object.
-func (n *Component_Transceiver_Channel_InputPower_InstantPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_InputPower_InstantPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_InputPower_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_InputPower_InstantPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/input-power/instant to the batch object.
-func (n *Component_Transceiver_Channel_InputPower_InstantPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_InputPower_InstantPath extracts the value of the leaf Instant from its parent oc.Component_Transceiver_Channel_InputPower
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertComponent_Transceiver_Channel_InputPower_InstantPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_InputPower) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.Instant
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
 }

@@ -21,6 +21,7 @@ import (
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/debugger"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
@@ -49,7 +50,7 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 		}
 		p.SetLocation(fmt.Sprintf(locFormat, portNum, portNum))
 	}
-	logAction(t, "Pushing config to %s", o.ate)
+	debugger.ActionStarted(t, "Pushing config to %s", o.ate)
 	resp, err := o.api.SetConfig(cfg)
 	if err != nil {
 		t.Fatalf("PushConfig(t) on %s: %v", o, err)
@@ -62,7 +63,7 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 // FetchConfig fetches config from the ATE.
 func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 	t.Helper()
-	logAction(t, "Fetching config from %s", o.ate)
+	debugger.ActionStarted(t, "Fetching config from %s", o.ate)
 	cfg, err := o.api.GetConfig()
 	if err != nil {
 		t.Fatalf("FetchConfig(t) from %s: %v", o, err)
@@ -72,7 +73,7 @@ func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 
 // StartProtocols starts protocols on the ATE.
 func (o *OTG) StartProtocols(t testing.TB) {
-	logAction(t, "Starting protocols on %s", o.ate)
+	debugger.ActionStarted(t, "Starting protocols on %s", o.ate)
 	started := o.api.NewProtocolState().SetState(gosnappi.ProtocolStateState.START)
 	resp, err := o.api.SetProtocolState(started)
 	if err != nil {
@@ -85,7 +86,7 @@ func (o *OTG) StartProtocols(t testing.TB) {
 
 // StopProtocols stops protocols on the ATE.
 func (o *OTG) StopProtocols(t testing.TB) {
-	logAction(t, "Stopping rotocols on %s", o.ate)
+	debugger.ActionStarted(t, "Stopping rotocols on %s", o.ate)
 	stopped := o.api.NewProtocolState().SetState(gosnappi.ProtocolStateState.STOP)
 	resp, err := o.api.SetProtocolState(stopped)
 	if err != nil {
@@ -98,7 +99,7 @@ func (o *OTG) StopProtocols(t testing.TB) {
 
 // StartTraffic starts traffic on the ATE.
 func (o *OTG) StartTraffic(t testing.TB) {
-	logAction(t, "Starting traffic on %s", o.ate)
+	debugger.ActionStarted(t, "Starting traffic on %s", o.ate)
 	started := o.api.NewTransmitState().SetState(gosnappi.TransmitStateState.START)
 	resp, err := o.api.SetTransmitState(started)
 	if err != nil {
@@ -111,7 +112,7 @@ func (o *OTG) StartTraffic(t testing.TB) {
 
 // StopTraffic stops traffic on the ATE.
 func (o *OTG) StopTraffic(t testing.TB) {
-	logAction(t, "Stopping traffic on %s", o.ate)
+	debugger.ActionStarted(t, "Stopping traffic on %s", o.ate)
 	stopped := o.api.NewTransmitState().SetState(gosnappi.TransmitStateState.STOP)
 	resp, err := o.api.SetTransmitState(stopped)
 	if err != nil {

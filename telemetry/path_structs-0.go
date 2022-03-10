@@ -3726,6 +3726,36 @@ type Component_IdPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_LastRebootReasonPath represents the /openconfig-platform/components/component/state/last-reboot-reason YANG schema element.
+type Component_LastRebootReasonPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootReasonPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-reboot-reason YANG schema element.
+type Component_LastRebootReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootTimePath represents the /openconfig-platform/components/component/state/last-reboot-time YANG schema element.
+type Component_LastRebootTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-reboot-time YANG schema element.
+type Component_LastRebootTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverTimePath represents the /openconfig-platform/components/component/state/last-switchover-time YANG schema element.
+type Component_LastSwitchoverTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-time YANG schema element.
+type Component_LastSwitchoverTimePathAny struct {
+	*ygot.NodePath
+}
+
 // Component_LocationPath represents the /openconfig-platform/components/component/state/location YANG schema element.
 type Component_LocationPath struct {
 	*ygot.NodePath
@@ -3793,6 +3823,16 @@ type Component_PartNoPath struct {
 
 // Component_PartNoPathAny represents the wildcard version of the /openconfig-platform/components/component/state/part-no YANG schema element.
 type Component_PartNoPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_RedundantRolePath represents the /openconfig-platform/components/component/state/redundant-role YANG schema element.
+type Component_RedundantRolePath struct {
+	*ygot.NodePath
+}
+
+// Component_RedundantRolePathAny represents the wildcard version of the /openconfig-platform/components/component/state/redundant-role YANG schema element.
+type Component_RedundantRolePathAny struct {
 	*ygot.NodePath
 }
 
@@ -4314,6 +4354,146 @@ func (n *ComponentPathAny) IntegratedCircuit() *Component_IntegratedCircuitPathA
 	}
 }
 
+// LastRebootReason (leaf): This reports the reason of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-reason"
+// Path from root: "/components/component/state/last-reboot-reason"
+func (n *ComponentPath) LastRebootReason() *Component_LastRebootReasonPath {
+	return &Component_LastRebootReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootReason (leaf): This reports the reason of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-reason"
+// Path from root: "/components/component/state/last-reboot-reason"
+func (n *ComponentPathAny) LastRebootReason() *Component_LastRebootReasonPathAny {
+	return &Component_LastRebootReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-time"
+// Path from root: "/components/component/state/last-reboot-time"
+func (n *ComponentPath) LastRebootTime() *Component_LastRebootTimePath {
+	return &Component_LastRebootTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-time"
+// Path from root: "/components/component/state/last-reboot-time"
+func (n *ComponentPathAny) LastRebootTime() *Component_LastRebootTimePathAny {
+	return &Component_LastRebootTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverReason (container): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the reason of the last change of the
+// component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-reason"
+// Path from root: "/components/component/state/last-switchover-reason"
+func (n *ComponentPath) LastSwitchoverReason() *Component_LastSwitchoverReasonPath {
+	return &Component_LastSwitchoverReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverReason (container): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the reason of the last change of the
+// component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-reason"
+// Path from root: "/components/component/state/last-switchover-reason"
+func (n *ComponentPathAny) LastSwitchoverReason() *Component_LastSwitchoverReasonPathAny {
+	return &Component_LastSwitchoverReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as
+// secondary), this reports the time of the last change of
+// the component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-time"
+// Path from root: "/components/component/state/last-switchover-time"
+func (n *ComponentPath) LastSwitchoverTime() *Component_LastSwitchoverTimePath {
+	return &Component_LastSwitchoverTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as
+// secondary), this reports the time of the last change of
+// the component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-time"
+// Path from root: "/components/component/state/last-switchover-time"
+func (n *ComponentPathAny) LastSwitchoverTime() *Component_LastSwitchoverTimePathAny {
+	return &Component_LastSwitchoverTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Location (leaf): System-supplied description of the location of the
 // component within the system. This could be a bay position,
 // slot number, socket location, etc. For component types that
@@ -4769,6 +4949,42 @@ func (n *ComponentPathAny) Property(Name string) *Component_PropertyPathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"properties", "property"},
 			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// RedundantRole (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the role of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/redundant-role"
+// Path from root: "/components/component/state/redundant-role"
+func (n *ComponentPath) RedundantRole() *Component_RedundantRolePath {
+	return &Component_RedundantRolePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redundant-role"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedundantRole (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the role of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/redundant-role"
+// Path from root: "/components/component/state/redundant-role"
+func (n *ComponentPathAny) RedundantRole() *Component_RedundantRolePathAny {
+	return &Component_RedundantRolePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redundant-role"},
+			map[string]interface{}{},
 			n,
 		),
 	}
@@ -5962,6 +6178,108 @@ func (n *Component_IntegratedCircuit_MemoryPathAny) UncorrectedParityErrors() *C
 	return &Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "uncorrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_LastSwitchoverReasonPath represents the /openconfig-platform/components/component/state/last-switchover-reason YANG schema element.
+type Component_LastSwitchoverReasonPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReasonPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason YANG schema element.
+type Component_LastSwitchoverReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_DetailsPath represents the /openconfig-platform/components/component/state/last-switchover-reason/details YANG schema element.
+type Component_LastSwitchoverReason_DetailsPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_DetailsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason/details YANG schema element.
+type Component_LastSwitchoverReason_DetailsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_TriggerPath represents the /openconfig-platform/components/component/state/last-switchover-reason/trigger YANG schema element.
+type Component_LastSwitchoverReason_TriggerPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_TriggerPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason/trigger YANG schema element.
+type Component_LastSwitchoverReason_TriggerPathAny struct {
+	*ygot.NodePath
+}
+
+// Details (leaf): Records detailed description of why the switchover happens.
+// For example, when system initiated the switchover, this leaf
+// can be used to record the specific reason, e.g. due to critical
+// errors of the routing daemon in the primary role.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "details"
+// Path from root: "/components/component/state/last-switchover-reason/details"
+func (n *Component_LastSwitchoverReasonPath) Details() *Component_LastSwitchoverReason_DetailsPath {
+	return &Component_LastSwitchoverReason_DetailsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Details (leaf): Records detailed description of why the switchover happens.
+// For example, when system initiated the switchover, this leaf
+// can be used to record the specific reason, e.g. due to critical
+// errors of the routing daemon in the primary role.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "details"
+// Path from root: "/components/component/state/last-switchover-reason/details"
+func (n *Component_LastSwitchoverReasonPathAny) Details() *Component_LastSwitchoverReason_DetailsPathAny {
+	return &Component_LastSwitchoverReason_DetailsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Trigger (leaf): Records the generic triggers, e.g. user or system
+// initiated the switchover.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "trigger"
+// Path from root: "/components/component/state/last-switchover-reason/trigger"
+func (n *Component_LastSwitchoverReasonPath) Trigger() *Component_LastSwitchoverReason_TriggerPath {
+	return &Component_LastSwitchoverReason_TriggerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"trigger"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Trigger (leaf): Records the generic triggers, e.g. user or system
+// initiated the switchover.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "trigger"
+// Path from root: "/components/component/state/last-switchover-reason/trigger"
+func (n *Component_LastSwitchoverReasonPathAny) Trigger() *Component_LastSwitchoverReason_TriggerPathAny {
+	return &Component_LastSwitchoverReason_TriggerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"trigger"},
 			map[string]interface{}{},
 			n,
 		),
@@ -31298,6 +31616,842 @@ func (n *Interface_Subinterface_Ipv4_UnnumberedPathAny) InterfaceRef() *Interfac
 		NodePath: ygot.NewNodePath(
 			[]string{"interface-ref"},
 			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/interface YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/interface YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/subinterface YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/subinterface YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/interface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/interface"
+func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Interface() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath {
+	return &Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/interface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/interface"
+func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny) Interface() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny {
+	return &Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/subinterface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/subinterface"
+func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Subinterface() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePath {
+	return &Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/subinterface"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/state/subinterface"
+func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny) Subinterface() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePathAny {
+	return &Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface_Subinterface_Ipv6Path represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6 YANG schema element.
+type Interface_Subinterface_Ipv6Path struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6PathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6 YANG schema element.
+type Interface_Subinterface_Ipv6PathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_DhcpClientPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client YANG schema element.
+type Interface_Subinterface_Ipv6_DhcpClientPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_DhcpClientPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client YANG schema element.
+type Interface_Subinterface_Ipv6_DhcpClientPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits YANG schema element.
+type Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits YANG schema element.
+type Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_EnabledPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv6_EnabledPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv6_EnabledPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_MtuPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu YANG schema element.
+type Interface_Subinterface_Ipv6_MtuPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_MtuPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu YANG schema element.
+type Interface_Subinterface_Ipv6_MtuPathAny struct {
+	*ygot.NodePath
+}
+
+// AddressAny (list): The list of configured IPv6 addresses on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "addresses/address"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address"
+// Ip (wildcarded): string
+func (n *Interface_Subinterface_Ipv6Path) AddressAny() *Interface_Subinterface_Ipv6_AddressPathAny {
+	return &Interface_Subinterface_Ipv6_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"addresses", "address"},
+			map[string]interface{}{"ip": "*"},
+			n,
+		),
+	}
+}
+
+// AddressAny (list): The list of configured IPv6 addresses on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "addresses/address"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address"
+// Ip (wildcarded): string
+func (n *Interface_Subinterface_Ipv6PathAny) AddressAny() *Interface_Subinterface_Ipv6_AddressPathAny {
+	return &Interface_Subinterface_Ipv6_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"addresses", "address"},
+			map[string]interface{}{"ip": "*"},
+			n,
+		),
+	}
+}
+
+// Address (list): The list of configured IPv6 addresses on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "addresses/address"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address"
+// Ip: string
+func (n *Interface_Subinterface_Ipv6Path) Address(Ip string) *Interface_Subinterface_Ipv6_AddressPath {
+	return &Interface_Subinterface_Ipv6_AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"addresses", "address"},
+			map[string]interface{}{"ip": Ip},
+			n,
+		),
+	}
+}
+
+// Address (list): The list of configured IPv6 addresses on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "addresses/address"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address"
+// Ip: string
+func (n *Interface_Subinterface_Ipv6PathAny) Address(Ip string) *Interface_Subinterface_Ipv6_AddressPathAny {
+	return &Interface_Subinterface_Ipv6_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"addresses", "address"},
+			map[string]interface{}{"ip": Ip},
+			n,
+		),
+	}
+}
+
+// Autoconf (container): Top-level container for IPv6 autoconf
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "autoconf"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf"
+func (n *Interface_Subinterface_Ipv6Path) Autoconf() *Interface_Subinterface_Ipv6_AutoconfPath {
+	return &Interface_Subinterface_Ipv6_AutoconfPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"autoconf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Autoconf (container): Top-level container for IPv6 autoconf
+// ----------------------------------------
+// Defining module: "openconfig-if-ip-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "autoconf"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/autoconf"
+func (n *Interface_Subinterface_Ipv6PathAny) Autoconf() *Interface_Subinterface_Ipv6_AutoconfPathAny {
+	return &Interface_Subinterface_Ipv6_AutoconfPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"autoconf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Counters (container): Packet and byte counters for IP transmission and
+// reception for the address family.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/counters"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters"
+func (n *Interface_Subinterface_Ipv6Path) Counters() *Interface_Subinterface_Ipv6_CountersPath {
+	return &Interface_Subinterface_Ipv6_CountersPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Counters (container): Packet and byte counters for IP transmission and
+// reception for the address family.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/counters"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters"
+func (n *Interface_Subinterface_Ipv6PathAny) Counters() *Interface_Subinterface_Ipv6_CountersPathAny {
+	return &Interface_Subinterface_Ipv6_CountersPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DhcpClient (leaf): Enables a DHCP client on the interface in order to request
+// an address
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/dhcp-client"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client"
+func (n *Interface_Subinterface_Ipv6Path) DhcpClient() *Interface_Subinterface_Ipv6_DhcpClientPath {
+	return &Interface_Subinterface_Ipv6_DhcpClientPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dhcp-client"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DhcpClient (leaf): Enables a DHCP client on the interface in order to request
+// an address
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/dhcp-client"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client"
+func (n *Interface_Subinterface_Ipv6PathAny) DhcpClient() *Interface_Subinterface_Ipv6_DhcpClientPathAny {
+	return &Interface_Subinterface_Ipv6_DhcpClientPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dhcp-client"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DupAddrDetectTransmits (leaf): The number of consecutive Neighbor Solicitation messages
+// sent while performing Duplicate Address Detection on a
+// tentative address.  A value of zero indicates that
+// Duplicate Address Detection is not performed on
+// tentative addresses.  A value of one indicates a single
+// transmission with no follow-up retransmissions.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/dup-addr-detect-transmits"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits"
+func (n *Interface_Subinterface_Ipv6Path) DupAddrDetectTransmits() *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath {
+	return &Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dup-addr-detect-transmits"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DupAddrDetectTransmits (leaf): The number of consecutive Neighbor Solicitation messages
+// sent while performing Duplicate Address Detection on a
+// tentative address.  A value of zero indicates that
+// Duplicate Address Detection is not performed on
+// tentative addresses.  A value of one indicates a single
+// transmission with no follow-up retransmissions.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/dup-addr-detect-transmits"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits"
+func (n *Interface_Subinterface_Ipv6PathAny) DupAddrDetectTransmits() *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny {
+	return &Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dup-addr-detect-transmits"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enabled (leaf): Controls whether IPv6 is enabled or disabled on this
+// interface.  When IPv6 is enabled, this interface is
+// connected to an IPv6 stack, and the interface can send
+// and receive IPv6 packets.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/enabled"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled"
+func (n *Interface_Subinterface_Ipv6Path) Enabled() *Interface_Subinterface_Ipv6_EnabledPath {
+	return &Interface_Subinterface_Ipv6_EnabledPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enabled (leaf): Controls whether IPv6 is enabled or disabled on this
+// interface.  When IPv6 is enabled, this interface is
+// connected to an IPv6 stack, and the interface can send
+// and receive IPv6 packets.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/enabled"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled"
+func (n *Interface_Subinterface_Ipv6PathAny) Enabled() *Interface_Subinterface_Ipv6_EnabledPathAny {
+	return &Interface_Subinterface_Ipv6_EnabledPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Mtu (leaf): The size, in octets, of the largest IPv6 packet that the
+// interface will send and receive.
+//
+// The server may restrict the allowed values for this leaf,
+// depending on the interface's type.
+//
+// If this leaf is not configured, the operationally used MTU
+// depends on the interface's type.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/mtu"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu"
+func (n *Interface_Subinterface_Ipv6Path) Mtu() *Interface_Subinterface_Ipv6_MtuPath {
+	return &Interface_Subinterface_Ipv6_MtuPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mtu"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Mtu (leaf): The size, in octets, of the largest IPv6 packet that the
+// interface will send and receive.
+//
+// The server may restrict the allowed values for this leaf,
+// depending on the interface's type.
+//
+// If this leaf is not configured, the operationally used MTU
+// depends on the interface's type.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/mtu"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu"
+func (n *Interface_Subinterface_Ipv6PathAny) Mtu() *Interface_Subinterface_Ipv6_MtuPathAny {
+	return &Interface_Subinterface_Ipv6_MtuPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mtu"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): List of IPv6 neighbors
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor"
+// Ip (wildcarded): string
+func (n *Interface_Subinterface_Ipv6Path) NeighborAny() *Interface_Subinterface_Ipv6_NeighborPathAny {
+	return &Interface_Subinterface_Ipv6_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"ip": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): List of IPv6 neighbors
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor"
+// Ip (wildcarded): string
+func (n *Interface_Subinterface_Ipv6PathAny) NeighborAny() *Interface_Subinterface_Ipv6_NeighborPathAny {
+	return &Interface_Subinterface_Ipv6_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"ip": "*"},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): List of IPv6 neighbors
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor"
+// Ip: string
+func (n *Interface_Subinterface_Ipv6Path) Neighbor(Ip string) *Interface_Subinterface_Ipv6_NeighborPath {
+	return &Interface_Subinterface_Ipv6_NeighborPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"ip": Ip},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): List of IPv6 neighbors
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor"
+// Ip: string
+func (n *Interface_Subinterface_Ipv6PathAny) Neighbor(Ip string) *Interface_Subinterface_Ipv6_NeighborPathAny {
+	return &Interface_Subinterface_Ipv6_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"ip": Ip},
+			n,
+		),
+	}
+}
+
+// RouterAdvertisement (container): Configuration and operational state parameters relating to
+// router advertisements.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "router-advertisement"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement"
+func (n *Interface_Subinterface_Ipv6Path) RouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisementPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisementPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"router-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouterAdvertisement (container): Configuration and operational state parameters relating to
+// router advertisements.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "router-advertisement"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement"
+func (n *Interface_Subinterface_Ipv6PathAny) RouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisementPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"router-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Unnumbered (container): Top-level container for setting unnumbered interfaces.
+// Includes reference the interface that provides the
+// address information
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "unnumbered"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered"
+func (n *Interface_Subinterface_Ipv6Path) Unnumbered() *Interface_Subinterface_Ipv6_UnnumberedPath {
+	return &Interface_Subinterface_Ipv6_UnnumberedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unnumbered"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Unnumbered (container): Top-level container for setting unnumbered interfaces.
+// Includes reference the interface that provides the
+// address information
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "unnumbered"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered"
+func (n *Interface_Subinterface_Ipv6PathAny) Unnumbered() *Interface_Subinterface_Ipv6_UnnumberedPathAny {
+	return &Interface_Subinterface_Ipv6_UnnumberedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unnumbered"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface_Subinterface_Ipv6_AddressPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address YANG schema element.
+type Interface_Subinterface_Ipv6_AddressPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_AddressPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address YANG schema element.
+type Interface_Subinterface_Ipv6_AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_IpPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/ip YANG schema element.
+type Interface_Subinterface_Ipv6_Address_IpPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_IpPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/ip YANG schema element.
+type Interface_Subinterface_Ipv6_Address_IpPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/origin YANG schema element.
+type Interface_Subinterface_Ipv6_Address_OriginPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_OriginPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/origin YANG schema element.
+type Interface_Subinterface_Ipv6_Address_OriginPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_PrefixLengthPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/prefix-length YANG schema element.
+type Interface_Subinterface_Ipv6_Address_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_PrefixLengthPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/prefix-length YANG schema element.
+type Interface_Subinterface_Ipv6_Address_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_StatusPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status YANG schema element.
+type Interface_Subinterface_Ipv6_Address_StatusPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Address_StatusPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status YANG schema element.
+type Interface_Subinterface_Ipv6_Address_StatusPathAny struct {
+	*ygot.NodePath
+}
+
+// Ip (leaf): The IPv6 address on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/ip"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/ip"
+func (n *Interface_Subinterface_Ipv6_AddressPath) Ip() *Interface_Subinterface_Ipv6_Address_IpPath {
+	return &Interface_Subinterface_Ipv6_Address_IpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ip (leaf): The IPv6 address on the interface.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/ip"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/ip"
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) Ip() *Interface_Subinterface_Ipv6_Address_IpPathAny {
+	return &Interface_Subinterface_Ipv6_Address_IpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of this address, e.g., static, dhcp, etc.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/origin"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/origin"
+func (n *Interface_Subinterface_Ipv6_AddressPath) Origin() *Interface_Subinterface_Ipv6_Address_OriginPath {
+	return &Interface_Subinterface_Ipv6_Address_OriginPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of this address, e.g., static, dhcp, etc.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/origin"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/origin"
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) Origin() *Interface_Subinterface_Ipv6_Address_OriginPathAny {
+	return &Interface_Subinterface_Ipv6_Address_OriginPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the subnet prefix.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/prefix-length"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/prefix-length"
+func (n *Interface_Subinterface_Ipv6_AddressPath) PrefixLength() *Interface_Subinterface_Ipv6_Address_PrefixLengthPath {
+	return &Interface_Subinterface_Ipv6_Address_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the subnet prefix.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/prefix-length"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/prefix-length"
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) PrefixLength() *Interface_Subinterface_Ipv6_Address_PrefixLengthPathAny {
+	return &Interface_Subinterface_Ipv6_Address_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Status (leaf): The status of an address.  Most of the states correspond
+// to states from the IPv6 Stateless Address
+// Autoconfiguration protocol.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/status"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status"
+func (n *Interface_Subinterface_Ipv6_AddressPath) Status() *Interface_Subinterface_Ipv6_Address_StatusPath {
+	return &Interface_Subinterface_Ipv6_Address_StatusPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Status (leaf): The status of an address.  Most of the states correspond
+// to states from the IPv6 Stateless Address
+// Autoconfiguration protocol.
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "state/status"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status"
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) Status() *Interface_Subinterface_Ipv6_Address_StatusPathAny {
+	return &Interface_Subinterface_Ipv6_Address_StatusPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// VrrpGroupAny (list): List of VRRP groups, keyed by virtual router id
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "vrrp/vrrp-group"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group"
+// VirtualRouterId (wildcarded): uint8
+func (n *Interface_Subinterface_Ipv6_AddressPath) VrrpGroupAny() *Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"vrrp", "vrrp-group"},
+			map[string]interface{}{"virtual-router-id": "*"},
+			n,
+		),
+	}
+}
+
+// VrrpGroupAny (list): List of VRRP groups, keyed by virtual router id
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "vrrp/vrrp-group"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group"
+// VirtualRouterId (wildcarded): uint8
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) VrrpGroupAny() *Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"vrrp", "vrrp-group"},
+			map[string]interface{}{"virtual-router-id": "*"},
+			n,
+		),
+	}
+}
+
+// VrrpGroup (list): List of VRRP groups, keyed by virtual router id
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "vrrp/vrrp-group"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group"
+// VirtualRouterId: uint8
+func (n *Interface_Subinterface_Ipv6_AddressPath) VrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroupPath {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroupPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"vrrp", "vrrp-group"},
+			map[string]interface{}{"virtual-router-id": VirtualRouterId},
+			n,
+		),
+	}
+}
+
+// VrrpGroup (list): List of VRRP groups, keyed by virtual router id
+// ----------------------------------------
+// Defining module: "openconfig-if-ip"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "vrrp/vrrp-group"
+// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group"
+// VirtualRouterId: uint8
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) VrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny {
+	return &Interface_Subinterface_Ipv6_Address_VrrpGroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"vrrp", "vrrp-group"},
+			map[string]interface{}{"virtual-router-id": VirtualRouterId},
 			n,
 		),
 	}

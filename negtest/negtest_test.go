@@ -66,8 +66,8 @@ func TestCaptureFatal(t *testing.T) {
 		fn      func(t testing.TB)
 		wantMsg *string
 	}{{
-		desc: "NoError",
-		fn: func(t testing.TB) {},
+		desc:    "NoError",
+		fn:      func(t testing.TB) {},
 		wantMsg: nil,
 	}, {
 		desc: "FailNow",
@@ -92,23 +92,23 @@ func TestCaptureFatal(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			got := CaptureFatal(t, tt.fn)
-			didGet, didWant := got != nil, tt.wantMsg != nil;
+			didGet, didWant := got != nil, tt.wantMsg != nil
 			if didGet != didWant {
 				t.Errorf("CaptureFatal got? %v, want? %v", didGet, didWant)
 			}
 			if didGet && didWant && *got != *tt.wantMsg {
-				t.Errorf("CaptureFatal got msg = %v, want %v", *got, *tt.wantMsg)
-		 }
+				t.Errorf("CaptureFatal got msg = %q, want %q", *got, *tt.wantMsg)
+			}
 		})
 	}
 }
 
 func TestErrorMsg(t *testing.T) {
 	tests := []struct {
-		desc               string
-		fn                 func(t testing.TB)
-		wantMsgs           []string
-		wantFatalSubstring string
+		desc          string
+		fn            func(t testing.TB)
+		wantMsgs      []string
+		wantSubstring string
 	}{{
 		desc: "Errorf called",
 		fn: func(t testing.TB) {
@@ -123,16 +123,16 @@ func TestErrorMsg(t *testing.T) {
 		},
 		wantMsgs: []string{"hello\n", "Planet Earth\n"},
 	}, {
-		desc:               "Fatal due to no error",
-		fn:                 func(t testing.TB) {},
-		wantFatalSubstring: "did noit raise an error as was expected",
+		desc:          "Fatal due to no error",
+		fn:            func(t testing.TB) {},
+		wantSubstring: "did not raise an error as was expected",
 	}}
 
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			if tt.wantFatalSubstring != "" {
-				if got := ExpectFatal(t, func(t testing.TB) { ExpectError(t, tt.fn) }); strings.Contains(got, tt.wantFatalSubstring) {
-					t.Fatalf("did not get expected fatal message, got: %v, want: %v", got, tt.wantFatalSubstring)
+			if tt.wantSubstring != "" {
+				if got := ExpectFatal(t, func(t testing.TB) { ExpectError(t, tt.fn) }); !strings.Contains(got, tt.wantSubstring) {
+					t.Fatalf("ExpectError got unexpected message %q, want substring %q", got, tt.wantSubstring)
 				}
 				return
 			}
@@ -174,7 +174,7 @@ func TestPanic(t *testing.T) {
 		})
 	}()
 	if got != wantPanicArg {
-		t.Errorf("panic arg = %q, want %q", got, wantPanicArg)
+		t.Errorf("Panic arg = %q, want %q", got, wantPanicArg)
 	}
 }
 
@@ -185,5 +185,26 @@ func TestBenignMethods(t *testing.T) {
 		t.Logf("hello %v", "there")
 		// Must fail to so that the test passes
 		t.FailNow()
+	})
+}
+
+func TestParallelFatal(t *testing.T) {
+	t.Run("success", func(t *testing.T) {
+		ParallelFatal(t,
+			func(testing.TB) {},
+			func(testing.TB) {})
+	})
+
+	t.Run("failure", func(t *testing.T) {
+		failMsg1, failMsg2 := "fail1", "fail2"
+		got := ExpectFatal(t, func(t testing.TB) {
+			ParallelFatal(t,
+				func(t testing.TB) { t.Fatal(failMsg1) },
+				func(testing.TB) {},
+				func(t testing.TB) { t.Fatal(failMsg2) })
+		})
+		if !strings.Contains(got, failMsg1) || !strings.Contains(got, failMsg2) {
+			t.Errorf("ParallelFatal got unexpected message %q, want substrings %q and %q", got, failMsg1, failMsg2)
+		}
 	})
 }

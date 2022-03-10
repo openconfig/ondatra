@@ -22,6 +22,7 @@ import (
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
+	"github.com/openconfig/ondatra/internal/debugger"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -46,7 +47,7 @@ func (tr *Traffic) NewFlow(name string) *Flow {
 // Start starts one or more traffic flows on the ATE.
 func (tr *Traffic) Start(t testing.TB, flows ...*Flow) {
 	t.Helper()
-	logAction(t, "Starting traffic on %s", tr.ate)
+	debugger.ActionStarted(t, "Starting traffic on %s", tr.ate)
 	if err := tr.start(flows); err != nil {
 		t.Fatalf("Start(t) on %s: %v", tr, err)
 	}
@@ -65,7 +66,7 @@ func (tr *Traffic) start(flows []*Flow) error {
 // Frame size can only be updated to a frame size of the same type.
 func (tr *Traffic) Update(t testing.TB, flows ...*Flow) {
 	t.Helper()
-	logAction(t, "Updating traffic on %s", tr.ate)
+	debugger.ActionStarted(t, "Updating traffic on %s", tr.ate)
 	if err := tr.update(flows); err != nil {
 		t.Fatalf("Update(t) on %s: %v", tr, err)
 	}
@@ -82,7 +83,7 @@ func (tr *Traffic) update(flows []*Flow) error {
 // Stop stops all traffic flows on the ATE.
 func (tr *Traffic) Stop(t testing.TB) {
 	t.Helper()
-	logAction(t, "Stopping traffic on %s", tr.ate)
+	debugger.ActionStarted(t, "Stopping traffic on %s", tr.ate)
 	if err := ate.StopTraffic(context.Background(), tr.ate); err != nil {
 		t.Fatalf("Stop(t) on %s: %v", tr, err)
 	}

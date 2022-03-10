@@ -62,6 +62,110 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// Qos_Interface_Output_InterfaceRefPath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref YANG schema element.
+type Qos_Interface_Output_InterfaceRefPath struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Output_InterfaceRefPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref YANG schema element.
+type Qos_Interface_Output_InterfaceRefPathAny struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Output_InterfaceRef_InterfacePath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/interface YANG schema element.
+type Qos_Interface_Output_InterfaceRef_InterfacePath struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Output_InterfaceRef_InterfacePathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/interface YANG schema element.
+type Qos_Interface_Output_InterfaceRef_InterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Output_InterfaceRef_SubinterfacePath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/subinterface YANG schema element.
+type Qos_Interface_Output_InterfaceRef_SubinterfacePath struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Output_InterfaceRef_SubinterfacePathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/subinterface YANG schema element.
+type Qos_Interface_Output_InterfaceRef_SubinterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/interface"
+// Path from root: "/qos/interfaces/interface/output/interface-ref/state/interface"
+func (n *Qos_Interface_Output_InterfaceRefPath) Interface() *Qos_Interface_Output_InterfaceRef_InterfacePath {
+	return &Qos_Interface_Output_InterfaceRef_InterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/interface"
+// Path from root: "/qos/interfaces/interface/output/interface-ref/state/interface"
+func (n *Qos_Interface_Output_InterfaceRefPathAny) Interface() *Qos_Interface_Output_InterfaceRef_InterfacePathAny {
+	return &Qos_Interface_Output_InterfaceRef_InterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/subinterface"
+// Path from root: "/qos/interfaces/interface/output/interface-ref/state/subinterface"
+func (n *Qos_Interface_Output_InterfaceRefPath) Subinterface() *Qos_Interface_Output_InterfaceRef_SubinterfacePath {
+	return &Qos_Interface_Output_InterfaceRef_SubinterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/subinterface"
+// Path from root: "/qos/interfaces/interface/output/interface-ref/state/subinterface"
+func (n *Qos_Interface_Output_InterfaceRefPathAny) Subinterface() *Qos_Interface_Output_InterfaceRef_SubinterfacePathAny {
+	return &Qos_Interface_Output_InterfaceRef_SubinterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Qos_Interface_Output_QueuePath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue YANG schema element.
 type Qos_Interface_Output_QueuePath struct {
 	*ygot.NodePath

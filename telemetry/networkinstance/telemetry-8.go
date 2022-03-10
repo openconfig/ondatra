@@ -16,6 +16,6098 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariationPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay-variation/state/delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath extracts the value of the leaf Delay from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation_DelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelayVariation) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Delay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath extracts the value of the leaf ABit from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_ABitPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ABit
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-delay/state/delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath extracts the value of the leaf Delay from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay_DelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkDelay) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Delay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/local to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath extracts the value of the leaf Local from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_LocalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Local
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-id/state/remote to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath extracts the value of the leaf Remote from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId_RemotePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkId) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Remote
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLossPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath extracts the value of the leaf ABit from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_ABitPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ABit
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-loss/state/link-loss to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath extracts the value of the leaf LinkLoss from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss_LinkLossPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkLoss) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.LinkLoss
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypeWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypeWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Lookup(t testing.TB) *oc.QualifiedE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Get(t testing.TB) []oc.E_LinkProtectionType_Type {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_LinkProtectionType_TypeSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePathAny) Get(t testing.TB) [][]oc.E_LinkProtectionType_Type {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]oc.E_LinkProtectionType_Type
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	c := &oc.CollectionE_LinkProtectionType_TypeSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_LinkProtectionType_TypeSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_LinkProtectionType_TypeSlice) bool) *oc.E_LinkProtectionType_TypeSliceWatcher {
+	t.Helper()
+	w := &oc.E_LinkProtectionType_TypeSliceWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_LinkProtectionType_TypeSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_LinkProtectionType_TypeSlice) bool) *oc.E_LinkProtectionType_TypeSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Await(t testing.TB, timeout time.Duration, val []oc.E_LinkProtectionType_Type) *oc.QualifiedE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_LinkProtectionType_TypeSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	c := &oc.CollectionE_LinkProtectionType_TypeSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_LinkProtectionType_TypeSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_LinkProtectionType_TypeSlice) bool) *oc.E_LinkProtectionType_TypeSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/link-protection-type/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_LinkProtectionType_TypeSlice.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_LinkProtectionType) *oc.QualifiedE_LinkProtectionType_TypeSlice {
+	t.Helper()
+	qv := &oc.QualifiedE_LinkProtectionType_TypeSlice{
+		Metadata: md,
+	}
+	val := parent.Type
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath extracts the value of the leaf Bandwidth from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth_BandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxLinkBandwidth) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.Bandwidth
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath extracts the value of the leaf Bandwidth from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth_BandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.Bandwidth
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/a-bit to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath extracts the value of the leaf ABit from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_ABitPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ABit
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/max-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath extracts the value of the leaf MaxDelay from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MaxDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxDelay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/min-max-link-delay/state/min-delay to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath extracts the value of the leaf MinDelay from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_MinMaxLinkDelay) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MinDelay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath extracts the value of the leaf Bandwidth from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth_BandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_ResidualBandwidth) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.Bandwidth
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriorityPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath extracts the value of the leaf Bandwidth from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_BandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.Bandwidth
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/priority to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath extracts the value of the leaf Priority from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority_PriorityPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_SetupPriority) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Priority
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetricPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/te-default-metric/state/metric to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath extracts the value of the leaf Metric from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric_MetricPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TeDefaultMetric) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Metric
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Lookup(t testing.TB) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Get(t testing.TB) oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePathAny) Get(t testing.TB) []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{
+		Metadata: md,
+	}
+	val := parent.Type
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLspPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/count to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath extracts the value of the leaf Count from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_CountPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.Count
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Lookup(t testing.TB) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Get(t testing.TB) oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePathAny) Get(t testing.TB) []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/unconstrained-lsp/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UnconstrainedLsp) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{
+		Metadata: md,
+	}
+	val := parent.Type
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Get(t testing.TB) float32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPathAny) Get(t testing.TB) []float32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Await(t testing.TB, timeout time.Duration, val float32) *oc.QualifiedFloat32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat32 {
+	t.Helper()
+	c := &oc.CollectionFloat32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath extracts the value of the leaf Bandwidth from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat32.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_BandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) *oc.QualifiedFloat32 {
+	t.Helper()
+	qv := &oc.QualifiedFloat32{
+		Metadata: md,
+	}
+	val := parent.Bandwidth
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(ygot.BinaryToFloat32(val))
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Lookup(t testing.TB) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Get(t testing.TB) oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePathAny) Get(t testing.TB) []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	c := &oc.CollectionE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE) bool) *oc.E_IsisLsdbTypes_ISIS_SUBTLV_TYPEWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_Subtlv_UtilizedBandwidth) *oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_IsisLsdbTypes_ISIS_SUBTLV_TYPE{
+		Metadata: md,
+	}
+	val := parent.Type
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", gs, queryPath, false, false)
+		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{
+			Metadata: md,
+		}).SetVal(gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/length to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath extracts the value of the leaf Length from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_LengthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Length
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/type to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Type
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Lookup(t testing.TB) *oc.QualifiedBinary {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Get(t testing.TB) oc.Binary {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePathAny) Lookup(t testing.TB) []*oc.QualifiedBinary {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBinary
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePathAny) Get(t testing.TB) []oc.Binary {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.Binary
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
+	t.Helper()
+	c := &oc.CollectionBinary{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	w := &oc.BinaryWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBinary)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Await(t testing.TB, timeout time.Duration, val oc.Binary) *oc.QualifiedBinary {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBinary) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
+	t.Helper()
+	c := &oc.CollectionBinary{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv/state/value to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath extracts the value of the leaf Value from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv
+// and combines the update with an existing Metadata to return a *oc.QualifiedBinary.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv_ValuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlv) *oc.QualifiedBinary {
+	t.Helper()
+	qv := &oc.QualifiedBinary{
+		Metadata: md,
+	}
+	val := parent.Value
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor", gs, queryPath, true, false)
+		return convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t, md, gs), nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
+	t.Helper()
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id to the batch object.
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath extracts the value of the leaf MtId from its parent oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.MtId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/system-id with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -40282,3213 +46374,4 @@ func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_Grac
 		qv.SetVal(*val)
 	}
 	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Lookup(t testing.TB) *oc.QualifiedE_Tlv_Reason {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Get(t testing.TB) oc.E_Tlv_Reason {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPathAny) Lookup(t testing.TB) []*oc.QualifiedE_Tlv_Reason {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_Tlv_Reason
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPathAny) Get(t testing.TB) []oc.E_Tlv_Reason {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_Tlv_Reason
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Tlv_Reason {
-	t.Helper()
-	c := &oc.CollectionE_Tlv_Reason{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Tlv_Reason) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Tlv_Reason) bool) *oc.E_Tlv_ReasonWatcher {
-	t.Helper()
-	w := &oc.E_Tlv_ReasonWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Tlv_Reason)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Tlv_Reason) bool) *oc.E_Tlv_ReasonWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Await(t testing.TB, timeout time.Duration, val oc.E_Tlv_Reason) *oc.QualifiedE_Tlv_Reason {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Tlv_Reason) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Tlv_Reason {
-	t.Helper()
-	c := &oc.CollectionE_Tlv_Reason{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Tlv_Reason) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Tlv_Reason) bool) *oc.E_Tlv_ReasonWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/reason to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath extracts the value of the leaf Reason from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Tlv_Reason.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_ReasonPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv) *oc.QualifiedE_Tlv_Reason {
-	t.Helper()
-	qv := &oc.QualifiedE_Tlv_Reason{
-		Metadata: md,
-	}
-	val := parent.Reason
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Lookup(t testing.TB) *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Get(t testing.TB) oc.E_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePathAny) Get(t testing.TB) []oc.E_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_OspfTypes_GRACE_LSA_TLV_TYPES
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	c := &oc.CollectionE_OspfTypes_GRACE_LSA_TLV_TYPES{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool) *oc.E_OspfTypes_GRACE_LSA_TLV_TYPESWatcher {
-	t.Helper()
-	w := &oc.E_OspfTypes_GRACE_LSA_TLV_TYPESWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool) *oc.E_OspfTypes_GRACE_LSA_TLV_TYPESWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Await(t testing.TB, timeout time.Duration, val oc.E_OspfTypes_GRACE_LSA_TLV_TYPES) *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	c := &oc.CollectionE_OspfTypes_GRACE_LSA_TLV_TYPES{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES) bool) *oc.E_OspfTypes_GRACE_LSA_TLV_TYPESWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/state/type to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv) *oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES {
-	t.Helper()
-	qv := &oc.QualifiedE_OspfTypes_GRACE_LSA_TLV_TYPES{
-		Metadata: md,
-	}
-	val := parent.Type
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlvPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/length to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath extracts the value of the leaf Length from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_LengthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.Length
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	w := &oc.Uint16Watcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint16)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
-	t.Helper()
-	c := &oc.CollectionUint16{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/type to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath extracts the value of the leaf Type from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_TypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.Type
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Lookup(t testing.TB) *oc.QualifiedBinary {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Get(t testing.TB) oc.Binary {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePathAny) Lookup(t testing.TB) []*oc.QualifiedBinary {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBinary
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePathAny) Get(t testing.TB) []oc.Binary {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.Binary
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
-	t.Helper()
-	c := &oc.CollectionBinary{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
-	t.Helper()
-	w := &oc.BinaryWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBinary)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Await(t testing.TB, timeout time.Duration, val oc.Binary) *oc.QualifiedBinary {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBinary) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBinary {
-	t.Helper()
-	c := &oc.CollectionBinary{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBinary) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBinary) bool) *oc.BinaryWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa/tlvs/tlv/unknown-tlv/state/value to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath extracts the value of the leaf Value from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv
-// and combines the update with an existing Metadata to return a *oc.QualifiedBinary.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv_ValuePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsa_Tlv_UnknownTlv) *oc.QualifiedBinary {
-	t.Helper()
-	qv := &oc.QualifiedBinary{
-		Metadata: md,
-	}
-	val := parent.Value
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformationPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_TlvPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilitiesPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetExperimentalTe())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/experimental-te to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath extracts the value of the leaf ExperimentalTe from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_ExperimentalTePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.ExperimentalTe
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetGracefulRestartCapable())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-capable to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath extracts the value of the leaf GracefulRestartCapable from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartCapablePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.GracefulRestartCapable
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetGracefulRestartHelper())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/graceful-restart-helper to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath extracts the value of the leaf GracefulRestartHelper from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_GracefulRestartHelperPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.GracefulRestartHelper
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPointToPointOverLan())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/point-to-point-over-lan to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath extracts the value of the leaf PointToPointOverLan from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_PointToPointOverLanPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PointToPointOverLan
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetStubRouter())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/stub-router to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath extracts the value of the leaf StubRouter from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_StubRouterPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.StubRouter
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetTrafficEngineering())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/informational-capabilities/state/traffic-engineering to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath extracts the value of the leaf TrafficEngineering from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities_TrafficEngineeringPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_InformationalCapabilities) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.TrafficEngineering
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTagsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Lookup(t testing.TB) *oc.QualifiedUint32Slice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Get(t testing.TB) []uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32Slice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32Slice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPathAny) Get(t testing.TB) [][]uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32Slice {
-	t.Helper()
-	c := &oc.CollectionUint32Slice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32Slice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32Slice) bool) *oc.Uint32SliceWatcher {
-	t.Helper()
-	w := &oc.Uint32SliceWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint32Slice)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32Slice) bool) *oc.Uint32SliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Await(t testing.TB, timeout time.Duration, val []uint32) *oc.QualifiedUint32Slice {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32Slice) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32Slice {
-	t.Helper()
-	c := &oc.CollectionUint32Slice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32Slice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32Slice) bool) *oc.Uint32SliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/node-administrative-tags/state/administrative-tags to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath extracts the value of the leaf AdministrativeTags from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32Slice.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags_AdministrativeTagsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_NodeAdministrativeTags) *oc.QualifiedUint32Slice {
-	t.Helper()
-	qv := &oc.QualifiedUint32Slice{
-		Metadata: md,
-	}
-	val := parent.AdministrativeTags
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithmPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Lookup(t testing.TB) *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Get(t testing.TB) []oc.E_OspfTypes_SR_ALGORITHM {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPathAny) Lookup(t testing.TB) []*oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPathAny) Get(t testing.TB) [][]oc.E_OspfTypes_SR_ALGORITHM {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]oc.E_OspfTypes_SR_ALGORITHM
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	c := &oc.CollectionE_OspfTypes_SR_ALGORITHMSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool) *oc.E_OspfTypes_SR_ALGORITHMSliceWatcher {
-	t.Helper()
-	w := &oc.E_OspfTypes_SR_ALGORITHMSliceWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm", gs, queryPath, true, false)
-		return convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool) *oc.E_OspfTypes_SR_ALGORITHMSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Await(t testing.TB, timeout time.Duration, val []oc.E_OspfTypes_SR_ALGORITHM) *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	c := &oc.CollectionE_OspfTypes_SR_ALGORITHMSlice{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice) bool) *oc.E_OspfTypes_SR_ALGORITHMSliceWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-algorithm/state/supported-algorithms to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath extracts the value of the leaf SupportedAlgorithms from its parent oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice.
-func convertNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm_SupportedAlgorithmsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingAlgorithm) *oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice {
-	t.Helper()
-	qv := &oc.QualifiedE_OspfTypes_SR_ALGORITHMSlice{
-		Metadata: md,
-	}
-	val := parent.SupportedAlgorithms
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangeWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangeWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRangePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv", gs, queryPath, false, false)
-		return (&oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{
-			Metadata: md,
-		}).SetVal(gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_Tlv) bool) *oc.NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/router-information/tlvs/tlv/segment-routing-sid-label-range/tlvs/tlv to the batch object.
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_RouterInformation_Tlv_SegmentRoutingSidLabelRange_TlvPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
 }

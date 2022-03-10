@@ -10,6 +10,7 @@ require (
 	github.com/open-traffic-generator/snappi/gosnappi v0.7.6
 	github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d
 	github.com/openconfig/gnoi v0.0.0-20211102203610-1ece8ed91a0d
+	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.0.0
 	github.com/openconfig/gribi v0.1.1-0.20210423184541-ce37eb4ba92f
 	github.com/openconfig/ygot v0.15.1

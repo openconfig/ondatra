@@ -62,6 +62,546 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny struct {
+	*ygot.NodePath
+}
+
+// Ipv4Segment (container): Details of the IPv4 segment interface of the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "ipv4-segment"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Ipv4Segment() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-segment"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4Segment (container): Details of the IPv4 segment interface of the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "ipv4-segment"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Ipv4Segment() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-segment"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Loose (leaf): If this leaf is set the segment is identifier as a loose path
+// segment, otherwise the path strictly follows the path specified
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/loose"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Loose() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "loose"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Loose (leaf): If this leaf is set the segment is identifier as a loose path
+// segment, otherwise the path strictly follows the path specified
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/loose"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Loose() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "loose"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of the segment being specified as part of the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of the segment being specified as part of the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnnumberedHop (container): Details of the unnumbered interface segment of the
+// ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unnumbered-hop"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) UnnumberedHop() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unnumbered-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnnumberedHop (container): Details of the unnumbered interface segment of the
+// ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unnumbered-hop"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) UnnumberedHop() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unnumbered-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// Address (leaf): The IPv4 address of the hop within the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath) Address() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Address (leaf): The IPv4 address of the hop within the ERO
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny) Address() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny struct {
+	*ygot.NodePath
+}
+
+// InterfaceId (leaf): The identifier assigned to the link by the remote system
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath) InterfaceId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InterfaceId (leaf): The identifier assigned to the link by the remote system
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny) InterfaceId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouterId (leaf): The IPv4 router identtifier of the remote system
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath) RouterId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouterId (leaf): The IPv4 router identtifier of the remote system
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny) RouterId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny struct {
+	*ygot.NodePath
+}
+
+// SidType (leaf): The type of the value contained within the sub-TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sid-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath) SidType() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sid-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SidType (leaf): The type of the value contained within the sub-TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sid-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny) SidType() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sid-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SidValue (leaf): The value of the binding included within the sub-TLV. The type of
+// this binding is indicated by the type leaf.
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sid-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath) SidValue() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sid-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SidValue (leaf): The value of the binding included within the sub-TLV. The type of
+// this binding is indicated by the type leaf.
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sid-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny) SidValue() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sid-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny struct {
+	*ygot.NodePath
+}
+
+// Length (leaf): The length value of the unknown TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Length() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Length (leaf): The length value of the unknown TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Length() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type value of the unknown TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type value of the unknown TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): The value portion of the unknwon TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Value() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): The value portion of the unknwon TLV
+// ----------------------------------------
+// Defining module: "openconfig-ospfv2-lsdb"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value"
+func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Value() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny {
+	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsaPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/grace-lsa YANG schema element.
 type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_GraceLsaPath struct {
 	*ygot.NodePath
@@ -19456,110 +19996,6 @@ func (n *Qos_Interface_Output_Classifier_TermPathAny) MatchedPackets() *Qos_Inte
 	return &Qos_Interface_Output_Classifier_Term_MatchedPacketsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "matched-packets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Qos_Interface_Output_InterfaceRefPath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref YANG schema element.
-type Qos_Interface_Output_InterfaceRefPath struct {
-	*ygot.NodePath
-}
-
-// Qos_Interface_Output_InterfaceRefPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref YANG schema element.
-type Qos_Interface_Output_InterfaceRefPathAny struct {
-	*ygot.NodePath
-}
-
-// Qos_Interface_Output_InterfaceRef_InterfacePath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/interface YANG schema element.
-type Qos_Interface_Output_InterfaceRef_InterfacePath struct {
-	*ygot.NodePath
-}
-
-// Qos_Interface_Output_InterfaceRef_InterfacePathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/interface YANG schema element.
-type Qos_Interface_Output_InterfaceRef_InterfacePathAny struct {
-	*ygot.NodePath
-}
-
-// Qos_Interface_Output_InterfaceRef_SubinterfacePath represents the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/subinterface YANG schema element.
-type Qos_Interface_Output_InterfaceRef_SubinterfacePath struct {
-	*ygot.NodePath
-}
-
-// Qos_Interface_Output_InterfaceRef_SubinterfacePathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/interface-ref/state/subinterface YANG schema element.
-type Qos_Interface_Output_InterfaceRef_SubinterfacePathAny struct {
-	*ygot.NodePath
-}
-
-// Interface (leaf): Reference to a base interface.  If a reference to a
-// subinterface is required, this leaf must be specified
-// to indicate the base interface.
-// ----------------------------------------
-// Defining module: "openconfig-interfaces"
-// Instantiating module: "openconfig-qos"
-// Path from parent: "state/interface"
-// Path from root: "/qos/interfaces/interface/output/interface-ref/state/interface"
-func (n *Qos_Interface_Output_InterfaceRefPath) Interface() *Qos_Interface_Output_InterfaceRef_InterfacePath {
-	return &Qos_Interface_Output_InterfaceRef_InterfacePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "interface"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Interface (leaf): Reference to a base interface.  If a reference to a
-// subinterface is required, this leaf must be specified
-// to indicate the base interface.
-// ----------------------------------------
-// Defining module: "openconfig-interfaces"
-// Instantiating module: "openconfig-qos"
-// Path from parent: "state/interface"
-// Path from root: "/qos/interfaces/interface/output/interface-ref/state/interface"
-func (n *Qos_Interface_Output_InterfaceRefPathAny) Interface() *Qos_Interface_Output_InterfaceRef_InterfacePathAny {
-	return &Qos_Interface_Output_InterfaceRef_InterfacePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "interface"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Subinterface (leaf): Reference to a subinterface -- this requires the base
-// interface to be specified using the interface leaf in
-// this container.  If only a reference to a base interface
-// is requuired, this leaf should not be set.
-// ----------------------------------------
-// Defining module: "openconfig-interfaces"
-// Instantiating module: "openconfig-qos"
-// Path from parent: "state/subinterface"
-// Path from root: "/qos/interfaces/interface/output/interface-ref/state/subinterface"
-func (n *Qos_Interface_Output_InterfaceRefPath) Subinterface() *Qos_Interface_Output_InterfaceRef_SubinterfacePath {
-	return &Qos_Interface_Output_InterfaceRef_SubinterfacePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "subinterface"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Subinterface (leaf): Reference to a subinterface -- this requires the base
-// interface to be specified using the interface leaf in
-// this container.  If only a reference to a base interface
-// is requuired, this leaf should not be set.
-// ----------------------------------------
-// Defining module: "openconfig-interfaces"
-// Instantiating module: "openconfig-qos"
-// Path from parent: "state/subinterface"
-// Path from root: "/qos/interfaces/interface/output/interface-ref/state/subinterface"
-func (n *Qos_Interface_Output_InterfaceRefPathAny) Subinterface() *Qos_Interface_Output_InterfaceRef_SubinterfacePathAny {
-	return &Qos_Interface_Output_InterfaceRef_SubinterfacePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "subinterface"},
 			map[string]interface{}{},
 			n,
 		),

@@ -112,17 +112,19 @@ func (n *Network) ISIS() *IPReachabilityConfig {
 	return &IPReachabilityConfig{pb: n.pb.Isis}
 }
 
-// BGP creates a BGP config for the network or returns the existing config.  By
-// default, the network will have the following configuration:
+// BGP creates a BGP config for the network or returns the existing config.
+// By default, the network will advertise IPv4 routes over the BGP V4 peer and
+// advertise IPv6 routes over the V6 peer and have the following configuration:
 //   Active: true
 //   Origin: IGP
 //   ASN set mode: AS-SEQ
 func (n *Network) BGP() *BGPAttributes {
 	if n.pb.BgpAttributes == nil {
 		n.pb.BgpAttributes = &opb.BgpAttributes{
-			Active:     true,
-			Origin:     opb.BgpAttributes_ORIGIN_IGP,
-			AsnSetMode: opb.BgpAsnSetMode_ASN_SET_MODE_AS_SEQ,
+			Active:                true,
+			Origin:                opb.BgpAttributes_ORIGIN_IGP,
+			AsnSetMode:            opb.BgpAsnSetMode_ASN_SET_MODE_AS_SEQ,
+			AdvertisementProtocol: opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE,
 		}
 	}
 	return &BGPAttributes{pb: n.pb.BgpAttributes}

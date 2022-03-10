@@ -426,7 +426,15 @@ message BgpAttributes {
   repeated AsPathSegment as_path_segments = 7;
   StringIncRange originator_id = 9;
   repeated string cluster_ids = 10;
-  // NEXT ID: 11
+  enum AdvertisementProtocol {
+    ADVERTISEMENT_PROTOCOL_UNSPECIFIED = 0;
+    ADVERTISEMENT_PROTOCOL_V4 = 1;
+    ADVERTISEMENT_PROTOCOL_V6 = 2;
+    ADVERTISEMENT_PROTOCOL_V4_AND_V6 = 3;
+    ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE = 4;
+  }
+  AdvertisementProtocol advertisement_protocol = 11;
+  // NEXT ID: 12
 }
 
 message RsvpConfig {

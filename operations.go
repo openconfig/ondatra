@@ -22,8 +22,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/closer"
+	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/operations"
 
 	spb "github.com/openconfig/gnoi/system"
@@ -103,7 +104,7 @@ func (fr *fileReader) Read(p []byte) (int, error) {
 // Operate performs the Install operation.
 func (i *InstallOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Installing package on %s", i.dev)
+	debugger.ActionStarted(t, "Installing package on %s", i.dev)
 	if err := operations.Install(context.Background(), i.dev, i.version, i.standby, i.reader); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", i, err)
 	}
@@ -140,7 +141,7 @@ func (p *PingOp) WithCount(count int32) *PingOp {
 // Operate performs the Ping operation.
 func (p *PingOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Pinging from %s", p.dev)
+	debugger.ActionStarted(t, "Pinging from %s", p.dev)
 	if err := operations.Ping(context.Background(), p.dev, p.dest, p.count); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
 	}
@@ -185,7 +186,7 @@ func (s *SetInterfaceStateOp) WithStateEnabled(e bool) *SetInterfaceStateOp {
 // Operate performs the set interface state operation.
 func (s *SetInterfaceStateOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Setting interface state on %s", s.dev)
+	debugger.ActionStarted(t, "Setting interface state on %s", s.dev)
 	if err := operations.SetInterfaceState(context.Background(), s.dev, s.intf, s.enabled); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
@@ -215,7 +216,7 @@ func (r *RebootOp) WithTimeout(timeout time.Duration) *RebootOp {
 // Operate performs the Reboot operation.
 func (r *RebootOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Rebooting %s", r.dev)
+	debugger.ActionStarted(t, "Rebooting %s", r.dev)
 	if err := operations.Reboot(context.Background(), r.dev, r.timeout); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
@@ -279,7 +280,7 @@ func (r *KillProcessOp) String() string {
 // Operate performs the kill process operation.
 func (r *KillProcessOp) Operate(t testing.TB) {
 	t.Helper()
-	logAction(t, "Killing process on %s", r.dev)
+	debugger.ActionStarted(t, "Killing process on %s", r.dev)
 	if err := operations.KillProcess(context.Background(), r.dev, r.req); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}

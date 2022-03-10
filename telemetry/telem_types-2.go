@@ -12,461 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef sample.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef samples.
-type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef struct {
-	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRefWatcher
-	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRefWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef samples.
-type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRefWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRefWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter sample.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter samples.
-type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter struct {
-	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounterWatcher
-	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounterWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter samples.
-type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounterWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounterWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass sample.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass samples.
-type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass struct {
-	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher
-	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass samples.
-type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClassWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_SidCounter_ForwardingClass, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes is a *NetworkInstance_Mpls_TeGlobalAttributes with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributesWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributesWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes samples.
-type NetworkInstance_Mpls_TeGlobalAttributesWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributesWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup is a *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg is a *NetworkInstance_Mpls_TeGlobalAttributes_Srlg with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_Srlg // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList is a *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers is a *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers with a corresponding timestamp.
 type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers struct {
 	*genutil.Metadata
@@ -1962,6 +1507,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLi
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast struct {
 	*genutil.Metadata
@@ -2088,6 +1698,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitWatcher 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -2222,6 +1897,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLi
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast struct {
 	*genutil.Metadata
@@ -2348,6 +2088,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitWatcher 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv6Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -2482,6 +2287,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitWatche
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnEvpn_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls struct {
 	*genutil.Metadata
@@ -2608,6 +2478,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitWatcher st
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L2VpnVpls_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -2742,6 +2677,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLi
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast struct {
 	*genutil.Metadata
@@ -2868,6 +2868,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitWat
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -3002,6 +3067,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLi
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast struct {
 	*genutil.Metadata
@@ -3128,6 +3258,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitWat
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -3327,6 +3522,71 @@ func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitW
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6 is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6 with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6 struct {
 	*genutil.Metadata
@@ -3453,6 +3713,71 @@ type NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitWatch
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -4627,6 +4952,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast struct {
 	*genutil.Metadata
@@ -4753,6 +5143,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitWatche
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -4887,6 +5342,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast struct {
 	*genutil.Metadata
@@ -5013,6 +5533,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitWatche
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -5147,6 +5732,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitWatc
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls struct {
 	*genutil.Metadata
@@ -5273,6 +5923,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitWatcher 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -5407,6 +6122,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast struct {
 	*genutil.Metadata
@@ -5533,6 +6313,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitW
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -5667,6 +6512,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast struct {
 	*genutil.Metadata
@@ -5793,6 +6703,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitW
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -5992,6 +6967,71 @@ func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6 is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6 with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6 struct {
 	*genutil.Metadata
@@ -6118,6 +7158,71 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitWat
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) SetVal(v *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived samples.
+type CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived struct {
+	W    *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived samples.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -7743,851 +8848,6 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLim
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicastWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicastWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpnWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpnWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpnWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpnWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

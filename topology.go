@@ -21,11 +21,10 @@ import (
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
+	"github.com/openconfig/ondatra/internal/debugger"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
-
-var lagCount uint32
 
 // Topology is an ATE topology API.
 type Topology struct {
@@ -84,10 +83,9 @@ func (at *ATETopology) Interfaces() map[string]*Interface {
 
 // AddLAG adds and returns a new LAG.
 // By default the LAG has LACP enabled.
-func (at *ATETopology) AddLAG() *LAG {
-	lagCount = lagCount + 1
+func (at *ATETopology) AddLAG(name string) *LAG {
 	lpb := &opb.Lag{
-		Name: fmt.Sprintf("lag%d", lagCount),
+		Name: name,
 		Lacp: &opb.Lag_Lacp{Enabled: true},
 	}
 	at.top.Lags = append(at.top.Lags, lpb)
@@ -98,7 +96,7 @@ func (at *ATETopology) AddLAG() *LAG {
 // Currently running protocols will stop.
 func (at *ATETopology) Push(t testing.TB) *ATETopology {
 	t.Helper()
-	logAction(t, "Pushing topology to %s", at.ate)
+	debugger.ActionStarted(t, "Pushing topology to %s", at.ate)
 	if err := ate.PushTopology(context.Background(), at.ate, at.top); err != nil {
 		t.Fatalf("Push(t) on %s: %v", at, err)
 	}
@@ -109,7 +107,7 @@ func (at *ATETopology) Push(t testing.TB) *ATETopology {
 // Currently running protocols will continue running.
 func (at *ATETopology) Update(t testing.TB) {
 	t.Helper()
-	logAction(t, "Updating topology to %s", at.ate)
+	debugger.ActionStarted(t, "Updating topology to %s", at.ate)
 	if err := ate.UpdateTopology(context.Background(), at.ate, at.top, false); err != nil {
 		t.Fatalf("Update(t) on %s: %v", at, err)
 	}
@@ -128,7 +126,7 @@ func (at *ATETopology) UpdateBGPPeerStates(t testing.TB) {
 // StartProtocols starts the control plane protocols on the ATE.
 func (at *ATETopology) StartProtocols(t testing.TB) *ATETopology {
 	t.Helper()
-	logAction(t, "Starting protocols on %s", at.ate)
+	debugger.ActionStarted(t, "Starting protocols on %s", at.ate)
 	if err := ate.StartProtocols(context.Background(), at.ate); err != nil {
 		t.Fatalf("StartProtocols(t) on %s: %v", at, err)
 	}
@@ -138,7 +136,7 @@ func (at *ATETopology) StartProtocols(t testing.TB) *ATETopology {
 // StopProtocols stops the control plane protocols on the ATE.
 func (at *ATETopology) StopProtocols(t testing.TB) *ATETopology {
 	t.Helper()
-	logAction(t, "Stopping protocols to %s", at.ate)
+	debugger.ActionStarted(t, "Stopping protocols to %s", at.ate)
 	if err := ate.StopProtocols(context.Background(), at.ate); err != nil {
 		t.Fatalf("StopProtocols(t) on %s: %v", at, err)
 	}

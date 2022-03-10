@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/closer"
+	"github.com/openconfig/gocloser"
 )
 
 const (

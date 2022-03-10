@@ -16,9 +16,11 @@
 package negtest
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"runtime"
+	"sync"
 	"testing"
 )
 
@@ -74,6 +76,35 @@ func ExpectError(t testing.TB, fn func(testing.TB)) []string {
 		t.Fatalf("%s did not raise an error as was expected", funcName(fn))
 	}
 	return ft.errs
+}
+
+// ParallelFatal runs the provided functions in parallel. It waits for every
+// function to complete and if any fails fatally, i.e. calls any of t.{FailNow,
+// Fatal, Fatalf}, then it fails fatally itself.
+func ParallelFatal(t testing.TB, fns ...func(testing.TB)) {
+	t.Helper()
+	fnErrs := make(map[string]error)
+	var mu sync.Mutex
+	addErr := func(fn string, err error) {
+		mu.Lock()
+		defer mu.Unlock()
+		fnErrs[fn] = err
+	}
+
+	var wg sync.WaitGroup
+	for _, fn := range fns {
+		wg.Add(1)
+		go func(fn func(testing.TB)) {
+			defer wg.Done()
+			if errMsg := CaptureFatal(t, fn); errMsg != nil {
+				addErr(funcName(fn), errors.New(*errMsg))
+			}
+		}(fn)
+	}
+	wg.Wait()
+	if len(fnErrs) > 0 {
+		t.Fatalf("ParallelFatal: %d functions failed fatally: %v", len(fnErrs), fnErrs)
+	}
 }
 
 // fakeT is a testing.TB implementation that can be used as an input to unit tests

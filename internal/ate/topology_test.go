@@ -168,7 +168,7 @@ func TestAddLAGs(t *testing.T) {
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{vport1, vport2},
 				Lag: []*ixconfig.Lag{{
-					Name:    ixconfig.String("ixia1/staticLAG"),
+					Name:    ixconfig.String("staticLAG"),
 					LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("staticlag")},
 					ProtocolStack: &ixconfig.LagProtocolStack{
 						Enabled: ixconfig.MultivalueBool(true),
@@ -196,7 +196,7 @@ func TestAddLAGs(t *testing.T) {
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{vport1, vport2},
 				Lag: []*ixconfig.Lag{{
-					Name:    ixconfig.String("ixia1/lacpLAG"),
+					Name:    ixconfig.String("lacpLAG"),
 					LagMode: &ixconfig.LagLagMode{LagProtocol: ixconfig.MultivalueStr("lacp")},
 					ProtocolStack: &ixconfig.LagProtocolStack{
 						Enabled: ixconfig.MultivalueBool(true),

@@ -550,6 +550,8 @@ github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d h1:ENKx1I2+/8C70C6
 github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d/go.mod h1:h365Ifq35G6kLZDQlRvrccTt2LKK90VpjZLMNGxJRYc=
 github.com/openconfig/gnoi v0.0.0-20211102203610-1ece8ed91a0d h1:76V2FIiioEX5/Skam4lpFIrfVltvQxQaR9+PeOufNq8=
 github.com/openconfig/gnoi v0.0.0-20211102203610-1ece8ed91a0d/go.mod h1:Eq1jYfsMBoLDeE6p2+NP4CqPquhfJCI+gMtELTs2NYU=
+github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b h1:NSYuxdlOWLldNpid1dThR6Dci96juXioUguMho6aliI=
+github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b/go.mod h1:uhC/ybmPapgeyAL2b9ZrUQ+DZE+DB+J+/7377PX+lek=
 github.com/openconfig/goyang v0.0.0-20200115183954-d0a48929f0ea/go.mod h1:dhXaV0JgHJzdrHi2l+w0fZrwArtXL7jEFoiqLEdmkvU=
 github.com/openconfig/goyang v0.2.2/go.mod h1:vX61x01Q46AzbZUzG617vWqh/cB+aisc+RrNkXRd3W8=
 github.com/openconfig/goyang v1.0.0 h1:nYaFu7BOAk/eQn4CgAUjgYPfp3J6CdXrBryp32E5CjI=
