@@ -16,12 +16,14 @@ package ondatra
 
 import (
 	"fmt"
-	"strconv"
+	"log"
 	"testing"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	gnmiclient "github.com/openconfig/gnmi/client"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/testbed"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
@@ -40,15 +42,15 @@ func (o *OTG) NewConfig() gosnappi.Config {
 }
 
 // PushConfig pushes config to the ATE.
-func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
+func (o *OTG) PushConfig(t testing.TB, ate *ATEDevice, cfg gosnappi.Config) {
 	t.Helper()
-	const locFormat = "service-ate%d.ceos-simple.svc.cluster.local:5555+service-ate%d.ceos-simple.svc.cluster.local:50071"
 	for _, p := range cfg.Ports().Items() {
-		portNum, err := strconv.Atoi(p.Name()[1:])
-		if err != nil {
-			t.Fatal(err)
-		}
-		p.SetLocation(fmt.Sprintf(locFormat, portNum, portNum))
+		portName := p.Name()
+		portLocation := ate.Port(t, portName).Name()
+		log.Printf("Setting port Name(Topology): %s, Location: %s, Name(Config) %s",
+			portName, portLocation, portName)
+		p.SetLocation(portLocation)
+
 	}
 	debugger.ActionStarted(t, "Pushing config to %s", o.ate)
 	resp, err := o.api.SetConfig(cfg)
@@ -121,4 +123,12 @@ func (o *OTG) StopTraffic(t testing.TB) {
 	if warns := resp.Warnings(); len(warns) > 0 {
 		t.Logf("StopTraffic(t) on %s non-fatal warnings: %v", o, warns)
 	}
+}
+
+func (otg *OTG) NewGnmiQuery(t *testing.T) *gnmiclient.Query {
+	query, err := testbed.Bind().DialOTGGNMI(otg.ate)
+	if err != nil {
+		t.Error(err)
+	}
+	return query
 }
