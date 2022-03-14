@@ -17,7 +17,6 @@ package knebind
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"crypto/tls"
 	"fmt"
 	"io"
@@ -25,16 +24,21 @@ import (
 	"sync"
 	"time"
 
+	gnmiclient "github.com/openconfig/gnmi/client"
+
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
-	"golang.org/x/crypto/ssh"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/prototext"
-	"github.com/openconfig/gocloser"
+	"github.com/open-traffic-generator/snappi/gosnappi"
+	closer "github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"github.com/pkg/errors"
+	"golang.org/x/crypto/ssh"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	tpb "github.com/google/kne/proto/topo"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -140,6 +144,34 @@ func (b *Bind) dialGRPC(ctx context.Context, dut *binding.DUT, serviceName strin
 		return nil, errors.Wrapf(err, "DialContext(ctx, %s, %v)", addr, opts)
 	}
 	return conn, nil
+}
+
+func (b *Bind) DialOTG(ctx context.Context, ate *binding.ATE) (gosnappi.GosnappiApi, error) {
+	s, err := b.services.Lookup(ate.Name, "grpc")
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+	log.Infof("Dialing OTG GRPC server %s", addr)
+	api := gosnappi.NewApi()
+	api.NewGrpcTransport().SetLocation(addr).SetRequestTimeout(30 * time.Second)
+	return api, nil
+}
+
+func (b *Bind) DialOTGGNMI(ate *binding.ATE) (*gnmiclient.Query, error) {
+	s, err := b.services.Lookup(ate.Name, "gnmi")
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+	log.Infof("New OTG GNMI Query %s", addr)
+	query := &gnmiclient.Query{
+		Addrs:   []string{addr},
+		Timeout: 10 * time.Second,
+		TLS:     nil,
+		Type:    gnmiclient.Once,
+	}
+	return query, nil
 }
 
 // serviceAddr returns the external IP address of a KNE service.

@@ -15,8 +15,11 @@
 package ondatra
 
 import (
-	"github.com/open-traffic-generator/snappi/gosnappi"
+	"testing"
+
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/testbed"
+	"golang.org/x/net/context"
 )
 
 // ATEDevice is an automated test equipment.
@@ -26,10 +29,12 @@ type ATEDevice struct {
 }
 
 // OTG returns a handle to the OTG API.
-func (a *ATEDevice) OTG() *OTG {
+func (a *ATEDevice) OTG(t testing.TB) *OTG {
 	if a.otg == nil {
-		// TODO: Replace with a Binding.DialOTG method.
-		api := gosnappi.NewApi()
+		api, err := testbed.Bind().DialOTG(context.Background(), a.res.(*binding.ATE))
+		if err != nil {
+			t.Error(err)
+		}
 		a.otg = &OTG{ate: a.res.(*binding.ATE), api: api}
 	}
 	return a.otg

@@ -16,13 +16,16 @@
 package fakebind
 
 import (
-	"golang.org/x/net/context"
 	"time"
 
-	log "github.com/golang/glog"
-	"google.golang.org/grpc"
-	"github.com/openconfig/ondatra/binding"
+	"golang.org/x/net/context"
 
+	log "github.com/golang/glog"
+	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/ondatra/binding"
+	"google.golang.org/grpc"
+
+	gnmiclient "github.com/openconfig/gnmi/client"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
@@ -33,16 +36,18 @@ var _ binding.Binding = &Binding{}
 
 // Binding is a fake testbed binding comprised of stub implementations.
 type Binding struct {
-	Reservation   *binding.Reservation
-	ResvFetcher   func(context.Context, string) (*binding.Reservation, error)
-	ConfigPusher  func(context.Context, *binding.DUT, string, bool) error
-	CLIDialer     func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
-	ConsoleDialer func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
-	GNMIDialer    func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
-	GNOIDialer    func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
+	Reservation     *binding.Reservation
+	ResvFetcher     func(context.Context, string) (*binding.Reservation, error)
+	ConfigPusher    func(context.Context, *binding.DUT, string, bool) error
+	CLIDialer       func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
+	ConsoleDialer   func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error)
+	GNMIDialer      func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error)
+	GNOIDialer      func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error)
 	GRIBIDialer     func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error)
 	P4RTDialer      func(context.Context, *binding.DUT, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 	IxNetworkDialer func(context.Context, *binding.ATE) (*binding.IxNetwork, error)
+	OTGDialer       func(context.Context, *binding.ATE) (gosnappi.GosnappiApi, error)
+	OTGGNMIDialer   func(*binding.ATE) (*gnmiclient.Query, error)
 }
 
 // Reset zeros out all the stub implementations.
@@ -56,6 +61,8 @@ func (b *Binding) Reset() {
 	b.GNOIDialer = nil
 	b.P4RTDialer = nil
 	b.IxNetworkDialer = nil
+	b.OTGDialer = nil
+	b.OTGGNMIDialer = nil
 }
 
 // Reserve returns b.Reservation.
@@ -116,6 +123,16 @@ func (b *Binding) DialConsole(ctx context.Context, dut *binding.DUT, opts ...grp
 // DialIxNetwork delegates to b.IxNetworkDialer.
 func (b *Binding) DialIxNetwork(ctx context.Context, ate *binding.ATE) (*binding.IxNetwork, error) {
 	return b.IxNetworkDialer(ctx, ate)
+}
+
+// DialOTG delegates to b.OTGDialer.
+func (b *Binding) DialOTG(ctx context.Context, ate *binding.ATE) (gosnappi.GosnappiApi, error) {
+	return b.OTGDialer(ctx, ate)
+}
+
+// DialOTGGNMI delegates to b.OTGGNMIDialer.
+func (b *Binding) DialOTGGNMI(ate *binding.ATE) (*gnmiclient.Query, error) {
+	return b.OTGGNMIDialer(ate)
 }
 
 // HandleInfraFail logs the error and returns it unchanged.
