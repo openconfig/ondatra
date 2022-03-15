@@ -538,7 +538,6 @@ func TestTranslateFlowStats(t *testing.T) {
 	tests := []struct {
 		name             string
 		table            ixweb.StatTable
-		itFlows          []string
 		want             *telemetry.Device
 		wantErrSubstring string
 	}{{
@@ -553,21 +552,28 @@ func TestTranslateFlowStats(t *testing.T) {
 			"Tx Frames":     "20",
 			"Tx Frame Rate": "2",
 			"Tx Rate (bps)": "2048",
+			"Rx Port":       "port1",
+			"Tx Port":       "Eth1",
 		}},
-		want: &telemetry.Device{},
+		want: func() *telemetry.Device {
+			d := &telemetry.Device{}
+			f := d.GetOrCreateFlow("traffic1")
+			it := f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_NO_LABEL, "", "", "", "", 0)
+			it.Counters = &telemetry.Flow_IngressTracking_Counters{
+				InOctets: ygot.Uint64(100),
+				InPkts:   ygot.Uint64(10),
+				OutPkts:  ygot.Uint64(20),
+			}
+			it.LossPct = float32Bytes(2.1)
+			it.InFrameRate = float32Bytes(1)
+			it.OutFrameRate = float32Bytes(2)
+			it.InRate = float32Bytes(1024)
+			it.OutRate = float32Bytes(2048)
+			return d
+		}(),
 	}, {
 		name: "ingress tracking statistics",
 		table: ixweb.StatTable{{
-			"Traffic Item":  "traffic0",
-			"Loss %":        "2.1",
-			"Rx Bytes":      "100",
-			"Rx Frames":     "10",
-			"Rx Frame Rate": "1",
-			"Rx Rate (bps)": "1024",
-			"Tx Frames":     "20",
-			"Tx Frame Rate": "2",
-			"Tx Rate (bps)": "2048",
-		}, {
 			"Traffic Item":              "traffic1",
 			"Loss %":                    "2.1",
 			"Rx Bytes":                  "100",
@@ -589,7 +595,6 @@ func TestTranslateFlowStats(t *testing.T) {
 			"IPv4 :Precedence":          "3",
 			"VLAN:VLAN-ID":              "1",
 		}},
-		itFlows: []string{"traffic1"},
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
@@ -611,7 +616,6 @@ func TestTranslateFlowStats(t *testing.T) {
 		table: ixweb.StatTable{{
 			"Loss %": "2.1",
 		}},
-		itFlows:          []string{"traffic1"},
 		wantErrSubstring: "required key",
 	}, {
 		name: "invalid input for uint64 statistic",
@@ -619,7 +623,6 @@ func TestTranslateFlowStats(t *testing.T) {
 			"Traffic Item": "traffic1",
 			"Rx Bytes":     "one hundred",
 		}},
-		itFlows:          []string{"traffic1"},
 		wantErrSubstring: "Rx Bytes",
 	}, {
 		name: "invalid input for float32 statistic",
@@ -627,13 +630,12 @@ func TestTranslateFlowStats(t *testing.T) {
 			"Traffic Item": "traffic1",
 			"Loss %":       "two point one",
 		}},
-		itFlows:          []string{"traffic1"},
 		wantErrSubstring: "Loss %",
 	}}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := translateFlowStats(tt.table, tt.itFlows, nil)
+			got, err := translateFlowStats(tt.table, nil, nil)
 			if diff := errdiff.Substring(err, tt.wantErrSubstring); diff != "" {
 				t.Fatalf("did not get expected error, %s", diff)
 			}

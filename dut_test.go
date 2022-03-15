@@ -42,7 +42,7 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakes/fakestreamclient"
-	"github.com/openconfig/ondatra/negtest"
+	"github.com/openconfig/testt"
 
 )
 
@@ -167,7 +167,7 @@ func TestPushConfigErrors(t *testing.T) {
 
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
+			got := testt.ExpectFatal(t, func(t testing.TB) {
 				tt.config.Push(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
@@ -209,7 +209,7 @@ func TestGNMIError(t *testing.T) {
 		return nil, errors.New(wantErr)
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
-	gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+	gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 		raw.GNMI().New(t)
 	})
 	if !strings.Contains(gotErr, wantErr) {
@@ -362,7 +362,7 @@ func TestGNOIError(t *testing.T) {
 		return nil, errors.New(wantErr)
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
-	gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+	gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 		raw.GNOI().New(t)
 	})
 	if !strings.Contains(gotErr, wantErr) {
@@ -421,7 +421,7 @@ func TestGRIBIError(t *testing.T) {
 				return nil, errors.New(test.wantErr)
 			}
 
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				test.f(t)
 			})
 

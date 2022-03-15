@@ -206,32 +206,26 @@ func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.De
 	return d, nil
 }
 
-func translateFlowStats(in ixweb.StatTable, itFlows, _ []string) (*telemetry.Device, error) {
-	d := &telemetry.Device{}
-	// TODO: Investigate calling translateFlowStats only when itFlows is not empty.
-	if len(itFlows) == 0 {
-		return d, nil
-	}
+func translateFlowStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
 	flowRows, err := parseFlowStats(in)
 	if err != nil {
 		return nil, err
 	}
 
+	d := &telemetry.Device{}
 	for _, row := range flowRows {
-		if isIngressTracked(row.trafficItem, itFlows) {
-			f := d.GetOrCreateFlow(row.trafficItem)
-			it := ingressTrackingFromFlowStats(f, row)
-			it.Counters = &telemetry.Flow_IngressTracking_Counters{
-				InOctets: row.rxBytes,
-				InPkts:   row.rxFrames,
-				OutPkts:  row.txFrames,
-			}
-			it.LossPct = pfloat32Bytes(row.lossPct)
-			it.InRate = pfloat32Bytes(row.rxRate)
-			it.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-			it.OutRate = pfloat32Bytes(row.txRate)
-			it.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+		f := d.GetOrCreateFlow(row.trafficItem)
+		it := ingressTrackingFromFlowStats(f, row)
+		it.Counters = &telemetry.Flow_IngressTracking_Counters{
+			InOctets: row.rxBytes,
+			InPkts:   row.rxFrames,
+			OutPkts:  row.txFrames,
 		}
+		it.LossPct = pfloat32Bytes(row.lossPct)
+		it.InRate = pfloat32Bytes(row.rxRate)
+		it.InFrameRate = pfloat32Bytes(row.rxFrameRate)
+		it.OutRate = pfloat32Bytes(row.txRate)
+		it.OutFrameRate = pfloat32Bytes(row.txFrameRate)
 	}
 	return d, nil
 }

@@ -23,7 +23,7 @@ import (
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"
-	"github.com/openconfig/ondatra/negtest"
+	"github.com/openconfig/testt"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -175,7 +175,7 @@ func TestReserve(t *testing.T) {
 
 	t.Run("Get DUT failure", func(t *testing.T) {
 		id := "gaga"
-		got := negtest.ExpectFatal(t, func(t testing.TB) {
+		got := testt.ExpectFatal(t, func(t testing.TB) {
 			DUT(t, id)
 		})
 		if !strings.Contains(got, id) {
@@ -208,7 +208,7 @@ func TestReserve(t *testing.T) {
 
 	t.Run("Get ATE failure", func(t *testing.T) {
 		id := "gaga"
-		got := negtest.ExpectFatal(t, func(t testing.TB) {
+		got := testt.ExpectFatal(t, func(t testing.TB) {
 			ATE(t, id)
 		})
 		if !strings.Contains(got, id) {
@@ -233,7 +233,7 @@ func TestReserve(t *testing.T) {
 	t.Run("Get Port failure", func(t *testing.T) {
 		d := DUT(t, "dut")
 		pid := "gaga"
-		got := negtest.ExpectFatal(t, func(t testing.TB) {
+		got := testt.ExpectFatal(t, func(t testing.TB) {
 			d.Port(t, pid)
 		})
 		if !strings.Contains(got, pid) {

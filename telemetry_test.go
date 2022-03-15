@@ -33,10 +33,10 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/fakegnmi"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/negtest"
 	"github.com/openconfig/ondatra/telemetry/device"
 	"github.com/openconfig/ondatra/telemetry/interfaces"
 	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/testt"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -506,7 +506,7 @@ func TestGet(t *testing.T) {
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedE_Interface_OperStatus{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got status Qualified type different from expected (-want,+got):\n %s", diff)
 			}
-			fatalMsg := negtest.CaptureFatal(t, func(t testing.TB) {
+			fatalMsg := testt.CaptureFatal(t, func(t testing.TB) {
 				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
 					t.Errorf("Got status val different from expected (-want,+got):\n %s", diff)
 				}
@@ -627,7 +627,7 @@ func TestGet(t *testing.T) {
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
+			got := testt.ExpectFatal(t, func(t testing.TB) {
 				dut.Telemetry().Interface(staticPortName).OperStatus().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
@@ -952,7 +952,7 @@ func TestGetConfig(t *testing.T) {
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
+			got := testt.ExpectFatal(t, func(t testing.TB) {
 				dut.Config().Interface(staticPortName).Description().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
@@ -1379,7 +1379,7 @@ func TestGetNonleaf(t *testing.T) {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			if tt.wantFatalMsg != "" {
-				got := negtest.ExpectFatal(t, func(t testing.TB) {
+				got := testt.ExpectFatal(t, func(t testing.TB) {
 					tt.inInterfacePath().Lookup(t)
 				})
 				if !strings.Contains(got, tt.wantFatalMsg) {
@@ -1581,7 +1581,7 @@ func TestWildcardGet(t *testing.T) {
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
+			got := testt.ExpectFatal(t, func(t testing.TB) {
 				dut.Telemetry().InterfaceAny().Counters().InOctets().Lookup(t)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
@@ -1770,7 +1770,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 		t.Run(tt.desc, func(t *testing.T) {
 			tt.stub(fakeGNMI.Stub())
 			if tt.wantFatalMsg != "" {
-				got := negtest.ExpectFatal(t, func(t testing.TB) {
+				got := testt.ExpectFatal(t, func(t testing.TB) {
 					dut.Telemetry().InterfaceAny().Lookup(t)
 				})
 				if !strings.Contains(got, tt.wantFatalMsg) {

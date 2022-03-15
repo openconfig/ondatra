@@ -20,8 +20,8 @@ import (
 	"time"
 
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/negtest"
 	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/testt"
 )
 
 func TestMeanRateUint64(t *testing.T) {
@@ -90,7 +90,7 @@ func TestMeanRateUint64(t *testing.T) {
 
 	for _, tt := range testsFail {
 		t.Run(tt.desc, func(t *testing.T) {
-			got := negtest.ExpectFatal(t, func(t testing.TB) {
+			got := testt.ExpectFatal(t, func(t testing.TB) {
 				MeanRateUint64(t, tt.inVals)
 			})
 			if !strings.Contains(got, tt.wantFatalMsg) {
