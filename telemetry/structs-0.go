@@ -2775,42 +2775,47 @@ func (t *Acl_Interface_InterfaceRef) ΛEnumTypeMap() map[string][]reflect.Type {
 
 // Component represents the /openconfig-platform/components/component YANG schema element.
 type Component struct {
-	AllocatedPower    *uint32                               `path:"state/allocated-power" module:"openconfig-platform/openconfig-platform"`
-	Backplane         *Component_Backplane                  `path:"backplane" module:"openconfig-platform"`
-	Chassis           *Component_Chassis                    `path:"chassis" module:"openconfig-platform"`
-	Cpu               *Component_Cpu                        `path:"cpu" module:"openconfig-platform"`
-	Description       *string                               `path:"state/description" module:"openconfig-platform/openconfig-platform"`
-	Empty             *bool                                 `path:"state/empty" module:"openconfig-platform/openconfig-platform"`
-	EquipmentFailure  *bool                                 `path:"state/equipment-failure" module:"openconfig-platform/openconfig-alarms"`
-	EquipmentMismatch *bool                                 `path:"state/equipment-mismatch" module:"openconfig-platform/openconfig-alarms"`
-	Fabric            *Component_Fabric                     `path:"fabric" module:"openconfig-platform"`
-	Fan               *Component_Fan                        `path:"fan" module:"openconfig-platform"`
-	FirmwareVersion   *string                               `path:"state/firmware-version" module:"openconfig-platform/openconfig-platform"`
-	HardwareVersion   *string                               `path:"state/hardware-version" module:"openconfig-platform/openconfig-platform"`
-	Id                *string                               `path:"state/id" module:"openconfig-platform/openconfig-platform"`
-	IntegratedCircuit *Component_IntegratedCircuit          `path:"integrated-circuit" module:"openconfig-platform"`
-	Location          *string                               `path:"state/location" module:"openconfig-platform/openconfig-platform"`
-	Memory            *Component_Memory                     `path:"state/memory" module:"openconfig-platform/openconfig-platform"`
-	MfgDate           *string                               `path:"state/mfg-date" module:"openconfig-platform/openconfig-platform"`
-	MfgName           *string                               `path:"state/mfg-name" module:"openconfig-platform/openconfig-platform"`
-	Name              *string                               `path:"state/name|name" module:"openconfig-platform/openconfig-platform|openconfig-platform" shadow-path:"config/name|name" shadow-module:"openconfig-platform/openconfig-platform|openconfig-platform"`
-	OperStatus        E_PlatformTypes_COMPONENT_OPER_STATUS `path:"state/oper-status" module:"openconfig-platform/openconfig-platform"`
-	Parent            *string                               `path:"state/parent" module:"openconfig-platform/openconfig-platform"`
-	PartNo            *string                               `path:"state/part-no" module:"openconfig-platform/openconfig-platform"`
-	Pcie              *Component_Pcie                       `path:"state/pcie" module:"openconfig-platform/openconfig-platform"`
-	Port              *Component_Port                       `path:"port" module:"openconfig-platform"`
-	PowerSupply       *Component_PowerSupply                `path:"power-supply" module:"openconfig-platform"`
-	Property          map[string]*Component_Property        `path:"properties/property" module:"openconfig-platform/openconfig-platform"`
-	Removable         *bool                                 `path:"state/removable" module:"openconfig-platform/openconfig-platform"`
-	SerialNo          *string                               `path:"state/serial-no" module:"openconfig-platform/openconfig-platform"`
-	SoftwareModule    *Component_SoftwareModule             `path:"software-module" module:"openconfig-platform"`
-	SoftwareVersion   *string                               `path:"state/software-version" module:"openconfig-platform/openconfig-platform"`
-	Storage           *Component_Storage                    `path:"storage" module:"openconfig-platform"`
-	Subcomponent      map[string]*Component_Subcomponent    `path:"subcomponents/subcomponent" module:"openconfig-platform/openconfig-platform"`
-	Temperature       *Component_Temperature                `path:"state/temperature" module:"openconfig-platform/openconfig-platform"`
-	Transceiver       *Component_Transceiver                `path:"transceiver" module:"openconfig-platform-transceiver"`
-	Type              Component_Type_Union                  `path:"state/type" module:"openconfig-platform/openconfig-platform"`
-	UsedPower         *uint32                               `path:"state/used-power" module:"openconfig-platform/openconfig-platform"`
+	AllocatedPower       *uint32                                 `path:"state/allocated-power" module:"openconfig-platform/openconfig-platform"`
+	Backplane            *Component_Backplane                    `path:"backplane" module:"openconfig-platform"`
+	Chassis              *Component_Chassis                      `path:"chassis" module:"openconfig-platform"`
+	Cpu                  *Component_Cpu                          `path:"cpu" module:"openconfig-platform"`
+	Description          *string                                 `path:"state/description" module:"openconfig-platform/openconfig-platform"`
+	Empty                *bool                                   `path:"state/empty" module:"openconfig-platform/openconfig-platform"`
+	EquipmentFailure     *bool                                   `path:"state/equipment-failure" module:"openconfig-platform/openconfig-alarms"`
+	EquipmentMismatch    *bool                                   `path:"state/equipment-mismatch" module:"openconfig-platform/openconfig-alarms"`
+	Fabric               *Component_Fabric                       `path:"fabric" module:"openconfig-platform"`
+	Fan                  *Component_Fan                          `path:"fan" module:"openconfig-platform"`
+	FirmwareVersion      *string                                 `path:"state/firmware-version" module:"openconfig-platform/openconfig-platform"`
+	HardwareVersion      *string                                 `path:"state/hardware-version" module:"openconfig-platform/openconfig-platform"`
+	Id                   *string                                 `path:"state/id" module:"openconfig-platform/openconfig-platform"`
+	IntegratedCircuit    *Component_IntegratedCircuit            `path:"integrated-circuit" module:"openconfig-platform"`
+	LastRebootReason     E_PlatformTypes_COMPONENT_REBOOT_REASON `path:"state/last-reboot-reason" module:"openconfig-platform/openconfig-platform"`
+	LastRebootTime       *uint64                                 `path:"state/last-reboot-time" module:"openconfig-platform/openconfig-platform"`
+	LastSwitchoverReason *Component_LastSwitchoverReason         `path:"state/last-switchover-reason" module:"openconfig-platform/openconfig-platform"`
+	LastSwitchoverTime   *uint64                                 `path:"state/last-switchover-time" module:"openconfig-platform/openconfig-platform"`
+	Location             *string                                 `path:"state/location" module:"openconfig-platform/openconfig-platform"`
+	Memory               *Component_Memory                       `path:"state/memory" module:"openconfig-platform/openconfig-platform"`
+	MfgDate              *string                                 `path:"state/mfg-date" module:"openconfig-platform/openconfig-platform"`
+	MfgName              *string                                 `path:"state/mfg-name" module:"openconfig-platform/openconfig-platform"`
+	Name                 *string                                 `path:"state/name|name" module:"openconfig-platform/openconfig-platform|openconfig-platform" shadow-path:"config/name|name" shadow-module:"openconfig-platform/openconfig-platform|openconfig-platform"`
+	OperStatus           E_PlatformTypes_COMPONENT_OPER_STATUS   `path:"state/oper-status" module:"openconfig-platform/openconfig-platform"`
+	Parent               *string                                 `path:"state/parent" module:"openconfig-platform/openconfig-platform"`
+	PartNo               *string                                 `path:"state/part-no" module:"openconfig-platform/openconfig-platform"`
+	Pcie                 *Component_Pcie                         `path:"state/pcie" module:"openconfig-platform/openconfig-platform"`
+	Port                 *Component_Port                         `path:"port" module:"openconfig-platform"`
+	PowerSupply          *Component_PowerSupply                  `path:"power-supply" module:"openconfig-platform"`
+	Property             map[string]*Component_Property          `path:"properties/property" module:"openconfig-platform/openconfig-platform"`
+	RedundantRole        E_PlatformTypes_ComponentRedundantRole  `path:"state/redundant-role" module:"openconfig-platform/openconfig-platform"`
+	Removable            *bool                                   `path:"state/removable" module:"openconfig-platform/openconfig-platform"`
+	SerialNo             *string                                 `path:"state/serial-no" module:"openconfig-platform/openconfig-platform"`
+	SoftwareModule       *Component_SoftwareModule               `path:"software-module" module:"openconfig-platform"`
+	SoftwareVersion      *string                                 `path:"state/software-version" module:"openconfig-platform/openconfig-platform"`
+	Storage              *Component_Storage                      `path:"storage" module:"openconfig-platform"`
+	Subcomponent         map[string]*Component_Subcomponent      `path:"subcomponents/subcomponent" module:"openconfig-platform/openconfig-platform"`
+	Temperature          *Component_Temperature                  `path:"state/temperature" module:"openconfig-platform/openconfig-platform"`
+	Transceiver          *Component_Transceiver                  `path:"transceiver" module:"openconfig-platform-transceiver"`
+	Type                 Component_Type_Union                    `path:"state/type" module:"openconfig-platform/openconfig-platform"`
+	UsedPower            *uint32                                 `path:"state/used-power" module:"openconfig-platform/openconfig-platform"`
 }
 
 // IsYANGGoStruct ensures that Component implements the yang.GoStruct
@@ -3112,6 +3117,16 @@ func (t *Component) GetOrCreateIntegratedCircuit() *Component_IntegratedCircuit 
 	return t.IntegratedCircuit
 }
 
+// GetOrCreateLastSwitchoverReason retrieves the value of the LastSwitchoverReason field
+// or returns the existing field if it already exists.
+func (t *Component) GetOrCreateLastSwitchoverReason() *Component_LastSwitchoverReason {
+	if t.LastSwitchoverReason != nil {
+		return t.LastSwitchoverReason
+	}
+	t.LastSwitchoverReason = &Component_LastSwitchoverReason{}
+	return t.LastSwitchoverReason
+}
+
 // GetOrCreateMemory retrieves the value of the Memory field
 // or returns the existing field if it already exists.
 func (t *Component) GetOrCreateMemory() *Component_Memory {
@@ -3248,6 +3263,16 @@ func (t *Component) GetFan() *Component_Fan {
 func (t *Component) GetIntegratedCircuit() *Component_IntegratedCircuit {
 	if t != nil && t.IntegratedCircuit != nil {
 		return t.IntegratedCircuit
+	}
+	return nil
+}
+
+// GetLastSwitchoverReason returns the value of the LastSwitchoverReason struct pointer
+// from Component. If the receiver or the field LastSwitchoverReason is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component) GetLastSwitchoverReason() *Component_LastSwitchoverReason {
+	if t != nil && t.LastSwitchoverReason != nil {
+		return t.LastSwitchoverReason
 	}
 	return nil
 }
@@ -3460,6 +3485,54 @@ func (t *Component) GetId() string {
 	return *t.Id
 }
 
+// GetLastRebootReason retrieves the value of the leaf LastRebootReason from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastRebootReason is set, it can
+// safely use t.GetLastRebootReason() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastRebootReason == nil' before retrieving the leaf's value.
+func (t *Component) GetLastRebootReason() E_PlatformTypes_COMPONENT_REBOOT_REASON {
+	if t == nil || t.LastRebootReason == 0 {
+		return 0
+	}
+	return t.LastRebootReason
+}
+
+// GetLastRebootTime retrieves the value of the leaf LastRebootTime from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastRebootTime is set, it can
+// safely use t.GetLastRebootTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastRebootTime == nil' before retrieving the leaf's value.
+func (t *Component) GetLastRebootTime() uint64 {
+	if t == nil || t.LastRebootTime == nil {
+		return 0
+	}
+	return *t.LastRebootTime
+}
+
+// GetLastSwitchoverTime retrieves the value of the leaf LastSwitchoverTime from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastSwitchoverTime is set, it can
+// safely use t.GetLastSwitchoverTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastSwitchoverTime == nil' before retrieving the leaf's value.
+func (t *Component) GetLastSwitchoverTime() uint64 {
+	if t == nil || t.LastSwitchoverTime == nil {
+		return 0
+	}
+	return *t.LastSwitchoverTime
+}
+
 // GetLocation retrieves the value of the leaf Location from the Component
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -3572,6 +3645,22 @@ func (t *Component) GetPartNo() string {
 	return *t.PartNo
 }
 
+// GetRedundantRole retrieves the value of the leaf RedundantRole from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RedundantRole is set, it can
+// safely use t.GetRedundantRole() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RedundantRole == nil' before retrieving the leaf's value.
+func (t *Component) GetRedundantRole() E_PlatformTypes_ComponentRedundantRole {
+	if t == nil || t.RedundantRole == 0 {
+		return 0
+	}
+	return t.RedundantRole
+}
+
 // GetRemovable retrieves the value of the leaf Removable from the Component
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -3678,6 +3767,7 @@ func (t *Component) PopulateDefaults() {
 	t.Fabric.PopulateDefaults()
 	t.Fan.PopulateDefaults()
 	t.IntegratedCircuit.PopulateDefaults()
+	t.LastSwitchoverReason.PopulateDefaults()
 	t.Memory.PopulateDefaults()
 	t.Pcie.PopulateDefaults()
 	t.Port.PopulateDefaults()
@@ -4301,6 +4391,73 @@ func (t *Component_IntegratedCircuit_Memory) Validate(opts ...ygot.ValidationOpt
 // ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
 // that are included in the generated code.
 func (t *Component_IntegratedCircuit_Memory) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// Component_LastSwitchoverReason represents the /openconfig-platform/components/component/state/last-switchover-reason YANG schema element.
+type Component_LastSwitchoverReason struct {
+	Details *string                                                       `path:"details" module:"openconfig-platform"`
+	Trigger E_PlatformTypes_ComponentRedundantRoleSwitchoverReasonTrigger `path:"trigger" module:"openconfig-platform"`
+}
+
+// IsYANGGoStruct ensures that Component_LastSwitchoverReason implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_LastSwitchoverReason) IsYANGGoStruct() {}
+
+// GetDetails retrieves the value of the leaf Details from the Component_LastSwitchoverReason
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Details is set, it can
+// safely use t.GetDetails() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Details == nil' before retrieving the leaf's value.
+func (t *Component_LastSwitchoverReason) GetDetails() string {
+	if t == nil || t.Details == nil {
+		return ""
+	}
+	return *t.Details
+}
+
+// GetTrigger retrieves the value of the leaf Trigger from the Component_LastSwitchoverReason
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Trigger is set, it can
+// safely use t.GetTrigger() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Trigger == nil' before retrieving the leaf's value.
+func (t *Component_LastSwitchoverReason) GetTrigger() E_PlatformTypes_ComponentRedundantRoleSwitchoverReasonTrigger {
+	if t == nil || t.Trigger == 0 {
+		return 0
+	}
+	return t.Trigger
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_LastSwitchoverReason
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_LastSwitchoverReason) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_LastSwitchoverReason) Validate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_LastSwitchoverReason"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_LastSwitchoverReason) ΛEnumTypeMap() map[string][]reflect.Type {
 	return ΛEnumTypes
 }
 
@@ -18652,5 +18809,746 @@ func (t *Interface_Subinterface_Ipv4_Unnumbered) Validate(opts ...ygot.Validatio
 // ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
 // that are included in the generated code.
 func (t *Interface_Subinterface_Ipv4_Unnumbered) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref YANG schema element.
+type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef struct {
+	Interface    *string `path:"state/interface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Subinterface *uint32 `path:"state/subinterface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/subinterface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) IsYANGGoStruct() {}
+
+// GetInterface retrieves the value of the leaf Interface from the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interface is set, it can
+// safely use t.GetInterface() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interface == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) GetInterface() string {
+	if t == nil || t.Interface == nil {
+		return ""
+	}
+	return *t.Interface
+}
+
+// GetSubinterface retrieves the value of the leaf Subinterface from the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Subinterface is set, it can
+// safely use t.GetSubinterface() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Subinterface == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) GetSubinterface() uint32 {
+	if t == nil || t.Subinterface == nil {
+		return 0
+	}
+	return *t.Subinterface
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) Validate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// Interface_Subinterface_Ipv6 represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6 YANG schema element.
+type Interface_Subinterface_Ipv6 struct {
+	Address                map[string]*Interface_Subinterface_Ipv6_Address  `path:"addresses/address" module:"openconfig-if-ip/openconfig-if-ip"`
+	Autoconf               *Interface_Subinterface_Ipv6_Autoconf            `path:"autoconf" module:"openconfig-if-ip-ext"`
+	Counters               *Interface_Subinterface_Ipv6_Counters            `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
+	DhcpClient             *bool                                            `path:"state/dhcp-client" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dhcp-client" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	DupAddrDetectTransmits *uint32                                          `path:"state/dup-addr-detect-transmits" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dup-addr-detect-transmits" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Enabled                *bool                                            `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Mtu                    *uint32                                          `path:"state/mtu" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mtu" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Neighbor               map[string]*Interface_Subinterface_Ipv6_Neighbor `path:"neighbors/neighbor" module:"openconfig-if-ip/openconfig-if-ip"`
+	RouterAdvertisement    *Interface_Subinterface_Ipv6_RouterAdvertisement `path:"router-advertisement" module:"openconfig-if-ip"`
+	Unnumbered             *Interface_Subinterface_Ipv6_Unnumbered          `path:"unnumbered" module:"openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6 implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv6) IsYANGGoStruct() {}
+
+// NewAddress creates a new entry in the Address list of the
+// Interface_Subinterface_Ipv6 struct. The keys of the list are populated from the input
+// arguments.
+func (t *Interface_Subinterface_Ipv6) NewAddress(Ip string) (*Interface_Subinterface_Ipv6_Address, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Address == nil {
+		t.Address = make(map[string]*Interface_Subinterface_Ipv6_Address)
+	}
+
+	key := Ip
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Address[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Address", key)
+	}
+
+	t.Address[key] = &Interface_Subinterface_Ipv6_Address{
+		Ip: &Ip,
+	}
+
+	return t.Address[key], nil
+}
+
+// RenameAddress renames an entry in the list Address within
+// the Interface_Subinterface_Ipv6 struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Interface_Subinterface_Ipv6) RenameAddress(oldK, newK string) error {
+	if _, ok := t.Address[newK]; ok {
+		return fmt.Errorf("key %v already exists in Address", newK)
+	}
+
+	e, ok := t.Address[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Address", oldK)
+	}
+	e.Ip = &newK
+
+	t.Address[newK] = e
+	delete(t.Address, oldK)
+	return nil
+}
+
+// GetOrCreateAddress retrieves the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateAddress(Ip string) *Interface_Subinterface_Ipv6_Address {
+
+	key := Ip
+
+	if v, ok := t.Address[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAddress(Ip)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAddress got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAddress retrieves the value with the specified key from
+// the Address map field of Interface_Subinterface_Ipv6. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetAddress(Ip string) *Interface_Subinterface_Ipv6_Address {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Ip
+
+	if lm, ok := t.Address[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAddress deletes the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6. If there is no such element, the function
+// is a no-op.
+func (t *Interface_Subinterface_Ipv6) DeleteAddress(Ip string) {
+	key := Ip
+
+	delete(t.Address, key)
+}
+
+// AppendAddress appends the supplied Interface_Subinterface_Ipv6_Address struct to the
+// list Address of Interface_Subinterface_Ipv6. If the key value(s) specified in
+// the supplied Interface_Subinterface_Ipv6_Address already exist in the list, an error is
+// returned.
+func (t *Interface_Subinterface_Ipv6) AppendAddress(v *Interface_Subinterface_Ipv6_Address) error {
+	if v.Ip == nil {
+		return fmt.Errorf("invalid nil key received for Ip")
+	}
+
+	key := *v.Ip
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Address == nil {
+		t.Address = make(map[string]*Interface_Subinterface_Ipv6_Address)
+	}
+
+	if _, ok := t.Address[key]; ok {
+		return fmt.Errorf("duplicate key for list Address %v", key)
+	}
+
+	t.Address[key] = v
+	return nil
+}
+
+// NewNeighbor creates a new entry in the Neighbor list of the
+// Interface_Subinterface_Ipv6 struct. The keys of the list are populated from the input
+// arguments.
+func (t *Interface_Subinterface_Ipv6) NewNeighbor(Ip string) (*Interface_Subinterface_Ipv6_Neighbor, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Neighbor == nil {
+		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv6_Neighbor)
+	}
+
+	key := Ip
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Neighbor[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Neighbor", key)
+	}
+
+	t.Neighbor[key] = &Interface_Subinterface_Ipv6_Neighbor{
+		Ip: &Ip,
+	}
+
+	return t.Neighbor[key], nil
+}
+
+// RenameNeighbor renames an entry in the list Neighbor within
+// the Interface_Subinterface_Ipv6 struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Interface_Subinterface_Ipv6) RenameNeighbor(oldK, newK string) error {
+	if _, ok := t.Neighbor[newK]; ok {
+		return fmt.Errorf("key %v already exists in Neighbor", newK)
+	}
+
+	e, ok := t.Neighbor[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Neighbor", oldK)
+	}
+	e.Ip = &newK
+
+	t.Neighbor[newK] = e
+	delete(t.Neighbor, oldK)
+	return nil
+}
+
+// GetOrCreateNeighbor retrieves the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateNeighbor(Ip string) *Interface_Subinterface_Ipv6_Neighbor {
+
+	key := Ip
+
+	if v, ok := t.Neighbor[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewNeighbor(Ip)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateNeighbor got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetNeighbor retrieves the value with the specified key from
+// the Neighbor map field of Interface_Subinterface_Ipv6. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetNeighbor(Ip string) *Interface_Subinterface_Ipv6_Neighbor {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Ip
+
+	if lm, ok := t.Neighbor[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteNeighbor deletes the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6. If there is no such element, the function
+// is a no-op.
+func (t *Interface_Subinterface_Ipv6) DeleteNeighbor(Ip string) {
+	key := Ip
+
+	delete(t.Neighbor, key)
+}
+
+// AppendNeighbor appends the supplied Interface_Subinterface_Ipv6_Neighbor struct to the
+// list Neighbor of Interface_Subinterface_Ipv6. If the key value(s) specified in
+// the supplied Interface_Subinterface_Ipv6_Neighbor already exist in the list, an error is
+// returned.
+func (t *Interface_Subinterface_Ipv6) AppendNeighbor(v *Interface_Subinterface_Ipv6_Neighbor) error {
+	if v.Ip == nil {
+		return fmt.Errorf("invalid nil key received for Ip")
+	}
+
+	key := *v.Ip
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Neighbor == nil {
+		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv6_Neighbor)
+	}
+
+	if _, ok := t.Neighbor[key]; ok {
+		return fmt.Errorf("duplicate key for list Neighbor %v", key)
+	}
+
+	t.Neighbor[key] = v
+	return nil
+}
+
+// GetOrCreateAutoconf retrieves the value of the Autoconf field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateAutoconf() *Interface_Subinterface_Ipv6_Autoconf {
+	if t.Autoconf != nil {
+		return t.Autoconf
+	}
+	t.Autoconf = &Interface_Subinterface_Ipv6_Autoconf{}
+	return t.Autoconf
+}
+
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateCounters() *Interface_Subinterface_Ipv6_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Interface_Subinterface_Ipv6_Counters{}
+	return t.Counters
+}
+
+// GetOrCreateRouterAdvertisement retrieves the value of the RouterAdvertisement field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateRouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement {
+	if t.RouterAdvertisement != nil {
+		return t.RouterAdvertisement
+	}
+	t.RouterAdvertisement = &Interface_Subinterface_Ipv6_RouterAdvertisement{}
+	return t.RouterAdvertisement
+}
+
+// GetOrCreateUnnumbered retrieves the value of the Unnumbered field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateUnnumbered() *Interface_Subinterface_Ipv6_Unnumbered {
+	if t.Unnumbered != nil {
+		return t.Unnumbered
+	}
+	t.Unnumbered = &Interface_Subinterface_Ipv6_Unnumbered{}
+	return t.Unnumbered
+}
+
+// GetAutoconf returns the value of the Autoconf struct pointer
+// from Interface_Subinterface_Ipv6. If the receiver or the field Autoconf is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetAutoconf() *Interface_Subinterface_Ipv6_Autoconf {
+	if t != nil && t.Autoconf != nil {
+		return t.Autoconf
+	}
+	return nil
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from Interface_Subinterface_Ipv6. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetCounters() *Interface_Subinterface_Ipv6_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
+// GetRouterAdvertisement returns the value of the RouterAdvertisement struct pointer
+// from Interface_Subinterface_Ipv6. If the receiver or the field RouterAdvertisement is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetRouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement {
+	if t != nil && t.RouterAdvertisement != nil {
+		return t.RouterAdvertisement
+	}
+	return nil
+}
+
+// GetUnnumbered returns the value of the Unnumbered struct pointer
+// from Interface_Subinterface_Ipv6. If the receiver or the field Unnumbered is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetUnnumbered() *Interface_Subinterface_Ipv6_Unnumbered {
+	if t != nil && t.Unnumbered != nil {
+		return t.Unnumbered
+	}
+	return nil
+}
+
+// GetDhcpClient retrieves the value of the leaf DhcpClient from the Interface_Subinterface_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DhcpClient is set, it can
+// safely use t.GetDhcpClient() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DhcpClient == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6) GetDhcpClient() bool {
+	if t == nil || t.DhcpClient == nil {
+		return false
+	}
+	return *t.DhcpClient
+}
+
+// GetDupAddrDetectTransmits retrieves the value of the leaf DupAddrDetectTransmits from the Interface_Subinterface_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DupAddrDetectTransmits is set, it can
+// safely use t.GetDupAddrDetectTransmits() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DupAddrDetectTransmits == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6) GetDupAddrDetectTransmits() uint32 {
+	if t == nil || t.DupAddrDetectTransmits == nil {
+		return 1
+	}
+	return *t.DupAddrDetectTransmits
+}
+
+// GetEnabled retrieves the value of the leaf Enabled from the Interface_Subinterface_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return true
+	}
+	return *t.Enabled
+}
+
+// GetMtu retrieves the value of the leaf Mtu from the Interface_Subinterface_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Mtu is set, it can
+// safely use t.GetMtu() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Mtu == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6) GetMtu() uint32 {
+	if t == nil || t.Mtu == nil {
+		return 0
+	}
+	return *t.Mtu
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv6) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	if t.DhcpClient == nil {
+		var v bool = false
+		t.DhcpClient = &v
+	}
+	if t.DupAddrDetectTransmits == nil {
+		var v uint32 = 1
+		t.DupAddrDetectTransmits = &v
+	}
+	if t.Enabled == nil {
+		var v bool = true
+		t.Enabled = &v
+	}
+	t.Autoconf.PopulateDefaults()
+	t.Counters.PopulateDefaults()
+	t.RouterAdvertisement.PopulateDefaults()
+	t.Unnumbered.PopulateDefaults()
+	for _, e := range t.Address {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.Neighbor {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6) Validate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv6) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// Interface_Subinterface_Ipv6_Address represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address YANG schema element.
+type Interface_Subinterface_Ipv6_Address struct {
+	Ip           *string                                                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
+	Origin       E_IfIp_IpAddressOrigin                                   `path:"state/origin" module:"openconfig-if-ip/openconfig-if-ip"`
+	PrefixLength *uint8                                                   `path:"state/prefix-length" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/prefix-length" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Status       E_Address_Status                                         `path:"state/status" module:"openconfig-if-ip/openconfig-if-ip"`
+	VrrpGroup    map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup `path:"vrrp/vrrp-group" module:"openconfig-if-ip/openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_Address implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv6_Address) IsYANGGoStruct() {}
+
+// NewVrrpGroup creates a new entry in the VrrpGroup list of the
+// Interface_Subinterface_Ipv6_Address struct. The keys of the list are populated from the input
+// arguments.
+func (t *Interface_Subinterface_Ipv6_Address) NewVrrpGroup(VirtualRouterId uint8) (*Interface_Subinterface_Ipv6_Address_VrrpGroup, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.VrrpGroup == nil {
+		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup)
+	}
+
+	key := VirtualRouterId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.VrrpGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VrrpGroup", key)
+	}
+
+	t.VrrpGroup[key] = &Interface_Subinterface_Ipv6_Address_VrrpGroup{
+		VirtualRouterId: &VirtualRouterId,
+	}
+
+	return t.VrrpGroup[key], nil
+}
+
+// RenameVrrpGroup renames an entry in the list VrrpGroup within
+// the Interface_Subinterface_Ipv6_Address struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Interface_Subinterface_Ipv6_Address) RenameVrrpGroup(oldK, newK uint8) error {
+	if _, ok := t.VrrpGroup[newK]; ok {
+		return fmt.Errorf("key %v already exists in VrrpGroup", newK)
+	}
+
+	e, ok := t.VrrpGroup[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in VrrpGroup", oldK)
+	}
+	e.VirtualRouterId = &newK
+
+	t.VrrpGroup[newK] = e
+	delete(t.VrrpGroup, oldK)
+	return nil
+}
+
+// GetOrCreateVrrpGroup retrieves the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6_Address. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Interface_Subinterface_Ipv6_Address) GetOrCreateVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroup {
+
+	key := VirtualRouterId
+
+	if v, ok := t.VrrpGroup[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewVrrpGroup(VirtualRouterId)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateVrrpGroup got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetVrrpGroup retrieves the value with the specified key from
+// the VrrpGroup map field of Interface_Subinterface_Ipv6_Address. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Interface_Subinterface_Ipv6_Address) GetVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroup {
+
+	if t == nil {
+		return nil
+	}
+
+	key := VirtualRouterId
+
+	if lm, ok := t.VrrpGroup[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteVrrpGroup deletes the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv6_Address. If there is no such element, the function
+// is a no-op.
+func (t *Interface_Subinterface_Ipv6_Address) DeleteVrrpGroup(VirtualRouterId uint8) {
+	key := VirtualRouterId
+
+	delete(t.VrrpGroup, key)
+}
+
+// AppendVrrpGroup appends the supplied Interface_Subinterface_Ipv6_Address_VrrpGroup struct to the
+// list VrrpGroup of Interface_Subinterface_Ipv6_Address. If the key value(s) specified in
+// the supplied Interface_Subinterface_Ipv6_Address_VrrpGroup already exist in the list, an error is
+// returned.
+func (t *Interface_Subinterface_Ipv6_Address) AppendVrrpGroup(v *Interface_Subinterface_Ipv6_Address_VrrpGroup) error {
+	if v.VirtualRouterId == nil {
+		return fmt.Errorf("invalid nil key received for VirtualRouterId")
+	}
+
+	key := *v.VirtualRouterId
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.VrrpGroup == nil {
+		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup)
+	}
+
+	if _, ok := t.VrrpGroup[key]; ok {
+		return fmt.Errorf("duplicate key for list VrrpGroup %v", key)
+	}
+
+	t.VrrpGroup[key] = v
+	return nil
+}
+
+// GetIp retrieves the value of the leaf Ip from the Interface_Subinterface_Ipv6_Address
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Ip is set, it can
+// safely use t.GetIp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Ip == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Address) GetIp() string {
+	if t == nil || t.Ip == nil {
+		return ""
+	}
+	return *t.Ip
+}
+
+// GetOrigin retrieves the value of the leaf Origin from the Interface_Subinterface_Ipv6_Address
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Origin is set, it can
+// safely use t.GetOrigin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Origin == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Address) GetOrigin() E_IfIp_IpAddressOrigin {
+	if t == nil || t.Origin == 0 {
+		return 0
+	}
+	return t.Origin
+}
+
+// GetPrefixLength retrieves the value of the leaf PrefixLength from the Interface_Subinterface_Ipv6_Address
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PrefixLength is set, it can
+// safely use t.GetPrefixLength() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PrefixLength == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Address) GetPrefixLength() uint8 {
+	if t == nil || t.PrefixLength == nil {
+		return 0
+	}
+	return *t.PrefixLength
+}
+
+// GetStatus retrieves the value of the leaf Status from the Interface_Subinterface_Ipv6_Address
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Status is set, it can
+// safely use t.GetStatus() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Status == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Address) GetStatus() E_Address_Status {
+	if t == nil || t.Status == 0 {
+		return 0
+	}
+	return t.Status
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_Address
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv6_Address) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.VrrpGroup {
+		e.PopulateDefaults()
+	}
+}
+
+// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv6_Address struct, which is a YANG list entry.
+func (t *Interface_Subinterface_Ipv6_Address) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Ip == nil {
+		return nil, fmt.Errorf("nil value for key Ip")
+	}
+
+	return map[string]interface{}{
+		"ip": *t.Ip,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_Address) Validate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_Address"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv6_Address) ΛEnumTypeMap() map[string][]reflect.Type {
 	return ΛEnumTypes
 }

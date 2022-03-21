@@ -62,6 +62,1188 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny struct {
+	*ygot.NodePath
+}
+
+// RouterId (leaf): IPv4 Source router ID address. In cases where the
+// advertisement is an identifier for the advertising
+// router (e.g., with the N-flag set in the Prefix
+// Attribute Flags sub-TLV), it may be useful for other
+// routers to know the source of the advertisement. When
+// reachability advertisement is leaked from one level to
+// another, Router ID advertised is always the Router ID
+// of the IS-IS instance that originated the
+// advertisement. This would be true even if the prefix
+// had been learned from another protocol.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouterId (leaf): IPv4 Source router ID address. In cases where the
+// advertisement is an identifier for the advertising
+// router (e.g., with the N-flag set in the Prefix
+// Attribute Flags sub-TLV), it may be useful for other
+// routers to know the source of the advertisement. When
+// reachability advertisement is leaked from one level to
+// another, Router ID advertised is always the Router ID
+// of the IS-IS instance that originated the
+// advertisement. This would be true even if the prefix
+// had been learned from another protocol.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of subTLV being described. The type of subTLV is
+// expressed as a canonical name.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of subTLV being described. The type of subTLV is
+// expressed as a canonical name.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny struct {
+	*ygot.NodePath
+}
+
+// RouterId (leaf): IPv6 Source router ID address. In cases where the
+// advertisement is an identifier for the advertising
+// router (e.g., with the N-flag set in the Prefix
+// Attribute Flags sub-TLV), it may be useful for other
+// routers to know the source of the advertisement. When
+// reachability advertisement is leaked from one level to
+// another, Router ID advertised is always the Router ID
+// of the IS-IS instance that originated the
+// advertisement. This would be true even if the prefix
+// had been learned from another protocol.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouterId (leaf): IPv6 Source router ID address. In cases where the
+// advertisement is an identifier for the advertising
+// router (e.g., with the N-flag set in the Prefix
+// Attribute Flags sub-TLV), it may be useful for other
+// routers to know the source of the advertisement. When
+// reachability advertisement is leaked from one level to
+// another, Router ID advertised is always the Router ID
+// of the IS-IS instance that originated the
+// advertisement. This would be true even if the prefix
+// had been learned from another protocol.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/router-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "router-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of subTLV being described. The type of subTLV is
+// expressed as a canonical name.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): The type of subTLV being described. The type of subTLV is
+// expressed as a canonical name.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny struct {
+	*ygot.NodePath
+}
+
+// Algorithm (leaf): Prefix-SID algorithm to be used for path computation.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/algorithm"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPath) Algorithm() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "algorithm"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Algorithm (leaf): Prefix-SID algorithm to be used for path computation.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/algorithm"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPathAny) Algorithm() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "algorithm"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flags (leaf): Flags associated with Prefix Segment-ID.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/flags"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPath) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flags (leaf): Flags associated with Prefix Segment-ID.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/flags"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPathAny) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): IGP Prefix-SID value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPath) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): IGP Prefix-SID value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSidPathAny) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32PathAny struct {
+	*ygot.NodePath
+}
+
+// Tag32 (leaf): List of 32-bit tags associated with the prefix. Example
+// uses of these tags include carrying BGP standard (or
+// extended) communities and controlling redistribution
+// between levels and areas, different routing protocols,
+// or multiple instances of IS-IS running on the same
+// router.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/tag32"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPath) Tag32() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32Path {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "tag32"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Tag32 (leaf): List of 32-bit tags associated with the prefix. Example
+// uses of these tags include carrying BGP standard (or
+// extended) communities and controlling redistribution
+// between levels and areas, different routing protocols,
+// or multiple instances of IS-IS running on the same
+// router.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/tag32"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_TagPathAny) Tag32() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32PathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag_Tag32PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "tag32"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64PathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64 YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64PathAny struct {
+	*ygot.NodePath
+}
+
+// Tag64 (leaf): List of 64-bit tags associated with the prefix. Example
+// uses of these tags include carrying BGP standard (or
+// extended) communities and controlling redistribution
+// between levels and areas, different routing protocols,
+// or multiple instances of IS-IS running on the same
+// router.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/tag64"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64Path) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64Path {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "tag64"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Tag64 (leaf): List of 64-bit tags associated with the prefix. Example
+// uses of these tags include carrying BGP standard (or
+// extended) communities and controlling redistribution
+// between levels and areas, different routing protocols,
+// or multiple instances of IS-IS running on the same
+// router.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/tag64"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64PathAny) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64PathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_Subtlv_Tag64_Tag64PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "tag64"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePathAny struct {
+	*ygot.NodePath
+}
+
+// Length (leaf): TLV length.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPath) Length() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Length (leaf): TLV length.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPathAny) Length() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_LengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): TLV Type.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Type (leaf): TLV Type.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_TypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): TLV value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPath) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Value (leaf): TLV value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-ipv6-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlvPathAny) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIpv6Reachability_Prefix_UndefinedSubtlv_ValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny struct {
+	*ygot.NodePath
+}
+
+// NeighborAny (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId (wildcarded): uint16
+// SystemId (wildcarded): string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath) NeighborAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": "*", "system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId (wildcarded): uint16
+// SystemId (wildcarded): string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny) NeighborAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": "*", "system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAnySystemId (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId: uint16
+// SystemId (wildcarded): string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath) NeighborAnySystemId(MtId uint16) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": MtId, "system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAnySystemId (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId: uint16
+// SystemId (wildcarded): string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny) NeighborAnySystemId(MtId uint16) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": MtId, "system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAnyMtId (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId (wildcarded): uint16
+// SystemId: string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath) NeighborAnyMtId(SystemId string) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": "*", "system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// NeighborAnyMtId (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId (wildcarded): uint16
+// SystemId: string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny) NeighborAnyMtId(SystemId string) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": "*", "system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId: uint16
+// SystemId: string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePath) Neighbor(MtId uint16, SystemId string) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": MtId, "system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This container describes IS neighbors.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor"
+// MtId: uint16
+// SystemId: string
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttributePathAny) Neighbor(MtId uint16, SystemId string) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"mt-id": MtId, "system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/system-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/system-id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPathAny struct {
+	*ygot.NodePath
+}
+
+// InstanceAny (list): Instance of TLV-222 between the originating
+// and remote IS.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "instances/instance"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance"
+// Id (wildcarded): uint64
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath) InstanceAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instances", "instance"},
+			map[string]interface{}{"id": "*"},
+			n,
+		),
+	}
+}
+
+// InstanceAny (list): Instance of TLV-222 between the originating
+// and remote IS.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "instances/instance"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance"
+// Id (wildcarded): uint64
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny) InstanceAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instances", "instance"},
+			map[string]interface{}{"id": "*"},
+			n,
+		),
+	}
+}
+
+// Instance (list): Instance of TLV-222 between the originating
+// and remote IS.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "instances/instance"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance"
+// Id: uint64
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath) Instance(Id uint64) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instances", "instance"},
+			map[string]interface{}{"id": Id},
+			n,
+		),
+	}
+}
+
+// Instance (list): Instance of TLV-222 between the originating
+// and remote IS.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "instances/instance"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance"
+// Id: uint64
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny) Instance(Id uint64) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instances", "instance"},
+			map[string]interface{}{"id": Id},
+			n,
+		),
+	}
+}
+
+// MtId (leaf): Identifier of a topology being announced.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mt-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath) MtId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mt-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MtId (leaf): Identifier of a topology being announced.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mt-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/mt-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny) MtId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_MtIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mt-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SystemId (leaf): System-id of the IS neighbor.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/system-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/system-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPath) SystemId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SystemId (leaf): System-id of the IS neighbor.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/system-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/state/system-id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_NeighborPathAny) SystemId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_SystemIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/id YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/metric YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/metric YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPathAny struct {
+	*ygot.NodePath
+}
+
+// Id (leaf): Unique identifier for the TLV instance for the
+// neighbor. The ID is not required to be consistent
+// across readvertisements of the LSP.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) Id() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): Unique identifier for the TLV instance for the
+// neighbor. The ID is not required to be consistent
+// across readvertisements of the LSP.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/id"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) Id() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_IdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Metric (leaf): ISIS metric value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/metric"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/metric"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) Metric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Metric (leaf): ISIS metric value.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/metric"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/state/metric"
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) Metric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_MetricPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SubtlvAny (list): List of subTLV types in the LSDB for the specified TLV.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "subtlvs/subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv"
+// Type (wildcarded): E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) SubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"subtlvs", "subtlv"},
+			map[string]interface{}{"type": "*"},
+			n,
+		),
+	}
+}
+
+// SubtlvAny (list): List of subTLV types in the LSDB for the specified TLV.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "subtlvs/subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv"
+// Type (wildcarded): E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) SubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"subtlvs", "subtlv"},
+			map[string]interface{}{"type": "*"},
+			n,
+		),
+	}
+}
+
+// Subtlv (list): List of subTLV types in the LSDB for the specified TLV.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "subtlvs/subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv"
+// Type: E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) Subtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"subtlvs", "subtlv"},
+			map[string]interface{}{"type": Type},
+			n,
+		),
+	}
+}
+
+// Subtlv (list): List of subTLV types in the LSDB for the specified TLV.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "subtlvs/subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv"
+// Type: E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) Subtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"subtlvs", "subtlv"},
+			map[string]interface{}{"type": Type},
+			n,
+		),
+	}
+}
+
+// UndefinedSubtlvAny (list): Sub-TLVs that are not defined in the model or not
+// recognised by system.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "undefined-subtlvs/undefined-subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv"
+// Type (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) UndefinedSubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-subtlvs", "undefined-subtlv"},
+			map[string]interface{}{"type": "*"},
+			n,
+		),
+	}
+}
+
+// UndefinedSubtlvAny (list): Sub-TLVs that are not defined in the model or not
+// recognised by system.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "undefined-subtlvs/undefined-subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv"
+// Type (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) UndefinedSubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-subtlvs", "undefined-subtlv"},
+			map[string]interface{}{"type": "*"},
+			n,
+		),
+	}
+}
+
+// UndefinedSubtlv (list): Sub-TLVs that are not defined in the model or not
+// recognised by system.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "undefined-subtlvs/undefined-subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv"
+// Type: uint8
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePath) UndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-subtlvs", "undefined-subtlv"},
+			map[string]interface{}{"type": Type},
+			n,
+		),
+	}
+}
+
+// UndefinedSubtlv (list): Sub-TLVs that are not defined in the model or not
+// recognised by system.
+// ----------------------------------------
+// Defining module: "openconfig-isis-lsp"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "undefined-subtlvs/undefined-subtlv"
+// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/undefined-subtlvs/undefined-subtlv"
+// Type: uint8
+func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_InstancePathAny) UndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny {
+	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_UndefinedSubtlvPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-subtlvs", "undefined-subtlv"},
+			map[string]interface{}{"type": Type},
+			n,
+		),
+	}
+}
+
 // NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isis-neighbor-attribute/neighbors/neighbor/instances/instance/subtlvs/subtlv YANG schema element.
 type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_MtIsisNeighborAttribute_Neighbor_Instance_SubtlvPath struct {
 	*ygot.NodePath
@@ -14996,544 +16178,4 @@ type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPre
 // NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path YANG schema element.
 type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPathPathAny struct {
 	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Ipv4Segment (container): Details of the IPv4 segment interface of the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv4-segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Ipv4Segment() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-segment"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv4Segment (container): Details of the IPv4 segment interface of the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv4-segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Ipv4Segment() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-segment"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Loose (leaf): If this leaf is set the segment is identifier as a loose path
-// segment, otherwise the path strictly follows the path specified
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/loose"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Loose() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "loose"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Loose (leaf): If this leaf is set the segment is identifier as a loose path
-// segment, otherwise the path strictly follows the path specified
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/loose"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/loose"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Loose() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_LoosePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "loose"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of the segment being specified as part of the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of the segment being specified as part of the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/state/type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UnnumberedHop (container): Details of the unnumbered interface segment of the
-// ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unnumbered-hop"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPath) UnnumberedHop() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"unnumbered-hop"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UnnumberedHop (container): Details of the unnumbered interface segment of the
-// ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unnumbered-hop"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_SegmentPathAny) UnnumberedHop() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unnumbered-hop"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// Address (leaf): The IPv4 address of the hop within the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPath) Address() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Address (leaf): The IPv4 address of the hop within the ERO
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/ipv4-segment/state/address"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4SegmentPathAny) Address() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_Ipv4Segment_AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny struct {
-	*ygot.NodePath
-}
-
-// InterfaceId (leaf): The identifier assigned to the link by the remote system
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/interface-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath) InterfaceId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "interface-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InterfaceId (leaf): The identifier assigned to the link by the remote system
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/interface-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/interface-id"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny) InterfaceId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_InterfaceIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "interface-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RouterId (leaf): The IPv4 router identtifier of the remote system
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPath) RouterId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RouterId (leaf): The IPv4 router identtifier of the remote system
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/ero-path/segments/segment/unnumbered-hop/state/router-id"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHopPathAny) RouterId() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_EroPath_Segment_UnnumberedHop_RouterIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny struct {
-	*ygot.NodePath
-}
-
-// SidType (leaf): The type of the value contained within the sub-TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid-type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath) SidType() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid-type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SidType (leaf): The type of the value contained within the sub-TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid-type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny) SidType() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidTypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid-type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SidValue (leaf): The value of the binding included within the sub-TLV. The type of
-// this binding is indicated by the type leaf.
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid-value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPath) SidValue() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid-value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SidValue (leaf): The value of the binding included within the sub-TLV. The type of
-// this binding is indicated by the type leaf.
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid-value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/sid-label-binding/tlvs/tlv/sid-label-binding/state/sid-value"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBindingPathAny) SidValue() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_SidLabelBinding_Tlv_SidLabelBinding_SidValuePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid-value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value YANG schema element.
-type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny struct {
-	*ygot.NodePath
-}
-
-// Length (leaf): The length value of the unknown TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/length"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Length() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Length (leaf): The length value of the unknown TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/length"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/length"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Length() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_LengthPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type value of the unknown TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type value of the unknown TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/type"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Type() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): The value portion of the unknwon TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPath) Value() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): The value portion of the unknwon TLV
-// ----------------------------------------
-// Defining module: "openconfig-ospfv2-lsdb"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/lsdb/lsa-types/lsa-type/lsas/lsa/opaque-lsa/extended-prefix/tlvs/tlv/unknown-tlv/state/value"
-func (n *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlvPathAny) Value() *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny {
-	return &NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedPrefix_Tlv_UnknownTlv_ValuePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
 }

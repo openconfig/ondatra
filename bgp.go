@@ -582,6 +582,34 @@ func (a *BGPAttributes) WithClusterIDs(values ...string) *BGPAttributes {
 	return a
 }
 
+// WithAdvertisementProtocolV4 sets the routes to be advertised over a BGP V4
+// peer.
+func (a *BGPAttributes) WithAdvertisementProtocolV4() *BGPAttributes {
+	a.pb.AdvertisementProtocol = opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V4
+	return a
+}
+
+// WithAdvertisementProtocolV6 sets the routes to be advertised over a BGP V6
+// peer.
+func (a *BGPAttributes) WithAdvertisementProtocolV6() *BGPAttributes {
+	a.pb.AdvertisementProtocol = opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V6
+	return a
+}
+
+// WithAdvertisementProtocolV4AndV6 sets the routes to be advertised over both
+// BGP V4 and V6 peers.
+func (a *BGPAttributes) WithAdvertisementProtocolV4AndV6() *BGPAttributes {
+	a.pb.AdvertisementProtocol = opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V4_AND_V6
+	return a
+}
+
+// WithAdvertisementProtocolSameAsRoute sets the routes to be exported over the
+// BGP peer matching the routes' IP protocol.
+func (a *BGPAttributes) WithAdvertisementProtocolSameAsRoute() *BGPAttributes {
+	a.pb.AdvertisementProtocol = opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE
+	return a
+}
+
 // BGPSRTEPolicyGroup is a representation of BGP SR-TE policies on the ATE.
 type BGPSRTEPolicyGroup struct {
 	pb *opb.BgpPeer_SrtePolicyGroup

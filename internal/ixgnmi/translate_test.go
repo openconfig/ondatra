@@ -456,7 +456,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}
 }
 
-func TestTranslateFlowStats(t *testing.T) {
+func TestTranslateTrafficItemStats(t *testing.T) {
 	tests := []struct {
 		name             string
 		table            ixweb.StatTable
@@ -492,6 +492,86 @@ func TestTranslateFlowStats(t *testing.T) {
 			return d
 		}(),
 	}, {
+		name: "missing traffic item",
+		table: ixweb.StatTable{{
+			"Loss %": "2.1",
+		}},
+		wantErrSubstring: "required key",
+	}, {
+		name: "invalid input for uint64 statistic",
+		table: ixweb.StatTable{{
+			"Traffic Item": "traffic1",
+			"Rx Bytes":     "one hundred",
+		}},
+		wantErrSubstring: "Rx Bytes",
+	}, {
+		name: "invalid input for float32 statistic",
+		table: ixweb.StatTable{{
+			"Traffic Item": "traffic1",
+			"Loss %":       "two point one",
+		}},
+		wantErrSubstring: "Loss %",
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := translateTrafficItemStats(tt.table, tt.itFlows, nil)
+			if diff := errdiff.Substring(err, tt.wantErrSubstring); diff != "" {
+				t.Fatalf("did not get expected error, %s", diff)
+			}
+			if err != nil {
+				return
+			}
+
+			diff, err := ygot.Diff(tt.want, got)
+			if err != nil {
+				t.Fatalf("cannot diff received output, %v", err)
+			}
+			if !isEmptyDiff(diff) {
+				t.Fatalf("did not get expected mapped struct, delta from want to got:\n%s", prototext.Format(diff))
+			}
+		})
+	}
+}
+
+func TestTranslateFlowStats(t *testing.T) {
+	tests := []struct {
+		name             string
+		table            ixweb.StatTable
+		want             *telemetry.Device
+		wantErrSubstring string
+	}{{
+		name: "single flow statistics - ingress tracking disabled",
+		table: ixweb.StatTable{{
+			"Traffic Item":  "traffic1",
+			"Loss %":        "2.1",
+			"Rx Bytes":      "100",
+			"Rx Frames":     "10",
+			"Rx Frame Rate": "1",
+			"Rx Rate (bps)": "1024",
+			"Tx Frames":     "20",
+			"Tx Frame Rate": "2",
+			"Tx Rate (bps)": "2048",
+			"Rx Port":       "port1",
+			"Tx Port":       "Eth1",
+		}},
+		want: func() *telemetry.Device {
+			d := &telemetry.Device{}
+			f := d.GetOrCreateFlow("traffic1")
+			it := f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_NO_LABEL, "", "", "", "", 0)
+			it.Counters = &telemetry.Flow_IngressTracking_Counters{
+				InOctets: ygot.Uint64(100),
+				InPkts:   ygot.Uint64(10),
+				OutPkts:  ygot.Uint64(20),
+			}
+			it.LossPct = float32Bytes(2.1)
+			it.InFrameRate = float32Bytes(1)
+			it.OutFrameRate = float32Bytes(2)
+			it.InRate = float32Bytes(1024)
+			it.OutRate = float32Bytes(2048)
+			return d
+		}(),
+	}, {
 		name: "ingress tracking statistics",
 		table: ixweb.StatTable{{
 			"Traffic Item":              "traffic1",
@@ -515,11 +595,10 @@ func TestTranslateFlowStats(t *testing.T) {
 			"IPv4 :Precedence":          "3",
 			"VLAN:VLAN-ID":              "1",
 		}},
-		itFlows: []string{"traffic1"},
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
-			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
+			it := f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
 			it.Counters = &telemetry.Flow_IngressTracking_Counters{
 				InOctets: ygot.Uint64(100),
 				InPkts:   ygot.Uint64(10),
@@ -556,7 +635,7 @@ func TestTranslateFlowStats(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := translateFlowStats(tt.table, tt.itFlows, nil)
+			got, err := translateFlowStats(tt.table, nil, nil)
 			if diff := errdiff.Substring(err, tt.wantErrSubstring); diff != "" {
 				t.Fatalf("did not get expected error, %s", diff)
 			}
@@ -644,7 +723,7 @@ func TestTranslateEgressStats(t *testing.T) {
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
-			it := f.GetOrCreateIngressTracking("port1", "Eth1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
+			it := f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
 			it.Filter = ygot.String("MyFilter")
 			et := it.GetOrCreateEgressTracking("1")
 			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{

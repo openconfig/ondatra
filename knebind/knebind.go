@@ -26,12 +26,12 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
+	"github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"

@@ -155,4 +155,10 @@ func TestRefUpdate(t *testing.T) {
 	if *(vport.ConnectedTo) != topo.XPath().String() {
 		t.Errorf("Topology reference in Vport config not correctly updated: got %q, want %q", *(vport.ConnectedTo), topo.XPath().String())
 	}
+
+	// Update refs again to ensure resolved refs are not duplicated.
+	cfg.updateAllXPathsAndRefs()
+	if len(topo.Vports) != 1 || topo.Vports[0] != vport.XPath().String() {
+		t.Errorf("Vport reference in Topology config not correctly updated after second ref update: got %v, want %v", topo.Vports, []string{vport.XPath().String()})
+	}
 }

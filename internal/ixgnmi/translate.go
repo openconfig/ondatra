@@ -32,6 +32,7 @@ var (
 	translateFunctions = map[string]func(ixweb.StatTable, []string, []string) (*telemetry.Device, error){
 		portStatsCaption:         translatePortStats,
 		portCPUStatsCaption:      translatePortCPUStats,
+		trafficItemStatsCaption:  translateTrafficItemStats,
 		flowStatsCaption:         translateFlowStats,
 		ixweb.EgressStatsCaption: translateEgressStats,
 	}
@@ -90,8 +91,6 @@ func translate(st *Stats) (ygot.ValidatedGoStruct, error) {
 	return root, nil
 }
 
-// translatePortCPUStats maps the Ixia Port CPU Statistics to an OpenConfig
-// device structure.
 func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
 	portCPURows, err := parsePortCPUStats(in)
 	if err != nil {
@@ -132,8 +131,6 @@ func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device
 	return d, nil
 }
 
-// translatePortStats translates the Ixia "Port Stats" view to OpenConfig, returning
-// the translated statistics as a ygot-generated struct.
 func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
 	portRows, err := parsePortStats(in)
 	if err != nil {
@@ -187,9 +184,29 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 	return d, nil
 }
 
-// translateFlowStats translates the Flow Statistics view in the
-// supplied ixweb.StatTable to a telemetry.Device ygot-generated object.
-func translateFlowStats(in ixweb.StatTable, itFlows, _ []string) (*telemetry.Device, error) {
+func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
+	flowRows, err := parseFlowStats(in)
+	if err != nil {
+		return nil, err
+	}
+	d := &telemetry.Device{}
+	for _, row := range flowRows {
+		f := d.GetOrCreateFlow(row.trafficItem)
+		f.Counters = &telemetry.Flow_Counters{
+			InOctets: row.rxBytes,
+			InPkts:   row.rxFrames,
+			OutPkts:  row.txFrames,
+		}
+		f.LossPct = pfloat32Bytes(row.lossPct)
+		f.InRate = pfloat32Bytes(row.rxRate)
+		f.InFrameRate = pfloat32Bytes(row.rxFrameRate)
+		f.OutRate = pfloat32Bytes(row.txRate)
+		f.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+	}
+	return d, nil
+}
+
+func translateFlowStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
 	flowRows, err := parseFlowStats(in)
 	if err != nil {
 		return nil, err
@@ -198,36 +215,21 @@ func translateFlowStats(in ixweb.StatTable, itFlows, _ []string) (*telemetry.Dev
 	d := &telemetry.Device{}
 	for _, row := range flowRows {
 		f := d.GetOrCreateFlow(row.trafficItem)
-		if isIngressTracked(row.trafficItem, itFlows) {
-			it := ingressTrackingFromFlowStats(f, row)
-			it.Counters = &telemetry.Flow_IngressTracking_Counters{
-				InOctets: row.rxBytes,
-				InPkts:   row.rxFrames,
-				OutPkts:  row.txFrames,
-			}
-			it.LossPct = pfloat32Bytes(row.lossPct)
-			it.InRate = pfloat32Bytes(row.rxRate)
-			it.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-			it.OutRate = pfloat32Bytes(row.txRate)
-			it.OutFrameRate = pfloat32Bytes(row.txFrameRate)
-		} else {
-			f.Counters = &telemetry.Flow_Counters{
-				InOctets: row.rxBytes,
-				InPkts:   row.rxFrames,
-				OutPkts:  row.txFrames,
-			}
-			f.LossPct = pfloat32Bytes(row.lossPct)
-			f.InRate = pfloat32Bytes(row.rxRate)
-			f.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-			f.OutRate = pfloat32Bytes(row.txRate)
-			f.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+		it := ingressTrackingFromFlowStats(f, row)
+		it.Counters = &telemetry.Flow_IngressTracking_Counters{
+			InOctets: row.rxBytes,
+			InPkts:   row.rxFrames,
+			OutPkts:  row.txFrames,
 		}
+		it.LossPct = pfloat32Bytes(row.lossPct)
+		it.InRate = pfloat32Bytes(row.rxRate)
+		it.InFrameRate = pfloat32Bytes(row.rxFrameRate)
+		it.OutRate = pfloat32Bytes(row.txRate)
+		it.OutFrameRate = pfloat32Bytes(row.txFrameRate)
 	}
 	return d, nil
 }
 
-// translateEgressStats translates the Custom Egress Stats view in the
-// supplied ixweb.StatTable to a telemetry.Device ygot-generated object.
 func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telemetry.Device, error) {
 	egressRows, err := parseEgressStats(in)
 	if err != nil {
@@ -288,8 +290,8 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 
 func ingressTrackingFromFlowStats(flow *telemetry.Flow, row *flowRow) *telemetry.Flow_IngressTracking {
 	return flow.GetOrCreateIngressTracking(
-		row.rxPort,
 		row.txPort,
+		row.rxPort,
 		mplsLabelFromUint(row.mplsLabel),
 		row.srcIPv4,
 		row.dstIPv4,

@@ -81,7 +81,7 @@ func (ix *ixATE) addLAGs(lags []*opb.Lag) error {
 	portToLag := make(map[string]*opb.Lag)
 	for _, ol := range lags {
 		lag := &ixconfig.Lag{
-			Name:    ixconfig.String(fmt.Sprintf("%s/%s", ix.name, ol.GetName())),
+			Name:    ixconfig.String(ol.GetName()),
 			LagMode: &ixconfig.LagLagMode{},
 			ProtocolStack: &ixconfig.LagProtocolStack{
 				Multiplier: ixconfig.NumberFloat64(1),

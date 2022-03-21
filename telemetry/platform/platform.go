@@ -152,6 +152,36 @@ type Component_IdPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_LastRebootReasonPath represents the /openconfig-platform/components/component/state/last-reboot-reason YANG schema element.
+type Component_LastRebootReasonPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootReasonPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-reboot-reason YANG schema element.
+type Component_LastRebootReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootTimePath represents the /openconfig-platform/components/component/state/last-reboot-time YANG schema element.
+type Component_LastRebootTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_LastRebootTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-reboot-time YANG schema element.
+type Component_LastRebootTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverTimePath represents the /openconfig-platform/components/component/state/last-switchover-time YANG schema element.
+type Component_LastSwitchoverTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-time YANG schema element.
+type Component_LastSwitchoverTimePathAny struct {
+	*ygot.NodePath
+}
+
 // Component_LocationPath represents the /openconfig-platform/components/component/state/location YANG schema element.
 type Component_LocationPath struct {
 	*ygot.NodePath
@@ -219,6 +249,16 @@ type Component_PartNoPath struct {
 
 // Component_PartNoPathAny represents the wildcard version of the /openconfig-platform/components/component/state/part-no YANG schema element.
 type Component_PartNoPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_RedundantRolePath represents the /openconfig-platform/components/component/state/redundant-role YANG schema element.
+type Component_RedundantRolePath struct {
+	*ygot.NodePath
+}
+
+// Component_RedundantRolePathAny represents the wildcard version of the /openconfig-platform/components/component/state/redundant-role YANG schema element.
+type Component_RedundantRolePathAny struct {
 	*ygot.NodePath
 }
 
@@ -740,6 +780,146 @@ func (n *ComponentPathAny) IntegratedCircuit() *Component_IntegratedCircuitPathA
 	}
 }
 
+// LastRebootReason (leaf): This reports the reason of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-reason"
+// Path from root: "/components/component/state/last-reboot-reason"
+func (n *ComponentPath) LastRebootReason() *Component_LastRebootReasonPath {
+	return &Component_LastRebootReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootReason (leaf): This reports the reason of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-reason"
+// Path from root: "/components/component/state/last-reboot-reason"
+func (n *ComponentPathAny) LastRebootReason() *Component_LastRebootReasonPathAny {
+	return &Component_LastRebootReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-time"
+// Path from root: "/components/component/state/last-reboot-time"
+func (n *ComponentPath) LastRebootTime() *Component_LastRebootTimePath {
+	return &Component_LastRebootTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-reboot-time"
+// Path from root: "/components/component/state/last-reboot-time"
+func (n *ComponentPathAny) LastRebootTime() *Component_LastRebootTimePathAny {
+	return &Component_LastRebootTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-reboot-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverReason (container): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the reason of the last change of the
+// component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-reason"
+// Path from root: "/components/component/state/last-switchover-reason"
+func (n *ComponentPath) LastSwitchoverReason() *Component_LastSwitchoverReasonPath {
+	return &Component_LastSwitchoverReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverReason (container): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the reason of the last change of the
+// component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-reason"
+// Path from root: "/components/component/state/last-switchover-reason"
+func (n *ComponentPathAny) LastSwitchoverReason() *Component_LastSwitchoverReasonPathAny {
+	return &Component_LastSwitchoverReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as
+// secondary), this reports the time of the last change of
+// the component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-time"
+// Path from root: "/components/component/state/last-switchover-time"
+func (n *ComponentPath) LastSwitchoverTime() *Component_LastSwitchoverTimePath {
+	return &Component_LastSwitchoverTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as
+// secondary), this reports the time of the last change of
+// the component's role.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/last-switchover-time"
+// Path from root: "/components/component/state/last-switchover-time"
+func (n *ComponentPathAny) LastSwitchoverTime() *Component_LastSwitchoverTimePathAny {
+	return &Component_LastSwitchoverTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-switchover-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Location (leaf): System-supplied description of the location of the
 // component within the system. This could be a bay position,
 // slot number, socket location, etc. For component types that
@@ -1195,6 +1375,42 @@ func (n *ComponentPathAny) Property(Name string) *Component_PropertyPathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"properties", "property"},
 			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// RedundantRole (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the role of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/redundant-role"
+// Path from root: "/components/component/state/redundant-role"
+func (n *ComponentPath) RedundantRole() *Component_RedundantRolePath {
+	return &Component_RedundantRolePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redundant-role"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedundantRole (leaf): For components that have redundant roles (e.g. two
+// supervisors in a device, one as primary the other as secondary),
+// this reports the role of the component.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/redundant-role"
+// Path from root: "/components/component/state/redundant-role"
+func (n *ComponentPathAny) RedundantRole() *Component_RedundantRolePathAny {
+	return &Component_RedundantRolePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redundant-role"},
+			map[string]interface{}{},
 			n,
 		),
 	}
@@ -2388,6 +2604,108 @@ func (n *Component_IntegratedCircuit_MemoryPathAny) UncorrectedParityErrors() *C
 	return &Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "uncorrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_LastSwitchoverReasonPath represents the /openconfig-platform/components/component/state/last-switchover-reason YANG schema element.
+type Component_LastSwitchoverReasonPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReasonPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason YANG schema element.
+type Component_LastSwitchoverReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_DetailsPath represents the /openconfig-platform/components/component/state/last-switchover-reason/details YANG schema element.
+type Component_LastSwitchoverReason_DetailsPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_DetailsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason/details YANG schema element.
+type Component_LastSwitchoverReason_DetailsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_TriggerPath represents the /openconfig-platform/components/component/state/last-switchover-reason/trigger YANG schema element.
+type Component_LastSwitchoverReason_TriggerPath struct {
+	*ygot.NodePath
+}
+
+// Component_LastSwitchoverReason_TriggerPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-switchover-reason/trigger YANG schema element.
+type Component_LastSwitchoverReason_TriggerPathAny struct {
+	*ygot.NodePath
+}
+
+// Details (leaf): Records detailed description of why the switchover happens.
+// For example, when system initiated the switchover, this leaf
+// can be used to record the specific reason, e.g. due to critical
+// errors of the routing daemon in the primary role.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "details"
+// Path from root: "/components/component/state/last-switchover-reason/details"
+func (n *Component_LastSwitchoverReasonPath) Details() *Component_LastSwitchoverReason_DetailsPath {
+	return &Component_LastSwitchoverReason_DetailsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Details (leaf): Records detailed description of why the switchover happens.
+// For example, when system initiated the switchover, this leaf
+// can be used to record the specific reason, e.g. due to critical
+// errors of the routing daemon in the primary role.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "details"
+// Path from root: "/components/component/state/last-switchover-reason/details"
+func (n *Component_LastSwitchoverReasonPathAny) Details() *Component_LastSwitchoverReason_DetailsPathAny {
+	return &Component_LastSwitchoverReason_DetailsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Trigger (leaf): Records the generic triggers, e.g. user or system
+// initiated the switchover.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "trigger"
+// Path from root: "/components/component/state/last-switchover-reason/trigger"
+func (n *Component_LastSwitchoverReasonPath) Trigger() *Component_LastSwitchoverReason_TriggerPath {
+	return &Component_LastSwitchoverReason_TriggerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"trigger"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Trigger (leaf): Records the generic triggers, e.g. user or system
+// initiated the switchover.
+// ----------------------------------------
+// Defining module: "openconfig-platform-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "trigger"
+// Path from root: "/components/component/state/last-switchover-reason/trigger"
+func (n *Component_LastSwitchoverReasonPathAny) Trigger() *Component_LastSwitchoverReason_TriggerPathAny {
+	return &Component_LastSwitchoverReason_TriggerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"trigger"},
 			map[string]interface{}{},
 			n,
 		),

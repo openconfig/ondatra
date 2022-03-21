@@ -32,6 +32,8 @@ var (
 	reserve = flag.String("reserve", "", "reservation id or a mapping of device and port IDs to names of the form "+
 		"'dut=mydevice,dut:port1=Ethernet1/1,ate=myixia,ate:port2=2/3'")
 
+	debug = flag.Bool("debug", false, "Whether the test is run in debug mode")
+
 )
 
 // Values is the set of parsed and validated flag values.
@@ -41,6 +43,7 @@ type Values struct {
 	WaitTime    time.Duration
 	ResvID      string
 	ResvPartial map[string]string
+	Debug       bool
 }
 
 // Parse parse and validates the flag values.
@@ -67,11 +70,11 @@ func Parse() (*Values, error) {
 		WaitTime:    *waitTime,
 		ResvID:      resvID,
 		ResvPartial: resvPartial,
+		Debug: *debug,
 	}, nil
 }
 
 func parseReserve(res string) (string, map[string]string, error) {
-
 	if res == "" {
 		return "", nil, nil
 	}

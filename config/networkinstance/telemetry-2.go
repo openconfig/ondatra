@@ -15,1465 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.WarningThresholdPct
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.MaxPrefixes
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPreventTeardown())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.WarningThresholdPct
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.MaxPrefixes
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPreventTeardown())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.WarningThresholdPct
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -1672,107 +213,6 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixL
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -2771,6 +1211,402 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitP
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -2969,107 +1805,6 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLim
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -3359,6 +2094,402 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitP
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -3557,107 +2688,6 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLim
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -9180,6 +8210,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -9378,107 +8804,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Pre
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -9768,6 +9093,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitPa
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -9966,107 +9687,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimi
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -10459,6 +10079,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -10657,107 +10673,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Pre
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -11047,6 +10962,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitPa
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -11245,107 +11556,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimi
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -11738,6 +11948,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitPath
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -11936,107 +12542,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -12326,6 +12831,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitPath
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -12524,107 +13425,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -12914,6 +13714,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -13112,107 +14308,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Pre
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -13502,6 +14597,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -13700,107 +15191,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_Prefi
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -14090,6 +15480,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -14288,107 +16074,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Pre
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -14678,6 +16363,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -14876,107 +16957,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_Prefi
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -15266,6 +17246,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -15464,107 +17840,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixL
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -15854,6 +18129,402 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPreventTeardown())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PreventTeardown
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath extracts the value of the leaf WarningThresholdPct from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.WarningThresholdPct
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/max-prefixes with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -16052,107 +18723,6 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixL
 		Metadata: md,
 	}
 	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/restart-timer in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath extracts the value of the leaf RestartTimer from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.RestartTimer
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -20832,6 +23402,107 @@ func convertNetworkInstance_Protocol_Bgp_Neighbor_Timers_MinimumAdvertisementInt
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath extracts the value of the leaf RestartTime from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_Timers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.RestartTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_TransportPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Neighbor_Transport {
@@ -22194,400 +24865,4 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_ReceivePath(
 		qv.SetVal(*val)
 	}
 	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath extracts the value of the leaf SendMax from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.SendMax
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetSend())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath extracts the value of the leaf Send from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.Send
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Lookup(t testing.TB) *oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Get(t testing.TB) oc.E_BgpTypes_AFI_SAFI_TYPE {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePathAny) Lookup(t testing.TB) []*oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePathAny) Get(t testing.TB) []oc.E_BgpTypes_AFI_SAFI_TYPE {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_BgpTypes_AFI_SAFI_TYPE
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Replace(t testing.TB, val oc.E_BgpTypes_AFI_SAFI_TYPE) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_BgpTypes_AFI_SAFI_TYPE) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Update(t testing.TB, val oc.E_BgpTypes_AFI_SAFI_TYPE) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_BgpTypes_AFI_SAFI_TYPE) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath extracts the value of the leaf AfiSafiName from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi) *oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE {
-	t.Helper()
-	qv := &oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE{
-		Metadata: md,
-	}
-	val := parent.AfiSafiName
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
 }

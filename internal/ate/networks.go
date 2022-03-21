@@ -257,9 +257,17 @@ func bgpV4RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpIpRoutePropert
 		NoOfLargeCommunities:  ixconfig.NumberUint32(0),
 	}
 
-	if bgp.GetNextHopAddress() != "" {
+	if nh := bgp.GetNextHopAddress(); nh != "" {
 		brp.NextHopType = ixconfig.MultivalueStr("manual")
-		brp.Ipv4NextHop = ixconfig.MultivalueStr(bgp.GetNextHopAddress())
+		if _, isIPv6 := parseIP(nh); isIPv6 {
+			brp.Ipv6NextHop = ixconfig.MultivalueStr(nh)
+			brp.AdvertiseNexthopAsV4 = ixconfig.MultivalueFalse()
+			brp.NextHopIPType = ixconfig.MultivalueStr("ipv6")
+		} else {
+			brp.Ipv4NextHop = ixconfig.MultivalueStr(nh)
+			brp.AdvertiseNexthopAsV4 = ixconfig.MultivalueTrue()
+			brp.NextHopIPType = ixconfig.MultivalueStr("ipv4")
+		}
 	} else {
 		brp.NextHopType = ixconfig.MultivalueStr("sameaslocalip")
 	}
@@ -335,15 +343,15 @@ func bgpV6RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpV6IpRoutePrope
 
 	if nh := bgp.GetNextHopAddress(); nh != "" {
 		brp.NextHopType = ixconfig.MultivalueStr("manual")
-		brp.Ipv6NextHop = ixconfig.MultivalueStr(nh)
-		advNextHopAsV4 := true
-		nextHopIPType := "ipv4"
 		if _, isIPv6 := parseIP(nh); isIPv6 {
-			advNextHopAsV4 = false
-			nextHopIPType = "ipv6"
+			brp.Ipv6NextHop = ixconfig.MultivalueStr(nh)
+			brp.AdvertiseNexthopAsV4 = ixconfig.MultivalueFalse()
+			brp.NextHopIPType = ixconfig.MultivalueStr("ipv6")
+		} else {
+			brp.Ipv4NextHop = ixconfig.MultivalueStr(nh)
+			brp.AdvertiseNexthopAsV4 = ixconfig.MultivalueTrue()
+			brp.NextHopIPType = ixconfig.MultivalueStr("ipv4")
 		}
-		brp.AdvertiseNexthopAsV4 = ixconfig.MultivalueBool(advNextHopAsV4)
-		brp.NextHopIPType = ixconfig.MultivalueStr(nextHopIPType)
 	} else {
 		brp.NextHopType = ixconfig.MultivalueStr("sameaslocalip")
 	}
@@ -407,6 +415,43 @@ func bgpV6RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpV6IpRoutePrope
 	return brp, nil
 }
 
+func routeProps(bgp *opb.BgpAttributes, v6Routes bool) ([]*ixconfig.TopologyBgpIpRouteProperty, []*ixconfig.TopologyBgpV6IpRouteProperty, error) {
+	var exportV4, exportV6 bool
+	switch bgp.GetAdvertisementProtocol() {
+	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_UNSPECIFIED:
+		return nil, nil, usererr.New("BGP advertisement protocol not set for routes")
+	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V4:
+		exportV4 = true
+	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V6:
+		exportV6 = true
+	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V4_AND_V6:
+		exportV4 = true
+		exportV6 = true
+	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE:
+		exportV4 = !v6Routes
+		exportV6 = v6Routes
+	default:
+		return nil, nil, fmt.Errorf("unrecognized advertisement protocol specification: %v", bgp.GetAdvertisementProtocol())
+	}
+	var brps []*ixconfig.TopologyBgpIpRouteProperty
+	var brpsV6 []*ixconfig.TopologyBgpV6IpRouteProperty
+	if exportV4 {
+		brp, err := bgpV4RouteProp(bgp)
+		if err != nil {
+			return nil, nil, err
+		}
+		brps = []*ixconfig.TopologyBgpIpRouteProperty{brp}
+	}
+	if exportV6 {
+		brpV6, err := bgpV6RouteProp(bgp)
+		if err != nil {
+			return nil, nil, err
+		}
+		brpsV6 = []*ixconfig.TopologyBgpV6IpRouteProperty{brpV6}
+	}
+	return brps, brpsV6, nil
+}
+
 func ipv4Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg bool) ([]*ixconfig.TopologyIpv4PrefixPools, error) {
 	isis := netCfg.GetIsis()
 	bgp := netCfg.GetBgpAttributes()
@@ -447,12 +492,12 @@ func ipv4Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 	}
 
 	var brps []*ixconfig.TopologyBgpIpRouteProperty
+	var brpsV6 []*ixconfig.TopologyBgpV6IpRouteProperty
 	if bgp != nil {
-		brp, err := bgpV4RouteProp(bgp)
+		brps, brpsV6, err = routeProps(bgp, false)
 		if err != nil {
 			return nil, err
 		}
-		brps = []*ixconfig.TopologyBgpIpRouteProperty{brp}
 	} else if hasBgpCfg {
 		// BGP route config needs to be present if configured on _any_ network for this interface.
 		// Otherwise, Ixnetwork will autocreate an active config.
@@ -469,6 +514,7 @@ func ipv4Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 		NumberOfAddressesAsy: ixconfig.MultivalueUint32(ipv4.GetCount()),
 		IsisL3RouteProperty:  irps,
 		BgpIPRouteProperty:   brps,
+		BgpV6IPRouteProperty: brpsV6,
 	}}, nil
 }
 
@@ -511,17 +557,17 @@ func ipv6Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 		}}
 	}
 
-	var brps []*ixconfig.TopologyBgpV6IpRouteProperty
+	var brps []*ixconfig.TopologyBgpIpRouteProperty
+	var brpsV6 []*ixconfig.TopologyBgpV6IpRouteProperty
 	if bgp != nil {
-		brp, err := bgpV6RouteProp(bgp)
+		brps, brpsV6, err = routeProps(bgp, true)
 		if err != nil {
 			return nil, err
 		}
-		brps = []*ixconfig.TopologyBgpV6IpRouteProperty{brp}
 	} else if hasBgpCfg {
 		// BGP route config needs to be present if configured on _any_ network for this interface.
 		// Otherwise, Ixnetwork will autocreate an active config.
-		brps = []*ixconfig.TopologyBgpV6IpRouteProperty{{
+		brpsV6 = []*ixconfig.TopologyBgpV6IpRouteProperty{{
 			Name:   ixconfig.String(fmt.Sprintf("%s BGP V6 Inactive", netCfg.GetName())),
 			Active: ixconfig.MultivalueFalse(),
 		}}
@@ -533,7 +579,8 @@ func ipv6Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 		PrefixLength:         ixconfig.MultivalueUint32(uint32(mask)),
 		NumberOfAddressesAsy: ixconfig.MultivalueUint32(ipv6.GetCount()),
 		IsisL3RouteProperty:  irps,
-		BgpV6IPRouteProperty: brps,
+		BgpIPRouteProperty:   brps,
+		BgpV6IPRouteProperty: brpsV6,
 	}}, nil
 }
 

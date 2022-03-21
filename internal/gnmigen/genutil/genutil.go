@@ -26,7 +26,6 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra/internal/closer"
 	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"google.golang.org/grpc/codes"
@@ -38,6 +37,7 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/gnmi/errlist"
+	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
 

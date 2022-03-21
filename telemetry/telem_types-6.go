@@ -12,6 +12,851 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync is a *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor is a *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers is a *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Interface_Timers, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_LsdbWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_LsdbWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb samples.
+type NetworkInstance_Protocol_Ospfv2_Area_LsdbWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_LsdbWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaTypeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaTypeWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaTypeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_LsaWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_LsaWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_LsaWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_LsaWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsaWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsaWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsaWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsaWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfServiceWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfServiceWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfServiceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfServiceWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_AsExternalLsa_TypeOfService, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsaWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsaWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsaWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsaWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NetworkLsa, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsaWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsaWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsaWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsaWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfServiceWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfServiceWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfServiceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfServiceWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_NssaExternalLsa_TypeOfService, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsaWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsaWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsaWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsaWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) Val(t testing.TB) *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink sample.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) SetVal(v *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink samples.
+type CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink struct {
+	W    *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLinkWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLinkWatcher observes a stream of *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink samples.
+type NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLinkWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLinkWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink_Tlv is a *NetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink_Tlv with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Ospfv2_Area_Lsdb_LsaType_Lsa_OpaqueLsa_ExtendedLink_Tlv struct {
 	*genutil.Metadata
@@ -8003,591 +8848,6 @@ type Qos_QueueManagementProfile_RedWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Qos_QueueManagementProfile_RedWatcher) Await(t testing.TB) (*QualifiedQos_QueueManagementProfile_Red, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_QueueManagementProfile_Red_Uniform is a *Qos_QueueManagementProfile_Red_Uniform with a corresponding timestamp.
-type QualifiedQos_QueueManagementProfile_Red_Uniform struct {
-	*genutil.Metadata
-	val     *Qos_QueueManagementProfile_Red_Uniform // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_QueueManagementProfile_Red_Uniform) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_QueueManagementProfile_Red_Uniform sample, erroring out if not present.
-func (q *QualifiedQos_QueueManagementProfile_Red_Uniform) Val(t testing.TB) *Qos_QueueManagementProfile_Red_Uniform {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_QueueManagementProfile_Red_Uniform sample.
-func (q *QualifiedQos_QueueManagementProfile_Red_Uniform) SetVal(v *Qos_QueueManagementProfile_Red_Uniform) *QualifiedQos_QueueManagementProfile_Red_Uniform {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_QueueManagementProfile_Red_Uniform) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_QueueManagementProfile_Red_Uniform is a telemetry Collection whose Await method returns a slice of *Qos_QueueManagementProfile_Red_Uniform samples.
-type CollectionQos_QueueManagementProfile_Red_Uniform struct {
-	W    *Qos_QueueManagementProfile_Red_UniformWatcher
-	Data []*QualifiedQos_QueueManagementProfile_Red_Uniform
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_QueueManagementProfile_Red_Uniform) Await(t testing.TB) []*QualifiedQos_QueueManagementProfile_Red_Uniform {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_QueueManagementProfile_Red_UniformWatcher observes a stream of *Qos_QueueManagementProfile_Red_Uniform samples.
-type Qos_QueueManagementProfile_Red_UniformWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_QueueManagementProfile_Red_Uniform
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_QueueManagementProfile_Red_UniformWatcher) Await(t testing.TB) (*QualifiedQos_QueueManagementProfile_Red_Uniform, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_QueueManagementProfile_Wred is a *Qos_QueueManagementProfile_Wred with a corresponding timestamp.
-type QualifiedQos_QueueManagementProfile_Wred struct {
-	*genutil.Metadata
-	val     *Qos_QueueManagementProfile_Wred // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_QueueManagementProfile_Wred) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_QueueManagementProfile_Wred sample, erroring out if not present.
-func (q *QualifiedQos_QueueManagementProfile_Wred) Val(t testing.TB) *Qos_QueueManagementProfile_Wred {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_QueueManagementProfile_Wred sample.
-func (q *QualifiedQos_QueueManagementProfile_Wred) SetVal(v *Qos_QueueManagementProfile_Wred) *QualifiedQos_QueueManagementProfile_Wred {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_QueueManagementProfile_Wred) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_QueueManagementProfile_Wred is a telemetry Collection whose Await method returns a slice of *Qos_QueueManagementProfile_Wred samples.
-type CollectionQos_QueueManagementProfile_Wred struct {
-	W    *Qos_QueueManagementProfile_WredWatcher
-	Data []*QualifiedQos_QueueManagementProfile_Wred
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_QueueManagementProfile_Wred) Await(t testing.TB) []*QualifiedQos_QueueManagementProfile_Wred {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_QueueManagementProfile_WredWatcher observes a stream of *Qos_QueueManagementProfile_Wred samples.
-type Qos_QueueManagementProfile_WredWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_QueueManagementProfile_Wred
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_QueueManagementProfile_WredWatcher) Await(t testing.TB) (*QualifiedQos_QueueManagementProfile_Wred, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_QueueManagementProfile_Wred_Uniform is a *Qos_QueueManagementProfile_Wred_Uniform with a corresponding timestamp.
-type QualifiedQos_QueueManagementProfile_Wred_Uniform struct {
-	*genutil.Metadata
-	val     *Qos_QueueManagementProfile_Wred_Uniform // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_QueueManagementProfile_Wred_Uniform) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_QueueManagementProfile_Wred_Uniform sample, erroring out if not present.
-func (q *QualifiedQos_QueueManagementProfile_Wred_Uniform) Val(t testing.TB) *Qos_QueueManagementProfile_Wred_Uniform {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_QueueManagementProfile_Wred_Uniform sample.
-func (q *QualifiedQos_QueueManagementProfile_Wred_Uniform) SetVal(v *Qos_QueueManagementProfile_Wred_Uniform) *QualifiedQos_QueueManagementProfile_Wred_Uniform {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_QueueManagementProfile_Wred_Uniform) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_QueueManagementProfile_Wred_Uniform is a telemetry Collection whose Await method returns a slice of *Qos_QueueManagementProfile_Wred_Uniform samples.
-type CollectionQos_QueueManagementProfile_Wred_Uniform struct {
-	W    *Qos_QueueManagementProfile_Wred_UniformWatcher
-	Data []*QualifiedQos_QueueManagementProfile_Wred_Uniform
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_QueueManagementProfile_Wred_Uniform) Await(t testing.TB) []*QualifiedQos_QueueManagementProfile_Wred_Uniform {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_QueueManagementProfile_Wred_UniformWatcher observes a stream of *Qos_QueueManagementProfile_Wred_Uniform samples.
-type Qos_QueueManagementProfile_Wred_UniformWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_QueueManagementProfile_Wred_Uniform
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_QueueManagementProfile_Wred_UniformWatcher) Await(t testing.TB) (*QualifiedQos_QueueManagementProfile_Wred_Uniform, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy is a *Qos_SchedulerPolicy with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy) Val(t testing.TB) *Qos_SchedulerPolicy {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy sample.
-func (q *QualifiedQos_SchedulerPolicy) SetVal(v *Qos_SchedulerPolicy) *QualifiedQos_SchedulerPolicy {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy samples.
-type CollectionQos_SchedulerPolicy struct {
-	W    *Qos_SchedulerPolicyWatcher
-	Data []*QualifiedQos_SchedulerPolicy
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicyWatcher observes a stream of *Qos_SchedulerPolicy samples.
-type Qos_SchedulerPolicyWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicyWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler is a *Qos_SchedulerPolicy_Scheduler with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) SetVal(v *Qos_SchedulerPolicy_Scheduler) *QualifiedQos_SchedulerPolicy_Scheduler {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler samples.
-type CollectionQos_SchedulerPolicy_Scheduler struct {
-	W    *Qos_SchedulerPolicy_SchedulerWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_SchedulerWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler samples.
-type Qos_SchedulerPolicy_SchedulerWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_SchedulerWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_Input is a *Qos_SchedulerPolicy_Scheduler_Input with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_Input struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_Input // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_Input sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_Input {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_Input sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) SetVal(v *Qos_SchedulerPolicy_Scheduler_Input) *QualifiedQos_SchedulerPolicy_Scheduler_Input {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_Input is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_Input samples.
-type CollectionQos_SchedulerPolicy_Scheduler_Input struct {
-	W    *Qos_SchedulerPolicy_Scheduler_InputWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_Input
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_Input) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_Input {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_InputWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_Input samples.
-type Qos_SchedulerPolicy_Scheduler_InputWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_Input
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_InputWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_Input, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

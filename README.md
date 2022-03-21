@@ -53,6 +53,20 @@ additional flags related to the reservation of the testbed:
 In addition, the binding implementation is free to define its own set of
 optional or required flags.
 
+## Debugging an Ondatra Test
+
+To run an Ondatra test in "debug mode," pass the `-debug` flag to `go test.`
+Debug mode gives you the option allows you to insert breakpoints in your code
+with one simple line:
+
+```
+ondatra.Debug().Breakpoint(t)
+```
+
+It also offers a menu option to pause the test immediately after the testbed is
+reserved. This is useful if you want to just reserve the same testbed for manual
+testing, or to manually inspect the testbed before the test cases run.
+
 ## Testing on KNE
 
 You don't have to code your own binding implementation before getting started

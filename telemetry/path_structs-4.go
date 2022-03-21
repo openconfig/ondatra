@@ -62,6 +62,3152 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6MulticastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6UnicastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4 YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4 YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4PathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4Path) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4PathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4Path) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4PathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6 YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6 YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6PathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6Path) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6PathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6Path) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6PathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath struct {
 	*ygot.NodePath
@@ -82,6 +3228,16 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_M
 	*ygot.NodePath
 }
 
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prevent-teardown YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPath struct {
 	*ygot.NodePath
@@ -89,16 +3245,6 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_P
 
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prevent-teardown YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/restart-timer YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/restart-timer YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny struct {
 	*ygot.NodePath
 }
 
@@ -113,7 +3259,7 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_W
 }
 
 // MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbour
+// from the neighbor
 // ----------------------------------------
 // Defining module: "openconfig-bgp-common-multiprotocol"
 // Instantiating module: "openconfig-network-instance"
@@ -130,7 +3276,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLim
 }
 
 // MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbour
+// from the neighbor
 // ----------------------------------------
 // Defining module: "openconfig-bgp-common-multiprotocol"
 // Instantiating module: "openconfig-network-instance"
@@ -140,6 +3286,44 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLim
 	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_MaxPrefixesPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
 			map[string]interface{}{},
 			n,
 		),
@@ -186,44 +3370,8 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLim
 	}
 }
 
-// RestartTimer (leaf): Time interval in seconds after which the BGP session
-// is re-established after being torn down due to exceeding
-// the max-prefix limit.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/restart-timer"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/restart-timer"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPath) RestartTimer() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "restart-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RestartTimer (leaf): Time interval in seconds after which the BGP session
-// is re-established after being torn down due to exceeding
-// the max-prefix limit.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/restart-timer"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/restart-timer"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPathAny) RestartTimer() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_RestartTimerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "restart-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
 // WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbour before generation of warning messages
+// from a neighbor before generation of warning messages
 // or log entries. Expressed as a percentage of
 // max-prefixes
 // ----------------------------------------
@@ -242,7 +3390,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLim
 }
 
 // WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbour before generation of warning messages
+// from a neighbor before generation of warning messages
 // or log entries. Expressed as a percentage of
 // max-prefixes
 // ----------------------------------------
@@ -252,6 +3400,206 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLim
 // Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/state/warning-threshold-pct"
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_WarningThresholdPctPathAny {
 	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "warning-threshold-pct"},
 			map[string]interface{}{},
@@ -1492,6 +4840,16 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalP
 	*ygot.NodePath
 }
 
+// NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/restart-time YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/restart-time YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePathAny struct {
+	*ygot.NodePath
+}
+
 // ConnectRetry (leaf): Time interval in seconds between attempts to establish a
 // session with the peer.
 // ----------------------------------------
@@ -1636,6 +4994,42 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_TimersPathAny) MinimumAdvertisem
 	return &NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "minimum-advertisement-interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RestartTime (leaf): Time interval in seconds after which the BGP session is
+// re-established after being torn down due to exceeding any
+// configured max prefix-limit.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/restart-time"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/restart-time"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_TimersPath) RestartTime() *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePath {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "restart-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RestartTime (leaf): Time interval in seconds after which the BGP session is
+// re-established after being torn down due to exceeding any
+// configured max prefix-limit.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/restart-time"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/restart-time"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_TimersPathAny) RestartTime() *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePathAny {
+	return &NetworkInstance_Protocol_Bgp_PeerGroup_Timers_RestartTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "restart-time"},
 			map[string]interface{}{},
 			n,
 		),
@@ -25116,3444 +28510,6 @@ func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOut
 	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPost_Route_UnknownAttribute_TransitivePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "transitive"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny struct {
-	*ygot.NodePath
-}
-
-// RouteAny (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix (wildcarded): string
-// PathId (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath) RouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": "*", "path-id": "*"},
-			n,
-		),
-	}
-}
-
-// RouteAny (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix (wildcarded): string
-// PathId (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny) RouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": "*", "path-id": "*"},
-			n,
-		),
-	}
-}
-
-// RouteAnyPathId (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix: string
-// PathId (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath) RouteAnyPathId(Prefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": Prefix, "path-id": "*"},
-			n,
-		),
-	}
-}
-
-// RouteAnyPathId (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix: string
-// PathId (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny) RouteAnyPathId(Prefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": Prefix, "path-id": "*"},
-			n,
-		),
-	}
-}
-
-// RouteAnyPrefix (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix (wildcarded): string
-// PathId: uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath) RouteAnyPrefix(PathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": "*", "path-id": PathId},
-			n,
-		),
-	}
-}
-
-// RouteAnyPrefix (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix (wildcarded): string
-// PathId: uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny) RouteAnyPrefix(PathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": "*", "path-id": PathId},
-			n,
-		),
-	}
-}
-
-// Route (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix: string
-// PathId: uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePath) Route(Prefix string, PathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": Prefix, "path-id": PathId},
-			n,
-		),
-	}
-}
-
-// Route (list): List of routes in the table
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "routes/route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route"
-// Prefix: string
-// PathId: uint32
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPrePathAny) Route(Prefix string, PathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"routes", "route"},
-			map[string]interface{}{"prefix": Prefix, "path-id": PathId},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/attr-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/attr-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/community-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/community-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/ext-community-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/ext-community-index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/invalid-reason YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/invalid-reason YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/last-modified YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/last-modified YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/path-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/path-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/prefix YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/prefix YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/valid-route YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/valid-route YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePathAny struct {
-	*ygot.NodePath
-}
-
-// AttrIndex (leaf): Reference to the common attribute group for the
-// route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/attr-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrIndex (leaf): Reference to the common attribute group for the
-// route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/attr-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_AttrIndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CommunityIndex (leaf): Reference to the community attribute for the route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/community-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/community-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "community-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CommunityIndex (leaf): Reference to the community attribute for the route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/community-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/community-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_CommunityIndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "community-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
-// route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/ext-community-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/ext-community-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ext-community-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
-// route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/ext-community-index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/ext-community-index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ExtCommunityIndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ext-community-index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
-// reason.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/invalid-reason"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/invalid-reason"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "invalid-reason"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
-// reason.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/invalid-reason"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/invalid-reason"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_InvalidReasonPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "invalid-reason"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LastModified (leaf): Timestamp when this path was last modified.
-//
-// The value is the timestamp relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/last-modified"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/last-modified"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "last-modified"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LastModified (leaf): Timestamp when this path was last modified.
-//
-// The value is the timestamp relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/last-modified"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/last-modified"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_LastModifiedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "last-modified"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathId (leaf): When the BGP speaker supports advertisement of multiple
-// paths for a prefix, the path identifier is used to
-// uniquely identify a route based on the combination of the
-// prefix and path id.  In the Adj-RIB-In, the path-id value is
-// the value received in the update message.   In the Loc-RIB,
-// if used, it should represent a locally generated path-id
-// value for the corresponding route.  In Adj-RIB-Out, it
-// should be the value sent to a neighbor when add-paths is
-// used, i.e., the capability has been negotiated.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/path-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) PathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathId (leaf): When the BGP speaker supports advertisement of multiple
-// paths for a prefix, the path identifier is used to
-// uniquely identify a route based on the combination of the
-// prefix and path id.  In the Adj-RIB-In, the path-id value is
-// the value received in the update message.   In the Loc-RIB,
-// if used, it should represent a locally generated path-id
-// value for the corresponding route.  In Adj-RIB-Out, it
-// should be the value sent to a neighbor when add-paths is
-// used, i.e., the capability has been negotiated.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/path-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) PathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PathIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Prefix (leaf): Prefix for the route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/prefix"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) Prefix() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Prefix (leaf): Prefix for the route
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-tables"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/prefix"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) Prefix() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
-// or unsupported by the local router.  The list may be empty.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unknown-attributes/unknown-attribute"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute"
-// AttrType (wildcarded): uint8
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unknown-attributes", "unknown-attribute"},
-			map[string]interface{}{"attr-type": "*"},
-			n,
-		),
-	}
-}
-
-// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
-// or unsupported by the local router.  The list may be empty.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unknown-attributes/unknown-attribute"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute"
-// AttrType (wildcarded): uint8
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unknown-attributes", "unknown-attribute"},
-			map[string]interface{}{"attr-type": "*"},
-			n,
-		),
-	}
-}
-
-// UnknownAttribute (list): This list contains received attributes that are unrecognized
-// or unsupported by the local router.  The list may be empty.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unknown-attributes/unknown-attribute"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute"
-// AttrType: uint8
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"unknown-attributes", "unknown-attribute"},
-			map[string]interface{}{"attr-type": AttrType},
-			n,
-		),
-	}
-}
-
-// UnknownAttribute (list): This list contains received attributes that are unrecognized
-// or unsupported by the local router.  The list may be empty.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "unknown-attributes/unknown-attribute"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute"
-// AttrType: uint8
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unknown-attributes", "unknown-attribute"},
-			map[string]interface{}{"attr-type": AttrType},
-			n,
-		),
-	}
-}
-
-// ValidRoute (leaf): Indicates that the route is considered valid by the
-// local router
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/valid-route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/valid-route"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePath) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "valid-route"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ValidRoute (leaf): Indicates that the route is considered valid by the
-// local router
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-table-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/valid-route"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/state/valid-route"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_RoutePathAny) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_ValidRoutePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "valid-route"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/extended YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/extended YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/optional YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/optional YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/partial YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/partial YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePathAny struct {
-	*ygot.NodePath
-}
-
-// AttrLen (leaf): One or two octet attribute length field indicating the
-// length of the attribute data in octets.  If the Extended
-// Length attribute flag is set, the length field is 2 octets,
-// otherwise it is 1 octet
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-len"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-len"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-len"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrLen (leaf): One or two octet attribute length field indicating the
-// length of the attribute data in octets.  If the Extended
-// Length attribute flag is set, the length field is 2 octets,
-// otherwise it is 1 octet
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-len"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-len"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrLenPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-len"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrType (leaf): 1-octet value encoding the attribute type code
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrType (leaf): 1-octet value encoding the attribute type code
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrTypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrValue (leaf): Raw attribute value, not including the attribute
-// flags, type, or length.  The maximum length
-// of the attribute value data is 2^16-1 per the max value
-// of the attr-len field (2 octets).
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-value"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AttrValue (leaf): Raw attribute value, not including the attribute
-// flags, type, or length.  The maximum length
-// of the attribute value data is 2^16-1 per the max value
-// of the attr-len field (2 octets).
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/attr-value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/attr-value"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_AttrValuePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "attr-value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Extended (leaf): Defines whether the attribute length is one octet
-// (if set to false) or two octets (if set to true).  Set in
-// the fourth high-order bit of the BGP attribute flags
-// octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/extended"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/extended"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "extended"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Extended (leaf): Defines whether the attribute length is one octet
-// (if set to false) or two octets (if set to true).  Set in
-// the fourth high-order bit of the BGP attribute flags
-// octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/extended"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/extended"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_ExtendedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "extended"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Optional (leaf): Defines whether the attribute is optional (if
-// set to true) or well-known (if set to false).
-// Set in the high-order bit of the BGP attribute
-// flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/optional"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/optional"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "optional"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Optional (leaf): Defines whether the attribute is optional (if
-// set to true) or well-known (if set to false).
-// Set in the high-order bit of the BGP attribute
-// flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/optional"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/optional"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_OptionalPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "optional"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Partial (leaf): Defines whether the information contained in the optional
-// transitive attribute is partial (if set to true) or complete
-// (if set to false).  For well-known attributes and for
-// optional non-transitive attributes, the partial flag
-// must be set to false.  Set in the third high-order bit of
-// the BGP attribute flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/partial"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/partial"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "partial"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Partial (leaf): Defines whether the information contained in the optional
-// transitive attribute is partial (if set to true) or complete
-// (if set to false).  For well-known attributes and for
-// optional non-transitive attributes, the partial flag
-// must be set to false.  Set in the third high-order bit of
-// the BGP attribute flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/partial"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/partial"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_PartialPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "partial"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Transitive (leaf): Defines whether an optional attribute is transitive
-// (if set to true) or non-transitive (if set to false).  For
-// well-known attributes, the transitive flag MUST be set to
-// true.  Set in the second high-order bit of the BGP attribute
-// flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/transitive"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/transitive"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePath) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "transitive"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Transitive (leaf): Defines whether an optional attribute is transitive
-// (if set to true) or non-transitive (if set to false).  For
-// well-known attributes, the transitive flag MUST be set to
-// true.  Set in the second high-order bit of the BGP attribute
-// flags octet.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/transitive"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre/routes/route/unknown-attributes/unknown-attribute/state/transitive"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttributePathAny) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOutPre_Route_UnknownAttribute_TransitivePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "transitive"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSetPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSetPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/aigp YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/aigp YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/atomic-aggregate YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/atomic-aggregate YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/cluster-list YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/cluster-list YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/local-pref YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/local-pref YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/med YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/med YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/next-hop YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/next-hop YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/origin YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/origin YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/originator-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/originator-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPathAny struct {
-	*ygot.NodePath
-}
-
-// Aggregator (container): BGP attribute indicating the prefix has been aggregated by
-// the specified AS and router.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "aggregator"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) Aggregator() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"aggregator"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Aggregator (container): BGP attribute indicating the prefix has been aggregated by
-// the specified AS and router.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "aggregator"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) Aggregator() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"aggregator"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Aigp (leaf): BGP path attribute representing the accumulated IGP metric
-// for the path
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/aigp"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/aigp"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) Aigp() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "aigp"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Aigp (leaf): BGP path attribute representing the accumulated IGP metric
-// for the path
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/aigp"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/aigp"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) Aigp() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AigpPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "aigp"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AtomicAggregate (leaf): BGP attribute indicating that the prefix is an atomic
-// aggregate, i.e., the peer selected a less specific
-// route without selecting a more specific route that is
-// included in it.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/atomic-aggregate"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/atomic-aggregate"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) AtomicAggregate() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "atomic-aggregate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AtomicAggregate (leaf): BGP attribute indicating that the prefix is an atomic
-// aggregate, i.e., the peer selected a less specific
-// route without selecting a more specific route that is
-// included in it.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/atomic-aggregate"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/atomic-aggregate"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) AtomicAggregate() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AtomicAggregatePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "atomic-aggregate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ClusterList (leaf): Represents the reflection path that the route has passed.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cluster-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/cluster-list"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) ClusterList() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cluster-list"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ClusterList (leaf): Represents the reflection path that the route has passed.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cluster-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/cluster-list"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) ClusterList() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_ClusterListPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cluster-list"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) Index() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) Index() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_IndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalPref (leaf): BGP local preference attribute sent to internal peers to
-// indicate the degree of preference for externally learned
-// routes.  The route with the highest local preference value
-// is preferred.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-pref"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/local-pref"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) LocalPref() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-pref"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalPref (leaf): BGP local preference attribute sent to internal peers to
-// indicate the degree of preference for externally learned
-// routes.  The route with the highest local preference value
-// is preferred.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-pref"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/local-pref"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) LocalPref() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_LocalPrefPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-pref"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Med (leaf): BGP multi-exit discriminator attribute used in BGP route
-// selection process
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/med"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/med"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) Med() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "med"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Med (leaf): BGP multi-exit discriminator attribute used in BGP route
-// selection process
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/med"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/med"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) Med() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_MedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "med"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextHop (leaf): BGP next hop attribute defining the IP address of the router
-// that should be used as the next hop to the destination
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/next-hop"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/next-hop"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) NextHop() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "next-hop"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextHop (leaf): BGP next hop attribute defining the IP address of the router
-// that should be used as the next hop to the destination
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/next-hop"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/next-hop"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) NextHop() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_NextHopPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "next-hop"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Origin (leaf): BGP attribute defining the origin of the path information.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/origin"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/origin"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) Origin() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "origin"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Origin (leaf): BGP attribute defining the origin of the path information.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/origin"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/origin"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) Origin() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "origin"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OriginatorId (leaf): BGP attribute that provides the id as an IPv4 address
-// of the originator of the announcement.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/originator-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/originator-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) OriginatorId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "originator-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OriginatorId (leaf): BGP attribute that provides the id as an IPv4 address
-// of the originator of the announcement.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/originator-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/state/originator-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) OriginatorId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_OriginatorIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "originator-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TunnelEncapsulation (container): The Tunnel Encapsulation attribute specifies a set of
-// tunnels to a remote destination. The attribute is TLV
-// based and allows description of a tunnel type, and the
-// relevant information to create the tunnel to the remote
-// destination.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnel-encapsulation"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPath) TunnelEncapsulation() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnel-encapsulation"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TunnelEncapsulation (container): The Tunnel Encapsulation attribute specifies a set of
-// tunnels to a remote destination. The attribute is TLV
-// based and allows description of a tunnel type, and the
-// relevant information to create the tunnel to the remote
-// destination.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnel-encapsulation"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSetPathAny) TunnelEncapsulation() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnel-encapsulation"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as4 YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as4 YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4PathAny struct {
-	*ygot.NodePath
-}
-
-// Address (leaf): IP address of the router that performed the
-// aggregation.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath) Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Address (leaf): IP address of the router that performed the
-// aggregation.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny) Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// As (leaf): AS number of the autnonomous system that performed the
-// aggregation.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath) As() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// As (leaf): AS number of the autnonomous system that performed the
-// aggregation.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny) As() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_AsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// As4 (leaf): AS number of the autnonomous system that performed the
-// aggregation (4-octet representation).  This value is
-// populated if an upstream router is not 4-octet capable.
-// Its semantics are similar to the AS4_PATH optional
-// transitive attribute
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as4"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as4"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPath) As4() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4Path {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as4"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// As4 (leaf): AS number of the autnonomous system that performed the
-// aggregation (4-octet representation).  This value is
-// populated if an upstream router is not 4-octet capable.
-// Its semantics are similar to the AS4_PATH optional
-// transitive attribute
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as4"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/aggregator/state/as4"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorPathAny) As4() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4PathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator_As4PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as4"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/member YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/member YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Member (leaf): List of the AS numbers in the AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/member"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/member"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPath) Member() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "member"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Member (leaf): List of the AS numbers in the AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/member"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/member"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPathAny) Member() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_MemberPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "member"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPath) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as4-path/as4-segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentPathAny) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/member YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/member YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Member (leaf): List of the AS numbers in the AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/member"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/member"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPath) Member() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "member"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Member (leaf): List of the AS numbers in the AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/member"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/member"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPathAny) Member() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_MemberPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "member"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPath) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of AS-PATH segment
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/as-path/as-segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentPathAny) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny struct {
-	*ygot.NodePath
-}
-
-// TunnelAny (list): List of the tunnels that are specified within the
-// attribute. Keyed on the type of tunnel that the
-// TLV describes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnels/tunnel"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel"
-// Type (wildcarded): E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath) TunnelAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnels", "tunnel"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// TunnelAny (list): List of the tunnels that are specified within the
-// attribute. Keyed on the type of tunnel that the
-// TLV describes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnels/tunnel"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel"
-// Type (wildcarded): E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny) TunnelAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnels", "tunnel"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// Tunnel (list): List of the tunnels that are specified within the
-// attribute. Keyed on the type of tunnel that the
-// TLV describes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnels/tunnel"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel"
-// Type: E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPath) Tunnel(Type E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnels", "tunnel"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Tunnel (list): List of the tunnels that are specified within the
-// attribute. Keyed on the type of tunnel that the
-// TLV describes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tunnels/tunnel"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel"
-// Type: E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationPathAny) Tunnel(Type E_RibBgpTypes_TUNNEL_ENCAPSULATION_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tunnels", "tunnel"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// SubtlvAny (list): List of the subTLVs that are specified within the
-// TLV instance inside the tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv"
-// Type (wildcarded): E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath) SubtlvAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// SubtlvAny (list): List of the subTLVs that are specified within the
-// TLV instance inside the tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv"
-// Type (wildcarded): E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny) SubtlvAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// Subtlv (list): List of the subTLVs that are specified within the
-// TLV instance inside the tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv"
-// Type: E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath) Subtlv(Type E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Subtlv (list): List of the subTLVs that are specified within the
-// TLV instance inside the tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv"
-// Type: E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny) Subtlv(Type E_RibBgpTypes_TUNNEL_ENCAPSULATION_SUBTLV_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Type of the tunnel described within the tunnel encapsulation
-// attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPath) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Type of the tunnel described within the tunnel encapsulation
-// attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelPathAny) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/binding-sid YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/binding-sid YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/colors YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/colors YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/preference YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/preference YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// BindingSid (leaf): Binding SID associated with the SR-TE policy
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/binding-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/binding-sid"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) BindingSid() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "binding-sid"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// BindingSid (leaf): Binding SID associated with the SR-TE policy
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/binding-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/binding-sid"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) BindingSid() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_BindingSidPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "binding-sid"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Colors (leaf): The colours associated with the tunnel encapsulation attribute,
-// as described by RFC5512.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/colors"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/colors"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) Colors() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "colors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Colors (leaf): The colours associated with the tunnel encapsulation attribute,
-// as described by RFC5512.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/colors"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/colors"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) Colors() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_ColorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "colors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): The preference of the SR-TE policy described by the tunnel
-// encapsulation attribute. If unspecified, the preference
-// defaults to 100.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/preference"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) Preference() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): The preference of the SR-TE policy described by the tunnel
-// encapsulation attribute. If unspecified, the preference
-// defaults to 100.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/preference"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) Preference() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_PreferencePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RemoteEndpointAny (list): List of the remote endpoints described within the TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "remote-endpoints/remote-endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint"
-// Endpoint (wildcarded): string
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) RemoteEndpointAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"remote-endpoints", "remote-endpoint"},
-			map[string]interface{}{"endpoint": "*"},
-			n,
-		),
-	}
-}
-
-// RemoteEndpointAny (list): List of the remote endpoints described within the TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "remote-endpoints/remote-endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint"
-// Endpoint (wildcarded): string
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) RemoteEndpointAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"remote-endpoints", "remote-endpoint"},
-			map[string]interface{}{"endpoint": "*"},
-			n,
-		),
-	}
-}
-
-// RemoteEndpoint (list): List of the remote endpoints described within the TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "remote-endpoints/remote-endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint"
-// Endpoint: string
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) RemoteEndpoint(Endpoint string) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"remote-endpoints", "remote-endpoint"},
-			map[string]interface{}{"endpoint": Endpoint},
-			n,
-		),
-	}
-}
-
-// RemoteEndpoint (list): List of the remote endpoints described within the TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "remote-endpoints/remote-endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint"
-// Endpoint: string
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) RemoteEndpoint(Endpoint string) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"remote-endpoints", "remote-endpoint"},
-			map[string]interface{}{"endpoint": Endpoint},
-			n,
-		),
-	}
-}
-
-// SegmentListAny (list): List of segment lists that are specified within the
-// tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segment-lists/segment-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list"
-// InstanceId (wildcarded): uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) SegmentListAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segment-lists", "segment-list"},
-			map[string]interface{}{"instance-id": "*"},
-			n,
-		),
-	}
-}
-
-// SegmentListAny (list): List of segment lists that are specified within the
-// tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segment-lists/segment-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list"
-// InstanceId (wildcarded): uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) SegmentListAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segment-lists", "segment-list"},
-			map[string]interface{}{"instance-id": "*"},
-			n,
-		),
-	}
-}
-
-// SegmentList (list): List of segment lists that are specified within the
-// tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segment-lists/segment-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list"
-// InstanceId: uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) SegmentList(InstanceId uint64) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"segment-lists", "segment-list"},
-			map[string]interface{}{"instance-id": InstanceId},
-			n,
-		),
-	}
-}
-
-// SegmentList (list): List of segment lists that are specified within the
-// tunnel encapsulation attribute.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segment-lists/segment-list"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list"
-// InstanceId: uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) SegmentList(InstanceId uint64) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segment-lists", "segment-list"},
-			map[string]interface{}{"instance-id": InstanceId},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Type of the sub-TLV within the tunnel encapsulation attribute
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPath) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Type of the sub-TLV within the tunnel encapsulation attribute
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvPathAny) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/as YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/as YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/endpoint YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/endpoint YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPathAny struct {
-	*ygot.NodePath
-}
-
-// As (leaf): The remote AS to which the IP address of the remote endpoint
-// belongs.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/as"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath) As() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// As (leaf): The remote AS to which the IP address of the remote endpoint
-// belongs.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/as"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/as"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny) As() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_AsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "as"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Endpoint (leaf): IP address of the remote endpoint.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/endpoint"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPath) Endpoint() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "endpoint"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Endpoint (leaf): IP address of the remote endpoint.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/endpoint"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/remote-endpoints/remote-endpoint/state/endpoint"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointPathAny) Endpoint() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint_EndpointPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "endpoint"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/instance-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/instance-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/weight YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/weight YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPathAny struct {
-	*ygot.NodePath
-}
-
-// InstanceId (leaf): Instance of the segment list within the sub-TLV
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/instance-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/instance-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath) InstanceId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "instance-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InstanceId (leaf): Instance of the segment list within the sub-TLV
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/instance-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/instance-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny) InstanceId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_InstanceIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "instance-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SegmentAny (list): List of segments within the SR-TE segment list.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segments/segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment"
-// Index (wildcarded): uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath) SegmentAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segments", "segment"},
-			map[string]interface{}{"index": "*"},
-			n,
-		),
-	}
-}
-
-// SegmentAny (list): List of segments within the SR-TE segment list.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segments/segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment"
-// Index (wildcarded): uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny) SegmentAny() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segments", "segment"},
-			map[string]interface{}{"index": "*"},
-			n,
-		),
-	}
-}
-
-// Segment (list): List of segments within the SR-TE segment list.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segments/segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment"
-// Index: uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath) Segment(Index uint64) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"segments", "segment"},
-			map[string]interface{}{"index": Index},
-			n,
-		),
-	}
-}
-
-// Segment (list): List of segments within the SR-TE segment list.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "segments/segment"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment"
-// Index: uint64
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny) Segment(Index uint64) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"segments", "segment"},
-			map[string]interface{}{"index": Index},
-			n,
-		),
-	}
-}
-
-// Weight (leaf): The weight given to the path within the set of segment
-// lists that are included in the tunnel attribute sub-TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/weight"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/weight"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPath) Weight() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "weight"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Weight (leaf): The weight given to the path within the set of segment
-// lists that are included in the tunnel attribute sub-TLV.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/weight"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/state/weight"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListPathAny) Weight() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_WeightPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "weight"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-interface-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-interface-id YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv4-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv4-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv6-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv6-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-ttl YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-ttl YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv4-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv4-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv6-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv6-address YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/sid YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/sid YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/type YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Index (leaf): Index of the segment within the segment list. The segments are
-// ordered in ascending order, beginning at 0.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) Index() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): Index of the segment within the segment list. The segments are
-// ordered in ascending order, beginning at 0.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) Index() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_IndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalInterfaceId (leaf): The local interface identifier to be utilised for the segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-interface-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-interface-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) LocalInterfaceId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-interface-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalInterfaceId (leaf): The local interface identifier to be utilised for the segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-interface-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-interface-id"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) LocalInterfaceId() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalInterfaceIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-interface-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalIpv4Address (leaf): An IPv4 address of a local adjacency that is used to identify
-// the segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-ipv4-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv4-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) LocalIpv4Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalIpv4Address (leaf): An IPv4 address of a local adjacency that is used to identify
-// the segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-ipv4-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv4-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) LocalIpv4Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv4AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalIpv6Address (leaf): An IPv6 address of a local adjacency that is used to identify the
-// segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-ipv6-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv6-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) LocalIpv6Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LocalIpv6Address (leaf): An IPv6 address of a local adjacency that is used to identify the
-// segment.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/local-ipv6-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/local-ipv6-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) LocalIpv6Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_LocalIpv6AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "local-ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsBos (leaf): When this leaf is set to true the MPLS bottom-of-stack
-// (BoS) bit is set in the MPLS segment. The BoS bit should
-// always be set to zero by the sender.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-bos"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) MplsBos() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-bos"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsBos (leaf): When this leaf is set to true the MPLS bottom-of-stack
-// (BoS) bit is set in the MPLS segment. The BoS bit should
-// always be set to zero by the sender.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-bos"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) MplsBos() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-bos"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsTc (leaf): The MPLS TC bits used when the SID is specified as an MPLS
-// label. If set to zero, the receiving system specifies the
-// value of the TC bits.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-tc"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) MplsTc() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-tc"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsTc (leaf): The MPLS TC bits used when the SID is specified as an MPLS
-// label. If set to zero, the receiving system specifies the
-// value of the TC bits.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-tc"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) MplsTc() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-tc"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsTtl (leaf): The MPLS time to live (TTL) to be set for the MPLS
-// segment. If set to 255, the receiver specifies the
-// TTL value that is used for packets sent with this
-// segment in the stack.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-ttl"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-ttl"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) MplsTtl() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-ttl"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MplsTtl (leaf): The MPLS time to live (TTL) to be set for the MPLS
-// segment. If set to 255, the receiver specifies the
-// TTL value that is used for packets sent with this
-// segment in the stack.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/mpls-ttl"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-ttl"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) MplsTtl() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "mpls-ttl"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RemoteIpv4Address (leaf): An IPv4 address specified as the remote node address. When the type
-// of the segment specifies only the remote address, no other addresses
-// are specified. When the type of the segment requires a local address,
-// this leaf specifies the remote IPv4 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/remote-ipv4-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv4-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) RemoteIpv4Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "remote-ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RemoteIpv4Address (leaf): An IPv4 address specified as the remote node address. When the type
-// of the segment specifies only the remote address, no other addresses
-// are specified. When the type of the segment requires a local address,
-// this leaf specifies the remote IPv4 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/remote-ipv4-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv4-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) RemoteIpv4Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv4AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "remote-ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RemoteIpv6Address (leaf): An IPv6 address specified as the remote node address. When the type
-// of the segment specifies only the remote address, no other addresses
-// are specified. When the type of the segment requires a local address,
-// this leaf specifies the remote IPv6 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/remote-ipv6-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv6-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) RemoteIpv6Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "remote-ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RemoteIpv6Address (leaf): An IPv6 address specified as the remote node address. When the type
-// of the segment specifies only the remote address, no other addresses
-// are specified. When the type of the segment requires a local address,
-// this leaf specifies the remote IPv6 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/remote-ipv6-address"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/remote-ipv6-address"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) RemoteIpv6Address() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_RemoteIpv6AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "remote-ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Sid (leaf): SID value for the segment entry, specified as an MPLS label
-// or IPv6 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/sid"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) Sid() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Sid (leaf): SID value for the segment entry, specified as an MPLS label
-// or IPv6 address.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/sid"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) Sid() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_SidPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "sid"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of segment specified within the segment entry.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPath) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePath {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of segment specified within the segment entry.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/type"
-func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentPathAny) Type() *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_CommunityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_CommunityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_CommunityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_CommunityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_Community_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_Community_IndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_Community_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_Community_IndexPathAny struct {
-	*ygot.NodePath
-}
-
-// Community (leaf): List of standard or well-known BGP community
-// attributes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/community"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/community"
-func (n *NetworkInstance_Protocol_Bgp_Rib_CommunityPath) Community() *NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "community"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Community (leaf): List of standard or well-known BGP community
-// attributes.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/community"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/community"
-func (n *NetworkInstance_Protocol_Bgp_Rib_CommunityPathAny) Community() *NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_Community_CommunityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "community"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_CommunityPath) Index() *NetworkInstance_Protocol_Bgp_Rib_Community_IndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_Community_IndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/communities/community/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_CommunityPathAny) Index() *NetworkInstance_Protocol_Bgp_Rib_Community_IndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_Community_IndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/ext-community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/ext-community YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/index YANG schema element.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPathAny struct {
-	*ygot.NodePath
-}
-
-// ExtCommunity (leaf): List of BGP extended community attributes.  The received
-// extended community may be an explicitly modeled
-// type or unknown, represented by an 8-octet value
-// formatted according to RFC 4360.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/ext-community"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/ext-community"
-func (n *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPath) ExtCommunity() *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ext-community"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExtCommunity (leaf): List of BGP extended community attributes.  The received
-// extended community may be an explicitly modeled
-// type or unknown, represented by an 8-octet value
-// formatted according to RFC 4360.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/ext-community"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/ext-community"
-func (n *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPathAny) ExtCommunity() *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ext-community"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPath) Index() *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPath {
-	return &NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Index (leaf): System generated index for each attribute set.  The
-// index is used to reference an attribute set from a
-// specific path.  Multiple paths may reference the same
-// attribute set.
-// ----------------------------------------
-// Defining module: "openconfig-rib-bgp-shared-attributes"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/index"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/ext-communities/ext-community/state/index"
-func (n *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityPathAny) Index() *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPathAny {
-	return &NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_IndexPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "index"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_IgmpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp YANG schema element.
-type NetworkInstance_Protocol_IgmpPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_IgmpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp YANG schema element.
-type NetworkInstance_Protocol_IgmpPathAny struct {
-	*ygot.NodePath
-}
-
-// Global (container): Global IGMP configuration and operational state.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "global"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/global"
-func (n *NetworkInstance_Protocol_IgmpPath) Global() *NetworkInstance_Protocol_Igmp_GlobalPath {
-	return &NetworkInstance_Protocol_Igmp_GlobalPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"global"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Global (container): Global IGMP configuration and operational state.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "global"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/global"
-func (n *NetworkInstance_Protocol_IgmpPathAny) Global() *NetworkInstance_Protocol_Igmp_GlobalPathAny {
-	return &NetworkInstance_Protocol_Igmp_GlobalPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"global"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InterfaceAny (list): This container defines interface IGMP configuration and
-// state information.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "interfaces/interface"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface"
-// InterfaceId (wildcarded): string
-func (n *NetworkInstance_Protocol_IgmpPath) InterfaceAny() *NetworkInstance_Protocol_Igmp_InterfacePathAny {
-	return &NetworkInstance_Protocol_Igmp_InterfacePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"interfaces", "interface"},
-			map[string]interface{}{"interface-id": "*"},
-			n,
-		),
-	}
-}
-
-// InterfaceAny (list): This container defines interface IGMP configuration and
-// state information.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "interfaces/interface"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface"
-// InterfaceId (wildcarded): string
-func (n *NetworkInstance_Protocol_IgmpPathAny) InterfaceAny() *NetworkInstance_Protocol_Igmp_InterfacePathAny {
-	return &NetworkInstance_Protocol_Igmp_InterfacePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"interfaces", "interface"},
-			map[string]interface{}{"interface-id": "*"},
-			n,
-		),
-	}
-}
-
-// Interface (list): This container defines interface IGMP configuration and
-// state information.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "interfaces/interface"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface"
-// InterfaceId: string
-func (n *NetworkInstance_Protocol_IgmpPath) Interface(InterfaceId string) *NetworkInstance_Protocol_Igmp_InterfacePath {
-	return &NetworkInstance_Protocol_Igmp_InterfacePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"interfaces", "interface"},
-			map[string]interface{}{"interface-id": InterfaceId},
-			n,
-		),
-	}
-}
-
-// Interface (list): This container defines interface IGMP configuration and
-// state information.
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "interfaces/interface"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/interfaces/interface"
-// InterfaceId: string
-func (n *NetworkInstance_Protocol_IgmpPathAny) Interface(InterfaceId string) *NetworkInstance_Protocol_Igmp_InterfacePathAny {
-	return &NetworkInstance_Protocol_Igmp_InterfacePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"interfaces", "interface"},
-			map[string]interface{}{"interface-id": InterfaceId},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Igmp_GlobalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/global YANG schema element.
-type NetworkInstance_Protocol_Igmp_GlobalPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Igmp_GlobalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/igmp/global YANG schema element.
-type NetworkInstance_Protocol_Igmp_GlobalPathAny struct {
-	*ygot.NodePath
-}
-
-// Ssm (container): Source specific multicast (SSM).
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ssm"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/global/ssm"
-func (n *NetworkInstance_Protocol_Igmp_GlobalPath) Ssm() *NetworkInstance_Protocol_Igmp_Global_SsmPath {
-	return &NetworkInstance_Protocol_Igmp_Global_SsmPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ssm"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ssm (container): Source specific multicast (SSM).
-// ----------------------------------------
-// Defining module: "openconfig-igmp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ssm"
-// Path from root: "/network-instances/network-instance/protocols/protocol/igmp/global/ssm"
-func (n *NetworkInstance_Protocol_Igmp_GlobalPathAny) Ssm() *NetworkInstance_Protocol_Igmp_Global_SsmPathAny {
-	return &NetworkInstance_Protocol_Igmp_Global_SsmPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ssm"},
 			map[string]interface{}{},
 			n,
 		),
