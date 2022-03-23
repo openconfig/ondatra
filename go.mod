@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/golang/glog v1.0.0
-	github.com/google/go-cmp v0.5.6
+	github.com/google/go-cmp v0.5.7
 	github.com/google/kne v0.1.1-0.20220209214853-52a824020cd9
 	github.com/open-traffic-generator/snappi/gosnappi v0.7.13
 	github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d
@@ -12,6 +12,7 @@ require (
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.0.0
 	github.com/openconfig/gribi v0.1.1-0.20210423184541-ce37eb4ba92f
+	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygot v0.15.1
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible

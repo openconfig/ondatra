@@ -29,7 +29,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/negtest"
+	"github.com/openconfig/testt"
 
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
@@ -258,7 +258,7 @@ func TestInstallErrors(t *testing.T) {
 			fakeGNOI.Installer = func(context.Context, ...grpc.CallOption) (ospb.OS_InstallClient, error) {
 				return ic, nil
 			}
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				tt.op.Operate(t)
 			})
 			if !strings.Contains(gotErr, tt.wantErr) {
@@ -353,7 +353,7 @@ func TestPingErrors(t *testing.T) {
 		t.Run(tt.wantErr, func(t *testing.T) {
 			fakeGNOI.Pinger = tt.pinger
 			op := DUT(t, "dut").Operations().NewPing().WithDestination(tt.dest)
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				op.Operate(t)
 			})
 			if !strings.Contains(gotErr, tt.wantErr) {
@@ -494,7 +494,7 @@ func TestSetInterfaceStateErrors(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				tt.op.Operate(t)
 			})
 			if gotErr == "" {
@@ -577,7 +577,7 @@ func TestRebootErrors(t *testing.T) {
 				return &spb.RebootStatusResponse{}, tt.statusErr
 			}
 			reboot := tt.dut.Operations().NewReboot().WithTimeout(tt.timeout)
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				reboot.Operate(t)
 			})
 			if !strings.Contains(gotErr, tt.wantErr) {
@@ -626,7 +626,7 @@ func TestKillProcessErrors(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			var op *KillProcessOp
-			gotErr := negtest.ExpectFatal(t, func(t testing.TB) {
+			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				op = tt.dut.Operations().NewKillProcess()
 				op.Operate(t)
 			})
