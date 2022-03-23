@@ -16,14 +16,17 @@
 package binding
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"time"
 
-	"google.golang.org/grpc"
-	"github.com/openconfig/ondatra/binding/ixweb"
+	"golang.org/x/net/context"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/ondatra/binding/ixweb"
+	"google.golang.org/grpc"
+
+	gnmiclient "github.com/openconfig/gnmi/client"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	bpb "github.com/openconfig/gnoi/bgp"
 	cpb "github.com/openconfig/gnoi/cert"
@@ -41,7 +44,6 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
 )
 
 // Binding is a strategy interface for Ondatra vendor implementations.
@@ -117,6 +119,12 @@ type Binding interface {
 
 	// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
 	DialIxNetwork(ctx context.Context, ate *ATE) (*IxNetwork, error)
+
+	// DialOTG creates a client commnetion to the specified ATE's OTG endpoint.
+	DialOTG(ctx context.Context, ate *ATE) (gosnappi.GosnappiApi, error)
+
+	// DialOTGGNMI creates a client commnetion to the specified ATE's OTG gNMI endpoint.
+	DialOTGGNMI(ate *ATE) (*gnmiclient.Query, error)
 
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
