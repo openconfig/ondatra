@@ -3,7 +3,7 @@
 lint:
   # Linter files to ignore.
   ignores:
-    - id: ENUMS_HAVE_COMMENT
+    - id: ENUM_FIELDS_HAVE_COMMENT
       files:
         - proto/ate.proto
 
