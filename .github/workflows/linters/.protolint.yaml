@@ -6,7 +6,15 @@ lint:
     - id: ENUM_FIELDS_HAVE_COMMENT
       files:
         - proto/ate.proto
-
+    - id: MESSAGES_HAVE_COMMENT
+      files:
+        - proto/ate.proto
+    - id: ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+      files:
+        - proto/ate.proto
+    - id: FIELD_NAMES_EXCLUDE_PREPOSITIONS
+      files:
+        - proto/ate.proto
   # Linter rules.
   # Run `protolint list` to see all available rules.
   rules:
