@@ -27,6 +27,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/testt"
@@ -34,6 +36,7 @@ import (
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
 	opb "github.com/openconfig/ondatra/proto"
+	types "github.com/openconfig/gnoi/types"
 )
 
 var fakeGNOI = func() *fakeGNOIClient {
@@ -61,10 +64,15 @@ type fakeGNOIClient struct {
 	RebootStatuser func(context.Context, *spb.RebootStatusRequest, ...grpc.CallOption) (*spb.RebootStatusResponse, error)
 	KillProcessor  func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error)
 	Installer      func(context.Context, ...grpc.CallOption) (ospb.OS_InstallClient, error)
+	SCPer func(ctx context.Context, in *spb.SwitchControlProcessorRequest, opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error)
 }
 
 func (fg *fakeGNOIClient) System() spb.SystemClient {
 	return fg
+}
+
+func (fg *fakeGNOIClient) SwitchControlProcessor(ctx context.Context, in *spb.SwitchControlProcessorRequest, opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
+	return fg.SCPer(ctx, in, opts...)
 }
 
 func (fg *fakeGNOIClient) OS() ospb.OSClient {
@@ -636,3 +644,78 @@ func TestKillProcessErrors(t *testing.T) {
 		})
 	}
 }
+
+
+func TestSwitchControlProcessor(t *testing.T) {
+	initOperationFakes(t)
+	var got string
+	fakeGNOI.SCPer = func(ctx context.Context, in *spb.SwitchControlProcessorRequest, 
+													opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
+		got = getProcessorName(in.ControlProcessor)
+		resp := spb.SwitchControlProcessorResponse{
+			ControlProcessor : in.ControlProcessor,
+		}
+
+		return &resp, nil
+	}
+
+	cisco_dut := DUT(t,"dut_cisco")
+	comp_cisco := "RP0"
+
+	tests := []struct {
+		desc string
+		op *SwitchControlProcessorOp
+		want string
+	} {{
+		desc : "cisco switch control processor",
+		op : cisco_dut.Operations().
+					NewSwitchControlProcessor().
+					WithDestinationControlProcessor(comp_cisco),
+		want : "RP0",
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			got = ""
+			tt.op.Operate(t)
+			if !strings.Contains(got, tt.want) {
+				t.Errorf("Operate(t) on switch control process got %q, want %q", got, tt.want)
+			}		
+		})
+	}
+}
+
+func TestSwitchControlProcessorErrors(t *testing.T) {
+	initOperationFakes(t)
+	sw := DUT(t, "dut").Operations().NewSwitchControlProcessor()
+			
+	fakeGNOI.SCPer = func(ctx context.Context, in *spb.SwitchControlProcessorRequest, 
+													opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
+		scpErr := status.Errorf(codes.InvalidArgument,"invalid route controller")
+		return &spb.SwitchControlProcessorResponse{}, scpErr
+	}
+	var op *SwitchControlProcessorOp
+	gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+		op := sw.WithDestinationControlProcessor("RP0")
+		op.Operate(t)
+	})
+	if gotErr == "" {
+		t.Errorf("Operate() on op %v succeeded, want error", op)
+	}
+}
+
+func getProcessorName(sc *types.Path) (string) {
+	if sc != nil {
+		for _, elem := range sc.GetElem() {
+ 			if elem.GetName() == "component" {
+ 				for k, v := range elem.GetKey() {
+ 					if k == "name" {
+ 						return v
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+	return ""
+}
+

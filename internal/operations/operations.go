@@ -34,6 +34,7 @@ import (
 
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
+        "github.com/openconfig/gnoi/types"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -342,4 +343,28 @@ func checkDUT(dev binding.Device, op string) (*binding.DUT, error) {
 		return nil, errors.Errorf("%s operation not supported on ATEs: %v", op, dev)
 	}
 	return dev.(*binding.DUT), nil
+}
+
+
+// SwitchControlProcessor switchs to destination route processor
+func SwitchControlProcessor(ctx context.Context, dev binding.Device, dest string) error {
+       dut, err := checkDUT(dev, "restart routing")
+       if err != nil {
+               return err
+       }
+       gnoi, err := FetchGNOI(ctx, dut)
+       if err != nil {
+              return err
+       }
+       controlProcessor := &types.Path{
+               Origin: "openconfig-platform",
+               Elem: []*types.PathElem{
+                       {Name: "components",},
+                       {Name: "component",Key: map[string]string{"name": dest}},
+                       {Name: "state"},
+                       {Name: "location"},
+               },
+       }
+       _, err = gnoi.System().SwitchControlProcessor(ctx,&spb.SwitchControlProcessorRequest{ControlProcessor:controlProcessor})
+       return err
 }
