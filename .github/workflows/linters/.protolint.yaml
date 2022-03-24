@@ -14,7 +14,7 @@ lint:
         - proto/ate.proto
     - id: FIELD_NAMES_EXCLUDE_PREPOSITIONS
       files:
-        - proto/ate.
+        - proto/ate.proto
     - id: FIELDS_HAVE_COMMENT
       files:
         - proto/ate.proto
