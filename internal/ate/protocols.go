@@ -22,8 +22,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/binding/usererr"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -334,7 +334,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 	}
 
 	isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting())
-	isisNetwGrps, err := isisReachability(ifc.GetName(), isis.GetIsReachability())
+	isisNetwGrps, err := isisReachability(ifc.GetName(), isis.GetIsReachabilities())
 	if err != nil {
 		return err
 	}
@@ -381,7 +381,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	}
 
 	var lbCounts, lbLabels []uint32
-	for _, srlb := range sr.GetSrlbRange() {
+	for _, srlb := range sr.GetSrlbRanges() {
 		lbCounts = append(lbCounts, srlb.GetSidCount())
 		lbLabels = append(lbLabels, srlb.GetSidStartLabel())
 	}
@@ -395,7 +395,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	}
 
 	var gbCounts, gbLabels []uint32
-	for _, srgb := range sr.GetSrgbRange() {
+	for _, srgb := range sr.GetSrgbRanges() {
 		gbCounts = append(gbCounts, srgb.GetSidCount())
 		gbLabels = append(gbLabels, srgb.GetSidStartLabel())
 	}
@@ -501,11 +501,11 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 					maxAlgos = numAlgos
 				}
 				if j == 0 {
-					numSRGBRanges = len(sr.GetSrgbRange())
-					numSRLBRanges = len(sr.GetSrlbRange())
-				} else if numSRGBRanges != len(sr.GetSrgbRange()) {
+					numSRGBRanges = len(sr.GetSrgbRanges())
+					numSRLBRanges = len(sr.GetSrlbRanges())
+				} else if numSRGBRanges != len(sr.GetSrgbRanges()) {
 					return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRGB ranges")
-				} else if numSRLBRanges != len(sr.GetSrlbRange()) {
+				} else if numSRLBRanges != len(sr.GetSrlbRanges()) {
 					return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRLB ranges")
 				}
 			} else if numSRGBRanges != 0 {
@@ -685,8 +685,8 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 				srEFlag = sr.GetFlagExplicitNull()
 				srVFlag = sr.GetFlagValue()
 				srLFlag = sr.GetFlagLocal()
-				srgbRanges = sr.GetSrgbRange()
-				srlbRanges = sr.GetSrlbRange()
+				srgbRanges = sr.GetSrgbRanges()
+				srlbRanges = sr.GetSrlbRanges()
 				algos = sr.GetAlgorithms()
 
 				if sr.GetPrefixSid() != "" {
@@ -1539,8 +1539,8 @@ func appendUint64ToMultivalueList(mv *ixconfig.Multivalue, val uint64) *ixconfig
 // groups for the given interface already exist.
 func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
-	intf.rsvpLSPs = make(map[string]*ixconfig.TopologyRsvpteLsps, len(ifc.GetRsvp()))
-	for rsvpIdx, rsvp := range ifc.GetRsvp() {
+	intf.rsvpLSPs = make(map[string]*ixconfig.TopologyRsvpteLsps, len(ifc.GetRsvps()))
+	for rsvpIdx, rsvp := range ifc.GetRsvps() {
 		if intf.ipv4 == nil {
 			return usererr.New("could not find IPv4 config to configure RSVP interface for %q", ifc.GetName())
 		}

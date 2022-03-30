@@ -181,6 +181,7 @@ func (ix *ixATE) addTopology(ifs []*opb.InterfaceConfig) {
 		if enableVlan {
 			topoEth.Vlan = []*ixconfig.TopologyVlan{{VlanId: ixconfig.MultivalueUint32(eth.GetVlanId())}}
 		}
+
 		if !eth.GetFec().GetEnabled() {
 			for _, p := range linkPorts {
 				// Turn on force disable FEC.

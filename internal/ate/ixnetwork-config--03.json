@@ -3,7 +3,7 @@
    "trafficItem": [
       {
          "name": "ipv6FlowLabels1",
-         "routeMesh": "fullMesh",
+         "routeMesh": "oneToOne",
          "trafficType": "ipv6",
          "configElement": [
             {
