@@ -75,8 +75,8 @@ github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e h1:fD57ERR4JtEqsWbfPhv4DMiApHyliiK5xCTNVSPiaAs=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
-github.com/open-traffic-generator/snappi/gosnappi v0.7.13 h1:kDbu85j1K0Qmw2HBdouiTdl38nIA1hzpkw7Q/Q2MzQQ=
-github.com/open-traffic-generator/snappi/gosnappi v0.7.13/go.mod h1:yy1mdBicujeM24qLEEz+DDqCazoeg4yXTJjOKeiSUr4=
+github.com/open-traffic-generator/snappi/gosnappi v0.7.18 h1:RCyCtbvc6Qx11vp0Ec3BxZ76xcOMAzPTzrh6Y9Fywr4=
+github.com/open-traffic-generator/snappi/gosnappi v0.7.18/go.mod h1:yy1mdBicujeM24qLEEz+DDqCazoeg4yXTJjOKeiSUr4=
 github.com/openconfig/gnmi v0.0.0-20200414194230-1597cc0f2600/go.mod h1:M/EcuapNQgvzxo1DDXHK4tx3QpYM/uG4l591v33jG2A=
 github.com/openconfig/gnmi v0.0.0-20200508230933-d19cebf5e7be/go.mod h1:M/EcuapNQgvzxo1DDXHK4tx3QpYM/uG4l591v33jG2A=
 github.com/openconfig/gnmi v0.0.0-20210914185457-51254b657b7d h1:ENKx1I2+/8C70C69qGDw8zfHXFsPnSMtZyf9F2GjN/k=
