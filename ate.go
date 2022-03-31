@@ -17,7 +17,9 @@ package ondatra
 import (
 	"testing"
 
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"golang.org/x/net/context"
 )
@@ -48,4 +50,46 @@ func (a *ATEDevice) Topology() *Topology {
 // Traffic returns a handle to the traffic API.
 func (a *ATEDevice) Traffic() *Traffic {
 	return &Traffic{a.res.(*binding.ATE)}
+}
+
+// RawATEAPIs returns a handle to raw protocol APIs on the ATE.
+func (a *ATEDevice) RawATEAPIs() *RawATEAPIs {
+	return &RawATEAPIs{ate: a.res.(*binding.ATE)}
+}
+
+// RawAPIs provides access to raw DUT protocols APIs.
+type RawATEAPIs struct {
+	ate *binding.ATE
+}
+
+// ATEGNMI provides access to either a new or default gNMI client.
+func (r *RawATEAPIs) ATEGNMI() *GNMIATEAPI {
+	return &GNMIATEAPI{ate: r.ate}
+}
+
+// GNMIATEAPI provides access for creating a default or new gNMI client on the ATE.
+type GNMIATEAPI struct {
+	ate *binding.ATE
+}
+
+// New returns a new gNMI client on the ATE. This client will not be cached.
+func (g *GNMIATEAPI) New(t testing.TB) gpb.GNMIClient {
+	t.Helper()
+	debugger.ActionStarted(t, "Creating gNMI client for %s", g.ate)
+	gnmi, err := newGNMI(context.Background(), g.ate)
+	if err != nil {
+		t.Fatalf("GNMI(t) on %v: %v", g.ate, err)
+	}
+	return gnmi
+}
+
+// Default returns the default gNMI client for the ate.
+func (g *GNMIATEAPI) Default(t testing.TB) gpb.GNMIClient {
+	t.Helper()
+	debugger.ActionStarted(t, "Fetching gNMI client for %s", g.ate)
+	gnmi, err := fetchGNMI(context.Background(), g.ate, nil)
+	if err != nil {
+		t.Fatalf("GNMI(t) on %v: %v", g.ate, err)
+	}
+	return gnmi
 }

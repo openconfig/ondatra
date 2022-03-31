@@ -174,6 +174,34 @@ func (b *Bind) DialOTGGNMI(ate *binding.ATE) (*gnmiclient.Query, error) {
 	return query, nil
 }
 
+func (b *Bind) dialATEGRPC(ctx context.Context, ate *binding.ATE, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	s, err := b.services.Lookup(ate.Name, serviceName)
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+	log.Infof("Dialing service %q on dut %s@%s", serviceName, ate.Name, addr)
+	opts = append(opts,
+		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
+		grpc.WithPerRPCCredentials(&passCred{
+			username: b.cfg.Username,
+			password: b.cfg.Password,
+		}))
+	conn, err := grpc.DialContext(ctx, addr, opts...)
+	if err != nil {
+		return nil, errors.Wrapf(err, "DialContext(ctx, %s, %v)", addr, opts)
+	}
+	return conn, nil
+}
+
+func (b *Bind) DialATEGNMI(ctx context.Context, ate *binding.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	conn, err := b.dialATEGRPC(ctx, ate, "gnmi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return gpb.NewGNMIClient(conn), nil
+}
+
 // serviceAddr returns the external IP address of a KNE service.
 func serviceAddr(s *tpb.Service) string {
 	return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside())

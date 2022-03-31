@@ -126,6 +126,10 @@ type Binding interface {
 	// DialOTGGNMI creates a client commnetion to the specified ATE's OTG gNMI endpoint.
 	DialOTGGNMI(ate *ATE) (*gnmiclient.Query, error)
 
+	// DialATEGNMI creates a client connection to the specified ATE's gNMI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialATEGNMI(ctx context.Context, ate *ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error)
+
 	// HandleInfraFail handles the given error as an infrastructure failure.
 	// If an error is a failure of the Ondatra server or binding implementation
 	// rather than user error, it will be passed to HandleInfraFail, which can
