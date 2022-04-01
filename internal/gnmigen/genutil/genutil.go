@@ -492,12 +492,13 @@ func watch(ctx context.Context, n ygot.PathStruct, paths []*gpb.Path, duration t
 	}
 
 	c := &Watcher{
-		err:  make(chan error, 1),
+		err:  make(chan error),
 		path: path,
 	}
 
 	go func() {
 		defer cancel()
+		defer close(c.err)
 		err := receiveUntil(sub, mode, path, isLeaf, converter, pred)
 		c.err <- err
 	}()

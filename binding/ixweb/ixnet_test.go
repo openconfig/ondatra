@@ -15,7 +15,10 @@
 package ixweb
 
 import (
+	"golang.org/x/net/context"
 	"encoding/json"
+	"net/http"
+	"strings"
 	"testing"
 )
 
@@ -35,5 +38,40 @@ func TestOpArgs(t *testing.T) {
 	}
 	if got1, got2 := output.Arg1, output.Arg2; got1 != want1 || got2 != want2 {
 		t.Errorf("OpArgs unmarshal got [%s, %s], want [%s, %s]", got1, got2, want1, want2)
+	}
+}
+
+func TestDeleteSession(t *testing.T) {
+	tests := []struct {
+		desc    string
+		doResps []*http.Response
+		wantErr string
+	}{{
+		desc:    "success",
+		doResps: []*http.Response{fakeResponse(200, ""), fakeResponse(200, "")},
+	}, {
+		desc:    "success - 404 on stop",
+		doResps: []*http.Response{fakeResponse(404, ""), fakeResponse(200, "")},
+	}, {
+		desc:    "success - 500 on stop",
+		doResps: []*http.Response{fakeResponse(500, ""), fakeResponse(200, "")},
+		wantErr: "500",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			ixn := &IxNetwork{ixweb: &IxWeb{
+				client: &fakeHTTPClient{doResps: test.doResps},
+			}}
+			err := ixn.DeleteSession(context.Background(), 1)
+			if got, want := err != nil, test.wantErr != ""; got != want {
+				t.Fatalf("DeleteSession() got err %v, want err %v", err, want)
+			}
+			if err != nil {
+				if !strings.Contains(err.Error(), test.wantErr) {
+					t.Errorf("DeleteSession() got err %v, want contains %q", err, test.wantErr)
+				}
+				return
+			}
+		})
 	}
 }

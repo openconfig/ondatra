@@ -1,3 +1,8 @@
+[![Actions Status](https://github.com/openconfig/ondatra/workflows/Go/badge.svg)](https://github.com/openconfig/ondatra/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/openconfig/ondatra)](https://goreportcard.com/report/github.com/openconfig/ondatra)
+[![GoDoc](https://godoc.org/istio.io/istio?status.svg)](https://pkg.go.dev/github.com/openconfig/ondatra)
+[![License: BSD](https://img.shields.io/badge/license-Apache%202-blue)](https://opensource.org/licenses/Apache-2.0)
+
 # Ondatra: Open Network Device Automated Test Runner and API
 
 Ondatra is a framework for writing and running tests against both real and

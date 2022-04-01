@@ -2252,6 +2252,37 @@ func TestWatch(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("multiple awaits", func(t *testing.T) {
+		fakeGNMI.Stub().Sync().Notification(&gpb.Notification{Timestamp: startTime.Add(time.Second).UnixNano()})
+
+		watcher := dut.Telemetry().Interface("eth0").Counters().OutOctets().Watch(t, time.Second, func(val *telemetry.QualifiedUint64) bool { return true })
+		got, gotStatus := watcher.Await(t)
+
+		want := &telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Path: gnmiPath(t, getStrPath("eth0")),
+			},
+		}
+		wantStatus := true
+
+		if diff := cmp.Diff(want, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+			t.Errorf("First call to Await() returned unexpected diff(-want,+got):\n %s", diff)
+		}
+		if gotStatus != wantStatus {
+			t.Errorf("First call to Await() returned unexpected status got: %v want: %v", gotStatus, wantStatus)
+		}
+
+		got, gotStatus = watcher.Await(t)
+
+		if diff := cmp.Diff(want, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+			t.Errorf("Second call to Await() returned unexpected diff(-want,+got):\n %s", diff)
+		}
+		if gotStatus != wantStatus {
+			t.Errorf("Second call to Await() returned unexpected status got: %v want: %v", gotStatus, wantStatus)
+		}
+
+	})
 }
 
 func TestWildcardWatch(t *testing.T) {

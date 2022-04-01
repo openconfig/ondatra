@@ -488,6 +488,7 @@ func (f *fakeCfgClient) UpdateIDs(context.Context, *ixconfig.Ixnetwork, ...ixcon
 type fakeSession struct {
 	getRsps  map[string]string
 	getErrs  map[string]error
+	postRsps map[string]string
 	postErrs map[string]error
 }
 
@@ -498,7 +499,10 @@ func (f *fakeSession) Get(_ context.Context, p string, v interface{}) error {
 	return f.getErrs[p]
 }
 
-func (f *fakeSession) Post(_ context.Context, p string, _, _ interface{}) error {
+func (f *fakeSession) Post(_ context.Context, p string, _, v interface{}) error {
+	if f.postRsps[p] != "" {
+		json.Unmarshal([]byte(f.postRsps[p]), v)
+	}
 	return f.postErrs[p]
 }
 
@@ -864,6 +868,198 @@ func TestPathToOCRIB(t *testing.T) {
 			}
 			if diff := cmp.Diff(tt.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
 				t.Errorf("pathToOCRIB() got unexpected response diff (-want,+got)\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestLSPsFromIxia(t *testing.T) {
+	const (
+		lspName = "lsp0"
+		lspID   = "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps"
+	)
+	lspXP := parseXPath(t, "/fake/xpath/lsp")
+	lspCfg := &ixconfig.Ixnetwork{
+		Topology: []*ixconfig.Topology{{
+			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				NetworkGroup: []*ixconfig.TopologyNetworkGroup{{
+					DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+						Ipv4Loopback: []*ixconfig.TopologyIpv4Loopback{{
+							RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{{
+								Name: ixconfig.String(lspName),
+								RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
+									Xpath:  lspXP,
+									Active: ixconfig.MultivalueTrue(),
+								},
+							}},
+						}},
+					}},
+				}},
+			}},
+		}},
+	}
+
+	tests := []struct {
+		desc         string
+		lspRsp       string
+		lspErr       error
+		mvRsp        string
+		mvErr        error
+		updateIDsErr error
+		want         map[string][]*ingressLSP
+		wantErr      string
+	}{{
+		desc:         "update IDs error",
+		updateIDsErr: errors.New("some error"),
+		wantErr:      "failed to update IDs",
+	}, {
+		desc:    "lsp lookup error",
+		lspErr:  errors.New("some error"),
+		wantErr: "failed to fetch ingress LSPs config",
+	}, {
+		desc:    "multivalue lookup error",
+		lspRsp:  `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
+		mvErr:   errors.New("some error"),
+		wantErr: "failed to fetch source IPs for LSP",
+	}, {
+		desc:   "success",
+		lspRsp: `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
+		mvRsp:  `["1.1.1.1", "2.2.2.2"]`,
+		want: map[string][]*ingressLSP{
+			lspName: []*ingressLSP{{
+				up:  true,
+				src: "1.1.1.1",
+				dst: "1.1.1.1",
+			}, {
+
+				up:  false,
+				src: "2.2.2.2",
+				dst: "2.2.2.2",
+			}},
+		},
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			c := &Client{
+				client: &fakeCfgClient{
+					sess: &fakeSession{
+						getErrs: map[string]error{
+							lspID: tt.lspErr,
+						},
+						getRsps: map[string]string{
+							lspID: tt.lspRsp,
+						},
+						postErrs: map[string]error{
+							"multivalue/operations/getvalues": tt.mvErr,
+						},
+						postRsps: map[string]string{
+							"multivalue/operations/getvalues": tt.mvRsp,
+						},
+					},
+					cfg:       lspCfg,
+					updateErr: tt.updateIDsErr,
+					xpathToID: map[string]string{
+						lspXP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps",
+					},
+				},
+			}
+			got, err := c.lspsFromIxia(context.Background())
+			if d := errdiff.Substring(err, tt.wantErr); d != "" {
+				t.Fatalf("unexpected error diff\n%s", d)
+			}
+			if err != nil {
+				return
+			}
+			if d := cmp.Diff(tt.want, got, cmp.AllowUnexported(ingressLSP{})); d != "" {
+				t.Errorf("unexpected LSP diff (-want +got)\n%s", d)
+			}
+		})
+	}
+}
+
+func TestPathToOCLSPs(t *testing.T) {
+	oldLSPsFn := lspsFromIxiaFn
+	defer func() { lspsFromIxiaFn = oldLSPsFn }()
+
+	tests := []struct {
+		desc      string
+		initCache map[string]interface{}
+		lsps      map[string][]*ingressLSP
+		lspsErr   error
+		want      *gpb.Notification
+		wantErr   string
+	}{{
+		desc: "data is fresh",
+		initCache: map[string]interface{}{
+			lspsOCPath: true,
+		},
+	}, {
+		desc:    "failed to read LSP data from ATE",
+		lspsErr: errors.New("some error"),
+		wantErr: "failed to read LSPs from Ixia",
+	}, {
+		desc: "successful update",
+		lsps: map[string][]*ingressLSP{
+			"lsp0": []*ingressLSP{{
+				up:  true,
+				src: "1.1.1.1",
+				dst: "2.2.2.2",
+			}},
+		},
+		initCache: map[string]interface{}{
+			oldLSPCacheKey: &telemetry.Device{
+				NetworkInstance: map[string]*telemetry.NetworkInstance{
+					"fake": &telemetry.NetworkInstance{
+						Name: ygot.String("fake"),
+					},
+				},
+			},
+		},
+		want: func(t *testing.T) *gpb.Notification {
+			dev := &telemetry.Device{}
+			lsp := dev.GetOrCreateNetworkInstance("default").GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe().GetOrCreateSession(2765635037960339456)
+			lsp.SessionName = ygot.String("lsp0 0")
+			lsp.Type = telemetry.MplsTypes_LSP_ROLE_INGRESS
+			lsp.SourceAddress = ygot.String("1.1.1.1")
+			lsp.DestinationAddress = ygot.String("2.2.2.2")
+			lsp.Status = telemetry.Session_Status_UP
+			ns, err := ygot.TogNMINotifications(dev, 0, ygot.GNMINotificationsConfig{UsePathElem: true})
+			if err != nil {
+				t.Fatal("error creating notifications")
+			}
+			ns[0].Delete = []*gpb.Path{{
+				Elem: []*gpb.PathElem{{Name: "network-instances"}, {Name: "network-instance", Key: map[string]string{"name": "fake"}}, {Name: "state"}, {Name: "name"}},
+			}, {
+				Elem: []*gpb.PathElem{{Name: "network-instances"}, {Name: "network-instance", Key: map[string]string{"name": "fake"}}, {Name: "name"}},
+			}}
+			return ns[0]
+		}(t),
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			c := &Client{
+				fresh: cache.New(30*time.Second, cache.NoExpiration),
+			}
+			for k, v := range tt.initCache {
+				c.fresh.Set(k, v, -1)
+			}
+			lspsFromIxiaFn = func(*Client, context.Context) (map[string][]*ingressLSP, error) {
+				return tt.lsps, tt.lspsErr
+			}
+
+			got, gotErr := c.pathToOCLSPs(context.Background())
+			if diff := errdiff.Substring(gotErr, tt.wantErr); diff != "" {
+				t.Errorf("pathToOCLSPs() got unexpected error diff\n%s", diff)
+			}
+			if gotErr != nil {
+				return
+			}
+			if got != nil {
+				got.Timestamp = 0
+			}
+			if diff := cmp.Diff(tt.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
+				t.Errorf("pathToOCLSPS() got unexpected response diff (-want,+got)\n%s", diff)
 			}
 		})
 	}

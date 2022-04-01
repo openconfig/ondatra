@@ -696,7 +696,7 @@ func TestTranslateEgressStats(t *testing.T) {
 	}, {
 		name: "ingress tracking statistics",
 		table: ixweb.StatTable{{
-			"Egress Tracking":           "MyFilter",
+			"Egress Tracking":           "Custom: (8 bits at offset 184)",
 			"Rx Port":                   "port1",
 			"Tx Port":                   "Eth1",
 			"MPLS:Label Value":          "0",
@@ -718,13 +718,56 @@ func TestTranslateEgressStats(t *testing.T) {
 			"Tx Frames":       "20",
 			"Tx Frame Rate":   "2",
 			"Tx Rate (bps)":   "2048",
+		}, {
+			"Egress Tracking": "2",
+			"Loss %":          "3.1",
+			"Rx Bytes":        "200",
+			"Rx Frames":       "20",
+			"Rx Frame Rate":   "2",
+			"Rx Rate (bps)":   "2048",
+			"Tx Frames":       "30",
+			"Tx Frame Rate":   "3",
+			"Tx Rate (bps)":   "3072",
+		}, {
+			"Egress Tracking":           "Custom: (8 bits at offset 184)",
+			"Rx Port":                   "port1",
+			"Tx Port":                   "Eth1",
+			"MPLS:Label Value":          "0",
+			"Source Endpoint":           "255.255.255.255",
+			"Dest Endpoint":             "de:ad:be:ee:ee:ef",
+			"IPv4 :Source Address":      "1.1.1.1",
+			"IPv4 :Destination Address": "2.2.2.2",
+			"IPv6 :Source Address":      "1::",
+			"IPv6 :Destination Address": "EE::",
+			"IPv4 :Precedence":          "3",
+			"VLAN:VLAN-ID":              "2",
+		}, {
+			"Egress Tracking": "3",
+			"Loss %":          "4.1",
+			"Rx Bytes":        "300",
+			"Rx Frames":       "30",
+			"Rx Frame Rate":   "3",
+			"Rx Rate (bps)":   "3072",
+			"Tx Frames":       "40",
+			"Tx Frame Rate":   "4",
+			"Tx Rate (bps)":   "4096",
+		}, {
+			"Egress Tracking": "4",
+			"Loss %":          "5.1",
+			"Rx Bytes":        "400",
+			"Rx Frames":       "40",
+			"Rx Frame Rate":   "4",
+			"Rx Rate (bps)":   "4096",
+			"Tx Frames":       "50",
+			"Tx Frame Rate":   "5",
+			"Tx Rate (bps)":   "5120",
 		}},
 		itFlows: []string{"traffic1"},
 		want: func() *telemetry.Device {
 			d := &telemetry.Device{}
 			f := d.GetOrCreateFlow("traffic1")
 			it := f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 1)
-			it.Filter = ygot.String("MyFilter")
+			it.Filter = ygot.String("Custom: (8 bits at offset 184)")
 			et := it.GetOrCreateEgressTracking("1")
 			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
 				InOctets: ygot.Uint64(100),
@@ -736,6 +779,41 @@ func TestTranslateEgressStats(t *testing.T) {
 			et.OutFrameRate = float32Bytes(2)
 			et.InRate = float32Bytes(1024)
 			et.OutRate = float32Bytes(2048)
+			et = it.GetOrCreateEgressTracking("2")
+			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
+				InOctets: ygot.Uint64(200),
+				InPkts:   ygot.Uint64(20),
+				OutPkts:  ygot.Uint64(30),
+			}
+			et.LossPct = float32Bytes(3.1)
+			et.InFrameRate = float32Bytes(2)
+			et.OutFrameRate = float32Bytes(3)
+			et.InRate = float32Bytes(2048)
+			et.OutRate = float32Bytes(3072)
+			it = f.GetOrCreateIngressTracking("Eth1", "port1", telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL, "1.1.1.1", "2.2.2.2", "1::", "EE::", 2)
+			it.Filter = ygot.String("Custom: (8 bits at offset 184)")
+			et = it.GetOrCreateEgressTracking("3")
+			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
+				InOctets: ygot.Uint64(300),
+				InPkts:   ygot.Uint64(30),
+				OutPkts:  ygot.Uint64(40),
+			}
+			et.LossPct = float32Bytes(4.1)
+			et.InFrameRate = float32Bytes(3)
+			et.OutFrameRate = float32Bytes(4)
+			et.InRate = float32Bytes(3072)
+			et.OutRate = float32Bytes(4096)
+			et = it.GetOrCreateEgressTracking("4")
+			et.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
+				InOctets: ygot.Uint64(400),
+				InPkts:   ygot.Uint64(40),
+				OutPkts:  ygot.Uint64(50),
+			}
+			et.LossPct = float32Bytes(5.1)
+			et.InFrameRate = float32Bytes(4)
+			et.OutFrameRate = float32Bytes(5)
+			et.InRate = float32Bytes(4096)
+			et.OutRate = float32Bytes(5120)
 			return d
 		}(),
 	}, {
@@ -764,7 +842,7 @@ func TestTranslateEgressStats(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := translateEgressStats(tt.table, tt.itFlows, []string{"traffic1"})
 			if diff := errdiff.Substring(err, tt.wantErrSubstring); diff != "" {
-				t.Fatalf("did not get expected error, %s", diff)
+				t.Fatalf("translateEgressStats got unexpected error, %s", diff)
 			}
 			if err != nil {
 				return
@@ -775,7 +853,7 @@ func TestTranslateEgressStats(t *testing.T) {
 				t.Fatalf("cannot diff received output, %v", err)
 			}
 			if !isEmptyDiff(diff) {
-				t.Fatalf("did not get expected mapped struct, delta from want to got:\n%s", prototext.Format(diff))
+				t.Fatalf("translateEgressStats got unexpected diff:\n%s", prototext.Format(diff))
 			}
 		})
 	}

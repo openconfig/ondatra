@@ -5,7 +5,7 @@
     {
       "xpath": "/traffic/trafficItem[1]",
       "name": "ipv6FlowLabels1",
-      "routeMesh": "fullMesh",
+      "routeMesh": "oneToOne",
       "trafficType": "ipv6",
       "appLibProfile": null,
       "configElement": [

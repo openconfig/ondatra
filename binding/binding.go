@@ -238,3 +238,28 @@ type StreamClient interface {
 	Stderr() io.ReadCloser
 	Close() error
 }
+
+// ProxyBinding is a strategy interface for Ondatra vendor implementations.
+//
+// The framework enforces that at most testbed is reserved at a time, so
+// implementations can assume that these methods are never called out of order,
+// e.g. Release() is never be called without a prior Reserve().
+//
+// The ProxyBinding adds lower level binding interfaces for proxied connections
+// to the base Binding interface. Binding implementors are only expected to
+// implement a proxy binding if they want to use the thinkit proxy.
+//
+// By default, errors returned by binding methods will be reported as
+// "infrastructure failures," meaning the binding implementation itself is
+// responsible for the error, not the user. To generate a user error instead,
+// the binding should create or wrap an error using the "usererr" package.
+// All infrastructure failure errors are passed to ReportInfraFail.
+type ProxyBinding interface {
+	Binding
+
+	// DialGRPC creates a client connection to the specified DUT's service
+	// endpoint. The service will be represented as a gRPC service name.
+	// Implementations must append transport security options necessary to reach
+	// the server.
+	DialGRPC(ctx context.Context, dut *DUT, service string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
+}

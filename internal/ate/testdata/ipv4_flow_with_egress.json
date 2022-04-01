@@ -6,7 +6,7 @@
       "xpath": "/traffic/trafficItem[1]",
       "egressEnabled": true,
       "name": "ipv4Traffic",
-      "routeMesh": "fullMesh",
+      "routeMesh": "oneToOne",
       "trafficType": "ipv4",
       "appLibProfile": null,
       "configElement": [

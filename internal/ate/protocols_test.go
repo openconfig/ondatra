@@ -599,7 +599,7 @@ func TestAddISISProtocols(t *testing.T) {
 			Isis: &opb.ISISConfig{
 				Level:       opb.ISISConfig_L1,
 				NetworkType: opb.ISISConfig_BROADCAST,
-				IsReachability: []*opb.ISReachability{{
+				IsReachabilities: []*opb.ISReachability{{
 					Nodes: []*opb.ISReachability_Node{{
 						SegmentRouting: &opb.ISISSegmentRouting{
 							Enable:       true,
@@ -1152,7 +1152,7 @@ func TestISISReachability(t *testing.T) {
 					ToIpv4:   "2.2.2.2/32",
 				}},
 				SegmentRouting: &opb.ISISSegmentRouting{
-					SrgbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrgbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 16000,
 						SidCount:      8000,
 					}, {
@@ -1167,7 +1167,7 @@ func TestISISReachability(t *testing.T) {
 					ToIpv4:   "4.4.4.4/32",
 				}},
 				SegmentRouting: &opb.ISISSegmentRouting{
-					SrgbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrgbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 400000,
 						SidCount:      65001,
 					}},
@@ -1185,7 +1185,7 @@ func TestISISReachability(t *testing.T) {
 					ToIpv4:   "2.2.2.2/32",
 				}},
 				SegmentRouting: &opb.ISISSegmentRouting{
-					SrlbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrlbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 16000,
 						SidCount:      8000,
 					}, {
@@ -1200,7 +1200,7 @@ func TestISISReachability(t *testing.T) {
 					ToIpv4:   "4.4.4.4/32",
 				}},
 				SegmentRouting: &opb.ISISSegmentRouting{
-					SrlbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrlbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 400000,
 						SidCount:      65001,
 					}},
@@ -1240,11 +1240,11 @@ func TestISISReachability(t *testing.T) {
 						FlagSet:                   true,
 						FlagPersistent:            true,
 					},
-					SrgbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrgbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 400000,
 						SidCount:      65001,
 					}},
-					SrlbRange: []*opb.ISISSegmentRouting_SIDRange{{
+					SrlbRanges: []*opb.ISISSegmentRouting_SIDRange{{
 						SidStartLabel: 300000,
 						SidCount:      65001,
 					}},
@@ -1350,7 +1350,7 @@ func TestISISReachability(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			gotNetwGrps, gotErr := isisReachability("someIntf", []*opb.ISReachability{test.isr})
 			if ((gotErr == nil) != (test.wantErr == "")) || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
-				t.Errorf("isisReachability: got err: %v, want err %q", gotErr, test.wantErr)
+				t.Errorf("isIsReachabilities: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 			if gotErr != nil {
 				return
@@ -1360,7 +1360,7 @@ func TestISISReachability(t *testing.T) {
 				wantNetwGrpCount = 1
 			}
 			if wantNetwGrpCount != len(gotNetwGrps) {
-				t.Fatalf("isisReachability: unexpected number of network groups, got %d, want %d", len(gotNetwGrps), wantNetwGrpCount)
+				t.Fatalf("isIsReachabilities: unexpected number of network groups, got %d, want %d", len(gotNetwGrps), wantNetwGrpCount)
 			}
 			wantName := test.wantName
 			if wantName == "" {
@@ -1368,7 +1368,7 @@ func TestISISReachability(t *testing.T) {
 			}
 			if test.wantNetwTopo != nil {
 				if diff := jsonCfgDiff(t, test.wantNetwTopo, gotNetwGrps[wantName].NetworkTopology); diff != "" {
-					t.Fatalf("isisReachability: network group diff at (-want/+got): %s", diff)
+					t.Fatalf("isIsReachabilities: network group diff at (-want/+got): %s", diff)
 				}
 			}
 		})
@@ -2368,8 +2368,8 @@ func TestAddRSVPProtocols(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			c := clientWithTopo(test.hasIPv4, test.hasISISNetwGrp, test.numISISNodes)
 			ifc := &opb.InterfaceConfig{
-				Name: ifName,
-				Rsvp: []*opb.RsvpConfig{test.rsvp},
+				Name:  ifName,
+				Rsvps: []*opb.RsvpConfig{test.rsvp},
 			}
 			gotErr := c.addRSVPProtocols(ifc)
 			if (gotErr == nil && test.wantErr != "") || (gotErr != nil && test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {

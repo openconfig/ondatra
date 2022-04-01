@@ -92,9 +92,14 @@ func (n *IxNetwork) FetchSession(ctx context.Context, id int) (*Session, error) 
 }
 
 // DeleteSession deletes the IxNetwork session with the specified ID.
+// This is a noop if the session is already deleted.
 func (n *IxNetwork) DeleteSession(ctx context.Context, id int) error {
 	spath := sessionPath(id)
 	if err := n.ixweb.jsonReq(ctx, post, path.Join(spath, "operations/stop"), nil, nil); err != nil {
+		// A 404 error on stop indicates the session was already deleted.
+		if strings.Contains(err.Error(), "404") {
+			return nil
+		}
 		return fmt.Errorf("Error stopping session: %w", err)
 	}
 	if err := n.ixweb.jsonReq(ctx, delete, spath, nil, nil); err != nil {

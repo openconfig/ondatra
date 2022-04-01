@@ -37,18 +37,18 @@ func TestParsePortStats(t *testing.T) {
 		"Port Name": "3/4",
 	}}
 	want := []*portRow{{
-		portName:  "1/2",
-		lineSpeed: "100GE",
-		linkState: "Link Up",
-		framesTx:  pUint(1000),
-		framesRx:  pUint(750),
-		bytesTx:   pUint(10000),
-		bytesRx:   pUint(7500),
-		txRate:    pFloat(100.5),
-		rxRate:    pFloat(110.6),
-		crcErrs:   pUint(5),
+		PortName:  "1/2",
+		LineSpeed: "100GE",
+		LinkState: "Link Up",
+		FramesTx:  pUint(1000),
+		FramesRx:  pUint(750),
+		BytesTx:   pUint(10000),
+		BytesRx:   pUint(7500),
+		TxRate:    pFloat(100.5),
+		RxRate:    pFloat(110.6),
+		CRCErrs:   pUint(5),
 	}, {
-		portName: "3/4",
+		PortName: "3/4",
 	}}
 
 	got, err := parsePortStats(table)
@@ -70,12 +70,12 @@ func TestParsePortCPUStats(t *testing.T) {
 		"Port Name": "3/4",
 	}}
 	want := []*portCPURow{{
-		portName:    "1/2",
-		totalMemory: pUint(15000),
-		freeMemory:  pUint(10000),
-		cpuLoad:     pUint(50),
+		PortName:    "1/2",
+		TotalMemory: pUint(15000),
+		FreeMemory:  pUint(10000),
+		CPULoad:     pUint(50),
 	}, {
-		portName: "3/4",
+		PortName: "3/4",
 	}}
 
 	got, err := parsePortCPUStats(table)
@@ -109,24 +109,24 @@ func TestParseFlowStats(t *testing.T) {
 		"Traffic Item": "flowB",
 	}}
 	want := []*flowRow{{
-		trafficItem: "flowA",
-		txPort:      "1/2",
-		rxPort:      "3/4",
-		txFrames:    pUint(1000),
-		rxFrames:    pUint(750),
-		txFrameRate: pFloat(50.5),
-		rxFrameRate: pFloat(51.6),
-		rxBytes:     pUint(10000),
-		txRate:      pFloat(100.5),
-		rxRate:      pFloat(110.6),
-		lossPct:     pFloat(11.25),
-		srcIPv4:     "1.2.3.4",
-		dstIPv4:     "2.3.4.5",
-		srcIPv6:     "1:2:3:4:5:6:7:8",
-		dstIPv6:     "2:3:4:5:6:7:8:9",
-		mplsLabel:   pUint(12345),
+		TrafficItem: "flowA",
+		TxPort:      "1/2",
+		RxPort:      "3/4",
+		TxFrames:    pUint(1000),
+		RxFrames:    pUint(750),
+		TxFrameRate: pFloat(50.5),
+		RxFrameRate: pFloat(51.6),
+		RxBytes:     pUint(10000),
+		TxRate:      pFloat(100.5),
+		RxRate:      pFloat(110.6),
+		LossPct:     pFloat(11.25),
+		SrcIPv4:     "1.2.3.4",
+		DstIPv4:     "2.3.4.5",
+		SrcIPv6:     "1:2:3:4:5:6:7:8",
+		DstIPv6:     "2:3:4:5:6:7:8:9",
+		MPLSLabel:   pUint(12345),
 	}, {
-		trafficItem: "flowB",
+		TrafficItem: "flowB",
 	}}
 
 	got, err := parseFlowStats(table)
@@ -163,22 +163,22 @@ func TestParseEgressStats(t *testing.T) {
 	want := []*egressRow{{
 		filter: "Custom: (4 bits offset 128)",
 		flowRow: &flowRow{
-			trafficItem: "flowA",
-			txPort:      "1/2",
-			rxPort:      "3/4",
-			txFrames:    pUint(1000),
-			rxFrames:    pUint(750),
-			txFrameRate: pFloat(50.5),
-			rxFrameRate: pFloat(51.6),
-			rxBytes:     pUint(10000),
-			txRate:      pFloat(100.5),
-			rxRate:      pFloat(110.6),
-			lossPct:     pFloat(11.25),
-			srcIPv4:     "1.2.3.4",
-			dstIPv4:     "2.3.4.5",
-			srcIPv6:     "1:2:3:4:5:6:7:8",
-			dstIPv6:     "2:3:4:5:6:7:8:9",
-			mplsLabel:   pUint(12345),
+			TrafficItem: "flowA",
+			TxPort:      "1/2",
+			RxPort:      "3/4",
+			TxFrames:    pUint(1000),
+			RxFrames:    pUint(750),
+			TxFrameRate: pFloat(50.5),
+			RxFrameRate: pFloat(51.6),
+			RxBytes:     pUint(10000),
+			TxRate:      pFloat(100.5),
+			RxRate:      pFloat(110.6),
+			LossPct:     pFloat(11.25),
+			SrcIPv4:     "1.2.3.4",
+			DstIPv4:     "2.3.4.5",
+			SrcIPv6:     "1:2:3:4:5:6:7:8",
+			DstIPv6:     "2:3:4:5:6:7:8:9",
+			MPLSLabel:   pUint(12345),
 		},
 	}, {
 		filter:  "2",
@@ -191,6 +191,23 @@ func TestParseEgressStats(t *testing.T) {
 	}
 	if diff := cmp.Diff(got, want, cmp.AllowUnexported(egressRow{}, flowRow{})); diff != "" {
 		t.Errorf("parseEgressStats unexpected diff (-want,+got): %s", diff)
+	}
+}
+
+func TestRowString(t *testing.T) {
+	row := &struct {
+		String1, String2 string
+		Int1, Int2       *uint64
+		Float1, Float2   *float32
+	}{
+		String1: "present",
+		Int1:    pUint(5),
+		Float1:  pFloat(3.14),
+	}
+	const want = "{String1:present, String2:, Int1:5, Int2:, Float1:3.14, Float2:}"
+	got := rowString(row)
+	if diff := cmp.Diff(want, got); diff != "" {
+		t.Errorf("rowString() got unexpected diff: %s", diff)
 	}
 }
 

@@ -131,7 +131,7 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 		Name:        ixconfig.String(f.GetName()),
 		TrafficType: ixconfig.String(string(trafType)),
 		EndpointSet: []*ixconfig.TrafficTrafficItemEndpointSet{epSet},
-		RouteMesh:   ixconfig.String("fullMesh"),
+		RouteMesh:   ixconfig.String("oneToOne"),
 		ConfigElement: []*ixconfig.TrafficTrafficItemConfigElement{{
 			FrameRate:           fr,
 			FrameSize:           fs,
