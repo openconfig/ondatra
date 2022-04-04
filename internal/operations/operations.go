@@ -72,7 +72,7 @@ func FetchGNOI(ctx context.Context, dut *binding.DUT) (binding.GNOIClients, erro
 // The gNOI install scenarios are documented on the Install function here:
 // https://github.com/openconfig/gnoi/blob/master/os/os.proto
 func Install(ctx context.Context, dev binding.Device, version string, standby bool, reader io.Reader) error {
-	dut, err := checkDUT(dev, "ping")
+	dut, err := checkDUT(dev, "install")
 	if err != nil {
 		return err
 	}
@@ -276,7 +276,7 @@ func setDUTInterfaceState(ctx context.Context, dut *binding.DUT, intf string, en
 
 // Reboot reboots a device.
 func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) error {
-	dut, err := checkDUT(dev, "restart routing")
+	dut, err := checkDUT(dev, "reboot")
 	if err != nil {
 		return err
 	}
@@ -325,7 +325,7 @@ func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) erro
 
 // KillProcess kills a process on a device, and optionally restarts it.
 func KillProcess(ctx context.Context, dev binding.Device, req *spb.KillProcessRequest) error {
-	dut, err := checkDUT(dev, "restart routing")
+	dut, err := checkDUT(dev, "kill process")
 	if err != nil {
 		return err
 	}

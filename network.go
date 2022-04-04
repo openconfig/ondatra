@@ -104,10 +104,10 @@ func (i *NetworkIP) Count() uint32 {
 }
 
 // ISIS creates an ISIS configuration for the network or returns the existing config.
-// The default config params are Route Origin: Internal and Metric: 10
+// The default config params are Active: true, Route Origin: Internal and Metric: 10
 func (n *Network) ISIS() *IPReachabilityConfig {
 	if n.pb.Isis == nil {
-		n.pb.Isis = &opb.IPReachability{Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
+		n.pb.Isis = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
 	return &IPReachabilityConfig{pb: n.pb.Isis}
 }

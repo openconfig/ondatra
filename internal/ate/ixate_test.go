@@ -276,18 +276,6 @@ func jsonCfgDiff(t *testing.T, wantCfg, gotCfg ixconfig.IxiaCfgNode) string {
 	return cmp.Diff(want, got)
 }
 
-func readTopology(t *testing.T, filename string) *opb.Topology {
-	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
-	if err != nil {
-		t.Fatalf("Could not read file %q: %v", filename, err)
-	}
-	topo := &opb.Topology{}
-	if err := prototext.Unmarshal(b, topo); err != nil {
-		t.Fatalf("Could not unmarshal proto from file %q: %v", filename, err)
-	}
-	return topo
-}
-
 func toFlows(t *testing.T, filename string) []*opb.Flow {
 	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
 	if err != nil {
@@ -526,11 +514,7 @@ func TestPushTopology(t *testing.T) {
 				return test.routeTableImportErr
 			}
 
-			top := test.top
-			if top == nil {
-				top = readTopology(t, test.reqFile)
-			}
-			gotErr := c.PushTopology(context.Background(), top)
+			gotErr := c.PushTopology(context.Background(), test.top)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("PushTopology: unexpected error result, got err: %v, want %q", gotErr, test.wantErr)
 			}
@@ -1562,7 +1546,24 @@ func TestStartTraffic(t *testing.T) {
 			c := &ixATE{
 				c: &fakeCfgClient{importErrs: []error{nil, nil, nil}},
 			}
-			top := readTopology(t, "intfs_for_flows.textproto")
+
+			top := &opb.Topology{
+				Interfaces: []*opb.InterfaceConfig{{
+					Name: "intf1",
+					Link: &opb.InterfaceConfig_Port{"1/18"},
+					Ipv6: &opb.IpConfig{
+						AddressCidr:    "2a00:1450:100f:1:192:168:130:2/126",
+						DefaultGateway: "2a00:1450:100f:1:192:168:130:1",
+					},
+				}, {
+					Name: "intf2",
+					Link: &opb.InterfaceConfig_Port{"2/8"},
+					Ipv6: &opb.IpConfig{
+						AddressCidr:    "2a00:1450:100f:1:192:168:135:2/126",
+						DefaultGateway: "2a00:1450:100f:1:192:168:135:1",
+					},
+				}},
+			}
 			if err := c.PushTopology(context.Background(), top); err != nil {
 				t.Fatalf("Failed to configure initial topology for StartTraffic test: %v", err)
 			}

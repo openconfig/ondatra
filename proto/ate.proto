@@ -221,6 +221,7 @@ message IPReachability {
   bool flag_value = 9;
   bool flag_local = 10;
   bool enable_sid_index_label = 11;
+  bool active = 12;
 }
 
 message ISReachability {
@@ -247,7 +248,9 @@ message ISReachability {
       IPReachability reachability = 3;
     }
     Routes routes_ipv4 = 10;
+    Routes routes_ipv6 = 12;
     string capability_router_id = 11;
+    // NEXT ID: 13
   }
   repeated Node nodes = 1;
   string name = 2;

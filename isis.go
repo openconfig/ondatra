@@ -187,6 +187,12 @@ func (i *ISIS) ClearISReachabilities() *ISIS {
 	return i
 }
 
+// WithActive sets whether the prefixes are active.
+func (ip *IPReachabilityConfig) WithActive(active bool) *IPReachabilityConfig {
+	ip.pb.Active = active
+	return ip
+}
+
 // WithIPReachabilityInternal sets route origin as internal.
 func (ip *IPReachabilityConfig) WithIPReachabilityInternal() *IPReachabilityConfig {
 	ip.pb.RouteOrigin = opb.IPReachability_INTERNAL
@@ -532,6 +538,14 @@ func (node *ISISNode) RoutesIPv4() *ISISRoutes {
 		node.pb.RoutesIpv4 = &opb.ISReachability_Node_Routes{}
 	}
 	return &ISISRoutes{pb: node.pb.RoutesIpv4}
+}
+
+// RoutesIPv6 creates or returns the ISIS IPv6 route configuration.
+func (node *ISISNode) RoutesIPv6() *ISISRoutes {
+	if node.pb.RoutesIpv6 == nil {
+		node.pb.RoutesIpv6 = &opb.ISReachability_Node_Routes{}
+	}
+	return &ISISRoutes{pb: node.pb.RoutesIpv6}
 }
 
 // WithPrefix sets the (CIDR-string) prefix for the exported routes.

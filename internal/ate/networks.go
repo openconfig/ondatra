@@ -137,6 +137,7 @@ func isisRouteProp(ipr *opb.IPReachability) (*ixconfig.TopologyIsisL3RouteProper
 		Metric:                 ixconfig.MultivalueUint32(ipr.GetMetric()),
 		Algorithm:              ixconfig.MultivalueUint32(ipr.GetAlgorithm()),
 		RouteOrigin:            ixconfig.MultivalueStr(origin),
+		Active:                 ixconfig.MultivalueBool(ipr.GetActive()),
 		ConfigureSIDIndexLabel: ixconfig.MultivalueBool(ipr.GetEnableSidIndexLabel()),
 		SIDIndexLabel:          ixconfig.MultivalueUint32(ipr.GetSidIndexLabel()),
 		RFlag:                  ixconfig.MultivalueBool(ipr.GetFlagReadvertise()),
@@ -145,6 +146,9 @@ func isisRouteProp(ipr *opb.IPReachability) (*ixconfig.TopologyIsisL3RouteProper
 		EFlag:                  ixconfig.MultivalueBool(ipr.GetFlagExplicitNull()),
 		VFlag:                  ixconfig.MultivalueBool(ipr.GetFlagValue()),
 		LFlag:                  ixconfig.MultivalueBool(ipr.GetFlagLocal()),
+		IsisL3PrefixesSrSid: &ixconfig.TopologyIsisL3PrefixesSrSid{
+			Active: ixconfig.MultivalueBool(ipr.GetEnableSidIndexLabel()),
+		},
 	}, nil
 }
 

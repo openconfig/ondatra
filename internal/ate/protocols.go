@@ -333,7 +333,9 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		RtrcapId:           ixconfig.MultivalueStr(isis.GetCapabilityRouterId()),
 	}
 
-	isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting())
+	if err = isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting()); err != nil {
+		return err
+	}
 	isisNetwGrps, err := isisReachability(ifc.GetName(), isis.GetIsReachabilities())
 	if err != nil {
 		return err
@@ -357,11 +359,11 @@ func max(a, b int) int {
 }
 
 // isisSegmentRouting updates isisIntf/isisRtr based on the given segment routing config.
-func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.TopologyIsisL3Router, sr *opb.ISISSegmentRouting) {
+func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.TopologyIsisL3Router, sr *opb.ISISSegmentRouting) error {
 	if sr == nil || sr.GetEnable() == false {
 		isisRtr.EnableSR = ixconfig.Bool(false)
 		isisIntf.EnableAdjSID = ixconfig.MultivalueFalse()
-		return
+		return nil
 	}
 
 	// Configure IS-IS router
@@ -378,6 +380,15 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 		isisRtr.IsisSRAlgorithmList = append(isisRtr.IsisSRAlgorithmList, &ixconfig.TopologyIsisSrAlgorithmList{
 			IsisSrAlgorithm: ixconfig.MultivalueUint32(alg),
 		})
+	}
+
+	if sr.GetPrefixSid() != "" {
+		nodePrefix, nodeMask, isV6, err := parseCIDR(sr.GetPrefixSid())
+		if err != nil || isV6 {
+			return fmt.Errorf("invalid prefix SID: %q, want an IPv4 address in CIDR format", sr.GetPrefixSid())
+		}
+		isisRtr.NodePrefix = ixconfig.MultivalueStr(nodePrefix)
+		isisRtr.Mask = ixconfig.MultivalueUint32(nodeMask)
 	}
 
 	var lbCounts, lbLabels []uint32
@@ -411,7 +422,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	as := sr.GetAdjacencySid()
 	if as == nil {
 		isisIntf.EnableAdjSID = ixconfig.MultivalueFalse()
-		return
+		return nil
 	}
 	isisIntf.EnableAdjSID = ixconfig.MultivalueTrue()
 	isisIntf.AdjSID = ixconfig.MultivalueStr(as.GetSid())
@@ -422,6 +433,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	isisIntf.LFlag = ixconfig.MultivalueBool(as.GetFlagLocal())
 	isisIntf.SFlag = ixconfig.MultivalueBool(as.GetFlagSet())
 	isisIntf.PFlag = ixconfig.MultivalueBool(as.GetFlagPersistent())
+	return nil
 }
 
 func parseCIDR(cidr string) (string, uint32, bool, error) {
@@ -527,6 +539,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			srlbDescriptorLists = append(srlbDescriptorLists, &ixconfig.TopologyIsisSrlbDescriptorList{})
 		}
 		ipv4Routes := &ixconfig.TopologyIPv4PseudoNodeRoutes{}
+		ipv6Routes := &ixconfig.TopologyIPv6PseudoNodeRoutes{}
 		isisRtr := &ixconfig.TopologyIsisL3PseudoRouter{
 			// Even if we're not configuring anything, IxNetwork requires the counts to be at least 1.
 			SRAlgorithmCount:            ixconfig.NumberInt(max(maxAlgos, 1)),
@@ -536,6 +549,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			SrlbDescriptorCount:         ixconfig.NumberInt(max(numSRLBRanges, 1)),
 			IsisSRLBDescriptorList:      srlbDescriptorLists,
 			IPv4PseudoNodeRoutes:        []*ixconfig.TopologyIPv4PseudoNodeRoutes{ipv4Routes},
+			IPv6PseudoNodeRoutes:        []*ixconfig.TopologyIPv6PseudoNodeRoutes{ipv6Routes},
 		}
 		simRtr := &ixconfig.TopologySimRouter{IsisL3PseudoRouter: []*ixconfig.TopologyIsisL3PseudoRouter{isisRtr}}
 		simIntfIPv4 := &ixconfig.TopologySimInterfaceIPv4Config{}
@@ -623,51 +637,16 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			}
 
 			// Route export
-			var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
-			var routeMetric, routeAlgo, routeSIDIndexLabel uint32
-			routeCount := uint64(1)
-			routeAddr, routeOrigin := "0.0.0.0", "internal"
-			routeMask := uint32(1)
 			if routes := node.GetRoutesIpv4(); routes != nil {
-				exportRoutes = true
-				var isV6 bool
-				routeAddr, routeMask, isV6, err = parseCIDR(routes.GetPrefix())
-				if err != nil || isV6 {
-					return nil, usererr.New("invalid value %q for IPv4 route prefix", routes.GetPrefix())
-				}
-				routeCount = routes.GetNumRoutes()
-				if ipr := routes.GetReachability(); ipr != nil {
-					routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
-					if err != nil {
-						return nil, err
-					}
-					routeMetric = ipr.GetMetric()
-					routeAlgo = ipr.GetAlgorithm()
-					routeConfigureSID = ipr.GetEnableSidIndexLabel()
-					routeSIDIndexLabel = ipr.GetSidIndexLabel()
-					routeRFlag = ipr.GetFlagReadvertise()
-					routeNFlag = ipr.GetFlagNodeSid()
-					routePFlag = ipr.GetFlagNoPhp()
-					routeEFlag = ipr.GetFlagExplicitNull()
-					routeVFlag = ipr.GetFlagValue()
-					routeLFlag = ipr.GetFlagLocal()
+				if err = isisIPv4RouteExport(routes, ipv4Routes); err != nil {
+					return nil, err
 				}
 			}
-			ipv4Routes.Active = appendBoolToMultivalueList(ipv4Routes.Active, exportRoutes)
-			ipv4Routes.NetworkAddress = appendStrToMultivalueList(ipv4Routes.NetworkAddress, routeAddr)
-			ipv4Routes.PrefixLength = appendUintToMultivalueList(ipv4Routes.PrefixLength, routeMask)
-			ipv4Routes.RangeSize = appendUint64ToMultivalueList(ipv4Routes.RangeSize, routeCount)
-			ipv4Routes.Ipv4Metric = appendUintToMultivalueList(ipv4Routes.Ipv4Metric, routeMetric)
-			ipv4Routes.Algorithm = appendUintToMultivalueList(ipv4Routes.Algorithm, routeAlgo)
-			ipv4Routes.Ipv4RouteOrigin = appendStrToMultivalueList(ipv4Routes.Ipv4RouteOrigin, routeOrigin)
-			ipv4Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv4Routes.ConfigureSIDIndexLabel, routeConfigureSID)
-			ipv4Routes.SIDIndexLabel = appendUintToMultivalueList(ipv4Routes.SIDIndexLabel, routeSIDIndexLabel)
-			ipv4Routes.Ipv4RFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4RFlag, routeRFlag)
-			ipv4Routes.Ipv4NFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4NFlag, routeNFlag)
-			ipv4Routes.Ipv4PFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4PFlag, routePFlag)
-			ipv4Routes.Ipv4EFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4EFlag, routeEFlag)
-			ipv4Routes.Ipv4VFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4VFlag, routeVFlag)
-			ipv4Routes.Ipv4LFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4LFlag, routeLFlag)
+			if routes := node.GetRoutesIpv6(); routes != nil {
+				if err = isisIPv6RouteExport(routes, ipv6Routes); err != nil {
+					return nil, err
+				}
+			}
 
 			// Segment routing.
 			var enableSR, srRFlag, srNFlag, srPFlag, srEFlag, srVFlag, srLFlag bool
@@ -784,6 +763,94 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 		}
 	}
 	return isisNetwGrps, nil
+}
+
+func isisIPv4RouteExport(routes *opb.ISReachability_Node_Routes, ipv4Routes *ixconfig.TopologyIPv4PseudoNodeRoutes) error {
+	var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
+	var routeMetric, routeAlgo, routeSIDIndexLabel uint32
+	routeOrigin := "internal"
+	exportRoutes = true
+	routeAddr, routeMask, isV6, err := parseCIDR(routes.GetPrefix())
+	if err != nil || isV6 {
+		return usererr.New("invalid value %q for IPv4 route prefix", routes.GetPrefix())
+	}
+	routeCount := routes.GetNumRoutes()
+	if ipr := routes.GetReachability(); ipr != nil {
+		routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
+		if err != nil {
+			return err
+		}
+		routeMetric = ipr.GetMetric()
+		routeAlgo = ipr.GetAlgorithm()
+		routeConfigureSID = ipr.GetEnableSidIndexLabel()
+		routeSIDIndexLabel = ipr.GetSidIndexLabel()
+		routeRFlag = ipr.GetFlagReadvertise()
+		routeNFlag = ipr.GetFlagNodeSid()
+		routePFlag = ipr.GetFlagNoPhp()
+		routeEFlag = ipr.GetFlagExplicitNull()
+		routeVFlag = ipr.GetFlagValue()
+		routeLFlag = ipr.GetFlagLocal()
+	}
+	ipv4Routes.Active = appendBoolToMultivalueList(ipv4Routes.Active, exportRoutes)
+	ipv4Routes.NetworkAddress = appendStrToMultivalueList(ipv4Routes.NetworkAddress, routeAddr)
+	ipv4Routes.PrefixLength = appendUintToMultivalueList(ipv4Routes.PrefixLength, routeMask)
+	ipv4Routes.RangeSize = appendUint64ToMultivalueList(ipv4Routes.RangeSize, routeCount)
+	ipv4Routes.Ipv4Metric = appendUintToMultivalueList(ipv4Routes.Ipv4Metric, routeMetric)
+	ipv4Routes.Algorithm = appendUintToMultivalueList(ipv4Routes.Algorithm, routeAlgo)
+	ipv4Routes.Ipv4RouteOrigin = appendStrToMultivalueList(ipv4Routes.Ipv4RouteOrigin, routeOrigin)
+	ipv4Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv4Routes.ConfigureSIDIndexLabel, routeConfigureSID)
+	ipv4Routes.SIDIndexLabel = appendUintToMultivalueList(ipv4Routes.SIDIndexLabel, routeSIDIndexLabel)
+	ipv4Routes.Ipv4RFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4RFlag, routeRFlag)
+	ipv4Routes.Ipv4NFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4NFlag, routeNFlag)
+	ipv4Routes.Ipv4PFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4PFlag, routePFlag)
+	ipv4Routes.Ipv4EFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4EFlag, routeEFlag)
+	ipv4Routes.Ipv4VFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4VFlag, routeVFlag)
+	ipv4Routes.Ipv4LFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4LFlag, routeLFlag)
+	return nil
+}
+
+func isisIPv6RouteExport(routes *opb.ISReachability_Node_Routes, ipv6Routes *ixconfig.TopologyIPv6PseudoNodeRoutes) error {
+	var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
+	var routeMetric, routeAlgo, routeSIDIndexLabel uint32
+	routeOrigin := "internal"
+	exportRoutes = true
+	routeAddr, routeMask, isV6, err := parseCIDR(routes.GetPrefix())
+	if err != nil || !isV6 {
+		return usererr.New("invalid value %q for IPv6 route prefix", routes.GetPrefix())
+	}
+	routeCount := routes.GetNumRoutes()
+	if ipr := routes.GetReachability(); ipr != nil {
+		routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
+		if err != nil {
+			return err
+		}
+		routeMetric = ipr.GetMetric()
+		routeAlgo = ipr.GetAlgorithm()
+		routeConfigureSID = ipr.GetEnableSidIndexLabel()
+		routeSIDIndexLabel = ipr.GetSidIndexLabel()
+		routeRFlag = ipr.GetFlagReadvertise()
+		routeNFlag = ipr.GetFlagNodeSid()
+		routePFlag = ipr.GetFlagNoPhp()
+		routeEFlag = ipr.GetFlagExplicitNull()
+		routeVFlag = ipr.GetFlagValue()
+		routeLFlag = ipr.GetFlagLocal()
+	}
+	ipv6Routes.Active = appendBoolToMultivalueList(ipv6Routes.Active, exportRoutes)
+	ipv6Routes.NetworkAddress = appendStrToMultivalueList(ipv6Routes.NetworkAddress, routeAddr)
+	ipv6Routes.Prefix = appendUintToMultivalueList(ipv6Routes.Prefix, routeMask)
+	ipv6Routes.RangeSize = appendUint64ToMultivalueList(ipv6Routes.RangeSize, routeCount)
+	ipv6Routes.Ipv6Metric = appendUintToMultivalueList(ipv6Routes.Ipv6Metric, routeMetric)
+	ipv6Routes.Algorithm = appendUintToMultivalueList(ipv6Routes.Algorithm, routeAlgo)
+	ipv6Routes.Ipv6RouteOrigin = appendStrToMultivalueList(ipv6Routes.Ipv6RouteOrigin, routeOrigin)
+	ipv6Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv6Routes.ConfigureSIDIndexLabel, routeConfigureSID)
+	ipv6Routes.SIDIndexLabel = appendUintToMultivalueList(ipv6Routes.SIDIndexLabel, routeSIDIndexLabel)
+	ipv6Routes.Ipv6RFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6RFlag, routeRFlag)
+	ipv6Routes.Ipv6NFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6NFlag, routeNFlag)
+	ipv6Routes.Ipv6PFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6PFlag, routePFlag)
+	ipv6Routes.Ipv6EFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6EFlag, routeEFlag)
+	ipv6Routes.Ipv6VFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6VFlag, routeVFlag)
+	ipv6Routes.Ipv6LFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6LFlag, routeLFlag)
+	return nil
 }
 
 func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
