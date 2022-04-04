@@ -688,8 +688,8 @@ func TestSwitchControlProcessorErrors(t *testing.T) {
 	initOperationFakes(t)
 	sw := DUT(t, "dut").Operations().NewSwitchControlProcessor()
 	fakeGNOI.SwitchController = func(ctx context.Context, in *spb.SwitchControlProcessorRequest,opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
-		scpErr := status.Errorf(codes.InvalidArgument,"invalid route controller")
-		return &spb.SwitchControlProcessorResponse{}, scpErr
+		err := status.Errorf(codes.InvalidArgument,"invalid route controller")
+		return &spb.SwitchControlProcessorResponse{}, err
 	}
 	var op *SwitchControlProcessorOp
 	gotErr := testt.ExpectFatal(t, func(t testing.TB) {
