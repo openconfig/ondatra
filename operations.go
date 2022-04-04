@@ -294,7 +294,7 @@ func (o *Operations) NewSwitchControlProcessor() *SwitchControlProcessorOp {
 	}
 }
 
-// SwitchControlProcessorOp is an operation that switch from current route procesor
+// SwitchControlProcessorOp is an operation that switches from current route procesor
 // to provided route processor.
 type SwitchControlProcessorOp struct {
 	dev binding.Device
@@ -305,8 +305,8 @@ func (s *SwitchControlProcessorOp) String() string {
 	return fmt.Sprintf("SwitchControlProcessorOp%+v", *s)
 }
 
-// WithDestinationControlProcessor sets the destination route processor to switch to.
-func (s *SwitchControlProcessorOp) WithDestinationControlProcessor(dest string) *SwitchControlProcessorOp {
+// WithDestinationControlProcessor sets the destination route processor.
+func (s *SwitchControlProcessorOp) WithDestination(dest string) *SwitchControlProcessorOp {
 	s.dest = dest
 	return s
 }

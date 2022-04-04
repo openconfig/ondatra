@@ -27,6 +27,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
+	"github.com/openconfig/gnoi/types"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ate"
@@ -34,7 +35,6 @@ import (
 
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
-        "github.com/openconfig/gnoi/types"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -346,9 +346,9 @@ func checkDUT(dev binding.Device, op string) (*binding.DUT, error) {
 }
 
 
-// SwitchControlProcessor switchs to destination route processor
+// SwitchControlProcessor switches to destination route processor.
 func SwitchControlProcessor(ctx context.Context, dev binding.Device, dest string) error {
-       dut, err := checkDUT(dev, "restart routing")
+       dut, err := checkDUT(dev, "switch control processor")
        if err != nil {
                return err
        }
