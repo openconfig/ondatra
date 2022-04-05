@@ -20,12 +20,13 @@ set -e
 
 go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
+git clone https://github.com/open-traffic-generator/models-yang.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(
-  -path=public/release/models,public/third_party/ietf
+  -path=public/release/models,public/third_party/ietf,models-yang/models
   -generate_path_structs
   -compress_paths
   -exclude_modules="${EXCLUDE_MODULES}"
@@ -95,6 +96,12 @@ YANG_FILES=(
   public/third_party/ietf/ietf-inet-types.yang
   public/third_party/ietf/ietf-interfaces.yang
   public/third_party/ietf/ietf-yang-types.yang
+  models-yang/models/bgp/open-traffic-generator-bgp.yang
+  models-yang/models/discovery/open-traffic-generator-discovery.yang
+  models-yang/models/flow/open-traffic-generator-flow.yang
+  models-yang/models/interface/open-traffic-generator-port.yang
+  models-yang/models/isis/open-traffic-generator-isis.yang
+  models-yang/models/types/open-traffic-generator-types.yang
 )
 
 # Generate Structs
@@ -112,7 +119,7 @@ generator \
 go run internal/gnmigen/main/main.go \
   -output_dir=telemetry \
   -package_name=telemetry \
-  -path=public/release/models,public/third_party/ietf \
+  -path=public/release/models,public/third_party/ietf,models-yang/models \
   -exclude_modules="${EXCLUDE_MODULES}" \
   -gen_path_struct_api=false \
   -split_pathstructs_by_module=true \
@@ -139,7 +146,7 @@ generator \
 go run internal/gnmigen/main/main.go \
   -output_dir=config \
   -package_name=device \
-  -path=public/release/models,public/third_party/ietf \
+  -path=public/release/models,public/third_party/ietf,models-yang/models \
   -exclude_modules="${EXCLUDE_MODULES}" \
   -generate_config_func \
   -prefer_shadow_path \
@@ -173,7 +180,7 @@ generator \
 go run internal/gnmigen/main/main.go \
   -output_dir=telemetry \
   -package_name=device \
-  -path=public/release/models,public/third_party/ietf \
+  -path=public/release/models,public/third_party/ietf,models-yang/models \
   -exclude_modules="${EXCLUDE_MODULES}" \
   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
   -split_pathstructs_by_module=true \
@@ -185,4 +192,4 @@ go run internal/gnmigen/main/main.go \
 
 find config telemetry -name "*.go" -exec goimports -w {} +
 find config telemetry -name "*.go" -exec gofmt -w -s {} +
-rm -rf public gnmi-collector-metadata.yang
+rm -rf public models-yang gnmi-collector-metadata.yang
