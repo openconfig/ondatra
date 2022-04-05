@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_VlanTypes_TPID_TYPES is a E_VlanTypes_TPID_TYPES with a corresponding timestamp.
+type QualifiedE_VlanTypes_TPID_TYPES struct {
+	*genutil.Metadata
+	val     E_VlanTypes_TPID_TYPES // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_VlanTypes_TPID_TYPES) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_VlanTypes_TPID_TYPES sample, erroring out if not present.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) Val(t testing.TB) E_VlanTypes_TPID_TYPES {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_VlanTypes_TPID_TYPES sample.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) SetVal(v E_VlanTypes_TPID_TYPES) *QualifiedE_VlanTypes_TPID_TYPES {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_VlanTypes_TPID_TYPES is a telemetry Collection whose Await method returns a slice of E_VlanTypes_TPID_TYPES samples.
+type CollectionE_VlanTypes_TPID_TYPES struct {
+	W    *E_VlanTypes_TPID_TYPESWatcher
+	Data []*QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_VlanTypes_TPID_TYPES) Await(t testing.TB) []*QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_VlanTypes_TPID_TYPESWatcher observes a stream of E_VlanTypes_TPID_TYPES samples.
+type E_VlanTypes_TPID_TYPESWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_VlanTypes_TPID_TYPESWatcher) Await(t testing.TB) (*QualifiedE_VlanTypes_TPID_TYPES, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_VlanTypes_VlanModeType is a E_VlanTypes_VlanModeType with a corresponding timestamp.
 type QualifiedE_VlanTypes_VlanModeType struct {
 	*genutil.Metadata
