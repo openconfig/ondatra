@@ -30,7 +30,7 @@ func (n *Lacp_Interface_IntervalPath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_L
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/config/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_IntervalPath) Get(t testing.TB) oc.E_Lacp_LacpPeriodType {
 	t.Helper()
@@ -133,7 +133,7 @@ func (n *Lacp_Interface_LacpModePath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_L
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/config/lacp-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_LacpModePath) Get(t testing.TB) oc.E_Lacp_LacpActivityType {
 	t.Helper()

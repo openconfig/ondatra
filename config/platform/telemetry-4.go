@@ -28,7 +28,7 @@ func (n *Component_Transceiver_Channel_TxLaserPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/tx-laser with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TxLaserPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Component_Transceiver_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -230,7 +230,7 @@ func (n *Component_Transceiver_EthernetPmdPreconfPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/config/ethernet-pmd-preconf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_EthernetPmdPreconfPath) Get(t testing.TB) oc.E_TransportTypes_ETHERNET_PMD_TYPE {
 	t.Helper()
@@ -331,7 +331,7 @@ func (n *Component_Transceiver_FecModePath) Lookup(t testing.TB) *oc.QualifiedE_
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/config/fec-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_FecModePath) Get(t testing.TB) oc.E_PlatformTypes_FEC_MODE_TYPE {
 	t.Helper()
@@ -432,7 +432,7 @@ func (n *Component_Transceiver_FormFactorPreconfPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/config/form-factor-preconf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_FormFactorPreconfPath) Get(t testing.TB) oc.E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
 	t.Helper()
@@ -533,7 +533,7 @@ func (n *Component_Transceiver_ModuleFunctionalTypePath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/config/module-functional-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_ModuleFunctionalTypePath) Get(t testing.TB) oc.E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE {
 	t.Helper()

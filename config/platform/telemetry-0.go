@@ -29,7 +29,7 @@ func (n *ComponentPath) Lookup(t testing.TB) *oc.QualifiedComponent {
 }
 
 // Get fetches the value at /openconfig-platform/components/component with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *ComponentPath) Get(t testing.TB) *oc.Component {
 	t.Helper()
@@ -120,7 +120,7 @@ func (n *Component_BackplanePath) Lookup(t testing.TB) *oc.QualifiedComponent_Ba
 }
 
 // Get fetches the value at /openconfig-platform/components/component/backplane with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_BackplanePath) Get(t testing.TB) *oc.Component_Backplane {
 	t.Helper()
@@ -211,7 +211,7 @@ func (n *Component_ChassisPath) Lookup(t testing.TB) *oc.QualifiedComponent_Chas
 }
 
 // Get fetches the value at /openconfig-platform/components/component/chassis with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_ChassisPath) Get(t testing.TB) *oc.Component_Chassis {
 	t.Helper()
@@ -302,7 +302,7 @@ func (n *Component_CpuPath) Lookup(t testing.TB) *oc.QualifiedComponent_Cpu {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/cpu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_CpuPath) Get(t testing.TB) *oc.Component_Cpu {
 	t.Helper()
@@ -393,7 +393,7 @@ func (n *Component_Cpu_UtilizationPath) Lookup(t testing.TB) *oc.QualifiedCompon
 }
 
 // Get fetches the value at /openconfig-platform/components/component/cpu/utilization with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Cpu_UtilizationPath) Get(t testing.TB) *oc.Component_Cpu_Utilization {
 	t.Helper()
@@ -484,7 +484,7 @@ func (n *Component_FabricPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fabri
 }
 
 // Get fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_FabricPath) Get(t testing.TB) *oc.Component_Fabric {
 	t.Helper()
@@ -575,7 +575,7 @@ func (n *Component_FanPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fan {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/fan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_FanPath) Get(t testing.TB) *oc.Component_Fan {
 	t.Helper()
@@ -666,7 +666,7 @@ func (n *Component_IntegratedCircuitPath) Lookup(t testing.TB) *oc.QualifiedComp
 }
 
 // Get fetches the value at /openconfig-platform/components/component/integrated-circuit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_IntegratedCircuitPath) Get(t testing.TB) *oc.Component_IntegratedCircuit {
 	t.Helper()

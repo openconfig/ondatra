@@ -28,7 +28,7 @@ func (n *Meta_TargetLeavesDeletedPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesDeleted with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesDeletedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Meta_TargetLeavesEmptyPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesEmpty with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesEmptyPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -230,7 +230,7 @@ func (n *Meta_TargetLeavesPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeaves with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -331,7 +331,7 @@ func (n *Meta_TargetLeavesStalePath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesStale with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesStalePath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -432,7 +432,7 @@ func (n *Meta_TargetLeavesSuppressedPath) Lookup(t testing.TB) *oc.QualifiedInt6
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesSuppressed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesSuppressedPath) Get(t testing.TB) int64 {
 	t.Helper()

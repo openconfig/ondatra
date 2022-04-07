@@ -29,7 +29,7 @@ func (n *Lldp_Interface_Neighbor_TtlPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/ttl with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_Neighbor_TtlPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Lldp_Interface_Neighbor_TtlPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Lldp_Interface_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface_Neighbor", gs, queryPath, true, false)
-		return convertLldp_Interface_Neighbor_TtlPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Interface_Neighbor_TtlPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Lldp_Interface_Neighbor_TtlPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Lldp_Interface_Neighbor_TtlPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Lldp_Interface_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertLldp_Interface_Neighbor_TtlPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/ttl with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Lldp_Interface_Neighbor_TtlPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_Neighbor_TtlPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Lldp_Interface_Neighbor_TtlPath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_Neighbor_TtlPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/ttl to the batch object.
@@ -182,7 +210,7 @@ func (n *Lldp_SuppressTlvAdvertisementPath) Lookup(t testing.TB) *oc.QualifiedE_
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/suppress-tlv-advertisement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SuppressTlvAdvertisementPath) Get(t testing.TB) []oc.E_LldpTypes_LLDP_TLV {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Lldp_SuppressTlvAdvertisementPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.E_LldpTypes_LLDP_TLVSliceWatcher{}
 	gs := &oc.Lldp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp", gs, queryPath, true, false)
-		return convertLldp_SuppressTlvAdvertisementPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_SuppressTlvAdvertisementPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_LldpTypes_LLDP_TLVSlice)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Lldp_SuppressTlvAdvertisementPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Lldp_SuppressTlvAdvertisementPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_LldpTypes_LLDP_TLVSlice) bool) *oc.E_LldpTypes_LLDP_TLVSliceWatcher {
+	t.Helper()
+	w := &oc.E_LldpTypes_LLDP_TLVSliceWatcher{}
+	structs := map[string]*oc.Lldp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp", structs[pre], queryPath, true, false)
+			qv := convertLldp_SuppressTlvAdvertisementPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_LldpTypes_LLDP_TLVSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/suppress-tlv-advertisement with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Lldp_SuppressTlvAdvertisementPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_SuppressTlvAdvertisementPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_LldpTypes_LLDP_TLVSlice) bool) *oc.E_LldpTypes_LLDP_TLVSliceWatcher {
 	t.Helper()
-	return watch_Lldp_SuppressTlvAdvertisementPath(t, n, timeout, predicate)
+	return watch_Lldp_SuppressTlvAdvertisementPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/suppress-tlv-advertisement to the batch object.
@@ -335,7 +391,7 @@ func (n *Lldp_SystemDescriptionPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/system-description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SystemDescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Lldp_SystemDescriptionPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Lldp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp", gs, queryPath, true, false)
-		return convertLldp_SystemDescriptionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_SystemDescriptionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Lldp_SystemDescriptionPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Lldp_SystemDescriptionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Lldp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp", structs[pre], queryPath, true, false)
+			qv := convertLldp_SystemDescriptionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/system-description with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Lldp_SystemDescriptionPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_SystemDescriptionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Lldp_SystemDescriptionPath(t, n, timeout, predicate)
+	return watch_Lldp_SystemDescriptionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/system-description to the batch object.
@@ -488,7 +572,7 @@ func (n *Lldp_SystemNamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/system-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SystemNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Lldp_SystemNamePath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Lldp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp", gs, queryPath, true, false)
-		return convertLldp_SystemNamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_SystemNamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Lldp_SystemNamePathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Lldp_SystemNamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Lldp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp", structs[pre], queryPath, true, false)
+			qv := convertLldp_SystemNamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/system-name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Lldp_SystemNamePathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_SystemNamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Lldp_SystemNamePath(t, n, timeout, predicate)
+	return watch_Lldp_SystemNamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/system-name to the batch object.

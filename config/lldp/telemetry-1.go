@@ -30,7 +30,7 @@ func (n *Lldp_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *Lldp_HelloTimerPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/hello-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_HelloTimerPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -234,7 +234,7 @@ func (n *Lldp_InterfacePath) Lookup(t testing.TB) *oc.QualifiedLldp_Interface {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_InterfacePath) Get(t testing.TB) *oc.Lldp_Interface {
 	t.Helper()

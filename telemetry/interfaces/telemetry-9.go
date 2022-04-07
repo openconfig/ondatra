@@ -31,7 +31,7 @@ func (n *Interface_Subinterface_Vlan_MatchPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_MatchPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_Interface_Subinterface_Vlan_MatchPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_MatchWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *Interface_Subinterface_Vlan_MatchPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_MatchPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_MatchWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *Interface_Subinterface_Vlan_MatchPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_MatchPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_MatchPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_MatchPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match to the batch object.
@@ -182,7 +213,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath(t testing
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPathAny) Collect
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPathAny) Collect
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list to the batch object.
@@ -331,7 +393,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/inner-vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -385,10 +447,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsP
 	t.Helper()
 	w := &oc.Uint16SliceWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16Slice)
 		w.LastVal = val
@@ -441,6 +503,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPat
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
+	t.Helper()
+	w := &oc.Uint16SliceWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/inner-vlan-ids with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -448,7 +538,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/inner-vlan-ids to the batch object.
@@ -484,7 +574,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -538,10 +628,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPa
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -594,6 +684,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/outer-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -601,7 +719,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/state/outer-vlan-id to the batch object.
@@ -639,7 +757,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange {
 	t.Helper()
@@ -701,12 +819,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath(t t
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange)
 		w.LastVal = val
@@ -759,6 +878,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePathAny) C
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -766,7 +915,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePathAny) C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range to the batch object.
@@ -788,7 +937,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHigh
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -842,10 +991,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHi
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -898,6 +1047,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHigh
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-high-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -905,7 +1082,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHigh
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-high-vlan-id to the batch object.
@@ -941,7 +1118,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowV
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -995,10 +1172,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1051,6 +1228,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowV
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-low-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1058,7 +1263,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowV
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/inner-low-vlan-id to the batch object.
@@ -1094,7 +1299,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHigh
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1148,10 +1353,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHi
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1204,6 +1409,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHigh
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-high-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1211,7 +1444,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHigh
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-high-vlan-id to the batch object.
@@ -1247,7 +1480,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowV
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1301,10 +1534,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1357,6 +1590,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowV
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-low-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1364,7 +1625,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowV
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/state/outer-low-vlan-id to the batch object.
@@ -1402,7 +1663,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange {
 	t.Helper()
@@ -1464,12 +1725,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath(t testin
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange)
 		w.LastVal = val
@@ -1522,6 +1784,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePathAny) Collec
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1529,7 +1821,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range to the batch object.
@@ -1551,7 +1843,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanI
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1605,10 +1897,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVla
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1661,6 +1953,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanI
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-high-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1668,7 +1988,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanI
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-high-vlan-id to the batch object.
@@ -1704,7 +2024,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanId
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1758,10 +2078,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlan
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1814,6 +2134,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanId
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-low-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1821,7 +2169,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanId
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/inner-low-vlan-id to the batch object.
@@ -1857,7 +2205,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -1911,10 +2259,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdP
 	t.Helper()
 	w := &oc.Uint16SliceWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16Slice)
 		w.LastVal = val
@@ -1967,6 +2315,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPat
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
+	t.Helper()
+	w := &oc.Uint16SliceWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/outer-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1974,7 +2350,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/state/outer-vlan-id to the batch object.
@@ -2012,7 +2388,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList {
 	t.Helper()
@@ -2074,12 +2450,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath(t testing
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList)
 		w.LastVal = val
@@ -2132,6 +2509,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPathAny) Collect
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2139,7 +2546,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPathAny) Collect
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list to the batch object.
@@ -2161,7 +2568,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2215,10 +2622,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPa
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2271,6 +2678,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/inner-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2278,7 +2713,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/inner-vlan-id to the batch object.
@@ -2314,7 +2749,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/outer-vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -2368,10 +2803,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsP
 	t.Helper()
 	w := &oc.Uint16SliceWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16Slice)
 		w.LastVal = val
@@ -2424,6 +2859,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPat
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
+	t.Helper()
+	w := &oc.Uint16SliceWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/outer-vlan-ids with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2431,7 +2894,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/state/outer-vlan-ids to the batch object.
@@ -2469,7 +2932,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange {
 	t.Helper()
@@ -2531,12 +2994,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath(t testin
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange)
 		w.LastVal = val
@@ -2589,6 +3053,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePathAny) Collec
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2596,7 +3090,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range to the batch object.
@@ -2618,7 +3112,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2672,10 +3166,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdP
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2728,6 +3222,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPat
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/inner-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2735,7 +3257,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/inner-vlan-id to the batch object.
@@ -2771,7 +3293,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanI
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2825,10 +3347,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVla
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2881,6 +3403,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanI
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-high-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2888,7 +3438,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanI
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-high-vlan-id to the batch object.
@@ -2924,7 +3474,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanId
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2978,10 +3528,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlan
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -3034,6 +3584,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanId
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-low-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3041,7 +3619,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanId
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/state/outer-low-vlan-id to the batch object.
@@ -3079,7 +3657,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTagged {
 	t.Helper()
@@ -3141,12 +3719,13 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged)
 		w.LastVal = val
@@ -3199,6 +3778,36 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTaggedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_DoubleTaggedWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3206,7 +3815,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTagged) bool) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTaggedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged to the batch object.
@@ -3228,7 +3837,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3282,10 +3891,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath(t test
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -3338,6 +3947,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPathAny) Coll
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/inner-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3345,7 +3982,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/inner-vlan-id to the batch object.
@@ -3381,7 +4018,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3435,10 +4072,10 @@ func watch_Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath(t test
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -3491,6 +4128,34 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPathAny) Coll
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_DoubleTagged{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_DoubleTagged", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/outer-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3498,7 +4163,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/state/outer-vlan-id to the batch object.
@@ -3536,7 +4201,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedList {
 	t.Helper()
@@ -3598,12 +4263,13 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedListPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedList", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList)
 		w.LastVal = val
@@ -3656,6 +4322,36 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPathAny) Collect(t te
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedListPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedList", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3663,7 +4359,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedListPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedListPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list to the batch object.
@@ -3685,7 +4381,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list/state/vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -3739,10 +4435,10 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath(t test
 	t.Helper()
 	w := &oc.Uint16SliceWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedList", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16Slice)
 		w.LastVal = val
@@ -3795,6 +4491,34 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPathAny) Coll
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
+	t.Helper()
+	w := &oc.Uint16SliceWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTaggedList{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedList", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list/state/vlan-ids with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3802,7 +4526,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16Slice) bool) *oc.Uint16SliceWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list/state/vlan-ids to the batch object.
@@ -3840,7 +4564,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTagged {
 	t.Helper()
@@ -3902,12 +4626,13 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTagged", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged)
 		w.LastVal = val
@@ -3960,6 +4685,36 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTagged", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3967,7 +4722,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged to the batch object.
@@ -3991,7 +4746,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange {
 	t.Helper()
@@ -4053,12 +4808,13 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRangePath(t testing.TB,
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange)
 		w.LastVal = val
@@ -4111,6 +4867,36 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRangePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4118,7 +4904,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) bool) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRangePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRangePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range to the batch object.
@@ -4140,7 +4926,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath) Loo
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4194,10 +4980,10 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath(t 
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -4250,6 +5036,34 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPathAny) 
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/high-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4257,7 +5071,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPathAny) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/high-vlan-id to the batch object.
@@ -4293,7 +5107,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4347,10 +5161,10 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath(t t
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -4403,6 +5217,34 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPathAny) C
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTaggedRange", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/low-vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4410,7 +5252,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPathAny) C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/state/low-vlan-id to the batch object.
@@ -4446,7 +5288,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged/state/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4500,10 +5342,10 @@ func watch_Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath(t testing.T
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTagged", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -4556,6 +5398,34 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPathAny) Collect(t
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match_SingleTagged{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match_SingleTagged", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged/state/vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4563,7 +5433,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPathAny) Collect(t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged/state/vlan-id to the batch object.
@@ -4599,7 +5469,7 @@ func (n *Interface_Subinterface_Vlan_VlanIdPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/state/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_VlanIdPath) Get(t testing.TB) oc.Interface_Subinterface_Vlan_VlanId_Union {
 	t.Helper()
@@ -4653,10 +5523,10 @@ func watch_Interface_Subinterface_Vlan_VlanIdPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_VlanId_UnionWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_VlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_VlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_VlanId_Union)
 		w.LastVal = val
@@ -4709,6 +5579,34 @@ func (n *Interface_Subinterface_Vlan_VlanIdPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_VlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_VlanId_Union) bool) *oc.Interface_Subinterface_Vlan_VlanId_UnionWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_VlanId_UnionWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_VlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_VlanId_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/state/vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4716,7 +5614,7 @@ func (n *Interface_Subinterface_Vlan_VlanIdPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_VlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_VlanId_Union) bool) *oc.Interface_Subinterface_Vlan_VlanId_UnionWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_VlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_VlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/state/vlan-id to the batch object.
@@ -4754,7 +5652,7 @@ func (n *Interface_TpidPath) Lookup(t testing.TB) *oc.QualifiedE_VlanTypes_TPID_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -4808,10 +5706,10 @@ func watch_Interface_TpidPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_TpidPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_TpidPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
 		w.LastVal = val
@@ -4864,6 +5762,34 @@ func (n *Interface_TpidPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Interface_TpidPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_TpidPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/tpid with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4871,7 +5797,7 @@ func (n *Interface_TpidPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_TpidPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
 	t.Helper()
-	return watch_Interface_TpidPath(t, n, timeout, predicate)
+	return watch_Interface_TpidPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/tpid to the batch object.
@@ -4907,7 +5833,7 @@ func (n *Interface_TransceiverPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/transceiver with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_TransceiverPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4961,10 +5887,10 @@ func watch_Interface_TransceiverPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_TransceiverPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_TransceiverPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -5017,6 +5943,34 @@ func (n *Interface_TransceiverPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Interface_TransceiverPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_TransceiverPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/transceiver with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5024,7 +5978,7 @@ func (n *Interface_TransceiverPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_TransceiverPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_TransceiverPath(t, n, timeout, predicate)
+	return watch_Interface_TransceiverPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/transceiver to the batch object.
@@ -5060,7 +6014,7 @@ func (n *Interface_TypePath) Lookup(t testing.TB) *oc.QualifiedE_IETFInterfaces_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_TypePath) Get(t testing.TB) oc.E_IETFInterfaces_InterfaceType {
 	t.Helper()
@@ -5114,10 +6068,10 @@ func watch_Interface_TypePath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.E_IETFInterfaces_InterfaceTypeWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_TypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_TypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IETFInterfaces_InterfaceType)
 		w.LastVal = val
@@ -5170,6 +6124,34 @@ func (n *Interface_TypePathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Interface_TypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IETFInterfaces_InterfaceType) bool) *oc.E_IETFInterfaces_InterfaceTypeWatcher {
+	t.Helper()
+	w := &oc.E_IETFInterfaces_InterfaceTypeWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_TypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IETFInterfaces_InterfaceType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5177,7 +6159,7 @@ func (n *Interface_TypePathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IETFInterfaces_InterfaceType) bool) *oc.E_IETFInterfaces_InterfaceTypeWatcher {
 	t.Helper()
-	return watch_Interface_TypePath(t, n, timeout, predicate)
+	return watch_Interface_TypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/type to the batch object.

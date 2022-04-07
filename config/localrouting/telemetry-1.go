@@ -28,7 +28,7 @@ func (n *LocalRoutes_Aggregate_PrefixPath) Lookup(t testing.TB) *oc.QualifiedStr
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/config/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Aggregate_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *LocalRoutes_Aggregate_SetTagPath) Lookup(t testing.TB) *oc.QualifiedLoc
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/config/set-tag with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Aggregate_SetTagPath) Get(t testing.TB) oc.LocalRoutes_Aggregate_SetTag_Union {
 	t.Helper()
@@ -232,7 +232,7 @@ func (n *LocalRoutes_StaticPath) Lookup(t testing.TB) *oc.QualifiedLocalRoutes_S
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_StaticPath) Get(t testing.TB) *oc.LocalRoutes_Static {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *LocalRoutes_Static_DescriptionPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()

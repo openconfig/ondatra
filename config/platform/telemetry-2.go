@@ -28,7 +28,7 @@ func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-breakouts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/num-physical-channels with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -232,7 +232,7 @@ func (n *Component_PowerSupplyPath) Lookup(t testing.TB) *oc.QualifiedComponent_
 }
 
 // Get fetches the value at /openconfig-platform/components/component/power-supply with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_PowerSupplyPath) Get(t testing.TB) *oc.Component_PowerSupply {
 	t.Helper()
@@ -323,7 +323,7 @@ func (n *Component_PropertyPath) Lookup(t testing.TB) *oc.QualifiedComponent_Pro
 }
 
 // Get fetches the value at /openconfig-platform/components/component/properties/property with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_PropertyPath) Get(t testing.TB) *oc.Component_Property {
 	t.Helper()
@@ -412,7 +412,7 @@ func (n *Component_Property_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/properties/property/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Property_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -513,7 +513,7 @@ func (n *Component_Property_ValuePath) Lookup(t testing.TB) *oc.QualifiedCompone
 }
 
 // Get fetches the value at /openconfig-platform/components/component/properties/property/config/value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Property_ValuePath) Get(t testing.TB) oc.Component_Property_Value_Union {
 	t.Helper()
@@ -616,7 +616,7 @@ func (n *Component_SoftwareModulePath) Lookup(t testing.TB) *oc.QualifiedCompone
 }
 
 // Get fetches the value at /openconfig-platform/components/component/software-module with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_SoftwareModulePath) Get(t testing.TB) *oc.Component_SoftwareModule {
 	t.Helper()
@@ -707,7 +707,7 @@ func (n *Component_StoragePath) Lookup(t testing.TB) *oc.QualifiedComponent_Stor
 }
 
 // Get fetches the value at /openconfig-platform/components/component/storage with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_StoragePath) Get(t testing.TB) *oc.Component_Storage {
 	t.Helper()

@@ -30,7 +30,7 @@ func (n *LldpPath) Lookup(t testing.TB) *oc.QualifiedLldp {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LldpPath) Get(t testing.TB) *oc.Lldp {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *Lldp_ChassisIdPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/chassis-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_ChassisIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *Lldp_ChassisIdTypePath) Lookup(t testing.TB) *oc.QualifiedE_LldpTypes_C
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/chassis-id-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_ChassisIdTypePath) Get(t testing.TB) oc.E_LldpTypes_ChassisIdType {
 	t.Helper()

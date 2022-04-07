@@ -503,8 +503,8 @@ func (ix *ixATE) updateTopology(ctx context.Context, ics []*opb.InterfaceConfig)
 }
 
 // PushTopology configures the IxNetwork session with the specified topology.
-func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
-	if err := validateInterfaces(top.GetInterfaces()); err != nil {
+func (ix *ixATE) PushTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
 		return err
 	}
 	ix.resetClientCfg()
@@ -514,7 +514,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	if err := ix.importConfig(ctx, ix.cfg, true, topoImportTimeout); err != nil {
 		return err
 	}
-	if lags := top.GetLags(); len(lags) > 0 {
+	if lags := top.LAGs; len(lags) > 0 {
 		if err := ix.addLAGs(lags); err != nil {
 			return err
 		}
@@ -524,7 +524,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	}
 	// Avoid a possible race condition with repeated config imports (b/191984474).
 	sleepFn(45 * time.Second)
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	ix.operState = operStateOff
@@ -532,11 +532,11 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 }
 
 // UpdateTopology updates IxNetwork session to the specified topology.
-func (ix *ixATE) UpdateTopology(ctx context.Context, top *opb.Topology) error {
-	if err := validateInterfaces(top.GetInterfaces()); err != nil {
+func (ix *ixATE) UpdateTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
 		return err
 	}
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	// Protocols/traffic are stopped after updating topology, restart as needed.

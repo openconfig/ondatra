@@ -28,7 +28,7 @@ func (n *Keychain_Key_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/config/key-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_KeyIdPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *Keychain_Key_ReceiveLifetimePath) Lookup(t testing.TB) *oc.QualifiedKey
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/receive-lifetime with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_ReceiveLifetimePath) Get(t testing.TB) *oc.Keychain_Key_ReceiveLifetime {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *Keychain_Key_ReceiveLifetime_EndTimePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/receive-lifetime/config/end-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_ReceiveLifetime_EndTimePath) Get(t testing.TB) uint64 {
 	t.Helper()

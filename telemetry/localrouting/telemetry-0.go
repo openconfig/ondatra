@@ -31,7 +31,7 @@ func (n *LocalRoutesPath) Lookup(t testing.TB) *oc.QualifiedLocalRoutes {
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutesPath) Get(t testing.TB) *oc.LocalRoutes {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_LocalRoutesPath(t testing.TB, n ygot.PathStruct, duration time.Durati
 	t.Helper()
 	w := &oc.LocalRoutesWatcher{}
 	gs := &oc.LocalRoutes{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes", gs, queryPath, false, false)
-		return (&oc.QualifiedLocalRoutes{
+		qv := (&oc.QualifiedLocalRoutes{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLocalRoutes)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *LocalRoutesPathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 	return c
 }
 
+func watch_LocalRoutesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes) bool) *oc.LocalRoutesWatcher {
+	t.Helper()
+	w := &oc.LocalRoutesWatcher{}
+	structs := map[string]*oc.LocalRoutes{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLocalRoutes{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *LocalRoutesPathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes) bool) *oc.LocalRoutesWatcher {
 	t.Helper()
-	return watch_LocalRoutesPath(t, n, timeout, predicate)
+	return watch_LocalRoutesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes to the batch object.
@@ -182,7 +213,7 @@ func (n *LocalRoutes_AggregatePath) Lookup(t testing.TB) *oc.QualifiedLocalRoute
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_AggregatePath) Get(t testing.TB) *oc.LocalRoutes_Aggregate {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_LocalRoutes_AggregatePath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.LocalRoutes_AggregateWatcher{}
 	gs := &oc.LocalRoutes_Aggregate{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Aggregate", gs, queryPath, false, false)
-		return (&oc.QualifiedLocalRoutes_Aggregate{
+		qv := (&oc.QualifiedLocalRoutes_Aggregate{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Aggregate)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *LocalRoutes_AggregatePathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_LocalRoutes_AggregatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Aggregate) bool) *oc.LocalRoutes_AggregateWatcher {
+	t.Helper()
+	w := &oc.LocalRoutes_AggregateWatcher{}
+	structs := map[string]*oc.LocalRoutes_Aggregate{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Aggregate{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Aggregate", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLocalRoutes_Aggregate{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Aggregate)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/local-aggregates/aggregate with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *LocalRoutes_AggregatePathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_AggregatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Aggregate) bool) *oc.LocalRoutes_AggregateWatcher {
 	t.Helper()
-	return watch_LocalRoutes_AggregatePath(t, n, timeout, predicate)
+	return watch_LocalRoutes_AggregatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/local-aggregates/aggregate to the batch object.

@@ -28,7 +28,7 @@ func (n *LocalRoutes_Static_NextHop_NextHopPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/config/next-hop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_NextHopPath) Get(t testing.TB) oc.LocalRoutes_Static_NextHop_NextHop_Union {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *LocalRoutes_Static_NextHop_RecursePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/config/recurse with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_RecursePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -232,7 +232,7 @@ func (n *LocalRoutes_Static_PrefixPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/config/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -333,7 +333,7 @@ func (n *LocalRoutes_Static_SetTagPath) Lookup(t testing.TB) *oc.QualifiedLocalR
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/config/set-tag with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_SetTagPath) Get(t testing.TB) oc.LocalRoutes_Static_SetTag_Union {
 	t.Helper()

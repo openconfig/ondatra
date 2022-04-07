@@ -42,7 +42,7 @@ const (
 )
 
 var (
-	simpleTop = &opb.Topology{
+	simpleTop = &Topology{
 		Interfaces: []*opb.InterfaceConfig{{
 			Name: "intf",
 			Link: &opb.InterfaceConfig_Port{"port"},
@@ -382,20 +382,20 @@ func TestPushTopology(t *testing.T) {
 
 	tests := []struct {
 		desc, reqFile, wantCfgFile string
-		top                        *opb.Topology
+		top                        *Topology
 		importErrs                 []error
 		routeTableImportErr        error
 		opErr                      error
 		wantErr                    string
 	}{{
 		desc:       "Error if no interfaces",
-		top:        &opb.Topology{},
+		top:        &Topology{},
 		importErrs: []error{nil, nil},
 		wantErr:    "zero interfaces",
 	}, {
 		desc: "Error if too many interfaces",
-		top: func() *opb.Topology {
-			top := &opb.Topology{}
+		top: func() *Topology {
+			top := &Topology{}
 			for i := 0; i <= maxIntfs; i++ {
 				top.Interfaces = append(top.Interfaces, &opb.InterfaceConfig{})
 			}
@@ -421,7 +421,7 @@ func TestPushTopology(t *testing.T) {
 		wantErr:             "failed route",
 	}, {
 		desc: "IS-IS config with no traffic",
-		top: &opb.Topology{
+		top: &Topology{
 			Interfaces: []*opb.InterfaceConfig{{
 				Name: "intf",
 				Link: &opb.InterfaceConfig_Port{"12/1"},
@@ -487,7 +487,7 @@ func TestPushTopology(t *testing.T) {
 		wantCfgFile: "isis_no_traffic_cfg.json",
 	}, {
 		desc: "FEC disabled",
-		top: &opb.Topology{
+		top: &Topology{
 			Interfaces: []*opb.InterfaceConfig{{
 				Name: "intf",
 				Link: &opb.InterfaceConfig_Port{"12/1"},
@@ -533,7 +533,7 @@ func TestPushTopology(t *testing.T) {
 func TestUpdateTopology(t *testing.T) {
 	tests := []struct {
 		desc                 string
-		top                  *opb.Topology
+		top                  *Topology
 		operState            operState
 		importErr            error
 		routeTableImportErr  error
@@ -544,7 +544,7 @@ func TestUpdateTopology(t *testing.T) {
 		wantErr              string
 	}{{
 		desc:    "Error if no interfaces",
-		top:     &opb.Topology{},
+		top:     &Topology{},
 		wantErr: "zero interfaces",
 	}, {
 		desc:      "Error on config push",
@@ -1547,7 +1547,7 @@ func TestStartTraffic(t *testing.T) {
 				c: &fakeCfgClient{importErrs: []error{nil, nil, nil}},
 			}
 
-			top := &opb.Topology{
+			top := &Topology{
 				Interfaces: []*opb.InterfaceConfig{{
 					Name: "intf1",
 					Link: &opb.InterfaceConfig_Port{"1/18"},

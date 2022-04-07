@@ -30,7 +30,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -234,7 +234,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptionsPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptionsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions {
 	t.Helper()
@@ -325,7 +325,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Adver
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/advertise-inactive-routes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_AdvertiseInactiveRoutesPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -428,7 +428,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Alway
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/always-compare-med with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_AlwaysCompareMedPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -531,7 +531,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Enabl
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -634,7 +634,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Exter
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/external-compare-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_ExternalCompareRouterIdPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -737,7 +737,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Ignor
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/ignore-as-path-length with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_IgnoreAsPathLengthPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -840,7 +840,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Ignor
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/ignore-next-hop-igp-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_IgnoreNextHopIgpMetricPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -943,7 +943,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4Path) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4 {
 	t.Helper()
@@ -1034,7 +1034,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit {
 	t.Helper()
@@ -1125,7 +1125,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
 	t.Helper()
@@ -1214,7 +1214,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1317,7 +1317,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1418,7 +1418,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1519,7 +1519,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1622,7 +1622,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1723,7 +1723,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1826,7 +1826,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6Path) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6 {
 	t.Helper()
@@ -1917,7 +1917,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit {
 	t.Helper()
@@ -2008,7 +2008,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
 	t.Helper()
@@ -2097,7 +2097,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2200,7 +2200,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2301,7 +2301,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitR
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2402,7 +2402,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2505,7 +2505,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2606,7 +2606,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_SrtePolicyIpv6_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2709,7 +2709,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePathsPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths {
 	t.Helper()
@@ -2800,7 +2800,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_EbgpPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_EbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ebgp {
 	t.Helper()
@@ -2891,7 +2891,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ebgp_Allow
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/config/allow-multiple-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ebgp_AllowMultipleAsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2994,7 +2994,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ebgp_Maxim
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/config/maximum-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ebgp_MaximumPathsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3097,7 +3097,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_EnabledPat
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3200,7 +3200,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_IbgpPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_IbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ibgp {
 	t.Helper()
@@ -3291,7 +3291,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ibgp_Maxim
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp/config/maximum-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_UseMultiplePaths_Ibgp_MaximumPathsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3392,7 +3392,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AsPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/config/as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_AsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3495,7 +3495,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_ConfederationPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/confederation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_ConfederationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_Confederation {
 	t.Helper()
@@ -3584,7 +3584,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_Confederation_IdentifierPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/confederation/config/identifier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_Confederation_IdentifierPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3685,7 +3685,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_Confederation_MemberAsPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/confederation/config/member-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_Confederation_MemberAsPath) Get(t testing.TB) []uint32 {
 	t.Helper()
@@ -3788,7 +3788,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistancePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/default-route-distance with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistancePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistance {
 	t.Helper()
@@ -3877,7 +3877,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistance_ExternalRouteD
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/default-route-distance/config/external-route-distance with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistance_ExternalRouteDistancePath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3978,7 +3978,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistance_InternalRouteD
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/default-route-distance/config/internal-route-distance with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DefaultRouteDistance_InternalRouteDistancePath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -4081,7 +4081,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefixPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/dynamic-neighbor-prefixes/dynamic-neighbor-prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefixPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefix {
 	t.Helper()
@@ -4170,7 +4170,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefix_PeerGroupPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/dynamic-neighbor-prefixes/dynamic-neighbor-prefix/config/peer-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefix_PeerGroupPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4271,7 +4271,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefix_PrefixPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/dynamic-neighbor-prefixes/dynamic-neighbor-prefix/config/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_DynamicNeighborPrefix_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4374,7 +4374,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestartPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestartPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart {
 	t.Helper()
@@ -4463,7 +4463,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_EnabledPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4564,7 +4564,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_HelperOnlyPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/config/helper-only with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_HelperOnlyPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4665,7 +4665,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_RestartTimePath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/config/restart-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_RestartTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4766,7 +4766,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/config/stale-routes-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -4869,7 +4869,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptionsPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptionsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions {
 	t.Helper()
@@ -4960,7 +4960,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_AdvertiseInac
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/advertise-inactive-routes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_AdvertiseInactiveRoutesPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5063,7 +5063,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_AlwaysCompare
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/always-compare-med with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_AlwaysCompareMedPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5166,7 +5166,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_EnableAigpPat
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/enable-aigp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_EnableAigpPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5269,7 +5269,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_ExternalCompa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/external-compare-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_ExternalCompareRouterIdPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5372,7 +5372,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_IgnoreAsPathL
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/ignore-as-path-length with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_IgnoreAsPathLengthPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5475,7 +5475,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_IgnoreNextHop
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/config/ignore-next-hop-igp-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouteSelectionOptions_IgnoreNextHopIgpMetricPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5576,7 +5576,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_RouterIdPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/config/router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -5679,7 +5679,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePathsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths {
 	t.Helper()
@@ -5770,7 +5770,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_EbgpPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/ebgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_EbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ebgp {
 	t.Helper()
@@ -5861,7 +5861,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ebgp_AllowMultiple
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/ebgp/config/allow-multiple-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ebgp_AllowMultipleAsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5964,7 +5964,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ebgp_MaximumPathsP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/ebgp/config/maximum-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ebgp_MaximumPathsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -6067,7 +6067,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_EnabledPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -6170,7 +6170,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_IbgpPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/ibgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_IbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ibgp {
 	t.Helper()
@@ -6261,7 +6261,7 @@ func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ibgp_MaximumPathsP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/use-multiple-paths/ibgp/config/maximum-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Global_UseMultiplePaths_Ibgp_MaximumPathsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -6364,7 +6364,7 @@ func (n *NetworkInstance_Protocol_Bgp_NeighborPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_NeighborPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor {
 	t.Helper()
@@ -6455,7 +6455,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafiPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafiPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi {
 	t.Helper()
@@ -6546,7 +6546,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPathsPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/add-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths {
 	t.Helper()
@@ -6635,7 +6635,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_EligiblePrefixPo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/add-paths/config/eligible-prefix-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_EligiblePrefixPolicyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -6738,7 +6738,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_ReceivePath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/add-paths/config/receive with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_ReceivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -6839,7 +6839,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_SendMaxPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_SendMaxPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -6942,7 +6942,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_SendPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AddPaths_SendPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -7043,7 +7043,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AfiSafiNamePath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_AfiSafiNamePath) Get(t testing.TB) oc.E_BgpTypes_AFI_SAFI_TYPE {
 	t.Helper()
@@ -7146,7 +7146,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicyPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy {
 	t.Helper()
@@ -7237,7 +7237,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_DefaultExport
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/config/default-export-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_DefaultExportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -7340,7 +7340,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_DefaultImport
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/config/default-import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_DefaultImportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -7441,7 +7441,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_ExportPolicyP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/config/export-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_ExportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -7542,7 +7542,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_ImportPolicyP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/config/import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_ApplyPolicy_ImportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -7645,7 +7645,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_EnabledPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -7748,7 +7748,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_GracefulRestartPath) Look
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/graceful-restart with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_GracefulRestartPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_GracefulRestart {
 	t.Helper()
@@ -7839,7 +7839,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_GracefulRestart_EnabledPa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/graceful-restart/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_GracefulRestart_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -7942,7 +7942,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicastPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast {
 	t.Helper()
@@ -8033,7 +8033,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit {
 	t.Helper()
@@ -8124,7 +8124,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived {
 	t.Helper()
@@ -8213,7 +8213,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -8316,7 +8316,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -8417,7 +8417,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -8518,7 +8518,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -8621,7 +8621,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -8722,7 +8722,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-labeled-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -8825,7 +8825,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast {
 	t.Helper()
@@ -8916,7 +8916,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitPa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit {
 	t.Helper()
@@ -9007,7 +9007,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived {
 	t.Helper()
@@ -9096,7 +9096,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -9199,7 +9199,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9300,7 +9300,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -9401,7 +9401,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_M
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -9504,7 +9504,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_P
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9605,7 +9605,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_W
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -9708,7 +9708,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_SendDefaultRo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/config/send-default-route with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_SendDefaultRoutePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9811,7 +9811,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicastPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast {
 	t.Helper()
@@ -9902,7 +9902,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit {
 	t.Helper()
@@ -9993,7 +9993,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived {
 	t.Helper()
@@ -10082,7 +10082,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -10185,7 +10185,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -10286,7 +10286,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -10387,7 +10387,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -10490,7 +10490,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -10591,7 +10591,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-labeled-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -10694,7 +10694,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast {
 	t.Helper()
@@ -10785,7 +10785,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitPa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit {
 	t.Helper()
@@ -10876,7 +10876,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived {
 	t.Helper()
@@ -10965,7 +10965,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -11068,7 +11068,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -11169,7 +11169,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitRe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -11270,7 +11270,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_M
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -11373,7 +11373,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_P
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -11474,7 +11474,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_W
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -11577,7 +11577,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_SendDefaultRo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/config/send-default-route with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_SendDefaultRoutePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -11680,7 +11680,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpnPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpnPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn {
 	t.Helper()
@@ -11771,7 +11771,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit {
 	t.Helper()
@@ -11862,7 +11862,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived {
 	t.Helper()
@@ -11951,7 +11951,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12054,7 +12054,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -12155,7 +12155,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -12256,7 +12256,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_Max
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12359,7 +12359,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_Pre
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -12460,7 +12460,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_War
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-evpn/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnEvpn_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -12563,7 +12563,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVplsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVplsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls {
 	t.Helper()
@@ -12654,7 +12654,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit {
 	t.Helper()
@@ -12745,7 +12745,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived {
 	t.Helper()
@@ -12834,7 +12834,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12937,7 +12937,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -13038,7 +13038,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitRece
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -13139,7 +13139,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_Max
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -13242,7 +13242,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_Pre
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -13343,7 +13343,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_War
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -13446,7 +13446,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4MulticastPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4MulticastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast {
 	t.Helper()
@@ -13537,7 +13537,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit {
 	t.Helper()
@@ -13628,7 +13628,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived {
 	t.Helper()
@@ -13717,7 +13717,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -13820,7 +13820,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -13921,7 +13921,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -14022,7 +14022,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -14125,7 +14125,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14226,7 +14226,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -14329,7 +14329,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4UnicastPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast {
 	t.Helper()
@@ -14420,7 +14420,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit {
 	t.Helper()
@@ -14511,7 +14511,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived {
 	t.Helper()
@@ -14600,7 +14600,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -14703,7 +14703,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14804,7 +14804,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -14905,7 +14905,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -15008,7 +15008,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15109,7 +15109,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -15212,7 +15212,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6MulticastPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6MulticastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast {
 	t.Helper()
@@ -15303,7 +15303,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit {
 	t.Helper()
@@ -15394,7 +15394,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived {
 	t.Helper()
@@ -15483,7 +15483,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -15586,7 +15586,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15687,7 +15687,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -15788,7 +15788,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -15891,7 +15891,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15992,7 +15992,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_Prefix
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -16095,7 +16095,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6UnicastPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6UnicastPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast {
 	t.Helper()
@@ -16186,7 +16186,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit {
 	t.Helper()
@@ -16277,7 +16277,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived {
 	t.Helper()
@@ -16366,7 +16366,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -16469,7 +16469,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -16570,7 +16570,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -16671,7 +16671,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -16774,7 +16774,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -16875,7 +16875,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -16978,7 +16978,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4Path) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4 {
 	t.Helper()
@@ -17069,7 +17069,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit {
 	t.Helper()
@@ -17160,7 +17160,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived {
 	t.Helper()
@@ -17249,7 +17249,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -17352,7 +17352,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -17453,7 +17453,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -17554,7 +17554,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -17657,7 +17657,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -17758,7 +17758,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv4/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv4_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -17861,7 +17861,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6Path) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6 {
 	t.Helper()
@@ -17952,7 +17952,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit {
 	t.Helper()
@@ -18043,7 +18043,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceivedPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived {
 	t.Helper()
@@ -18132,7 +18132,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -18235,7 +18235,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -18336,7 +18336,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit-received/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimitReceived_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -18437,7 +18437,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -18540,7 +18540,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/prevent-teardown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -18641,7 +18641,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/srte-policy-ipv6/prefix-limit/config/warning-threshold-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_SrtePolicyIpv6_PrefixLimit_WarningThresholdPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -18744,7 +18744,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePathsPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/use-multiple-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths {
 	t.Helper()
@@ -18835,7 +18835,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_EbgpPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/use-multiple-paths/ebgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_EbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_Ebgp {
 	t.Helper()
@@ -18926,7 +18926,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_Ebgp_All
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/use-multiple-paths/ebgp/config/allow-multiple-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_Ebgp_AllowMultipleAsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -19029,7 +19029,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_EnabledP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/use-multiple-paths/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_UseMultiplePaths_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -19132,7 +19132,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicyPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/apply-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy {
 	t.Helper()
@@ -19223,7 +19223,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_DefaultExportPolicyPa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/apply-policy/config/default-export-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_DefaultExportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -19326,7 +19326,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_DefaultImportPolicyPa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/apply-policy/config/default-import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_DefaultImportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -19427,7 +19427,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_ExportPolicyPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/apply-policy/config/export-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_ExportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -19528,7 +19528,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_ImportPolicyPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/apply-policy/config/import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ApplyPolicy_ImportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -19631,7 +19631,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptionsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/as-path-options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptionsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions {
 	t.Helper()
@@ -19722,7 +19722,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_AllowOwnAsPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/as-path-options/config/allow-own-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_AllowOwnAsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -19825,7 +19825,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_DisablePeerAsFilter
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/as-path-options/config/disable-peer-as-filter with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_DisablePeerAsFilterPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -19928,7 +19928,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_ReplacePeerAsPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/as-path-options/config/replace-peer-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AsPathOptions_ReplacePeerAsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -20029,7 +20029,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AuthPasswordPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AuthPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -20130,7 +20130,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_DescriptionPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -20233,7 +20233,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihopPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/ebgp-multihop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihopPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihop {
 	t.Helper()
@@ -20324,7 +20324,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihop_EnabledPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/ebgp-multihop/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihop_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -20425,7 +20425,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihop_MultihopTtlPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/ebgp-multihop/config/multihop-ttl with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EbgpMultihop_MultihopTtlPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -20528,7 +20528,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnableBfdPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnableBfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_EnableBfd {
 	t.Helper()
@@ -20617,7 +20617,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnableBfd_EnabledPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnableBfd_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -20720,7 +20720,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnabledPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -20823,7 +20823,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ErrorHandlingPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/error-handling with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ErrorHandlingPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_ErrorHandling {
 	t.Helper()
@@ -20914,7 +20914,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_ErrorHandling_TreatAsWithdrawPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/error-handling/config/treat-as-withdraw with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_ErrorHandling_TreatAsWithdrawPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21017,7 +21017,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestartPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestartPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart {
 	t.Helper()
@@ -21106,7 +21106,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_EnabledPath) Look
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21207,7 +21207,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_HelperOnlyPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/config/helper-only with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_HelperOnlyPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21308,7 +21308,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_RestartTimePath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/config/restart-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_RestartTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -21409,7 +21409,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_StaleRoutesTimePa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/config/stale-routes-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -21510,7 +21510,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/local-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -21613,7 +21613,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptionsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/logging-options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptionsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions {
 	t.Helper()
@@ -21704,7 +21704,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions_LogNeighborStateCh
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/logging-options/config/log-neighbor-state-changes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions_LogNeighborStateChangesPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21805,7 +21805,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_NeighborAddressPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/neighbor-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_NeighborAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -21906,7 +21906,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerAsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/peer-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerAsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -22007,7 +22007,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerGroupPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/peer-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerGroupPath) Get(t testing.TB) string {
 	t.Helper()
@@ -22108,7 +22108,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerTypePath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/peer-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_PeerTypePath) Get(t testing.TB) oc.E_BgpTypes_PeerType {
 	t.Helper()
@@ -22209,7 +22209,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_RemovePrivateAsPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/remove-private-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_RemovePrivateAsPath) Get(t testing.TB) oc.E_BgpTypes_RemovePrivateAsOption {
 	t.Helper()
@@ -22312,7 +22312,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteFlapDampingPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/route-flap-damping with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteFlapDampingPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -22415,7 +22415,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflectorPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/route-reflector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflectorPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector {
 	t.Helper()
@@ -22506,7 +22506,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector_RouteReflectorClie
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/route-reflector/config/route-reflector-client with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector_RouteReflectorClientPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -22607,7 +22607,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector_RouteReflectorClus
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/route-reflector/config/route-reflector-cluster-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector_RouteReflectorClusterIdPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Bgp_Neighbor_RouteReflector_RouteReflectorClusterId_Union {
 	t.Helper()
@@ -22710,7 +22710,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_SendCommunityPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/config/send-community with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_SendCommunityPath) Get(t testing.TB) oc.E_BgpTypes_CommunityType {
 	t.Helper()
@@ -22813,7 +22813,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_TimersPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_Timers {
 	t.Helper()
@@ -22904,7 +22904,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_ConnectRetryPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/connect-retry with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_ConnectRetryPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -23007,7 +23007,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_HoldTimePath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/hold-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_HoldTimePath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -23110,7 +23110,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_KeepaliveIntervalPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/keepalive-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_KeepaliveIntervalPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -23213,7 +23213,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_MinimumAdvertisementInterv
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/minimum-advertisement-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_MinimumAdvertisementIntervalPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -23314,7 +23314,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers/config/restart-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Timers_RestartTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -23417,7 +23417,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_TransportPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_TransportPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_Transport {
 	t.Helper()
@@ -23506,7 +23506,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_LocalAddressPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/config/local-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_LocalAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -23609,7 +23609,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_MtuDiscoveryPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/config/mtu-discovery with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_MtuDiscoveryPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -23712,7 +23712,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_PassiveModePath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/config/passive-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_PassiveModePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -23813,7 +23813,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_TcpMssPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/config/tcp-mss with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_Transport_TcpMssPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -23916,7 +23916,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePathsPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/use-multiple-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths {
 	t.Helper()
@@ -24007,7 +24007,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_EbgpPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/use-multiple-paths/ebgp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_EbgpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_Ebgp {
 	t.Helper()
@@ -24098,7 +24098,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_Ebgp_AllowMultip
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/use-multiple-paths/ebgp/config/allow-multiple-as with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_Ebgp_AllowMultipleAsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -24201,7 +24201,7 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_EnabledPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/use-multiple-paths/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_UseMultiplePaths_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -24304,7 +24304,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroupPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroupPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_PeerGroup {
 	t.Helper()
@@ -24395,7 +24395,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafiPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafiPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi {
 	t.Helper()
@@ -24486,7 +24486,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPathsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPathsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths {
 	t.Helper()
@@ -24575,7 +24575,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_EligiblePrefixP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/eligible-prefix-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_EligiblePrefixPolicyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -24678,7 +24678,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_ReceivePath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/receive with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_ReceivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -24779,7 +24779,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -24882,7 +24882,7 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Get(t testing.TB) bool {
 	t.Helper()

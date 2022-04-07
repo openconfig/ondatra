@@ -30,7 +30,7 @@ func (n *LocalRoutesPath) Lookup(t testing.TB) *oc.QualifiedLocalRoutes {
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutesPath) Get(t testing.TB) *oc.LocalRoutes {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *LocalRoutes_AggregatePath) Lookup(t testing.TB) *oc.QualifiedLocalRoute
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_AggregatePath) Get(t testing.TB) *oc.LocalRoutes_Aggregate {
 	t.Helper()
@@ -210,7 +210,7 @@ func (n *LocalRoutes_Aggregate_DescriptionPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Aggregate_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -313,7 +313,7 @@ func (n *LocalRoutes_Aggregate_DiscardPath) Lookup(t testing.TB) *oc.QualifiedBo
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/local-aggregates/aggregate/config/discard with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Aggregate_DiscardPath) Get(t testing.TB) bool {
 	t.Helper()

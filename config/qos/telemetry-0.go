@@ -30,7 +30,7 @@ func (n *QosPath) Lookup(t testing.TB) *oc.QualifiedQos {
 }
 
 // Get fetches the value at /openconfig-qos/qos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *QosPath) Get(t testing.TB) *oc.Qos {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *Qos_BufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedQos_
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfilePath) Get(t testing.TB) *oc.Qos_BufferAllocationProfile {
 	t.Helper()
@@ -210,7 +210,7 @@ func (n *Qos_BufferAllocationProfile_NamePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -313,7 +313,7 @@ func (n *Qos_BufferAllocationProfile_QueuePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_QueuePath) Get(t testing.TB) *oc.Qos_BufferAllocationProfile_Queue {
 	t.Helper()
@@ -402,7 +402,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/dedicated-buffer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -503,7 +503,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath) Lookup
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/dynamic-limit-scaling-factor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath) Get(t testing.TB) int32 {
 	t.Helper()
@@ -604,7 +604,7 @@ func (n *Qos_BufferAllocationProfile_Queue_NamePath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -705,7 +705,7 @@ func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/shared-buffer-limit-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath) Get(t testing.TB) oc.E_Qos_SHARED_BUFFER_LIMIT_TYPE {
 	t.Helper()
@@ -806,7 +806,7 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/static-shared-buffer-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -907,7 +907,7 @@ func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/use-shared-buffer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1010,7 +1010,7 @@ func (n *Qos_ClassifierPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier {
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_ClassifierPath) Get(t testing.TB) *oc.Qos_Classifier {
 	t.Helper()
@@ -1099,7 +1099,7 @@ func (n *Qos_Classifier_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1202,7 +1202,7 @@ func (n *Qos_Classifier_TermPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifi
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_TermPath) Get(t testing.TB) *oc.Qos_Classifier_Term {
 	t.Helper()
@@ -1293,7 +1293,7 @@ func (n *Qos_Classifier_Term_ActionsPath) Lookup(t testing.TB) *oc.QualifiedQos_
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_ActionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions {
 	t.Helper()
@@ -1384,7 +1384,7 @@ func (n *Qos_Classifier_Term_Actions_RemarkPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_RemarkPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions_Remark {
 	t.Helper()
@@ -1473,7 +1473,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/config/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1574,7 +1574,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/config/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1675,7 +1675,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/config/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1776,7 +1776,7 @@ func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/config/target-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1879,7 +1879,7 @@ func (n *Qos_Classifier_Term_ConditionsPath) Lookup(t testing.TB) *oc.QualifiedQ
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_ConditionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions {
 	t.Helper()
@@ -1970,7 +1970,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Ipv4 {
 	t.Helper()
@@ -2059,7 +2059,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/destination-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2160,7 +2160,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2261,7 +2261,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/dscp-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpSetPath) Get(t testing.TB) []uint8 {
 	t.Helper()
@@ -2362,7 +2362,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/hop-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_HopLimitPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2463,7 +2463,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_ProtocolPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union {
 	t.Helper()
@@ -2564,7 +2564,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2667,7 +2667,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Ipv6 {
 	t.Helper()
@@ -2756,7 +2756,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/destination-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2857,7 +2857,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/destination-flow-label with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2958,7 +2958,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3059,7 +3059,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/dscp-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_DscpSetPath) Get(t testing.TB) []uint8 {
 	t.Helper()
@@ -3160,7 +3160,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/hop-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_HopLimitPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3261,7 +3261,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/config/protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv6_ProtocolPath) Get(t testing.TB) oc.Qos_Classifier_Term_Conditions_Ipv6_Protocol_Union {
 	t.Helper()

@@ -28,7 +28,7 @@ func (n *Meta_Window_MinPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/min with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_MinPath) Get(t testing.TB) int64 {
 	t.Helper()

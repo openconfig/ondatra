@@ -20,11 +20,6 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/openconfig/ondatra/proto";
 
-message Topology {
-  repeated Lag lags = 1;
-  repeated InterfaceConfig interfaces = 2;
-}
-
 message Traffic {
   repeated Flow flows = 2;
 }

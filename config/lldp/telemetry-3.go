@@ -28,7 +28,7 @@ func (n *Lldp_SystemDescriptionPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/system-description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SystemDescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Lldp_SystemNamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/system-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SystemNamePath) Get(t testing.TB) string {
 	t.Helper()

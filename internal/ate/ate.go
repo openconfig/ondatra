@@ -33,6 +33,12 @@ var (
 	ixias = make(map[*binding.ATE]*ixATE)
 )
 
+// Topology is an ATE topology.
+type Topology struct {
+	Interfaces []*opb.InterfaceConfig
+	LAGs       []*opb.Lag
+}
+
 func ixiaForATE(ctx context.Context, ate *binding.ATE) (*ixATE, error) {
 	mu.Lock()
 	defer mu.Unlock()
@@ -52,7 +58,7 @@ func ixiaForATE(ctx context.Context, ate *binding.ATE) (*ixATE, error) {
 }
 
 // PushTopology pushes a topology to an ATE.
-func PushTopology(ctx context.Context, ate *binding.ATE, top *opb.Topology) error {
+func PushTopology(ctx context.Context, ate *binding.ATE, top *Topology) error {
 	ix, err := ixiaForATE(ctx, ate)
 	if err != nil {
 		return err
@@ -65,14 +71,14 @@ func PushTopology(ctx context.Context, ate *binding.ATE, top *opb.Topology) erro
 }
 
 // UpdateTopology updates a topology on an ATE.
-func UpdateTopology(ctx context.Context, ate *binding.ATE, top *opb.Topology, bgpPeerStateOnly bool) error {
+func UpdateTopology(ctx context.Context, ate *binding.ATE, top *Topology, bgpPeerStateOnly bool) error {
 	ix, err := ixiaForATE(ctx, ate)
 	if err != nil {
 		return err
 	}
 	// TODO: Remove this branching once new Ixia config binding is used.
 	if bgpPeerStateOnly {
-		err = ix.UpdateBGPPeerStates(ctx, top.GetInterfaces())
+		err = ix.UpdateBGPPeerStates(ctx, top.Interfaces)
 	} else {
 		err = ix.UpdateTopology(ctx, top)
 	}

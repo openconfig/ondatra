@@ -28,7 +28,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_MaxQueueDepthPacketsPath)
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/config/max-queue-depth-packets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_MaxQueueDepthPacketsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_MaxQueueDepthPercentPath)
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/config/max-queue-depth-percent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_MaxQueueDepthPercentPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -230,7 +230,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_QueuingBehaviorPath) Look
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/config/queuing-behavior with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_QueuingBehaviorPath) Get(t testing.TB) oc.E_QosTypes_QueueBehavior {
 	t.Helper()
@@ -333,7 +333,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OutputPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/output with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OutputPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_Output {
 	t.Helper()
@@ -422,7 +422,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Output_ChildSchedulerPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/output/config/child-scheduler with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Output_ChildSchedulerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -523,7 +523,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Output_OutputFwdGroupPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/output/config/output-fwd-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Output_OutputFwdGroupPath) Get(t testing.TB) string {
 	t.Helper()
@@ -624,7 +624,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Output_OutputTypePath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/output/config/output-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Output_OutputTypePath) Get(t testing.TB) oc.E_Output_OutputType {
 	t.Helper()
@@ -725,7 +725,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_PriorityPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/config/priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_PriorityPath) Get(t testing.TB) oc.E_Scheduler_Priority {
 	t.Helper()
@@ -826,7 +826,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_SequencePath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/config/sequence with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_SequencePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -929,7 +929,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor {
 	t.Helper()
@@ -1018,7 +1018,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_BcPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/bc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_BcPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1119,7 +1119,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_BePath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/be with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_BePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1220,7 +1220,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/cir with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1321,7 +1321,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPctPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/cir-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1422,7 +1422,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPctRemainingPath) Lo
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/cir-pct-remaining with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_CirPctRemainingPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1525,7 +1525,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionPath) Look
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/conform-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction {
 	t.Helper()
@@ -1614,7 +1614,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetDot1PP
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/conform-action/config/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1715,7 +1715,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetDscpPa
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/conform-action/config/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1816,7 +1816,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetMplsTc
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/conform-action/config/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction_SetMplsTcPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1919,7 +1919,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionPath) Looku
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/exceed-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction {
 	t.Helper()
@@ -2008,7 +2008,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_DropPath) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/exceed-action/config/drop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_DropPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2109,7 +2109,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetDot1PPa
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/exceed-action/config/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2210,7 +2210,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetDscpPat
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/exceed-action/config/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2311,7 +2311,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetMplsTcP
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/exceed-action/config/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction_SetMplsTcPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2412,7 +2412,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/pir with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2513,7 +2513,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPctPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/pir-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2614,7 +2614,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPctRemainingPath) Lo
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/config/pir-pct-remaining with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_PirPctRemainingPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2717,7 +2717,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionPath) Look
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/violate-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction {
 	t.Helper()
@@ -2806,7 +2806,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_DropPath)
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/violate-action/config/drop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_DropPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2907,7 +2907,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetDot1PP
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/violate-action/config/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3008,7 +3008,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetDscpPa
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/violate-action/config/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3109,7 +3109,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetMplsTc
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/two-rate-three-color/violate-action/config/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction_SetMplsTcPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3210,7 +3210,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_TypePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_TypePath) Get(t testing.TB) oc.E_QosTypes_QOS_SCHEDULER_TYPE {
 	t.Helper()
