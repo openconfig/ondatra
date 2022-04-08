@@ -259,17 +259,17 @@ generator \
     "${ATE_COMMON_ARGS[@]}" \
     "${ATE_YANG_FILES[@]}"
 
-go run internal/gnmigen/main/main.go \
-  -output_dir=telemetry \
-  -package_name=device \
-  -path=models-yang/models \
-  -schema_struct_path=github.com/openconfig/ondatra/telemetry \
-  -split_pathstructs_by_module=true \
-  -fake_root_helper_filename=device/root_helper.go \
-  -fake_root_gnmi_filename=device/device_telem.go \
-  -telemetry_funcs_file_split=3 \
-  -telemetry_types_file_split=3 \
-  "${ATE_YANG_FILES[@]}"
+# go run internal/gnmigen/main/main.go \
+#   -output_dir=telemetry \
+#   -package_name=device \
+#   -path=models-yang/models \
+#   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
+#   -split_pathstructs_by_module=true \
+#   -fake_root_helper_filename=device/root_helper.go \
+#   -fake_root_gnmi_filename=device/device_telem.go \
+#   -telemetry_funcs_file_split=3 \
+#   -telemetry_types_file_split=3 \
+#   "${ATE_YANG_FILES[@]}"
 
 
 # Generate Telemetry API.
@@ -389,7 +389,7 @@ go run internal/gnmigen/main/main.go \
 #   -list_builder_key_threshold=4 \
 #   -output_dir=telemetry \
 #   -package_name=telemetry \
-#   -path_structs_split_files_count=13 \
+#   -path_structs_split_files_count=10 \
 #   "${ALL_COMMON_ARGS[@]}" \
 #   "${ALL_YANG_FILES[@]}"
 
@@ -401,7 +401,7 @@ go run internal/gnmigen/main/main.go \
 #   -exclude_modules="${EXCLUDE_MODULES}" \
 #   -gen_path_struct_api=false \
 #   -split_pathstructs_by_module=true \
-#   -telemetry_types_file_split=13 \
+#   -telemetry_types_file_split=10 \
 #   "${ALL_YANG_FILES[@]}"
 
 # mkdir -p config/device
@@ -412,7 +412,7 @@ go run internal/gnmigen/main/main.go \
 #   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
 #   -output_dir=config \
 #   -package_name=device \
-#   -path_structs_split_files_count=8 \
+#   -path_structs_split_files_count=5 \
 #   -split_pathstructs_by_module=true \
 #   -path_structs_output_file=config/device/device.go \
 #   -base_import_path=github.com/openconfig/ondatra/config \
@@ -433,7 +433,7 @@ go run internal/gnmigen/main/main.go \
 #   -fake_root_helper_filename=device/root_helper.go \
 #   -fake_root_gnmi_filename=device/device_telem.go \
 #   -config_import_path=github.com/openconfig/ondatra/config \
-#   -telemetry_funcs_file_split=8 \
+#   -telemetry_funcs_file_split=5 \
 #   -telemetry_types_file_split=0 \
 #   "${YANG_FILES[@]}"
 
@@ -452,7 +452,7 @@ go run internal/gnmigen/main/main.go \
 #   -trim_path_package_oc_prefix=true \
 #   -path_struct_package_suffix="" \
 #   -base_import_path=github.com/openconfig/ondatra/telemetry \
-#   -path_structs_split_files_count=13 \
+#   -path_structs_split_files_count=10 \
 #   "${ALL_COMMON_ARGS[@]}" \
 #   "${ALL_YANG_FILES[@]}"
 
@@ -465,8 +465,8 @@ go run internal/gnmigen/main/main.go \
 #   -split_pathstructs_by_module=true \
 #   -fake_root_helper_filename=device/root_helper.go \
 #   -fake_root_gnmi_filename=device/device_telem.go \
-#   -telemetry_funcs_file_split=13 \
-#   -telemetry_types_file_split=13 \
+#   -telemetry_funcs_file_split=10 \
+#   -telemetry_types_file_split=10 \
 #   "${ALL_YANG_FILES[@]}"
 
 
