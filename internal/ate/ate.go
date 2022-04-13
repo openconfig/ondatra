@@ -16,15 +16,16 @@
 package ate
 
 import (
-	"golang.org/x/net/context"
 	"net"
 	"sync"
 
-	"github.com/pkg/errors"
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/testbed"
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"

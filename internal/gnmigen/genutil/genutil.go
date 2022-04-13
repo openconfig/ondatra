@@ -16,7 +16,6 @@
 package genutil
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"reflect"
@@ -25,21 +24,23 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
+	"github.com/openconfig/gnmi/errlist"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/testbed"
+	"github.com/openconfig/ygot/util"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ygot/ytypes"
+	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
-	"github.com/openconfig/ygot/util"
-	"github.com/openconfig/ygot/ygot"
-	"github.com/openconfig/ygot/ytypes"
-	"github.com/openconfig/gnmi/errlist"
-	"github.com/openconfig/gocloser"
-	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )

@@ -15,20 +15,23 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"math"
 	"sync"
 	"testing"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"github.com/openconfig/ondatra/telemetry/device"
 
+	"google.golang.org/grpc"
+
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	otgdevice "github.com/openconfig/ondatra/otgtelemetry/device"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -81,6 +84,14 @@ func (v Vendor) String() string {
 // Telemetry returns a telemetry path root for the device.
 func (d *Device) Telemetry() *device.DevicePath {
 	root := device.DeviceRoot(d.ID())
+	// TODO: Add field to root node in ygot instead of using custom data.
+	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
+	return root
+}
+
+// OTGTelemetry returns a telemetry path root for the device.
+func (d *Device) OTGTelemetry() *otgdevice.DevicePath {
+	root := otgdevice.DeviceRoot(d.ID())
 	// TODO: Add field to root node in ygot instead of using custom data.
 	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
 	return root
@@ -192,7 +203,11 @@ func newGNMI(ctx context.Context, dev binding.Device) (gpb.GNMIClient, error) {
 	}
 	if rATE, ok := dev.(*binding.ATE); ok {
 		dialGNMI = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-			return ate.DialGNMI(ctx, rATE, opts...)
+			if rATE.HardwareModel == "IXIA_TG" && rATE.Vendor == opb.Device_IXIA {
+				return testbed.Bind().DialATEGNMI(ctx, rATE, opts...)
+			} else {
+				return ate.DialGNMI(ctx, rATE, opts...)
+			}
 		}
 	}
 	return dialGNMI(ctx,
