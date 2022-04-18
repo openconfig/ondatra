@@ -18,10 +18,15 @@
 
 set -e
 
-go install github.com/openconfig/ygot/generator@latest
-git clone https://github.com/openconfig/public.git
-wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
+rm -rf public
+go install github.com/openconfig/ygot/generator@v0.16.3
 
+git clone https://github.com/openconfig/public.git
+cd public
+git checkout 28630070cbf209399fdd1ce697aea052aeb2fec4
+cd ..
+
+wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(

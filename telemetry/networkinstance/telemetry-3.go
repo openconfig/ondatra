@@ -16,189 +16,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPreventTeardown())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	gs := &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
-	t.Helper()
-	c := &oc.CollectionBool{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	w := &oc.BoolWatcher{}
-	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedBool)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prevent-teardown to the batch object.
-func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath extracts the value of the leaf PreventTeardown from its parent oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_PreventTeardownPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PreventTeardown
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/warning-threshold-pct with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit_WarningThresholdPctPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
@@ -55246,6 +55063,187 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_Pref
 		Metadata: md,
 	}
 	val := parent.MaxPrefixes
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath extracts the value of the leaf PrefixLimitExceeded from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived_PrefixLimitExceededPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceived) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PrefixLimitExceeded
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

@@ -15,6 +15,107 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime with a ONCE subscription.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime in the given batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime in the given batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/forwarding-holdtime in the given batch object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath extracts the value of the leaf ForwardingHoldtime from its parent oc.NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_ForwardingHoldtimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.ForwardingHoldtime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/ldp/global/graceful-restart/config/helper-enable with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Mpls_SignalingProtocols_Ldp_Global_GracefulRestart_HelperEnablePath) Lookup(t testing.TB) *oc.QualifiedBool {
@@ -4917,107 +5018,6 @@ func convertNetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authenticat
 	val := parent.AuthenticationKey
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) Lookup(t testing.TB) *oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) Get(t testing.TB) oc.E_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type with a ONCE subscription.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny) Get(t testing.TB) []oc.E_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_MplsTypes_RSVP_AUTH_TYPE
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type in the given batch object.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) Replace(t testing.TB, val oc.E_MplsTypes_RSVP_AUTH_TYPE) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type in the given batch object.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_MplsTypes_RSVP_AUTH_TYPE) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) Update(t testing.TB, val oc.E_MplsTypes_RSVP_AUTH_TYPE) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/config/authentication-type in the given batch object.
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_MplsTypes_RSVP_AUTH_TYPE) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertNetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath extracts the value of the leaf AuthenticationType from its parent oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE.
-func convertNetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication) *oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	qv := &oc.QualifiedE_MplsTypes_RSVP_AUTH_TYPE{
-		Metadata: md,
-	}
-	val := parent.AuthenticationType
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
 	}
 	return qv
 }
@@ -24769,107 +24769,6 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixL
 		Metadata: md,
 	}
 	val := parent.WarningThresholdPct
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.MaxPrefixes
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
