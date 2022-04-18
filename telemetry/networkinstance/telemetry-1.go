@@ -55134,8 +55134,10 @@ func watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePath(t, n, timeout, predicate)
+	return watch_NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny(t, n, timeout, predicate)
 }
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/decapsulate-gue to the batch object.
 func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_DecapsulateGuePathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)

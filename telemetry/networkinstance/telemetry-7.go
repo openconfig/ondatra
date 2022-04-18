@@ -83,14 +83,14 @@ func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Ne
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
-<<<<<<< HEAD
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay", gs, queryPath, true, false)
->>>>>>> f246853
+		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay_MinDelayPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
+		return ok && predicate(val)
 	})
 	return w
 }
