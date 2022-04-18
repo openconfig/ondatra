@@ -67,7 +67,7 @@ func TestConnect(t *testing.T) {
 			fakeClient := &fakeHTTPClient{doResps: test.doResps, doErrs: test.doErrs}
 			ix, err := Connect(context.Background(), hostname, WithHTTPClient(fakeClient))
 			if got, want := err != nil, test.wantErr != ""; got != want {
-				t.Fatalf("Connect() got err %v, want err? %v", err, want)
+				t.Fatalf("Connect() got err %v, want err %v", err, want)
 			}
 			if err != nil {
 				if !strings.Contains(err.Error(), test.wantErr) {
@@ -128,7 +128,7 @@ func TestAsyncOperation(t *testing.T) {
 			ix := &IxWeb{client: &fakeHTTPClient{doResps: test.doResps}}
 			err := ix.jsonReq(context.Background(), post, "/my/path", nil, nil)
 			if got, want := err != nil, test.wantErr != ""; got != want {
-				t.Fatalf("request() got err %v, want err? %v", err, want)
+				t.Fatalf("request() got err %v, want err %v", err, want)
 			}
 			if err != nil && !strings.Contains(err.Error(), test.wantErr) {
 				t.Errorf("request() got err %v, want contains %q", err, test.wantErr)

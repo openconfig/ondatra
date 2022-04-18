@@ -29,7 +29,7 @@ func (n *LocalRoutes_Static_PrefixPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/state/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_LocalRoutes_Static_PrefixPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.LocalRoutes_Static{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static", gs, queryPath, true, false)
-		return convertLocalRoutes_Static_PrefixPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLocalRoutes_Static_PrefixPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *LocalRoutes_Static_PrefixPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_LocalRoutes_Static_PrefixPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.LocalRoutes_Static{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static", structs[pre], queryPath, true, false)
+			qv := convertLocalRoutes_Static_PrefixPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/state/prefix with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *LocalRoutes_Static_PrefixPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_PrefixPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_PrefixPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_PrefixPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/state/prefix to the batch object.
@@ -182,7 +210,7 @@ func (n *LocalRoutes_Static_SetTagPath) Lookup(t testing.TB) *oc.QualifiedLocalR
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/state/set-tag with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_SetTagPath) Get(t testing.TB) oc.LocalRoutes_Static_SetTag_Union {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_LocalRoutes_Static_SetTagPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.LocalRoutes_Static_SetTag_UnionWatcher{}
 	gs := &oc.LocalRoutes_Static{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static", gs, queryPath, true, false)
-		return convertLocalRoutes_Static_SetTagPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLocalRoutes_Static_SetTagPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_SetTag_Union)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *LocalRoutes_Static_SetTagPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_LocalRoutes_Static_SetTagPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_SetTag_Union) bool) *oc.LocalRoutes_Static_SetTag_UnionWatcher {
+	t.Helper()
+	w := &oc.LocalRoutes_Static_SetTag_UnionWatcher{}
+	structs := map[string]*oc.LocalRoutes_Static{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static", structs[pre], queryPath, true, false)
+			qv := convertLocalRoutes_Static_SetTagPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_SetTag_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/state/set-tag with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *LocalRoutes_Static_SetTagPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_SetTagPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_SetTag_Union) bool) *oc.LocalRoutes_Static_SetTag_UnionWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_SetTagPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_SetTagPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/state/set-tag to the batch object.

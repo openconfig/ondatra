@@ -30,7 +30,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -133,7 +133,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -236,7 +236,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth {
 	t.Helper()
@@ -325,7 +325,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -428,7 +428,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting {
 	t.Helper()
@@ -517,7 +517,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -618,7 +618,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Get(t testing.TB) string {
 	t.Helper()
@@ -719,7 +719,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Get(t testing.TB) string {
 	t.Helper()
@@ -822,7 +822,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers {
 	t.Helper()
@@ -913,7 +913,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration {
 	t.Helper()
@@ -1002,7 +1002,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitI
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1103,7 +1103,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitInt
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1204,7 +1204,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspSecondWait
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-second-wait-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspSecondWaitIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1307,7 +1307,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspLifetimeIntervalPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-lifetime-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspLifetimeIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1408,7 +1408,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/config/lsp-refresh-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspRefreshIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1511,7 +1511,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_SpfPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers_Spf {
 	t.Helper()
@@ -1600,7 +1600,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-first-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfFirstIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1703,7 +1703,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-hold-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfHoldIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1804,7 +1804,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfSecondIntervalPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/spf/config/spf-second-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_Spf_SpfSecondIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1907,7 +1907,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_TransportPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/transport with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_TransportPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Transport {
 	t.Helper()
@@ -1996,7 +1996,7 @@ func (n *NetworkInstance_Protocol_Isis_Global_Transport_LspMtuSizePath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/transport/config/lsp-mtu-size with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Global_Transport_LspMtuSizePath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2099,7 +2099,7 @@ func (n *NetworkInstance_Protocol_Isis_InterfacePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_InterfacePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface {
 	t.Helper()
@@ -2190,7 +2190,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_AfPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_AfPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Af {
 	t.Helper()
@@ -2279,7 +2279,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Af_AfiNamePath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af/config/afi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Af_AfiNamePath) Get(t testing.TB) oc.E_IsisTypes_AFI_TYPE {
 	t.Helper()
@@ -2380,7 +2380,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Af_EnabledPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Af_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2481,7 +2481,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Af_SafiNamePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af/config/safi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Af_SafiNamePath) Get(t testing.TB) oc.E_IsisTypes_SAFI_TYPE {
 	t.Helper()
@@ -2584,7 +2584,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_AuthenticationPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_AuthenticationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Authentication {
 	t.Helper()
@@ -2673,7 +2673,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthModePath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/auth-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthModePath) Get(t testing.TB) oc.E_IsisTypes_AUTH_MODE {
 	t.Helper()
@@ -2774,7 +2774,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthPasswordPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2875,7 +2875,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthTypePath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/auth-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_AuthTypePath) Get(t testing.TB) oc.E_KeychainTypes_AUTH_TYPE {
 	t.Helper()
@@ -2978,7 +2978,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3079,7 +3079,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/authentication/config/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Authentication_KeychainPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3182,7 +3182,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_BfdPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_BfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Bfd {
 	t.Helper()
@@ -3271,7 +3271,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Bfd_BfdTlvPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/bfd/config/bfd-tlv with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Bfd_BfdTlvPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3374,7 +3374,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_CircuitCountersPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/circuit-counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_CircuitCountersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_CircuitCounters {
 	t.Helper()
@@ -3463,7 +3463,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_CircuitTypePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/config/circuit-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_CircuitTypePath) Get(t testing.TB) oc.E_IsisTypes_CircuitType {
 	t.Helper()
@@ -3566,7 +3566,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_EnableBfdPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/enable-bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_EnableBfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_EnableBfd {
 	t.Helper()
@@ -3655,7 +3655,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_EnableBfd_EnabledPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/enable-bfd/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_EnableBfd_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3758,7 +3758,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_EnabledPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3859,7 +3859,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_HelloPaddingPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/config/hello-padding with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_HelloPaddingPath) Get(t testing.TB) oc.E_IsisTypes_HelloPaddingType {
 	t.Helper()
@@ -3960,7 +3960,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceIdPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/config/interface-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4063,7 +4063,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRefPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRefPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_InterfaceRef {
 	t.Helper()
@@ -4152,7 +4152,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRef_InterfacePath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -4253,7 +4253,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRef_SubinterfacePath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -4356,7 +4356,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_LevelPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_LevelPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level {
 	t.Helper()
@@ -4447,7 +4447,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_AfPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_AfPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_Af {
 	t.Helper()
@@ -4536,7 +4536,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_AfiNamePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/afi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_AfiNamePath) Get(t testing.TB) oc.E_IsisTypes_AFI_TYPE {
 	t.Helper()
@@ -4637,7 +4637,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_EnabledPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4740,7 +4740,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_MetricPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_MetricPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -4841,7 +4841,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SafiNamePath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/safi-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SafiNamePath) Get(t testing.TB) oc.E_IsisTypes_SAFI_TYPE {
 	t.Helper()
@@ -4944,7 +4944,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRoutingPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRoutingPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting {
 	t.Helper()
@@ -5035,7 +5035,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySidPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid {
 	t.Helper()
@@ -5126,7 +5126,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid/config/group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_GroupPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5227,7 +5227,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid/config/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_NeighborPath) Get(t testing.TB) string {
 	t.Helper()
@@ -5330,7 +5330,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid/config/protection-eligible with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_ProtectionEligiblePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5431,7 +5431,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid/config/sid-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_SidIdPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_SidId_Union {
 	t.Helper()
@@ -5534,7 +5534,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixS
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSidPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid {
 	t.Helper()
@@ -5623,7 +5623,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixS
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid/config/label-options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_LabelOptionsPath) Get(t testing.TB) oc.E_PrefixSid_LabelOptions {
 	t.Helper()
@@ -5724,7 +5724,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixS
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid/config/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -5825,7 +5825,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixS
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid/config/sid-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_SidIdPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_SidId_Union {
 	t.Helper()
@@ -5928,7 +5928,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_EnabledPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -6031,7 +6031,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthenticationPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthenticationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication {
 	t.Helper()
@@ -6120,7 +6120,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthM
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/auth-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthModePath) Get(t testing.TB) oc.E_IsisTypes_AUTH_MODE {
 	t.Helper()
@@ -6221,7 +6221,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -6322,7 +6322,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthT
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/auth-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_AuthTypePath) Get(t testing.TB) oc.E_KeychainTypes_AUTH_TYPE {
 	t.Helper()
@@ -6425,7 +6425,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Enabl
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -6526,7 +6526,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_Keych
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/hello-authentication/config/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_HelloAuthentication_KeychainPath) Get(t testing.TB) string {
 	t.Helper()
@@ -6627,7 +6627,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_LevelNumberPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/config/level-number with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_LevelNumberPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -6730,7 +6730,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCountersPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCountersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters {
 	t.Helper()
@@ -6821,7 +6821,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_CsnpPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_CsnpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Csnp {
 	t.Helper()
@@ -6912,7 +6912,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_EshPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/esh with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_EshPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Esh {
 	t.Helper()
@@ -7003,7 +7003,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_IihPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_IihPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Iih {
 	t.Helper()
@@ -7094,7 +7094,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_IshPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/ish with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_IshPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Ish {
 	t.Helper()
@@ -7185,7 +7185,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_LspPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_LspPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Lsp {
 	t.Helper()
@@ -7276,7 +7276,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_PsnpPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_PsnpPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Psnp {
 	t.Helper()
@@ -7367,7 +7367,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_UnknownPat
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_UnknownPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_PacketCounters_Unknown {
 	t.Helper()
@@ -7458,7 +7458,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PassivePath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/config/passive with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PassivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -7559,7 +7559,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_PriorityPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/config/priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_PriorityPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -7662,7 +7662,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_TimersPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Level_Timers {
 	t.Helper()
@@ -7751,7 +7751,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Timers_HelloIntervalPath)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/timers/config/hello-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Timers_HelloIntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -7852,7 +7852,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Timers_HelloMultiplierPat
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/timers/config/hello-multiplier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Level_Timers_HelloMultiplierPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -7955,7 +7955,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_MplsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/mpls with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_MplsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Mpls {
 	t.Helper()
@@ -8046,7 +8046,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSyncPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/mpls/igp-ldp-sync with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSyncPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSync {
 	t.Helper()
@@ -8137,7 +8137,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSync_EnabledPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/mpls/igp-ldp-sync/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSync_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -8238,7 +8238,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSync_PostSessionUpDe
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Mpls_IgpLdpSync_PostSessionUpDelayPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -8341,7 +8341,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_PassivePath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/config/passive with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_PassivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -8444,7 +8444,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_TimersPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Interface_Timers {
 	t.Helper()
@@ -8533,7 +8533,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Timers_CsnpIntervalPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/timers/config/csnp-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Timers_CsnpIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -8634,7 +8634,7 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Timers_LspPacingIntervalPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/timers/config/lsp-pacing-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Interface_Timers_LspPacingIntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -8737,7 +8737,7 @@ func (n *NetworkInstance_Protocol_Isis_LevelPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_LevelPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level {
 	t.Helper()
@@ -8828,7 +8828,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_AuthenticationCheckPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/config/authentication-check with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_AuthenticationCheckPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -8931,7 +8931,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_AuthenticationPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_AuthenticationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Authentication {
 	t.Helper()
@@ -9020,7 +9020,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthModePath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/auth-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthModePath) Get(t testing.TB) oc.E_IsisTypes_AUTH_MODE {
 	t.Helper()
@@ -9121,7 +9121,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthPasswordPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/auth-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -9222,7 +9222,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthTypePath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/auth-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_AuthTypePath) Get(t testing.TB) oc.E_KeychainTypes_AUTH_TYPE {
 	t.Helper()
@@ -9325,7 +9325,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-csnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableCsnpPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9428,7 +9428,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Look
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-lsp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisableLspPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9531,7 +9531,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/disable-psnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_DisablePsnpPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9634,7 +9634,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9735,7 +9735,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_Authentication_KeychainPath) Get(t testing.TB) string {
 	t.Helper()
@@ -9838,7 +9838,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_EnabledPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -9939,7 +9939,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_LevelNumberPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/config/level-number with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_LevelNumberPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -10040,7 +10040,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_MetricStylePath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/config/metric-style with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_MetricStylePath) Get(t testing.TB) oc.E_IsisTypes_MetricStyle {
 	t.Helper()
@@ -10143,7 +10143,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreferencePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_RoutePreferencePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_RoutePreference {
 	t.Helper()
@@ -10232,7 +10232,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePrefer
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -10333,7 +10333,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePrefer
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -10436,7 +10436,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_SystemLevelCountersPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/system-level-counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_SystemLevelCountersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_SystemLevelCounters {
 	t.Helper()
@@ -10527,7 +10527,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineeringPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/traffic-engineering with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineeringPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_TrafficEngineering {
 	t.Helper()
@@ -10618,7 +10618,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_EnabledPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/traffic-engineering/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -10719,7 +10719,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_Ipv4RouterIdPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/traffic-engineering/config/ipv4-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_Ipv4RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -10820,7 +10820,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_Ipv6RouterIdPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/traffic-engineering/config/ipv6-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Isis_Level_TrafficEngineering_Ipv6RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -10921,7 +10921,7 @@ func (n *NetworkInstance_Protocol_NamePath) Lookup(t testing.TB) *oc.QualifiedSt
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -11024,7 +11024,7 @@ func (n *NetworkInstance_Protocol_Ospfv2Path) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2 {
 	t.Helper()
@@ -11115,7 +11115,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_AreaPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_AreaPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area {
 	t.Helper()
@@ -11204,7 +11204,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_IdentifierPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/config/identifier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_IdentifierPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Ospfv2_Area_Identifier_Union {
 	t.Helper()
@@ -11307,7 +11307,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_InterfacePath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_InterfacePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface {
 	t.Helper()
@@ -11396,7 +11396,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_AuthenticationTypePath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/authentication-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_AuthenticationTypePath) Get(t testing.TB) string {
 	t.Helper()
@@ -11499,7 +11499,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_EnableBfdPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/enable-bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_EnableBfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_EnableBfd {
 	t.Helper()
@@ -11588,7 +11588,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_EnableBfd_EnabledPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/enable-bfd/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_EnableBfd_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -11689,7 +11689,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_HideNetworkPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/hide-network with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_HideNetworkPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -11790,7 +11790,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_IdPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_IdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -11893,7 +11893,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRefPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRefPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRef {
 	t.Helper()
@@ -11982,7 +11982,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRef_InterfacePa
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -12083,7 +12083,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRef_Subinterfac
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12186,7 +12186,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_LsaFilterPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/lsa-filter with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_LsaFilterPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_LsaFilter {
 	t.Helper()
@@ -12275,7 +12275,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_LsaFilter_AllPath) Looku
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/lsa-filter/config/all with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_LsaFilter_AllPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -12376,7 +12376,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MetricPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MetricPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -12479,7 +12479,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MplsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/mpls with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MplsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls {
 	t.Helper()
@@ -12570,7 +12570,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/mpls/igp-ldp-sync with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSyncPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync {
 	t.Helper()
@@ -12659,7 +12659,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync_EnabledP
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/mpls/igp-ldp-sync/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -12760,7 +12760,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync_PostSess
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_IgpLdpSync_PostSessionUpDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12861,7 +12861,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_TrafficEngineeringM
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/mpls/config/traffic-engineering-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Mpls_TrafficEngineeringMetricPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -12964,7 +12964,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MultiAreaAdjacencyPrimar
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/multi-area-adjacency-primary with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_MultiAreaAdjacencyPrimaryPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -13067,7 +13067,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_NeighborPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor {
 	t.Helper()
@@ -13156,7 +13156,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor_MetricPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/neighbors/neighbor/config/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor_MetricPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -13257,7 +13257,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor_RouterIdPath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/neighbors/neighbor/config/router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Neighbor_RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -13358,7 +13358,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_NetworkTypePath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/network-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_NetworkTypePath) Get(t testing.TB) oc.E_OspfTypes_OSPF_NETWORK_TYPE {
 	t.Helper()
@@ -13459,7 +13459,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_PassivePath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/passive with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_PassivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -13560,7 +13560,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_PriorityPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/config/priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_PriorityPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -13663,7 +13663,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers {
 	t.Helper()
@@ -13752,7 +13752,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_DeadIntervalPath)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/timers/config/dead-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_DeadIntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -13853,7 +13853,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_HelloIntervalPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/timers/config/hello-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_HelloIntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -13954,7 +13954,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_RetransmissionInt
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/interfaces/interface/timers/config/retransmission-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Interface_Timers_RetransmissionIntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -14057,7 +14057,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_MplsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/mpls with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_MplsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_Mpls {
 	t.Helper()
@@ -14146,7 +14146,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_Mpls_TrafficEngineeringEnabledPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/mpls/config/traffic-engineering-enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_Mpls_TrafficEngineeringEnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14249,7 +14249,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_VirtualLinkPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/virtual-links/virtual-link with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_VirtualLinkPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Area_VirtualLink {
 	t.Helper()
@@ -14338,7 +14338,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Area_VirtualLink_RemoteRouterIdPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/areas/area/virtual-links/virtual-link/config/remote-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Area_VirtualLink_RemoteRouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -14441,7 +14441,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_GlobalPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_GlobalPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global {
 	t.Helper()
@@ -14532,7 +14532,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestartPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/graceful-restart with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestartPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_GracefulRestart {
 	t.Helper()
@@ -14621,7 +14621,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestart_EnabledPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/graceful-restart/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestart_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14722,7 +14722,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestart_HelperOnlyPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/graceful-restart/config/helper-only with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_GracefulRestart_HelperOnlyPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14823,7 +14823,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_HideTransitOnlyNetworksPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/config/hide-transit-only-networks with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_HideTransitOnlyNetworksPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -14924,7 +14924,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_IgpShortcutsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/config/igp-shortcuts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_IgpShortcutsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15027,7 +15027,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicyPath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicyPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy {
 	t.Helper()
@@ -15118,7 +15118,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_Defau
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy/config/default-import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_DefaultImportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -15219,7 +15219,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_DstAr
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy/config/dst-area with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_DstAreaPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Ospfv2_Area_Identifier_Union {
 	t.Helper()
@@ -15320,7 +15320,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_Impor
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy/config/import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_ImportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -15421,7 +15421,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_SrcAr
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy/config/src-area with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_SrcAreaPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Ospfv2_Area_Identifier_Union {
 	t.Helper()
@@ -15522,7 +15522,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_LogAdjacencyChangesPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/config/log-adjacency-changes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_LogAdjacencyChangesPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15625,7 +15625,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_MplsPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/mpls with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_MplsPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Mpls {
 	t.Helper()
@@ -15716,7 +15716,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSyncPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/mpls/igp-ldp-sync with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSyncPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync {
 	t.Helper()
@@ -15805,7 +15805,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync_EnabledPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/mpls/igp-ldp-sync/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -15906,7 +15906,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync_PostSessionUpDel
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -16007,7 +16007,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_TrafficEngineeringExtension
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/mpls/config/traffic-engineering-extensions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Mpls_TrafficEngineeringExtensionsPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -16108,7 +16108,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_RouterIdPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/config/router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -16211,7 +16211,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_SummaryRouteCostModePath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/config/summary-route-cost-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_SummaryRouteCostModePath) Get(t testing.TB) oc.E_Global_SummaryRouteCostMode {
 	t.Helper()
@@ -16314,7 +16314,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_TimersPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Timers {
 	t.Helper()
@@ -16405,7 +16405,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGenerationPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/lsa-generation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGenerationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration {
 	t.Helper()
@@ -16494,7 +16494,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration_InitialDela
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/lsa-generation/config/initial-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration_InitialDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -16595,7 +16595,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration_MaximumDela
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/lsa-generation/config/maximum-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration_MaximumDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -16698,7 +16698,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetricPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetricPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric {
 	t.Helper()
@@ -16787,7 +16787,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_IncludePath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric/config/include with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_IncludePath) Get(t testing.TB) []oc.E_OspfTypes_MAX_METRIC_INCLUDE {
 	t.Helper()
@@ -16888,7 +16888,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_SetPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric/config/set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_SetPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -16989,7 +16989,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_TimeoutPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric/config/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_TimeoutPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -17090,7 +17090,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_TriggerPath) Lo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric/config/trigger with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric_TriggerPath) Get(t testing.TB) []oc.E_OspfTypes_MAX_METRIC_TRIGGER {
 	t.Helper()
@@ -17193,7 +17193,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_SpfPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/spf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_SpfPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf {
 	t.Helper()
@@ -17282,7 +17282,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_InitialDelayPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/spf/config/initial-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_InitialDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -17383,7 +17383,7 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_MaximumDelayPath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/spf/config/maximum-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_MaximumDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -17486,7 +17486,7 @@ func (n *NetworkInstance_Protocol_PimPath) Lookup(t testing.TB) *oc.QualifiedNet
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_PimPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim {
 	t.Helper()
@@ -17577,7 +17577,7 @@ func (n *NetworkInstance_Protocol_Pim_GlobalPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_GlobalPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Global {
 	t.Helper()
@@ -17666,7 +17666,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_MaximumGroupsPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/config/maximum-groups with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_MaximumGroupsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -17769,7 +17769,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPointPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/rendezvous-points/rendezvous-point with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPointPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Global_RendezvousPoint {
 	t.Helper()
@@ -17858,7 +17858,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPoint_AddressPath) Lookup
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/rendezvous-points/rendezvous-point/config/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPoint_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -17959,7 +17959,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPoint_MulticastGroupsPath
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/rendezvous-points/rendezvous-point/config/multicast-groups with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_RendezvousPoint_MulticastGroupsPath) Get(t testing.TB) string {
 	t.Helper()
@@ -18062,7 +18062,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_SsmPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/ssm with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_SsmPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Global_Ssm {
 	t.Helper()
@@ -18151,7 +18151,7 @@ func (n *NetworkInstance_Protocol_Pim_Global_Ssm_SsmRangesPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/global/ssm/config/ssm-ranges with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Global_Ssm_SsmRangesPath) Get(t testing.TB) string {
 	t.Helper()
@@ -18254,7 +18254,7 @@ func (n *NetworkInstance_Protocol_Pim_InterfacePath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_InterfacePath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Interface {
 	t.Helper()
@@ -18345,7 +18345,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_BorderRouterPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/border-router with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_BorderRouterPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -18448,7 +18448,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_BsrBorderPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/bsr-border with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_BsrBorderPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -18549,7 +18549,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_DeadTimerPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/dead-timer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_DeadTimerPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -18650,7 +18650,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_DrPriorityPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/dr-priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_DrPriorityPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -18753,7 +18753,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_EnableBfdPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/enable-bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_EnableBfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Interface_EnableBfd {
 	t.Helper()
@@ -18842,7 +18842,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_EnableBfd_EnabledPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/enable-bfd/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_EnableBfd_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -18945,7 +18945,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_EnabledPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -19046,7 +19046,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_HelloIntervalPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/hello-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_HelloIntervalPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -19147,7 +19147,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceIdPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/interface-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -19250,7 +19250,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRefPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRefPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pim_Interface_InterfaceRef {
 	t.Helper()
@@ -19339,7 +19339,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRef_InterfacePath) Look
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -19440,7 +19440,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRef_SubinterfacePath) L
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -19541,7 +19541,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_JoinPruneIntervalPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/join-prune-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_JoinPruneIntervalPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -19642,7 +19642,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_MaximumGroupsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/maximum-groups with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_MaximumGroupsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -19743,7 +19743,7 @@ func (n *NetworkInstance_Protocol_Pim_Interface_ModePath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/config/mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Pim_Interface_ModePath) Get(t testing.TB) oc.E_PimTypes_PIM_MODE {
 	t.Helper()
@@ -19846,7 +19846,7 @@ func (n *NetworkInstance_Protocol_StaticPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_StaticPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Static {
 	t.Helper()
@@ -19935,7 +19935,7 @@ func (n *NetworkInstance_Protocol_Static_DescriptionPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -20038,7 +20038,7 @@ func (n *NetworkInstance_Protocol_Static_NextHopPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHopPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Static_NextHop {
 	t.Helper()
@@ -20129,7 +20129,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_EnableBfdPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/enable-bfd with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_EnableBfdPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Static_NextHop_EnableBfd {
 	t.Helper()
@@ -20218,7 +20218,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_EnableBfd_EnabledPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/enable-bfd/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_EnableBfd_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -20319,7 +20319,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_IndexPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_IndexPath) Get(t testing.TB) string {
 	t.Helper()
@@ -20422,7 +20422,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRefPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRefPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Static_NextHop_InterfaceRef {
 	t.Helper()
@@ -20511,7 +20511,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRef_InterfacePath) Loo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -20612,7 +20612,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRef_SubinterfacePath) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -20713,7 +20713,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_MetricPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_MetricPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -20814,7 +20814,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_NextHopPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/next-hop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_NextHopPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Static_NextHop_NextHop_Union {
 	t.Helper()
@@ -20917,7 +20917,7 @@ func (n *NetworkInstance_Protocol_Static_NextHop_RecursePath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/recurse with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_NextHop_RecursePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21018,7 +21018,7 @@ func (n *NetworkInstance_Protocol_Static_PrefixPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/config/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -21119,7 +21119,7 @@ func (n *NetworkInstance_Protocol_Static_SetTagPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/config/set-tag with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Protocol_Static_SetTagPath) Get(t testing.TB) oc.NetworkInstance_Protocol_Static_SetTag_Union {
 	t.Helper()
@@ -21220,7 +21220,7 @@ func (n *NetworkInstance_RouteDistinguisherPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/config/route-distinguisher with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteDistinguisherPath) Get(t testing.TB) string {
 	t.Helper()
@@ -21323,7 +21323,7 @@ func (n *NetworkInstance_RouteLimitPath) Lookup(t testing.TB) *oc.QualifiedNetwo
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/route-limits/route-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteLimitPath) Get(t testing.TB) *oc.NetworkInstance_RouteLimit {
 	t.Helper()
@@ -21412,7 +21412,7 @@ func (n *NetworkInstance_RouteLimit_AfiPath) Lookup(t testing.TB) *oc.QualifiedE
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/route-limits/route-limit/config/afi with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteLimit_AfiPath) Get(t testing.TB) oc.E_Types_ADDRESS_FAMILY {
 	t.Helper()
@@ -21513,7 +21513,7 @@ func (n *NetworkInstance_RouteLimit_AlarmThresholdPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/route-limits/route-limit/config/alarm-threshold with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteLimit_AlarmThresholdPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -21614,7 +21614,7 @@ func (n *NetworkInstance_RouteLimit_MaximumPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/route-limits/route-limit/config/maximum with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteLimit_MaximumPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -21717,7 +21717,7 @@ func (n *NetworkInstance_RouteLimit_WarningOnlyPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/route-limits/route-limit/config/warning-only with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouteLimit_WarningOnlyPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -21818,7 +21818,7 @@ func (n *NetworkInstance_RouterIdPath) Lookup(t testing.TB) *oc.QualifiedString 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/config/router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_RouterIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -21921,7 +21921,7 @@ func (n *NetworkInstance_SegmentRoutingPath) Lookup(t testing.TB) *oc.QualifiedN
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRoutingPath) Get(t testing.TB) *oc.NetworkInstance_SegmentRouting {
 	t.Helper()
@@ -22012,7 +22012,7 @@ func (n *NetworkInstance_SegmentRouting_SrgbPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srgbs/srgb with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_SrgbPath) Get(t testing.TB) *oc.NetworkInstance_SegmentRouting_Srgb {
 	t.Helper()
@@ -22101,7 +22101,7 @@ func (n *NetworkInstance_SegmentRouting_Srgb_DataplaneTypePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srgbs/srgb/config/dataplane-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srgb_DataplaneTypePath) Get(t testing.TB) oc.E_SegmentRoutingTypes_SrDataplaneType {
 	t.Helper()
@@ -22202,7 +22202,7 @@ func (n *NetworkInstance_SegmentRouting_Srgb_Ipv6PrefixesPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srgbs/srgb/config/ipv6-prefixes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srgb_Ipv6PrefixesPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -22303,7 +22303,7 @@ func (n *NetworkInstance_SegmentRouting_Srgb_LocalIdPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srgbs/srgb/config/local-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srgb_LocalIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -22404,7 +22404,7 @@ func (n *NetworkInstance_SegmentRouting_Srgb_MplsLabelBlocksPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srgbs/srgb/config/mpls-label-blocks with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srgb_MplsLabelBlocksPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -22507,7 +22507,7 @@ func (n *NetworkInstance_SegmentRouting_SrlbPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srlbs/srlb with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_SrlbPath) Get(t testing.TB) *oc.NetworkInstance_SegmentRouting_Srlb {
 	t.Helper()
@@ -22596,7 +22596,7 @@ func (n *NetworkInstance_SegmentRouting_Srlb_DataplaneTypePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srlbs/srlb/config/dataplane-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srlb_DataplaneTypePath) Get(t testing.TB) oc.E_SegmentRoutingTypes_SrDataplaneType {
 	t.Helper()
@@ -22697,7 +22697,7 @@ func (n *NetworkInstance_SegmentRouting_Srlb_Ipv6PrefixPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srlbs/srlb/config/ipv6-prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srlb_Ipv6PrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -22798,7 +22798,7 @@ func (n *NetworkInstance_SegmentRouting_Srlb_LocalIdPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srlbs/srlb/config/local-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srlb_LocalIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -22899,7 +22899,7 @@ func (n *NetworkInstance_SegmentRouting_Srlb_MplsLabelBlockPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/segment-routing/srlbs/srlb/config/mpls-label-block with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_SegmentRouting_Srlb_MplsLabelBlockPath) Get(t testing.TB) string {
 	t.Helper()
@@ -23002,7 +23002,7 @@ func (n *NetworkInstance_TableConnectionPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnectionPath) Get(t testing.TB) *oc.NetworkInstance_TableConnection {
 	t.Helper()
@@ -23091,7 +23091,7 @@ func (n *NetworkInstance_TableConnection_AddressFamilyPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/address-family with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_AddressFamilyPath) Get(t testing.TB) oc.E_Types_ADDRESS_FAMILY {
 	t.Helper()
@@ -23194,7 +23194,7 @@ func (n *NetworkInstance_TableConnection_DefaultImportPolicyPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/default-import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_DefaultImportPolicyPath) Get(t testing.TB) oc.E_RoutingPolicy_DefaultPolicyType {
 	t.Helper()
@@ -23297,7 +23297,7 @@ func (n *NetworkInstance_TableConnection_DisableMetricPropagationPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/disable-metric-propagation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_DisableMetricPropagationPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -23398,7 +23398,7 @@ func (n *NetworkInstance_TableConnection_DstProtocolPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/dst-protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_DstProtocolPath) Get(t testing.TB) oc.E_PolicyTypes_INSTALL_PROTOCOL_TYPE {
 	t.Helper()
@@ -23499,7 +23499,7 @@ func (n *NetworkInstance_TableConnection_ImportPolicyPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/import-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_ImportPolicyPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -23600,7 +23600,7 @@ func (n *NetworkInstance_TableConnection_SrcProtocolPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/table-connections/table-connection/config/src-protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TableConnection_SrcProtocolPath) Get(t testing.TB) oc.E_PolicyTypes_INSTALL_PROTOCOL_TYPE {
 	t.Helper()
@@ -23703,7 +23703,7 @@ func (n *NetworkInstance_TablePath) Lookup(t testing.TB) *oc.QualifiedNetworkIns
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/tables/table with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TablePath) Get(t testing.TB) *oc.NetworkInstance_Table {
 	t.Helper()
@@ -23792,7 +23792,7 @@ func (n *NetworkInstance_Table_AddressFamilyPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/tables/table/config/address-family with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Table_AddressFamilyPath) Get(t testing.TB) oc.E_Types_ADDRESS_FAMILY {
 	t.Helper()
@@ -23893,7 +23893,7 @@ func (n *NetworkInstance_Table_ProtocolPath) Lookup(t testing.TB) *oc.QualifiedE
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/tables/table/config/protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Table_ProtocolPath) Get(t testing.TB) oc.E_PolicyTypes_INSTALL_PROTOCOL_TYPE {
 	t.Helper()
@@ -23994,7 +23994,7 @@ func (n *NetworkInstance_TypePath) Lookup(t testing.TB) *oc.QualifiedE_NetworkIn
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_TypePath) Get(t testing.TB) oc.E_NetworkInstanceTypes_NETWORK_INSTANCE_TYPE {
 	t.Helper()
@@ -24097,7 +24097,7 @@ func (n *NetworkInstance_VlanPath) Lookup(t testing.TB) *oc.QualifiedNetworkInst
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/vlans/vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_VlanPath) Get(t testing.TB) *oc.NetworkInstance_Vlan {
 	t.Helper()
@@ -24186,7 +24186,7 @@ func (n *NetworkInstance_Vlan_NamePath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/vlans/vlan/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Vlan_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -24289,7 +24289,7 @@ func (n *NetworkInstance_Vlan_StatusPath) Lookup(t testing.TB) *oc.QualifiedE_Vl
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/vlans/vlan/config/status with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Vlan_StatusPath) Get(t testing.TB) oc.E_Vlan_Status {
 	t.Helper()
@@ -24390,7 +24390,7 @@ func (n *NetworkInstance_Vlan_VlanIdPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/vlans/vlan/config/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *NetworkInstance_Vlan_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()

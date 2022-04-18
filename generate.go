@@ -15,4 +15,5 @@
 package ondatra
 
 //go:generate ./proto/generate.sh
+//go:generate ./proxy/proto/generate.sh
 //go:generate ./internal/gnmigen/generate.sh

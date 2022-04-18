@@ -29,7 +29,7 @@ func (n *Meta_ConnectedPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connected with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectedPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Meta_ConnectedPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_ConnectedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_ConnectedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Meta_ConnectedPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Meta_ConnectedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_ConnectedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/connected with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Meta_ConnectedPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_ConnectedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Meta_ConnectedPath(t, n, timeout, predicate)
+	return watch_Meta_ConnectedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/connected to the batch object.
@@ -182,7 +210,7 @@ func (n *Meta_LatencyAvgPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latencyAvg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_LatencyAvgPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Meta_LatencyAvgPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_LatencyAvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_LatencyAvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Meta_LatencyAvgPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Meta_LatencyAvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_LatencyAvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latencyAvg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Meta_LatencyAvgPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_LatencyAvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_LatencyAvgPath(t, n, timeout, predicate)
+	return watch_Meta_LatencyAvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latencyAvg to the batch object.
@@ -335,7 +391,7 @@ func (n *Meta_LatencyMaxPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latencyMax with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_LatencyMaxPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Meta_LatencyMaxPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_LatencyMaxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_LatencyMaxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Meta_LatencyMaxPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Meta_LatencyMaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_LatencyMaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latencyMax with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Meta_LatencyMaxPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_LatencyMaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_LatencyMaxPath(t, n, timeout, predicate)
+	return watch_Meta_LatencyMaxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latencyMax to the batch object.

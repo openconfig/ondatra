@@ -42,7 +42,8 @@ import (
 )
 
 const (
-	ribOCPath = "/network-instances/network-instance/protocols/protocol/bgp/rib"
+	ribOCPath  = "/network-instances/network-instance/protocols/protocol/bgp/rib"
+	lspsOCPath = "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te"
 
 	portStatsCaption        = "Port Statistics"
 	portCPUStatsCaption     = "Port CPU Statistics"
@@ -62,13 +63,21 @@ var (
 			}
 			return nil, err
 		}},
+		lspsOCPath: &prefixReader{read: func(ctx context.Context, c *Client, _ *gpb.Path) ([]*gpb.Notification, error) {
+			n, err := c.pathToOCLSPs(ctx)
+			if n != nil {
+				return []*gpb.Notification{n}, err
+			}
+			return nil, err
+		}},
 	}
 
 	// To be stubbed out by tests.
 	readStatsFn = func(ctx context.Context, c *Client, cacheKey string, captions []string) (ygot.GoStruct, error) {
 		return c.readStats(ctx, cacheKey, captions)
 	}
-	ribFromIxiaFn = (*Client).ribFromIxia
+	ribFromIxiaFn  = (*Client).ribFromIxia
+	lspsFromIxiaFn = (*Client).lspsFromIxia
 )
 
 type prefixReader struct {
@@ -416,6 +425,118 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 
 	c.fresh.Set(oldRibCacheKey, dev, -1)
 	c.fresh.SetDefault(ribOCPath, true)
+
+	return notif, nil
+}
+
+func dgToLSPs(dg *ixconfig.TopologyDeviceGroup) []*ixconfig.TopologyRsvpteLsps {
+	var lsps []*ixconfig.TopologyRsvpteLsps
+	for _, ng := range dg.NetworkGroup {
+		for _, ndg := range ng.DeviceGroup {
+			for _, lb := range ndg.Ipv4Loopback {
+				lsps = append(lsps, lb.RsvpteLsps...)
+			}
+		}
+	}
+	for _, ndg := range dg.DeviceGroup {
+		lsps = append(lsps, dgToLSPs(ndg)...)
+	}
+	return lsps
+}
+
+func (c *Client) lspsFromIxia(ctx context.Context) (map[string][]*ingressLSP, error) {
+	const mvEP = "multivalue/operations/getvalues"
+	cfg := c.client.LastImportedConfig()
+	if cfg == nil {
+		return nil, errors.New("no IxNetwork config found")
+	}
+
+	var lsps []*ixconfig.TopologyRsvpteLsps
+	for _, topo := range cfg.Topology {
+		for _, dg := range topo.DeviceGroup {
+			lsps = append(lsps, dgToLSPs(dg)...)
+		}
+	}
+
+	var ingressLSPNodes []ixconfig.IxiaCfgNode
+	nameToIngressLSP := map[string]*ixconfig.TopologyRsvpP2PIngressLsps{}
+	for _, lspNode := range lsps {
+		if iLSP := lspNode.RsvpP2PIngressLsps; iLSP != nil && *(iLSP.Active.SingleValue.Value) == "true" {
+			ingressLSPNodes = append(ingressLSPNodes, iLSP)
+			nameToIngressLSP[*(lspNode.Name)] = iLSP
+		}
+	}
+
+	if err := c.client.UpdateIDs(ctx, cfg, ingressLSPNodes...); err != nil {
+		return nil, errors.Wrapf(err, "failed to update IDs for ingress LSPs")
+	}
+
+	ingressLSPsByPrefix := map[string][]*ingressLSP{}
+	for n, lspCfg := range nameToIngressLSP {
+		nodeID, err := c.client.NodeID(lspCfg)
+		if err != nil {
+			return nil, err
+		}
+		ixLSPs := new(struct {
+			State    []string
+			SourceIP string
+			RemoteIP string
+		})
+		if err := c.client.Session().Get(ctx, nodeID, ixLSPs); err != nil {
+			return nil, errors.Wrapf(err, "failed to fetch ingress LSPs config")
+		}
+		var srcIPs, dstIPs []string
+		if err := c.client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.SourceIP, 0, len(ixLSPs.State)}, &srcIPs); err != nil {
+			return nil, errors.Wrapf(err, "failed to fetch source IPs for LSP")
+		}
+		if err := c.client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.RemoteIP, 0, len(ixLSPs.State)}, &dstIPs); err != nil {
+			return nil, errors.Wrapf(err, "failed to fetch destination IPs for LSP")
+		}
+		var lsps []*ingressLSP
+		for i, state := range ixLSPs.State {
+			lsps = append(lsps, &ingressLSP{
+				up:  state == "up",
+				src: srcIPs[i],
+				dst: dstIPs[i],
+			})
+		}
+		ingressLSPsByPrefix[n] = lsps
+	}
+
+	return ingressLSPsByPrefix, nil
+}
+
+const oldLSPCacheKey = "lspCacheKey"
+
+func (c *Client) pathToOCLSPs(ctx context.Context) (*gpb.Notification, error) {
+	if _, hasFreshInfo := c.fresh.Get(lspsOCPath); hasFreshInfo {
+		return nil, nil
+	}
+
+	ingressLSPs, err := lspsFromIxiaFn(c, ctx)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to read LSPs from Ixia")
+	}
+
+	dev := &telemetry.Device{}
+	rsvpTE := dev.GetOrCreateNetworkInstance("default").GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
+	if err := lsps(ingressLSPs, rsvpTE); err != nil {
+		return nil, err
+	}
+
+	var oldLSPs *telemetry.Device
+	if old, ok := c.fresh.Get(oldLSPCacheKey); ok {
+		oldLSPs = old.(*telemetry.Device)
+	}
+
+	notif, err := ygot.Diff(oldLSPs, dev)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to render notifications")
+	}
+	notif.Timestamp = time.Now().UnixNano()
+
+	c.fresh.Set(oldLSPCacheKey, dev, -1)
+	c.fresh.SetDefault(lspsOCPath, true)
 
 	return notif, nil
 }

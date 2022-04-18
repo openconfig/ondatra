@@ -29,7 +29,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPath) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommun
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-ref with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-ref to the batch object.
@@ -184,7 +212,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity {
 	t.Helper()
@@ -246,12 +274,13 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", gs, queryPath, false, false)
-		return (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{
+		qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity)
 		w.LastVal = val
@@ -304,6 +333,36 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityWatcher {
+	t.Helper()
+	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -311,7 +370,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community to the batch object.
@@ -335,7 +394,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlinePath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline {
 	t.Helper()
@@ -397,12 +456,13 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlineWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline", gs, queryPath, false, false)
-		return (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{
+		qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline)
 		w.LastVal = val
@@ -455,6 +515,36 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlinePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlineWatcher {
+	t.Helper()
+	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlineWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -462,7 +552,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlinePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlineWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlinePath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_InlinePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline to the batch object.
@@ -484,7 +574,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline/state/communities with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPath) Get(t testing.TB) []oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_Union {
 	t.Helper()
@@ -538,10 +628,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSliceWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSlice)
 		w.LastVal = val
@@ -594,6 +684,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSlice) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSliceWatcher {
+	t.Helper()
+	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSliceWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline/state/communities with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -601,7 +719,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSlice) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_UnionSliceWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_CommunitiesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline/state/communities to the batch object.
@@ -637,7 +755,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPath) Get(t testing.TB) oc.E_SetCommunity_Method {
 	t.Helper()
@@ -691,10 +809,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.E_SetCommunity_MethodWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SetCommunity_Method)
 		w.LastVal = val
@@ -747,6 +865,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SetCommunity_Method) bool) *oc.E_SetCommunity_MethodWatcher {
+	t.Helper()
+	w := &oc.E_SetCommunity_MethodWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SetCommunity_Method)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/method with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -754,7 +900,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SetCommunity_Method) bool) *oc.E_SetCommunity_MethodWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_MethodPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/method to the batch object.
@@ -790,7 +936,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath) Get(t testing.TB) oc.E_BgpPolicy_BgpSetCommunityOptionType {
 	t.Helper()
@@ -844,10 +990,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType)
 		w.LastVal = val
@@ -900,6 +1046,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool) *oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher {
+	t.Helper()
+	w := &oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -907,7 +1081,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_BgpPolicy_BgpSetCommunityOptionType) bool) *oc.E_BgpPolicy_BgpSetCommunityOptionTypeWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_OptionsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options to the batch object.
@@ -945,7 +1119,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference {
 	t.Helper()
@@ -1007,12 +1181,13 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", gs, queryPath, false, false)
-		return (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
+		qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
 		w.LastVal = val
@@ -1065,6 +1240,36 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher {
+	t.Helper()
+	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1072,7 +1277,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferenceWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference to the batch object.
@@ -1094,7 +1299,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1148,10 +1353,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCom
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1204,6 +1409,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1211,7 +1444,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-ref to the batch object.
@@ -1247,7 +1480,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPre
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1301,10 +1534,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalP
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -1357,6 +1590,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPre
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1364,7 +1625,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPre
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref to the batch object.
@@ -1400,7 +1661,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath)
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath) Get(t testing.TB) oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union {
 	t.Helper()
@@ -1454,10 +1715,10 @@ func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPat
 	t.Helper()
 	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher{}
 	gs := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", gs, queryPath, true, false)
-		return convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union)
 		w.LastVal = val
@@ -1510,6 +1771,34 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathA
 	return c
 }
 
+func watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher {
+	t.Helper()
+	w := &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher{}
+	structs := map[string]*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions", structs[pre], queryPath, true, false)
+			qv := convertRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1517,7 +1806,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathA
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedRoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union) bool) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_UnionWatcher {
 	t.Helper()
-	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPath(t, n, timeout, predicate)
+	return watch_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med to the batch object.

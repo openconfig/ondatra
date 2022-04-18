@@ -31,7 +31,7 @@ func (n *InterfacePath) Lookup(t testing.TB) *oc.QualifiedInterface {
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *InterfacePath) Get(t testing.TB) *oc.Interface {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.InterfaceWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface{
+		qv := (&oc.QualifiedInterface{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_InterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface) bool) *oc.InterfaceWatcher {
+	t.Helper()
+	w := &oc.InterfaceWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface) bool) *oc.InterfaceWatcher {
 	t.Helper()
-	return watch_InterfacePath(t, n, timeout, predicate)
+	return watch_InterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface to the batch object.
@@ -180,7 +211,7 @@ func (n *Interface_AdminStatusPath) Lookup(t testing.TB) *oc.QualifiedE_Interfac
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/admin-status with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_AdminStatusPath) Get(t testing.TB) oc.E_Interface_AdminStatus {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_Interface_AdminStatusPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.E_Interface_AdminStatusWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_AdminStatusPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_AdminStatusPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Interface_AdminStatus)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *Interface_AdminStatusPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Interface_AdminStatusPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Interface_AdminStatus) bool) *oc.E_Interface_AdminStatusWatcher {
+	t.Helper()
+	w := &oc.E_Interface_AdminStatusWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_AdminStatusPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Interface_AdminStatus)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/admin-status with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *Interface_AdminStatusPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_AdminStatusPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Interface_AdminStatus) bool) *oc.E_Interface_AdminStatusWatcher {
 	t.Helper()
-	return watch_Interface_AdminStatusPath(t, n, timeout, predicate)
+	return watch_Interface_AdminStatusPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/admin-status to the batch object.
@@ -335,7 +394,7 @@ func (n *Interface_AggregationPath) Lookup(t testing.TB) *oc.QualifiedInterface_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_AggregationPath) Get(t testing.TB) *oc.Interface_Aggregation {
 	t.Helper()
@@ -397,12 +456,13 @@ func watch_Interface_AggregationPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.Interface_AggregationWatcher{}
 	gs := &oc.Interface_Aggregation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Aggregation{
+		qv := (&oc.QualifiedInterface_Aggregation{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation)
 		w.LastVal = val
@@ -455,6 +515,36 @@ func (n *Interface_AggregationPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Interface_AggregationPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation) bool) *oc.Interface_AggregationWatcher {
+	t.Helper()
+	w := &oc.Interface_AggregationWatcher{}
+	structs := map[string]*oc.Interface_Aggregation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Aggregation{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -462,7 +552,7 @@ func (n *Interface_AggregationPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_AggregationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation) bool) *oc.Interface_AggregationWatcher {
 	t.Helper()
-	return watch_Interface_AggregationPath(t, n, timeout, predicate)
+	return watch_Interface_AggregationPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation to the batch object.
@@ -484,7 +574,7 @@ func (n *Interface_Aggregation_LagSpeedPath) Lookup(t testing.TB) *oc.QualifiedU
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/state/lag-speed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_LagSpeedPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -538,10 +628,10 @@ func watch_Interface_Aggregation_LagSpeedPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Aggregation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation", gs, queryPath, true, false)
-		return convertInterface_Aggregation_LagSpeedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_LagSpeedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -594,6 +684,34 @@ func (n *Interface_Aggregation_LagSpeedPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Aggregation_LagSpeedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Aggregation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_LagSpeedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/state/lag-speed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -601,7 +719,7 @@ func (n *Interface_Aggregation_LagSpeedPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_LagSpeedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Aggregation_LagSpeedPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_LagSpeedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/state/lag-speed to the batch object.
@@ -637,7 +755,7 @@ func (n *Interface_Aggregation_LagTypePath) Lookup(t testing.TB) *oc.QualifiedE_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/state/lag-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_LagTypePath) Get(t testing.TB) oc.E_IfAggregate_AggregationType {
 	t.Helper()
@@ -691,10 +809,10 @@ func watch_Interface_Aggregation_LagTypePath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.E_IfAggregate_AggregationTypeWatcher{}
 	gs := &oc.Interface_Aggregation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation", gs, queryPath, true, false)
-		return convertInterface_Aggregation_LagTypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_LagTypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfAggregate_AggregationType)
 		w.LastVal = val
@@ -747,6 +865,34 @@ func (n *Interface_Aggregation_LagTypePathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Interface_Aggregation_LagTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfAggregate_AggregationType) bool) *oc.E_IfAggregate_AggregationTypeWatcher {
+	t.Helper()
+	w := &oc.E_IfAggregate_AggregationTypeWatcher{}
+	structs := map[string]*oc.Interface_Aggregation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_LagTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfAggregate_AggregationType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/state/lag-type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -754,7 +900,7 @@ func (n *Interface_Aggregation_LagTypePathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_LagTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfAggregate_AggregationType) bool) *oc.E_IfAggregate_AggregationTypeWatcher {
 	t.Helper()
-	return watch_Interface_Aggregation_LagTypePath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_LagTypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/state/lag-type to the batch object.
@@ -790,7 +936,7 @@ func (n *Interface_Aggregation_MemberPath) Lookup(t testing.TB) *oc.QualifiedStr
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/state/member with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_MemberPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -844,10 +990,10 @@ func watch_Interface_Aggregation_MemberPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.StringSliceWatcher{}
 	gs := &oc.Interface_Aggregation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation", gs, queryPath, true, false)
-		return convertInterface_Aggregation_MemberPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_MemberPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedStringSlice)
 		w.LastVal = val
@@ -900,6 +1046,34 @@ func (n *Interface_Aggregation_MemberPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Interface_Aggregation_MemberPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	structs := map[string]*oc.Interface_Aggregation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_MemberPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/state/member with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -907,7 +1081,7 @@ func (n *Interface_Aggregation_MemberPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_MemberPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
 	t.Helper()
-	return watch_Interface_Aggregation_MemberPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_MemberPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/state/member to the batch object.
@@ -943,7 +1117,7 @@ func (n *Interface_Aggregation_MinLinksPath) Lookup(t testing.TB) *oc.QualifiedU
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/state/min-links with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_MinLinksPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -997,10 +1171,10 @@ func watch_Interface_Aggregation_MinLinksPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Aggregation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation", gs, queryPath, true, false)
-		return convertInterface_Aggregation_MinLinksPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_MinLinksPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1053,6 +1227,34 @@ func (n *Interface_Aggregation_MinLinksPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Aggregation_MinLinksPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Aggregation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_MinLinksPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/state/min-links with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1060,7 +1262,7 @@ func (n *Interface_Aggregation_MinLinksPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_MinLinksPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Aggregation_MinLinksPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_MinLinksPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/state/min-links to the batch object.
@@ -1098,7 +1300,7 @@ func (n *Interface_Aggregation_SwitchedVlanPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_SwitchedVlanPath) Get(t testing.TB) *oc.Interface_Aggregation_SwitchedVlan {
 	t.Helper()
@@ -1160,12 +1362,13 @@ func watch_Interface_Aggregation_SwitchedVlanPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Interface_Aggregation_SwitchedVlanWatcher{}
 	gs := &oc.Interface_Aggregation_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Aggregation_SwitchedVlan{
+		qv := (&oc.QualifiedInterface_Aggregation_SwitchedVlan{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation_SwitchedVlan)
 		w.LastVal = val
@@ -1218,6 +1421,36 @@ func (n *Interface_Aggregation_SwitchedVlanPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Aggregation_SwitchedVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation_SwitchedVlan) bool) *oc.Interface_Aggregation_SwitchedVlanWatcher {
+	t.Helper()
+	w := &oc.Interface_Aggregation_SwitchedVlanWatcher{}
+	structs := map[string]*oc.Interface_Aggregation_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Aggregation_SwitchedVlan{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation_SwitchedVlan)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1225,7 +1458,7 @@ func (n *Interface_Aggregation_SwitchedVlanPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_SwitchedVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation_SwitchedVlan) bool) *oc.Interface_Aggregation_SwitchedVlanWatcher {
 	t.Helper()
-	return watch_Interface_Aggregation_SwitchedVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_SwitchedVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan to the batch object.
@@ -1247,7 +1480,7 @@ func (n *Interface_Aggregation_SwitchedVlan_AccessVlanPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/access-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_SwitchedVlan_AccessVlanPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1301,10 +1534,10 @@ func watch_Interface_Aggregation_SwitchedVlan_AccessVlanPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Aggregation_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Aggregation_SwitchedVlan_AccessVlanPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_SwitchedVlan_AccessVlanPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1357,6 +1590,34 @@ func (n *Interface_Aggregation_SwitchedVlan_AccessVlanPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Aggregation_SwitchedVlan_AccessVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Aggregation_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_SwitchedVlan_AccessVlanPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/access-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1364,7 +1625,7 @@ func (n *Interface_Aggregation_SwitchedVlan_AccessVlanPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_SwitchedVlan_AccessVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Aggregation_SwitchedVlan_AccessVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_SwitchedVlan_AccessVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/access-vlan to the batch object.
@@ -1400,7 +1661,7 @@ func (n *Interface_Aggregation_SwitchedVlan_InterfaceModePath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/interface-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_SwitchedVlan_InterfaceModePath) Get(t testing.TB) oc.E_VlanTypes_VlanModeType {
 	t.Helper()
@@ -1454,10 +1715,10 @@ func watch_Interface_Aggregation_SwitchedVlan_InterfaceModePath(t testing.TB, n 
 	t.Helper()
 	w := &oc.E_VlanTypes_VlanModeTypeWatcher{}
 	gs := &oc.Interface_Aggregation_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Aggregation_SwitchedVlan_InterfaceModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_SwitchedVlan_InterfaceModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanModeType)
 		w.LastVal = val
@@ -1510,6 +1771,34 @@ func (n *Interface_Aggregation_SwitchedVlan_InterfaceModePathAny) Collect(t test
 	return c
 }
 
+func watch_Interface_Aggregation_SwitchedVlan_InterfaceModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanModeType) bool) *oc.E_VlanTypes_VlanModeTypeWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_VlanModeTypeWatcher{}
+	structs := map[string]*oc.Interface_Aggregation_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_SwitchedVlan_InterfaceModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanModeType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/interface-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1517,7 +1806,7 @@ func (n *Interface_Aggregation_SwitchedVlan_InterfaceModePathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_SwitchedVlan_InterfaceModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanModeType) bool) *oc.E_VlanTypes_VlanModeTypeWatcher {
 	t.Helper()
-	return watch_Interface_Aggregation_SwitchedVlan_InterfaceModePath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_SwitchedVlan_InterfaceModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/interface-mode to the batch object.
@@ -1553,7 +1842,7 @@ func (n *Interface_Aggregation_SwitchedVlan_NativeVlanPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/native-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_SwitchedVlan_NativeVlanPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1607,10 +1896,10 @@ func watch_Interface_Aggregation_SwitchedVlan_NativeVlanPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Aggregation_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Aggregation_SwitchedVlan_NativeVlanPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_SwitchedVlan_NativeVlanPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1663,6 +1952,34 @@ func (n *Interface_Aggregation_SwitchedVlan_NativeVlanPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Aggregation_SwitchedVlan_NativeVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Aggregation_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_SwitchedVlan_NativeVlanPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/native-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1670,7 +1987,7 @@ func (n *Interface_Aggregation_SwitchedVlan_NativeVlanPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_SwitchedVlan_NativeVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Aggregation_SwitchedVlan_NativeVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_SwitchedVlan_NativeVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/native-vlan to the batch object.
@@ -1706,7 +2023,7 @@ func (n *Interface_Aggregation_SwitchedVlan_TrunkVlansPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/trunk-vlans with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Aggregation_SwitchedVlan_TrunkVlansPath) Get(t testing.TB) []oc.Interface_Aggregation_SwitchedVlan_TrunkVlans_Union {
 	t.Helper()
@@ -1760,10 +2077,10 @@ func watch_Interface_Aggregation_SwitchedVlan_TrunkVlansPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Interface_Aggregation_SwitchedVlan_TrunkVlans_UnionSliceWatcher{}
 	gs := &oc.Interface_Aggregation_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Aggregation_SwitchedVlan_TrunkVlansPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Aggregation_SwitchedVlan_TrunkVlansPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation_SwitchedVlan_TrunkVlans_UnionSlice)
 		w.LastVal = val
@@ -1816,6 +2133,34 @@ func (n *Interface_Aggregation_SwitchedVlan_TrunkVlansPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Aggregation_SwitchedVlan_TrunkVlansPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation_SwitchedVlan_TrunkVlans_UnionSlice) bool) *oc.Interface_Aggregation_SwitchedVlan_TrunkVlans_UnionSliceWatcher {
+	t.Helper()
+	w := &oc.Interface_Aggregation_SwitchedVlan_TrunkVlans_UnionSliceWatcher{}
+	structs := map[string]*oc.Interface_Aggregation_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Aggregation_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Aggregation_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Aggregation_SwitchedVlan_TrunkVlansPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Aggregation_SwitchedVlan_TrunkVlans_UnionSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/trunk-vlans with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1823,7 +2168,7 @@ func (n *Interface_Aggregation_SwitchedVlan_TrunkVlansPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Aggregation_SwitchedVlan_TrunkVlansPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Aggregation_SwitchedVlan_TrunkVlans_UnionSlice) bool) *oc.Interface_Aggregation_SwitchedVlan_TrunkVlans_UnionSliceWatcher {
 	t.Helper()
-	return watch_Interface_Aggregation_SwitchedVlan_TrunkVlansPath(t, n, timeout, predicate)
+	return watch_Interface_Aggregation_SwitchedVlan_TrunkVlansPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/aggregation/switched-vlan/state/trunk-vlans to the batch object.
@@ -1861,7 +2206,7 @@ func (n *Interface_CountersPath) Lookup(t testing.TB) *oc.QualifiedInterface_Cou
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_CountersPath) Get(t testing.TB) *oc.Interface_Counters {
 	t.Helper()
@@ -1923,12 +2268,13 @@ func watch_Interface_CountersPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.Interface_CountersWatcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Counters{
+		qv := (&oc.QualifiedInterface_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Counters)
 		w.LastVal = val
@@ -1981,6 +2327,36 @@ func (n *Interface_CountersPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_Interface_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Counters) bool) *oc.Interface_CountersWatcher {
+	t.Helper()
+	w := &oc.Interface_CountersWatcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1988,7 +2364,7 @@ func (n *Interface_CountersPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Counters) bool) *oc.Interface_CountersWatcher {
 	t.Helper()
-	return watch_Interface_CountersPath(t, n, timeout, predicate)
+	return watch_Interface_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters to the batch object.
@@ -2010,7 +2386,7 @@ func (n *Interface_Counters_CarrierTransitionsPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/carrier-transitions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_CarrierTransitionsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2064,10 +2440,10 @@ func watch_Interface_Counters_CarrierTransitionsPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_CarrierTransitionsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_CarrierTransitionsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2120,6 +2496,34 @@ func (n *Interface_Counters_CarrierTransitionsPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_Interface_Counters_CarrierTransitionsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_CarrierTransitionsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/carrier-transitions with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2127,7 +2531,7 @@ func (n *Interface_Counters_CarrierTransitionsPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_CarrierTransitionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_CarrierTransitionsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_CarrierTransitionsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/carrier-transitions to the batch object.
@@ -2163,7 +2567,7 @@ func (n *Interface_Counters_InBroadcastPktsPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-broadcast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InBroadcastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2217,10 +2621,10 @@ func watch_Interface_Counters_InBroadcastPktsPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InBroadcastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InBroadcastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2273,6 +2677,34 @@ func (n *Interface_Counters_InBroadcastPktsPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Counters_InBroadcastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InBroadcastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-broadcast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2280,7 +2712,7 @@ func (n *Interface_Counters_InBroadcastPktsPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InBroadcastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InBroadcastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InBroadcastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-broadcast-pkts to the batch object.
@@ -2316,7 +2748,7 @@ func (n *Interface_Counters_InDiscardsPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-discards with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InDiscardsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2370,10 +2802,10 @@ func watch_Interface_Counters_InDiscardsPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InDiscardsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InDiscardsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2426,6 +2858,34 @@ func (n *Interface_Counters_InDiscardsPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Interface_Counters_InDiscardsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InDiscardsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-discards with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2433,7 +2893,7 @@ func (n *Interface_Counters_InDiscardsPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InDiscardsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InDiscardsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InDiscardsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-discards to the batch object.
@@ -2469,7 +2929,7 @@ func (n *Interface_Counters_InErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2523,10 +2983,10 @@ func watch_Interface_Counters_InErrorsPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2579,6 +3039,34 @@ func (n *Interface_Counters_InErrorsPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Interface_Counters_InErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2586,7 +3074,7 @@ func (n *Interface_Counters_InErrorsPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-errors to the batch object.
@@ -2622,7 +3110,7 @@ func (n *Interface_Counters_InFcsErrorsPath) Lookup(t testing.TB) *oc.QualifiedU
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-fcs-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InFcsErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2676,10 +3164,10 @@ func watch_Interface_Counters_InFcsErrorsPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InFcsErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InFcsErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2732,6 +3220,34 @@ func (n *Interface_Counters_InFcsErrorsPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Counters_InFcsErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InFcsErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-fcs-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2739,7 +3255,7 @@ func (n *Interface_Counters_InFcsErrorsPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InFcsErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InFcsErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InFcsErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-fcs-errors to the batch object.
@@ -2775,7 +3291,7 @@ func (n *Interface_Counters_InMulticastPktsPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-multicast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InMulticastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2829,10 +3345,10 @@ func watch_Interface_Counters_InMulticastPktsPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InMulticastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InMulticastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2885,6 +3401,34 @@ func (n *Interface_Counters_InMulticastPktsPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Counters_InMulticastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InMulticastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-multicast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2892,7 +3436,7 @@ func (n *Interface_Counters_InMulticastPktsPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InMulticastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InMulticastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InMulticastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-multicast-pkts to the batch object.
@@ -2928,7 +3472,7 @@ func (n *Interface_Counters_InOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2982,10 +3526,10 @@ func watch_Interface_Counters_InOctetsPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3038,6 +3582,34 @@ func (n *Interface_Counters_InOctetsPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Interface_Counters_InOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3045,7 +3617,7 @@ func (n *Interface_Counters_InOctetsPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-octets to the batch object.
@@ -3081,7 +3653,7 @@ func (n *Interface_Counters_InPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3135,10 +3707,10 @@ func watch_Interface_Counters_InPktsPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3191,6 +3763,34 @@ func (n *Interface_Counters_InPktsPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_Interface_Counters_InPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3198,7 +3798,7 @@ func (n *Interface_Counters_InPktsPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-pkts to the batch object.
@@ -3234,7 +3834,7 @@ func (n *Interface_Counters_InUnicastPktsPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-unicast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InUnicastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3288,10 +3888,10 @@ func watch_Interface_Counters_InUnicastPktsPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InUnicastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InUnicastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3344,6 +3944,34 @@ func (n *Interface_Counters_InUnicastPktsPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_Interface_Counters_InUnicastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InUnicastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-unicast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3351,7 +3979,7 @@ func (n *Interface_Counters_InUnicastPktsPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InUnicastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InUnicastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InUnicastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-unicast-pkts to the batch object.
@@ -3387,7 +4015,7 @@ func (n *Interface_Counters_InUnknownProtosPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/in-unknown-protos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_InUnknownProtosPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3441,10 +4069,10 @@ func watch_Interface_Counters_InUnknownProtosPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_InUnknownProtosPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_InUnknownProtosPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3497,6 +4125,34 @@ func (n *Interface_Counters_InUnknownProtosPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Counters_InUnknownProtosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_InUnknownProtosPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/in-unknown-protos with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3504,7 +4160,7 @@ func (n *Interface_Counters_InUnknownProtosPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_InUnknownProtosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_InUnknownProtosPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_InUnknownProtosPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/in-unknown-protos to the batch object.
@@ -3540,7 +4196,7 @@ func (n *Interface_Counters_LastClearPath) Lookup(t testing.TB) *oc.QualifiedUin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/last-clear with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_LastClearPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3594,10 +4250,10 @@ func watch_Interface_Counters_LastClearPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_LastClearPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_LastClearPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3650,6 +4306,34 @@ func (n *Interface_Counters_LastClearPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Interface_Counters_LastClearPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_LastClearPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/last-clear with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3657,7 +4341,7 @@ func (n *Interface_Counters_LastClearPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_LastClearPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_LastClearPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_LastClearPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/last-clear to the batch object.
@@ -3693,7 +4377,7 @@ func (n *Interface_Counters_OutBroadcastPktsPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-broadcast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutBroadcastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3747,10 +4431,10 @@ func watch_Interface_Counters_OutBroadcastPktsPath(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutBroadcastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutBroadcastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3803,6 +4487,34 @@ func (n *Interface_Counters_OutBroadcastPktsPathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Interface_Counters_OutBroadcastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutBroadcastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-broadcast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3810,7 +4522,7 @@ func (n *Interface_Counters_OutBroadcastPktsPathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutBroadcastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutBroadcastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutBroadcastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-broadcast-pkts to the batch object.
@@ -3846,7 +4558,7 @@ func (n *Interface_Counters_OutDiscardsPath) Lookup(t testing.TB) *oc.QualifiedU
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-discards with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutDiscardsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3900,10 +4612,10 @@ func watch_Interface_Counters_OutDiscardsPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutDiscardsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutDiscardsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3956,6 +4668,34 @@ func (n *Interface_Counters_OutDiscardsPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Counters_OutDiscardsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutDiscardsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-discards with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3963,7 +4703,7 @@ func (n *Interface_Counters_OutDiscardsPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutDiscardsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutDiscardsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutDiscardsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-discards to the batch object.
@@ -3999,7 +4739,7 @@ func (n *Interface_Counters_OutErrorsPath) Lookup(t testing.TB) *oc.QualifiedUin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -4053,10 +4793,10 @@ func watch_Interface_Counters_OutErrorsPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -4109,6 +4849,34 @@ func (n *Interface_Counters_OutErrorsPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Interface_Counters_OutErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4116,7 +4884,7 @@ func (n *Interface_Counters_OutErrorsPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-errors to the batch object.
@@ -4152,7 +4920,7 @@ func (n *Interface_Counters_OutMulticastPktsPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-multicast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutMulticastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -4206,10 +4974,10 @@ func watch_Interface_Counters_OutMulticastPktsPath(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutMulticastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutMulticastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -4262,6 +5030,34 @@ func (n *Interface_Counters_OutMulticastPktsPathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Interface_Counters_OutMulticastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutMulticastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-multicast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4269,7 +5065,7 @@ func (n *Interface_Counters_OutMulticastPktsPathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutMulticastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutMulticastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutMulticastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-multicast-pkts to the batch object.
@@ -4305,7 +5101,7 @@ func (n *Interface_Counters_OutOctetsPath) Lookup(t testing.TB) *oc.QualifiedUin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -4359,10 +5155,10 @@ func watch_Interface_Counters_OutOctetsPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -4415,6 +5211,34 @@ func (n *Interface_Counters_OutOctetsPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Interface_Counters_OutOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4422,7 +5246,7 @@ func (n *Interface_Counters_OutOctetsPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-octets to the batch object.
@@ -4458,7 +5282,7 @@ func (n *Interface_Counters_OutPktsPath) Lookup(t testing.TB) *oc.QualifiedUint6
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -4512,10 +5336,10 @@ func watch_Interface_Counters_OutPktsPath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -4568,6 +5392,34 @@ func (n *Interface_Counters_OutPktsPathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_Interface_Counters_OutPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4575,7 +5427,7 @@ func (n *Interface_Counters_OutPktsPathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-pkts to the batch object.
@@ -4611,7 +5463,7 @@ func (n *Interface_Counters_OutUnicastPktsPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/counters/out-unicast-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Counters_OutUnicastPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -4665,10 +5517,10 @@ func watch_Interface_Counters_OutUnicastPktsPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Counters", gs, queryPath, true, false)
-		return convertInterface_Counters_OutUnicastPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Counters_OutUnicastPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -4721,6 +5573,34 @@ func (n *Interface_Counters_OutUnicastPktsPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_Counters_OutUnicastPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Counters_OutUnicastPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/counters/out-unicast-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4728,7 +5608,7 @@ func (n *Interface_Counters_OutUnicastPktsPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Counters_OutUnicastPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Counters_OutUnicastPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Counters_OutUnicastPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/counters/out-unicast-pkts to the batch object.
@@ -4764,7 +5644,7 @@ func (n *Interface_CpuPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/cpu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_CpuPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4818,10 +5698,10 @@ func watch_Interface_CpuPath(t testing.TB, n ygot.PathStruct, duration time.Dura
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_CpuPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_CpuPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -4874,6 +5754,34 @@ func (n *Interface_CpuPathAny) Collect(t testing.TB, duration time.Duration) *oc
 	return c
 }
 
+func watch_Interface_CpuPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_CpuPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/cpu with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4881,7 +5789,7 @@ func (n *Interface_CpuPathAny) Collect(t testing.TB, duration time.Duration) *oc
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_CpuPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_CpuPath(t, n, timeout, predicate)
+	return watch_Interface_CpuPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/cpu to the batch object.
@@ -4917,7 +5825,7 @@ func (n *Interface_DescriptionPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4971,10 +5879,10 @@ func watch_Interface_DescriptionPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_DescriptionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_DescriptionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -5027,6 +5935,34 @@ func (n *Interface_DescriptionPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Interface_DescriptionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_DescriptionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/description with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5034,7 +5970,7 @@ func (n *Interface_DescriptionPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_DescriptionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_DescriptionPath(t, n, timeout, predicate)
+	return watch_Interface_DescriptionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/description to the batch object.
@@ -5072,7 +6008,7 @@ func (n *Interface_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5126,10 +6062,10 @@ func watch_Interface_EnabledPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -5182,6 +6118,34 @@ func (n *Interface_EnabledPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_Interface_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5189,7 +6153,7 @@ func (n *Interface_EnabledPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_EnabledPath(t, n, timeout, predicate)
+	return watch_Interface_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/state/enabled to the batch object.
@@ -5227,7 +6191,7 @@ func (n *Interface_EthernetPath) Lookup(t testing.TB) *oc.QualifiedInterface_Eth
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_EthernetPath) Get(t testing.TB) *oc.Interface_Ethernet {
 	t.Helper()
@@ -5289,12 +6253,13 @@ func watch_Interface_EthernetPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.Interface_EthernetWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Ethernet{
+		qv := (&oc.QualifiedInterface_Ethernet{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet)
 		w.LastVal = val
@@ -5347,6 +6312,36 @@ func (n *Interface_EthernetPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_Interface_EthernetPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet) bool) *oc.Interface_EthernetWatcher {
+	t.Helper()
+	w := &oc.Interface_EthernetWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Ethernet{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5354,7 +6349,7 @@ func (n *Interface_EthernetPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_EthernetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet) bool) *oc.Interface_EthernetWatcher {
 	t.Helper()
-	return watch_Interface_EthernetPath(t, n, timeout, predicate)
+	return watch_Interface_EthernetPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet to the batch object.
@@ -5376,7 +6371,7 @@ func (n *Interface_Ethernet_AggregateIdPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/aggregate-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_AggregateIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -5430,10 +6425,10 @@ func watch_Interface_Ethernet_AggregateIdPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_AggregateIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_AggregateIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -5486,6 +6481,34 @@ func (n *Interface_Ethernet_AggregateIdPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Ethernet_AggregateIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_AggregateIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/aggregate-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5493,7 +6516,7 @@ func (n *Interface_Ethernet_AggregateIdPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_AggregateIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_AggregateIdPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_AggregateIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/aggregate-id to the batch object.

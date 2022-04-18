@@ -29,7 +29,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInte
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath) Get(t testing.TB) []string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackIn
 	t.Helper()
 	w := &oc.StringSliceWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedStringSlice)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInte
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInte
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking_TrackInterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/interface-tracking/state/track-interface to the batch object.
@@ -184,7 +212,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -238,10 +266,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath(t testin
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -294,6 +322,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPathAny) Collec
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt-delay with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -301,7 +357,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptDelayPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt-delay to the batch object.
@@ -339,7 +395,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -393,10 +449,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath(t testing.TB,
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -449,6 +505,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -456,7 +540,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PreemptPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/preempt to the batch object.
@@ -494,7 +578,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -548,10 +632,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -604,6 +688,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPathAny) Collect(t 
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/priority with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -611,7 +723,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_PriorityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/priority to the batch object.
@@ -647,7 +759,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -701,10 +813,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath(t test
 	t.Helper()
 	w := &oc.StringSliceWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedStringSlice)
 		w.LastVal = val
@@ -757,6 +869,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPathAny) Coll
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -764,7 +904,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-address to the batch object.
@@ -800,7 +940,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath) Looku
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-link-local with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath) Get(t testing.TB) string {
 	t.Helper()
@@ -854,10 +994,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath(t te
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -910,6 +1050,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPathAny) Co
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-link-local with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -917,7 +1085,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPathAny) Co
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualLinkLocalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-link-local to the batch object.
@@ -953,7 +1121,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath) Lookup
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1007,10 +1175,10 @@ func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath(t tes
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -1063,6 +1231,34 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPathAny) Col
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Address_VrrpGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Address_VrrpGroup", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-router-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1070,7 +1266,7 @@ func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPathAny) Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Address_VrrpGroup_VirtualRouterIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/vrrp/vrrp-group/state/virtual-router-id to the batch object.
@@ -1108,7 +1304,7 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_CountersPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_Counters {
 	t.Helper()
@@ -1170,12 +1366,13 @@ func watch_Interface_RoutedVlan_Ipv6_CountersPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Interface_RoutedVlan_Ipv6_CountersWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_RoutedVlan_Ipv6_Counters{
+		qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Counters)
 		w.LastVal = val
@@ -1228,6 +1425,36 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Counters) bool) *oc.Interface_RoutedVlan_Ipv6_CountersWatcher {
+	t.Helper()
+	w := &oc.Interface_RoutedVlan_Ipv6_CountersWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1235,7 +1462,7 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Counters) bool) *oc.Interface_RoutedVlan_Ipv6_CountersWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_CountersPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters to the batch object.
@@ -1257,7 +1484,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-discarded-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1311,10 +1538,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1367,6 +1594,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPathAny) Collect(t te
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-discarded-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1374,7 +1629,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InDiscardedPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-discarded-pkts to the batch object.
@@ -1410,7 +1665,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-error-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1464,10 +1719,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InErrorPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InErrorPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1520,6 +1775,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InErrorPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-error-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1527,7 +1810,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InErrorPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-error-pkts to the batch object.
@@ -1563,7 +1846,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1617,10 +1900,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1673,6 +1956,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPathAny) Collect(t 
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1680,7 +1991,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-octets to the batch object.
@@ -1716,7 +2027,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1770,10 +2081,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1826,6 +2137,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny) Collect(t te
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1833,7 +2172,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-forwarded-pkts to the batch object.
@@ -1869,7 +2208,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InOctetsPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1923,10 +2262,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InOctetsPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1979,6 +2318,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InOctetsPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1986,7 +2353,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InOctetsPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-octets to the batch object.
@@ -2022,7 +2389,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InPktsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2076,10 +2443,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_InPktsPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_InPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_InPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2132,6 +2499,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InPktsPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_InPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_InPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2139,7 +2534,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InPktsPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_InPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_InPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_InPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-pkts to the batch object.
@@ -2175,7 +2570,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-discarded-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2229,10 +2624,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath(t testing.TB,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2285,6 +2680,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-discarded-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2292,7 +2715,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutDiscardedPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-discarded-pkts to the batch object.
@@ -2328,7 +2751,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-error-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2382,10 +2805,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2438,6 +2861,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPathAny) Collect(t testi
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-error-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2445,7 +2896,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutErrorPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-error-pkts to the batch object.
@@ -2481,7 +2932,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2535,10 +2986,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath(t testing.T
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2591,6 +3042,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPathAny) Collect(t
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2598,7 +3077,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPathAny) Collect(t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-octets to the batch object.
@@ -2634,7 +3113,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2688,10 +3167,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath(t testing.TB,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2744,6 +3223,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2751,7 +3258,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-forwarded-pkts to the batch object.
@@ -2787,7 +3294,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2841,10 +3348,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2897,6 +3404,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutOctetsPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2904,7 +3439,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutOctetsPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-octets to the batch object.
@@ -2940,7 +3475,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2994,10 +3529,10 @@ func watch_Interface_RoutedVlan_Ipv6_Counters_OutPktsPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Counters_OutPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Counters_OutPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3050,6 +3585,34 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Counters_OutPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3057,7 +3620,7 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Counters_OutPktsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-pkts to the batch object.
@@ -3095,7 +3658,7 @@ func (n *Interface_RoutedVlan_Ipv6_DhcpClientPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dhcp-client with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_DhcpClientPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3149,10 +3712,10 @@ func watch_Interface_RoutedVlan_Ipv6_DhcpClientPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_DhcpClientPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_DhcpClientPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3205,6 +3768,34 @@ func (n *Interface_RoutedVlan_Ipv6_DhcpClientPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_DhcpClientPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_DhcpClientPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dhcp-client with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3212,7 +3803,7 @@ func (n *Interface_RoutedVlan_Ipv6_DhcpClientPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_DhcpClientPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_DhcpClientPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_DhcpClientPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dhcp-client to the batch object.
@@ -3250,7 +3841,7 @@ func (n *Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dup-addr-detect-transmits with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3304,10 +3895,10 @@ func watch_Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -3360,6 +3951,34 @@ func (n *Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPathAny) Collect(t test
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dup-addr-detect-transmits with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3367,7 +3986,7 @@ func (n *Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_DupAddrDetectTransmitsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dup-addr-detect-transmits to the batch object.
@@ -3405,7 +4024,7 @@ func (n *Interface_RoutedVlan_Ipv6_EnabledPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3459,10 +4078,10 @@ func watch_Interface_RoutedVlan_Ipv6_EnabledPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3515,6 +4134,34 @@ func (n *Interface_RoutedVlan_Ipv6_EnabledPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3522,7 +4169,7 @@ func (n *Interface_RoutedVlan_Ipv6_EnabledPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_EnabledPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/enabled to the batch object.
@@ -3558,7 +4205,7 @@ func (n *Interface_RoutedVlan_Ipv6_MtuPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/mtu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_MtuPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3612,10 +4259,10 @@ func watch_Interface_RoutedVlan_Ipv6_MtuPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_MtuPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_MtuPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -3668,6 +4315,34 @@ func (n *Interface_RoutedVlan_Ipv6_MtuPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_MtuPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_MtuPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/mtu with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3675,7 +4350,7 @@ func (n *Interface_RoutedVlan_Ipv6_MtuPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_MtuPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_MtuPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_MtuPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/mtu to the batch object.
@@ -3713,7 +4388,7 @@ func (n *Interface_RoutedVlan_Ipv6_NeighborPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_NeighborPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_Neighbor {
 	t.Helper()
@@ -3775,12 +4450,13 @@ func watch_Interface_RoutedVlan_Ipv6_NeighborPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Interface_RoutedVlan_Ipv6_NeighborWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor{
+		qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor)
 		w.LastVal = val
@@ -3833,6 +4509,36 @@ func (n *Interface_RoutedVlan_Ipv6_NeighborPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_NeighborPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor) bool) *oc.Interface_RoutedVlan_Ipv6_NeighborWatcher {
+	t.Helper()
+	w := &oc.Interface_RoutedVlan_Ipv6_NeighborWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3840,7 +4546,7 @@ func (n *Interface_RoutedVlan_Ipv6_NeighborPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_NeighborPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Neighbor) bool) *oc.Interface_RoutedVlan_Ipv6_NeighborWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_NeighborPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_NeighborPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor to the batch object.
@@ -3862,7 +4568,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IpPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/ip with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_IpPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3916,10 +4622,10 @@ func watch_Interface_RoutedVlan_Ipv6_Neighbor_IpPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Neighbor_IpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Neighbor_IpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3972,6 +4678,34 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IpPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Neighbor_IpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Neighbor_IpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/ip with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3979,7 +4713,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IpPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_IpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Neighbor_IpPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Neighbor_IpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/ip to the batch object.
@@ -4015,7 +4749,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/is-router with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4069,10 +4803,10 @@ func watch_Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Neighbor_IsRouterPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Neighbor_IsRouterPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -4125,6 +4859,34 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Neighbor_IsRouterPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/is-router with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4132,7 +4894,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Neighbor_IsRouterPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/is-router to the batch object.
@@ -4168,7 +4930,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/link-layer-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4222,10 +4984,10 @@ func watch_Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath(t testing.TB,
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -4278,6 +5040,34 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/link-layer-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4285,7 +5075,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/link-layer-address to the batch object.
@@ -4321,7 +5111,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/neighbor-state with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath) Get(t testing.TB) oc.E_Neighbor_NeighborState {
 	t.Helper()
@@ -4375,10 +5165,10 @@ func watch_Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath(t testing.TB, n 
 	t.Helper()
 	w := &oc.E_Neighbor_NeighborStateWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Neighbor_NeighborState)
 		w.LastVal = val
@@ -4431,6 +5221,34 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePathAny) Collect(t test
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Neighbor_NeighborState) bool) *oc.E_Neighbor_NeighborStateWatcher {
+	t.Helper()
+	w := &oc.E_Neighbor_NeighborStateWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Neighbor_NeighborState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/neighbor-state with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4438,7 +5256,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Neighbor_NeighborState) bool) *oc.E_Neighbor_NeighborStateWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Neighbor_NeighborStatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/neighbor-state to the batch object.
@@ -4474,7 +5292,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_OriginPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/origin with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_OriginPath) Get(t testing.TB) oc.E_IfIp_NeighborOrigin {
 	t.Helper()
@@ -4528,10 +5346,10 @@ func watch_Interface_RoutedVlan_Ipv6_Neighbor_OriginPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.E_IfIp_NeighborOriginWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Neighbor_OriginPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Neighbor_OriginPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfIp_NeighborOrigin)
 		w.LastVal = val
@@ -4584,6 +5402,34 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_OriginPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Neighbor_OriginPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfIp_NeighborOrigin) bool) *oc.E_IfIp_NeighborOriginWatcher {
+	t.Helper()
+	w := &oc.E_IfIp_NeighborOriginWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Neighbor_OriginPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfIp_NeighborOrigin)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/origin with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4591,7 +5437,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_OriginPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_OriginPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfIp_NeighborOrigin) bool) *oc.E_IfIp_NeighborOriginWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Neighbor_OriginPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Neighbor_OriginPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/origin to the batch object.
@@ -4629,7 +5475,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement {
 	t.Helper()
@@ -4691,12 +5537,13 @@ func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisementPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisementWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement{
+		qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement)
 		w.LastVal = val
@@ -4749,6 +5596,36 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement) bool) *oc.Interface_RoutedVlan_Ipv6_RouterAdvertisementWatcher {
+	t.Helper()
+	w := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisementWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4756,7 +5633,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_RouterAdvertisement) bool) *oc.Interface_RoutedVlan_Ipv6_RouterAdvertisementWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisementPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement to the batch object.
@@ -4778,7 +5655,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -4832,10 +5709,10 @@ func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath(t testing.
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -4888,6 +5765,34 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPathAny) Collect(
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4895,7 +5800,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/interval to the batch object.
@@ -4931,7 +5836,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/lifetime with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -4985,10 +5890,10 @@ func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath(t testing.
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -5041,6 +5946,34 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny) Collect(
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/lifetime with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5048,7 +5981,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/lifetime to the batch object.
@@ -5086,7 +6019,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5140,10 +6073,10 @@ func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath(t testing.
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -5196,6 +6129,34 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny) Collect(
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5203,7 +6164,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress to the batch object.
@@ -5241,7 +6202,7 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_UnnumberedPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_Unnumbered {
 	t.Helper()
@@ -5303,12 +6264,13 @@ func watch_Interface_RoutedVlan_Ipv6_UnnumberedPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.Interface_RoutedVlan_Ipv6_UnnumberedWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Unnumbered", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered{
+		qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered)
 		w.LastVal = val
@@ -5361,6 +6323,36 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_UnnumberedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered) bool) *oc.Interface_RoutedVlan_Ipv6_UnnumberedWatcher {
+	t.Helper()
+	w := &oc.Interface_RoutedVlan_Ipv6_UnnumberedWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Unnumbered", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5368,7 +6360,7 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_UnnumberedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_RoutedVlan_Ipv6_Unnumbered) bool) *oc.Interface_RoutedVlan_Ipv6_UnnumberedWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_UnnumberedPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_UnnumberedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered to the batch object.
@@ -5392,7 +6384,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -5446,10 +6438,10 @@ func watch_Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Unnumbered", gs, queryPath, true, false)
-		return convertInterface_RoutedVlan_Ipv6_Unnumbered_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_RoutedVlan_Ipv6_Unnumbered_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -5502,6 +6494,34 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_RoutedVlan_Ipv6_Unnumbered{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_RoutedVlan_Ipv6_Unnumbered", structs[pre], queryPath, true, false)
+			qv := convertInterface_RoutedVlan_Ipv6_Unnumbered_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5509,7 +6529,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath(t, n, timeout, predicate)
+	return watch_Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/state/enabled to the batch object.

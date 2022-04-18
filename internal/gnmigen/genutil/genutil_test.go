@@ -887,7 +887,7 @@ func TestUnmarshal(t *testing.T) {
 				// implemented, then need to add tests for adds
 				// and deletes to same and different children,
 				// whether leaf or non-leaf, under a non-leaf.
-				UnionLeafSingleType: []string{"aa", "bb", "a", "bbb"},
+				UnionLeafSingleType: []string{"a", "bbb"},
 			},
 		},
 	}, {

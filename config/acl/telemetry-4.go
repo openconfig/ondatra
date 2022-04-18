@@ -28,7 +28,7 @@ func (n *Acl_Interface_EgressAclSet_SetNamePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/egress-acl-sets/egress-acl-set/config/set-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_EgressAclSet_SetNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Acl_Interface_EgressAclSet_TypePath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/egress-acl-sets/egress-acl-set/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_EgressAclSet_TypePath) Get(t testing.TB) oc.E_Acl_ACL_TYPE {
 	t.Helper()
@@ -230,7 +230,7 @@ func (n *Acl_Interface_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/config/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -333,7 +333,7 @@ func (n *Acl_Interface_IngressAclSetPath) Lookup(t testing.TB) *oc.QualifiedAcl_
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSetPath) Get(t testing.TB) *oc.Acl_Interface_IngressAclSet {
 	t.Helper()
@@ -422,7 +422,7 @@ func (n *Acl_Interface_IngressAclSet_SetNamePath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/config/set-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_SetNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -523,7 +523,7 @@ func (n *Acl_Interface_IngressAclSet_TypePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_TypePath) Get(t testing.TB) oc.E_Acl_ACL_TYPE {
 	t.Helper()
@@ -626,7 +626,7 @@ func (n *Acl_Interface_InterfaceRefPath) Lookup(t testing.TB) *oc.QualifiedAcl_I
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_InterfaceRefPath) Get(t testing.TB) *oc.Acl_Interface_InterfaceRef {
 	t.Helper()
@@ -715,7 +715,7 @@ func (n *Acl_Interface_InterfaceRef_InterfacePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -816,7 +816,7 @@ func (n *Acl_Interface_InterfaceRef_SubinterfacePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()

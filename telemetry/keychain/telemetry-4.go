@@ -31,7 +31,7 @@ func (n *Keychain_Key_SendLifetimePath) Lookup(t testing.TB) *oc.QualifiedKeycha
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/send-lifetime with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_SendLifetimePath) Get(t testing.TB) *oc.Keychain_Key_SendLifetime {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_Keychain_Key_SendLifetimePath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.Keychain_Key_SendLifetimeWatcher{}
 	gs := &oc.Keychain_Key_SendLifetime{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain_Key_SendLifetime", gs, queryPath, false, false)
-		return (&oc.QualifiedKeychain_Key_SendLifetime{
+		qv := (&oc.QualifiedKeychain_Key_SendLifetime{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedKeychain_Key_SendLifetime)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *Keychain_Key_SendLifetimePathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_Keychain_Key_SendLifetimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedKeychain_Key_SendLifetime) bool) *oc.Keychain_Key_SendLifetimeWatcher {
+	t.Helper()
+	w := &oc.Keychain_Key_SendLifetimeWatcher{}
+	structs := map[string]*oc.Keychain_Key_SendLifetime{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain_Key_SendLifetime{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain_Key_SendLifetime", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedKeychain_Key_SendLifetime{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedKeychain_Key_SendLifetime)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain/keys/key/send-lifetime with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *Keychain_Key_SendLifetimePathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Keychain_Key_SendLifetimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedKeychain_Key_SendLifetime) bool) *oc.Keychain_Key_SendLifetimeWatcher {
 	t.Helper()
-	return watch_Keychain_Key_SendLifetimePath(t, n, timeout, predicate)
+	return watch_Keychain_Key_SendLifetimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain/keys/key/send-lifetime to the batch object.
@@ -180,7 +211,7 @@ func (n *Keychain_Key_SendLifetime_EndTimePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/send-lifetime/state/end-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_SendLifetime_EndTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_Keychain_Key_SendLifetime_EndTimePath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Keychain_Key_SendLifetime{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain_Key_SendLifetime", gs, queryPath, true, false)
-		return convertKeychain_Key_SendLifetime_EndTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertKeychain_Key_SendLifetime_EndTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *Keychain_Key_SendLifetime_EndTimePathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Keychain_Key_SendLifetime_EndTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Keychain_Key_SendLifetime{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain_Key_SendLifetime{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain_Key_SendLifetime", structs[pre], queryPath, true, false)
+			qv := convertKeychain_Key_SendLifetime_EndTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain/keys/key/send-lifetime/state/end-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *Keychain_Key_SendLifetime_EndTimePathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Keychain_Key_SendLifetime_EndTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Keychain_Key_SendLifetime_EndTimePath(t, n, timeout, predicate)
+	return watch_Keychain_Key_SendLifetime_EndTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain/keys/key/send-lifetime/state/end-time to the batch object.

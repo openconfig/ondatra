@@ -29,7 +29,7 @@ func (n *Meta_Window_AvgPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_AvgPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Meta_Window_AvgPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta_Window{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta_Window", gs, queryPath, true, false)
-		return convertMeta_Window_AvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_Window_AvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Meta_Window_AvgPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Meta_Window_AvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta_Window{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta_Window{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta_Window", structs[pre], queryPath, true, false)
+			qv := convertMeta_Window_AvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latency/window/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Meta_Window_AvgPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_Window_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_Window_AvgPath(t, n, timeout, predicate)
+	return watch_Meta_Window_AvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latency/window/avg to the batch object.
@@ -182,7 +210,7 @@ func (n *Meta_Window_MaxPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_MaxPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Meta_Window_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta_Window{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta_Window", gs, queryPath, true, false)
-		return convertMeta_Window_MaxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_Window_MaxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Meta_Window_MaxPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Meta_Window_MaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta_Window{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta_Window{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta_Window", structs[pre], queryPath, true, false)
+			qv := convertMeta_Window_MaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latency/window/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Meta_Window_MaxPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_Window_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_Window_MaxPath(t, n, timeout, predicate)
+	return watch_Meta_Window_MaxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latency/window/max to the batch object.
@@ -335,7 +391,7 @@ func (n *Meta_Window_MinPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/min with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_MinPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Meta_Window_MinPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta_Window{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta_Window", gs, queryPath, true, false)
-		return convertMeta_Window_MinPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_Window_MinPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Meta_Window_MinPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Meta_Window_MinPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta_Window{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta_Window{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta_Window", structs[pre], queryPath, true, false)
+			qv := convertMeta_Window_MinPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latency/window/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Meta_Window_MinPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_Window_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_Window_MinPath(t, n, timeout, predicate)
+	return watch_Meta_Window_MinPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latency/window/min to the batch object.

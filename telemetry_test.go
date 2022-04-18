@@ -2252,6 +2252,37 @@ func TestWatch(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("multiple awaits", func(t *testing.T) {
+		fakeGNMI.Stub().Sync().Notification(&gpb.Notification{Timestamp: startTime.Add(time.Second).UnixNano()})
+
+		watcher := dut.Telemetry().Interface("eth0").Counters().OutOctets().Watch(t, time.Second, func(val *telemetry.QualifiedUint64) bool { return true })
+		got, gotStatus := watcher.Await(t)
+
+		want := &telemetry.QualifiedUint64{
+			Metadata: &genutil.Metadata{
+				Path: gnmiPath(t, getStrPath("eth0")),
+			},
+		}
+		wantStatus := true
+
+		if diff := cmp.Diff(want, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+			t.Errorf("First call to Await() returned unexpected diff(-want,+got):\n %s", diff)
+		}
+		if gotStatus != wantStatus {
+			t.Errorf("First call to Await() returned unexpected status got: %v want: %v", gotStatus, wantStatus)
+		}
+
+		got, gotStatus = watcher.Await(t)
+
+		if diff := cmp.Diff(want, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+			t.Errorf("Second call to Await() returned unexpected diff(-want,+got):\n %s", diff)
+		}
+		if gotStatus != wantStatus {
+			t.Errorf("Second call to Await() returned unexpected status got: %v want: %v", gotStatus, wantStatus)
+		}
+
+	})
 }
 
 func TestWildcardWatch(t *testing.T) {
@@ -2384,6 +2415,116 @@ func TestWildcardWatch(t *testing.T) {
 			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
 
 			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedUint64{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)
+			}
+			if predStatus != tt.wantStatus {
+				t.Errorf("Got different predicate status, got %v want %v ", predStatus, tt.wantStatus)
+			}
+		})
+	}
+}
+
+func TestNonleafWildcardWatch(t *testing.T) {
+	initTelemetryFakes(t)
+	dut := DUT(t, "dut")
+
+	getStrPath := func(iname, counter string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/%s", iname, counter)
+	}
+
+	startTime := time.Now()
+
+	// All of stubbed responses need to end with a notification timestamped
+	// after the collect has timed out; otherwise the fake encounters an EOF.
+	tests := []struct {
+		desc                 string
+		stub                 func(s *fakegnmi.Stubber)
+		inPortKey            string
+		wantSubscriptionPath *gpb.Path
+		wantQualified        *telemetry.QualifiedInterface_Counters
+		wantStatus           bool
+	}{{
+		desc: "predicate never true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: gnmiPath(t, getStrPath("eth0", "in-octets")),
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 150}},
+					}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: gnmiPath(t, getStrPath("eth0", "out-octets")),
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
+						}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		wantSubscriptionPath: gnmiPath(t, "interfaces/interface[name=*]/state/counters"),
+		wantQualified: (&telemetry.QualifiedInterface_Counters{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime.Add(10 * time.Millisecond),
+				Path:      gnmiPath(t, "interfaces/interface[name=eth0]/state/counters"),
+			},
+		}).SetVal(&telemetry.Interface_Counters{
+			InOctets:  ygot.Uint64(150),
+			OutOctets: ygot.Uint64(50),
+		}),
+	}, {
+		desc: "predicate is true",
+		stub: func(s *fakegnmi.Stubber) {
+			s.Notification(
+				&gpb.Notification{
+					Timestamp: startTime.UnixNano(),
+					Update: []*gpb.Update{{
+						Path: gnmiPath(t, getStrPath("lo0", "in-octets")),
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 150}},
+					}}}).
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(10 * time.Millisecond).UnixNano(),
+						Update: []*gpb.Update{{
+							Path: gnmiPath(t, getStrPath("eth0", "out-octets")),
+							Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 50}},
+						}}}).
+				Sync().
+				Notification(
+					&gpb.Notification{
+						Timestamp: startTime.Add(time.Minute).UnixNano(),
+					})
+		},
+		wantStatus:           true,
+		wantSubscriptionPath: gnmiPath(t, "interfaces/interface[name=*]/state/counters"),
+		wantQualified: (&telemetry.QualifiedInterface_Counters{
+			Metadata: &genutil.Metadata{
+				Timestamp: startTime,
+				Path:      gnmiPath(t, "interfaces/interface[name=lo0]/state/counters"),
+			},
+		}).SetVal(&telemetry.Interface_Counters{InOctets: ygot.Uint64(150)}),
+	}}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			tt.stub(fakeGNMI.Stub())
+			var lo0, eth0 bool
+			got, predStatus := dut.Telemetry().InterfaceAny().Counters().Watch(t, time.Second, func(val *telemetry.QualifiedInterface_Counters) bool {
+				lo0 = lo0 || (val.GetPath().GetElem()[1].GetKey()["name"] == "lo0" && val.Val(t).GetInOctets() == 150)
+				eth0 = eth0 || (val.GetPath().GetElem()[1].GetKey()["name"] == "eth0" && val.Val(t).GetOutOctets() == 50)
+				return lo0 && eth0
+			}).Await(t)
+			verifySubscriptionPathsSent(t, tt.wantSubscriptionPath)
+			if got != nil {
+				checkJustReceived(t, got.RecvTimestamp)
+				tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+			}
+
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedInterface_Counters{}), protocmp.Transform()); diff != "" {
 				t.Errorf("Got out octets different from expected, diff(-want,+got):\n %s", diff)
 			}
 			if predStatus != tt.wantStatus {

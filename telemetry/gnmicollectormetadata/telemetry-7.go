@@ -29,7 +29,7 @@ func (n *Meta_Window_SizePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/state/size with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_SizePath) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Meta_Window_SizePath(t testing.TB, n ygot.PathStruct, duration time.D
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Meta_Window{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta_Window", gs, queryPath, true, false)
-		return convertMeta_Window_SizePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_Window_SizePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Meta_Window_SizePathAny) Collect(t testing.TB, duration time.Duration) 
 	return c
 }
 
+func watch_Meta_Window_SizePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Meta_Window{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta_Window{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta_Window", structs[pre], queryPath, true, false)
+			qv := convertMeta_Window_SizePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/latency/window/state/size with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Meta_Window_SizePathAny) Collect(t testing.TB, duration time.Duration) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_Window_SizePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Meta_Window_SizePath(t, n, timeout, predicate)
+	return watch_Meta_Window_SizePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/latency/window/state/size to the batch object.

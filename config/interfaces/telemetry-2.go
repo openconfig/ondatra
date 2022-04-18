@@ -28,7 +28,7 @@ func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/config/link-layer-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Neighbor_LinkLayerAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/lifetime with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -424,7 +424,7 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/suppress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -527,7 +527,7 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_UnnumberedPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_Unnumbered {
 	t.Helper()
@@ -618,7 +618,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -721,7 +721,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRefPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRefPath) Get(t testing.TB) *oc.Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef {
 	t.Helper()
@@ -810,7 +810,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef_InterfacePath) Lookup
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -911,7 +911,7 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath) Loo
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1012,7 +1012,7 @@ func (n *Interface_RoutedVlan_VlanPath) Lookup(t testing.TB) *oc.QualifiedInterf
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/routed-vlan/config/vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_RoutedVlan_VlanPath) Get(t testing.TB) oc.Interface_RoutedVlan_Vlan_Union {
 	t.Helper()
@@ -1115,7 +1115,7 @@ func (n *Interface_SubinterfacePath) Lookup(t testing.TB) *oc.QualifiedInterface
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_SubinterfacePath) Get(t testing.TB) *oc.Interface_Subinterface {
 	t.Helper()
@@ -1204,7 +1204,7 @@ func (n *Interface_Subinterface_DescriptionPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1307,7 +1307,7 @@ func (n *Interface_Subinterface_EnabledPath) Lookup(t testing.TB) *oc.QualifiedB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1410,7 +1410,7 @@ func (n *Interface_Subinterface_IndexPath) Lookup(t testing.TB) *oc.QualifiedUin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/config/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_IndexPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1513,7 +1513,7 @@ func (n *Interface_Subinterface_Ipv4Path) Lookup(t testing.TB) *oc.QualifiedInte
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4Path) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4 {
 	t.Helper()
@@ -1604,7 +1604,7 @@ func (n *Interface_Subinterface_Ipv4_AddressPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_AddressPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Address {
 	t.Helper()
@@ -1693,7 +1693,7 @@ func (n *Interface_Subinterface_Ipv4_Address_IpPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/config/ip with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_IpPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1794,7 +1794,7 @@ func (n *Interface_Subinterface_Ipv4_Address_PrefixLengthPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/config/prefix-length with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_PrefixLengthPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1897,7 +1897,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroupPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroupPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Address_VrrpGroup {
 	t.Helper()
@@ -1988,7 +1988,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_AcceptModePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/accept-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_AcceptModePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2091,7 +2091,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_AdvertisementIntervalPath
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/advertisement-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_AdvertisementIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2194,7 +2194,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTrackingPath) Lo
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/interface-tracking with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTrackingPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking {
 	t.Helper()
@@ -2285,7 +2285,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking_Priorit
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/interface-tracking/config/priority-decrement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking_PriorityDecrementPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2386,7 +2386,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking_TrackIn
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/interface-tracking/config/track-interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking_TrackInterfacePath) Get(t testing.TB) []string {
 	t.Helper()
@@ -2489,7 +2489,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PreemptDelayPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/preempt-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PreemptDelayPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2592,7 +2592,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PreemptPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/preempt with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PreemptPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2695,7 +2695,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PriorityPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_PriorityPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2796,7 +2796,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_VirtualAddressPath) Looku
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/virtual-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_VirtualAddressPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -2897,7 +2897,7 @@ func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_VirtualRouterIdPath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/config/virtual-router-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Address_VrrpGroup_VirtualRouterIdPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3000,7 +3000,7 @@ func (n *Interface_Subinterface_Ipv4_DhcpClientPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/config/dhcp-client with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_DhcpClientPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3103,7 +3103,7 @@ func (n *Interface_Subinterface_Ipv4_EnabledPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3204,7 +3204,7 @@ func (n *Interface_Subinterface_Ipv4_MtuPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/config/mtu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_MtuPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3307,7 +3307,7 @@ func (n *Interface_Subinterface_Ipv4_NeighborPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_NeighborPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Neighbor {
 	t.Helper()
@@ -3396,7 +3396,7 @@ func (n *Interface_Subinterface_Ipv4_Neighbor_IpPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/neighbors/neighbor/config/ip with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Neighbor_IpPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3497,7 +3497,7 @@ func (n *Interface_Subinterface_Ipv4_Neighbor_LinkLayerAddressPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/neighbors/neighbor/config/link-layer-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Neighbor_LinkLayerAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3600,7 +3600,7 @@ func (n *Interface_Subinterface_Ipv4_ProxyArpPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_ProxyArpPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_ProxyArp {
 	t.Helper()
@@ -3691,7 +3691,7 @@ func (n *Interface_Subinterface_Ipv4_ProxyArp_ModePath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/config/mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_ProxyArp_ModePath) Get(t testing.TB) oc.E_ProxyArp_Mode {
 	t.Helper()
@@ -3794,7 +3794,7 @@ func (n *Interface_Subinterface_Ipv4_UnnumberedPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_UnnumberedPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Unnumbered {
 	t.Helper()
@@ -3885,7 +3885,7 @@ func (n *Interface_Subinterface_Ipv4_Unnumbered_EnabledPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Unnumbered_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3988,7 +3988,7 @@ func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
 	t.Helper()

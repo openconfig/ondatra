@@ -30,7 +30,7 @@ func (n *System_Aaa_ServerGroupPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroupPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *System_Aaa_ServerGroup_NamePath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -222,7 +222,7 @@ func (n *System_Aaa_ServerGroup_ServerPath) Lookup(t testing.TB) *oc.QualifiedSy
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_ServerPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server {
 	t.Helper()
@@ -311,7 +311,7 @@ func (n *System_Aaa_ServerGroup_Server_AddressPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -412,7 +412,7 @@ func (n *System_Aaa_ServerGroup_Server_NamePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -515,7 +515,7 @@ func (n *System_Aaa_ServerGroup_Server_RadiusPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_RadiusPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Radius {
 	t.Helper()
@@ -606,7 +606,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/acct-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -709,7 +709,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/auth-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -810,7 +810,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/retransmit-attempts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -911,7 +911,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1012,7 +1012,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1113,7 +1113,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1216,7 +1216,7 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TacacsPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Tacacs {
 	t.Helper()
@@ -1307,7 +1307,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1408,7 +1408,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1509,7 +1509,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1610,7 +1610,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1711,7 +1711,7 @@ func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1812,7 +1812,7 @@ func (n *System_Aaa_ServerGroup_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Aa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_TypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_SERVER_TYPE {
 	t.Helper()
@@ -1915,7 +1915,7 @@ func (n *System_ClockPath) Lookup(t testing.TB) *oc.QualifiedSystem_Clock {
 }
 
 // Get fetches the value at /openconfig-system/system/clock with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_ClockPath) Get(t testing.TB) *oc.System_Clock {
 	t.Helper()
@@ -2004,7 +2004,7 @@ func (n *System_Clock_TimezoneNamePath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/clock/config/timezone-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Clock_TimezoneNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2107,7 +2107,7 @@ func (n *System_DnsPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns {
 }
 
 // Get fetches the value at /openconfig-system/system/dns with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_DnsPath) Get(t testing.TB) *oc.System_Dns {
 	t.Helper()

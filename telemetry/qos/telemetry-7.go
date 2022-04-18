@@ -29,7 +29,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
-		return convertQos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny) Collect(t 
 	return c
 }
 
+func watch_Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", structs[pre], queryPath, true, false)
+			qv := convertQos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold to the batch object.
@@ -182,7 +210,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
-		return convertQos_QueueManagementProfile_Wred_Uniform_MinThresholdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_QueueManagementProfile_Wred_Uniform_MinThresholdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny) Collect(t 
 	return c
 }
 
+func watch_Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", structs[pre], queryPath, true, false)
+			qv := convertQos_QueueManagementProfile_Wred_Uniform_MinThresholdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold to the batch object.
@@ -335,7 +391,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_WeightPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/weight with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_WeightPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Qos_QueueManagementProfile_Wred_Uniform_WeightPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Qos_QueueManagementProfile_Wred_Uniform{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", gs, queryPath, true, false)
-		return convertQos_QueueManagementProfile_Wred_Uniform_WeightPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_QueueManagementProfile_Wred_Uniform_WeightPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_WeightPathAny) Collect(t testin
 	return c
 }
 
+func watch_Qos_QueueManagementProfile_Wred_Uniform_WeightPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Qos_QueueManagementProfile_Wred_Uniform{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_QueueManagementProfile_Wred_Uniform{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_QueueManagementProfile_Wred_Uniform", structs[pre], queryPath, true, false)
+			qv := convertQos_QueueManagementProfile_Wred_Uniform_WeightPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/weight with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_WeightPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_QueueManagementProfile_Wred_Uniform_WeightPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Qos_QueueManagementProfile_Wred_Uniform_WeightPath(t, n, timeout, predicate)
+	return watch_Qos_QueueManagementProfile_Wred_Uniform_WeightPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/weight to the batch object.
@@ -490,7 +574,7 @@ func (n *Qos_QueuePath) Lookup(t testing.TB) *oc.QualifiedQos_Queue {
 }
 
 // Get fetches the value at /openconfig-qos/qos/queues/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueuePath) Get(t testing.TB) *oc.Qos_Queue {
 	t.Helper()
@@ -552,12 +636,13 @@ func watch_Qos_QueuePath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.Qos_QueueWatcher{}
 	gs := &oc.Qos_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Queue", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Queue{
+		qv := (&oc.QualifiedQos_Queue{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Queue)
 		w.LastVal = val
@@ -610,6 +695,36 @@ func (n *Qos_QueuePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_Qos_QueuePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Queue) bool) *oc.Qos_QueueWatcher {
+	t.Helper()
+	w := &oc.Qos_QueueWatcher{}
+	structs := map[string]*oc.Qos_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Queue", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Queue{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Queue)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queues/queue with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -617,7 +732,7 @@ func (n *Qos_QueuePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_QueuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Queue) bool) *oc.Qos_QueueWatcher {
 	t.Helper()
-	return watch_Qos_QueuePath(t, n, timeout, predicate)
+	return watch_Qos_QueuePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/queues/queue to the batch object.
@@ -639,7 +754,7 @@ func (n *Qos_Queue_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-qos/qos/queues/queue/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Queue_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -693,10 +808,10 @@ func watch_Qos_Queue_NamePath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Queue", gs, queryPath, true, false)
-		return convertQos_Queue_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Queue_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -749,6 +864,34 @@ func (n *Qos_Queue_NamePathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Qos_Queue_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_Queue_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/queues/queue/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +899,7 @@ func (n *Qos_Queue_NamePathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Queue_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Queue_NamePath(t, n, timeout, predicate)
+	return watch_Qos_Queue_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/queues/queue/state/name to the batch object.
@@ -794,7 +937,7 @@ func (n *Qos_SchedulerPolicyPath) Lookup(t testing.TB) *oc.QualifiedQos_Schedule
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicyPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy {
 	t.Helper()
@@ -856,12 +999,13 @@ func watch_Qos_SchedulerPolicyPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.Qos_SchedulerPolicyWatcher{}
 	gs := &oc.Qos_SchedulerPolicy{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_SchedulerPolicy{
+		qv := (&oc.QualifiedQos_SchedulerPolicy{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy)
 		w.LastVal = val
@@ -914,6 +1058,36 @@ func (n *Qos_SchedulerPolicyPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Qos_SchedulerPolicyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy) bool) *oc.Qos_SchedulerPolicyWatcher {
+	t.Helper()
+	w := &oc.Qos_SchedulerPolicyWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_SchedulerPolicy{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -921,7 +1095,7 @@ func (n *Qos_SchedulerPolicyPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy) bool) *oc.Qos_SchedulerPolicyWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicyPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy to the batch object.
@@ -943,7 +1117,7 @@ func (n *Qos_SchedulerPolicy_NamePath) Lookup(t testing.TB) *oc.QualifiedString 
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -997,10 +1171,10 @@ func watch_Qos_SchedulerPolicy_NamePath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_SchedulerPolicy{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1053,6 +1227,34 @@ func (n *Qos_SchedulerPolicy_NamePathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1060,7 +1262,7 @@ func (n *Qos_SchedulerPolicy_NamePathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_NamePath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/state/name to the batch object.
@@ -1098,7 +1300,7 @@ func (n *Qos_SchedulerPolicy_SchedulerPath) Lookup(t testing.TB) *oc.QualifiedQo
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_SchedulerPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler {
 	t.Helper()
@@ -1160,12 +1362,13 @@ func watch_Qos_SchedulerPolicy_SchedulerPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Qos_SchedulerPolicy_SchedulerWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_SchedulerPolicy_Scheduler{
+		qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler)
 		w.LastVal = val
@@ -1218,6 +1421,36 @@ func (n *Qos_SchedulerPolicy_SchedulerPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_SchedulerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler) bool) *oc.Qos_SchedulerPolicy_SchedulerWatcher {
+	t.Helper()
+	w := &oc.Qos_SchedulerPolicy_SchedulerWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1225,7 +1458,7 @@ func (n *Qos_SchedulerPolicy_SchedulerPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_SchedulerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler) bool) *oc.Qos_SchedulerPolicy_SchedulerWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_SchedulerPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_SchedulerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler to the batch object.
@@ -1249,7 +1482,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_InputPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_InputPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_Input {
 	t.Helper()
@@ -1311,12 +1544,13 @@ func watch_Qos_SchedulerPolicy_Scheduler_InputPath(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.Qos_SchedulerPolicy_Scheduler_InputWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_Input{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_SchedulerPolicy_Scheduler_Input{
+		qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_Input{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_Input)
 		w.LastVal = val
@@ -1369,6 +1603,36 @@ func (n *Qos_SchedulerPolicy_Scheduler_InputPathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_InputPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_Input) bool) *oc.Qos_SchedulerPolicy_Scheduler_InputWatcher {
+	t.Helper()
+	w := &oc.Qos_SchedulerPolicy_Scheduler_InputWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_Input{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_Input{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_Input{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_Input)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1376,7 +1640,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_InputPathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_InputPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_Input) bool) *oc.Qos_SchedulerPolicy_Scheduler_InputWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_InputPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_InputPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input to the batch object.
@@ -1398,7 +1662,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_IdPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_IdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1452,10 +1716,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_Input_IdPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_Input{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_Input_IdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_Input_IdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1508,6 +1772,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_IdPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_Input_IdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_Input{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_Input{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_Input_IdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1515,7 +1807,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_IdPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_Input_IdPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_Input_IdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/id to the batch object.
@@ -1551,7 +1843,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_InputTypePath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/input-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_InputTypePath) Get(t testing.TB) oc.E_Input_InputType {
 	t.Helper()
@@ -1605,10 +1897,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_Input_InputTypePath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.E_Input_InputTypeWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_Input{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_Input_InputTypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_Input_InputTypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Input_InputType)
 		w.LastVal = val
@@ -1661,6 +1953,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_InputTypePathAny) Collect(t testing
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_Input_InputTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Input_InputType) bool) *oc.E_Input_InputTypeWatcher {
+	t.Helper()
+	w := &oc.E_Input_InputTypeWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_Input{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_Input{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_Input_InputTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Input_InputType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/input-type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1668,7 +1988,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_InputTypePathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_InputTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Input_InputType) bool) *oc.E_Input_InputTypeWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_Input_InputTypePath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_Input_InputTypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/input-type to the batch object.
@@ -1704,7 +2024,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_QueuePath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_QueuePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1758,10 +2078,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_Input_QueuePath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_Input{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_Input_QueuePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_Input_QueuePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1814,6 +2134,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_QueuePathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_Input_QueuePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_Input{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_Input{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_Input_QueuePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/queue with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1821,7 +2169,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_QueuePathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_QueuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_Input_QueuePath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_Input_QueuePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/queue to the batch object.
@@ -1857,7 +2205,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_WeightPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/weight with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_WeightPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1911,10 +2259,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_Input_WeightPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_Input{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_Input_WeightPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_Input_WeightPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1967,6 +2315,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_WeightPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_Input_WeightPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_Input{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_Input{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_Input", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_Input_WeightPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/weight with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1974,7 +2350,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_Input_WeightPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_Input_WeightPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_Input_WeightPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_Input_WeightPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/state/weight to the batch object.
@@ -2012,7 +2388,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor {
 	t.Helper()
@@ -2074,12 +2450,13 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor{
+		qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor)
 		w.LastVal = val
@@ -2132,6 +2509,36 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPathAny) Collect(t testing
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) bool) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher {
+	t.Helper()
+	w := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2139,7 +2546,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) bool) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color to the batch object.
@@ -2161,7 +2568,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/bc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2215,10 +2622,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -2271,6 +2678,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPathAny) Collect(t test
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/bc with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2278,7 +2713,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_BcPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/bc to the batch object.
@@ -2314,7 +2749,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2368,10 +2803,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath(t testing.TB, n
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2424,6 +2859,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPathAny) Collect(t tes
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2431,7 +2894,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir to the batch object.
@@ -2467,7 +2930,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2521,10 +2984,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -2577,6 +3040,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPathAny) Collect(t 
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2584,7 +3075,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct to the batch object.
@@ -2620,7 +3111,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath) Look
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct-remaining with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2674,10 +3165,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath(t t
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -2730,6 +3221,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPathAny) C
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct-remaining with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2737,7 +3256,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPathAny) C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_CirPctRemainingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/state/cir-pct-remaining to the batch object.
@@ -2775,7 +3294,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPath) Lookup
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPath) Get(t testing.TB) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
 	t.Helper()
@@ -2837,12 +3356,13 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPath(t tes
 	t.Helper()
 	w := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{
+		qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction)
 		w.LastVal = val
@@ -2895,6 +3415,36 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPathAny) Col
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) bool) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher {
+	t.Helper()
+	w := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2902,7 +3452,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPathAny) Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) bool) *oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action to the batch object.
@@ -2924,7 +3474,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPat
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2978,10 +3528,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PP
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3034,6 +3584,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPat
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dot1p with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3041,7 +3619,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDot1PPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dot1p to the batch object.
@@ -3077,7 +3655,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath
 }
 
 // Get fetches the value at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3131,10 +3709,10 @@ func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPa
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", gs, queryPath, true, false)
-		return convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3187,6 +3765,34 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath
 	return c
 }
 
+func watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction", structs[pre], queryPath, true, false)
+			qv := convertQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dscp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3194,7 +3800,7 @@ func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPath(t, n, timeout, predicate)
+	return watch_Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction_SetDscpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/one-rate-two-color/conform-action/state/set-dscp to the batch object.

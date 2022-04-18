@@ -36,9 +36,6 @@ var (
 		flowStatsCaption:         translateFlowStats,
 		ixweb.EgressStatsCaption: translateEgressStats,
 	}
-	// debugLog enables logging of debug information in the library. It is expensive
-	// so should only be enabled for development purposes.
-	debugLog = false
 )
 
 // translate converts Ixia statistics tables to an OpenConfig schema.
@@ -84,10 +81,9 @@ func translate(st *Stats) (ygot.ValidatedGoStruct, error) {
 		}
 	}
 
-	if debugLog {
-		log.Infof("merged processed device, %s", jsonDebug(root))
+	if log.V(3) {
+		log.Infof("Merged translated device: %s", jsonDebug(root))
 	}
-
 	return root, nil
 }
 
@@ -96,10 +92,11 @@ func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device
 	if err != nil {
 		return nil, err
 	}
+	log.V(3).Infof("Parsed Port CPU Stats: %v", portCPURows)
 
 	d := &telemetry.Device{}
 	for _, row := range portCPURows {
-		portName, err := shortPortName(row.portName)
+		portName, err := shortPortName(row.PortName)
 		if err != nil {
 			return nil, err
 		}
@@ -112,20 +109,16 @@ func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device
 		cpu.Type = telemetry.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_CPU
 		cpu.Parent = port.Name
 
-		if row.totalMemory != nil && row.freeMemory != nil {
+		if row.TotalMemory != nil && row.FreeMemory != nil {
 			port.Memory = &telemetry.Component_Memory{
-				Available: ygot.Uint64(*row.freeMemory),
-				Utilized:  ygot.Uint64(*row.totalMemory - *row.freeMemory),
+				Available: ygot.Uint64(*row.FreeMemory),
+				Utilized:  ygot.Uint64(*row.TotalMemory - *row.FreeMemory),
 			}
 		}
 
-		if row.cpuLoad != nil {
-			cpu.GetOrCreateCpu().GetOrCreateUtilization().Instant = ygot.Uint8(uint8(*row.cpuLoad))
+		if row.CPULoad != nil {
+			cpu.GetOrCreateCpu().GetOrCreateUtilization().Instant = ygot.Uint8(uint8(*row.CPULoad))
 		}
-	}
-
-	if debugLog {
-		log.Infof("port CPU device, %s", jsonDebug(d))
 	}
 
 	return d, nil
@@ -136,26 +129,27 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 	if err != nil {
 		return nil, err
 	}
+	log.V(3).Infof("Parsed Port Stats: %v", portRows)
 
 	d := &telemetry.Device{}
 	for _, row := range portRows {
-		portName, err := shortPortName(row.portName)
+		portName, err := shortPortName(row.PortName)
 		if err != nil {
 			return nil, err
 		}
 		i := d.GetOrCreateInterface(portName)
 		i.Counters = &telemetry.Interface_Counters{
-			InOctets:  row.bytesRx,
-			InPkts:    row.framesRx,
-			OutOctets: row.bytesTx,
-			OutPkts:   row.framesTx,
+			InOctets:  row.BytesRx,
+			InPkts:    row.FramesRx,
+			OutOctets: row.BytesTx,
+			OutPkts:   row.FramesTx,
 		}
-		i.GetOrCreateEthernet().GetOrCreateCounters().InCrcErrors = row.crcErrs
-		i.InRate = pfloat32Bytes(row.rxRate)
-		i.OutRate = pfloat32Bytes(row.txRate)
+		i.GetOrCreateEthernet().GetOrCreateCounters().InCrcErrors = row.CRCErrs
+		i.InRate = pfloat32Bytes(row.RxRate)
+		i.OutRate = pfloat32Bytes(row.TxRate)
 
 		i.Type = telemetry.IETFInterfaces_InterfaceType_ethernetCsmacd
-		switch row.linkState {
+		switch row.LinkState {
 		case "":
 			// No error when empty.
 		case "Link Up":
@@ -163,11 +157,11 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		case "Link Down", "No PCS Lock":
 			i.OperStatus = telemetry.Interface_OperStatus_DOWN
 		default:
-			return nil, errors.Errorf("statistics row %q has an unmappable port link state %q", row.portName, row.linkState)
+			return nil, errors.Errorf("statistics row %q has an unmappable port link state %q", row.PortName, row.LinkState)
 		}
 
 		// TODO: Map different speed interfaces - need to determine what the possible Ixia values are.
-		switch row.lineSpeed {
+		switch row.LineSpeed {
 		case "":
 			// No error when empty.
 		case "10GE LAN":
@@ -177,7 +171,7 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		case "400GE":
 			i.GetOrCreateEthernet().PortSpeed = telemetry.IfEthernet_ETHERNET_SPEED_SPEED_400GB
 		default:
-			return nil, errors.Errorf("statistics row %q has an unmappable port link speed %q", row.portName, row.lineSpeed)
+			return nil, errors.Errorf("statistics row %q has an unmappable port link speed %q", row.PortName, row.LineSpeed)
 		}
 	}
 
@@ -185,23 +179,25 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 }
 
 func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
-	flowRows, err := parseFlowStats(in)
+	itemRows, err := parseFlowStats(in)
 	if err != nil {
 		return nil, err
 	}
+	log.V(3).Infof("Parsed Item Stats: %v", itemRows)
+
 	d := &telemetry.Device{}
-	for _, row := range flowRows {
-		f := d.GetOrCreateFlow(row.trafficItem)
+	for _, row := range itemRows {
+		f := d.GetOrCreateFlow(row.TrafficItem)
 		f.Counters = &telemetry.Flow_Counters{
-			InOctets: row.rxBytes,
-			InPkts:   row.rxFrames,
-			OutPkts:  row.txFrames,
+			InOctets: row.RxBytes,
+			InPkts:   row.RxFrames,
+			OutPkts:  row.TxFrames,
 		}
-		f.LossPct = pfloat32Bytes(row.lossPct)
-		f.InRate = pfloat32Bytes(row.rxRate)
-		f.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-		f.OutRate = pfloat32Bytes(row.txRate)
-		f.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+		f.LossPct = pfloat32Bytes(row.LossPct)
+		f.InRate = pfloat32Bytes(row.RxRate)
+		f.InFrameRate = pfloat32Bytes(row.RxFrameRate)
+		f.OutRate = pfloat32Bytes(row.TxRate)
+		f.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
 	}
 	return d, nil
 }
@@ -211,21 +207,22 @@ func translateFlowStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 	if err != nil {
 		return nil, err
 	}
+	log.V(3).Infof("Parsed Flow Stats: %v", flowRows)
 
 	d := &telemetry.Device{}
 	for _, row := range flowRows {
-		f := d.GetOrCreateFlow(row.trafficItem)
+		f := d.GetOrCreateFlow(row.TrafficItem)
 		it := ingressTrackingFromFlowStats(f, row)
 		it.Counters = &telemetry.Flow_IngressTracking_Counters{
-			InOctets: row.rxBytes,
-			InPkts:   row.rxFrames,
-			OutPkts:  row.txFrames,
+			InOctets: row.RxBytes,
+			InPkts:   row.RxFrames,
+			OutPkts:  row.TxFrames,
 		}
-		it.LossPct = pfloat32Bytes(row.lossPct)
-		it.InRate = pfloat32Bytes(row.rxRate)
-		it.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-		it.OutRate = pfloat32Bytes(row.txRate)
-		it.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+		it.LossPct = pfloat32Bytes(row.LossPct)
+		it.InRate = pfloat32Bytes(row.RxRate)
+		it.InFrameRate = pfloat32Bytes(row.RxFrameRate)
+		it.OutRate = pfloat32Bytes(row.TxRate)
+		it.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
 	}
 	return d, nil
 }
@@ -235,6 +232,7 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 	if err != nil {
 		return nil, err
 	}
+	log.V(3).Infof("Parsed Egress Stats: %v", egressRows)
 
 	d := &telemetry.Device{}
 	var f *telemetry.Flow
@@ -243,13 +241,13 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 		// When there is only a single egress tracking flow, Ixia will omit the
 		// "Traffic Item" column entirely, so populate it with that flow name.
 		if i == 0 && len(etFlows) == 1 {
-			row.trafficItem = etFlows[0]
+			row.TrafficItem = etFlows[0]
 		}
 
-		// Setting the traffic item key, if present.
-		if row.trafficItem != "" {
-			f = d.GetOrCreateFlow(row.trafficItem)
-			if isIngressTracked(row.trafficItem, itFlows) {
+		// If the traffic item value is set, we are starting a new flow row.
+		if row.TrafficItem != "" {
+			f = d.GetOrCreateFlow(row.TrafficItem)
+			if isIngressTracked(row.TrafficItem, itFlows) {
 				it = ingressTrackingFromFlowStats(f, row.flowRow)
 				it.Filter = &row.filter
 			} else {
@@ -258,30 +256,40 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 			continue
 		}
 
+		// If we aren't starting a new flow row but the filter starts with "Custom:",
+		// then we are starting a new ingress-tracked value within the flow.
+		// NOTE: This only works because we only support "custom" egress tracking.
+		// If that changes, we will need to do something more sophisticated here.
+		if it != nil && strings.HasPrefix(row.filter, "Custom:") {
+			it = ingressTrackingFromFlowStats(f, row.flowRow)
+			it.Filter = &row.filter
+			continue
+		}
+
 		if it == nil {
 			ef := f.GetOrCreateEgressTracking(row.filter)
 			ef.Counters = &telemetry.Flow_EgressTracking_Counters{
-				InOctets: row.rxBytes,
-				InPkts:   row.rxFrames,
-				OutPkts:  row.txFrames,
+				InOctets: row.RxBytes,
+				InPkts:   row.RxFrames,
+				OutPkts:  row.TxFrames,
 			}
-			ef.LossPct = pfloat32Bytes(row.lossPct)
-			ef.InRate = pfloat32Bytes(row.rxRate)
-			ef.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-			ef.OutRate = pfloat32Bytes(row.txRate)
-			ef.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+			ef.LossPct = pfloat32Bytes(row.LossPct)
+			ef.InRate = pfloat32Bytes(row.RxRate)
+			ef.InFrameRate = pfloat32Bytes(row.RxFrameRate)
+			ef.OutRate = pfloat32Bytes(row.TxRate)
+			ef.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
 		} else {
 			ef := it.GetOrCreateEgressTracking(row.filter)
 			ef.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
-				InOctets: row.rxBytes,
-				InPkts:   row.rxFrames,
-				OutPkts:  row.txFrames,
+				InOctets: row.RxBytes,
+				InPkts:   row.RxFrames,
+				OutPkts:  row.TxFrames,
 			}
-			ef.LossPct = pfloat32Bytes(row.lossPct)
-			ef.InRate = pfloat32Bytes(row.rxRate)
-			ef.InFrameRate = pfloat32Bytes(row.rxFrameRate)
-			ef.OutRate = pfloat32Bytes(row.txRate)
-			ef.OutFrameRate = pfloat32Bytes(row.txFrameRate)
+			ef.LossPct = pfloat32Bytes(row.LossPct)
+			ef.InRate = pfloat32Bytes(row.RxRate)
+			ef.InFrameRate = pfloat32Bytes(row.RxFrameRate)
+			ef.OutRate = pfloat32Bytes(row.TxRate)
+			ef.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
 		}
 	}
 
@@ -290,14 +298,14 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 
 func ingressTrackingFromFlowStats(flow *telemetry.Flow, row *flowRow) *telemetry.Flow_IngressTracking {
 	return flow.GetOrCreateIngressTracking(
-		row.txPort,
-		row.rxPort,
-		mplsLabelFromUint(row.mplsLabel),
-		row.srcIPv4,
-		row.dstIPv4,
-		row.srcIPv6,
-		row.dstIPv6,
-		vlanIDFromUint(row.vlanID),
+		row.TxPort,
+		row.RxPort,
+		mplsLabelFromUint(row.MPLSLabel),
+		row.SrcIPv4,
+		row.DstIPv4,
+		row.SrcIPv6,
+		row.DstIPv6,
+		vlanIDFromUint(row.VLANID),
 	)
 }
 

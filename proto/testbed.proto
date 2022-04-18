@@ -30,7 +30,7 @@ message Device {
   string id = 1;
 
   enum Vendor {
-    UNKNOWN = 0;
+    VENDOR_UNSPECIFIED = 0;
     ARISTA = 1;
     CISCO = 2;
     IXIA = 3;
@@ -38,6 +38,7 @@ message Device {
     CIENA = 5;
     PALOALTO = 6;
     NOKIA = 7;
+    ZPE = 8;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.
@@ -70,7 +71,7 @@ message Port {
 
   // Speed enum values are the port speed in Gbps.
   enum Speed {
-    S_UNKNOWN = 0;
+    SPEED_UNSPECIFIED = 0;
     S_10GB = 10;
     S_100GB = 100;
     S_400GB = 400;

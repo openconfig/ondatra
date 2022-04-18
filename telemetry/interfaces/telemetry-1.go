@@ -31,7 +31,7 @@ func (n *Interface_Ethernet_AutoNegotiatePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/auto-negotiate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_AutoNegotiatePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -85,10 +85,10 @@ func watch_Interface_Ethernet_AutoNegotiatePath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_AutoNegotiatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_AutoNegotiatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -141,6 +141,34 @@ func (n *Interface_Ethernet_AutoNegotiatePathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_Interface_Ethernet_AutoNegotiatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_AutoNegotiatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/auto-negotiate with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -148,7 +176,7 @@ func (n *Interface_Ethernet_AutoNegotiatePathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_AutoNegotiatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_AutoNegotiatePath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_AutoNegotiatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/auto-negotiate to the batch object.
@@ -186,7 +214,7 @@ func (n *Interface_Ethernet_CountersPath) Lookup(t testing.TB) *oc.QualifiedInte
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_CountersPath) Get(t testing.TB) *oc.Interface_Ethernet_Counters {
 	t.Helper()
@@ -248,12 +276,13 @@ func watch_Interface_Ethernet_CountersPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Interface_Ethernet_CountersWatcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Ethernet_Counters{
+		qv := (&oc.QualifiedInterface_Ethernet_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_Counters)
 		w.LastVal = val
@@ -306,6 +335,36 @@ func (n *Interface_Ethernet_CountersPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Interface_Ethernet_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_Counters) bool) *oc.Interface_Ethernet_CountersWatcher {
+	t.Helper()
+	w := &oc.Interface_Ethernet_CountersWatcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Ethernet_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -313,7 +372,7 @@ func (n *Interface_Ethernet_CountersPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_Counters) bool) *oc.Interface_Ethernet_CountersWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_CountersPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters to the batch object.
@@ -335,7 +394,7 @@ func (n *Interface_Ethernet_Counters_InBlockErrorsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-block-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InBlockErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +448,10 @@ func watch_Interface_Ethernet_Counters_InBlockErrorsPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InBlockErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InBlockErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +504,34 @@ func (n *Interface_Ethernet_Counters_InBlockErrorsPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InBlockErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InBlockErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-block-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +539,7 @@ func (n *Interface_Ethernet_Counters_InBlockErrorsPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InBlockErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InBlockErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InBlockErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-block-errors to the batch object.
@@ -488,7 +575,7 @@ func (n *Interface_Ethernet_Counters_InCarrierErrorsPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-carrier-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InCarrierErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -542,10 +629,10 @@ func watch_Interface_Ethernet_Counters_InCarrierErrorsPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InCarrierErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InCarrierErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -598,6 +685,34 @@ func (n *Interface_Ethernet_Counters_InCarrierErrorsPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InCarrierErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InCarrierErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-carrier-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +720,7 @@ func (n *Interface_Ethernet_Counters_InCarrierErrorsPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InCarrierErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InCarrierErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InCarrierErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-carrier-errors to the batch object.
@@ -641,7 +756,7 @@ func (n *Interface_Ethernet_Counters_InCrcErrorsPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-crc-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InCrcErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -695,10 +810,10 @@ func watch_Interface_Ethernet_Counters_InCrcErrorsPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InCrcErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InCrcErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -751,6 +866,34 @@ func (n *Interface_Ethernet_Counters_InCrcErrorsPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InCrcErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InCrcErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-crc-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +901,7 @@ func (n *Interface_Ethernet_Counters_InCrcErrorsPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InCrcErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InCrcErrorsPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InCrcErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-crc-errors to the batch object.
@@ -794,7 +937,7 @@ func (n *Interface_Ethernet_Counters_InFragmentFramesPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-fragment-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InFragmentFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -848,10 +991,10 @@ func watch_Interface_Ethernet_Counters_InFragmentFramesPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InFragmentFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InFragmentFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -904,6 +1047,34 @@ func (n *Interface_Ethernet_Counters_InFragmentFramesPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InFragmentFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InFragmentFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-fragment-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1082,7 @@ func (n *Interface_Ethernet_Counters_InFragmentFramesPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InFragmentFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InFragmentFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InFragmentFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-fragment-frames to the batch object.
@@ -947,7 +1118,7 @@ func (n *Interface_Ethernet_Counters_InInterruptedTxPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-interrupted-tx with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InInterruptedTxPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1001,10 +1172,10 @@ func watch_Interface_Ethernet_Counters_InInterruptedTxPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InInterruptedTxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InInterruptedTxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1057,6 +1228,34 @@ func (n *Interface_Ethernet_Counters_InInterruptedTxPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InInterruptedTxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InInterruptedTxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-interrupted-tx with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1064,7 +1263,7 @@ func (n *Interface_Ethernet_Counters_InInterruptedTxPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InInterruptedTxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InInterruptedTxPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InInterruptedTxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-interrupted-tx to the batch object.
@@ -1100,7 +1299,7 @@ func (n *Interface_Ethernet_Counters_InJabberFramesPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-jabber-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InJabberFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1154,10 +1353,10 @@ func watch_Interface_Ethernet_Counters_InJabberFramesPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InJabberFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InJabberFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1210,6 +1409,34 @@ func (n *Interface_Ethernet_Counters_InJabberFramesPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InJabberFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InJabberFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-jabber-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1217,7 +1444,7 @@ func (n *Interface_Ethernet_Counters_InJabberFramesPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InJabberFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InJabberFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InJabberFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-jabber-frames to the batch object.
@@ -1253,7 +1480,7 @@ func (n *Interface_Ethernet_Counters_InLateCollisionPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-late-collision with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InLateCollisionPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1307,10 +1534,10 @@ func watch_Interface_Ethernet_Counters_InLateCollisionPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InLateCollisionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InLateCollisionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1363,6 +1590,34 @@ func (n *Interface_Ethernet_Counters_InLateCollisionPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InLateCollisionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InLateCollisionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-late-collision with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1370,7 +1625,7 @@ func (n *Interface_Ethernet_Counters_InLateCollisionPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InLateCollisionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InLateCollisionPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InLateCollisionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-late-collision to the batch object.
@@ -1406,7 +1661,7 @@ func (n *Interface_Ethernet_Counters_InMacControlFramesPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-control-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InMacControlFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1460,10 +1715,10 @@ func watch_Interface_Ethernet_Counters_InMacControlFramesPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InMacControlFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InMacControlFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1516,6 +1771,34 @@ func (n *Interface_Ethernet_Counters_InMacControlFramesPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InMacControlFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InMacControlFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-control-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1523,7 +1806,7 @@ func (n *Interface_Ethernet_Counters_InMacControlFramesPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InMacControlFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InMacControlFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InMacControlFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-control-frames to the batch object.
@@ -1559,7 +1842,7 @@ func (n *Interface_Ethernet_Counters_InMacErrorsRxPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-errors-rx with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InMacErrorsRxPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1613,10 +1896,10 @@ func watch_Interface_Ethernet_Counters_InMacErrorsRxPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InMacErrorsRxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InMacErrorsRxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1669,6 +1952,34 @@ func (n *Interface_Ethernet_Counters_InMacErrorsRxPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InMacErrorsRxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InMacErrorsRxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-errors-rx with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1676,7 +1987,7 @@ func (n *Interface_Ethernet_Counters_InMacErrorsRxPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InMacErrorsRxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InMacErrorsRxPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InMacErrorsRxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-errors-rx to the batch object.
@@ -1712,7 +2023,7 @@ func (n *Interface_Ethernet_Counters_InMacPauseFramesPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-pause-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InMacPauseFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1766,10 +2077,10 @@ func watch_Interface_Ethernet_Counters_InMacPauseFramesPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InMacPauseFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InMacPauseFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1822,6 +2133,34 @@ func (n *Interface_Ethernet_Counters_InMacPauseFramesPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InMacPauseFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InMacPauseFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-pause-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1829,7 +2168,7 @@ func (n *Interface_Ethernet_Counters_InMacPauseFramesPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InMacPauseFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InMacPauseFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InMacPauseFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-mac-pause-frames to the batch object.
@@ -1865,7 +2204,7 @@ func (n *Interface_Ethernet_Counters_InMaxsizeExceededPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-maxsize-exceeded with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InMaxsizeExceededPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1919,10 +2258,10 @@ func watch_Interface_Ethernet_Counters_InMaxsizeExceededPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InMaxsizeExceededPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InMaxsizeExceededPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1975,6 +2314,34 @@ func (n *Interface_Ethernet_Counters_InMaxsizeExceededPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InMaxsizeExceededPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InMaxsizeExceededPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-maxsize-exceeded with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1982,7 +2349,7 @@ func (n *Interface_Ethernet_Counters_InMaxsizeExceededPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InMaxsizeExceededPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InMaxsizeExceededPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InMaxsizeExceededPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-maxsize-exceeded to the batch object.
@@ -2018,7 +2385,7 @@ func (n *Interface_Ethernet_Counters_InOversizeFramesPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-oversize-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InOversizeFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2072,10 +2439,10 @@ func watch_Interface_Ethernet_Counters_InOversizeFramesPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InOversizeFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InOversizeFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2128,6 +2495,34 @@ func (n *Interface_Ethernet_Counters_InOversizeFramesPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InOversizeFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InOversizeFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-oversize-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2135,7 +2530,7 @@ func (n *Interface_Ethernet_Counters_InOversizeFramesPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InOversizeFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InOversizeFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InOversizeFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-oversize-frames to the batch object.
@@ -2171,7 +2566,7 @@ func (n *Interface_Ethernet_Counters_InSingleCollisionPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-single-collision with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InSingleCollisionPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2225,10 +2620,10 @@ func watch_Interface_Ethernet_Counters_InSingleCollisionPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InSingleCollisionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InSingleCollisionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2281,6 +2676,34 @@ func (n *Interface_Ethernet_Counters_InSingleCollisionPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InSingleCollisionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InSingleCollisionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-single-collision with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2288,7 +2711,7 @@ func (n *Interface_Ethernet_Counters_InSingleCollisionPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InSingleCollisionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InSingleCollisionPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InSingleCollisionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-single-collision to the batch object.
@@ -2324,7 +2747,7 @@ func (n *Interface_Ethernet_Counters_InSymbolErrorPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-symbol-error with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InSymbolErrorPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2378,10 +2801,10 @@ func watch_Interface_Ethernet_Counters_InSymbolErrorPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InSymbolErrorPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InSymbolErrorPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2434,6 +2857,34 @@ func (n *Interface_Ethernet_Counters_InSymbolErrorPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InSymbolErrorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InSymbolErrorPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-symbol-error with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2441,7 +2892,7 @@ func (n *Interface_Ethernet_Counters_InSymbolErrorPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InSymbolErrorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InSymbolErrorPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InSymbolErrorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-symbol-error to the batch object.
@@ -2477,7 +2928,7 @@ func (n *Interface_Ethernet_Counters_InUndersizeFramesPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-undersize-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_InUndersizeFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2531,10 +2982,10 @@ func watch_Interface_Ethernet_Counters_InUndersizeFramesPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_InUndersizeFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_InUndersizeFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2587,6 +3038,34 @@ func (n *Interface_Ethernet_Counters_InUndersizeFramesPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_InUndersizeFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_InUndersizeFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-undersize-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2594,7 +3073,7 @@ func (n *Interface_Ethernet_Counters_InUndersizeFramesPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_InUndersizeFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_InUndersizeFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_InUndersizeFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-undersize-frames to the batch object.
@@ -2630,7 +3109,7 @@ func (n *Interface_Ethernet_Counters_In_8021QFramesPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-8021q-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_In_8021QFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2684,10 +3163,10 @@ func watch_Interface_Ethernet_Counters_In_8021QFramesPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_In_8021QFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_In_8021QFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2740,6 +3219,34 @@ func (n *Interface_Ethernet_Counters_In_8021QFramesPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_In_8021QFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_In_8021QFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-8021q-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2747,7 +3254,7 @@ func (n *Interface_Ethernet_Counters_In_8021QFramesPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_In_8021QFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_In_8021QFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_In_8021QFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-8021q-frames to the batch object.
@@ -2783,7 +3290,7 @@ func (n *Interface_Ethernet_Counters_OutMacControlFramesPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-control-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_OutMacControlFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2837,10 +3344,10 @@ func watch_Interface_Ethernet_Counters_OutMacControlFramesPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_OutMacControlFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_OutMacControlFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2893,6 +3400,34 @@ func (n *Interface_Ethernet_Counters_OutMacControlFramesPathAny) Collect(t testi
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_OutMacControlFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_OutMacControlFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-control-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2900,7 +3435,7 @@ func (n *Interface_Ethernet_Counters_OutMacControlFramesPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_OutMacControlFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_OutMacControlFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_OutMacControlFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-control-frames to the batch object.
@@ -2936,7 +3471,7 @@ func (n *Interface_Ethernet_Counters_OutMacErrorsTxPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-errors-tx with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_OutMacErrorsTxPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2990,10 +3525,10 @@ func watch_Interface_Ethernet_Counters_OutMacErrorsTxPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_OutMacErrorsTxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_OutMacErrorsTxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3046,6 +3581,34 @@ func (n *Interface_Ethernet_Counters_OutMacErrorsTxPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_OutMacErrorsTxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_OutMacErrorsTxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-errors-tx with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3053,7 +3616,7 @@ func (n *Interface_Ethernet_Counters_OutMacErrorsTxPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_OutMacErrorsTxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_OutMacErrorsTxPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_OutMacErrorsTxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-errors-tx to the batch object.
@@ -3089,7 +3652,7 @@ func (n *Interface_Ethernet_Counters_OutMacPauseFramesPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-pause-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_OutMacPauseFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3143,10 +3706,10 @@ func watch_Interface_Ethernet_Counters_OutMacPauseFramesPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_OutMacPauseFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_OutMacPauseFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3199,6 +3762,34 @@ func (n *Interface_Ethernet_Counters_OutMacPauseFramesPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_OutMacPauseFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_OutMacPauseFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-pause-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3206,7 +3797,7 @@ func (n *Interface_Ethernet_Counters_OutMacPauseFramesPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_OutMacPauseFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_OutMacPauseFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_OutMacPauseFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-mac-pause-frames to the batch object.
@@ -3242,7 +3833,7 @@ func (n *Interface_Ethernet_Counters_Out_8021QFramesPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-8021q-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_Counters_Out_8021QFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3296,10 +3887,10 @@ func watch_Interface_Ethernet_Counters_Out_8021QFramesPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Ethernet_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_Counters", gs, queryPath, true, false)
-		return convertInterface_Ethernet_Counters_Out_8021QFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_Counters_Out_8021QFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3352,6 +3943,34 @@ func (n *Interface_Ethernet_Counters_Out_8021QFramesPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_Ethernet_Counters_Out_8021QFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_Counters_Out_8021QFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-8021q-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3359,7 +3978,7 @@ func (n *Interface_Ethernet_Counters_Out_8021QFramesPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_Counters_Out_8021QFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_Counters_Out_8021QFramesPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_Counters_Out_8021QFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-8021q-frames to the batch object.
@@ -3395,7 +4014,7 @@ func (n *Interface_Ethernet_DuplexModePath) Lookup(t testing.TB) *oc.QualifiedE_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/duplex-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_DuplexModePath) Get(t testing.TB) oc.E_Ethernet_DuplexMode {
 	t.Helper()
@@ -3449,10 +4068,10 @@ func watch_Interface_Ethernet_DuplexModePath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.E_Ethernet_DuplexModeWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_DuplexModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_DuplexModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Ethernet_DuplexMode)
 		w.LastVal = val
@@ -3505,6 +4124,34 @@ func (n *Interface_Ethernet_DuplexModePathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Interface_Ethernet_DuplexModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Ethernet_DuplexMode) bool) *oc.E_Ethernet_DuplexModeWatcher {
+	t.Helper()
+	w := &oc.E_Ethernet_DuplexModeWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_DuplexModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Ethernet_DuplexMode)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/duplex-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3512,7 +4159,7 @@ func (n *Interface_Ethernet_DuplexModePathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_DuplexModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Ethernet_DuplexMode) bool) *oc.E_Ethernet_DuplexModeWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_DuplexModePath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_DuplexModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/duplex-mode to the batch object.
@@ -3550,7 +4197,7 @@ func (n *Interface_Ethernet_EnableFlowControlPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/enable-flow-control with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_EnableFlowControlPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3604,10 +4251,10 @@ func watch_Interface_Ethernet_EnableFlowControlPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_EnableFlowControlPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_EnableFlowControlPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3660,6 +4307,34 @@ func (n *Interface_Ethernet_EnableFlowControlPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_Interface_Ethernet_EnableFlowControlPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_EnableFlowControlPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/enable-flow-control with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3667,7 +4342,7 @@ func (n *Interface_Ethernet_EnableFlowControlPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_EnableFlowControlPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_EnableFlowControlPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_EnableFlowControlPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/enable-flow-control to the batch object.
@@ -3703,7 +4378,7 @@ func (n *Interface_Ethernet_FecModePath) Lookup(t testing.TB) *oc.QualifiedE_IfE
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/fec-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_FecModePath) Get(t testing.TB) oc.E_IfEthernet_INTERFACE_FEC {
 	t.Helper()
@@ -3757,10 +4432,10 @@ func watch_Interface_Ethernet_FecModePath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.E_IfEthernet_INTERFACE_FECWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_FecModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_FecModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_INTERFACE_FEC)
 		w.LastVal = val
@@ -3813,6 +4488,34 @@ func (n *Interface_Ethernet_FecModePathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_Interface_Ethernet_FecModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_INTERFACE_FEC) bool) *oc.E_IfEthernet_INTERFACE_FECWatcher {
+	t.Helper()
+	w := &oc.E_IfEthernet_INTERFACE_FECWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_FecModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_INTERFACE_FEC)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/fec-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3820,7 +4523,7 @@ func (n *Interface_Ethernet_FecModePathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_FecModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_INTERFACE_FEC) bool) *oc.E_IfEthernet_INTERFACE_FECWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_FecModePath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_FecModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/fec-mode to the batch object.
@@ -3856,7 +4559,7 @@ func (n *Interface_Ethernet_HwMacAddressPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/hw-mac-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_HwMacAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3910,10 +4613,10 @@ func watch_Interface_Ethernet_HwMacAddressPath(t testing.TB, n ygot.PathStruct, 
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_HwMacAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_HwMacAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3966,6 +4669,34 @@ func (n *Interface_Ethernet_HwMacAddressPathAny) Collect(t testing.TB, duration 
 	return c
 }
 
+func watch_Interface_Ethernet_HwMacAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_HwMacAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/hw-mac-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3973,7 +4704,7 @@ func (n *Interface_Ethernet_HwMacAddressPathAny) Collect(t testing.TB, duration 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_HwMacAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_HwMacAddressPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_HwMacAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/hw-mac-address to the batch object.
@@ -4009,7 +4740,7 @@ func (n *Interface_Ethernet_MacAddressPath) Lookup(t testing.TB) *oc.QualifiedSt
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/mac-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_MacAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -4063,10 +4794,10 @@ func watch_Interface_Ethernet_MacAddressPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_MacAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_MacAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -4119,6 +4850,34 @@ func (n *Interface_Ethernet_MacAddressPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Interface_Ethernet_MacAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_MacAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/mac-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4126,7 +4885,7 @@ func (n *Interface_Ethernet_MacAddressPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_MacAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_MacAddressPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_MacAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/mac-address to the batch object.
@@ -4162,7 +4921,7 @@ func (n *Interface_Ethernet_NegotiatedDuplexModePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-duplex-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_NegotiatedDuplexModePath) Get(t testing.TB) oc.E_Ethernet_NegotiatedDuplexMode {
 	t.Helper()
@@ -4216,10 +4975,10 @@ func watch_Interface_Ethernet_NegotiatedDuplexModePath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.E_Ethernet_NegotiatedDuplexModeWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_NegotiatedDuplexModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_NegotiatedDuplexModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Ethernet_NegotiatedDuplexMode)
 		w.LastVal = val
@@ -4272,6 +5031,34 @@ func (n *Interface_Ethernet_NegotiatedDuplexModePathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Interface_Ethernet_NegotiatedDuplexModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Ethernet_NegotiatedDuplexMode) bool) *oc.E_Ethernet_NegotiatedDuplexModeWatcher {
+	t.Helper()
+	w := &oc.E_Ethernet_NegotiatedDuplexModeWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_NegotiatedDuplexModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Ethernet_NegotiatedDuplexMode)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-duplex-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4279,7 +5066,7 @@ func (n *Interface_Ethernet_NegotiatedDuplexModePathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_NegotiatedDuplexModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Ethernet_NegotiatedDuplexMode) bool) *oc.E_Ethernet_NegotiatedDuplexModeWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_NegotiatedDuplexModePath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_NegotiatedDuplexModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-duplex-mode to the batch object.
@@ -4315,7 +5102,7 @@ func (n *Interface_Ethernet_NegotiatedPortSpeedPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-port-speed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_NegotiatedPortSpeedPath) Get(t testing.TB) oc.E_IfEthernet_ETHERNET_SPEED {
 	t.Helper()
@@ -4369,10 +5156,10 @@ func watch_Interface_Ethernet_NegotiatedPortSpeedPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_NegotiatedPortSpeedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_NegotiatedPortSpeedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
 		w.LastVal = val
@@ -4425,6 +5212,34 @@ func (n *Interface_Ethernet_NegotiatedPortSpeedPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Interface_Ethernet_NegotiatedPortSpeedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
+	t.Helper()
+	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_NegotiatedPortSpeedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-port-speed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4432,7 +5247,7 @@ func (n *Interface_Ethernet_NegotiatedPortSpeedPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_NegotiatedPortSpeedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_NegotiatedPortSpeedPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_NegotiatedPortSpeedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/negotiated-port-speed to the batch object.
@@ -4468,7 +5283,7 @@ func (n *Interface_Ethernet_PortSpeedPath) Lookup(t testing.TB) *oc.QualifiedE_I
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/port-speed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_PortSpeedPath) Get(t testing.TB) oc.E_IfEthernet_ETHERNET_SPEED {
 	t.Helper()
@@ -4522,10 +5337,10 @@ func watch_Interface_Ethernet_PortSpeedPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_PortSpeedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_PortSpeedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
 		w.LastVal = val
@@ -4578,6 +5393,34 @@ func (n *Interface_Ethernet_PortSpeedPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Interface_Ethernet_PortSpeedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
+	t.Helper()
+	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_PortSpeedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/port-speed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4585,7 +5428,7 @@ func (n *Interface_Ethernet_PortSpeedPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_PortSpeedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_PortSpeedPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_PortSpeedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/port-speed to the batch object.
@@ -4623,7 +5466,7 @@ func (n *Interface_Ethernet_StandaloneLinkTrainingPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/state/standalone-link-training with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_StandaloneLinkTrainingPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -4677,10 +5520,10 @@ func watch_Interface_Ethernet_StandaloneLinkTrainingPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Ethernet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet", gs, queryPath, true, false)
-		return convertInterface_Ethernet_StandaloneLinkTrainingPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_StandaloneLinkTrainingPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -4733,6 +5576,34 @@ func (n *Interface_Ethernet_StandaloneLinkTrainingPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_Ethernet_StandaloneLinkTrainingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Ethernet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_StandaloneLinkTrainingPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/state/standalone-link-training with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4740,7 +5611,7 @@ func (n *Interface_Ethernet_StandaloneLinkTrainingPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_StandaloneLinkTrainingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_StandaloneLinkTrainingPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_StandaloneLinkTrainingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/state/standalone-link-training to the batch object.
@@ -4778,7 +5649,7 @@ func (n *Interface_Ethernet_SwitchedVlanPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_SwitchedVlanPath) Get(t testing.TB) *oc.Interface_Ethernet_SwitchedVlan {
 	t.Helper()
@@ -4840,12 +5711,13 @@ func watch_Interface_Ethernet_SwitchedVlanPath(t testing.TB, n ygot.PathStruct, 
 	t.Helper()
 	w := &oc.Interface_Ethernet_SwitchedVlanWatcher{}
 	gs := &oc.Interface_Ethernet_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Ethernet_SwitchedVlan{
+		qv := (&oc.QualifiedInterface_Ethernet_SwitchedVlan{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_SwitchedVlan)
 		w.LastVal = val
@@ -4898,6 +5770,36 @@ func (n *Interface_Ethernet_SwitchedVlanPathAny) Collect(t testing.TB, duration 
 	return c
 }
 
+func watch_Interface_Ethernet_SwitchedVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_SwitchedVlan) bool) *oc.Interface_Ethernet_SwitchedVlanWatcher {
+	t.Helper()
+	w := &oc.Interface_Ethernet_SwitchedVlanWatcher{}
+	structs := map[string]*oc.Interface_Ethernet_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Ethernet_SwitchedVlan{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_SwitchedVlan)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4905,7 +5807,7 @@ func (n *Interface_Ethernet_SwitchedVlanPathAny) Collect(t testing.TB, duration 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_SwitchedVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_SwitchedVlan) bool) *oc.Interface_Ethernet_SwitchedVlanWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_SwitchedVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_SwitchedVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan to the batch object.
@@ -4927,7 +5829,7 @@ func (n *Interface_Ethernet_SwitchedVlan_AccessVlanPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/access-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_SwitchedVlan_AccessVlanPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4981,10 +5883,10 @@ func watch_Interface_Ethernet_SwitchedVlan_AccessVlanPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Ethernet_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Ethernet_SwitchedVlan_AccessVlanPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_SwitchedVlan_AccessVlanPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -5037,6 +5939,34 @@ func (n *Interface_Ethernet_SwitchedVlan_AccessVlanPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_SwitchedVlan_AccessVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_SwitchedVlan_AccessVlanPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/access-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5044,7 +5974,7 @@ func (n *Interface_Ethernet_SwitchedVlan_AccessVlanPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_SwitchedVlan_AccessVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_SwitchedVlan_AccessVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_SwitchedVlan_AccessVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/access-vlan to the batch object.
@@ -5080,7 +6010,7 @@ func (n *Interface_Ethernet_SwitchedVlan_InterfaceModePath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/interface-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_SwitchedVlan_InterfaceModePath) Get(t testing.TB) oc.E_VlanTypes_VlanModeType {
 	t.Helper()
@@ -5134,10 +6064,10 @@ func watch_Interface_Ethernet_SwitchedVlan_InterfaceModePath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.E_VlanTypes_VlanModeTypeWatcher{}
 	gs := &oc.Interface_Ethernet_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Ethernet_SwitchedVlan_InterfaceModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_SwitchedVlan_InterfaceModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanModeType)
 		w.LastVal = val
@@ -5190,6 +6120,34 @@ func (n *Interface_Ethernet_SwitchedVlan_InterfaceModePathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Ethernet_SwitchedVlan_InterfaceModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanModeType) bool) *oc.E_VlanTypes_VlanModeTypeWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_VlanModeTypeWatcher{}
+	structs := map[string]*oc.Interface_Ethernet_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_SwitchedVlan_InterfaceModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanModeType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/interface-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5197,7 +6155,7 @@ func (n *Interface_Ethernet_SwitchedVlan_InterfaceModePathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_SwitchedVlan_InterfaceModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanModeType) bool) *oc.E_VlanTypes_VlanModeTypeWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_SwitchedVlan_InterfaceModePath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_SwitchedVlan_InterfaceModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/interface-mode to the batch object.
@@ -5233,7 +6191,7 @@ func (n *Interface_Ethernet_SwitchedVlan_NativeVlanPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/native-vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_SwitchedVlan_NativeVlanPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -5287,10 +6245,10 @@ func watch_Interface_Ethernet_SwitchedVlan_NativeVlanPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Ethernet_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Ethernet_SwitchedVlan_NativeVlanPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_SwitchedVlan_NativeVlanPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -5343,6 +6301,34 @@ func (n *Interface_Ethernet_SwitchedVlan_NativeVlanPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_SwitchedVlan_NativeVlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Ethernet_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_SwitchedVlan_NativeVlanPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/native-vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5350,7 +6336,7 @@ func (n *Interface_Ethernet_SwitchedVlan_NativeVlanPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_SwitchedVlan_NativeVlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Ethernet_SwitchedVlan_NativeVlanPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_SwitchedVlan_NativeVlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/native-vlan to the batch object.
@@ -5386,7 +6372,7 @@ func (n *Interface_Ethernet_SwitchedVlan_TrunkVlansPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/trunk-vlans with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ethernet_SwitchedVlan_TrunkVlansPath) Get(t testing.TB) []oc.Interface_Ethernet_SwitchedVlan_TrunkVlans_Union {
 	t.Helper()
@@ -5440,10 +6426,10 @@ func watch_Interface_Ethernet_SwitchedVlan_TrunkVlansPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Interface_Ethernet_SwitchedVlan_TrunkVlans_UnionSliceWatcher{}
 	gs := &oc.Interface_Ethernet_SwitchedVlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", gs, queryPath, true, false)
-		return convertInterface_Ethernet_SwitchedVlan_TrunkVlansPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ethernet_SwitchedVlan_TrunkVlansPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_SwitchedVlan_TrunkVlans_UnionSlice)
 		w.LastVal = val
@@ -5496,6 +6482,34 @@ func (n *Interface_Ethernet_SwitchedVlan_TrunkVlansPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Ethernet_SwitchedVlan_TrunkVlansPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_SwitchedVlan_TrunkVlans_UnionSlice) bool) *oc.Interface_Ethernet_SwitchedVlan_TrunkVlans_UnionSliceWatcher {
+	t.Helper()
+	w := &oc.Interface_Ethernet_SwitchedVlan_TrunkVlans_UnionSliceWatcher{}
+	structs := map[string]*oc.Interface_Ethernet_SwitchedVlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ethernet_SwitchedVlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ethernet_SwitchedVlan", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ethernet_SwitchedVlan_TrunkVlansPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Ethernet_SwitchedVlan_TrunkVlans_UnionSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/trunk-vlans with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5503,7 +6517,7 @@ func (n *Interface_Ethernet_SwitchedVlan_TrunkVlansPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ethernet_SwitchedVlan_TrunkVlansPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Ethernet_SwitchedVlan_TrunkVlans_UnionSlice) bool) *oc.Interface_Ethernet_SwitchedVlan_TrunkVlans_UnionSliceWatcher {
 	t.Helper()
-	return watch_Interface_Ethernet_SwitchedVlan_TrunkVlansPath(t, n, timeout, predicate)
+	return watch_Interface_Ethernet_SwitchedVlan_TrunkVlansPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan/state/trunk-vlans to the batch object.

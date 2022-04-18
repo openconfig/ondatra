@@ -29,7 +29,7 @@ func (n *Lldp_Interface_Counters_TlvUnknownPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/state/counters/tlv-unknown with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_Counters_TlvUnknownPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Lldp_Interface_Counters_TlvUnknownPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Interface_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface_Counters", gs, queryPath, true, false)
-		return convertLldp_Interface_Counters_TlvUnknownPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Interface_Counters_TlvUnknownPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Lldp_Interface_Counters_TlvUnknownPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Lldp_Interface_Counters_TlvUnknownPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Interface_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Interface_Counters_TlvUnknownPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/state/counters/tlv-unknown with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Lldp_Interface_Counters_TlvUnknownPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_Counters_TlvUnknownPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Interface_Counters_TlvUnknownPath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_Counters_TlvUnknownPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/state/counters/tlv-unknown to the batch object.
@@ -184,7 +212,7 @@ func (n *Lldp_Interface_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -238,10 +266,10 @@ func watch_Lldp_Interface_EnabledPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Lldp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface", gs, queryPath, true, false)
-		return convertLldp_Interface_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Interface_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -294,6 +322,34 @@ func (n *Lldp_Interface_EnabledPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Lldp_Interface_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Lldp_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface", structs[pre], queryPath, true, false)
+			qv := convertLldp_Interface_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -301,7 +357,7 @@ func (n *Lldp_Interface_EnabledPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Lldp_Interface_EnabledPath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/state/enabled to the batch object.
@@ -337,7 +393,7 @@ func (n *Lldp_Interface_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -391,10 +447,10 @@ func watch_Lldp_Interface_NamePath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Lldp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface", gs, queryPath, true, false)
-		return convertLldp_Interface_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Interface_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -447,6 +503,34 @@ func (n *Lldp_Interface_NamePathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Lldp_Interface_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Lldp_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface", structs[pre], queryPath, true, false)
+			qv := convertLldp_Interface_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -454,7 +538,7 @@ func (n *Lldp_Interface_NamePathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Lldp_Interface_NamePath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/state/name to the batch object.
@@ -492,7 +576,7 @@ func (n *Lldp_Interface_NeighborPath) Lookup(t testing.TB) *oc.QualifiedLldp_Int
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_NeighborPath) Get(t testing.TB) *oc.Lldp_Interface_Neighbor {
 	t.Helper()
@@ -554,12 +638,13 @@ func watch_Lldp_Interface_NeighborPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.Lldp_Interface_NeighborWatcher{}
 	gs := &oc.Lldp_Interface_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface_Neighbor", gs, queryPath, false, false)
-		return (&oc.QualifiedLldp_Interface_Neighbor{
+		qv := (&oc.QualifiedLldp_Interface_Neighbor{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLldp_Interface_Neighbor)
 		w.LastVal = val
@@ -612,6 +697,36 @@ func (n *Lldp_Interface_NeighborPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Lldp_Interface_NeighborPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLldp_Interface_Neighbor) bool) *oc.Lldp_Interface_NeighborWatcher {
+	t.Helper()
+	w := &oc.Lldp_Interface_NeighborWatcher{}
+	structs := map[string]*oc.Lldp_Interface_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface_Neighbor", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLldp_Interface_Neighbor{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLldp_Interface_Neighbor)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -619,7 +734,7 @@ func (n *Lldp_Interface_NeighborPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_NeighborPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLldp_Interface_Neighbor) bool) *oc.Lldp_Interface_NeighborWatcher {
 	t.Helper()
-	return watch_Lldp_Interface_NeighborPath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_NeighborPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor to the batch object.
@@ -641,7 +756,7 @@ func (n *Lldp_Interface_Neighbor_AgePath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/age with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_Neighbor_AgePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -695,10 +810,10 @@ func watch_Lldp_Interface_Neighbor_AgePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Interface_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface_Neighbor", gs, queryPath, true, false)
-		return convertLldp_Interface_Neighbor_AgePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Interface_Neighbor_AgePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -751,6 +866,34 @@ func (n *Lldp_Interface_Neighbor_AgePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Lldp_Interface_Neighbor_AgePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Interface_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertLldp_Interface_Neighbor_AgePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/age with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +901,7 @@ func (n *Lldp_Interface_Neighbor_AgePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_Neighbor_AgePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Interface_Neighbor_AgePath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_Neighbor_AgePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/age to the batch object.
@@ -796,7 +939,7 @@ func (n *Lldp_Interface_Neighbor_CapabilityPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/capabilities/capability with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_Neighbor_CapabilityPath) Get(t testing.TB) *oc.Lldp_Interface_Neighbor_Capability {
 	t.Helper()
@@ -858,12 +1001,13 @@ func watch_Lldp_Interface_Neighbor_CapabilityPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Lldp_Interface_Neighbor_CapabilityWatcher{}
 	gs := &oc.Lldp_Interface_Neighbor_Capability{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Interface_Neighbor_Capability", gs, queryPath, false, false)
-		return (&oc.QualifiedLldp_Interface_Neighbor_Capability{
+		qv := (&oc.QualifiedLldp_Interface_Neighbor_Capability{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLldp_Interface_Neighbor_Capability)
 		w.LastVal = val
@@ -916,6 +1060,36 @@ func (n *Lldp_Interface_Neighbor_CapabilityPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Lldp_Interface_Neighbor_CapabilityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLldp_Interface_Neighbor_Capability) bool) *oc.Lldp_Interface_Neighbor_CapabilityWatcher {
+	t.Helper()
+	w := &oc.Lldp_Interface_Neighbor_CapabilityWatcher{}
+	structs := map[string]*oc.Lldp_Interface_Neighbor_Capability{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Interface_Neighbor_Capability{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Interface_Neighbor_Capability", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLldp_Interface_Neighbor_Capability{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLldp_Interface_Neighbor_Capability)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/capabilities/capability with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -923,7 +1097,7 @@ func (n *Lldp_Interface_Neighbor_CapabilityPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Interface_Neighbor_CapabilityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLldp_Interface_Neighbor_Capability) bool) *oc.Lldp_Interface_Neighbor_CapabilityWatcher {
 	t.Helper()
-	return watch_Lldp_Interface_Neighbor_CapabilityPath(t, n, timeout, predicate)
+	return watch_Lldp_Interface_Neighbor_CapabilityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/capabilities/capability to the batch object.

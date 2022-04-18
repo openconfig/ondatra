@@ -333,7 +333,7 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) (bool, map[*opb.Port]
 	if dev.GetSoftwareVersion() != "" && dev.GetSoftwareVersion() != softwareVersion(node) {
 		return false, nil
 	}
-	if v := dev.GetVendor(); v != opb.Device_UNKNOWN && v != type2VendorMap[node.GetType()] {
+	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != type2VendorMap[node.GetType()] {
 		return false, nil
 	}
 	log.V(1).Infof("Found node match: %q", dev.GetId())
@@ -362,7 +362,7 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) (bool, map[*opb.Port]
 
 func (s *solver) portMatch(port *opb.Port, intf *intf) bool {
 	// TODO: When solver is rewritten, support more generic port matching.
-	if port.GetSpeed() != opb.Port_S_UNKNOWN {
+	if port.GetSpeed() != opb.Port_SPEED_UNSPECIFIED {
 		return false
 	}
 	return true

@@ -29,7 +29,7 @@ func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPath) Get(t testing.TB) oc.Acl_AclSet_AclEntry_Transport_DestinationPort_Union {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Acl_AclSet_AclEntry_Transport_DestinationPortPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Acl_AclSet_AclEntry_Transport_DestinationPort_UnionWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Transport{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Transport_DestinationPortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Transport_DestinationPortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Transport_DestinationPort_Union)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPathAny) Collect(t testing
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Transport_DestinationPortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Transport_DestinationPort_Union) bool) *oc.Acl_AclSet_AclEntry_Transport_DestinationPort_UnionWatcher {
+	t.Helper()
+	w := &oc.Acl_AclSet_AclEntry_Transport_DestinationPort_UnionWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Transport{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Transport{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Transport_DestinationPortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Transport_DestinationPort_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Transport_DestinationPort_Union) bool) *oc.Acl_AclSet_AclEntry_Transport_DestinationPort_UnionWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Transport_DestinationPortPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Transport_DestinationPortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port to the batch object.
@@ -182,7 +210,7 @@ func (n *Acl_AclSet_AclEntry_Transport_SourcePortPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Transport_SourcePortPath) Get(t testing.TB) oc.Acl_AclSet_AclEntry_Transport_SourcePort_Union {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Acl_AclSet_AclEntry_Transport_SourcePortPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.Acl_AclSet_AclEntry_Transport_SourcePort_UnionWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Transport{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Transport_SourcePortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Transport_SourcePortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Transport_SourcePort_Union)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Acl_AclSet_AclEntry_Transport_SourcePortPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Transport_SourcePortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Transport_SourcePort_Union) bool) *oc.Acl_AclSet_AclEntry_Transport_SourcePort_UnionWatcher {
+	t.Helper()
+	w := &oc.Acl_AclSet_AclEntry_Transport_SourcePort_UnionWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Transport{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Transport{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Transport_SourcePortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Transport_SourcePort_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Acl_AclSet_AclEntry_Transport_SourcePortPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Transport_SourcePortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Transport_SourcePort_Union) bool) *oc.Acl_AclSet_AclEntry_Transport_SourcePort_UnionWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Transport_SourcePortPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Transport_SourcePortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port to the batch object.
@@ -335,7 +391,7 @@ func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPath) Get(t testing.TB) []oc.E_PacketMatchTypes_TCP_FLAGS {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Acl_AclSet_AclEntry_Transport_TcpFlagsPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Transport{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Transport_TcpFlagsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Transport_TcpFlagsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool) *oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher {
+	t.Helper()
+	w := &oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Transport{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Transport{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Transport", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Transport_TcpFlagsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_PacketMatchTypes_TCP_FLAGSSlice) bool) *oc.E_PacketMatchTypes_TCP_FLAGSSliceWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Transport_TcpFlagsPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags to the batch object.
@@ -488,7 +572,7 @@ func (n *Acl_AclSet_DescriptionPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/state/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Acl_AclSet_DescriptionPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Acl_AclSet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet", gs, queryPath, true, false)
-		return convertAcl_AclSet_DescriptionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_DescriptionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Acl_AclSet_DescriptionPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Acl_AclSet_DescriptionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Acl_AclSet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_DescriptionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/state/description with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Acl_AclSet_DescriptionPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_DescriptionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_DescriptionPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_DescriptionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/state/description to the batch object.
@@ -641,7 +753,7 @@ func (n *Acl_AclSet_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_Acl_AclSet_NamePath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Acl_AclSet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet", gs, queryPath, true, false)
-		return convertAcl_AclSet_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *Acl_AclSet_NamePathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Acl_AclSet_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Acl_AclSet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *Acl_AclSet_NamePathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_NamePath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/state/name to the batch object.
@@ -794,7 +934,7 @@ func (n *Acl_AclSet_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Acl_ACL_TYPE {
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_TypePath) Get(t testing.TB) oc.E_Acl_ACL_TYPE {
 	t.Helper()
@@ -848,10 +988,10 @@ func watch_Acl_AclSet_TypePath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.E_Acl_ACL_TYPEWatcher{}
 	gs := &oc.Acl_AclSet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet", gs, queryPath, true, false)
-		return convertAcl_AclSet_TypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_TypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_TYPE)
 		w.LastVal = val
@@ -904,6 +1044,34 @@ func (n *Acl_AclSet_TypePathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Acl_AclSet_TypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_TYPE) bool) *oc.E_Acl_ACL_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_Acl_ACL_TYPEWatcher{}
+	structs := map[string]*oc.Acl_AclSet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_TypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/state/type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1079,7 @@ func (n *Acl_AclSet_TypePathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_TYPE) bool) *oc.E_Acl_ACL_TYPEWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_TypePath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_TypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/state/type to the batch object.
@@ -947,7 +1115,7 @@ func (n *Acl_CounterCapabilityPath) Lookup(t testing.TB) *oc.QualifiedE_Acl_ACL_
 }
 
 // Get fetches the value at /openconfig-acl/acl/state/counter-capability with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_CounterCapabilityPath) Get(t testing.TB) oc.E_Acl_ACL_COUNTER_CAPABILITY {
 	t.Helper()
@@ -1001,10 +1169,10 @@ func watch_Acl_CounterCapabilityPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.E_Acl_ACL_COUNTER_CAPABILITYWatcher{}
 	gs := &oc.Acl{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl", gs, queryPath, true, false)
-		return convertAcl_CounterCapabilityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_CounterCapabilityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_COUNTER_CAPABILITY)
 		w.LastVal = val
@@ -1057,6 +1225,34 @@ func (n *Acl_CounterCapabilityPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Acl_CounterCapabilityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_COUNTER_CAPABILITY) bool) *oc.E_Acl_ACL_COUNTER_CAPABILITYWatcher {
+	t.Helper()
+	w := &oc.E_Acl_ACL_COUNTER_CAPABILITYWatcher{}
+	structs := map[string]*oc.Acl{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl", structs[pre], queryPath, true, false)
+			qv := convertAcl_CounterCapabilityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_COUNTER_CAPABILITY)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/state/counter-capability with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1064,7 +1260,7 @@ func (n *Acl_CounterCapabilityPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_CounterCapabilityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_COUNTER_CAPABILITY) bool) *oc.E_Acl_ACL_COUNTER_CAPABILITYWatcher {
 	t.Helper()
-	return watch_Acl_CounterCapabilityPath(t, n, timeout, predicate)
+	return watch_Acl_CounterCapabilityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/state/counter-capability to the batch object.

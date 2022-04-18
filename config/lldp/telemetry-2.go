@@ -30,7 +30,7 @@ func (n *Lldp_Interface_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *Lldp_Interface_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/interfaces/interface/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Interface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -232,7 +232,7 @@ func (n *Lldp_SuppressTlvAdvertisementPath) Lookup(t testing.TB) *oc.QualifiedE_
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/config/suppress-tlv-advertisement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_SuppressTlvAdvertisementPath) Get(t testing.TB) []oc.E_LldpTypes_LLDP_TLV {
 	t.Helper()

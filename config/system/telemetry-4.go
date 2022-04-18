@@ -30,7 +30,7 @@ func (n *System_Ntp_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp_Ser
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_ServerPath) Get(t testing.TB) *oc.System_Ntp_Server {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *System_Ntp_Server_AddressPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -222,7 +222,7 @@ func (n *System_Ntp_Server_AssociationTypePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/association-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_AssociationTypePath) Get(t testing.TB) oc.E_Server_AssociationType {
 	t.Helper()
@@ -325,7 +325,7 @@ func (n *System_Ntp_Server_IburstPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/iburst with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_IburstPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -428,7 +428,7 @@ func (n *System_Ntp_Server_PortPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -531,7 +531,7 @@ func (n *System_Ntp_Server_PreferPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/prefer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_PreferPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -634,7 +634,7 @@ func (n *System_Ntp_Server_VersionPath) Lookup(t testing.TB) *oc.QualifiedUint8 
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/config/version with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_VersionPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -737,7 +737,7 @@ func (n *System_SshServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_SshServe
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServerPath) Get(t testing.TB) *oc.System_SshServer {
 	t.Helper()
@@ -828,7 +828,7 @@ func (n *System_SshServer_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/config/enable with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_EnablePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -931,7 +931,7 @@ func (n *System_SshServer_ProtocolVersionPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/config/protocol-version with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_ProtocolVersionPath) Get(t testing.TB) oc.E_SshServer_ProtocolVersion {
 	t.Helper()
@@ -1032,7 +1032,7 @@ func (n *System_SshServer_RateLimitPath) Lookup(t testing.TB) *oc.QualifiedUint1
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/config/rate-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_RateLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1133,7 +1133,7 @@ func (n *System_SshServer_SessionLimitPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/config/session-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_SessionLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1234,7 +1234,7 @@ func (n *System_SshServer_TimeoutPath) Lookup(t testing.TB) *oc.QualifiedUint16 
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/config/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1337,7 +1337,7 @@ func (n *System_TelnetServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Telne
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServerPath) Get(t testing.TB) *oc.System_TelnetServer {
 	t.Helper()
@@ -1428,7 +1428,7 @@ func (n *System_TelnetServer_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool 
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/config/enable with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_EnablePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1529,7 +1529,7 @@ func (n *System_TelnetServer_RateLimitPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/config/rate-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_RateLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1630,7 +1630,7 @@ func (n *System_TelnetServer_SessionLimitPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/config/session-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_SessionLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1731,7 +1731,7 @@ func (n *System_TelnetServer_TimeoutPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/config/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()

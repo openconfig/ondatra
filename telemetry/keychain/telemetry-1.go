@@ -29,7 +29,7 @@ func (n *Keychain_Key_CryptoAlgorithmPath) Lookup(t testing.TB) *oc.QualifiedE_K
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/state/crypto-algorithm with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_CryptoAlgorithmPath) Get(t testing.TB) oc.E_KeychainTypes_CRYPTO_TYPE {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Keychain_Key_CryptoAlgorithmPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.E_KeychainTypes_CRYPTO_TYPEWatcher{}
 	gs := &oc.Keychain_Key{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain_Key", gs, queryPath, true, false)
-		return convertKeychain_Key_CryptoAlgorithmPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertKeychain_Key_CryptoAlgorithmPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_KeychainTypes_CRYPTO_TYPE)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Keychain_Key_CryptoAlgorithmPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Keychain_Key_CryptoAlgorithmPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_KeychainTypes_CRYPTO_TYPE) bool) *oc.E_KeychainTypes_CRYPTO_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_KeychainTypes_CRYPTO_TYPEWatcher{}
+	structs := map[string]*oc.Keychain_Key{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain_Key{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain_Key", structs[pre], queryPath, true, false)
+			qv := convertKeychain_Key_CryptoAlgorithmPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_KeychainTypes_CRYPTO_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain/keys/key/state/crypto-algorithm with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Keychain_Key_CryptoAlgorithmPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Keychain_Key_CryptoAlgorithmPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_KeychainTypes_CRYPTO_TYPE) bool) *oc.E_KeychainTypes_CRYPTO_TYPEWatcher {
 	t.Helper()
-	return watch_Keychain_Key_CryptoAlgorithmPath(t, n, timeout, predicate)
+	return watch_Keychain_Key_CryptoAlgorithmPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain/keys/key/state/crypto-algorithm to the batch object.
@@ -182,7 +210,7 @@ func (n *Keychain_Key_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/state/key-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_KeyIdPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Keychain_Key_KeyIdPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Keychain_Key{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain_Key", gs, queryPath, true, false)
-		return convertKeychain_Key_KeyIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertKeychain_Key_KeyIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Keychain_Key_KeyIdPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_Keychain_Key_KeyIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Keychain_Key{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain_Key{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain_Key", structs[pre], queryPath, true, false)
+			qv := convertKeychain_Key_KeyIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain/keys/key/state/key-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Keychain_Key_KeyIdPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Keychain_Key_KeyIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Keychain_Key_KeyIdPath(t, n, timeout, predicate)
+	return watch_Keychain_Key_KeyIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain/keys/key/state/key-id to the batch object.

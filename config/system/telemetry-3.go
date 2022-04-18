@@ -28,7 +28,7 @@ func (n *System_Logging_RemoteServer_HostPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/host with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_HostPath) Get(t testing.TB) string {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *System_Logging_RemoteServer_RemotePortPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/remote-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_RemotePortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -234,7 +234,7 @@ func (n *System_Logging_RemoteServer_SelectorPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SelectorPath) Get(t testing.TB) *oc.System_Logging_RemoteServer_Selector {
 	t.Helper()
@@ -323,7 +323,7 @@ func (n *System_Logging_RemoteServer_Selector_FacilityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/config/facility with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
 	t.Helper()
@@ -424,7 +424,7 @@ func (n *System_Logging_RemoteServer_Selector_SeverityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/config/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -525,7 +525,7 @@ func (n *System_Logging_RemoteServer_SourceAddressPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -626,7 +626,7 @@ func (n *System_LoginBannerPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/login-banner with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LoginBannerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -729,7 +729,7 @@ func (n *System_MemoryPath) Lookup(t testing.TB) *oc.QualifiedSystem_Memory {
 }
 
 // Get fetches the value at /openconfig-system/system/memory with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MemoryPath) Get(t testing.TB) *oc.System_Memory {
 	t.Helper()
@@ -820,7 +820,7 @@ func (n *System_MessagesPath) Lookup(t testing.TB) *oc.QualifiedSystem_Messages 
 }
 
 // Get fetches the value at /openconfig-system/system/messages with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MessagesPath) Get(t testing.TB) *oc.System_Messages {
 	t.Helper()
@@ -911,7 +911,7 @@ func (n *System_Messages_DebugServicePath) Lookup(t testing.TB) *oc.QualifiedSys
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugServicePath) Get(t testing.TB) *oc.System_Messages_DebugService {
 	t.Helper()
@@ -1002,7 +1002,7 @@ func (n *System_Messages_DebugService_EnabledPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugService_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1103,7 +1103,7 @@ func (n *System_Messages_DebugService_ServicePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service/config/service with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugService_ServicePath) Get(t testing.TB) oc.E_Messages_DEBUG_SERVICE {
 	t.Helper()
@@ -1204,7 +1204,7 @@ func (n *System_Messages_SeverityPath) Lookup(t testing.TB) *oc.QualifiedE_Syste
 }
 
 // Get fetches the value at /openconfig-system/system/messages/config/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -1305,7 +1305,7 @@ func (n *System_MotdBannerPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/motd-banner with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MotdBannerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1408,7 +1408,7 @@ func (n *System_NtpPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_NtpPath) Get(t testing.TB) *oc.System_Ntp {
 	t.Helper()
@@ -1499,7 +1499,7 @@ func (n *System_Ntp_EnableNtpAuthPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/config/enable-ntp-auth with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnableNtpAuthPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1602,7 +1602,7 @@ func (n *System_Ntp_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1705,7 +1705,7 @@ func (n *System_Ntp_NtpKeyPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp_Ntp
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKeyPath) Get(t testing.TB) *oc.System_Ntp_NtpKey {
 	t.Helper()
@@ -1794,7 +1794,7 @@ func (n *System_Ntp_NtpKey_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1895,7 +1895,7 @@ func (n *System_Ntp_NtpKey_KeyTypePath) Lookup(t testing.TB) *oc.QualifiedE_Syst
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyTypePath) Get(t testing.TB) oc.E_System_NTP_AUTH_TYPE {
 	t.Helper()
@@ -1996,7 +1996,7 @@ func (n *System_Ntp_NtpKey_KeyValuePath) Lookup(t testing.TB) *oc.QualifiedStrin
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyValuePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2097,7 +2097,7 @@ func (n *System_Ntp_NtpSourceAddressPath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/config/ntp-source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpSourceAddressPath) Get(t testing.TB) string {
 	t.Helper()

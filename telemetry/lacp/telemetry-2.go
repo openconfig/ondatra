@@ -31,7 +31,7 @@ func (n *Lacp_Interface_Member_CountersPath) Lookup(t testing.TB) *oc.QualifiedL
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_Member_CountersPath) Get(t testing.TB) *oc.Lacp_Interface_Member_Counters {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_Lacp_Interface_Member_CountersPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Lacp_Interface_Member_CountersWatcher{}
 	gs := &oc.Lacp_Interface_Member_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedLacp_Interface_Member_Counters{
+		qv := (&oc.QualifiedLacp_Interface_Member_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLacp_Interface_Member_Counters)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *Lacp_Interface_Member_CountersPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Lacp_Interface_Member_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLacp_Interface_Member_Counters) bool) *oc.Lacp_Interface_Member_CountersWatcher {
+	t.Helper()
+	w := &oc.Lacp_Interface_Member_CountersWatcher{}
+	structs := map[string]*oc.Lacp_Interface_Member_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface_Member_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface_Member_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLacp_Interface_Member_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLacp_Interface_Member_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *Lacp_Interface_Member_CountersPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_Member_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLacp_Interface_Member_Counters) bool) *oc.Lacp_Interface_Member_CountersWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_Member_CountersPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters to the batch object.
@@ -180,7 +211,7 @@ func (n *Lacp_Interface_Member_Counters_LacpErrorsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_Member_Counters_LacpErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_Lacp_Interface_Member_Counters_LacpErrorsPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lacp_Interface_Member_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member_Counters", gs, queryPath, true, false)
-		return convertLacp_Interface_Member_Counters_LacpErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLacp_Interface_Member_Counters_LacpErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *Lacp_Interface_Member_Counters_LacpErrorsPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Lacp_Interface_Member_Counters_LacpErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lacp_Interface_Member_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface_Member_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface_Member_Counters", structs[pre], queryPath, true, false)
+			qv := convertLacp_Interface_Member_Counters_LacpErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *Lacp_Interface_Member_Counters_LacpErrorsPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_Member_Counters_LacpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lacp_Interface_Member_Counters_LacpErrorsPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_Counters_LacpErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-errors to the batch object.
@@ -333,7 +392,7 @@ func (n *Lacp_Interface_Member_Counters_LacpInPktsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-in-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_Member_Counters_LacpInPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -387,10 +446,10 @@ func watch_Lacp_Interface_Member_Counters_LacpInPktsPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lacp_Interface_Member_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member_Counters", gs, queryPath, true, false)
-		return convertLacp_Interface_Member_Counters_LacpInPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLacp_Interface_Member_Counters_LacpInPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -443,6 +502,34 @@ func (n *Lacp_Interface_Member_Counters_LacpInPktsPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Lacp_Interface_Member_Counters_LacpInPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lacp_Interface_Member_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface_Member_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface_Member_Counters", structs[pre], queryPath, true, false)
+			qv := convertLacp_Interface_Member_Counters_LacpInPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-in-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +537,7 @@ func (n *Lacp_Interface_Member_Counters_LacpInPktsPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_Member_Counters_LacpInPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lacp_Interface_Member_Counters_LacpInPktsPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_Counters_LacpInPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-in-pkts to the batch object.
@@ -486,7 +573,7 @@ func (n *Lacp_Interface_Member_Counters_LacpOutPktsPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_Member_Counters_LacpOutPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -540,10 +627,10 @@ func watch_Lacp_Interface_Member_Counters_LacpOutPktsPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lacp_Interface_Member_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface_Member_Counters", gs, queryPath, true, false)
-		return convertLacp_Interface_Member_Counters_LacpOutPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLacp_Interface_Member_Counters_LacpOutPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -596,6 +683,34 @@ func (n *Lacp_Interface_Member_Counters_LacpOutPktsPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Lacp_Interface_Member_Counters_LacpOutPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lacp_Interface_Member_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface_Member_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface_Member_Counters", structs[pre], queryPath, true, false)
+			qv := convertLacp_Interface_Member_Counters_LacpOutPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-out-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -603,7 +718,7 @@ func (n *Lacp_Interface_Member_Counters_LacpOutPktsPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_Member_Counters_LacpOutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lacp_Interface_Member_Counters_LacpOutPktsPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_Member_Counters_LacpOutPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/members/member/state/counters/lacp-out-pkts to the batch object.
