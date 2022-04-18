@@ -83,54 +83,11 @@ func (n *DevicePath) BgpPeer(Name string) *opentrafficgeneratorbgp.BgpPeerPath {
 // Path from parent: "flows/flow"
 // Path from root: "/flows/flow"
 // Name (wildcarded): string
-// MetricGroup (wildcarded): string
 func (n *DevicePath) FlowAny() *opentrafficgeneratorflow.FlowPathAny {
 	return &opentrafficgeneratorflow.FlowPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"flows", "flow"},
-			map[string]interface{}{"name": "*", "metric-group": "*"},
-			n,
-		),
-	}
-}
-
-// FlowAnyMetricGroup (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "flows/flow"
-// Path from root: "/flows/flow"
-// Name: string
-// MetricGroup (wildcarded): string
-func (n *DevicePath) FlowAnyMetricGroup(Name string) *opentrafficgeneratorflow.FlowPathAny {
-	return &opentrafficgeneratorflow.FlowPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"flows", "flow"},
-			map[string]interface{}{"name": Name, "metric-group": "*"},
-			n,
-		),
-	}
-}
-
-// FlowAnyName (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "flows/flow"
-// Path from root: "/flows/flow"
-// Name (wildcarded): string
-// MetricGroup: string
-func (n *DevicePath) FlowAnyName(MetricGroup string) *opentrafficgeneratorflow.FlowPathAny {
-	return &opentrafficgeneratorflow.FlowPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"flows", "flow"},
-			map[string]interface{}{"name": "*", "metric-group": MetricGroup},
+			map[string]interface{}{"name": "*"},
 			n,
 		),
 	}
@@ -146,12 +103,11 @@ func (n *DevicePath) FlowAnyName(MetricGroup string) *opentrafficgeneratorflow.F
 // Path from parent: "flows/flow"
 // Path from root: "/flows/flow"
 // Name: string
-// MetricGroup: string
-func (n *DevicePath) Flow(Name string, MetricGroup string) *opentrafficgeneratorflow.FlowPath {
+func (n *DevicePath) Flow(Name string) *opentrafficgeneratorflow.FlowPath {
 	return &opentrafficgeneratorflow.FlowPath{
 		NodePath: ygot.NewNodePath(
 			[]string{"flows", "flow"},
-			map[string]interface{}{"name": Name, "metric-group": MetricGroup},
+			map[string]interface{}{"name": Name},
 			n,
 		),
 	}

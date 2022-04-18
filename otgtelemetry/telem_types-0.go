@@ -337,136 +337,6 @@ func (w *Flow_CountersWatcher) Await(t testing.TB) (*QualifiedFlow_Counters, boo
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedFlow_Enumeration is a *Flow_Enumeration with a corresponding timestamp.
-type QualifiedFlow_Enumeration struct {
-	*genutil.Metadata
-	val     *Flow_Enumeration // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedFlow_Enumeration) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Flow_Enumeration sample, erroring out if not present.
-func (q *QualifiedFlow_Enumeration) Val(t testing.TB) *Flow_Enumeration {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Flow_Enumeration sample.
-func (q *QualifiedFlow_Enumeration) SetVal(v *Flow_Enumeration) *QualifiedFlow_Enumeration {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedFlow_Enumeration) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionFlow_Enumeration is a telemetry Collection whose Await method returns a slice of *Flow_Enumeration samples.
-type CollectionFlow_Enumeration struct {
-	W    *Flow_EnumerationWatcher
-	Data []*QualifiedFlow_Enumeration
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionFlow_Enumeration) Await(t testing.TB) []*QualifiedFlow_Enumeration {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Flow_EnumerationWatcher observes a stream of *Flow_Enumeration samples.
-type Flow_EnumerationWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedFlow_Enumeration
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Flow_EnumerationWatcher) Await(t testing.TB) (*QualifiedFlow_Enumeration, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedFlow_Enumeration_Counters is a *Flow_Enumeration_Counters with a corresponding timestamp.
-type QualifiedFlow_Enumeration_Counters struct {
-	*genutil.Metadata
-	val     *Flow_Enumeration_Counters // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedFlow_Enumeration_Counters) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Flow_Enumeration_Counters sample, erroring out if not present.
-func (q *QualifiedFlow_Enumeration_Counters) Val(t testing.TB) *Flow_Enumeration_Counters {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Flow_Enumeration_Counters sample.
-func (q *QualifiedFlow_Enumeration_Counters) SetVal(v *Flow_Enumeration_Counters) *QualifiedFlow_Enumeration_Counters {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedFlow_Enumeration_Counters) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionFlow_Enumeration_Counters is a telemetry Collection whose Await method returns a slice of *Flow_Enumeration_Counters samples.
-type CollectionFlow_Enumeration_Counters struct {
-	W    *Flow_Enumeration_CountersWatcher
-	Data []*QualifiedFlow_Enumeration_Counters
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionFlow_Enumeration_Counters) Await(t testing.TB) []*QualifiedFlow_Enumeration_Counters {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Flow_Enumeration_CountersWatcher observes a stream of *Flow_Enumeration_Counters samples.
-type Flow_Enumeration_CountersWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedFlow_Enumeration_Counters
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Flow_Enumeration_CountersWatcher) Await(t testing.TB) (*QualifiedFlow_Enumeration_Counters, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedInterface is a *Interface with a corresponding timestamp.
 type QualifiedInterface struct {
 	*genutil.Metadata
@@ -593,6 +463,71 @@ type Interface_Ipv4NeighborWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Interface_Ipv4NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv4Neighbor, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedInterface_Ipv6Neighbor is a *Interface_Ipv6Neighbor with a corresponding timestamp.
+type QualifiedInterface_Ipv6Neighbor struct {
+	*genutil.Metadata
+	val     *Interface_Ipv6Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedInterface_Ipv6Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Interface_Ipv6Neighbor sample, erroring out if not present.
+func (q *QualifiedInterface_Ipv6Neighbor) Val(t testing.TB) *Interface_Ipv6Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Interface_Ipv6Neighbor sample.
+func (q *QualifiedInterface_Ipv6Neighbor) SetVal(v *Interface_Ipv6Neighbor) *QualifiedInterface_Ipv6Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedInterface_Ipv6Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionInterface_Ipv6Neighbor is a telemetry Collection whose Await method returns a slice of *Interface_Ipv6Neighbor samples.
+type CollectionInterface_Ipv6Neighbor struct {
+	W    *Interface_Ipv6NeighborWatcher
+	Data []*QualifiedInterface_Ipv6Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionInterface_Ipv6Neighbor) Await(t testing.TB) []*QualifiedInterface_Ipv6Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Interface_Ipv6NeighborWatcher observes a stream of *Interface_Ipv6Neighbor samples.
+type Interface_Ipv6NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedInterface_Ipv6Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Interface_Ipv6NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv6Neighbor, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

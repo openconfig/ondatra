@@ -1073,9 +1073,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "PWE_ETHERNET_RAW_MODE", DefiningModule: "openconfig-mpls-types"},
 		2: {Name: "PWE_ETHERNET_TAGGED_MODE", DefiningModule: "openconfig-mpls-types"},
 	},
-	"E_MplsTypes_RSVP_AUTH_TYPE": {
-		1: {Name: "RSVP_AUTH_MD5", DefiningModule: "openconfig-mpls-types"},
-	},
 	"E_MplsTypes_TUNNEL_ADMIN_STATUS": {
 		1: {Name: "ADMIN_DOWN", DefiningModule: "openconfig-mpls-types"},
 		2: {Name: "ADMIN_UP", DefiningModule: "openconfig-mpls-types"},
@@ -2116,9 +2113,6 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	},
 	"/network-instances/network-instance/mpls/signaling-protocols/ldp/targeted/address-families/address-family/state/afi-name": {
 		reflect.TypeOf((E_MplsLdp_MplsLdpAfi)(0)),
-	},
-	"/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/authentication-type": {
-		reflect.TypeOf((E_MplsTypes_RSVP_AUTH_TYPE)(0)),
 	},
 	"/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/bandwidth-reservations/bandwidth-reservation/state/priority": {
 		reflect.TypeOf((E_BandwidthReservation_Priority_Enum)(0)),

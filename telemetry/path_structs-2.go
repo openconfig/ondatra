@@ -7632,16 +7632,6 @@ type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_Aut
 	*ygot.NodePath
 }
 
-// NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/authentication-type YANG schema element.
-type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/authentication-type YANG schema element.
-type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny struct {
-	*ygot.NodePath
-}
-
 // NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_EnablePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/enable YANG schema element.
 type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_EnablePath struct {
 	*ygot.NodePath
@@ -7652,7 +7642,8 @@ type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_Ena
 	*ygot.NodePath
 }
 
-// AuthenticationKey (leaf): Authenticate RSVP signaling messages
+// AuthenticationKey (leaf): authenticate RSVP signaling
+// messages
 // ----------------------------------------
 // Defining module: "openconfig-mpls-rsvp"
 // Instantiating module: "openconfig-network-instance"
@@ -7668,7 +7659,8 @@ func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication
 	}
 }
 
-// AuthenticationKey (leaf): Authenticate RSVP signaling messages
+// AuthenticationKey (leaf): authenticate RSVP signaling
+// messages
 // ----------------------------------------
 // Defining module: "openconfig-mpls-rsvp"
 // Instantiating module: "openconfig-network-instance"
@@ -7678,38 +7670,6 @@ func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication
 	return &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationKeyPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "authentication-key"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AuthenticationType (leaf): RSVP message authentication algorithm type
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/authentication-type"
-// Path from root: "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/authentication-type"
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_AuthenticationPath) AuthenticationType() *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath {
-	return &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "authentication-type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AuthenticationType (leaf): RSVP message authentication algorithm type
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/authentication-type"
-// Path from root: "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/authentication/state/authentication-type"
-func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_AuthenticationPathAny) AuthenticationType() *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny {
-	return &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Authentication_AuthenticationTypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "authentication-type"},
 			map[string]interface{}{},
 			n,
 		),

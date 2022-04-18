@@ -18,12 +18,16 @@
 
 set -e
 
-go install github.com/openconfig/ygot/generator@latest
+go install github.com/openconfig/ygot/generator@v0.16.3
 rm -rf public models-yang gnmi-collector-metadata.yang
 git clone https://github.com/openconfig/public.git
+cd public
+git checkout 28630070cbf209399fdd1ce697aea052aeb2fec4
+cd ..
+
 git clone https://github.com/open-traffic-generator/models-yang.git
 cd models-yang
-git checkout 4fa6d95
+git checkout 8ae9adf
 cd ..
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 

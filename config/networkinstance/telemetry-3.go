@@ -15,6 +15,210 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send-max in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath extracts the value of the leaf SendMax from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendMaxPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.SendMax
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetSend())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription,
+// failing the test fatally is no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/add-paths/config/send in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath extracts the value of the leaf Send from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths_SendPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AddPaths) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Send
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/config/afi-safi-name with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_AfiSafiNamePath) Lookup(t testing.TB) *oc.QualifiedE_BgpTypes_AFI_SAFI_TYPE {
@@ -24599,297 +24803,4 @@ func convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath(t t
 		qv.SetVal(*val)
 	}
 	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath extracts the value of the leaf PostSessionUpDelay from its parent oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.PostSessionUpDelay
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_NetPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Get(t testing.TB) []string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedStringSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_NetPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPathAny) Get(t testing.TB) [][]string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Update(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_NetPath extracts the value of the leaf Net from its parent oc.NetworkInstance_Protocol_Isis_Global
-// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
-func convertNetworkInstance_Protocol_Isis_Global_NetPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global) *oc.QualifiedStringSlice {
-	t.Helper()
-	qv := &oc.QualifiedStringSlice{
-		Metadata: md,
-	}
-	val := parent.Net
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_Nsr
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
 }

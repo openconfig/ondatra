@@ -61,16 +61,6 @@ type Flow_LossPctPathAny struct {
 	*ygot.NodePath
 }
 
-// Flow_MetricGroupPath represents the /open-traffic-generator-flow/flows/flow/state/metric-group YANG schema element.
-type Flow_MetricGroupPath struct {
-	*ygot.NodePath
-}
-
-// Flow_MetricGroupPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/metric-group YANG schema element.
-type Flow_MetricGroupPathAny struct {
-	*ygot.NodePath
-}
-
 // Flow_NamePath represents the /open-traffic-generator-flow/flows/flow/state/name YANG schema element.
 type Flow_NamePath struct {
 	*ygot.NodePath
@@ -101,6 +91,16 @@ type Flow_OutRatePathAny struct {
 	*ygot.NodePath
 }
 
+// Flow_TransmitPath represents the /open-traffic-generator-flow/flows/flow/state/transmit YANG schema element.
+type Flow_TransmitPath struct {
+	*ygot.NodePath
+}
+
+// Flow_TransmitPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/transmit YANG schema element.
+type Flow_TransmitPathAny struct {
+	*ygot.NodePath
+}
+
 // Counters (container): Counters that correspond to the individual flow.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-flow"
@@ -128,86 +128,6 @@ func (n *FlowPathAny) Counters() *Flow_CountersPathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "counters"},
 			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// EnumerationAny (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "enumerations/enumeration"
-// Path from root: "/flows/flow/enumerations/enumeration"
-// Name (wildcarded): string
-func (n *FlowPath) EnumerationAny() *Flow_EnumerationPathAny {
-	return &Flow_EnumerationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"enumerations", "enumeration"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// EnumerationAny (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "enumerations/enumeration"
-// Path from root: "/flows/flow/enumerations/enumeration"
-// Name (wildcarded): string
-func (n *FlowPathAny) EnumerationAny() *Flow_EnumerationPathAny {
-	return &Flow_EnumerationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"enumerations", "enumeration"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// Enumeration (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "enumerations/enumeration"
-// Path from root: "/flows/flow/enumerations/enumeration"
-// Name: string
-func (n *FlowPath) Enumeration(Name string) *Flow_EnumerationPath {
-	return &Flow_EnumerationPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"enumerations", "enumeration"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// Enumeration (list): A flow of packets between one or more internal and external sources
-// and one or more internal and external destinations that the target
-// is able to track and report statistics on. Each flow is identified by
-// an arbitrary string identifier.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "enumerations/enumeration"
-// Path from root: "/flows/flow/enumerations/enumeration"
-// Name: string
-func (n *FlowPathAny) Enumeration(Name string) *Flow_EnumerationPathAny {
-	return &Flow_EnumerationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"enumerations", "enumeration"},
-			map[string]interface{}{"name": Name},
 			n,
 		),
 	}
@@ -315,38 +235,6 @@ func (n *FlowPathAny) LossPct() *Flow_LossPctPathAny {
 	}
 }
 
-// MetricGroup (leaf): Any metric groups and filters
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/metric-group"
-// Path from root: "/flows/flow/state/metric-group"
-func (n *FlowPath) MetricGroup() *Flow_MetricGroupPath {
-	return &Flow_MetricGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MetricGroup (leaf): Any metric groups and filters
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/metric-group"
-// Path from root: "/flows/flow/state/metric-group"
-func (n *FlowPathAny) MetricGroup() *Flow_MetricGroupPathAny {
-	return &Flow_MetricGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
 // Name (leaf): An arbitary name used for the flow tracked by the system. This
 // name must be unique for the flows tracked and exported by the target.
 // ----------------------------------------
@@ -443,6 +331,38 @@ func (n *FlowPathAny) OutRate() *Flow_OutRatePathAny {
 	return &Flow_OutRatePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "out-rate"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transmit (leaf): Whether or not the flow is transmitting
+// ----------------------------------------
+// Defining module: "open-traffic-generator-flow"
+// Instantiating module: "open-traffic-generator-flow"
+// Path from parent: "state/transmit"
+// Path from root: "/flows/flow/state/transmit"
+func (n *FlowPath) Transmit() *Flow_TransmitPath {
+	return &Flow_TransmitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transmit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transmit (leaf): Whether or not the flow is transmitting
+// ----------------------------------------
+// Defining module: "open-traffic-generator-flow"
+// Instantiating module: "open-traffic-generator-flow"
+// Path from parent: "state/transmit"
+// Path from root: "/flows/flow/state/transmit"
+func (n *FlowPathAny) Transmit() *Flow_TransmitPathAny {
+	return &Flow_TransmitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transmit"},
 			map[string]interface{}{},
 			n,
 		),
@@ -623,536 +543,6 @@ func (n *Flow_CountersPath) OutPkts() *Flow_Counters_OutPktsPath {
 // Path from root: "/flows/flow/state/counters/out-pkts"
 func (n *Flow_CountersPathAny) OutPkts() *Flow_Counters_OutPktsPathAny {
 	return &Flow_Counters_OutPktsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flow_EnumerationPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration YANG schema element.
-type Flow_EnumerationPath struct {
-	*ygot.NodePath
-}
-
-// Flow_EnumerationPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration YANG schema element.
-type Flow_EnumerationPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_InFrameRatePath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/in-frame-rate YANG schema element.
-type Flow_Enumeration_InFrameRatePath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_InFrameRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/in-frame-rate YANG schema element.
-type Flow_Enumeration_InFrameRatePathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_InRatePath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/in-rate YANG schema element.
-type Flow_Enumeration_InRatePath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_InRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/in-rate YANG schema element.
-type Flow_Enumeration_InRatePathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_LossPctPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/loss-pct YANG schema element.
-type Flow_Enumeration_LossPctPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_LossPctPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/loss-pct YANG schema element.
-type Flow_Enumeration_LossPctPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_MetricGroupPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/metric-group YANG schema element.
-type Flow_Enumeration_MetricGroupPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_MetricGroupPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/metric-group YANG schema element.
-type Flow_Enumeration_MetricGroupPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_NamePath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/name YANG schema element.
-type Flow_Enumeration_NamePath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_NamePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/name YANG schema element.
-type Flow_Enumeration_NamePathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_OutFrameRatePath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/out-frame-rate YANG schema element.
-type Flow_Enumeration_OutFrameRatePath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_OutFrameRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/out-frame-rate YANG schema element.
-type Flow_Enumeration_OutFrameRatePathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_OutRatePath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/out-rate YANG schema element.
-type Flow_Enumeration_OutRatePath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_OutRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/out-rate YANG schema element.
-type Flow_Enumeration_OutRatePathAny struct {
-	*ygot.NodePath
-}
-
-// Counters (container): Counters that correspond to the individual flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/counters"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters"
-func (n *Flow_EnumerationPath) Counters() *Flow_Enumeration_CountersPath {
-	return &Flow_Enumeration_CountersPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "counters"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Counters (container): Counters that correspond to the individual flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/counters"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters"
-func (n *Flow_EnumerationPathAny) Counters() *Flow_Enumeration_CountersPathAny {
-	return &Flow_Enumeration_CountersPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "counters"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InFrameRate (leaf): The rate, measured in frames per second, at which frames are being
-// received for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/in-frame-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/in-frame-rate"
-func (n *Flow_EnumerationPath) InFrameRate() *Flow_Enumeration_InFrameRatePath {
-	return &Flow_Enumeration_InFrameRatePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "in-frame-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InFrameRate (leaf): The rate, measured in frames per second, at which frames are being
-// received for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/in-frame-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/in-frame-rate"
-func (n *Flow_EnumerationPathAny) InFrameRate() *Flow_Enumeration_InFrameRatePathAny {
-	return &Flow_Enumeration_InFrameRatePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "in-frame-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InRate (leaf): The rate, measured in bits per second, at which the flow is being
-// received.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/in-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/in-rate"
-func (n *Flow_EnumerationPath) InRate() *Flow_Enumeration_InRatePath {
-	return &Flow_Enumeration_InRatePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "in-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InRate (leaf): The rate, measured in bits per second, at which the flow is being
-// received.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/in-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/in-rate"
-func (n *Flow_EnumerationPathAny) InRate() *Flow_Enumeration_InRatePathAny {
-	return &Flow_Enumeration_InRatePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "in-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LossPct (leaf): The percentage of transmitted packets that were not received by the
-// destinations of the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/loss-pct"
-// Path from root: "/flows/flow/enumerations/enumeration/state/loss-pct"
-func (n *Flow_EnumerationPath) LossPct() *Flow_Enumeration_LossPctPath {
-	return &Flow_Enumeration_LossPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "loss-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// LossPct (leaf): The percentage of transmitted packets that were not received by the
-// destinations of the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/loss-pct"
-// Path from root: "/flows/flow/enumerations/enumeration/state/loss-pct"
-func (n *Flow_EnumerationPathAny) LossPct() *Flow_Enumeration_LossPctPathAny {
-	return &Flow_Enumeration_LossPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "loss-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MetricGroup (leaf): Any metric groups and filters
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/metric-group"
-// Path from root: "/flows/flow/enumerations/enumeration/state/metric-group"
-func (n *Flow_EnumerationPath) MetricGroup() *Flow_Enumeration_MetricGroupPath {
-	return &Flow_Enumeration_MetricGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MetricGroup (leaf): Any metric groups and filters
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/metric-group"
-// Path from root: "/flows/flow/enumerations/enumeration/state/metric-group"
-func (n *Flow_EnumerationPathAny) MetricGroup() *Flow_Enumeration_MetricGroupPathAny {
-	return &Flow_Enumeration_MetricGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): An arbitary name used for the flow tracked by the system. This
-// name must be unique for the flows tracked and exported by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/name"
-// Path from root: "/flows/flow/enumerations/enumeration/state/name"
-func (n *Flow_EnumerationPath) Name() *Flow_Enumeration_NamePath {
-	return &Flow_Enumeration_NamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): An arbitary name used for the flow tracked by the system. This
-// name must be unique for the flows tracked and exported by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/name"
-// Path from root: "/flows/flow/enumerations/enumeration/state/name"
-func (n *Flow_EnumerationPathAny) Name() *Flow_Enumeration_NamePathAny {
-	return &Flow_Enumeration_NamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutFrameRate (leaf): The rate, measured in frames per second, at which frames are being
-// transmitted for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/out-frame-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/out-frame-rate"
-func (n *Flow_EnumerationPath) OutFrameRate() *Flow_Enumeration_OutFrameRatePath {
-	return &Flow_Enumeration_OutFrameRatePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "out-frame-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutFrameRate (leaf): The rate, measured in frames per second, at which frames are being
-// transmitted for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/out-frame-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/out-frame-rate"
-func (n *Flow_EnumerationPathAny) OutFrameRate() *Flow_Enumeration_OutFrameRatePathAny {
-	return &Flow_Enumeration_OutFrameRatePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "out-frame-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutRate (leaf): The rate, measured in bits per second, at which the flow is being
-// transmitted.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/out-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/out-rate"
-func (n *Flow_EnumerationPath) OutRate() *Flow_Enumeration_OutRatePath {
-	return &Flow_Enumeration_OutRatePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "out-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutRate (leaf): The rate, measured in bits per second, at which the flow is being
-// transmitted.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "state/out-rate"
-// Path from root: "/flows/flow/enumerations/enumeration/state/out-rate"
-func (n *Flow_EnumerationPathAny) OutRate() *Flow_Enumeration_OutRatePathAny {
-	return &Flow_Enumeration_OutRatePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "out-rate"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flow_Enumeration_CountersPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters YANG schema element.
-type Flow_Enumeration_CountersPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_CountersPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters YANG schema element.
-type Flow_Enumeration_CountersPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InOctetsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-octets YANG schema element.
-type Flow_Enumeration_Counters_InOctetsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-octets YANG schema element.
-type Flow_Enumeration_Counters_InOctetsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InPktsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-pkts YANG schema element.
-type Flow_Enumeration_Counters_InPktsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-pkts YANG schema element.
-type Flow_Enumeration_Counters_InPktsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutOctetsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-octets YANG schema element.
-type Flow_Enumeration_Counters_OutOctetsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-octets YANG schema element.
-type Flow_Enumeration_Counters_OutOctetsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutPktsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-pkts YANG schema element.
-type Flow_Enumeration_Counters_OutPktsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-pkts YANG schema element.
-type Flow_Enumeration_Counters_OutPktsPathAny struct {
-	*ygot.NodePath
-}
-
-// InOctets (leaf): The total number of bytes received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-octets"
-func (n *Flow_Enumeration_CountersPath) InOctets() *Flow_Enumeration_Counters_InOctetsPath {
-	return &Flow_Enumeration_Counters_InOctetsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InOctets (leaf): The total number of bytes received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-octets"
-func (n *Flow_Enumeration_CountersPathAny) InOctets() *Flow_Enumeration_Counters_InOctetsPathAny {
-	return &Flow_Enumeration_Counters_InOctetsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InPkts (leaf): The total number of packets received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-pkts"
-func (n *Flow_Enumeration_CountersPath) InPkts() *Flow_Enumeration_Counters_InPktsPath {
-	return &Flow_Enumeration_Counters_InPktsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InPkts (leaf): The total number of packets received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-pkts"
-func (n *Flow_Enumeration_CountersPathAny) InPkts() *Flow_Enumeration_Counters_InPktsPathAny {
-	return &Flow_Enumeration_Counters_InPktsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-octets"
-func (n *Flow_Enumeration_CountersPath) OutOctets() *Flow_Enumeration_Counters_OutOctetsPath {
-	return &Flow_Enumeration_Counters_OutOctetsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-octets"
-func (n *Flow_Enumeration_CountersPathAny) OutOctets() *Flow_Enumeration_Counters_OutOctetsPathAny {
-	return &Flow_Enumeration_Counters_OutOctetsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutPkts (leaf): The total number of packets sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-pkts"
-func (n *Flow_Enumeration_CountersPath) OutPkts() *Flow_Enumeration_Counters_OutPktsPath {
-	return &Flow_Enumeration_Counters_OutPktsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutPkts (leaf): The total number of packets sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-pkts"
-func (n *Flow_Enumeration_CountersPathAny) OutPkts() *Flow_Enumeration_Counters_OutPktsPathAny {
-	return &Flow_Enumeration_Counters_OutPktsPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"out-pkts"},
 			map[string]interface{}{},

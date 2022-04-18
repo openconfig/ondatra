@@ -3587,71 +3587,6 @@ func (w *E_MplsTypes_PSEUDOWIRE_ENCAPSULATIONWatcher) Await(t testing.TB) (*Qual
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedE_MplsTypes_RSVP_AUTH_TYPE is a E_MplsTypes_RSVP_AUTH_TYPE with a corresponding timestamp.
-type QualifiedE_MplsTypes_RSVP_AUTH_TYPE struct {
-	*genutil.Metadata
-	val     E_MplsTypes_RSVP_AUTH_TYPE // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_MplsTypes_RSVP_AUTH_TYPE) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_MplsTypes_RSVP_AUTH_TYPE sample, erroring out if not present.
-func (q *QualifiedE_MplsTypes_RSVP_AUTH_TYPE) Val(t testing.TB) E_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_MplsTypes_RSVP_AUTH_TYPE sample.
-func (q *QualifiedE_MplsTypes_RSVP_AUTH_TYPE) SetVal(v E_MplsTypes_RSVP_AUTH_TYPE) *QualifiedE_MplsTypes_RSVP_AUTH_TYPE {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_MplsTypes_RSVP_AUTH_TYPE) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_MplsTypes_RSVP_AUTH_TYPE is a telemetry Collection whose Await method returns a slice of E_MplsTypes_RSVP_AUTH_TYPE samples.
-type CollectionE_MplsTypes_RSVP_AUTH_TYPE struct {
-	W    *E_MplsTypes_RSVP_AUTH_TYPEWatcher
-	Data []*QualifiedE_MplsTypes_RSVP_AUTH_TYPE
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_MplsTypes_RSVP_AUTH_TYPE) Await(t testing.TB) []*QualifiedE_MplsTypes_RSVP_AUTH_TYPE {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_MplsTypes_RSVP_AUTH_TYPEWatcher observes a stream of E_MplsTypes_RSVP_AUTH_TYPE samples.
-type E_MplsTypes_RSVP_AUTH_TYPEWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_MplsTypes_RSVP_AUTH_TYPE
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_MplsTypes_RSVP_AUTH_TYPEWatcher) Await(t testing.TB) (*QualifiedE_MplsTypes_RSVP_AUTH_TYPE, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedE_MplsTypes_TUNNEL_ADMIN_STATUS is a E_MplsTypes_TUNNEL_ADMIN_STATUS with a corresponding timestamp.
 type QualifiedE_MplsTypes_TUNNEL_ADMIN_STATUS struct {
 	*genutil.Metadata
@@ -8848,6 +8783,71 @@ type E_Types_ADDRESS_FAMILYWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Types_ADDRESS_FAMILYWatcher) Await(t testing.TB) (*QualifiedE_Types_ADDRESS_FAMILY, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_VlanTypes_TPID_TYPES is a E_VlanTypes_TPID_TYPES with a corresponding timestamp.
+type QualifiedE_VlanTypes_TPID_TYPES struct {
+	*genutil.Metadata
+	val     E_VlanTypes_TPID_TYPES // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_VlanTypes_TPID_TYPES) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_VlanTypes_TPID_TYPES sample, erroring out if not present.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) Val(t testing.TB) E_VlanTypes_TPID_TYPES {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_VlanTypes_TPID_TYPES sample.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) SetVal(v E_VlanTypes_TPID_TYPES) *QualifiedE_VlanTypes_TPID_TYPES {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_VlanTypes_TPID_TYPES is a telemetry Collection whose Await method returns a slice of E_VlanTypes_TPID_TYPES samples.
+type CollectionE_VlanTypes_TPID_TYPES struct {
+	W    *E_VlanTypes_TPID_TYPESWatcher
+	Data []*QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_VlanTypes_TPID_TYPES) Await(t testing.TB) []*QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_VlanTypes_TPID_TYPESWatcher observes a stream of E_VlanTypes_TPID_TYPES samples.
+type E_VlanTypes_TPID_TYPESWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_VlanTypes_TPID_TYPESWatcher) Await(t testing.TB) (*QualifiedE_VlanTypes_TPID_TYPES, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

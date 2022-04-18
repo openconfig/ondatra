@@ -4603,33 +4603,6 @@ const (
 	MplsTypes_PSEUDOWIRE_ENCAPSULATION_PWE_ETHERNET_TAGGED_MODE E_MplsTypes_PSEUDOWIRE_ENCAPSULATION = 2
 )
 
-// E_MplsTypes_RSVP_AUTH_TYPE is a derived int64 type which is used to represent
-// the enumerated node MplsTypes_RSVP_AUTH_TYPE. An additional value named
-// MplsTypes_RSVP_AUTH_TYPE_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_MplsTypes_RSVP_AUTH_TYPE int64
-
-// IsYANGGoEnum ensures that MplsTypes_RSVP_AUTH_TYPE implements the yang.GoEnum
-// interface. This ensures that MplsTypes_RSVP_AUTH_TYPE can be identified as a
-// mapped type for a YANG enumeration.
-func (E_MplsTypes_RSVP_AUTH_TYPE) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  MplsTypes_RSVP_AUTH_TYPE.
-func (E_MplsTypes_RSVP_AUTH_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_MplsTypes_RSVP_AUTH_TYPE.
-func (e E_MplsTypes_RSVP_AUTH_TYPE) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_MplsTypes_RSVP_AUTH_TYPE")
-}
-
-const (
-	// MplsTypes_RSVP_AUTH_TYPE_UNSET corresponds to the value UNSET of MplsTypes_RSVP_AUTH_TYPE
-	MplsTypes_RSVP_AUTH_TYPE_UNSET E_MplsTypes_RSVP_AUTH_TYPE = 0
-	// MplsTypes_RSVP_AUTH_TYPE_RSVP_AUTH_MD5 corresponds to the value RSVP_AUTH_MD5 of MplsTypes_RSVP_AUTH_TYPE
-	MplsTypes_RSVP_AUTH_TYPE_RSVP_AUTH_MD5 E_MplsTypes_RSVP_AUTH_TYPE = 1
-)
-
 // E_MplsTypes_TUNNEL_ADMIN_STATUS is a derived int64 type which is used to represent
 // the enumerated node MplsTypes_TUNNEL_ADMIN_STATUS. An additional value named
 // MplsTypes_TUNNEL_ADMIN_STATUS_UNSET is added to the enumeration which is used as

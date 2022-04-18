@@ -21,378 +21,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// Flow_Enumeration_CountersPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters YANG schema element.
-type Flow_Enumeration_CountersPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_CountersPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters YANG schema element.
-type Flow_Enumeration_CountersPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InOctetsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-octets YANG schema element.
-type Flow_Enumeration_Counters_InOctetsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-octets YANG schema element.
-type Flow_Enumeration_Counters_InOctetsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InPktsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-pkts YANG schema element.
-type Flow_Enumeration_Counters_InPktsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_InPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/in-pkts YANG schema element.
-type Flow_Enumeration_Counters_InPktsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutOctetsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-octets YANG schema element.
-type Flow_Enumeration_Counters_OutOctetsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-octets YANG schema element.
-type Flow_Enumeration_Counters_OutOctetsPathAny struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutPktsPath represents the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-pkts YANG schema element.
-type Flow_Enumeration_Counters_OutPktsPath struct {
-	*ygot.NodePath
-}
-
-// Flow_Enumeration_Counters_OutPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/enumerations/enumeration/state/counters/out-pkts YANG schema element.
-type Flow_Enumeration_Counters_OutPktsPathAny struct {
-	*ygot.NodePath
-}
-
-// InOctets (leaf): The total number of bytes received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-octets"
-func (n *Flow_Enumeration_CountersPath) InOctets() *Flow_Enumeration_Counters_InOctetsPath {
-	return &Flow_Enumeration_Counters_InOctetsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InOctets (leaf): The total number of bytes received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-octets"
-func (n *Flow_Enumeration_CountersPathAny) InOctets() *Flow_Enumeration_Counters_InOctetsPathAny {
-	return &Flow_Enumeration_Counters_InOctetsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InPkts (leaf): The total number of packets received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-pkts"
-func (n *Flow_Enumeration_CountersPath) InPkts() *Flow_Enumeration_Counters_InPktsPath {
-	return &Flow_Enumeration_Counters_InPktsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InPkts (leaf): The total number of packets received by the target for the flow.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "in-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/in-pkts"
-func (n *Flow_Enumeration_CountersPathAny) InPkts() *Flow_Enumeration_Counters_InPktsPathAny {
-	return &Flow_Enumeration_Counters_InPktsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"in-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-octets"
-func (n *Flow_Enumeration_CountersPath) OutOctets() *Flow_Enumeration_Counters_OutOctetsPath {
-	return &Flow_Enumeration_Counters_OutOctetsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-octets"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-octets"
-func (n *Flow_Enumeration_CountersPathAny) OutOctets() *Flow_Enumeration_Counters_OutOctetsPathAny {
-	return &Flow_Enumeration_Counters_OutOctetsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-octets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutPkts (leaf): The total number of packets sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-pkts"
-func (n *Flow_Enumeration_CountersPath) OutPkts() *Flow_Enumeration_Counters_OutPktsPath {
-	return &Flow_Enumeration_Counters_OutPktsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OutPkts (leaf): The total number of packets sent by the target for the flow. These
-// packets may be generated or forwarded by the target.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-flow"
-// Instantiating module: "open-traffic-generator-flow"
-// Path from parent: "out-pkts"
-// Path from root: "/flows/flow/enumerations/enumeration/state/counters/out-pkts"
-func (n *Flow_Enumeration_CountersPathAny) OutPkts() *Flow_Enumeration_Counters_OutPktsPathAny {
-	return &Flow_Enumeration_Counters_OutPktsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"out-pkts"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// InterfacePath represents the /open-traffic-generator-discovery/interfaces/interface YANG schema element.
-type InterfacePath struct {
-	*ygot.NodePath
-}
-
-// InterfacePathAny represents the wildcard version of the /open-traffic-generator-discovery/interfaces/interface YANG schema element.
-type InterfacePathAny struct {
-	*ygot.NodePath
-}
-
-// Interface_NamePath represents the /open-traffic-generator-discovery/interfaces/interface/state/name YANG schema element.
-type Interface_NamePath struct {
-	*ygot.NodePath
-}
-
-// Interface_NamePathAny represents the wildcard version of the /open-traffic-generator-discovery/interfaces/interface/state/name YANG schema element.
-type Interface_NamePathAny struct {
-	*ygot.NodePath
-}
-
-// Ipv4NeighborAny (list): The interface neighbor state or ARP cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv4-neighbors/ipv4-neighbor"
-// Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
-// Ipv4Address (wildcarded): string
-func (n *InterfacePath) Ipv4NeighborAny() *Interface_Ipv4NeighborPathAny {
-	return &Interface_Ipv4NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-neighbors", "ipv4-neighbor"},
-			map[string]interface{}{"ipv4-address": "*"},
-			n,
-		),
-	}
-}
-
-// Ipv4NeighborAny (list): The interface neighbor state or ARP cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv4-neighbors/ipv4-neighbor"
-// Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
-// Ipv4Address (wildcarded): string
-func (n *InterfacePathAny) Ipv4NeighborAny() *Interface_Ipv4NeighborPathAny {
-	return &Interface_Ipv4NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-neighbors", "ipv4-neighbor"},
-			map[string]interface{}{"ipv4-address": "*"},
-			n,
-		),
-	}
-}
-
-// Ipv4Neighbor (list): The interface neighbor state or ARP cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv4-neighbors/ipv4-neighbor"
-// Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
-// Ipv4Address: string
-func (n *InterfacePath) Ipv4Neighbor(Ipv4Address string) *Interface_Ipv4NeighborPath {
-	return &Interface_Ipv4NeighborPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-neighbors", "ipv4-neighbor"},
-			map[string]interface{}{"ipv4-address": Ipv4Address},
-			n,
-		),
-	}
-}
-
-// Ipv4Neighbor (list): The interface neighbor state or ARP cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv4-neighbors/ipv4-neighbor"
-// Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
-// Ipv4Address: string
-func (n *InterfacePathAny) Ipv4Neighbor(Ipv4Address string) *Interface_Ipv4NeighborPathAny {
-	return &Interface_Ipv4NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-neighbors", "ipv4-neighbor"},
-			map[string]interface{}{"ipv4-address": Ipv4Address},
-			n,
-		),
-	}
-}
-
-// Ipv6NeighborAny (list): The interface neighbor state or NDISC cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv6-neighbors/ipv6-neighbor"
-// Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
-// Ipv6Address (wildcarded): string
-func (n *InterfacePath) Ipv6NeighborAny() *Interface_Ipv6NeighborPathAny {
-	return &Interface_Ipv6NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-neighbors", "ipv6-neighbor"},
-			map[string]interface{}{"ipv6-address": "*"},
-			n,
-		),
-	}
-}
-
-// Ipv6NeighborAny (list): The interface neighbor state or NDISC cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv6-neighbors/ipv6-neighbor"
-// Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
-// Ipv6Address (wildcarded): string
-func (n *InterfacePathAny) Ipv6NeighborAny() *Interface_Ipv6NeighborPathAny {
-	return &Interface_Ipv6NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-neighbors", "ipv6-neighbor"},
-			map[string]interface{}{"ipv6-address": "*"},
-			n,
-		),
-	}
-}
-
-// Ipv6Neighbor (list): The interface neighbor state or NDISC cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv6-neighbors/ipv6-neighbor"
-// Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
-// Ipv6Address: string
-func (n *InterfacePath) Ipv6Neighbor(Ipv6Address string) *Interface_Ipv6NeighborPath {
-	return &Interface_Ipv6NeighborPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-neighbors", "ipv6-neighbor"},
-			map[string]interface{}{"ipv6-address": Ipv6Address},
-			n,
-		),
-	}
-}
-
-// Ipv6Neighbor (list): The interface neighbor state or NDISC cache entry.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "ipv6-neighbors/ipv6-neighbor"
-// Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
-// Ipv6Address: string
-func (n *InterfacePathAny) Ipv6Neighbor(Ipv6Address string) *Interface_Ipv6NeighborPathAny {
-	return &Interface_Ipv6NeighborPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-neighbors", "ipv6-neighbor"},
-			map[string]interface{}{"ipv6-address": Ipv6Address},
-			n,
-		),
-	}
-}
-
-// Name (leaf): An arbitary name of an OTG interface determined by the OTG
-// configuration.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "state/name"
-// Path from root: "/interfaces/interface/state/name"
-func (n *InterfacePath) Name() *Interface_NamePath {
-	return &Interface_NamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): An arbitary name of an OTG interface determined by the OTG
-// configuration.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
-// Instantiating module: "open-traffic-generator-discovery"
-// Path from parent: "state/name"
-// Path from root: "/interfaces/interface/state/name"
-func (n *InterfacePathAny) Name() *Interface_NamePathAny {
-	return &Interface_NamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
 // Interface_Ipv4NeighborPath represents the /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor YANG schema element.
 type Interface_Ipv4NeighborPath struct {
 	*ygot.NodePath
@@ -735,6 +363,1154 @@ func (n *IsisRouter_CountersPathAny) Level2() *IsisRouter_Counters_Level2PathAny
 	return &IsisRouter_Counters_Level2PathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"level2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_Counters_Level1Path represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1 YANG schema element.
+type IsisRouter_Counters_Level1Path struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1PathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1 YANG schema element.
+type IsisRouter_Counters_Level1PathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_DatabaseSizePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/database-size YANG schema element.
+type IsisRouter_Counters_Level1_DatabaseSizePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_DatabaseSizePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/database-size YANG schema element.
+type IsisRouter_Counters_Level1_DatabaseSizePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InBcastHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level1_InBcastHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InBcastHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level1_InBcastHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InCsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-csnp YANG schema element.
+type IsisRouter_Counters_Level1_InCsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InCsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-csnp YANG schema element.
+type IsisRouter_Counters_Level1_InCsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InLspPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-lsp YANG schema element.
+type IsisRouter_Counters_Level1_InLspPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InLspPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-lsp YANG schema element.
+type IsisRouter_Counters_Level1_InLspPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InP2PHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level1_InP2PHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InP2PHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level1_InP2PHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InPsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-psnp YANG schema element.
+type IsisRouter_Counters_Level1_InPsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_InPsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/in-psnp YANG schema element.
+type IsisRouter_Counters_Level1_InPsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutBcastHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level1_OutBcastHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutBcastHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level1_OutBcastHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutCsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-csnp YANG schema element.
+type IsisRouter_Counters_Level1_OutCsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutCsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-csnp YANG schema element.
+type IsisRouter_Counters_Level1_OutCsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutLspPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-lsp YANG schema element.
+type IsisRouter_Counters_Level1_OutLspPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutLspPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-lsp YANG schema element.
+type IsisRouter_Counters_Level1_OutLspPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutP2PHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level1_OutP2PHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutP2PHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level1_OutP2PHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutPsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-psnp YANG schema element.
+type IsisRouter_Counters_Level1_OutPsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_OutPsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-psnp YANG schema element.
+type IsisRouter_Counters_Level1_OutPsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_SessionsFlapPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-flap YANG schema element.
+type IsisRouter_Counters_Level1_SessionsFlapPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_SessionsFlapPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-flap YANG schema element.
+type IsisRouter_Counters_Level1_SessionsFlapPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_SessionsUpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-up YANG schema element.
+type IsisRouter_Counters_Level1_SessionsUpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level1_SessionsUpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-up YANG schema element.
+type IsisRouter_Counters_Level1_SessionsUpPathAny struct {
+	*ygot.NodePath
+}
+
+// DatabaseSize (leaf): The total number of link stOTG updOTGs (LSPs) in the LSP
+// databases.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "database-size"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/database-size"
+func (n *IsisRouter_Counters_Level1Path) DatabaseSize() *IsisRouter_Counters_Level1_DatabaseSizePath {
+	return &IsisRouter_Counters_Level1_DatabaseSizePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"database-size"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DatabaseSize (leaf): The total number of link stOTG updOTGs (LSPs) in the LSP
+// databases.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "database-size"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/database-size"
+func (n *IsisRouter_Counters_Level1PathAny) DatabaseSize() *IsisRouter_Counters_Level1_DatabaseSizePathAny {
+	return &IsisRouter_Counters_Level1_DatabaseSizePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"database-size"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InBcastHellos (leaf): The total number of broacast HELLO messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-bcast-hellos"
+func (n *IsisRouter_Counters_Level1Path) InBcastHellos() *IsisRouter_Counters_Level1_InBcastHellosPath {
+	return &IsisRouter_Counters_Level1_InBcastHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InBcastHellos (leaf): The total number of broacast HELLO messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-bcast-hellos"
+func (n *IsisRouter_Counters_Level1PathAny) InBcastHellos() *IsisRouter_Counters_Level1_InBcastHellosPathAny {
+	return &IsisRouter_Counters_Level1_InBcastHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-csnp"
+func (n *IsisRouter_Counters_Level1Path) InCsnp() *IsisRouter_Counters_Level1_InCsnpPath {
+	return &IsisRouter_Counters_Level1_InCsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-csnp"
+func (n *IsisRouter_Counters_Level1PathAny) InCsnp() *IsisRouter_Counters_Level1_InCsnpPathAny {
+	return &IsisRouter_Counters_Level1_InCsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-lsp"
+func (n *IsisRouter_Counters_Level1Path) InLsp() *IsisRouter_Counters_Level1_InLspPath {
+	return &IsisRouter_Counters_Level1_InLspPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-lsp"
+func (n *IsisRouter_Counters_Level1PathAny) InLsp() *IsisRouter_Counters_Level1_InLspPathAny {
+	return &IsisRouter_Counters_Level1_InLspPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-p2p-hellos"
+func (n *IsisRouter_Counters_Level1Path) InP2PHellos() *IsisRouter_Counters_Level1_InP2PHellosPath {
+	return &IsisRouter_Counters_Level1_InP2PHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-p2p-hellos"
+func (n *IsisRouter_Counters_Level1PathAny) InP2PHellos() *IsisRouter_Counters_Level1_InP2PHellosPathAny {
+	return &IsisRouter_Counters_Level1_InP2PHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-psnp"
+func (n *IsisRouter_Counters_Level1Path) InPsnp() *IsisRouter_Counters_Level1_InPsnpPath {
+	return &IsisRouter_Counters_Level1_InPsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/in-psnp"
+func (n *IsisRouter_Counters_Level1PathAny) InPsnp() *IsisRouter_Counters_Level1_InPsnpPathAny {
+	return &IsisRouter_Counters_Level1_InPsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutBcastHellos (leaf): The total number of broadcast HELLO messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-bcast-hellos"
+func (n *IsisRouter_Counters_Level1Path) OutBcastHellos() *IsisRouter_Counters_Level1_OutBcastHellosPath {
+	return &IsisRouter_Counters_Level1_OutBcastHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutBcastHellos (leaf): The total number of broadcast HELLO messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-bcast-hellos"
+func (n *IsisRouter_Counters_Level1PathAny) OutBcastHellos() *IsisRouter_Counters_Level1_OutBcastHellosPathAny {
+	return &IsisRouter_Counters_Level1_OutBcastHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-csnp"
+func (n *IsisRouter_Counters_Level1Path) OutCsnp() *IsisRouter_Counters_Level1_OutCsnpPath {
+	return &IsisRouter_Counters_Level1_OutCsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-csnp"
+func (n *IsisRouter_Counters_Level1PathAny) OutCsnp() *IsisRouter_Counters_Level1_OutCsnpPathAny {
+	return &IsisRouter_Counters_Level1_OutCsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-lsp"
+func (n *IsisRouter_Counters_Level1Path) OutLsp() *IsisRouter_Counters_Level1_OutLspPath {
+	return &IsisRouter_Counters_Level1_OutLspPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-lsp"
+func (n *IsisRouter_Counters_Level1PathAny) OutLsp() *IsisRouter_Counters_Level1_OutLspPathAny {
+	return &IsisRouter_Counters_Level1_OutLspPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-p2p-hellos"
+func (n *IsisRouter_Counters_Level1Path) OutP2PHellos() *IsisRouter_Counters_Level1_OutP2PHellosPath {
+	return &IsisRouter_Counters_Level1_OutP2PHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-p2p-hellos"
+func (n *IsisRouter_Counters_Level1PathAny) OutP2PHellos() *IsisRouter_Counters_Level1_OutP2PHellosPathAny {
+	return &IsisRouter_Counters_Level1_OutP2PHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-psnp"
+func (n *IsisRouter_Counters_Level1Path) OutPsnp() *IsisRouter_Counters_Level1_OutPsnpPath {
+	return &IsisRouter_Counters_Level1_OutPsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/out-psnp"
+func (n *IsisRouter_Counters_Level1PathAny) OutPsnp() *IsisRouter_Counters_Level1_OutPsnpPathAny {
+	return &IsisRouter_Counters_Level1_OutPsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsFlap (leaf): The total number of sessions flap.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-flap"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/sessions-flap"
+func (n *IsisRouter_Counters_Level1Path) SessionsFlap() *IsisRouter_Counters_Level1_SessionsFlapPath {
+	return &IsisRouter_Counters_Level1_SessionsFlapPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-flap"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsFlap (leaf): The total number of sessions flap.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-flap"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/sessions-flap"
+func (n *IsisRouter_Counters_Level1PathAny) SessionsFlap() *IsisRouter_Counters_Level1_SessionsFlapPathAny {
+	return &IsisRouter_Counters_Level1_SessionsFlapPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-flap"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsUp (leaf): The total number of sessions that are fully up.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-up"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/sessions-up"
+func (n *IsisRouter_Counters_Level1Path) SessionsUp() *IsisRouter_Counters_Level1_SessionsUpPath {
+	return &IsisRouter_Counters_Level1_SessionsUpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-up"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsUp (leaf): The total number of sessions that are fully up.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-up"
+// Path from root: "/isis-routers/isis-router/state/counters/level1/sessions-up"
+func (n *IsisRouter_Counters_Level1PathAny) SessionsUp() *IsisRouter_Counters_Level1_SessionsUpPathAny {
+	return &IsisRouter_Counters_Level1_SessionsUpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-up"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_Counters_Level2Path represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2 YANG schema element.
+type IsisRouter_Counters_Level2Path struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2PathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2 YANG schema element.
+type IsisRouter_Counters_Level2PathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_DatabaseSizePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/database-size YANG schema element.
+type IsisRouter_Counters_Level2_DatabaseSizePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_DatabaseSizePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/database-size YANG schema element.
+type IsisRouter_Counters_Level2_DatabaseSizePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InBcastHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level2_InBcastHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InBcastHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level2_InBcastHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InCsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-csnp YANG schema element.
+type IsisRouter_Counters_Level2_InCsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InCsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-csnp YANG schema element.
+type IsisRouter_Counters_Level2_InCsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InLspPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-lsp YANG schema element.
+type IsisRouter_Counters_Level2_InLspPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InLspPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-lsp YANG schema element.
+type IsisRouter_Counters_Level2_InLspPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InP2PHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level2_InP2PHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InP2PHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level2_InP2PHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InPsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-psnp YANG schema element.
+type IsisRouter_Counters_Level2_InPsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_InPsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-psnp YANG schema element.
+type IsisRouter_Counters_Level2_InPsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutBcastHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level2_OutBcastHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutBcastHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-bcast-hellos YANG schema element.
+type IsisRouter_Counters_Level2_OutBcastHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutCsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-csnp YANG schema element.
+type IsisRouter_Counters_Level2_OutCsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutCsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-csnp YANG schema element.
+type IsisRouter_Counters_Level2_OutCsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutLspPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-lsp YANG schema element.
+type IsisRouter_Counters_Level2_OutLspPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutLspPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-lsp YANG schema element.
+type IsisRouter_Counters_Level2_OutLspPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutP2PHellosPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level2_OutP2PHellosPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutP2PHellosPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-p2p-hellos YANG schema element.
+type IsisRouter_Counters_Level2_OutP2PHellosPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutPsnpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-psnp YANG schema element.
+type IsisRouter_Counters_Level2_OutPsnpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_OutPsnpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/out-psnp YANG schema element.
+type IsisRouter_Counters_Level2_OutPsnpPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_SessionsFlapPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/sessions-flap YANG schema element.
+type IsisRouter_Counters_Level2_SessionsFlapPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_SessionsFlapPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/sessions-flap YANG schema element.
+type IsisRouter_Counters_Level2_SessionsFlapPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_SessionsUpPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/sessions-up YANG schema element.
+type IsisRouter_Counters_Level2_SessionsUpPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_Counters_Level2_SessionsUpPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/sessions-up YANG schema element.
+type IsisRouter_Counters_Level2_SessionsUpPathAny struct {
+	*ygot.NodePath
+}
+
+// DatabaseSize (leaf): The total number of link stOTG updOTGs (LSPs) in the LSP
+// databases.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "database-size"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/database-size"
+func (n *IsisRouter_Counters_Level2Path) DatabaseSize() *IsisRouter_Counters_Level2_DatabaseSizePath {
+	return &IsisRouter_Counters_Level2_DatabaseSizePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"database-size"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DatabaseSize (leaf): The total number of link stOTG updOTGs (LSPs) in the LSP
+// databases.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "database-size"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/database-size"
+func (n *IsisRouter_Counters_Level2PathAny) DatabaseSize() *IsisRouter_Counters_Level2_DatabaseSizePathAny {
+	return &IsisRouter_Counters_Level2_DatabaseSizePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"database-size"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InBcastHellos (leaf): The total number of broacast HELLO messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-bcast-hellos"
+func (n *IsisRouter_Counters_Level2Path) InBcastHellos() *IsisRouter_Counters_Level2_InBcastHellosPath {
+	return &IsisRouter_Counters_Level2_InBcastHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InBcastHellos (leaf): The total number of broacast HELLO messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-bcast-hellos"
+func (n *IsisRouter_Counters_Level2PathAny) InBcastHellos() *IsisRouter_Counters_Level2_InBcastHellosPathAny {
+	return &IsisRouter_Counters_Level2_InBcastHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-csnp"
+func (n *IsisRouter_Counters_Level2Path) InCsnp() *IsisRouter_Counters_Level2_InCsnpPath {
+	return &IsisRouter_Counters_Level2_InCsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-csnp"
+func (n *IsisRouter_Counters_Level2PathAny) InCsnp() *IsisRouter_Counters_Level2_InCsnpPathAny {
+	return &IsisRouter_Counters_Level2_InCsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-lsp"
+func (n *IsisRouter_Counters_Level2Path) InLsp() *IsisRouter_Counters_Level2_InLspPath {
+	return &IsisRouter_Counters_Level2_InLspPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-lsp"
+func (n *IsisRouter_Counters_Level2PathAny) InLsp() *IsisRouter_Counters_Level2_InLspPathAny {
+	return &IsisRouter_Counters_Level2_InLspPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-p2p-hellos"
+func (n *IsisRouter_Counters_Level2Path) InP2PHellos() *IsisRouter_Counters_Level2_InP2PHellosPath {
+	return &IsisRouter_Counters_Level2_InP2PHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-p2p-hellos"
+func (n *IsisRouter_Counters_Level2PathAny) InP2PHellos() *IsisRouter_Counters_Level2_InP2PHellosPathAny {
+	return &IsisRouter_Counters_Level2_InP2PHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-psnp"
+func (n *IsisRouter_Counters_Level2Path) InPsnp() *IsisRouter_Counters_Level2_InPsnpPath {
+	return &IsisRouter_Counters_Level2_InPsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages received.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "in-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/in-psnp"
+func (n *IsisRouter_Counters_Level2PathAny) InPsnp() *IsisRouter_Counters_Level2_InPsnpPathAny {
+	return &IsisRouter_Counters_Level2_InPsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutBcastHellos (leaf): The total number of broadcast HELLO messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-bcast-hellos"
+func (n *IsisRouter_Counters_Level2Path) OutBcastHellos() *IsisRouter_Counters_Level2_OutBcastHellosPath {
+	return &IsisRouter_Counters_Level2_OutBcastHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutBcastHellos (leaf): The total number of broadcast HELLO messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-bcast-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-bcast-hellos"
+func (n *IsisRouter_Counters_Level2PathAny) OutBcastHellos() *IsisRouter_Counters_Level2_OutBcastHellosPathAny {
+	return &IsisRouter_Counters_Level2_OutBcastHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-bcast-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-csnp"
+func (n *IsisRouter_Counters_Level2Path) OutCsnp() *IsisRouter_Counters_Level2_OutCsnpPath {
+	return &IsisRouter_Counters_Level2_OutCsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutCsnp (leaf): The total number of complete sequence number packet (CSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-csnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-csnp"
+func (n *IsisRouter_Counters_Level2PathAny) OutCsnp() *IsisRouter_Counters_Level2_OutCsnpPathAny {
+	return &IsisRouter_Counters_Level2_OutCsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-csnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-lsp"
+func (n *IsisRouter_Counters_Level2Path) OutLsp() *IsisRouter_Counters_Level2_OutLspPath {
+	return &IsisRouter_Counters_Level2_OutLspPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-lsp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-lsp"
+func (n *IsisRouter_Counters_Level2PathAny) OutLsp() *IsisRouter_Counters_Level2_OutLspPathAny {
+	return &IsisRouter_Counters_Level2_OutLspPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-p2p-hellos"
+func (n *IsisRouter_Counters_Level2Path) OutP2PHellos() *IsisRouter_Counters_Level2_OutP2PHellosPath {
+	return &IsisRouter_Counters_Level2_OutP2PHellosPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutP2PHellos (leaf): The total number of point to point (P2P) HELLO messages
+// sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-p2p-hellos"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-p2p-hellos"
+func (n *IsisRouter_Counters_Level2PathAny) OutP2PHellos() *IsisRouter_Counters_Level2_OutP2PHellosPathAny {
+	return &IsisRouter_Counters_Level2_OutP2PHellosPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-p2p-hellos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-psnp"
+func (n *IsisRouter_Counters_Level2Path) OutPsnp() *IsisRouter_Counters_Level2_OutPsnpPath {
+	return &IsisRouter_Counters_Level2_OutPsnpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutPsnp (leaf): The total number of partial sequence number packet (PSNPs)
+// messages sent.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "out-psnp"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/out-psnp"
+func (n *IsisRouter_Counters_Level2PathAny) OutPsnp() *IsisRouter_Counters_Level2_OutPsnpPathAny {
+	return &IsisRouter_Counters_Level2_OutPsnpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"out-psnp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsFlap (leaf): The total number of sessions flap.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-flap"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/sessions-flap"
+func (n *IsisRouter_Counters_Level2Path) SessionsFlap() *IsisRouter_Counters_Level2_SessionsFlapPath {
+	return &IsisRouter_Counters_Level2_SessionsFlapPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-flap"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsFlap (leaf): The total number of sessions flap.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-flap"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/sessions-flap"
+func (n *IsisRouter_Counters_Level2PathAny) SessionsFlap() *IsisRouter_Counters_Level2_SessionsFlapPathAny {
+	return &IsisRouter_Counters_Level2_SessionsFlapPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-flap"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsUp (leaf): The total number of sessions that are fully up.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-up"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/sessions-up"
+func (n *IsisRouter_Counters_Level2Path) SessionsUp() *IsisRouter_Counters_Level2_SessionsUpPath {
+	return &IsisRouter_Counters_Level2_SessionsUpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-up"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SessionsUp (leaf): The total number of sessions that are fully up.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "sessions-up"
+// Path from root: "/isis-routers/isis-router/state/counters/level2/sessions-up"
+func (n *IsisRouter_Counters_Level2PathAny) SessionsUp() *IsisRouter_Counters_Level2_SessionsUpPathAny {
+	return &IsisRouter_Counters_Level2_SessionsUpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"sessions-up"},
 			map[string]interface{}{},
 			n,
 		),
