@@ -180,7 +180,7 @@ func (b *Bind) dialATEGRPC(ctx context.Context, ate *binding.ATE, serviceName st
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	addr = "10.39.35.40:50051"
+	// addr = "10.39.35.40:50051"
 	log.Infof("Dialing service %q on ate %s@%s", serviceName, ate.Name, addr)
 	opts = append(opts,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
