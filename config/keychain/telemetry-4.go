@@ -28,7 +28,7 @@ func (n *Keychain_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Keychain_TolerancePath) Lookup(t testing.TB) *oc.QualifiedKeychain_Tole
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/config/tolerance with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_TolerancePath) Get(t testing.TB) oc.Keychain_Tolerance_Union {
 	t.Helper()

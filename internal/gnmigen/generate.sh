@@ -31,6 +31,7 @@ git checkout 8ae9adf
 cd ..
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 
+wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(
@@ -83,6 +84,7 @@ YANG_FILES=(
   public/release/models/optical-transport/openconfig-transport-types.yang
   public/release/models/ospf/openconfig-ospfv2.yang
   public/release/models/platform/openconfig-platform-cpu.yang
+  public/release/models/platform/openconfig-platform-fan.yang
   public/release/models/platform/openconfig-platform-integrated-circuit.yang
   public/release/models/platform/openconfig-platform-software.yang
   public/release/models/platform/openconfig-platform-transceiver.yang

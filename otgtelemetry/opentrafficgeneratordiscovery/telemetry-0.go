@@ -31,7 +31,7 @@ func (n *InterfacePath) Lookup(t testing.TB) *oc.QualifiedInterface {
 }
 
 // Get fetches the value at /open-traffic-generator-discovery/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *InterfacePath) Get(t testing.TB) *oc.Interface {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.InterfaceWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface{
+		qv := (&oc.QualifiedInterface{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_InterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface) bool) *oc.InterfaceWatcher {
+	t.Helper()
+	w := &oc.InterfaceWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-discovery/interfaces/interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *InterfacePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface) bool) *oc.InterfaceWatcher {
 	t.Helper()
-	return watch_InterfacePath(t, n, timeout, predicate)
+	return watch_InterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-discovery/interfaces/interface to the batch object.
@@ -182,7 +213,7 @@ func (n *Interface_Ipv4NeighborPath) Lookup(t testing.TB) *oc.QualifiedInterface
 }
 
 // Get fetches the value at /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ipv4NeighborPath) Get(t testing.TB) *oc.Interface_Ipv4Neighbor {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_Interface_Ipv4NeighborPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Interface_Ipv4NeighborWatcher{}
 	gs := &oc.Interface_Ipv4Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ipv4Neighbor", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Ipv4Neighbor{
+		qv := (&oc.QualifiedInterface_Ipv4Neighbor{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Ipv4Neighbor)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *Interface_Ipv4NeighborPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Interface_Ipv4NeighborPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Ipv4Neighbor) bool) *oc.Interface_Ipv4NeighborWatcher {
+	t.Helper()
+	w := &oc.Interface_Ipv4NeighborWatcher{}
+	structs := map[string]*oc.Interface_Ipv4Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ipv4Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ipv4Neighbor", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Ipv4Neighbor{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Ipv4Neighbor)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *Interface_Ipv4NeighborPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ipv4NeighborPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Ipv4Neighbor) bool) *oc.Interface_Ipv4NeighborWatcher {
 	t.Helper()
-	return watch_Interface_Ipv4NeighborPath(t, n, timeout, predicate)
+	return watch_Interface_Ipv4NeighborPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor to the batch object.
@@ -331,7 +393,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/ipv4-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ipv4Neighbor_Ipv4AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -385,10 +447,10 @@ func watch_Interface_Ipv4Neighbor_Ipv4AddressPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Ipv4Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ipv4Neighbor", gs, queryPath, true, false)
-		return convertInterface_Ipv4Neighbor_Ipv4AddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ipv4Neighbor_Ipv4AddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -441,6 +503,34 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Interface_Ipv4Neighbor_Ipv4AddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Ipv4Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ipv4Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ipv4Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ipv4Neighbor_Ipv4AddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/ipv4-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -448,7 +538,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ipv4Neighbor_Ipv4AddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Ipv4Neighbor_Ipv4AddressPath(t, n, timeout, predicate)
+	return watch_Interface_Ipv4Neighbor_Ipv4AddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-discovery/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/ipv4-address to the batch object.

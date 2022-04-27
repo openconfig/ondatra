@@ -29,7 +29,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPath(t testing.T
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Counters_OutForwardedPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Counters_OutForwardedPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny) Collect(t
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Counters_OutForwardedPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny) Collect(t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-pkts to the batch object.
@@ -182,7 +210,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutOctetsPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Interface_Subinterface_Ipv6_Counters_OutOctetsPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Counters_OutOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Counters_OutOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutOctetsPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Counters_OutOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Counters_OutOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutOctetsPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Counters_OutOctetsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Counters_OutOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-octets to the batch object.
@@ -335,7 +391,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Interface_Subinterface_Ipv6_Counters_OutPktsPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Counters_OutPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Counters_OutPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Counters_OutPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Counters_OutPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Counters_OutPktsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Counters_OutPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-pkts to the batch object.
@@ -490,7 +574,7 @@ func (n *Interface_Subinterface_Ipv6_DhcpClientPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_DhcpClientPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -544,10 +628,10 @@ func watch_Interface_Subinterface_Ipv6_DhcpClientPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_DhcpClientPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_DhcpClientPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -600,6 +684,34 @@ func (n *Interface_Subinterface_Ipv6_DhcpClientPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_DhcpClientPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_DhcpClientPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -607,7 +719,7 @@ func (n *Interface_Subinterface_Ipv6_DhcpClientPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_DhcpClientPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_DhcpClientPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_DhcpClientPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client to the batch object.
@@ -645,7 +757,7 @@ func (n *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -699,10 +811,10 @@ func watch_Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_DupAddrDetectTransmitsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_DupAddrDetectTransmitsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -755,6 +867,34 @@ func (n *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny) Collect(t te
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_DupAddrDetectTransmitsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -762,7 +902,7 @@ func (n *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_DupAddrDetectTransmitsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dup-addr-detect-transmits to the batch object.
@@ -800,7 +940,7 @@ func (n *Interface_Subinterface_Ipv6_EnabledPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -854,10 +994,10 @@ func watch_Interface_Subinterface_Ipv6_EnabledPath(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -910,6 +1050,34 @@ func (n *Interface_Subinterface_Ipv6_EnabledPathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -917,7 +1085,7 @@ func (n *Interface_Subinterface_Ipv6_EnabledPathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_EnabledPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/enabled to the batch object.
@@ -953,7 +1121,7 @@ func (n *Interface_Subinterface_Ipv6_MtuPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_MtuPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1007,10 +1175,10 @@ func watch_Interface_Subinterface_Ipv6_MtuPath(t testing.TB, n ygot.PathStruct, 
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_MtuPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_MtuPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -1063,6 +1231,34 @@ func (n *Interface_Subinterface_Ipv6_MtuPathAny) Collect(t testing.TB, duration 
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_MtuPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_MtuPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1070,7 +1266,7 @@ func (n *Interface_Subinterface_Ipv6_MtuPathAny) Collect(t testing.TB, duration 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_MtuPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_MtuPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_MtuPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu to the batch object.
@@ -1108,7 +1304,7 @@ func (n *Interface_Subinterface_Ipv6_NeighborPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_NeighborPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv6_Neighbor {
 	t.Helper()
@@ -1170,12 +1366,13 @@ func watch_Interface_Subinterface_Ipv6_NeighborPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.Interface_Subinterface_Ipv6_NeighborWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Ipv6_Neighbor{
+		qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Neighbor{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Neighbor)
 		w.LastVal = val
@@ -1228,6 +1425,36 @@ func (n *Interface_Subinterface_Ipv6_NeighborPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_NeighborPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Neighbor) bool) *oc.Interface_Subinterface_Ipv6_NeighborWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Ipv6_NeighborWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Neighbor{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Neighbor)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1235,7 +1462,7 @@ func (n *Interface_Subinterface_Ipv6_NeighborPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_NeighborPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Neighbor) bool) *oc.Interface_Subinterface_Ipv6_NeighborWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_NeighborPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_NeighborPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor to the batch object.
@@ -1257,7 +1484,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IpPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/ip with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Neighbor_IpPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1311,10 +1538,10 @@ func watch_Interface_Subinterface_Ipv6_Neighbor_IpPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Neighbor_IpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Neighbor_IpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1367,6 +1594,34 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IpPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Neighbor_IpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Neighbor_IpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/ip with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1374,7 +1629,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IpPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Neighbor_IpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Neighbor_IpPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Neighbor_IpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/ip to the batch object.
@@ -1410,7 +1665,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IsRouterPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/is-router with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Neighbor_IsRouterPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1464,10 +1719,10 @@ func watch_Interface_Subinterface_Ipv6_Neighbor_IsRouterPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Neighbor_IsRouterPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Neighbor_IsRouterPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1520,6 +1775,34 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IsRouterPathAny) Collect(t testing
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Neighbor_IsRouterPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Neighbor_IsRouterPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/is-router with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1527,7 +1810,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_IsRouterPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Neighbor_IsRouterPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Neighbor_IsRouterPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Neighbor_IsRouterPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/is-router to the batch object.
@@ -1563,7 +1846,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/link-layer-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1617,10 +1900,10 @@ func watch_Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath(t testing.T
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1673,6 +1956,34 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPathAny) Collect(t
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/link-layer-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1680,7 +1991,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPathAny) Collect(t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Neighbor_LinkLayerAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/link-layer-address to the batch object.
@@ -1716,7 +2027,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_NeighborStatePath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/neighbor-state with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Neighbor_NeighborStatePath) Get(t testing.TB) oc.E_Neighbor_NeighborState {
 	t.Helper()
@@ -1770,10 +2081,10 @@ func watch_Interface_Subinterface_Ipv6_Neighbor_NeighborStatePath(t testing.TB, 
 	t.Helper()
 	w := &oc.E_Neighbor_NeighborStateWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Neighbor_NeighborStatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Neighbor_NeighborStatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Neighbor_NeighborState)
 		w.LastVal = val
@@ -1826,6 +2137,34 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_NeighborStatePathAny) Collect(t te
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Neighbor_NeighborStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Neighbor_NeighborState) bool) *oc.E_Neighbor_NeighborStateWatcher {
+	t.Helper()
+	w := &oc.E_Neighbor_NeighborStateWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Neighbor_NeighborStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Neighbor_NeighborState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/neighbor-state with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1833,7 +2172,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_NeighborStatePathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Neighbor_NeighborStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Neighbor_NeighborState) bool) *oc.E_Neighbor_NeighborStateWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Neighbor_NeighborStatePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Neighbor_NeighborStatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/neighbor-state to the batch object.
@@ -1869,7 +2208,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_OriginPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/origin with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Neighbor_OriginPath) Get(t testing.TB) oc.E_IfIp_NeighborOrigin {
 	t.Helper()
@@ -1923,10 +2262,10 @@ func watch_Interface_Subinterface_Ipv6_Neighbor_OriginPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.E_IfIp_NeighborOriginWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Neighbor_OriginPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Neighbor_OriginPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfIp_NeighborOrigin)
 		w.LastVal = val
@@ -1979,6 +2318,34 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_OriginPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Neighbor_OriginPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfIp_NeighborOrigin) bool) *oc.E_IfIp_NeighborOriginWatcher {
+	t.Helper()
+	w := &oc.E_IfIp_NeighborOriginWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Neighbor_OriginPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfIp_NeighborOrigin)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/origin with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1986,7 +2353,7 @@ func (n *Interface_Subinterface_Ipv6_Neighbor_OriginPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Neighbor_OriginPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfIp_NeighborOrigin) bool) *oc.E_IfIp_NeighborOriginWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Neighbor_OriginPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Neighbor_OriginPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/origin to the batch object.
@@ -2024,7 +2391,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv6_RouterAdvertisement {
 	t.Helper()
@@ -2086,12 +2453,13 @@ func watch_Interface_Subinterface_Ipv6_RouterAdvertisementPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Interface_Subinterface_Ipv6_RouterAdvertisementWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement{
+		qv := (&oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement)
 		w.LastVal = val
@@ -2144,6 +2512,36 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Collect(t testi
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_RouterAdvertisementPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement) bool) *oc.Interface_Subinterface_Ipv6_RouterAdvertisementWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Ipv6_RouterAdvertisementWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2151,7 +2549,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_RouterAdvertisement) bool) *oc.Interface_Subinterface_Ipv6_RouterAdvertisementWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_RouterAdvertisementPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_RouterAdvertisementPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement to the batch object.
@@ -2173,7 +2571,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2227,10 +2625,10 @@ func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath(t testin
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -2283,6 +2681,34 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPathAny) Collec
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2290,7 +2716,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/interval to the batch object.
@@ -2326,7 +2752,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/lifetime with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2380,10 +2806,10 @@ func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath(t testin
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -2436,6 +2862,34 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny) Collec
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/lifetime with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2443,7 +2897,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/lifetime to the batch object.
@@ -2481,7 +2935,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2535,10 +2989,10 @@ func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath(t testin
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -2591,6 +3045,34 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny) Collec
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_RouterAdvertisement{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_RouterAdvertisement", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2598,7 +3080,7 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress to the batch object.
@@ -2636,7 +3118,7 @@ func (n *Interface_Subinterface_Ipv6_UnnumberedPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_UnnumberedPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv6_Unnumbered {
 	t.Helper()
@@ -2698,12 +3180,13 @@ func watch_Interface_Subinterface_Ipv6_UnnumberedPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.Interface_Subinterface_Ipv6_UnnumberedWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Unnumbered{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered{
+		qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered)
 		w.LastVal = val
@@ -2756,6 +3239,36 @@ func (n *Interface_Subinterface_Ipv6_UnnumberedPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_UnnumberedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered) bool) *oc.Interface_Subinterface_Ipv6_UnnumberedWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Ipv6_UnnumberedWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Unnumbered{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Unnumbered{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2763,7 +3276,7 @@ func (n *Interface_Subinterface_Ipv6_UnnumberedPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_UnnumberedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered) bool) *oc.Interface_Subinterface_Ipv6_UnnumberedWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_UnnumberedPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_UnnumberedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered to the batch object.
@@ -2787,7 +3300,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_EnabledPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2841,10 +3354,10 @@ func watch_Interface_Subinterface_Ipv6_Unnumbered_EnabledPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Unnumbered{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Unnumbered_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Unnumbered_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -2897,6 +3410,34 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_EnabledPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Unnumbered_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Unnumbered{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Unnumbered{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Unnumbered_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2904,7 +3445,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_EnabledPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Unnumbered_EnabledPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Unnumbered_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/state/enabled to the batch object.
@@ -2942,7 +3483,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef {
 	t.Helper()
@@ -3004,12 +3545,13 @@ func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPath(t testing.TB,
 	t.Helper()
 	w := &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef{
+		qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef)
 		w.LastVal = val
@@ -3062,6 +3604,36 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny) Collect(t t
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef) bool) *oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3069,7 +3641,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef) bool) *oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref to the batch object.
@@ -3091,7 +3663,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -3145,10 +3717,10 @@ func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath(t t
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3201,6 +3773,34 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePathAny) C
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3208,7 +3808,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePathAny) C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_InterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/interface to the batch object.
@@ -3244,7 +3844,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath) L
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3298,10 +3898,10 @@ func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath(
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -3354,6 +3954,34 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePathAny
 	return c
 }
 
+func watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/subinterface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3361,7 +3989,7 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePathAny
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef_SubinterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/unnumbered/interface-ref/state/subinterface to the batch object.
@@ -3397,7 +4025,7 @@ func (n *Interface_Subinterface_LastChangePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/last-change with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_LastChangePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3451,10 +4079,10 @@ func watch_Interface_Subinterface_LastChangePath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Interface_Subinterface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface", gs, queryPath, true, false)
-		return convertInterface_Subinterface_LastChangePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_LastChangePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3507,6 +4135,34 @@ func (n *Interface_Subinterface_LastChangePathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_Subinterface_LastChangePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Subinterface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_LastChangePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/last-change with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3514,7 +4170,7 @@ func (n *Interface_Subinterface_LastChangePathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_LastChangePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_LastChangePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_LastChangePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/last-change to the batch object.
@@ -3550,7 +4206,7 @@ func (n *Interface_Subinterface_LogicalPath) Lookup(t testing.TB) *oc.QualifiedB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/logical with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_LogicalPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3604,10 +4260,10 @@ func watch_Interface_Subinterface_LogicalPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface", gs, queryPath, true, false)
-		return convertInterface_Subinterface_LogicalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_LogicalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3660,6 +4316,34 @@ func (n *Interface_Subinterface_LogicalPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Interface_Subinterface_LogicalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_LogicalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/logical with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3667,7 +4351,7 @@ func (n *Interface_Subinterface_LogicalPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_LogicalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_LogicalPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_LogicalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/logical to the batch object.
@@ -3703,7 +4387,7 @@ func (n *Interface_Subinterface_ManagementPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/management with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_ManagementPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3757,10 +4441,10 @@ func watch_Interface_Subinterface_ManagementPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Interface_Subinterface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface", gs, queryPath, true, false)
-		return convertInterface_Subinterface_ManagementPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_ManagementPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3813,6 +4497,34 @@ func (n *Interface_Subinterface_ManagementPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_Subinterface_ManagementPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Interface_Subinterface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_ManagementPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/management with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3820,7 +4532,7 @@ func (n *Interface_Subinterface_ManagementPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_ManagementPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_ManagementPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_ManagementPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/management to the batch object.
@@ -3856,7 +4568,7 @@ func (n *Interface_Subinterface_NamePath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -3910,10 +4622,10 @@ func watch_Interface_Subinterface_NamePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Subinterface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface", gs, queryPath, true, false)
-		return convertInterface_Subinterface_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3966,6 +4678,34 @@ func (n *Interface_Subinterface_NamePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Interface_Subinterface_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Subinterface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3973,7 +4713,7 @@ func (n *Interface_Subinterface_NamePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_NamePath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/name to the batch object.
@@ -4009,7 +4749,7 @@ func (n *Interface_Subinterface_OperStatusPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/oper-status with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_OperStatusPath) Get(t testing.TB) oc.E_Interface_OperStatus {
 	t.Helper()
@@ -4063,10 +4803,10 @@ func watch_Interface_Subinterface_OperStatusPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.E_Interface_OperStatusWatcher{}
 	gs := &oc.Interface_Subinterface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface", gs, queryPath, true, false)
-		return convertInterface_Subinterface_OperStatusPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_OperStatusPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Interface_OperStatus)
 		w.LastVal = val
@@ -4119,6 +4859,34 @@ func (n *Interface_Subinterface_OperStatusPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Interface_Subinterface_OperStatusPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Interface_OperStatus) bool) *oc.E_Interface_OperStatusWatcher {
+	t.Helper()
+	w := &oc.E_Interface_OperStatusWatcher{}
+	structs := map[string]*oc.Interface_Subinterface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_OperStatusPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Interface_OperStatus)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/oper-status with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4126,7 +4894,7 @@ func (n *Interface_Subinterface_OperStatusPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_OperStatusPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Interface_OperStatus) bool) *oc.E_Interface_OperStatusWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_OperStatusPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_OperStatusPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/oper-status to the batch object.
@@ -4164,7 +4932,7 @@ func (n *Interface_Subinterface_VlanPath) Lookup(t testing.TB) *oc.QualifiedInte
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_VlanPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan {
 	t.Helper()
@@ -4226,12 +4994,13 @@ func watch_Interface_Subinterface_VlanPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Interface_Subinterface_VlanWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan)
 		w.LastVal = val
@@ -4284,6 +5053,36 @@ func (n *Interface_Subinterface_VlanPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Interface_Subinterface_VlanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan) bool) *oc.Interface_Subinterface_VlanWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_VlanWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4291,7 +5090,7 @@ func (n *Interface_Subinterface_VlanPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_VlanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan) bool) *oc.Interface_Subinterface_VlanWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_VlanPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_VlanPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan to the batch object.
@@ -4315,7 +5114,7 @@ func (n *Interface_Subinterface_Vlan_EgressMappingPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMappingPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_EgressMapping {
 	t.Helper()
@@ -4377,12 +5176,13 @@ func watch_Interface_Subinterface_Vlan_EgressMappingPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_EgressMappingWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_EgressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping)
 		w.LastVal = val
@@ -4435,6 +5235,36 @@ func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_EgressMappingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_EgressMapping) bool) *oc.Interface_Subinterface_Vlan_EgressMappingWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_EgressMappingWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_EgressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_EgressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4442,7 +5272,7 @@ func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_EgressMapping) bool) *oc.Interface_Subinterface_Vlan_EgressMappingWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_EgressMappingPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_EgressMappingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping to the batch object.
@@ -4464,7 +5294,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -4518,10 +5348,10 @@ func watch_Interface_Subinterface_Vlan_EgressMapping_TpidPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_EgressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
 		w.LastVal = val
@@ -4574,6 +5404,34 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPathAny) Collect(t testin
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_EgressMapping_TpidPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_EgressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_EgressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/tpid with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4581,7 +5439,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_EgressMapping_TpidPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_EgressMapping_TpidPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/tpid to the batch object.
@@ -4617,7 +5475,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -4671,10 +5529,10 @@ func watch_Interface_Subinterface_Vlan_EgressMapping_VlanIdPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_EgressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -4727,6 +5585,34 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny) Collect(t test
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_EgressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_EgressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4734,7 +5620,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-id to the batch object.
@@ -4770,7 +5656,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-stack-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath) Get(t testing.TB) oc.E_VlanTypes_VlanStackAction {
 	t.Helper()
@@ -4824,10 +5710,10 @@ func watch_Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath(t testi
 	t.Helper()
 	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_EgressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_EgressMapping_VlanStackActionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_EgressMapping_VlanStackActionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
 		w.LastVal = val
@@ -4880,6 +5766,34 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPathAny) Colle
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_EgressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_EgressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_EgressMapping_VlanStackActionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-stack-action with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -4887,7 +5801,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPathAny) Colle
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/state/vlan-stack-action to the batch object.
@@ -4925,7 +5839,7 @@ func (n *Interface_Subinterface_Vlan_IngressMappingPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMappingPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_IngressMapping {
 	t.Helper()
@@ -4987,12 +5901,13 @@ func watch_Interface_Subinterface_Vlan_IngressMappingPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Interface_Subinterface_Vlan_IngressMappingWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", gs, queryPath, false, false)
-		return (&oc.QualifiedInterface_Subinterface_Vlan_IngressMapping{
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_IngressMapping{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_IngressMapping)
 		w.LastVal = val
@@ -5045,6 +5960,36 @@ func (n *Interface_Subinterface_Vlan_IngressMappingPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_IngressMappingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_IngressMapping) bool) *oc.Interface_Subinterface_Vlan_IngressMappingWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_IngressMappingWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_IngressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_IngressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_IngressMapping{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_IngressMapping)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5052,7 +5997,7 @@ func (n *Interface_Subinterface_Vlan_IngressMappingPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_IngressMappingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_IngressMapping) bool) *oc.Interface_Subinterface_Vlan_IngressMappingWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMappingPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_IngressMappingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping to the batch object.
@@ -5074,7 +6019,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -5128,10 +6073,10 @@ func watch_Interface_Subinterface_Vlan_IngressMapping_TpidPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_IngressMapping_TpidPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_IngressMapping_TpidPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
 		w.LastVal = val
@@ -5184,6 +6129,34 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPathAny) Collect(t testi
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_IngressMapping_TpidPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_TPID_TYPESWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_IngressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_IngressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_IngressMapping_TpidPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_TPID_TYPES)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/tpid with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5191,7 +6164,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_TPID_TYPES) bool) *oc.E_VlanTypes_TPID_TYPESWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMapping_TpidPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_IngressMapping_TpidPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/tpid to the batch object.
@@ -5227,7 +6200,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -5281,10 +6254,10 @@ func watch_Interface_Subinterface_Vlan_IngressMapping_VlanIdPath(t testing.TB, n
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_IngressMapping_VlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_IngressMapping_VlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -5337,6 +6310,34 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPathAny) Collect(t tes
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_IngressMapping_VlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_IngressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_IngressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_IngressMapping_VlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5344,7 +6345,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanIdPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-id to the batch object.
@@ -5380,7 +6381,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Get(t testing.TB) oc.E_VlanTypes_VlanStackAction {
 	t.Helper()
@@ -5434,10 +6435,10 @@ func watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t test
 	t.Helper()
 	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
 	gs := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", gs, queryPath, true, false)
-		return convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
 		w.LastVal = val
@@ -5490,6 +6491,34 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Coll
 	return c
 }
 
+func watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
+	t.Helper()
+	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_IngressMapping{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_IngressMapping{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -5497,7 +6526,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
 	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, n, timeout, predicate)
+	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action to the batch object.

@@ -31,7 +31,7 @@ func (n *DevicePath) Lookup(t testing.TB) *oc.QualifiedDevice {
 }
 
 // Get fetches the value at / with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *DevicePath) Get(t testing.TB) *oc.Device {
 	t.Helper()
@@ -60,12 +60,13 @@ func watch_DevicePath(t testing.TB, n ygot.PathStruct, duration time.Duration, p
 	t.Helper()
 	w := &oc.DeviceWatcher{}
 	gs := &oc.Device{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Device", gs, queryPath, false, false)
-		return (&oc.QualifiedDevice{
+		qv := (&oc.QualifiedDevice{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedDevice)
 		w.LastVal = val

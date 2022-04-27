@@ -28,7 +28,7 @@ func (n *Meta_TargetLeavesUpdatedPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesUpdated with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesUpdatedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Meta_TargetSizePath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetSize with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetSizePath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -232,7 +232,7 @@ func (n *Meta_WindowPath) Lookup(t testing.TB) *oc.QualifiedMeta_Window {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_WindowPath) Get(t testing.TB) *oc.Meta_Window {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *Meta_Window_AvgPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_AvgPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -422,7 +422,7 @@ func (n *Meta_Window_MaxPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latency/window/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_Window_MaxPath) Get(t testing.TB) int64 {
 	t.Helper()

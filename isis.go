@@ -35,9 +35,9 @@ type ISReachabilityConfig struct {
 
 // WithName assigns a name to the IS-IS reachability config.
 // It should be unique among all reachability configs on the interface.
-func (i *ISReachabilityConfig) WithName(name string) *ISReachabilityConfig {
-	i.pb.Name = name
-	return i
+func (ir *ISReachabilityConfig) WithName(name string) *ISReachabilityConfig {
+	ir.pb.Name = name
+	return ir
 }
 
 // ISISNode is a representation of a simulated IS-IS node.
@@ -177,14 +177,20 @@ func (i *ISIS) SegmentRouting() *ISISSegmentRouting {
 // AddISReachability adds an ISReachability config to the ISIS config.
 func (i *ISIS) AddISReachability() *ISReachabilityConfig {
 	isR := &ISReachabilityConfig{pb: &opb.ISReachability{}}
-	i.pb.IsReachability = append(i.pb.IsReachability, isR.pb)
+	i.pb.IsReachabilities = append(i.pb.IsReachabilities, isR.pb)
 	return isR
 }
 
 // ClearISReachabilities clears ISReachability configs from the ISIS config.
 func (i *ISIS) ClearISReachabilities() *ISIS {
-	i.pb.IsReachability = nil
+	i.pb.IsReachabilities = nil
 	return i
+}
+
+// WithActive sets whether the prefixes are active.
+func (ip *IPReachabilityConfig) WithActive(active bool) *IPReachabilityConfig {
+	ip.pb.Active = active
+	return ip
 }
 
 // WithIPReachabilityInternal sets route origin as internal.
@@ -260,19 +266,19 @@ func (ip *IPReachabilityConfig) WithFlagLocal(enabled bool) *IPReachabilityConfi
 }
 
 // AddISISNode adds a simulated IS-IS node with ingress/egress metrics defaulted to 10.
-func (isR *ISReachabilityConfig) AddISISNode() *ISISNode {
+func (ir *ISReachabilityConfig) AddISISNode() *ISISNode {
 	node := &ISISNode{pb: &opb.ISReachability_Node{
 		EgressMetric:  10,
 		IngressMetric: 10,
 	}}
-	isR.pb.Nodes = append(isR.pb.Nodes, node.pb)
+	ir.pb.Nodes = append(ir.pb.Nodes, node.pb)
 	return node
 }
 
 // ClearISISNodes clears simulated IS-IS nodes.
-func (isR *ISReachabilityConfig) ClearISISNodes() *ISReachabilityConfig {
-	isR.pb.Nodes = nil
-	return isR
+func (ir *ISReachabilityConfig) ClearISISNodes() *ISReachabilityConfig {
+	ir.pb.Nodes = nil
+	return ir
 }
 
 // WithIngressMetric sets the metric on the ingress link.
@@ -454,26 +460,26 @@ func (sr *ISISSegmentRouting) WithPrefixSID(sid string) *ISISSegmentRouting {
 // AddSRGBRange adds a SRGB range.
 func (sr *ISISSegmentRouting) AddSRGBRange() *SIDRange {
 	srr := &SIDRange{pb: &opb.ISISSegmentRouting_SIDRange{}}
-	sr.pb.SrgbRange = append(sr.pb.SrgbRange, srr.pb)
+	sr.pb.SrgbRanges = append(sr.pb.SrgbRanges, srr.pb)
 	return srr
 }
 
 // ClearSRGBRanges clears SRGB ranges.
 func (sr *ISISSegmentRouting) ClearSRGBRanges() *ISISSegmentRouting {
-	sr.pb.SrgbRange = nil
+	sr.pb.SrgbRanges = nil
 	return sr
 }
 
 // AddSRLBRange adds a SRLB range.
 func (sr *ISISSegmentRouting) AddSRLBRange() *SIDRange {
 	srr := &SIDRange{pb: &opb.ISISSegmentRouting_SIDRange{}}
-	sr.pb.SrlbRange = append(sr.pb.SrlbRange, srr.pb)
+	sr.pb.SrlbRanges = append(sr.pb.SrlbRanges, srr.pb)
 	return srr
 }
 
 // ClearSRLBRanges clears SRLB ranges.
 func (sr *ISISSegmentRouting) ClearSRLBRanges() *ISISSegmentRouting {
-	sr.pb.SrlbRange = nil
+	sr.pb.SrlbRanges = nil
 	return sr
 }
 
@@ -532,6 +538,14 @@ func (node *ISISNode) RoutesIPv4() *ISISRoutes {
 		node.pb.RoutesIpv4 = &opb.ISReachability_Node_Routes{}
 	}
 	return &ISISRoutes{pb: node.pb.RoutesIpv4}
+}
+
+// RoutesIPv6 creates or returns the ISIS IPv6 route configuration.
+func (node *ISISNode) RoutesIPv6() *ISISRoutes {
+	if node.pb.RoutesIpv6 == nil {
+		node.pb.RoutesIpv6 = &opb.ISReachability_Node_Routes{}
+	}
+	return &ISISRoutes{pb: node.pb.RoutesIpv6}
 }
 
 // WithPrefix sets the (CIDR-string) prefix for the exported routes.

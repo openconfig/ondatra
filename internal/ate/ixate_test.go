@@ -41,6 +41,15 @@ const (
 	sessionPrefix = "/api/v1/sessions/0"
 )
 
+var (
+	simpleTop = &Topology{
+		Interfaces: []*opb.InterfaceConfig{{
+			Name: "intf",
+			Link: &opb.InterfaceConfig_Port{"port"},
+		}},
+	}
+)
+
 // updateXPaths sets fake XPaths only for those nodes that require it for config
 // generation: vports, lags, and any node that may be a traffic item endpoint.
 func updateXPaths(cfg *ixconfig.Ixnetwork) error {
@@ -267,18 +276,6 @@ func jsonCfgDiff(t *testing.T, wantCfg, gotCfg ixconfig.IxiaCfgNode) string {
 	return cmp.Diff(want, got)
 }
 
-func readTopology(t *testing.T, filename string) *opb.Topology {
-	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
-	if err != nil {
-		t.Fatalf("Could not read file %q: %v", filename, err)
-	}
-	topo := &opb.Topology{}
-	if err := prototext.Unmarshal(b, topo); err != nil {
-		t.Fatalf("Could not unmarshal proto from file %q: %v", filename, err)
-	}
-	return topo
-}
-
 func toFlows(t *testing.T, filename string) []*opb.Flow {
 	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
 	if err != nil {
@@ -382,43 +379,124 @@ func TestPushTopology(t *testing.T) {
 	resetIxiaTrafficCfgFn = func(context.Context, *ixATE) error {
 		return nil
 	}
+
 	tests := []struct {
 		desc, reqFile, wantCfgFile string
+		top                        *Topology
 		importErrs                 []error
 		routeTableImportErr        error
 		opErr                      error
-		wantErr                    bool
+		wantErr                    string
 	}{{
-		desc:        "Error on port config push",
-		reqFile:     "no_intfs.textproto",
-		importErrs:  []error{errors.New("ports push err")},
-		wantCfgFile: "no_intfs_cfg.json",
-		wantErr:     true,
+		desc:       "Error if no interfaces",
+		top:        &Topology{},
+		importErrs: []error{nil, nil},
+		wantErr:    "zero interfaces",
 	}, {
-		desc:        "Error on topo config push",
-		reqFile:     "no_intfs.textproto",
-		importErrs:  []error{nil, errors.New("topo push err")},
-		wantCfgFile: "no_intfs_cfg.json",
-		wantErr:     true,
+		desc: "Error if too many interfaces",
+		top: func() *Topology {
+			top := &Topology{}
+			for i := 0; i <= maxIntfs; i++ {
+				top.Interfaces = append(top.Interfaces, &opb.InterfaceConfig{})
+			}
+			return top
+		}(),
+		importErrs: []error{nil, nil},
+		wantErr:    "must be at most",
+	}, {
+		desc:       "Error on port config push",
+		top:        simpleTop,
+		importErrs: []error{errors.New("ports push err")},
+		wantErr:    "ports push",
+	}, {
+		desc:       "Error on topo config push",
+		top:        simpleTop,
+		importErrs: []error{nil, errors.New("topo push err")},
+		wantErr:    "topo push",
 	}, {
 		desc:                "Route table import err",
-		reqFile:             "no_intfs.textproto",
+		top:                 simpleTop,
 		importErrs:          []error{nil, nil},
 		routeTableImportErr: errors.New("failed route table import"),
-		wantErr:             true,
+		wantErr:             "failed route",
 	}, {
-		desc:        "Base config push",
-		reqFile:     "no_intfs.textproto",
-		importErrs:  []error{nil, nil},
-		wantCfgFile: "no_intfs_cfg.json",
-	}, {
-		desc:        "IS-IS config with no traffic",
-		reqFile:     "isis_no_traffic.textproto",
+		desc: "IS-IS config with no traffic",
+		top: &Topology{
+			Interfaces: []*opb.InterfaceConfig{{
+				Name: "intf",
+				Link: &opb.InterfaceConfig_Port{"12/1"},
+				Ethernet: &opb.EthernetConfig{
+					Mtu: 9000,
+					Fec: &opb.Fec{Enabled: true},
+				},
+				Ipv4: &opb.IpConfig{
+					AddressCidr:    "192.168.31.2/30",
+					DefaultGateway: "192.168.31.1",
+				},
+				Isis: &opb.ISISConfig{
+					Level:              opb.ISISConfig_L2,
+					Metric:             10,
+					AreaId:             "490001",
+					EnableWideMetric:   true,
+					NetworkType:        opb.ISISConfig_POINT_TO_POINT,
+					AuthType:           opb.ISISConfig_MD5,
+					AuthKey:            "md5password",
+					EnableHelloPadding: true,
+					TeRouterId:         "0.0.0.0",
+					CapabilityRouterId: "0.0.0.1",
+					HelloIntervalSec:   10,
+					DeadIntervalSec:    30,
+				},
+				Networks: []*opb.Network{{
+					Name:          "net1",
+					InterfaceName: "intf",
+					Ipv4: &opb.NetworkIp{
+						AddressCidr: "30.0.0.0/30",
+						Count:       15000,
+					},
+					Isis: &opb.IPReachability{
+						Metric:      10,
+						RouteOrigin: opb.IPReachability_INTERNAL,
+					},
+				}, {
+					Name:          "net2",
+					InterfaceName: "intf",
+					Ipv4: &opb.NetworkIp{
+						AddressCidr: "40.0.0.0/30",
+						Count:       35000,
+					},
+					Isis: &opb.IPReachability{
+						Metric:      10,
+						RouteOrigin: opb.IPReachability_INTERNAL,
+					},
+				}, {
+					Name:          "net3",
+					InterfaceName: "intf",
+					Ipv6: &opb.NetworkIp{
+						AddressCidr: "2001:4860:0:1::444:1/126",
+						Count:       15000,
+					},
+					Isis: &opb.IPReachability{
+						Metric:      10,
+						RouteOrigin: opb.IPReachability_INTERNAL,
+					},
+				}},
+			}},
+		},
 		importErrs:  []error{nil, nil},
 		wantCfgFile: "isis_no_traffic_cfg.json",
 	}, {
-		desc:        "FEC disabled",
-		reqFile:     "fec_disabled.textproto",
+		desc: "FEC disabled",
+		top: &Topology{
+			Interfaces: []*opb.InterfaceConfig{{
+				Name: "intf",
+				Link: &opb.InterfaceConfig_Port{"12/1"},
+				Ethernet: &opb.EthernetConfig{
+					Mtu: 1500,
+					Fec: &opb.Fec{Enabled: false},
+				},
+			}},
+		},
 		importErrs:  []error{nil, nil},
 		wantCfgFile: "fec_disabled.json",
 	}}
@@ -436,17 +514,16 @@ func TestPushTopology(t *testing.T) {
 				return test.routeTableImportErr
 			}
 
-			top := readTopology(t, test.reqFile)
-			gotErr := c.PushTopology(context.Background(), top)
-			if (gotErr != nil) != test.wantErr {
-				t.Errorf("PushTopology: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)
+			gotErr := c.PushTopology(context.Background(), test.top)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("PushTopology: unexpected error result, got err: %v, want %q", gotErr, test.wantErr)
 			}
-
-			if !test.wantErr {
-				wantCfg := toCfg(t, test.wantCfgFile)
-				if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
-					t.Fatalf("PushTopology: Unexpected topology config pushed, diff (-want, +got)\n%s", diff)
-				}
+			if gotErr != nil {
+				return
+			}
+			wantCfg := toCfg(t, test.wantCfgFile)
+			if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
+				t.Errorf("PushTopology: Unexpected topology config pushed, diff (-want, +got)\n%s", diff)
 			}
 		})
 	}
@@ -456,6 +533,7 @@ func TestPushTopology(t *testing.T) {
 func TestUpdateTopology(t *testing.T) {
 	tests := []struct {
 		desc                 string
+		top                  *Topology
 		operState            operState
 		importErr            error
 		routeTableImportErr  error
@@ -465,17 +543,25 @@ func TestUpdateTopology(t *testing.T) {
 		startErr             error
 		wantErr              string
 	}{{
+		desc:    "Error if no interfaces",
+		top:     &Topology{},
+		wantErr: "zero interfaces",
+	}, {
 		desc:      "Error on config push",
+		top:       simpleTop,
 		importErr: errors.New("push error"),
 		wantErr:   "push error",
 	}, {
 		desc:                "Error on route table import",
+		top:                 simpleTop,
 		routeTableImportErr: errors.New("route table import error"),
 		wantErr:             "route table import error",
 	}, {
 		desc: "traffic/protocols not yet running",
+		top:  simpleTop,
 	}, {
 		desc:                 "error starting protocols",
+		top:                  simpleTop,
 		operState:            operStateProtocolsOn,
 		startProtocolsErr:    errors.New("could not start protocols"),
 		validateProtocolsErr: errors.New("protocols not up"),
@@ -483,21 +569,25 @@ func TestUpdateTopology(t *testing.T) {
 		wantErr: "protocols not up",
 	}, {
 		desc:                 "error waiting for protocols",
+		top:                  simpleTop,
 		operState:            operStateProtocolsOn,
 		validateProtocolsErr: errors.New("protocols not up"),
 		wantErr:              "protocols not up",
 	}, {
 		desc:      "error starting traffic",
+		top:       simpleTop,
 		operState: operStateTrafficOn,
 		genErr:    errors.New("could not generate traffic"),
 		wantErr:   "could not generate traffic",
 	}, {
 		desc:      "error starting traffic",
+		top:       simpleTop,
 		operState: operStateTrafficOn,
 		startErr:  errors.New("could not start traffic"),
 		wantErr:   "could not start traffic",
 	}, {
 		desc:      "successful protocol/traffic start",
+		top:       simpleTop,
 		operState: operStateTrafficOn,
 	}}
 	for _, test := range tests {
@@ -513,6 +603,13 @@ func TestUpdateTopology(t *testing.T) {
 				c:         fc,
 				cfg:       &ixconfig.Ixnetwork{Traffic: &ixconfig.Traffic{}},
 				operState: test.operState,
+				ports: map[string]*ixconfig.Vport{
+					"port": &ixconfig.Vport{
+						Xpath:    &ixconfig.XPath{},
+						L1Config: &ixconfig.VportL1Config{},
+					},
+				},
+				intfs: make(map[string]*intf),
 			}
 			syncRouteTableFilesAndImportFn = func(context.Context, *ixATE) error {
 				return test.routeTableImportErr
@@ -526,8 +623,7 @@ func TestUpdateTopology(t *testing.T) {
 			startTrafficFn = func(context.Context, *ixATE) error {
 				return test.startErr
 			}
-
-			gotErr := c.UpdateTopology(context.Background(), &opb.Topology{})
+			gotErr := c.UpdateTopology(context.Background(), test.top)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("UpdateTopology: got err: %v, want err %q", gotErr, test.wantErr)
 			}
@@ -1359,11 +1455,13 @@ func TestStart(t *testing.T) {
 	}
 }
 
+// TODO: Use a Traffic struct in place of a reqFile and expand the
+// tests to cover more behaviors of validateInterfaces.
 func TestStartTraffic(t *testing.T) {
 	tests := []struct {
 		desc                               string
 		operState                          operState
-		intfsFile, reqFile, wantCfgFile    string
+		reqFile, wantCfgFile               string
 		resetTrafficCfgErr, resolveMacsErr error
 		importErr                          error
 		updateIDsErr                       error
@@ -1372,80 +1470,68 @@ func TestStartTraffic(t *testing.T) {
 		startErr                           error
 		wantErr                            bool
 	}{{
-		desc:      "protocols not running",
-		intfsFile: "no_intfs.textproto",
-		reqFile:   "no_flows.textproto",
-		wantErr:   true,
+		desc:    "protocols not running",
+		reqFile: "no_flows.textproto",
+		wantErr: true,
 	}, {
 		desc:      "traffic already started",
 		operState: operStateTrafficOn,
-		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 	}, {
 		desc:               "failed traffic reset",
 		operState:          operStateProtocolsOn,
 		resetTrafficCfgErr: errors.New("failed to reset traffic config"),
-		intfsFile:          "no_intfs.textproto",
 		reqFile:            "no_flows.textproto",
 		wantErr:            true,
 	}, {
 		desc:           "failed mac resolution",
 		operState:      operStateProtocolsOn,
 		resolveMacsErr: errors.New("failed to resolve macs"),
-		intfsFile:      "no_intfs.textproto",
 		reqFile:        "no_flows.textproto",
 		wantErr:        true,
 	}, {
 		desc:      "failed traffic config push",
 		operState: operStateProtocolsOn,
 		importErr: errors.New("traffic config push failed"),
-		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 		wantErr:   true,
 	}, {
 		desc:         "failed traffic item ID update",
 		operState:    operStateProtocolsOn,
 		updateIDsErr: errors.New("traffic item IDs not updated"),
-		intfsFile:    "no_intfs.textproto",
 		reqFile:      "no_flows.textproto",
 		wantErr:      true,
 	}, {
 		desc:      "failed to generate traffic",
 		operState: operStateProtocolsOn,
 		genErr:    errors.New("failed to generate traffic items"),
-		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 		wantErr:   true,
 	}, {
 		desc:      "failed to update traffic flows",
 		operState: operStateProtocolsOn,
 		flowsErr:  errors.New("failed to update traffic flows"),
-		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 		wantErr:   true,
 	}, {
 		desc:      "failed to start traffic flows",
 		operState: operStateProtocolsOn,
 		startErr:  errors.New("failed to start traffic flows"),
-		intfsFile: "no_intfs.textproto",
 		reqFile:   "no_flows.textproto",
 		wantErr:   true,
 	}, {
 		desc:        "no flows configured",
 		operState:   operStateProtocolsOn,
-		intfsFile:   "no_intfs.textproto",
 		reqFile:     "no_flows.textproto",
 		wantCfgFile: "no_flows_cfg.json",
 	}, {
 		desc:        "ipv4 with egress tracking",
 		operState:   operStateProtocolsOn,
-		intfsFile:   "intfs_for_flows.textproto",
 		reqFile:     "ipv4_flow_with_egress.textproto",
 		wantCfgFile: "ipv4_flow_with_egress.json",
 	}, {
 		desc:        "ipv6 with flow labels",
 		operState:   operStateProtocolsOn,
-		intfsFile:   "intfs_for_flows.textproto",
 		reqFile:     "ipv6_flow_with_labels.textproto",
 		wantCfgFile: "ipv6_flow_with_labels.json",
 	}}
@@ -1460,7 +1546,24 @@ func TestStartTraffic(t *testing.T) {
 			c := &ixATE{
 				c: &fakeCfgClient{importErrs: []error{nil, nil, nil}},
 			}
-			top := readTopology(t, test.intfsFile)
+
+			top := &Topology{
+				Interfaces: []*opb.InterfaceConfig{{
+					Name: "intf1",
+					Link: &opb.InterfaceConfig_Port{"1/18"},
+					Ipv6: &opb.IpConfig{
+						AddressCidr:    "2a00:1450:100f:1:192:168:130:2/126",
+						DefaultGateway: "2a00:1450:100f:1:192:168:130:1",
+					},
+				}, {
+					Name: "intf2",
+					Link: &opb.InterfaceConfig_Port{"2/8"},
+					Ipv6: &opb.IpConfig{
+						AddressCidr:    "2a00:1450:100f:1:192:168:135:2/126",
+						DefaultGateway: "2a00:1450:100f:1:192:168:135:1",
+					},
+				}},
+			}
 			if err := c.PushTopology(context.Background(), top); err != nil {
 				t.Fatalf("Failed to configure initial topology for StartTraffic test: %v", err)
 			}
@@ -1662,7 +1765,7 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 			Link:     &opb.InterfaceConfig_Port{port},
 			Ethernet: &opb.EthernetConfig{Mtu: 1500},
 			Ipv6: &opb.IpConfig{
-				AddressCidr:    "aa::/127",
+				AddressCidr:    "aa::/126",
 				DefaultGateway: "aa::2",
 			},
 			Bgp: &opb.BgpConfig{
@@ -1723,7 +1826,7 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 				DefaultGateway: "192.168.1.2",
 			},
 			Ipv6: &opb.IpConfig{
-				AddressCidr:    "aa::/127",
+				AddressCidr:    "aa::/126",
 				DefaultGateway: "aa::2",
 			},
 			Bgp: &opb.BgpConfig{

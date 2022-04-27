@@ -29,7 +29,7 @@ func (n *Port_Counters_OutFramesPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /open-traffic-generator-port/ports/port/state/counters/out-frames with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Port_Counters_OutFramesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Port_Counters_OutFramesPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Port_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Port_Counters", gs, queryPath, true, false)
-		return convertPort_Counters_OutFramesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertPort_Counters_OutFramesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Port_Counters_OutFramesPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Port_Counters_OutFramesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Port_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Port_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Port_Counters", structs[pre], queryPath, true, false)
+			qv := convertPort_Counters_OutFramesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-port/ports/port/state/counters/out-frames with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Port_Counters_OutFramesPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Port_Counters_OutFramesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Port_Counters_OutFramesPath(t, n, timeout, predicate)
+	return watch_Port_Counters_OutFramesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-port/ports/port/state/counters/out-frames to the batch object.
@@ -182,7 +210,7 @@ func (n *Port_Counters_OutOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /open-traffic-generator-port/ports/port/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Port_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Port_Counters_OutOctetsPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Port_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Port_Counters", gs, queryPath, true, false)
-		return convertPort_Counters_OutOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertPort_Counters_OutOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Port_Counters_OutOctetsPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Port_Counters_OutOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Port_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Port_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Port_Counters", structs[pre], queryPath, true, false)
+			qv := convertPort_Counters_OutOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-port/ports/port/state/counters/out-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Port_Counters_OutOctetsPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Port_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Port_Counters_OutOctetsPath(t, n, timeout, predicate)
+	return watch_Port_Counters_OutOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-port/ports/port/state/counters/out-octets to the batch object.
@@ -335,7 +391,7 @@ func (n *Port_InRatePath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
 }
 
 // Get fetches the value at /open-traffic-generator-port/ports/port/state/in-rate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Port_InRatePath) Get(t testing.TB) float32 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Port_InRatePath(t testing.TB, n ygot.PathStruct, duration time.Durati
 	t.Helper()
 	w := &oc.Float32Watcher{}
 	gs := &oc.Port{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Port", gs, queryPath, true, false)
-		return convertPort_InRatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertPort_InRatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat32)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Port_InRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 	return c
 }
 
+func watch_Port_InRatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	structs := map[string]*oc.Port{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Port{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Port", structs[pre], queryPath, true, false)
+			qv := convertPort_InRatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-port/ports/port/state/in-rate with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Port_InRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Port_InRatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
 	t.Helper()
-	return watch_Port_InRatePath(t, n, timeout, predicate)
+	return watch_Port_InRatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-port/ports/port/state/in-rate to the batch object.
@@ -488,7 +572,7 @@ func (n *Port_LinkPath) Lookup(t testing.TB) *oc.QualifiedE_Port_Link {
 }
 
 // Get fetches the value at /open-traffic-generator-port/ports/port/state/link with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Port_LinkPath) Get(t testing.TB) oc.E_Port_Link {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Port_LinkPath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.E_Port_LinkWatcher{}
 	gs := &oc.Port{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Port", gs, queryPath, true, false)
-		return convertPort_LinkPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertPort_LinkPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Port_Link)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Port_LinkPathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_Port_LinkPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Port_Link) bool) *oc.E_Port_LinkWatcher {
+	t.Helper()
+	w := &oc.E_Port_LinkWatcher{}
+	structs := map[string]*oc.Port{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Port{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Port", structs[pre], queryPath, true, false)
+			qv := convertPort_LinkPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Port_Link)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-port/ports/port/state/link with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Port_LinkPathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Port_LinkPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Port_Link) bool) *oc.E_Port_LinkWatcher {
 	t.Helper()
-	return watch_Port_LinkPath(t, n, timeout, predicate)
+	return watch_Port_LinkPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-port/ports/port/state/link to the batch object.

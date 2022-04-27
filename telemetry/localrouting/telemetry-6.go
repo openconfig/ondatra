@@ -31,7 +31,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRefPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRefPath) Get(t testing.TB) *oc.LocalRoutes_Static_NextHop_InterfaceRef {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_LocalRoutes_Static_NextHop_InterfaceRefPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.LocalRoutes_Static_NextHop_InterfaceRefWatcher{}
 	gs := &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", gs, queryPath, false, false)
-		return (&oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef{
+		qv := (&oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRefPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_LocalRoutes_Static_NextHop_InterfaceRefPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef) bool) *oc.LocalRoutes_Static_NextHop_InterfaceRefWatcher {
+	t.Helper()
+	w := &oc.LocalRoutes_Static_NextHop_InterfaceRefWatcher{}
+	structs := map[string]*oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRefPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_NextHop_InterfaceRefPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLocalRoutes_Static_NextHop_InterfaceRef) bool) *oc.LocalRoutes_Static_NextHop_InterfaceRefWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_NextHop_InterfaceRefPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHop_InterfaceRefPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref to the batch object.
@@ -180,7 +211,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath(t testing.TB, n
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", gs, queryPath, true, false)
-		return convertLocalRoutes_Static_NextHop_InterfaceRef_InterfacePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLocalRoutes_Static_NextHop_InterfaceRef_InterfacePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePathAny) Collect(t tes
 	return c
 }
 
+func watch_LocalRoutes_Static_NextHop_InterfaceRef_InterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", structs[pre], queryPath, true, false)
+			qv := convertLocalRoutes_Static_NextHop_InterfaceRef_InterfacePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHop_InterfaceRef_InterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/interface to the batch object.

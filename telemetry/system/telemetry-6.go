@@ -31,7 +31,7 @@ func (n *System_LicensePath) Lookup(t testing.TB) *oc.QualifiedSystem_License {
 }
 
 // Get fetches the value at /openconfig-system/system/license with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LicensePath) Get(t testing.TB) *oc.System_License {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_System_LicensePath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.System_LicenseWatcher{}
 	gs := &oc.System_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_License{
+		qv := (&oc.QualifiedSystem_License{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_License)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *System_LicensePathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_System_LicensePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_License) bool) *oc.System_LicenseWatcher {
+	t.Helper()
+	w := &oc.System_LicenseWatcher{}
+	structs := map[string]*oc.System_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_License{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_License)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *System_LicensePathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_LicensePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_License) bool) *oc.System_LicenseWatcher {
 	t.Helper()
-	return watch_System_LicensePath(t, n, timeout, predicate)
+	return watch_System_LicensePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license to the batch object.
@@ -182,7 +213,7 @@ func (n *System_License_LicensePath) Lookup(t testing.TB) *oc.QualifiedSystem_Li
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_LicensePath) Get(t testing.TB) *oc.System_License_License {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_System_License_LicensePath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.System_License_LicenseWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_License_License{
+		qv := (&oc.QualifiedSystem_License_License{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_License_License)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *System_License_LicensePathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_System_License_LicensePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_License_License) bool) *oc.System_License_LicenseWatcher {
+	t.Helper()
+	w := &oc.System_License_LicenseWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_License_License{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_License_License)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *System_License_LicensePathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_LicensePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_License_License) bool) *oc.System_License_LicenseWatcher {
 	t.Helper()
-	return watch_System_License_LicensePath(t, n, timeout, predicate)
+	return watch_System_License_LicensePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license to the batch object.
@@ -333,7 +395,7 @@ func (n *System_License_License_ActivePath) Lookup(t testing.TB) *oc.QualifiedBo
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/active with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_ActivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -387,10 +449,10 @@ func watch_System_License_License_ActivePath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_ActivePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_ActivePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -443,6 +505,34 @@ func (n *System_License_License_ActivePathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_License_License_ActivePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_ActivePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/active with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +540,7 @@ func (n *System_License_License_ActivePathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_ActivePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_License_License_ActivePath(t, n, timeout, predicate)
+	return watch_System_License_License_ActivePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/active to the batch object.
@@ -486,7 +576,7 @@ func (n *System_License_License_DescriptionPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -540,10 +630,10 @@ func watch_System_License_License_DescriptionPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_DescriptionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_DescriptionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -596,6 +686,34 @@ func (n *System_License_License_DescriptionPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_System_License_License_DescriptionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_DescriptionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/description with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -603,7 +721,7 @@ func (n *System_License_License_DescriptionPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_DescriptionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_License_License_DescriptionPath(t, n, timeout, predicate)
+	return watch_System_License_License_DescriptionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/description to the batch object.
@@ -639,7 +757,7 @@ func (n *System_License_License_ExpirationDatePath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/expiration-date with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_ExpirationDatePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -693,10 +811,10 @@ func watch_System_License_License_ExpirationDatePath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_ExpirationDatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_ExpirationDatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -749,6 +867,34 @@ func (n *System_License_License_ExpirationDatePathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_System_License_License_ExpirationDatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_ExpirationDatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/expiration-date with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +902,7 @@ func (n *System_License_License_ExpirationDatePathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_ExpirationDatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_License_License_ExpirationDatePath(t, n, timeout, predicate)
+	return watch_System_License_License_ExpirationDatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/expiration-date to the batch object.
@@ -792,7 +938,7 @@ func (n *System_License_License_ExpiredPath) Lookup(t testing.TB) *oc.QualifiedB
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/expired with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_ExpiredPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -846,10 +992,10 @@ func watch_System_License_License_ExpiredPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_ExpiredPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_ExpiredPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -902,6 +1048,34 @@ func (n *System_License_License_ExpiredPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_System_License_License_ExpiredPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_ExpiredPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/expired with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1083,7 @@ func (n *System_License_License_ExpiredPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_ExpiredPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_License_License_ExpiredPath(t, n, timeout, predicate)
+	return watch_System_License_License_ExpiredPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/expired to the batch object.
@@ -945,7 +1119,7 @@ func (n *System_License_License_InUsePath) Lookup(t testing.TB) *oc.QualifiedBoo
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/in-use with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_InUsePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -999,10 +1173,10 @@ func watch_System_License_License_InUsePath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_InUsePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_InUsePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1055,6 +1229,34 @@ func (n *System_License_License_InUsePathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_System_License_License_InUsePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_InUsePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/in-use with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1264,7 @@ func (n *System_License_License_InUsePathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_InUsePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_License_License_InUsePath(t, n, timeout, predicate)
+	return watch_System_License_License_InUsePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/in-use to the batch object.
@@ -1098,7 +1300,7 @@ func (n *System_License_License_IssueDatePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/issue-date with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_IssueDatePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1152,10 +1354,10 @@ func watch_System_License_License_IssueDatePath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_IssueDatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_IssueDatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1208,6 +1410,34 @@ func (n *System_License_License_IssueDatePathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_License_License_IssueDatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_IssueDatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/issue-date with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1445,7 @@ func (n *System_License_License_IssueDatePathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_IssueDatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_License_License_IssueDatePath(t, n, timeout, predicate)
+	return watch_System_License_License_IssueDatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/issue-date to the batch object.
@@ -1251,7 +1481,7 @@ func (n *System_License_License_LicenseDataPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/license-data with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_LicenseDataPath) Get(t testing.TB) oc.System_License_License_LicenseData_Union {
 	t.Helper()
@@ -1305,10 +1535,10 @@ func watch_System_License_License_LicenseDataPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.System_License_License_LicenseData_UnionWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_LicenseDataPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_LicenseDataPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_License_License_LicenseData_Union)
 		w.LastVal = val
@@ -1361,6 +1591,34 @@ func (n *System_License_License_LicenseDataPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_System_License_License_LicenseDataPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_License_License_LicenseData_Union) bool) *oc.System_License_License_LicenseData_UnionWatcher {
+	t.Helper()
+	w := &oc.System_License_License_LicenseData_UnionWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_LicenseDataPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_License_License_LicenseData_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/license-data with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1626,7 @@ func (n *System_License_License_LicenseDataPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_LicenseDataPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_License_License_LicenseData_Union) bool) *oc.System_License_License_LicenseData_UnionWatcher {
 	t.Helper()
-	return watch_System_License_License_LicenseDataPath(t, n, timeout, predicate)
+	return watch_System_License_License_LicenseDataPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/license-data to the batch object.
@@ -1404,7 +1662,7 @@ func (n *System_License_License_LicenseIdPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/license-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_LicenseIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1458,10 +1716,10 @@ func watch_System_License_License_LicenseIdPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_LicenseIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_LicenseIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1514,6 +1772,34 @@ func (n *System_License_License_LicenseIdPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_License_License_LicenseIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_LicenseIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/license-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +1807,7 @@ func (n *System_License_License_LicenseIdPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_LicenseIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_License_License_LicenseIdPath(t, n, timeout, predicate)
+	return watch_System_License_License_LicenseIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/license-id to the batch object.
@@ -1557,7 +1843,7 @@ func (n *System_License_License_ValidPath) Lookup(t testing.TB) *oc.QualifiedBoo
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/state/valid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_ValidPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1611,10 +1897,10 @@ func watch_System_License_License_ValidPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_License_License{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_License_License", gs, queryPath, true, false)
-		return convertSystem_License_License_ValidPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_License_License_ValidPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1667,6 +1953,34 @@ func (n *System_License_License_ValidPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_System_License_License_ValidPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_License_License{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_License_License{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_License_License", structs[pre], queryPath, true, false)
+			qv := convertSystem_License_License_ValidPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/license/licenses/license/state/valid with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +1988,7 @@ func (n *System_License_License_ValidPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_License_License_ValidPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_License_License_ValidPath(t, n, timeout, predicate)
+	return watch_System_License_License_ValidPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/license/licenses/license/state/valid to the batch object.
@@ -1712,7 +2026,7 @@ func (n *System_LoggingPath) Lookup(t testing.TB) *oc.QualifiedSystem_Logging {
 }
 
 // Get fetches the value at /openconfig-system/system/logging with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LoggingPath) Get(t testing.TB) *oc.System_Logging {
 	t.Helper()
@@ -1774,12 +2088,13 @@ func watch_System_LoggingPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.System_LoggingWatcher{}
 	gs := &oc.System_Logging{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Logging{
+		qv := (&oc.QualifiedSystem_Logging{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Logging)
 		w.LastVal = val
@@ -1832,6 +2147,36 @@ func (n *System_LoggingPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_System_LoggingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Logging) bool) *oc.System_LoggingWatcher {
+	t.Helper()
+	w := &oc.System_LoggingWatcher{}
+	structs := map[string]*oc.System_Logging{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Logging{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Logging)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1839,7 +2184,7 @@ func (n *System_LoggingPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_LoggingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Logging) bool) *oc.System_LoggingWatcher {
 	t.Helper()
-	return watch_System_LoggingPath(t, n, timeout, predicate)
+	return watch_System_LoggingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging to the batch object.
@@ -1863,7 +2208,7 @@ func (n *System_Logging_ConsolePath) Lookup(t testing.TB) *oc.QualifiedSystem_Lo
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_ConsolePath) Get(t testing.TB) *oc.System_Logging_Console {
 	t.Helper()
@@ -1925,12 +2270,13 @@ func watch_System_Logging_ConsolePath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.System_Logging_ConsoleWatcher{}
 	gs := &oc.System_Logging_Console{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_Console", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Logging_Console{
+		qv := (&oc.QualifiedSystem_Logging_Console{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Logging_Console)
 		w.LastVal = val
@@ -1983,6 +2329,36 @@ func (n *System_Logging_ConsolePathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_System_Logging_ConsolePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Logging_Console) bool) *oc.System_Logging_ConsoleWatcher {
+	t.Helper()
+	w := &oc.System_Logging_ConsoleWatcher{}
+	structs := map[string]*oc.System_Logging_Console{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_Console{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_Console", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Logging_Console{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Logging_Console)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/console with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1990,7 +2366,7 @@ func (n *System_Logging_ConsolePathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_ConsolePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Logging_Console) bool) *oc.System_Logging_ConsoleWatcher {
 	t.Helper()
-	return watch_System_Logging_ConsolePath(t, n, timeout, predicate)
+	return watch_System_Logging_ConsolePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/console to the batch object.
@@ -2014,7 +2390,7 @@ func (n *System_Logging_Console_SelectorPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_SelectorPath) Get(t testing.TB) *oc.System_Logging_Console_Selector {
 	t.Helper()
@@ -2076,12 +2452,13 @@ func watch_System_Logging_Console_SelectorPath(t testing.TB, n ygot.PathStruct, 
 	t.Helper()
 	w := &oc.System_Logging_Console_SelectorWatcher{}
 	gs := &oc.System_Logging_Console_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_Console_Selector", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Logging_Console_Selector{
+		qv := (&oc.QualifiedSystem_Logging_Console_Selector{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Logging_Console_Selector)
 		w.LastVal = val
@@ -2134,6 +2511,36 @@ func (n *System_Logging_Console_SelectorPathAny) Collect(t testing.TB, duration 
 	return c
 }
 
+func watch_System_Logging_Console_SelectorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Logging_Console_Selector) bool) *oc.System_Logging_Console_SelectorWatcher {
+	t.Helper()
+	w := &oc.System_Logging_Console_SelectorWatcher{}
+	structs := map[string]*oc.System_Logging_Console_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_Console_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_Console_Selector", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Logging_Console_Selector{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Logging_Console_Selector)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/console/selectors/selector with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2141,7 +2548,7 @@ func (n *System_Logging_Console_SelectorPathAny) Collect(t testing.TB, duration 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_Console_SelectorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Logging_Console_Selector) bool) *oc.System_Logging_Console_SelectorWatcher {
 	t.Helper()
-	return watch_System_Logging_Console_SelectorPath(t, n, timeout, predicate)
+	return watch_System_Logging_Console_SelectorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/console/selectors/selector to the batch object.
@@ -2163,7 +2570,7 @@ func (n *System_Logging_Console_Selector_FacilityPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/state/facility with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
 	t.Helper()
@@ -2217,10 +2624,10 @@ func watch_System_Logging_Console_Selector_FacilityPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.E_SystemLogging_SYSLOG_FACILITYWatcher{}
 	gs := &oc.System_Logging_Console_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_Console_Selector", gs, queryPath, true, false)
-		return convertSystem_Logging_Console_Selector_FacilityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_Console_Selector_FacilityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY)
 		w.LastVal = val
@@ -2273,6 +2680,34 @@ func (n *System_Logging_Console_Selector_FacilityPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_System_Logging_Console_Selector_FacilityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY) bool) *oc.E_SystemLogging_SYSLOG_FACILITYWatcher {
+	t.Helper()
+	w := &oc.E_SystemLogging_SYSLOG_FACILITYWatcher{}
+	structs := map[string]*oc.System_Logging_Console_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_Console_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_Console_Selector", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_Console_Selector_FacilityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/console/selectors/selector/state/facility with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2280,7 +2715,7 @@ func (n *System_Logging_Console_Selector_FacilityPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_Console_Selector_FacilityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY) bool) *oc.E_SystemLogging_SYSLOG_FACILITYWatcher {
 	t.Helper()
-	return watch_System_Logging_Console_Selector_FacilityPath(t, n, timeout, predicate)
+	return watch_System_Logging_Console_Selector_FacilityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/console/selectors/selector/state/facility to the batch object.
@@ -2316,7 +2751,7 @@ func (n *System_Logging_Console_Selector_SeverityPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/state/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -2370,10 +2805,10 @@ func watch_System_Logging_Console_Selector_SeverityPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.E_SystemLogging_SyslogSeverityWatcher{}
 	gs := &oc.System_Logging_Console_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_Console_Selector", gs, queryPath, true, false)
-		return convertSystem_Logging_Console_Selector_SeverityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_Console_Selector_SeverityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SyslogSeverity)
 		w.LastVal = val
@@ -2426,6 +2861,34 @@ func (n *System_Logging_Console_Selector_SeverityPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_System_Logging_Console_Selector_SeverityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SyslogSeverity) bool) *oc.E_SystemLogging_SyslogSeverityWatcher {
+	t.Helper()
+	w := &oc.E_SystemLogging_SyslogSeverityWatcher{}
+	structs := map[string]*oc.System_Logging_Console_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_Console_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_Console_Selector", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_Console_Selector_SeverityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SyslogSeverity)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/console/selectors/selector/state/severity with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2433,7 +2896,7 @@ func (n *System_Logging_Console_Selector_SeverityPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_Console_Selector_SeverityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SyslogSeverity) bool) *oc.E_SystemLogging_SyslogSeverityWatcher {
 	t.Helper()
-	return watch_System_Logging_Console_Selector_SeverityPath(t, n, timeout, predicate)
+	return watch_System_Logging_Console_Selector_SeverityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/console/selectors/selector/state/severity to the batch object.
@@ -2471,7 +2934,7 @@ func (n *System_Logging_RemoteServerPath) Lookup(t testing.TB) *oc.QualifiedSyst
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServerPath) Get(t testing.TB) *oc.System_Logging_RemoteServer {
 	t.Helper()
@@ -2533,12 +2996,13 @@ func watch_System_Logging_RemoteServerPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.System_Logging_RemoteServerWatcher{}
 	gs := &oc.System_Logging_RemoteServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Logging_RemoteServer{
+		qv := (&oc.QualifiedSystem_Logging_RemoteServer{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Logging_RemoteServer)
 		w.LastVal = val
@@ -2591,6 +3055,36 @@ func (n *System_Logging_RemoteServerPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Logging_RemoteServerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Logging_RemoteServer) bool) *oc.System_Logging_RemoteServerWatcher {
+	t.Helper()
+	w := &oc.System_Logging_RemoteServerWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Logging_RemoteServer{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Logging_RemoteServer)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2598,7 +3092,7 @@ func (n *System_Logging_RemoteServerPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Logging_RemoteServer) bool) *oc.System_Logging_RemoteServerWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServerPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server to the batch object.
@@ -2620,7 +3114,7 @@ func (n *System_Logging_RemoteServer_HostPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/state/host with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_HostPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2674,10 +3168,10 @@ func watch_System_Logging_RemoteServer_HostPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Logging_RemoteServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer", gs, queryPath, true, false)
-		return convertSystem_Logging_RemoteServer_HostPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_RemoteServer_HostPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -2730,6 +3224,34 @@ func (n *System_Logging_RemoteServer_HostPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_Logging_RemoteServer_HostPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_RemoteServer_HostPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/state/host with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2737,7 +3259,7 @@ func (n *System_Logging_RemoteServer_HostPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_HostPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_HostPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_HostPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/state/host to the batch object.
@@ -2775,7 +3297,7 @@ func (n *System_Logging_RemoteServer_RemotePortPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/state/remote-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_RemotePortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2829,10 +3351,10 @@ func watch_System_Logging_RemoteServer_RemotePortPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Logging_RemoteServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer", gs, queryPath, true, false)
-		return convertSystem_Logging_RemoteServer_RemotePortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_RemoteServer_RemotePortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2885,6 +3407,34 @@ func (n *System_Logging_RemoteServer_RemotePortPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_System_Logging_RemoteServer_RemotePortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_RemoteServer_RemotePortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/state/remote-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2892,7 +3442,7 @@ func (n *System_Logging_RemoteServer_RemotePortPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_RemotePortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_RemotePortPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_RemotePortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/state/remote-port to the batch object.
@@ -2930,7 +3480,7 @@ func (n *System_Logging_RemoteServer_SelectorPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SelectorPath) Get(t testing.TB) *oc.System_Logging_RemoteServer_Selector {
 	t.Helper()
@@ -2992,12 +3542,13 @@ func watch_System_Logging_RemoteServer_SelectorPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.System_Logging_RemoteServer_SelectorWatcher{}
 	gs := &oc.System_Logging_RemoteServer_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer_Selector", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Logging_RemoteServer_Selector{
+		qv := (&oc.QualifiedSystem_Logging_RemoteServer_Selector{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Logging_RemoteServer_Selector)
 		w.LastVal = val
@@ -3050,6 +3601,36 @@ func (n *System_Logging_RemoteServer_SelectorPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_System_Logging_RemoteServer_SelectorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Logging_RemoteServer_Selector) bool) *oc.System_Logging_RemoteServer_SelectorWatcher {
+	t.Helper()
+	w := &oc.System_Logging_RemoteServer_SelectorWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer_Selector", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Logging_RemoteServer_Selector{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Logging_RemoteServer_Selector)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3057,7 +3638,7 @@ func (n *System_Logging_RemoteServer_SelectorPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_SelectorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Logging_RemoteServer_Selector) bool) *oc.System_Logging_RemoteServer_SelectorWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_SelectorPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_SelectorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector to the batch object.
@@ -3079,7 +3660,7 @@ func (n *System_Logging_RemoteServer_Selector_FacilityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/facility with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
 	t.Helper()
@@ -3133,10 +3714,10 @@ func watch_System_Logging_RemoteServer_Selector_FacilityPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.E_SystemLogging_SYSLOG_FACILITYWatcher{}
 	gs := &oc.System_Logging_RemoteServer_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer_Selector", gs, queryPath, true, false)
-		return convertSystem_Logging_RemoteServer_Selector_FacilityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_RemoteServer_Selector_FacilityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY)
 		w.LastVal = val
@@ -3189,6 +3770,34 @@ func (n *System_Logging_RemoteServer_Selector_FacilityPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Logging_RemoteServer_Selector_FacilityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY) bool) *oc.E_SystemLogging_SYSLOG_FACILITYWatcher {
+	t.Helper()
+	w := &oc.E_SystemLogging_SYSLOG_FACILITYWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer_Selector", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_RemoteServer_Selector_FacilityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/facility with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3196,7 +3805,7 @@ func (n *System_Logging_RemoteServer_Selector_FacilityPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_Selector_FacilityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY) bool) *oc.E_SystemLogging_SYSLOG_FACILITYWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_Selector_FacilityPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_Selector_FacilityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/facility to the batch object.
@@ -3232,7 +3841,7 @@ func (n *System_Logging_RemoteServer_Selector_SeverityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -3286,10 +3895,10 @@ func watch_System_Logging_RemoteServer_Selector_SeverityPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.E_SystemLogging_SyslogSeverityWatcher{}
 	gs := &oc.System_Logging_RemoteServer_Selector{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer_Selector", gs, queryPath, true, false)
-		return convertSystem_Logging_RemoteServer_Selector_SeverityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_RemoteServer_Selector_SeverityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SyslogSeverity)
 		w.LastVal = val
@@ -3342,6 +3951,34 @@ func (n *System_Logging_RemoteServer_Selector_SeverityPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Logging_RemoteServer_Selector_SeverityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SyslogSeverity) bool) *oc.E_SystemLogging_SyslogSeverityWatcher {
+	t.Helper()
+	w := &oc.E_SystemLogging_SyslogSeverityWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer_Selector{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer_Selector{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer_Selector", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_RemoteServer_Selector_SeverityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SystemLogging_SyslogSeverity)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/severity with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3349,7 +3986,7 @@ func (n *System_Logging_RemoteServer_Selector_SeverityPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_Selector_SeverityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SystemLogging_SyslogSeverity) bool) *oc.E_SystemLogging_SyslogSeverityWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_Selector_SeverityPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_Selector_SeverityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/state/severity to the batch object.
@@ -3385,7 +4022,7 @@ func (n *System_Logging_RemoteServer_SourceAddressPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/state/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3439,10 +4076,10 @@ func watch_System_Logging_RemoteServer_SourceAddressPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Logging_RemoteServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Logging_RemoteServer", gs, queryPath, true, false)
-		return convertSystem_Logging_RemoteServer_SourceAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Logging_RemoteServer_SourceAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3495,6 +4132,34 @@ func (n *System_Logging_RemoteServer_SourceAddressPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_System_Logging_RemoteServer_SourceAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Logging_RemoteServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Logging_RemoteServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Logging_RemoteServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_Logging_RemoteServer_SourceAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/logging/remote-servers/remote-server/state/source-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3502,7 +4167,7 @@ func (n *System_Logging_RemoteServer_SourceAddressPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Logging_RemoteServer_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Logging_RemoteServer_SourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Logging_RemoteServer_SourceAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/logging/remote-servers/remote-server/state/source-address to the batch object.
@@ -3538,7 +4203,7 @@ func (n *System_LoginBannerPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/state/login-banner with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LoginBannerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3592,10 +4257,10 @@ func watch_System_LoginBannerPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System", gs, queryPath, true, false)
-		return convertSystem_LoginBannerPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_LoginBannerPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3648,6 +4313,34 @@ func (n *System_LoginBannerPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_System_LoginBannerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System", structs[pre], queryPath, true, false)
+			qv := convertSystem_LoginBannerPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/state/login-banner with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3655,7 +4348,7 @@ func (n *System_LoginBannerPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_LoginBannerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_LoginBannerPath(t, n, timeout, predicate)
+	return watch_System_LoginBannerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/state/login-banner to the batch object.

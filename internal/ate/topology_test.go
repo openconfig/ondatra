@@ -85,7 +85,7 @@ func TestAddPorts(t *testing.T) {
 		ports:       make(map[string]*ixconfig.Vport),
 	}
 
-	top := &opb.Topology{
+	top := &Topology{
 		// Invert order in function call to test alphabetization.
 		Interfaces: []*opb.InterfaceConfig{
 			{Link: &opb.InterfaceConfig_Port{secondPort}},
@@ -113,12 +113,12 @@ func TestAddPortsErrors(t *testing.T) {
 
 	tests := []struct {
 		desc    string
-		top     *opb.Topology
+		top     *Topology
 		wantErr string
 	}{{
 		desc: "port in two lags",
-		top: &opb.Topology{
-			Lags: []*opb.Lag{{
+		top: &Topology{
+			LAGs: []*opb.Lag{{
 				Ports: []string{"1/1"},
 			}, {
 				Ports: []string{"1/1"},
@@ -127,8 +127,8 @@ func TestAddPortsErrors(t *testing.T) {
 		wantErr: "belongs to two lags",
 	}, {
 		desc: "interface on port which belongs to lag",
-		top: &opb.Topology{
-			Lags:       []*opb.Lag{{Ports: []string{"1/1"}}},
+		top: &Topology{
+			LAGs:       []*opb.Lag{{Ports: []string{"1/1"}}},
 			Interfaces: []*opb.InterfaceConfig{{Link: &opb.InterfaceConfig_Port{"1/1"}}},
 		},
 		wantErr: "already belongs to lag",

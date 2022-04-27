@@ -29,7 +29,7 @@ func (n *Acl_Interface_EgressAclSet_TypePath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/egress-acl-sets/egress-acl-set/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_EgressAclSet_TypePath) Get(t testing.TB) oc.E_Acl_ACL_TYPE {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Acl_Interface_EgressAclSet_TypePath(t testing.TB, n ygot.PathStruct, 
 	t.Helper()
 	w := &oc.E_Acl_ACL_TYPEWatcher{}
 	gs := &oc.Acl_Interface_EgressAclSet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_EgressAclSet", gs, queryPath, true, false)
-		return convertAcl_Interface_EgressAclSet_TypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_Interface_EgressAclSet_TypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_TYPE)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Acl_Interface_EgressAclSet_TypePathAny) Collect(t testing.TB, duration 
 	return c
 }
 
+func watch_Acl_Interface_EgressAclSet_TypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_TYPE) bool) *oc.E_Acl_ACL_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_Acl_ACL_TYPEWatcher{}
+	structs := map[string]*oc.Acl_Interface_EgressAclSet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_EgressAclSet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_EgressAclSet", structs[pre], queryPath, true, false)
+			qv := convertAcl_Interface_EgressAclSet_TypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Acl_ACL_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/egress-acl-sets/egress-acl-set/state/type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Acl_Interface_EgressAclSet_TypePathAny) Collect(t testing.TB, duration 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_EgressAclSet_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Acl_ACL_TYPE) bool) *oc.E_Acl_ACL_TYPEWatcher {
 	t.Helper()
-	return watch_Acl_Interface_EgressAclSet_TypePath(t, n, timeout, predicate)
+	return watch_Acl_Interface_EgressAclSet_TypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/egress-acl-sets/egress-acl-set/state/type to the batch object.
@@ -182,7 +210,7 @@ func (n *Acl_Interface_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/state/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Acl_Interface_IdPath(t testing.TB, n ygot.PathStruct, duration time.D
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Acl_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface", gs, queryPath, true, false)
-		return convertAcl_Interface_IdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_Interface_IdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Acl_Interface_IdPathAny) Collect(t testing.TB, duration time.Duration) 
 	return c
 }
 
+func watch_Acl_Interface_IdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Acl_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface", structs[pre], queryPath, true, false)
+			qv := convertAcl_Interface_IdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/state/id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Acl_Interface_IdPathAny) Collect(t testing.TB, duration time.Duration) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Acl_Interface_IdPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/state/id to the batch object.
@@ -337,7 +393,7 @@ func (n *Acl_Interface_IngressAclSetPath) Lookup(t testing.TB) *oc.QualifiedAcl_
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSetPath) Get(t testing.TB) *oc.Acl_Interface_IngressAclSet {
 	t.Helper()
@@ -399,12 +455,13 @@ func watch_Acl_Interface_IngressAclSetPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Acl_Interface_IngressAclSetWatcher{}
 	gs := &oc.Acl_Interface_IngressAclSet{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_IngressAclSet", gs, queryPath, false, false)
-		return (&oc.QualifiedAcl_Interface_IngressAclSet{
+		qv := (&oc.QualifiedAcl_Interface_IngressAclSet{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_Interface_IngressAclSet)
 		w.LastVal = val
@@ -457,6 +514,36 @@ func (n *Acl_Interface_IngressAclSetPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Acl_Interface_IngressAclSetPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_Interface_IngressAclSet) bool) *oc.Acl_Interface_IngressAclSetWatcher {
+	t.Helper()
+	w := &oc.Acl_Interface_IngressAclSetWatcher{}
+	structs := map[string]*oc.Acl_Interface_IngressAclSet{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_IngressAclSet{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_IngressAclSet", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedAcl_Interface_IngressAclSet{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_Interface_IngressAclSet)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -464,7 +551,7 @@ func (n *Acl_Interface_IngressAclSetPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IngressAclSetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_Interface_IngressAclSet) bool) *oc.Acl_Interface_IngressAclSetWatcher {
 	t.Helper()
-	return watch_Acl_Interface_IngressAclSetPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IngressAclSetPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set to the batch object.
@@ -488,7 +575,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntryPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_AclEntryPath) Get(t testing.TB) *oc.Acl_Interface_IngressAclSet_AclEntry {
 	t.Helper()
@@ -550,12 +637,13 @@ func watch_Acl_Interface_IngressAclSet_AclEntryPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.Acl_Interface_IngressAclSet_AclEntryWatcher{}
 	gs := &oc.Acl_Interface_IngressAclSet_AclEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", gs, queryPath, false, false)
-		return (&oc.QualifiedAcl_Interface_IngressAclSet_AclEntry{
+		qv := (&oc.QualifiedAcl_Interface_IngressAclSet_AclEntry{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_Interface_IngressAclSet_AclEntry)
 		w.LastVal = val
@@ -608,6 +696,36 @@ func (n *Acl_Interface_IngressAclSet_AclEntryPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_Acl_Interface_IngressAclSet_AclEntryPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_Interface_IngressAclSet_AclEntry) bool) *oc.Acl_Interface_IngressAclSet_AclEntryWatcher {
+	t.Helper()
+	w := &oc.Acl_Interface_IngressAclSet_AclEntryWatcher{}
+	structs := map[string]*oc.Acl_Interface_IngressAclSet_AclEntry{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_IngressAclSet_AclEntry{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedAcl_Interface_IngressAclSet_AclEntry{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_Interface_IngressAclSet_AclEntry)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -615,7 +733,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntryPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IngressAclSet_AclEntryPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_Interface_IngressAclSet_AclEntry) bool) *oc.Acl_Interface_IngressAclSet_AclEntryWatcher {
 	t.Helper()
-	return watch_Acl_Interface_IngressAclSet_AclEntryPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IngressAclSet_AclEntryPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry to the batch object.
@@ -637,7 +755,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -691,10 +809,10 @@ func watch_Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Acl_Interface_IngressAclSet_AclEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", gs, queryPath, true, false)
-		return convertAcl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -747,6 +865,34 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPathAny) Collect(t te
 	return c
 }
 
+func watch_Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Acl_Interface_IngressAclSet_AclEntry{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_IngressAclSet_AclEntry{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", structs[pre], queryPath, true, false)
+			qv := convertAcl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -754,7 +900,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IngressAclSet_AclEntry_MatchedOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-octets to the batch object.
@@ -790,7 +936,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-packets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -844,10 +990,10 @@ func watch_Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath(t testing.TB,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Acl_Interface_IngressAclSet_AclEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", gs, queryPath, true, false)
-		return convertAcl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -900,6 +1046,34 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPathAny) Collect(t t
 	return c
 }
 
+func watch_Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Acl_Interface_IngressAclSet_AclEntry{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_IngressAclSet_AclEntry{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", structs[pre], queryPath, true, false)
+			qv := convertAcl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-packets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -907,7 +1081,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IngressAclSet_AclEntry_MatchedPacketsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-packets to the batch object.
@@ -943,7 +1117,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_SequenceIdPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/sequence-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_Interface_IngressAclSet_AclEntry_SequenceIdPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -997,10 +1171,10 @@ func watch_Acl_Interface_IngressAclSet_AclEntry_SequenceIdPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Acl_Interface_IngressAclSet_AclEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", gs, queryPath, true, false)
-		return convertAcl_Interface_IngressAclSet_AclEntry_SequenceIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_Interface_IngressAclSet_AclEntry_SequenceIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -1053,6 +1227,34 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_SequenceIdPathAny) Collect(t testi
 	return c
 }
 
+func watch_Acl_Interface_IngressAclSet_AclEntry_SequenceIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Acl_Interface_IngressAclSet_AclEntry{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_Interface_IngressAclSet_AclEntry{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_Interface_IngressAclSet_AclEntry", structs[pre], queryPath, true, false)
+			qv := convertAcl_Interface_IngressAclSet_AclEntry_SequenceIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/sequence-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1060,7 +1262,7 @@ func (n *Acl_Interface_IngressAclSet_AclEntry_SequenceIdPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_Interface_IngressAclSet_AclEntry_SequenceIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Acl_Interface_IngressAclSet_AclEntry_SequenceIdPath(t, n, timeout, predicate)
+	return watch_Acl_Interface_IngressAclSet_AclEntry_SequenceIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/sequence-id to the batch object.

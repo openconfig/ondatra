@@ -29,7 +29,7 @@ func (n *Interface_Ipv6Neighbor_LinkLayerAddressPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /open-traffic-generator-discovery/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/link-layer-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Ipv6Neighbor_LinkLayerAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Interface_Ipv6Neighbor_LinkLayerAddressPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface_Ipv6Neighbor{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Ipv6Neighbor", gs, queryPath, true, false)
-		return convertInterface_Ipv6Neighbor_LinkLayerAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_Ipv6Neighbor_LinkLayerAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Interface_Ipv6Neighbor_LinkLayerAddressPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Interface_Ipv6Neighbor_LinkLayerAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface_Ipv6Neighbor{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Ipv6Neighbor{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Ipv6Neighbor", structs[pre], queryPath, true, false)
+			qv := convertInterface_Ipv6Neighbor_LinkLayerAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-discovery/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/link-layer-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Interface_Ipv6Neighbor_LinkLayerAddressPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_Ipv6Neighbor_LinkLayerAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_Ipv6Neighbor_LinkLayerAddressPath(t, n, timeout, predicate)
+	return watch_Interface_Ipv6Neighbor_LinkLayerAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-discovery/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/link-layer-address to the batch object.
@@ -182,7 +210,7 @@ func (n *Interface_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /open-traffic-generator-discovery/interfaces/interface/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Interface_NamePath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface", gs, queryPath, true, false)
-		return convertInterface_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertInterface_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Interface_NamePathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Interface_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface", structs[pre], queryPath, true, false)
+			qv := convertInterface_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-discovery/interfaces/interface/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Interface_NamePathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Interface_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Interface_NamePath(t, n, timeout, predicate)
+	return watch_Interface_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-discovery/interfaces/interface/state/name to the batch object.

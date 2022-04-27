@@ -31,7 +31,7 @@ func (n *System_ProcessPath) Lookup(t testing.TB) *oc.QualifiedSystem_Process {
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_ProcessPath) Get(t testing.TB) *oc.System_Process {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_System_ProcessPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.System_ProcessWatcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Process{
+		qv := (&oc.QualifiedSystem_Process{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Process)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *System_ProcessPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_System_ProcessPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Process) bool) *oc.System_ProcessWatcher {
+	t.Helper()
+	w := &oc.System_ProcessWatcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Process{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Process)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *System_ProcessPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_ProcessPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Process) bool) *oc.System_ProcessWatcher {
 	t.Helper()
-	return watch_System_ProcessPath(t, n, timeout, predicate)
+	return watch_System_ProcessPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process to the batch object.
@@ -180,7 +211,7 @@ func (n *System_Process_ArgsPath) Lookup(t testing.TB) *oc.QualifiedStringSlice 
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/args with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_ArgsPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_System_Process_ArgsPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.StringSliceWatcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_ArgsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_ArgsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedStringSlice)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *System_Process_ArgsPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_System_Process_ArgsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_ArgsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/args with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *System_Process_ArgsPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_ArgsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
 	t.Helper()
-	return watch_System_Process_ArgsPath(t, n, timeout, predicate)
+	return watch_System_Process_ArgsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/args to the batch object.
@@ -333,7 +392,7 @@ func (n *System_Process_CpuUsageSystemPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/cpu-usage-system with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_CpuUsageSystemPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -387,10 +446,10 @@ func watch_System_Process_CpuUsageSystemPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_CpuUsageSystemPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_CpuUsageSystemPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -443,6 +502,34 @@ func (n *System_Process_CpuUsageSystemPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_Process_CpuUsageSystemPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_CpuUsageSystemPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/cpu-usage-system with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +537,7 @@ func (n *System_Process_CpuUsageSystemPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_CpuUsageSystemPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Process_CpuUsageSystemPath(t, n, timeout, predicate)
+	return watch_System_Process_CpuUsageSystemPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/cpu-usage-system to the batch object.
@@ -486,7 +573,7 @@ func (n *System_Process_CpuUsageUserPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/cpu-usage-user with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_CpuUsageUserPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -540,10 +627,10 @@ func watch_System_Process_CpuUsageUserPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_CpuUsageUserPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_CpuUsageUserPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -596,6 +683,34 @@ func (n *System_Process_CpuUsageUserPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Process_CpuUsageUserPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_CpuUsageUserPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/cpu-usage-user with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -603,7 +718,7 @@ func (n *System_Process_CpuUsageUserPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_CpuUsageUserPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Process_CpuUsageUserPath(t, n, timeout, predicate)
+	return watch_System_Process_CpuUsageUserPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/cpu-usage-user to the batch object.
@@ -639,7 +754,7 @@ func (n *System_Process_CpuUtilizationPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/cpu-utilization with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_CpuUtilizationPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -693,10 +808,10 @@ func watch_System_Process_CpuUtilizationPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_CpuUtilizationPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_CpuUtilizationPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -749,6 +864,34 @@ func (n *System_Process_CpuUtilizationPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_Process_CpuUtilizationPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_CpuUtilizationPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/cpu-utilization with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +899,7 @@ func (n *System_Process_CpuUtilizationPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_CpuUtilizationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Process_CpuUtilizationPath(t, n, timeout, predicate)
+	return watch_System_Process_CpuUtilizationPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/cpu-utilization to the batch object.
@@ -792,7 +935,7 @@ func (n *System_Process_MemoryUsagePath) Lookup(t testing.TB) *oc.QualifiedUint6
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/memory-usage with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_MemoryUsagePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -846,10 +989,10 @@ func watch_System_Process_MemoryUsagePath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_MemoryUsagePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_MemoryUsagePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -902,6 +1045,34 @@ func (n *System_Process_MemoryUsagePathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_System_Process_MemoryUsagePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_MemoryUsagePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/memory-usage with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1080,7 @@ func (n *System_Process_MemoryUsagePathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_MemoryUsagePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Process_MemoryUsagePath(t, n, timeout, predicate)
+	return watch_System_Process_MemoryUsagePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/memory-usage to the batch object.
@@ -945,7 +1116,7 @@ func (n *System_Process_MemoryUtilizationPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/memory-utilization with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_MemoryUtilizationPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -999,10 +1170,10 @@ func watch_System_Process_MemoryUtilizationPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_MemoryUtilizationPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_MemoryUtilizationPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -1055,6 +1226,34 @@ func (n *System_Process_MemoryUtilizationPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_Process_MemoryUtilizationPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_MemoryUtilizationPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/memory-utilization with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1261,7 @@ func (n *System_Process_MemoryUtilizationPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_MemoryUtilizationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Process_MemoryUtilizationPath(t, n, timeout, predicate)
+	return watch_System_Process_MemoryUtilizationPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/memory-utilization to the batch object.
@@ -1098,7 +1297,7 @@ func (n *System_Process_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1152,10 +1351,10 @@ func watch_System_Process_NamePath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1208,6 +1407,34 @@ func (n *System_Process_NamePathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_System_Process_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1442,7 @@ func (n *System_Process_NamePathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Process_NamePath(t, n, timeout, predicate)
+	return watch_System_Process_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/name to the batch object.
@@ -1251,7 +1478,7 @@ func (n *System_Process_PidPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/pid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_PidPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1305,10 +1532,10 @@ func watch_System_Process_PidPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_PidPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_PidPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1361,6 +1588,34 @@ func (n *System_Process_PidPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_System_Process_PidPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_PidPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/pid with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1623,7 @@ func (n *System_Process_PidPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_PidPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Process_PidPath(t, n, timeout, predicate)
+	return watch_System_Process_PidPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/pid to the batch object.
@@ -1404,7 +1659,7 @@ func (n *System_Process_StartTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 
 }
 
 // Get fetches the value at /openconfig-system/system/processes/process/state/start-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Process_StartTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1458,10 +1713,10 @@ func watch_System_Process_StartTimePath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Process{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Process", gs, queryPath, true, false)
-		return convertSystem_Process_StartTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Process_StartTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1514,6 +1769,34 @@ func (n *System_Process_StartTimePathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Process_StartTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Process{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Process{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Process", structs[pre], queryPath, true, false)
+			qv := convertSystem_Process_StartTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/processes/process/state/start-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +1804,7 @@ func (n *System_Process_StartTimePathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Process_StartTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Process_StartTimePath(t, n, timeout, predicate)
+	return watch_System_Process_StartTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/processes/process/state/start-time to the batch object.
@@ -1559,7 +1842,7 @@ func (n *System_SshServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_SshServe
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServerPath) Get(t testing.TB) *oc.System_SshServer {
 	t.Helper()
@@ -1621,12 +1904,13 @@ func watch_System_SshServerPath(t testing.TB, n ygot.PathStruct, duration time.D
 	t.Helper()
 	w := &oc.System_SshServerWatcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_SshServer{
+		qv := (&oc.QualifiedSystem_SshServer{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_SshServer)
 		w.LastVal = val
@@ -1679,6 +1963,36 @@ func (n *System_SshServerPathAny) Collect(t testing.TB, duration time.Duration) 
 	return c
 }
 
+func watch_System_SshServerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_SshServer) bool) *oc.System_SshServerWatcher {
+	t.Helper()
+	w := &oc.System_SshServerWatcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_SshServer{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_SshServer)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1686,7 +2000,7 @@ func (n *System_SshServerPathAny) Collect(t testing.TB, duration time.Duration) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_SshServer) bool) *oc.System_SshServerWatcher {
 	t.Helper()
-	return watch_System_SshServerPath(t, n, timeout, predicate)
+	return watch_System_SshServerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server to the batch object.
@@ -1710,7 +2024,7 @@ func (n *System_SshServer_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/state/enable with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_EnablePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1764,10 +2078,10 @@ func watch_System_SshServer_EnablePath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, true, false)
-		return convertSystem_SshServer_EnablePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_SshServer_EnablePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1820,6 +2134,34 @@ func (n *System_SshServer_EnablePathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_System_SshServer_EnablePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_SshServer_EnablePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server/state/enable with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1827,7 +2169,7 @@ func (n *System_SshServer_EnablePathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServer_EnablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_SshServer_EnablePath(t, n, timeout, predicate)
+	return watch_System_SshServer_EnablePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server/state/enable to the batch object.
@@ -1865,7 +2207,7 @@ func (n *System_SshServer_ProtocolVersionPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/state/protocol-version with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_ProtocolVersionPath) Get(t testing.TB) oc.E_SshServer_ProtocolVersion {
 	t.Helper()
@@ -1919,10 +2261,10 @@ func watch_System_SshServer_ProtocolVersionPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.E_SshServer_ProtocolVersionWatcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, true, false)
-		return convertSystem_SshServer_ProtocolVersionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_SshServer_ProtocolVersionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_SshServer_ProtocolVersion)
 		w.LastVal = val
@@ -1975,6 +2317,34 @@ func (n *System_SshServer_ProtocolVersionPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_SshServer_ProtocolVersionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_SshServer_ProtocolVersion) bool) *oc.E_SshServer_ProtocolVersionWatcher {
+	t.Helper()
+	w := &oc.E_SshServer_ProtocolVersionWatcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_SshServer_ProtocolVersionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_SshServer_ProtocolVersion)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server/state/protocol-version with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1982,7 +2352,7 @@ func (n *System_SshServer_ProtocolVersionPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServer_ProtocolVersionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_SshServer_ProtocolVersion) bool) *oc.E_SshServer_ProtocolVersionWatcher {
 	t.Helper()
-	return watch_System_SshServer_ProtocolVersionPath(t, n, timeout, predicate)
+	return watch_System_SshServer_ProtocolVersionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server/state/protocol-version to the batch object.
@@ -2018,7 +2388,7 @@ func (n *System_SshServer_RateLimitPath) Lookup(t testing.TB) *oc.QualifiedUint1
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/state/rate-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_RateLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2072,10 +2442,10 @@ func watch_System_SshServer_RateLimitPath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, true, false)
-		return convertSystem_SshServer_RateLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_SshServer_RateLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2128,6 +2498,34 @@ func (n *System_SshServer_RateLimitPathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_System_SshServer_RateLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_SshServer_RateLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server/state/rate-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2135,7 +2533,7 @@ func (n *System_SshServer_RateLimitPathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServer_RateLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_SshServer_RateLimitPath(t, n, timeout, predicate)
+	return watch_System_SshServer_RateLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server/state/rate-limit to the batch object.
@@ -2171,7 +2569,7 @@ func (n *System_SshServer_SessionLimitPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/state/session-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_SessionLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2225,10 +2623,10 @@ func watch_System_SshServer_SessionLimitPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, true, false)
-		return convertSystem_SshServer_SessionLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_SshServer_SessionLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2281,6 +2679,34 @@ func (n *System_SshServer_SessionLimitPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_SshServer_SessionLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_SshServer_SessionLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server/state/session-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2288,7 +2714,7 @@ func (n *System_SshServer_SessionLimitPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServer_SessionLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_SshServer_SessionLimitPath(t, n, timeout, predicate)
+	return watch_System_SshServer_SessionLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server/state/session-limit to the batch object.
@@ -2324,7 +2750,7 @@ func (n *System_SshServer_TimeoutPath) Lookup(t testing.TB) *oc.QualifiedUint16 
 }
 
 // Get fetches the value at /openconfig-system/system/ssh-server/state/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_SshServer_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2378,10 +2804,10 @@ func watch_System_SshServer_TimeoutPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_SshServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_SshServer", gs, queryPath, true, false)
-		return convertSystem_SshServer_TimeoutPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_SshServer_TimeoutPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2434,6 +2860,34 @@ func (n *System_SshServer_TimeoutPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_SshServer_TimeoutPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_SshServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_SshServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_SshServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_SshServer_TimeoutPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ssh-server/state/timeout with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2441,7 +2895,7 @@ func (n *System_SshServer_TimeoutPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_SshServer_TimeoutPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_SshServer_TimeoutPath(t, n, timeout, predicate)
+	return watch_System_SshServer_TimeoutPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ssh-server/state/timeout to the batch object.
@@ -2479,7 +2933,7 @@ func (n *System_TelnetServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Telne
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServerPath) Get(t testing.TB) *oc.System_TelnetServer {
 	t.Helper()
@@ -2541,12 +2995,13 @@ func watch_System_TelnetServerPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.System_TelnetServerWatcher{}
 	gs := &oc.System_TelnetServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_TelnetServer", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_TelnetServer{
+		qv := (&oc.QualifiedSystem_TelnetServer{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_TelnetServer)
 		w.LastVal = val
@@ -2599,6 +3054,36 @@ func (n *System_TelnetServerPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_System_TelnetServerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_TelnetServer) bool) *oc.System_TelnetServerWatcher {
+	t.Helper()
+	w := &oc.System_TelnetServerWatcher{}
+	structs := map[string]*oc.System_TelnetServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_TelnetServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_TelnetServer", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_TelnetServer{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_TelnetServer)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/telnet-server with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2606,7 +3091,7 @@ func (n *System_TelnetServerPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_TelnetServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_TelnetServer) bool) *oc.System_TelnetServerWatcher {
 	t.Helper()
-	return watch_System_TelnetServerPath(t, n, timeout, predicate)
+	return watch_System_TelnetServerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/telnet-server to the batch object.
@@ -2630,7 +3115,7 @@ func (n *System_TelnetServer_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool 
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/state/enable with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_EnablePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2684,10 +3169,10 @@ func watch_System_TelnetServer_EnablePath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_TelnetServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_TelnetServer", gs, queryPath, true, false)
-		return convertSystem_TelnetServer_EnablePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_TelnetServer_EnablePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -2740,6 +3225,34 @@ func (n *System_TelnetServer_EnablePathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_System_TelnetServer_EnablePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_TelnetServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_TelnetServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_TelnetServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_TelnetServer_EnablePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/telnet-server/state/enable with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2747,7 +3260,7 @@ func (n *System_TelnetServer_EnablePathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_TelnetServer_EnablePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_TelnetServer_EnablePath(t, n, timeout, predicate)
+	return watch_System_TelnetServer_EnablePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/telnet-server/state/enable to the batch object.
@@ -2783,7 +3296,7 @@ func (n *System_TelnetServer_RateLimitPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/state/rate-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_RateLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2837,10 +3350,10 @@ func watch_System_TelnetServer_RateLimitPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_TelnetServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_TelnetServer", gs, queryPath, true, false)
-		return convertSystem_TelnetServer_RateLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_TelnetServer_RateLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2893,6 +3406,34 @@ func (n *System_TelnetServer_RateLimitPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_TelnetServer_RateLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_TelnetServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_TelnetServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_TelnetServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_TelnetServer_RateLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/telnet-server/state/rate-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2900,7 +3441,7 @@ func (n *System_TelnetServer_RateLimitPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_TelnetServer_RateLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_TelnetServer_RateLimitPath(t, n, timeout, predicate)
+	return watch_System_TelnetServer_RateLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/telnet-server/state/rate-limit to the batch object.
@@ -2936,7 +3477,7 @@ func (n *System_TelnetServer_SessionLimitPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/state/session-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_SessionLimitPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2990,10 +3531,10 @@ func watch_System_TelnetServer_SessionLimitPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_TelnetServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_TelnetServer", gs, queryPath, true, false)
-		return convertSystem_TelnetServer_SessionLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_TelnetServer_SessionLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -3046,6 +3587,34 @@ func (n *System_TelnetServer_SessionLimitPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_TelnetServer_SessionLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_TelnetServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_TelnetServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_TelnetServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_TelnetServer_SessionLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/telnet-server/state/session-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3053,7 +3622,7 @@ func (n *System_TelnetServer_SessionLimitPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_TelnetServer_SessionLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_TelnetServer_SessionLimitPath(t, n, timeout, predicate)
+	return watch_System_TelnetServer_SessionLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/telnet-server/state/session-limit to the batch object.
@@ -3089,7 +3658,7 @@ func (n *System_TelnetServer_TimeoutPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-system/system/telnet-server/state/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_TelnetServer_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3143,10 +3712,10 @@ func watch_System_TelnetServer_TimeoutPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_TelnetServer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_TelnetServer", gs, queryPath, true, false)
-		return convertSystem_TelnetServer_TimeoutPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_TelnetServer_TimeoutPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -3199,6 +3768,34 @@ func (n *System_TelnetServer_TimeoutPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_TelnetServer_TimeoutPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_TelnetServer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_TelnetServer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_TelnetServer", structs[pre], queryPath, true, false)
+			qv := convertSystem_TelnetServer_TimeoutPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/telnet-server/state/timeout with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3206,7 +3803,7 @@ func (n *System_TelnetServer_TimeoutPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_TelnetServer_TimeoutPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_TelnetServer_TimeoutPath(t, n, timeout, predicate)
+	return watch_System_TelnetServer_TimeoutPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/telnet-server/state/timeout to the batch object.

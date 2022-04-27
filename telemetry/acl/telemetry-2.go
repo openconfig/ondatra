@@ -29,7 +29,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/dscp-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPath) Get(t testing.TB) []uint8 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Acl_AclSet_AclEntry_Ipv4_DscpSetPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint8SliceWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv4_DscpSetPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv4_DscpSetPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8Slice)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv4_DscpSetPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
+	t.Helper()
+	w := &oc.Uint8SliceWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv4{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv4_DscpSetPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8Slice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/dscp-set with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8Slice) bool) *oc.Uint8SliceWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv4_DscpSetPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv4_DscpSetPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/dscp-set to the batch object.
@@ -182,7 +210,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/hop-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Acl_AclSet_AclEntry_Ipv4_HopLimitPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv4_HopLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv4_HopLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv4{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv4_HopLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/hop-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv4_HopLimitPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/hop-limit to the batch object.
@@ -335,7 +391,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPath) Get(t testing.TB) oc.Acl_AclSet_AclEntry_Ipv4_Protocol_Union {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Acl_AclSet_AclEntry_Ipv4_ProtocolPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Acl_AclSet_AclEntry_Ipv4_Protocol_UnionWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv4_ProtocolPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv4_ProtocolPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv4_ProtocolPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union) bool) *oc.Acl_AclSet_AclEntry_Ipv4_Protocol_UnionWatcher {
+	t.Helper()
+	w := &oc.Acl_AclSet_AclEntry_Ipv4_Protocol_UnionWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv4{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv4_ProtocolPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/protocol with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union) bool) *oc.Acl_AclSet_AclEntry_Ipv4_Protocol_UnionWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv4_ProtocolPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv4_ProtocolPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/protocol to the batch object.
@@ -488,7 +572,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Acl_AclSet_AclEntry_Ipv4_SourceAddressPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv4_SourceAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv4_SourceAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv4{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv4", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv4_SourceAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv4_SourceAddressPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address to the batch object.
@@ -643,7 +755,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6Path) Lookup(t testing.TB) *oc.QualifiedAcl_Acl
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6Path) Get(t testing.TB) *oc.Acl_AclSet_AclEntry_Ipv6 {
 	t.Helper()
@@ -705,12 +817,13 @@ func watch_Acl_AclSet_AclEntry_Ipv6Path(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Acl_AclSet_AclEntry_Ipv6Watcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", gs, queryPath, false, false)
-		return (&oc.QualifiedAcl_AclSet_AclEntry_Ipv6{
+		qv := (&oc.QualifiedAcl_AclSet_AclEntry_Ipv6{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Ipv6)
 		w.LastVal = val
@@ -763,6 +876,36 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv6PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Ipv6) bool) *oc.Acl_AclSet_AclEntry_Ipv6Watcher {
+	t.Helper()
+	w := &oc.Acl_AclSet_AclEntry_Ipv6Watcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedAcl_AclSet_AclEntry_Ipv6{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedAcl_AclSet_AclEntry_Ipv6)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -770,7 +913,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedAcl_AclSet_AclEntry_Ipv6) bool) *oc.Acl_AclSet_AclEntry_Ipv6Watcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv6Path(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv6PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6 to the batch object.
@@ -792,7 +935,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -846,10 +989,10 @@ func watch_Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv6_DestinationAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv6_DestinationAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -902,6 +1045,34 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv6_DestinationAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1080,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address to the batch object.
@@ -945,7 +1116,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-flow-label with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -999,10 +1170,10 @@ func watch_Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Acl_AclSet_AclEntry_Ipv6{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", gs, queryPath, true, false)
-		return convertAcl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertAcl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -1055,6 +1226,34 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPathAny) Collect(t testing
 	return c
 }
 
+func watch_Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Acl_AclSet_AclEntry_Ipv6{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Acl_AclSet_AclEntry_Ipv6{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Acl_AclSet_AclEntry_Ipv6", structs[pre], queryPath, true, false)
+			qv := convertAcl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-flow-label with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1261,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath(t, n, timeout, predicate)
+	return watch_Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-flow-label to the batch object.

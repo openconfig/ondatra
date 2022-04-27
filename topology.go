@@ -37,13 +37,13 @@ func (tp *Topology) String() string {
 
 // New returns a new ATE topology.
 func (tp *Topology) New() *ATETopology {
-	return &ATETopology{ate: tp.ate, top: &opb.Topology{}}
+	return &ATETopology{ate: tp.ate, top: &ate.Topology{}}
 }
 
 // ATETopology is an ATE topology.
 type ATETopology struct {
 	ate *binding.ATE
-	top *opb.Topology
+	top *ate.Topology
 }
 
 func (at *ATETopology) String() string {
@@ -88,7 +88,7 @@ func (at *ATETopology) AddLAG(name string) *LAG {
 		Name: name,
 		Lacp: &opb.Lag_Lacp{Enabled: true},
 	}
-	at.top.Lags = append(at.top.Lags, lpb)
+	at.top.LAGs = append(at.top.LAGs, lpb)
 	return &LAG{pb: lpb}
 }
 

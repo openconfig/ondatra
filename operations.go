@@ -285,3 +285,35 @@ func (r *KillProcessOp) Operate(t testing.TB) {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
 }
+
+// NewSwitchControlProcessor creates a new switch control processor operation.
+func (o *Operations) NewSwitchControlProcessor() *SwitchControlProcessorOp {
+	return &SwitchControlProcessorOp{
+		dev: o.dev,
+	}
+}
+
+// SwitchControlProcessorOp is an operation that switches from the current
+// route procesor to a provided destination route processor.
+type SwitchControlProcessorOp struct {
+	dev  binding.Device
+	dest string
+}
+
+func (s *SwitchControlProcessorOp) String() string {
+	return fmt.Sprintf("SwitchControlProcessorOp%+v", *s)
+}
+
+// WithDestination sets the destination route processor.
+func (s *SwitchControlProcessorOp) WithDestination(dest string) *SwitchControlProcessorOp {
+	s.dest = dest
+	return s
+}
+
+// Operate performs the SwitchControlProcessor operation.
+func (s *SwitchControlProcessorOp) Operate(t testing.TB) {
+	t.Helper()
+	if err := operations.SwitchControlProcessor(context.Background(), s.dev, s.dest); err != nil {
+		t.Fatalf("Operate(t) on %s: %v", s, err)
+	}
+}

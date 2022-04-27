@@ -29,7 +29,7 @@ func (n *Lldp_Counters_FrameErrorInPath) Lookup(t testing.TB) *oc.QualifiedUint6
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/frame-error-in with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_FrameErrorInPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Lldp_Counters_FrameErrorInPath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_FrameErrorInPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_FrameErrorInPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Lldp_Counters_FrameErrorInPathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_Lldp_Counters_FrameErrorInPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_FrameErrorInPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/frame-error-in with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Lldp_Counters_FrameErrorInPathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_FrameErrorInPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Counters_FrameErrorInPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_FrameErrorInPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/frame-error-in to the batch object.
@@ -182,7 +210,7 @@ func (n *Lldp_Counters_FrameInPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/frame-in with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_FrameInPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Lldp_Counters_FrameInPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_FrameInPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_FrameInPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Lldp_Counters_FrameInPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Lldp_Counters_FrameInPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_FrameInPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/frame-in with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Lldp_Counters_FrameInPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_FrameInPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Counters_FrameInPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_FrameInPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/frame-in to the batch object.
@@ -335,7 +391,7 @@ func (n *Lldp_Counters_FrameOutPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/frame-out with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_FrameOutPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Lldp_Counters_FrameOutPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_FrameOutPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_FrameOutPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Lldp_Counters_FrameOutPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Lldp_Counters_FrameOutPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_FrameOutPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/frame-out with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Lldp_Counters_FrameOutPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_FrameOutPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Counters_FrameOutPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_FrameOutPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/frame-out to the batch object.
@@ -488,7 +572,7 @@ func (n *Lldp_Counters_LastClearPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/last-clear with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_LastClearPath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Lldp_Counters_LastClearPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_LastClearPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_LastClearPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Lldp_Counters_LastClearPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Lldp_Counters_LastClearPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_LastClearPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/last-clear with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Lldp_Counters_LastClearPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_LastClearPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Lldp_Counters_LastClearPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_LastClearPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/last-clear to the batch object.
@@ -641,7 +753,7 @@ func (n *Lldp_Counters_TlvAcceptedPath) Lookup(t testing.TB) *oc.QualifiedUint64
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/tlv-accepted with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_TlvAcceptedPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_Lldp_Counters_TlvAcceptedPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_TlvAcceptedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_TlvAcceptedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *Lldp_Counters_TlvAcceptedPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_Lldp_Counters_TlvAcceptedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_TlvAcceptedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/tlv-accepted with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *Lldp_Counters_TlvAcceptedPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_TlvAcceptedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Counters_TlvAcceptedPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_TlvAcceptedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/tlv-accepted to the batch object.
@@ -794,7 +934,7 @@ func (n *Lldp_Counters_TlvDiscardPath) Lookup(t testing.TB) *oc.QualifiedUint64 
 }
 
 // Get fetches the value at /openconfig-lldp/lldp/state/counters/tlv-discard with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lldp_Counters_TlvDiscardPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -848,10 +988,10 @@ func watch_Lldp_Counters_TlvDiscardPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Lldp_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lldp_Counters", gs, queryPath, true, false)
-		return convertLldp_Counters_TlvDiscardPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLldp_Counters_TlvDiscardPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -904,6 +1044,34 @@ func (n *Lldp_Counters_TlvDiscardPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_Lldp_Counters_TlvDiscardPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Lldp_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lldp_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lldp_Counters", structs[pre], queryPath, true, false)
+			qv := convertLldp_Counters_TlvDiscardPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lldp/lldp/state/counters/tlv-discard with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1079,7 @@ func (n *Lldp_Counters_TlvDiscardPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lldp_Counters_TlvDiscardPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Lldp_Counters_TlvDiscardPath(t, n, timeout, predicate)
+	return watch_Lldp_Counters_TlvDiscardPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lldp/lldp/state/counters/tlv-discard to the batch object.

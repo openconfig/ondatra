@@ -31,7 +31,7 @@ func (n *KeychainPath) Lookup(t testing.TB) *oc.QualifiedKeychain {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *KeychainPath) Get(t testing.TB) *oc.Keychain {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_KeychainPath(t testing.TB, n ygot.PathStruct, duration time.Duration,
 	t.Helper()
 	w := &oc.KeychainWatcher{}
 	gs := &oc.Keychain{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain", gs, queryPath, false, false)
-		return (&oc.QualifiedKeychain{
+		qv := (&oc.QualifiedKeychain{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedKeychain)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *KeychainPathAny) Collect(t testing.TB, duration time.Duration) *oc.Coll
 	return c
 }
 
+func watch_KeychainPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedKeychain) bool) *oc.KeychainWatcher {
+	t.Helper()
+	w := &oc.KeychainWatcher{}
+	structs := map[string]*oc.Keychain{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedKeychain{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedKeychain)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *KeychainPathAny) Collect(t testing.TB, duration time.Duration) *oc.Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *KeychainPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedKeychain) bool) *oc.KeychainWatcher {
 	t.Helper()
-	return watch_KeychainPath(t, n, timeout, predicate)
+	return watch_KeychainPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain to the batch object.
@@ -182,7 +213,7 @@ func (n *Keychain_KeyPath) Lookup(t testing.TB) *oc.QualifiedKeychain_Key {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_KeyPath) Get(t testing.TB) *oc.Keychain_Key {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_Keychain_KeyPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.Keychain_KeyWatcher{}
 	gs := &oc.Keychain_Key{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Keychain_Key", gs, queryPath, false, false)
-		return (&oc.QualifiedKeychain_Key{
+		qv := (&oc.QualifiedKeychain_Key{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedKeychain_Key)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *Keychain_KeyPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Keychain_KeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedKeychain_Key) bool) *oc.Keychain_KeyWatcher {
+	t.Helper()
+	w := &oc.Keychain_KeyWatcher{}
+	structs := map[string]*oc.Keychain_Key{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Keychain_Key{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Keychain_Key", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedKeychain_Key{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedKeychain_Key)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-keychain/keychains/keychain/keys/key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *Keychain_KeyPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Keychain_KeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedKeychain_Key) bool) *oc.Keychain_KeyWatcher {
 	t.Helper()
-	return watch_Keychain_KeyPath(t, n, timeout, predicate)
+	return watch_Keychain_KeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-keychain/keychains/keychain/keys/key to the batch object.

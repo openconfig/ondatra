@@ -28,7 +28,7 @@ func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/queues/queue/config/queue-management-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_Queue_QueueManagementProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *Qos_Interface_Input_SchedulerPolicyPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_SchedulerPolicyPath) Get(t testing.TB) *oc.Qos_Interface_Input_SchedulerPolicy {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *Qos_Interface_Input_SchedulerPolicy_NamePath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/scheduler-policy/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_SchedulerPolicy_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/config/unicast-buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_UnicastBufferAllocationProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -424,7 +424,7 @@ func (n *Qos_Interface_Input_VoqInterfacePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_VoqInterfacePath) Get(t testing.TB) *oc.Qos_Interface_Input_VoqInterface {
 	t.Helper()
@@ -513,7 +513,7 @@ func (n *Qos_Interface_Input_VoqInterface_NamePath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_VoqInterface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -616,7 +616,7 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_VoqInterface_QueuePath) Get(t testing.TB) *oc.Qos_Interface_Input_VoqInterface_Queue {
 	t.Helper()
@@ -705,7 +705,7 @@ func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Input_VoqInterface_Queue_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -806,7 +806,7 @@ func (n *Qos_Interface_InterfaceIdPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/config/interface-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_InterfaceIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -909,7 +909,7 @@ func (n *Qos_Interface_InterfaceRefPath) Lookup(t testing.TB) *oc.QualifiedQos_I
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_InterfaceRefPath) Get(t testing.TB) *oc.Qos_Interface_InterfaceRef {
 	t.Helper()
@@ -998,7 +998,7 @@ func (n *Qos_Interface_InterfaceRef_InterfacePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1099,7 +1099,7 @@ func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1202,7 +1202,7 @@ func (n *Qos_Interface_OutputPath) Lookup(t testing.TB) *oc.QualifiedQos_Interfa
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_OutputPath) Get(t testing.TB) *oc.Qos_Interface_Output {
 	t.Helper()
@@ -1291,7 +1291,7 @@ func (n *Qos_Interface_Output_BufferAllocationProfilePath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/config/buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_BufferAllocationProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1394,7 +1394,7 @@ func (n *Qos_Interface_Output_ClassifierPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_ClassifierPath) Get(t testing.TB) *oc.Qos_Interface_Output_Classifier {
 	t.Helper()
@@ -1483,7 +1483,7 @@ func (n *Qos_Interface_Output_Classifier_NamePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_Classifier_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1584,7 +1584,7 @@ func (n *Qos_Interface_Output_Classifier_TypePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/classifiers/classifier/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_Classifier_TypePath) Get(t testing.TB) oc.E_Input_Classifier_Type {
 	t.Helper()
@@ -1687,7 +1687,7 @@ func (n *Qos_Interface_Output_InterfaceRefPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_InterfaceRefPath) Get(t testing.TB) *oc.Qos_Interface_Output_InterfaceRef {
 	t.Helper()
@@ -1776,7 +1776,7 @@ func (n *Qos_Interface_Output_InterfaceRef_InterfacePath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1877,7 +1877,7 @@ func (n *Qos_Interface_Output_InterfaceRef_SubinterfacePath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1978,7 +1978,7 @@ func (n *Qos_Interface_Output_MulticastBufferAllocationProfilePath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/config/multicast-buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_MulticastBufferAllocationProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2081,7 +2081,7 @@ func (n *Qos_Interface_Output_QueuePath) Lookup(t testing.TB) *oc.QualifiedQos_I
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/queues/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_QueuePath) Get(t testing.TB) *oc.Qos_Interface_Output_Queue {
 	t.Helper()
@@ -2170,7 +2170,7 @@ func (n *Qos_Interface_Output_Queue_NamePath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/queues/queue/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_Queue_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2271,7 +2271,7 @@ func (n *Qos_Interface_Output_Queue_QueueManagementProfilePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/queues/queue/config/queue-management-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_Queue_QueueManagementProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2374,7 +2374,7 @@ func (n *Qos_Interface_Output_SchedulerPolicyPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_SchedulerPolicyPath) Get(t testing.TB) *oc.Qos_Interface_Output_SchedulerPolicy {
 	t.Helper()
@@ -2463,7 +2463,7 @@ func (n *Qos_Interface_Output_SchedulerPolicy_NamePath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/scheduler-policy/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_SchedulerPolicy_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2564,7 +2564,7 @@ func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/interfaces/interface/output/config/unicast-buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Interface_Output_UnicastBufferAllocationProfilePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2667,7 +2667,7 @@ func (n *Qos_QueueManagementProfilePath) Lookup(t testing.TB) *oc.QualifiedQos_Q
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfilePath) Get(t testing.TB) *oc.Qos_QueueManagementProfile {
 	t.Helper()
@@ -2756,7 +2756,7 @@ func (n *Qos_QueueManagementProfile_NamePath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2859,7 +2859,7 @@ func (n *Qos_QueueManagementProfile_RedPath) Lookup(t testing.TB) *oc.QualifiedQ
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_RedPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Red {
 	t.Helper()
@@ -2950,7 +2950,7 @@ func (n *Qos_QueueManagementProfile_Red_UniformPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Red_UniformPath) Get(t testing.TB) *oc.Qos_QueueManagementProfile_Red_Uniform {
 	t.Helper()
@@ -3041,7 +3041,7 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/config/drop with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Red_Uniform_DropPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3144,7 +3144,7 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/config/enable-ecn with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -3245,7 +3245,7 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/config/max-threshold with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPath) Get(t testing.TB) uint64 {
 	t.Helper()

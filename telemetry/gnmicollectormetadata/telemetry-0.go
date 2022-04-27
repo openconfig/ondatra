@@ -31,7 +31,7 @@ func (n *MetaPath) Lookup(t testing.TB) *oc.QualifiedMeta {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *MetaPath) Get(t testing.TB) *oc.Meta {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_MetaPath(t testing.TB, n ygot.PathStruct, duration time.Duration, pre
 	t.Helper()
 	w := &oc.MetaWatcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, false, false)
-		return (&oc.QualifiedMeta{
+		qv := (&oc.QualifiedMeta{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedMeta)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *MetaPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collecti
 	return c
 }
 
+func watch_MetaPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedMeta) bool) *oc.MetaWatcher {
+	t.Helper()
+	w := &oc.MetaWatcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedMeta{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedMeta)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *MetaPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collecti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *MetaPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedMeta) bool) *oc.MetaWatcher {
 	t.Helper()
-	return watch_MetaPath(t, n, timeout, predicate)
+	return watch_MetaPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta to the batch object.
@@ -180,7 +211,7 @@ func (n *Meta_ConnectErrorPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connectError with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectErrorPath) Get(t testing.TB) string {
 	t.Helper()
@@ -234,10 +265,10 @@ func watch_Meta_ConnectErrorPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_ConnectErrorPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_ConnectErrorPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -290,6 +321,34 @@ func (n *Meta_ConnectErrorPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_Meta_ConnectErrorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_ConnectErrorPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/connectError with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +356,7 @@ func (n *Meta_ConnectErrorPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_ConnectErrorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Meta_ConnectErrorPath(t, n, timeout, predicate)
+	return watch_Meta_ConnectErrorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/connectError to the batch object.
@@ -333,7 +392,7 @@ func (n *Meta_ConnectedAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connectedAddress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectedAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -387,10 +446,10 @@ func watch_Meta_ConnectedAddressPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_ConnectedAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_ConnectedAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -443,6 +502,34 @@ func (n *Meta_ConnectedAddressPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Meta_ConnectedAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_ConnectedAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/connectedAddress with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +537,7 @@ func (n *Meta_ConnectedAddressPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_ConnectedAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Meta_ConnectedAddressPath(t, n, timeout, predicate)
+	return watch_Meta_ConnectedAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/connectedAddress to the batch object.

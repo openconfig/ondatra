@@ -74,6 +74,8 @@ const (
 	CIENA = Vendor(opb.Device_CIENA)
 	// PALOALTO vendor.
 	PALOALTO = Vendor(opb.Device_PALOALTO)
+	// ZPE vendor.
+	ZPE = Vendor(opb.Device_ZPE)
 )
 
 // String returns the name of the vendor.

@@ -461,7 +461,7 @@ type Predicate func(QualifiedValue) bool
 
 // ConvertFunc converts a datapoint queried from a path to the corresponding
 // Metadata.
-type ConvertFunc func([]*DataPoint, *gpb.Path) (QualifiedValue, error)
+type ConvertFunc func([]*DataPoint, *gpb.Path) ([]QualifiedValue, error)
 
 // MustWatch retrieves a Collection sample for a PathStruct and evaluates data against the predicate.
 func MustWatch(t testing.TB, n ygot.PathStruct, paths []*gpb.Path, duration time.Duration, isLeaf bool, converter ConvertFunc, pred Predicate) *Watcher {
@@ -493,12 +493,13 @@ func watch(ctx context.Context, n ygot.PathStruct, paths []*gpb.Path, duration t
 	}
 
 	c := &Watcher{
-		err:  make(chan error, 1),
+		err:  make(chan error),
 		path: path,
 	}
 
 	go func() {
 		defer cancel()
+		defer close(c.err)
 		err := receiveUntil(sub, mode, path, isLeaf, converter, pred)
 		c.err <- err
 	}()
@@ -541,16 +542,18 @@ func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, 
 			datas = [][]*DataPoint{recvData}
 		}
 		for _, data := range datas {
-			val, err := converter(data, path)
+			vals, err := converter(data, path)
 			if err != nil {
 				return err
 			}
-			if complianceErrs := val.GetComplianceErrors(); complianceErrs != nil {
-				log.V(0).Infof("noncompliant data encountered during receiveUntil, ignoring value: %v", complianceErrs)
-				continue
-			}
-			if pred(val) {
-				return nil
+			for _, val := range vals {
+				if complianceErrs := val.GetComplianceErrors(); complianceErrs != nil {
+					log.V(0).Infof("noncompliant data encountered during receiveUntil, ignoring value: %v", complianceErrs)
+					continue
+				}
+				if pred(val) {
+					return nil
+				}
 			}
 		}
 		recvData = nil
@@ -750,6 +753,9 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint) (map[string][]*Da
 	groups := map[string][]*DataPoint{}
 
 	for _, dp := range datapoints {
+		if dp.Sync { // Sync datapoints don't have a path, so ignore them.
+			continue
+		}
 		elems := dp.Path.GetElem()
 		if uint(len(elems)) < prefixLen {
 			groups["/"] = append(groups["/"], dp)

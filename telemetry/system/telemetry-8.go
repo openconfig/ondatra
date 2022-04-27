@@ -29,7 +29,7 @@ func (n *System_MountPoint_SizePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-system/system/mount-points/mount-point/state/size with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MountPoint_SizePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_System_MountPoint_SizePath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_MountPoint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_MountPoint", gs, queryPath, true, false)
-		return convertSystem_MountPoint_SizePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_MountPoint_SizePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *System_MountPoint_SizePathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_System_MountPoint_SizePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_MountPoint{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_MountPoint{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_MountPoint", structs[pre], queryPath, true, false)
+			qv := convertSystem_MountPoint_SizePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/mount-points/mount-point/state/size with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *System_MountPoint_SizePathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_MountPoint_SizePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_MountPoint_SizePath(t, n, timeout, predicate)
+	return watch_System_MountPoint_SizePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/mount-points/mount-point/state/size to the batch object.
@@ -182,7 +210,7 @@ func (n *System_MountPoint_StorageComponentPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/mount-points/mount-point/state/storage-component with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MountPoint_StorageComponentPath) Get(t testing.TB) string {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_System_MountPoint_StorageComponentPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_MountPoint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_MountPoint", gs, queryPath, true, false)
-		return convertSystem_MountPoint_StorageComponentPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_MountPoint_StorageComponentPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *System_MountPoint_StorageComponentPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_System_MountPoint_StorageComponentPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_MountPoint{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_MountPoint{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_MountPoint", structs[pre], queryPath, true, false)
+			qv := convertSystem_MountPoint_StorageComponentPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/mount-points/mount-point/state/storage-component with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *System_MountPoint_StorageComponentPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_MountPoint_StorageComponentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_MountPoint_StorageComponentPath(t, n, timeout, predicate)
+	return watch_System_MountPoint_StorageComponentPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/mount-points/mount-point/state/storage-component to the batch object.
@@ -335,7 +391,7 @@ func (n *System_MountPoint_UtilizedPath) Lookup(t testing.TB) *oc.QualifiedUint6
 }
 
 // Get fetches the value at /openconfig-system/system/mount-points/mount-point/state/utilized with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MountPoint_UtilizedPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_System_MountPoint_UtilizedPath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_MountPoint{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_MountPoint", gs, queryPath, true, false)
-		return convertSystem_MountPoint_UtilizedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_MountPoint_UtilizedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *System_MountPoint_UtilizedPathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_System_MountPoint_UtilizedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_MountPoint{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_MountPoint{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_MountPoint", structs[pre], queryPath, true, false)
+			qv := convertSystem_MountPoint_UtilizedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/mount-points/mount-point/state/utilized with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *System_MountPoint_UtilizedPathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_MountPoint_UtilizedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_MountPoint_UtilizedPath(t, n, timeout, predicate)
+	return watch_System_MountPoint_UtilizedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/mount-points/mount-point/state/utilized to the batch object.
@@ -490,7 +574,7 @@ func (n *System_NtpPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_NtpPath) Get(t testing.TB) *oc.System_Ntp {
 	t.Helper()
@@ -552,12 +636,13 @@ func watch_System_NtpPath(t testing.TB, n ygot.PathStruct, duration time.Duratio
 	t.Helper()
 	w := &oc.System_NtpWatcher{}
 	gs := &oc.System_Ntp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Ntp{
+		qv := (&oc.QualifiedSystem_Ntp{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Ntp)
 		w.LastVal = val
@@ -610,6 +695,36 @@ func (n *System_NtpPathAny) Collect(t testing.TB, duration time.Duration) *oc.Co
 	return c
 }
 
+func watch_System_NtpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Ntp) bool) *oc.System_NtpWatcher {
+	t.Helper()
+	w := &oc.System_NtpWatcher{}
+	structs := map[string]*oc.System_Ntp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Ntp{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Ntp)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -617,7 +732,7 @@ func (n *System_NtpPathAny) Collect(t testing.TB, duration time.Duration) *oc.Co
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_NtpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Ntp) bool) *oc.System_NtpWatcher {
 	t.Helper()
-	return watch_System_NtpPath(t, n, timeout, predicate)
+	return watch_System_NtpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp to the batch object.
@@ -639,7 +754,7 @@ func (n *System_Ntp_AuthMismatchPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/state/auth-mismatch with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_AuthMismatchPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -693,10 +808,10 @@ func watch_System_Ntp_AuthMismatchPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Ntp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp", gs, queryPath, true, false)
-		return convertSystem_Ntp_AuthMismatchPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_AuthMismatchPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -749,6 +864,34 @@ func (n *System_Ntp_AuthMismatchPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_System_Ntp_AuthMismatchPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Ntp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_AuthMismatchPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/state/auth-mismatch with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +899,7 @@ func (n *System_Ntp_AuthMismatchPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_AuthMismatchPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Ntp_AuthMismatchPath(t, n, timeout, predicate)
+	return watch_System_Ntp_AuthMismatchPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/state/auth-mismatch to the batch object.
@@ -794,7 +937,7 @@ func (n *System_Ntp_EnableNtpAuthPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/state/enable-ntp-auth with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnableNtpAuthPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -848,10 +991,10 @@ func watch_System_Ntp_EnableNtpAuthPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_Ntp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp", gs, queryPath, true, false)
-		return convertSystem_Ntp_EnableNtpAuthPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_EnableNtpAuthPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -904,6 +1047,34 @@ func (n *System_Ntp_EnableNtpAuthPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Ntp_EnableNtpAuthPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_Ntp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_EnableNtpAuthPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/state/enable-ntp-auth with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1082,7 @@ func (n *System_Ntp_EnableNtpAuthPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_EnableNtpAuthPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_Ntp_EnableNtpAuthPath(t, n, timeout, predicate)
+	return watch_System_Ntp_EnableNtpAuthPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/state/enable-ntp-auth to the batch object.
@@ -949,7 +1120,7 @@ func (n *System_Ntp_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/state/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1003,10 +1174,10 @@ func watch_System_Ntp_EnabledPath(t testing.TB, n ygot.PathStruct, duration time
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_Ntp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp", gs, queryPath, true, false)
-		return convertSystem_Ntp_EnabledPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_EnabledPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1059,6 +1230,34 @@ func (n *System_Ntp_EnabledPathAny) Collect(t testing.TB, duration time.Duration
 	return c
 }
 
+func watch_System_Ntp_EnabledPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_Ntp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_EnabledPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/state/enabled with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1066,7 +1265,7 @@ func (n *System_Ntp_EnabledPathAny) Collect(t testing.TB, duration time.Duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_EnabledPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_Ntp_EnabledPath(t, n, timeout, predicate)
+	return watch_System_Ntp_EnabledPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/state/enabled to the batch object.
@@ -1104,7 +1303,7 @@ func (n *System_Ntp_NtpKeyPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp_Ntp
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKeyPath) Get(t testing.TB) *oc.System_Ntp_NtpKey {
 	t.Helper()
@@ -1166,12 +1365,13 @@ func watch_System_Ntp_NtpKeyPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.System_Ntp_NtpKeyWatcher{}
 	gs := &oc.System_Ntp_NtpKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_NtpKey", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Ntp_NtpKey{
+		qv := (&oc.QualifiedSystem_Ntp_NtpKey{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Ntp_NtpKey)
 		w.LastVal = val
@@ -1224,6 +1424,36 @@ func (n *System_Ntp_NtpKeyPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_System_Ntp_NtpKeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Ntp_NtpKey) bool) *oc.System_Ntp_NtpKeyWatcher {
+	t.Helper()
+	w := &oc.System_Ntp_NtpKeyWatcher{}
+	structs := map[string]*oc.System_Ntp_NtpKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_NtpKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_NtpKey", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Ntp_NtpKey{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Ntp_NtpKey)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/ntp-keys/ntp-key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1231,7 +1461,7 @@ func (n *System_Ntp_NtpKeyPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_NtpKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Ntp_NtpKey) bool) *oc.System_Ntp_NtpKeyWatcher {
 	t.Helper()
-	return watch_System_Ntp_NtpKeyPath(t, n, timeout, predicate)
+	return watch_System_Ntp_NtpKeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/ntp-keys/ntp-key to the batch object.
@@ -1253,7 +1483,7 @@ func (n *System_Ntp_NtpKey_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1307,10 +1537,10 @@ func watch_System_Ntp_NtpKey_KeyIdPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Ntp_NtpKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_NtpKey", gs, queryPath, true, false)
-		return convertSystem_Ntp_NtpKey_KeyIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_NtpKey_KeyIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -1363,6 +1593,34 @@ func (n *System_Ntp_NtpKey_KeyIdPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_System_Ntp_NtpKey_KeyIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Ntp_NtpKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_NtpKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_NtpKey", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_NtpKey_KeyIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1370,7 +1628,7 @@ func (n *System_Ntp_NtpKey_KeyIdPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_NtpKey_KeyIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Ntp_NtpKey_KeyIdPath(t, n, timeout, predicate)
+	return watch_System_Ntp_NtpKey_KeyIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-id to the batch object.
@@ -1406,7 +1664,7 @@ func (n *System_Ntp_NtpKey_KeyTypePath) Lookup(t testing.TB) *oc.QualifiedE_Syst
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyTypePath) Get(t testing.TB) oc.E_System_NTP_AUTH_TYPE {
 	t.Helper()
@@ -1460,10 +1718,10 @@ func watch_System_Ntp_NtpKey_KeyTypePath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.E_System_NTP_AUTH_TYPEWatcher{}
 	gs := &oc.System_Ntp_NtpKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_NtpKey", gs, queryPath, true, false)
-		return convertSystem_Ntp_NtpKey_KeyTypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_NtpKey_KeyTypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_System_NTP_AUTH_TYPE)
 		w.LastVal = val
@@ -1516,6 +1774,34 @@ func (n *System_Ntp_NtpKey_KeyTypePathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_System_Ntp_NtpKey_KeyTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_System_NTP_AUTH_TYPE) bool) *oc.E_System_NTP_AUTH_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_System_NTP_AUTH_TYPEWatcher{}
+	structs := map[string]*oc.System_Ntp_NtpKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_NtpKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_NtpKey", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_NtpKey_KeyTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_System_NTP_AUTH_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1523,7 +1809,7 @@ func (n *System_Ntp_NtpKey_KeyTypePathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_NtpKey_KeyTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_System_NTP_AUTH_TYPE) bool) *oc.E_System_NTP_AUTH_TYPEWatcher {
 	t.Helper()
-	return watch_System_Ntp_NtpKey_KeyTypePath(t, n, timeout, predicate)
+	return watch_System_Ntp_NtpKey_KeyTypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-type to the batch object.
@@ -1559,7 +1845,7 @@ func (n *System_Ntp_NtpKey_KeyValuePath) Lookup(t testing.TB) *oc.QualifiedStrin
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyValuePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1613,10 +1899,10 @@ func watch_System_Ntp_NtpKey_KeyValuePath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Ntp_NtpKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_NtpKey", gs, queryPath, true, false)
-		return convertSystem_Ntp_NtpKey_KeyValuePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_NtpKey_KeyValuePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1669,6 +1955,34 @@ func (n *System_Ntp_NtpKey_KeyValuePathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_System_Ntp_NtpKey_KeyValuePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Ntp_NtpKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_NtpKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_NtpKey", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_NtpKey_KeyValuePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-value with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1676,7 +1990,7 @@ func (n *System_Ntp_NtpKey_KeyValuePathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_NtpKey_KeyValuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Ntp_NtpKey_KeyValuePath(t, n, timeout, predicate)
+	return watch_System_Ntp_NtpKey_KeyValuePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/ntp-keys/ntp-key/state/key-value to the batch object.
@@ -1712,7 +2026,7 @@ func (n *System_Ntp_NtpSourceAddressPath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/state/ntp-source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpSourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1766,10 +2080,10 @@ func watch_System_Ntp_NtpSourceAddressPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Ntp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp", gs, queryPath, true, false)
-		return convertSystem_Ntp_NtpSourceAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_NtpSourceAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1822,6 +2136,34 @@ func (n *System_Ntp_NtpSourceAddressPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Ntp_NtpSourceAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Ntp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_NtpSourceAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/state/ntp-source-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1829,7 +2171,7 @@ func (n *System_Ntp_NtpSourceAddressPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_NtpSourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Ntp_NtpSourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Ntp_NtpSourceAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/state/ntp-source-address to the batch object.
@@ -1867,7 +2209,7 @@ func (n *System_Ntp_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp_Ser
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_ServerPath) Get(t testing.TB) *oc.System_Ntp_Server {
 	t.Helper()
@@ -1929,12 +2271,13 @@ func watch_System_Ntp_ServerPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.System_Ntp_ServerWatcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Ntp_Server{
+		qv := (&oc.QualifiedSystem_Ntp_Server{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Ntp_Server)
 		w.LastVal = val
@@ -1987,6 +2330,36 @@ func (n *System_Ntp_ServerPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_System_Ntp_ServerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Ntp_Server) bool) *oc.System_Ntp_ServerWatcher {
+	t.Helper()
+	w := &oc.System_Ntp_ServerWatcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Ntp_Server{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Ntp_Server)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1994,7 +2367,7 @@ func (n *System_Ntp_ServerPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_ServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Ntp_Server) bool) *oc.System_Ntp_ServerWatcher {
 	t.Helper()
-	return watch_System_Ntp_ServerPath(t, n, timeout, predicate)
+	return watch_System_Ntp_ServerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server to the batch object.
@@ -2016,7 +2389,7 @@ func (n *System_Ntp_Server_AddressPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2070,10 +2443,10 @@ func watch_System_Ntp_Server_AddressPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_AddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_AddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -2126,6 +2499,34 @@ func (n *System_Ntp_Server_AddressPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_System_Ntp_Server_AddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_AddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2133,7 +2534,7 @@ func (n *System_Ntp_Server_AddressPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_AddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Ntp_Server_AddressPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_AddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/address to the batch object.
@@ -2171,7 +2572,7 @@ func (n *System_Ntp_Server_AssociationTypePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/association-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_AssociationTypePath) Get(t testing.TB) oc.E_Server_AssociationType {
 	t.Helper()
@@ -2225,10 +2626,10 @@ func watch_System_Ntp_Server_AssociationTypePath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.E_Server_AssociationTypeWatcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_AssociationTypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_AssociationTypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Server_AssociationType)
 		w.LastVal = val
@@ -2281,6 +2682,34 @@ func (n *System_Ntp_Server_AssociationTypePathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_System_Ntp_Server_AssociationTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Server_AssociationType) bool) *oc.E_Server_AssociationTypeWatcher {
+	t.Helper()
+	w := &oc.E_Server_AssociationTypeWatcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_AssociationTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Server_AssociationType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/association-type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2288,7 +2717,7 @@ func (n *System_Ntp_Server_AssociationTypePathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_AssociationTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Server_AssociationType) bool) *oc.E_Server_AssociationTypeWatcher {
 	t.Helper()
-	return watch_System_Ntp_Server_AssociationTypePath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_AssociationTypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/association-type to the batch object.
@@ -2326,7 +2755,7 @@ func (n *System_Ntp_Server_IburstPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/iburst with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_IburstPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2380,10 +2809,10 @@ func watch_System_Ntp_Server_IburstPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_IburstPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_IburstPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -2436,6 +2865,34 @@ func (n *System_Ntp_Server_IburstPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Ntp_Server_IburstPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_IburstPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/iburst with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2443,7 +2900,7 @@ func (n *System_Ntp_Server_IburstPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_IburstPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_Ntp_Server_IburstPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_IburstPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/iburst to the batch object.
@@ -2479,7 +2936,7 @@ func (n *System_Ntp_Server_OffsetPath) Lookup(t testing.TB) *oc.QualifiedUint64 
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/offset with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_OffsetPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2533,10 +2990,10 @@ func watch_System_Ntp_Server_OffsetPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_OffsetPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_OffsetPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2589,6 +3046,34 @@ func (n *System_Ntp_Server_OffsetPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Ntp_Server_OffsetPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_OffsetPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/offset with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2596,7 +3081,7 @@ func (n *System_Ntp_Server_OffsetPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_OffsetPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_OffsetPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_OffsetPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/offset to the batch object.
@@ -2632,7 +3117,7 @@ func (n *System_Ntp_Server_PollIntervalPath) Lookup(t testing.TB) *oc.QualifiedU
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/poll-interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_PollIntervalPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -2686,10 +3171,10 @@ func watch_System_Ntp_Server_PollIntervalPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_PollIntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_PollIntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -2742,6 +3227,34 @@ func (n *System_Ntp_Server_PollIntervalPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_System_Ntp_Server_PollIntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_PollIntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/poll-interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2749,7 +3262,7 @@ func (n *System_Ntp_Server_PollIntervalPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_PollIntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_PollIntervalPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_PollIntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/poll-interval to the batch object.
@@ -2787,7 +3300,7 @@ func (n *System_Ntp_Server_PortPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2841,10 +3354,10 @@ func watch_System_Ntp_Server_PortPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_PortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_PortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2897,6 +3410,34 @@ func (n *System_Ntp_Server_PortPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_System_Ntp_Server_PortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_PortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2904,7 +3445,7 @@ func (n *System_Ntp_Server_PortPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_PortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_PortPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_PortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/port to the batch object.
@@ -2942,7 +3483,7 @@ func (n *System_Ntp_Server_PreferPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/prefer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_PreferPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -2996,10 +3537,10 @@ func watch_System_Ntp_Server_PreferPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_PreferPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_PreferPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -3052,6 +3593,34 @@ func (n *System_Ntp_Server_PreferPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Ntp_Server_PreferPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_PreferPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/prefer with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3059,7 +3628,7 @@ func (n *System_Ntp_Server_PreferPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_PreferPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_System_Ntp_Server_PreferPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_PreferPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/prefer to the batch object.
@@ -3095,7 +3664,7 @@ func (n *System_Ntp_Server_RootDelayPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/root-delay with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_RootDelayPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -3149,10 +3718,10 @@ func watch_System_Ntp_Server_RootDelayPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_RootDelayPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_RootDelayPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -3205,6 +3774,34 @@ func (n *System_Ntp_Server_RootDelayPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Ntp_Server_RootDelayPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_RootDelayPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/root-delay with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3212,7 +3809,7 @@ func (n *System_Ntp_Server_RootDelayPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_RootDelayPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_RootDelayPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_RootDelayPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/root-delay to the batch object.
@@ -3248,7 +3845,7 @@ func (n *System_Ntp_Server_RootDispersionPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/root-dispersion with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_RootDispersionPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3302,10 +3899,10 @@ func watch_System_Ntp_Server_RootDispersionPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_RootDispersionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_RootDispersionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3358,6 +3955,34 @@ func (n *System_Ntp_Server_RootDispersionPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_Ntp_Server_RootDispersionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_RootDispersionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/root-dispersion with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3365,7 +3990,7 @@ func (n *System_Ntp_Server_RootDispersionPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_RootDispersionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_RootDispersionPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_RootDispersionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/root-dispersion to the batch object.
@@ -3401,7 +4026,7 @@ func (n *System_Ntp_Server_StratumPath) Lookup(t testing.TB) *oc.QualifiedUint8 
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/stratum with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_StratumPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3455,10 +4080,10 @@ func watch_System_Ntp_Server_StratumPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_StratumPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_StratumPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3511,6 +4136,34 @@ func (n *System_Ntp_Server_StratumPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_System_Ntp_Server_StratumPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_StratumPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/stratum with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3518,7 +4171,7 @@ func (n *System_Ntp_Server_StratumPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_StratumPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_StratumPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_StratumPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/stratum to the batch object.
@@ -3556,7 +4209,7 @@ func (n *System_Ntp_Server_VersionPath) Lookup(t testing.TB) *oc.QualifiedUint8 
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/servers/server/state/version with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_Server_VersionPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3610,10 +4263,10 @@ func watch_System_Ntp_Server_VersionPath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Ntp_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Ntp_Server", gs, queryPath, true, false)
-		return convertSystem_Ntp_Server_VersionPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Ntp_Server_VersionPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3666,6 +4319,34 @@ func (n *System_Ntp_Server_VersionPathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_System_Ntp_Server_VersionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Ntp_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Ntp_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Ntp_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Ntp_Server_VersionPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/ntp/servers/server/state/version with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3673,7 +4354,7 @@ func (n *System_Ntp_Server_VersionPathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Ntp_Server_VersionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Ntp_Server_VersionPath(t, n, timeout, predicate)
+	return watch_System_Ntp_Server_VersionPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/ntp/servers/server/state/version to the batch object.

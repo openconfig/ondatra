@@ -29,7 +29,7 @@ func (n *Flow_SrcIpv6Path) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/state/src-ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_SrcIpv6Path) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Flow_SrcIpv6Path(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_SrcIpv6Path(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_SrcIpv6Path(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Flow_SrcIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Flow_SrcIpv6PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_SrcIpv6Path(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/state/src-ipv6 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Flow_SrcIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_SrcIpv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_SrcIpv6Path(t, n, timeout, predicate)
+	return watch_Flow_SrcIpv6PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/state/src-ipv6 to the batch object.
@@ -182,7 +210,7 @@ func (n *Flow_SrcPortPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/state/src-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_SrcPortPath) Get(t testing.TB) string {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Flow_SrcPortPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_SrcPortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_SrcPortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Flow_SrcPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Flow_SrcPortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_SrcPortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/state/src-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Flow_SrcPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_SrcPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_SrcPortPath(t, n, timeout, predicate)
+	return watch_Flow_SrcPortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/state/src-port to the batch object.
@@ -335,7 +391,7 @@ func (n *Flow_VlanIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/state/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Flow_VlanIdPath(t testing.TB, n ygot.PathStruct, duration time.Durati
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_VlanIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_VlanIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Flow_VlanIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 	return c
 }
 
+func watch_Flow_VlanIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_VlanIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/state/vlan-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Flow_VlanIdPathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_VlanIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_Flow_VlanIdPath(t, n, timeout, predicate)
+	return watch_Flow_VlanIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/state/vlan-id to the batch object.

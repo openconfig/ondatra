@@ -30,7 +30,7 @@ func (n *Component_SubcomponentPath) Lookup(t testing.TB) *oc.QualifiedComponent
 }
 
 // Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_SubcomponentPath) Get(t testing.TB) *oc.Component_Subcomponent {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *Component_Subcomponent_NamePath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Subcomponent_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -222,7 +222,7 @@ func (n *Component_TransceiverPath) Lookup(t testing.TB) *oc.QualifiedComponent_
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_TransceiverPath) Get(t testing.TB) *oc.Component_Transceiver {
 	t.Helper()
@@ -313,7 +313,7 @@ func (n *Component_Transceiver_ChannelPath) Lookup(t testing.TB) *oc.QualifiedCo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_ChannelPath) Get(t testing.TB) *oc.Component_Transceiver_Channel {
 	t.Helper()
@@ -402,7 +402,7 @@ func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/associated-optical-channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Get(t testing.TB) string {
 	t.Helper()
@@ -503,7 +503,7 @@ func (n *Component_Transceiver_Channel_DescriptionPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -604,7 +604,7 @@ func (n *Component_Transceiver_Channel_IndexPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_IndexPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -705,7 +705,7 @@ func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Get(t testing.TB) float64 {
 	t.Helper()

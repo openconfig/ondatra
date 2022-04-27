@@ -30,7 +30,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRefPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRefPath) Get(t testing.TB) *oc.LocalRoutes_Static_NextHop_InterfaceRef {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_InterfacePath) Get(t testing.TB) string {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/config/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *LocalRoutes_Static_NextHop_MetricPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/config/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_MetricPath) Get(t testing.TB) uint32 {
 	t.Helper()

@@ -29,7 +29,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/subinterface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath(t testing.TB
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", gs, queryPath, true, false)
-		return convertLocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePathAny) Collect(t 
 	return c
 }
 
+func watch_LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static_NextHop_InterfaceRef{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static_NextHop_InterfaceRef", structs[pre], queryPath, true, false)
+			qv := convertLocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/subinterface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHop_InterfaceRef_SubinterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/interface-ref/state/subinterface to the batch object.
@@ -182,7 +210,7 @@ func (n *LocalRoutes_Static_NextHop_MetricPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/state/metric with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LocalRoutes_Static_NextHop_MetricPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_LocalRoutes_Static_NextHop_MetricPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.LocalRoutes_Static_NextHop{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "LocalRoutes_Static_NextHop", gs, queryPath, true, false)
-		return convertLocalRoutes_Static_NextHop_MetricPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLocalRoutes_Static_NextHop_MetricPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *LocalRoutes_Static_NextHop_MetricPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_LocalRoutes_Static_NextHop_MetricPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.LocalRoutes_Static_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.LocalRoutes_Static_NextHop{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "LocalRoutes_Static_NextHop", structs[pre], queryPath, true, false)
+			qv := convertLocalRoutes_Static_NextHop_MetricPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/state/metric with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *LocalRoutes_Static_NextHop_MetricPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LocalRoutes_Static_NextHop_MetricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_LocalRoutes_Static_NextHop_MetricPath(t, n, timeout, predicate)
+	return watch_LocalRoutes_Static_NextHop_MetricPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-local-routing/local-routes/static-routes/static/next-hops/next-hop/state/metric to the batch object.

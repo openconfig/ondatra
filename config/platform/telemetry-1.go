@@ -30,7 +30,7 @@ func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-platform/components/component/integrated-circuit/backplane-facing-capacity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_IntegratedCircuit_BackplaneFacingCapacityPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_BackplaneFacingCapacity {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *Component_IntegratedCircuit_MemoryPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-platform/components/component/integrated-circuit/memory with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_IntegratedCircuit_MemoryPath) Get(t testing.TB) *oc.Component_IntegratedCircuit_Memory {
 	t.Helper()
@@ -210,7 +210,7 @@ func (n *Component_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -313,7 +313,7 @@ func (n *Component_PortPath) Lookup(t testing.TB) *oc.QualifiedComponent_Port {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_PortPath) Get(t testing.TB) *oc.Component_Port {
 	t.Helper()
@@ -404,7 +404,7 @@ func (n *Component_Port_BreakoutModePath) Lookup(t testing.TB) *oc.QualifiedComp
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutModePath) Get(t testing.TB) *oc.Component_Port_BreakoutMode {
 	t.Helper()
@@ -495,7 +495,7 @@ func (n *Component_Port_BreakoutMode_GroupPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_GroupPath) Get(t testing.TB) *oc.Component_Port_BreakoutMode_Group {
 	t.Helper()
@@ -584,7 +584,7 @@ func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/breakout-speed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPath) Get(t testing.TB) oc.E_IfEthernet_ETHERNET_SPEED {
 	t.Helper()
@@ -685,7 +685,7 @@ func (n *Component_Port_BreakoutMode_Group_IndexPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/config/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_IndexPath) Get(t testing.TB) uint8 {
 	t.Helper()

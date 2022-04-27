@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"hash/crc32"
 	"io/ioutil"
+	"net"
 	"path"
 	"regexp"
 	"sort"
@@ -52,6 +53,9 @@ const (
 	routeTableFormatJuniper routeTableFormat = "juniper"
 
 	importRetries = 5
+
+	// IxNetwork has an undocumented maximum number of DeviceGroups.
+	maxIntfs = 256
 )
 
 var (
@@ -499,7 +503,10 @@ func (ix *ixATE) updateTopology(ctx context.Context, ics []*opb.InterfaceConfig)
 }
 
 // PushTopology configures the IxNetwork session with the specified topology.
-func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
+func (ix *ixATE) PushTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
+		return err
+	}
 	ix.resetClientCfg()
 	if err := ix.addPorts(top); err != nil {
 		return err
@@ -507,7 +514,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	if err := ix.importConfig(ctx, ix.cfg, true, topoImportTimeout); err != nil {
 		return err
 	}
-	if lags := top.GetLags(); len(lags) > 0 {
+	if lags := top.LAGs; len(lags) > 0 {
 		if err := ix.addLAGs(lags); err != nil {
 			return err
 		}
@@ -517,7 +524,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	}
 	// Avoid a possible race condition with repeated config imports (b/191984474).
 	sleepFn(45 * time.Second)
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	ix.operState = operStateOff
@@ -525,8 +532,11 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 }
 
 // UpdateTopology updates IxNetwork session to the specified topology.
-func (ix *ixATE) UpdateTopology(ctx context.Context, top *opb.Topology) error {
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+func (ix *ixATE) UpdateTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
+		return err
+	}
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	// Protocols/traffic are stopped after updating topology, restart as needed.
@@ -959,6 +969,9 @@ func startTraffic(ctx context.Context, ix *ixATE) error {
 
 // StartTraffic starts traffic for the IxNetwork session based on the given flows.
 func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
+	if err := validateFlows(flows); err != nil {
+		return err
+	}
 	if ix.operState == operStateOff {
 		return usererr.New("cannot start traffic before starting protocols")
 	}
@@ -1012,6 +1025,9 @@ func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 
 // UpdateTraffic updates traffic config for the IxNetwork session based on the given flows.
 func (ix *ixATE) UpdateTraffic(ctx context.Context, flows []*opb.Flow) error {
+	if err := validateFlows(flows); err != nil {
+		return err
+	}
 	if ix.operState != operStateTrafficOn {
 		return usererr.New("cannot update traffic before it has been started")
 	}
@@ -1112,6 +1128,9 @@ func (ix *ixATE) FlushStats() {
 // BGP active states.
 // TODO: Remove this method once new Ixia config binding is used.
 func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceConfig) error {
+	if err := validateInterfaces(ifs); err != nil {
+		return err
+	}
 	if err := ix.configureTopology(ifs); err != nil {
 		return err
 	}
@@ -1152,6 +1171,75 @@ func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceCo
 	applyOnTheFlyArgs := ixweb.OpArgs{ix.c.Session().AbsPath(applyOnTheFlyArg)}
 	if err := ix.c.Session().Post(ctx, applyOnTheFlyOp, applyOnTheFlyArgs, nil); err != nil {
 		return errors.Wrap(err, "could not apply topology changes")
+	}
+	return nil
+}
+
+func validateFlows(fs []*opb.Flow) error {
+	for _, f := range fs {
+		if len(f.GetSrcEndpoints()) == 0 {
+			return usererr.New("flow has no src endpointd")
+		}
+		if len(f.GetDstEndpoints()) == 0 {
+			return usererr.New("flow has no dst endpoints")
+		}
+	}
+	return nil
+}
+
+func validateInterfaces(ifs []*opb.InterfaceConfig) error {
+	if len(ifs) == 0 {
+		return usererr.New("zero interfaces to configure, need at least one")
+	}
+	if len(ifs) > maxIntfs {
+		return usererr.New("%v interfaces to configure, must be at most %v", len(ifs), maxIntfs)
+	}
+	intfs := make(map[string]bool)
+
+	for _, i := range ifs {
+		if i.GetPort() == "" && i.GetLag() == "" {
+			return usererr.New("interface has no port or lag specified: %v", i)
+		}
+		if i.GetLag() != "" && i.GetEnableLacp() {
+			return usererr.New("interface should not specify both a LAG and that LACP is enabled: %v", i)
+		}
+		if intfs[i.GetName()] {
+			return usererr.New("duplicate interface name: %s", i.GetName())
+		}
+		intfs[i.GetName()] = true
+		nets := make(map[string]bool)
+		for _, n := range i.GetNetworks() {
+			if nets[n.GetName()] {
+				return usererr.New("duplicate network name: %s", n.GetName())
+			}
+			nets[n.GetName()] = true
+		}
+		if err := validateIP(i.GetIpv4(), "ipv4 on "+i.GetName()); err != nil {
+			return err
+		}
+		if err := validateIP(i.GetIpv6(), "ipv6 on "+i.GetName()); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func validateIP(ipc *opb.IpConfig, desc string) error {
+	if ipc == nil {
+		return nil
+	}
+	addr := ipc.GetAddressCidr()
+	gway := ipc.GetDefaultGateway()
+	_, an, err := net.ParseCIDR(addr)
+	if err != nil {
+		return usererr.New("%s address is not valid CIDR notation: %s", desc, addr)
+	}
+	gi := net.ParseIP(gway)
+	if gi == nil {
+		return usererr.New("%s default gateway is not valid IP notation: %s", desc, gway)
+	}
+	if !an.Contains(gi) {
+		return usererr.New("%s default gateway is not in CIDR range %s: %s", desc, addr, gway)
 	}
 	return nil
 }

@@ -29,7 +29,7 @@ func (n *LacpPath) Lookup(t testing.TB) *oc.QualifiedLacp {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LacpPath) Get(t testing.TB) *oc.Lacp {
 	t.Helper()
@@ -120,7 +120,7 @@ func (n *Lacp_InterfacePath) Lookup(t testing.TB) *oc.QualifiedLacp_Interface {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_InterfacePath) Get(t testing.TB) *oc.Lacp_Interface {
 	t.Helper()

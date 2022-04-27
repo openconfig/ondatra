@@ -29,7 +29,7 @@ func (n *System_Aaa_ServerGroup_NamePath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_System_Aaa_ServerGroup_NamePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *System_Aaa_ServerGroup_NamePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *System_Aaa_ServerGroup_NamePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_NamePath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/state/name to the batch object.
@@ -184,7 +212,7 @@ func (n *System_Aaa_ServerGroup_ServerPath) Lookup(t testing.TB) *oc.QualifiedSy
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_ServerPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server {
 	t.Helper()
@@ -246,12 +274,13 @@ func watch_System_Aaa_ServerGroup_ServerPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.System_Aaa_ServerGroup_ServerWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server{
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server)
 		w.LastVal = val
@@ -304,6 +333,36 @@ func (n *System_Aaa_ServerGroup_ServerPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_ServerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server) bool) *oc.System_Aaa_ServerGroup_ServerWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_ServerGroup_ServerWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -311,7 +370,7 @@ func (n *System_Aaa_ServerGroup_ServerPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_ServerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server) bool) *oc.System_Aaa_ServerGroup_ServerWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_ServerPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_ServerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server to the batch object.
@@ -333,7 +392,7 @@ func (n *System_Aaa_ServerGroup_Server_AddressPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -387,10 +446,10 @@ func watch_System_Aaa_ServerGroup_Server_AddressPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_AddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_AddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -443,6 +502,34 @@ func (n *System_Aaa_ServerGroup_Server_AddressPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_AddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_AddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +537,7 @@ func (n *System_Aaa_ServerGroup_Server_AddressPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_AddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_AddressPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_AddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/address to the batch object.
@@ -486,7 +573,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionAbortsPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-aborts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ConnectionAbortsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -540,10 +627,10 @@ func watch_System_Aaa_ServerGroup_Server_ConnectionAbortsPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ConnectionAbortsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ConnectionAbortsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -596,6 +683,34 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionAbortsPathAny) Collect(t testin
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ConnectionAbortsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ConnectionAbortsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-aborts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -603,7 +718,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionAbortsPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ConnectionAbortsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ConnectionAbortsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ConnectionAbortsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-aborts to the batch object.
@@ -639,7 +754,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionClosesPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-closes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ConnectionClosesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -693,10 +808,10 @@ func watch_System_Aaa_ServerGroup_Server_ConnectionClosesPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ConnectionClosesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ConnectionClosesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -749,6 +864,34 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionClosesPathAny) Collect(t testin
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ConnectionClosesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ConnectionClosesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-closes with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +899,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionClosesPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ConnectionClosesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ConnectionClosesPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ConnectionClosesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-closes to the batch object.
@@ -792,7 +935,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionFailuresPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-failures with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ConnectionFailuresPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -846,10 +989,10 @@ func watch_System_Aaa_ServerGroup_Server_ConnectionFailuresPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ConnectionFailuresPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ConnectionFailuresPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -902,6 +1045,34 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionFailuresPathAny) Collect(t test
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ConnectionFailuresPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ConnectionFailuresPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-failures with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1080,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionFailuresPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ConnectionFailuresPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ConnectionFailuresPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ConnectionFailuresPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-failures to the batch object.
@@ -945,7 +1116,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionOpensPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-opens with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ConnectionOpensPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -999,10 +1170,10 @@ func watch_System_Aaa_ServerGroup_Server_ConnectionOpensPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ConnectionOpensPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ConnectionOpensPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1055,6 +1226,34 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionOpensPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ConnectionOpensPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ConnectionOpensPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-opens with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1261,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionOpensPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ConnectionOpensPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ConnectionOpensPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ConnectionOpensPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-opens to the batch object.
@@ -1098,7 +1297,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionTimeoutsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-timeouts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ConnectionTimeoutsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1152,10 +1351,10 @@ func watch_System_Aaa_ServerGroup_Server_ConnectionTimeoutsPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ConnectionTimeoutsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ConnectionTimeoutsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1208,6 +1407,34 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionTimeoutsPathAny) Collect(t test
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ConnectionTimeoutsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ConnectionTimeoutsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-timeouts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1442,7 @@ func (n *System_Aaa_ServerGroup_Server_ConnectionTimeoutsPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ConnectionTimeoutsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ConnectionTimeoutsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ConnectionTimeoutsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/connection-timeouts to the batch object.
@@ -1251,7 +1478,7 @@ func (n *System_Aaa_ServerGroup_Server_ErrorsReceivedPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/errors-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_ErrorsReceivedPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1305,10 +1532,10 @@ func watch_System_Aaa_ServerGroup_Server_ErrorsReceivedPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_ErrorsReceivedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_ErrorsReceivedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1361,6 +1588,34 @@ func (n *System_Aaa_ServerGroup_Server_ErrorsReceivedPathAny) Collect(t testing.
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_ErrorsReceivedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_ErrorsReceivedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/errors-received with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1623,7 @@ func (n *System_Aaa_ServerGroup_Server_ErrorsReceivedPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_ErrorsReceivedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_ErrorsReceivedPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_ErrorsReceivedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/errors-received to the batch object.
@@ -1404,7 +1659,7 @@ func (n *System_Aaa_ServerGroup_Server_MessagesReceivedPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-received with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_MessagesReceivedPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1458,10 +1713,10 @@ func watch_System_Aaa_ServerGroup_Server_MessagesReceivedPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_MessagesReceivedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_MessagesReceivedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1514,6 +1769,34 @@ func (n *System_Aaa_ServerGroup_Server_MessagesReceivedPathAny) Collect(t testin
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_MessagesReceivedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_MessagesReceivedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-received with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +1804,7 @@ func (n *System_Aaa_ServerGroup_Server_MessagesReceivedPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_MessagesReceivedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_MessagesReceivedPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_MessagesReceivedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-received to the batch object.
@@ -1557,7 +1840,7 @@ func (n *System_Aaa_ServerGroup_Server_MessagesSentPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-sent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_MessagesSentPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1611,10 +1894,10 @@ func watch_System_Aaa_ServerGroup_Server_MessagesSentPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_MessagesSentPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_MessagesSentPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1667,6 +1950,34 @@ func (n *System_Aaa_ServerGroup_Server_MessagesSentPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_MessagesSentPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_MessagesSentPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-sent with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +1985,7 @@ func (n *System_Aaa_ServerGroup_Server_MessagesSentPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_MessagesSentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_MessagesSentPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_MessagesSentPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/messages-sent to the batch object.
@@ -1710,7 +2021,7 @@ func (n *System_Aaa_ServerGroup_Server_NamePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1764,10 +2075,10 @@ func watch_System_Aaa_ServerGroup_Server_NamePath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1820,6 +2131,34 @@ func (n *System_Aaa_ServerGroup_Server_NamePathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1827,7 +2166,7 @@ func (n *System_Aaa_ServerGroup_Server_NamePathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_NamePath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/name to the batch object.
@@ -1865,7 +2204,7 @@ func (n *System_Aaa_ServerGroup_Server_RadiusPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_RadiusPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Radius {
 	t.Helper()
@@ -1927,12 +2266,13 @@ func watch_System_Aaa_ServerGroup_Server_RadiusPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.System_Aaa_ServerGroup_Server_RadiusWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius{
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius)
 		w.LastVal = val
@@ -1985,6 +2325,36 @@ func (n *System_Aaa_ServerGroup_Server_RadiusPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_RadiusPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius) bool) *oc.System_Aaa_ServerGroup_Server_RadiusWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_ServerGroup_Server_RadiusWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1992,7 +2362,7 @@ func (n *System_Aaa_ServerGroup_Server_RadiusPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_RadiusPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius) bool) *oc.System_Aaa_ServerGroup_Server_RadiusWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_RadiusPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_RadiusPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius to the batch object.
@@ -2016,7 +2386,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/acct-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2070,10 +2440,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_AcctPortPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_AcctPortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_AcctPortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2126,6 +2496,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_AcctPortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_AcctPortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/acct-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2133,7 +2531,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_AcctPortPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_AcctPortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/acct-port to the batch object.
@@ -2171,7 +2569,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/auth-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2225,10 +2623,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_AuthPortPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_AuthPortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_AuthPortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -2281,6 +2679,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_AuthPortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_AuthPortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/auth-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2288,7 +2714,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_AuthPortPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_AuthPortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/auth-port to the batch object.
@@ -2326,7 +2752,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_CountersPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_CountersPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Radius_Counters {
 	t.Helper()
@@ -2388,12 +2814,13 @@ func watch_System_Aaa_ServerGroup_Server_Radius_CountersPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.System_Aaa_ServerGroup_Server_Radius_CountersWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters{
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters)
 		w.LastVal = val
@@ -2446,6 +2873,36 @@ func (n *System_Aaa_ServerGroup_Server_Radius_CountersPathAny) Collect(t testing
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters) bool) *oc.System_Aaa_ServerGroup_Server_Radius_CountersWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_ServerGroup_Server_Radius_CountersWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2453,7 +2910,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_CountersPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Radius_Counters) bool) *oc.System_Aaa_ServerGroup_Server_Radius_CountersWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_CountersPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters to the batch object.
@@ -2475,7 +2932,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath) Lookup
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-accepts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2529,10 +2986,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath(t tes
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2585,6 +3042,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPathAny) Col
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-accepts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2592,7 +3077,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPathAny) Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessAcceptsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-accepts to the batch object.
@@ -2628,7 +3113,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath) Lookup
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-rejects with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2682,10 +3167,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath(t tes
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2738,6 +3223,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPathAny) Col
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-rejects with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2745,7 +3258,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPathAny) Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_AccessRejectsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/access-rejects to the batch object.
@@ -2781,7 +3294,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/retried-access-requests with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2835,10 +3348,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2891,6 +3404,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/retried-access-requests with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2898,7 +3439,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_RetriedAccessRequestsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/retried-access-requests to the batch object.
@@ -2934,7 +3475,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/timeout-access-requests with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2988,10 +3529,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3044,6 +3585,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius_Counters", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/timeout-access-requests with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3051,7 +3620,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_Counters_TimeoutAccessRequestsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/counters/timeout-access-requests to the batch object.
@@ -3087,7 +3656,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/retransmit-attempts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3141,10 +3710,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath(t testing
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3197,6 +3766,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPathAny) Collect
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/retransmit-attempts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3204,7 +3801,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPathAny) Collect
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/retransmit-attempts to the batch object.
@@ -3240,7 +3837,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3294,10 +3891,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath(t testing.TB
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3350,6 +3947,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPathAny) Collect(t 
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key-hashed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3357,7 +3982,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key-hashed to the batch object.
@@ -3393,7 +4018,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3447,10 +4072,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3503,6 +4128,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPathAny) Collect(t testin
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_SecretKeyPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3510,7 +4163,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_SecretKeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/secret-key to the batch object.
@@ -3546,7 +4199,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -3600,10 +4253,10 @@ func watch_System_Aaa_ServerGroup_Server_Radius_SourceAddressPath(t testing.TB, 
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Radius{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Radius_SourceAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Radius_SourceAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -3656,6 +4309,34 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPathAny) Collect(t te
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Radius_SourceAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Radius{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Radius{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Radius", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Radius_SourceAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/source-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3663,7 +4344,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Radius_SourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Radius_SourceAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/state/source-address to the batch object.

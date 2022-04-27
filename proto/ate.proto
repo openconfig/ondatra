@@ -20,11 +20,6 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/openconfig/ondatra/proto";
 
-message Topology {
-  repeated Lag lags = 1;
-  repeated InterfaceConfig interfaces = 2;
-}
-
 message Traffic {
   repeated Flow flows = 2;
 }
@@ -51,10 +46,9 @@ message InterfaceConfig {
   string ipv6_loopback_cidr = 13;
   ISISConfig isis = 7;
   BgpConfig bgp = 8;
-  repeated RsvpConfig rsvp = 12;
+  repeated RsvpConfig rsvps = 12;
   repeated Network networks = 9;
   bool enable_lacp = 10;
-  // NEXT ID: 14
 }
 
 message EthernetConfig {
@@ -161,7 +155,7 @@ message ISISConfig {
   // config to simulate pool of reachable ips.
   IPReachability ip_reachability = 12;
   // config to simulate topology of IS-IS routers.
-  repeated ISReachability is_reachability = 13;
+  repeated ISReachability is_reachabilities = 13;
   // pripority of the interface
   uint32 interface_priority = 14;
   // interval between sending hello packets.
@@ -193,8 +187,8 @@ message ISISSegmentRouting {
     uint32 sid_start_label = 1;
     uint32 sid_count = 2;
   }
-  repeated SIDRange srgb_range = 4;
-  repeated SIDRange srlb_range = 5;
+  repeated SIDRange srgb_ranges = 4;
+  repeated SIDRange srlb_ranges = 5;
   bool flag_readvertise = 6;
   bool flag_node_sid = 7;
   bool flag_no_php = 8;
@@ -222,6 +216,7 @@ message IPReachability {
   bool flag_value = 9;
   bool flag_local = 10;
   bool enable_sid_index_label = 11;
+  bool active = 12;
 }
 
 message ISReachability {
@@ -248,7 +243,9 @@ message ISReachability {
       IPReachability reachability = 3;
     }
     Routes routes_ipv4 = 10;
+    Routes routes_ipv6 = 12;
     string capability_router_id = 11;
+    // NEXT ID: 13
   }
   repeated Node nodes = 1;
   string name = 2;

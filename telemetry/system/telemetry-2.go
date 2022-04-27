@@ -31,7 +31,7 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TacacsPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Tacacs {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_System_Aaa_ServerGroup_Server_TacacsPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.System_Aaa_ServerGroup_Server_TacacsWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_TacacsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool) *oc.System_Aaa_ServerGroup_Server_TacacsWatcher {
+	t.Helper()
+	w := &oc.System_Aaa_ServerGroup_Server_TacacsWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_TacacsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Aaa_ServerGroup_Server_Tacacs) bool) *oc.System_Aaa_ServerGroup_Server_TacacsWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TacacsPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_TacacsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs to the batch object.
@@ -182,7 +213,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -236,10 +267,10 @@ func watch_System_Aaa_ServerGroup_Server_Tacacs_PortPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -292,6 +323,34 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Tacacs_PortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_PortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +358,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_PortPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Tacacs_PortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/port to the batch object.
@@ -335,7 +394,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -389,10 +448,10 @@ func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t testing.TB
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -445,6 +504,34 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Collect(t 
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +539,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key-hashed to the batch object.
@@ -488,7 +575,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +629,10 @@ func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +685,34 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Collect(t testin
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +720,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/secret-key to the batch object.
@@ -641,7 +756,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -695,10 +810,10 @@ func watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t testing.TB, 
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server_Tacacs{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -751,6 +866,34 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Collect(t te
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server_Tacacs{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server_Tacacs{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server_Tacacs", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +901,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/state/source-address to the batch object.
@@ -794,7 +937,7 @@ func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -848,10 +991,10 @@ func watch_System_Aaa_ServerGroup_Server_TimeoutPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint16Watcher{}
 	gs := &oc.System_Aaa_ServerGroup_Server{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup_Server", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
@@ -904,6 +1047,34 @@ func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_Server_TimeoutPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
+	t.Helper()
+	w := &oc.Uint16Watcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup_Server{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup_Server{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup_Server", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_Server_TimeoutPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint16)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1082,7 @@ func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_Server_TimeoutPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_Server_TimeoutPath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_Server_TimeoutPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/servers/server/state/timeout to the batch object.
@@ -947,7 +1118,7 @@ func (n *System_Aaa_ServerGroup_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Aa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/state/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_TypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_SERVER_TYPE {
 	t.Helper()
@@ -1001,10 +1172,10 @@ func watch_System_Aaa_ServerGroup_TypePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.E_AaaTypes_AAA_SERVER_TYPEWatcher{}
 	gs := &oc.System_Aaa_ServerGroup{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Aaa_ServerGroup", gs, queryPath, true, false)
-		return convertSystem_Aaa_ServerGroup_TypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Aaa_ServerGroup_TypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE)
 		w.LastVal = val
@@ -1057,6 +1228,34 @@ func (n *System_Aaa_ServerGroup_TypePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_System_Aaa_ServerGroup_TypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool) *oc.E_AaaTypes_AAA_SERVER_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_AaaTypes_AAA_SERVER_TYPEWatcher{}
+	structs := map[string]*oc.System_Aaa_ServerGroup{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Aaa_ServerGroup{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Aaa_ServerGroup", structs[pre], queryPath, true, false)
+			qv := convertSystem_Aaa_ServerGroup_TypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/aaa/server-groups/server-group/state/type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1064,7 +1263,7 @@ func (n *System_Aaa_ServerGroup_TypePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Aaa_ServerGroup_TypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AaaTypes_AAA_SERVER_TYPE) bool) *oc.E_AaaTypes_AAA_SERVER_TYPEWatcher {
 	t.Helper()
-	return watch_System_Aaa_ServerGroup_TypePath(t, n, timeout, predicate)
+	return watch_System_Aaa_ServerGroup_TypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/aaa/server-groups/server-group/state/type to the batch object.
@@ -1102,7 +1301,7 @@ func (n *System_AlarmPath) Lookup(t testing.TB) *oc.QualifiedSystem_Alarm {
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_AlarmPath) Get(t testing.TB) *oc.System_Alarm {
 	t.Helper()
@@ -1164,12 +1363,13 @@ func watch_System_AlarmPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.System_AlarmWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Alarm{
+		qv := (&oc.QualifiedSystem_Alarm{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Alarm)
 		w.LastVal = val
@@ -1222,6 +1422,36 @@ func (n *System_AlarmPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_System_AlarmPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Alarm) bool) *oc.System_AlarmWatcher {
+	t.Helper()
+	w := &oc.System_AlarmWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Alarm{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Alarm)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1229,7 +1459,7 @@ func (n *System_AlarmPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_AlarmPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Alarm) bool) *oc.System_AlarmWatcher {
 	t.Helper()
-	return watch_System_AlarmPath(t, n, timeout, predicate)
+	return watch_System_AlarmPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm to the batch object.
@@ -1251,7 +1481,7 @@ func (n *System_Alarm_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_IdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1305,10 +1535,10 @@ func watch_System_Alarm_IdPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_IdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_IdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1361,6 +1591,34 @@ func (n *System_Alarm_IdPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_System_Alarm_IdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_IdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1626,7 @@ func (n *System_Alarm_IdPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_IdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Alarm_IdPath(t, n, timeout, predicate)
+	return watch_System_Alarm_IdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/id to the batch object.
@@ -1404,7 +1662,7 @@ func (n *System_Alarm_ResourcePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/resource with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_ResourcePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1458,10 +1716,10 @@ func watch_System_Alarm_ResourcePath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_ResourcePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_ResourcePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1514,6 +1772,34 @@ func (n *System_Alarm_ResourcePathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_System_Alarm_ResourcePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_ResourcePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/resource with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +1807,7 @@ func (n *System_Alarm_ResourcePathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_ResourcePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Alarm_ResourcePath(t, n, timeout, predicate)
+	return watch_System_Alarm_ResourcePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/resource to the batch object.
@@ -1557,7 +1843,7 @@ func (n *System_Alarm_SeverityPath) Lookup(t testing.TB) *oc.QualifiedE_AlarmTyp
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_SeverityPath) Get(t testing.TB) oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY {
 	t.Helper()
@@ -1611,10 +1897,10 @@ func watch_System_Alarm_SeverityPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_SeverityPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_SeverityPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)
 		w.LastVal = val
@@ -1667,6 +1953,34 @@ func (n *System_Alarm_SeverityPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_System_Alarm_SeverityPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool) *oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher {
+	t.Helper()
+	w := &oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_SeverityPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/severity with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +1988,7 @@ func (n *System_Alarm_SeverityPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_SeverityPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_AlarmTypes_OPENCONFIG_ALARM_SEVERITY) bool) *oc.E_AlarmTypes_OPENCONFIG_ALARM_SEVERITYWatcher {
 	t.Helper()
-	return watch_System_Alarm_SeverityPath(t, n, timeout, predicate)
+	return watch_System_Alarm_SeverityPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/severity to the batch object.
@@ -1710,7 +2024,7 @@ func (n *System_Alarm_TextPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/text with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_TextPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1764,10 +2078,10 @@ func watch_System_Alarm_TextPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_TextPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_TextPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1820,6 +2134,34 @@ func (n *System_Alarm_TextPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_System_Alarm_TextPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_TextPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/text with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1827,7 +2169,7 @@ func (n *System_Alarm_TextPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_TextPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Alarm_TextPath(t, n, timeout, predicate)
+	return watch_System_Alarm_TextPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/text to the batch object.
@@ -1863,7 +2205,7 @@ func (n *System_Alarm_TimeCreatedPath) Lookup(t testing.TB) *oc.QualifiedUint64 
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/time-created with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_TimeCreatedPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1917,10 +2259,10 @@ func watch_System_Alarm_TimeCreatedPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_TimeCreatedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_TimeCreatedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1973,6 +2315,34 @@ func (n *System_Alarm_TimeCreatedPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_System_Alarm_TimeCreatedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_TimeCreatedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/time-created with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1980,7 +2350,7 @@ func (n *System_Alarm_TimeCreatedPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_TimeCreatedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Alarm_TimeCreatedPath(t, n, timeout, predicate)
+	return watch_System_Alarm_TimeCreatedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/time-created to the batch object.
@@ -2016,7 +2386,7 @@ func (n *System_Alarm_TypeIdPath) Lookup(t testing.TB) *oc.QualifiedSystem_Alarm
 }
 
 // Get fetches the value at /openconfig-system/system/alarms/alarm/state/type-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Alarm_TypeIdPath) Get(t testing.TB) oc.System_Alarm_TypeId_Union {
 	t.Helper()
@@ -2070,10 +2440,10 @@ func watch_System_Alarm_TypeIdPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.System_Alarm_TypeId_UnionWatcher{}
 	gs := &oc.System_Alarm{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Alarm", gs, queryPath, true, false)
-		return convertSystem_Alarm_TypeIdPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Alarm_TypeIdPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Alarm_TypeId_Union)
 		w.LastVal = val
@@ -2126,6 +2496,34 @@ func (n *System_Alarm_TypeIdPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_System_Alarm_TypeIdPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Alarm_TypeId_Union) bool) *oc.System_Alarm_TypeId_UnionWatcher {
+	t.Helper()
+	w := &oc.System_Alarm_TypeId_UnionWatcher{}
+	structs := map[string]*oc.System_Alarm{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Alarm{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Alarm", structs[pre], queryPath, true, false)
+			qv := convertSystem_Alarm_TypeIdPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Alarm_TypeId_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/alarms/alarm/state/type-id with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2133,7 +2531,7 @@ func (n *System_Alarm_TypeIdPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Alarm_TypeIdPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Alarm_TypeId_Union) bool) *oc.System_Alarm_TypeId_UnionWatcher {
 	t.Helper()
-	return watch_System_Alarm_TypeIdPath(t, n, timeout, predicate)
+	return watch_System_Alarm_TypeIdPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/alarms/alarm/state/type-id to the batch object.
@@ -2169,7 +2567,7 @@ func (n *System_BootTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-system/system/state/boot-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_BootTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2223,10 +2621,10 @@ func watch_System_BootTimePath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System", gs, queryPath, true, false)
-		return convertSystem_BootTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_BootTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2279,6 +2677,34 @@ func (n *System_BootTimePathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_System_BootTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System", structs[pre], queryPath, true, false)
+			qv := convertSystem_BootTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/state/boot-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2286,7 +2712,7 @@ func (n *System_BootTimePathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_BootTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_BootTimePath(t, n, timeout, predicate)
+	return watch_System_BootTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/state/boot-time to the batch object.
@@ -2324,7 +2750,7 @@ func (n *System_ClockPath) Lookup(t testing.TB) *oc.QualifiedSystem_Clock {
 }
 
 // Get fetches the value at /openconfig-system/system/clock with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_ClockPath) Get(t testing.TB) *oc.System_Clock {
 	t.Helper()
@@ -2386,12 +2812,13 @@ func watch_System_ClockPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.System_ClockWatcher{}
 	gs := &oc.System_Clock{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Clock", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Clock{
+		qv := (&oc.QualifiedSystem_Clock{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Clock)
 		w.LastVal = val
@@ -2444,6 +2871,36 @@ func (n *System_ClockPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_System_ClockPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Clock) bool) *oc.System_ClockWatcher {
+	t.Helper()
+	w := &oc.System_ClockWatcher{}
+	structs := map[string]*oc.System_Clock{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Clock{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Clock", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Clock{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Clock)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/clock with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2451,7 +2908,7 @@ func (n *System_ClockPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_ClockPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Clock) bool) *oc.System_ClockWatcher {
 	t.Helper()
-	return watch_System_ClockPath(t, n, timeout, predicate)
+	return watch_System_ClockPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/clock to the batch object.
@@ -2473,7 +2930,7 @@ func (n *System_Clock_TimezoneNamePath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/clock/state/timezone-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Clock_TimezoneNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2527,10 +2984,10 @@ func watch_System_Clock_TimezoneNamePath(t testing.TB, n ygot.PathStruct, durati
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.System_Clock{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Clock", gs, queryPath, true, false)
-		return convertSystem_Clock_TimezoneNamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Clock_TimezoneNamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -2583,6 +3040,34 @@ func (n *System_Clock_TimezoneNamePathAny) Collect(t testing.TB, duration time.D
 	return c
 }
 
+func watch_System_Clock_TimezoneNamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.System_Clock{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Clock{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Clock", structs[pre], queryPath, true, false)
+			qv := convertSystem_Clock_TimezoneNamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/clock/state/timezone-name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2590,7 +3075,7 @@ func (n *System_Clock_TimezoneNamePathAny) Collect(t testing.TB, duration time.D
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Clock_TimezoneNamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_System_Clock_TimezoneNamePath(t, n, timeout, predicate)
+	return watch_System_Clock_TimezoneNamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/clock/state/timezone-name to the batch object.
@@ -2628,7 +3113,7 @@ func (n *System_CpuPath) Lookup(t testing.TB) *oc.QualifiedSystem_Cpu {
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_CpuPath) Get(t testing.TB) *oc.System_Cpu {
 	t.Helper()
@@ -2690,12 +3175,13 @@ func watch_System_CpuPath(t testing.TB, n ygot.PathStruct, duration time.Duratio
 	t.Helper()
 	w := &oc.System_CpuWatcher{}
 	gs := &oc.System_Cpu{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Cpu{
+		qv := (&oc.QualifiedSystem_Cpu{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Cpu)
 		w.LastVal = val
@@ -2748,6 +3234,36 @@ func (n *System_CpuPathAny) Collect(t testing.TB, duration time.Duration) *oc.Co
 	return c
 }
 
+func watch_System_CpuPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Cpu) bool) *oc.System_CpuWatcher {
+	t.Helper()
+	w := &oc.System_CpuWatcher{}
+	structs := map[string]*oc.System_Cpu{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Cpu{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Cpu)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2755,7 +3271,7 @@ func (n *System_CpuPathAny) Collect(t testing.TB, duration time.Duration) *oc.Co
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_CpuPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu) bool) *oc.System_CpuWatcher {
 	t.Helper()
-	return watch_System_CpuPath(t, n, timeout, predicate)
+	return watch_System_CpuPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu to the batch object.
@@ -2779,7 +3295,7 @@ func (n *System_Cpu_HardwareInterruptPath) Lookup(t testing.TB) *oc.QualifiedSys
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterruptPath) Get(t testing.TB) *oc.System_Cpu_HardwareInterrupt {
 	t.Helper()
@@ -2841,12 +3357,13 @@ func watch_System_Cpu_HardwareInterruptPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.System_Cpu_HardwareInterruptWatcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, false, false)
-		return (&oc.QualifiedSystem_Cpu_HardwareInterrupt{
+		qv := (&oc.QualifiedSystem_Cpu_HardwareInterrupt{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedSystem_Cpu_HardwareInterrupt)
 		w.LastVal = val
@@ -2899,6 +3416,36 @@ func (n *System_Cpu_HardwareInterruptPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_System_Cpu_HardwareInterruptPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_HardwareInterrupt) bool) *oc.System_Cpu_HardwareInterruptWatcher {
+	t.Helper()
+	w := &oc.System_Cpu_HardwareInterruptWatcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedSystem_Cpu_HardwareInterrupt{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedSystem_Cpu_HardwareInterrupt)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2906,7 +3453,7 @@ func (n *System_Cpu_HardwareInterruptPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterruptPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedSystem_Cpu_HardwareInterrupt) bool) *oc.System_Cpu_HardwareInterruptWatcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterruptPath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterruptPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt to the batch object.
@@ -2928,7 +3475,7 @@ func (n *System_Cpu_HardwareInterrupt_AvgPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterrupt_AvgPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2982,10 +3529,10 @@ func watch_System_Cpu_HardwareInterrupt_AvgPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, true, false)
-		return convertSystem_Cpu_HardwareInterrupt_AvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Cpu_HardwareInterrupt_AvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3038,6 +3585,34 @@ func (n *System_Cpu_HardwareInterrupt_AvgPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_Cpu_HardwareInterrupt_AvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, true, false)
+			qv := convertSystem_Cpu_HardwareInterrupt_AvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3045,7 +3620,7 @@ func (n *System_Cpu_HardwareInterrupt_AvgPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterrupt_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterrupt_AvgPath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterrupt_AvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt/avg to the batch object.
@@ -3081,7 +3656,7 @@ func (n *System_Cpu_HardwareInterrupt_InstantPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/instant with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterrupt_InstantPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3135,10 +3710,10 @@ func watch_System_Cpu_HardwareInterrupt_InstantPath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, true, false)
-		return convertSystem_Cpu_HardwareInterrupt_InstantPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Cpu_HardwareInterrupt_InstantPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3191,6 +3766,34 @@ func (n *System_Cpu_HardwareInterrupt_InstantPathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_System_Cpu_HardwareInterrupt_InstantPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, true, false)
+			qv := convertSystem_Cpu_HardwareInterrupt_InstantPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3198,7 +3801,7 @@ func (n *System_Cpu_HardwareInterrupt_InstantPathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterrupt_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterrupt_InstantPath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterrupt_InstantPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt/instant to the batch object.
@@ -3234,7 +3837,7 @@ func (n *System_Cpu_HardwareInterrupt_IntervalPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterrupt_IntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3288,10 +3891,10 @@ func watch_System_Cpu_HardwareInterrupt_IntervalPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, true, false)
-		return convertSystem_Cpu_HardwareInterrupt_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Cpu_HardwareInterrupt_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3344,6 +3947,34 @@ func (n *System_Cpu_HardwareInterrupt_IntervalPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_System_Cpu_HardwareInterrupt_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, true, false)
+			qv := convertSystem_Cpu_HardwareInterrupt_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3351,7 +3982,7 @@ func (n *System_Cpu_HardwareInterrupt_IntervalPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterrupt_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterrupt_IntervalPath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterrupt_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt/interval to the batch object.
@@ -3387,7 +4018,7 @@ func (n *System_Cpu_HardwareInterrupt_MaxPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterrupt_MaxPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3441,10 +4072,10 @@ func watch_System_Cpu_HardwareInterrupt_MaxPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, true, false)
-		return convertSystem_Cpu_HardwareInterrupt_MaxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Cpu_HardwareInterrupt_MaxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3497,6 +4128,34 @@ func (n *System_Cpu_HardwareInterrupt_MaxPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_System_Cpu_HardwareInterrupt_MaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, true, false)
+			qv := convertSystem_Cpu_HardwareInterrupt_MaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3504,7 +4163,7 @@ func (n *System_Cpu_HardwareInterrupt_MaxPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterrupt_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterrupt_MaxPath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterrupt_MaxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max to the batch object.
@@ -3540,7 +4199,7 @@ func (n *System_Cpu_HardwareInterrupt_MaxTimePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Cpu_HardwareInterrupt_MaxTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -3594,10 +4253,10 @@ func watch_System_Cpu_HardwareInterrupt_MaxTimePath(t testing.TB, n ygot.PathStr
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.System_Cpu_HardwareInterrupt{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "System_Cpu_HardwareInterrupt", gs, queryPath, true, false)
-		return convertSystem_Cpu_HardwareInterrupt_MaxTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertSystem_Cpu_HardwareInterrupt_MaxTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3650,6 +4309,34 @@ func (n *System_Cpu_HardwareInterrupt_MaxTimePathAny) Collect(t testing.TB, dura
 	return c
 }
 
+func watch_System_Cpu_HardwareInterrupt_MaxTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.System_Cpu_HardwareInterrupt{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.System_Cpu_HardwareInterrupt{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "System_Cpu_HardwareInterrupt", structs[pre], queryPath, true, false)
+			qv := convertSystem_Cpu_HardwareInterrupt_MaxTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3657,7 +4344,7 @@ func (n *System_Cpu_HardwareInterrupt_MaxTimePathAny) Collect(t testing.TB, dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *System_Cpu_HardwareInterrupt_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_System_Cpu_HardwareInterrupt_MaxTimePath(t, n, timeout, predicate)
+	return watch_System_Cpu_HardwareInterrupt_MaxTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-system/system/cpus/cpu/state/hardware-interrupt/max-time to the batch object.

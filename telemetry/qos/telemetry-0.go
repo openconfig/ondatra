@@ -31,7 +31,7 @@ func (n *QosPath) Lookup(t testing.TB) *oc.QualifiedQos {
 }
 
 // Get fetches the value at /openconfig-qos/qos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *QosPath) Get(t testing.TB) *oc.Qos {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_QosPath(t testing.TB, n ygot.PathStruct, duration time.Duration, pred
 	t.Helper()
 	w := &oc.QosWatcher{}
 	gs := &oc.Qos{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos", gs, queryPath, false, false)
-		return (&oc.QualifiedQos{
+		qv := (&oc.QualifiedQos{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *QosPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collectio
 	return c
 }
 
+func watch_QosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos) bool) *oc.QosWatcher {
+	t.Helper()
+	w := &oc.QosWatcher{}
+	structs := map[string]*oc.Qos{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *QosPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collectio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *QosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos) bool) *oc.QosWatcher {
 	t.Helper()
-	return watch_QosPath(t, n, timeout, predicate)
+	return watch_QosPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos to the batch object.
@@ -182,7 +213,7 @@ func (n *Qos_BufferAllocationProfilePath) Lookup(t testing.TB) *oc.QualifiedQos_
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfilePath) Get(t testing.TB) *oc.Qos_BufferAllocationProfile {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_Qos_BufferAllocationProfilePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Qos_BufferAllocationProfileWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_BufferAllocationProfile{
+		qv := (&oc.QualifiedQos_BufferAllocationProfile{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_BufferAllocationProfile)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *Qos_BufferAllocationProfilePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Qos_BufferAllocationProfilePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_BufferAllocationProfile) bool) *oc.Qos_BufferAllocationProfileWatcher {
+	t.Helper()
+	w := &oc.Qos_BufferAllocationProfileWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_BufferAllocationProfile{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_BufferAllocationProfile)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *Qos_BufferAllocationProfilePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfilePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_BufferAllocationProfile) bool) *oc.Qos_BufferAllocationProfileWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfilePath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfilePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile to the batch object.
@@ -331,7 +393,7 @@ func (n *Qos_BufferAllocationProfile_NamePath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -385,10 +447,10 @@ func watch_Qos_BufferAllocationProfile_NamePath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -441,6 +503,34 @@ func (n *Qos_BufferAllocationProfile_NamePathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -448,7 +538,7 @@ func (n *Qos_BufferAllocationProfile_NamePathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_NamePath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/state/name to the batch object.
@@ -486,7 +576,7 @@ func (n *Qos_BufferAllocationProfile_QueuePath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_QueuePath) Get(t testing.TB) *oc.Qos_BufferAllocationProfile_Queue {
 	t.Helper()
@@ -548,12 +638,13 @@ func watch_Qos_BufferAllocationProfile_QueuePath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Qos_BufferAllocationProfile_QueueWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_BufferAllocationProfile_Queue{
+		qv := (&oc.QualifiedQos_BufferAllocationProfile_Queue{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_BufferAllocationProfile_Queue)
 		w.LastVal = val
@@ -606,6 +697,36 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_QueuePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_BufferAllocationProfile_Queue) bool) *oc.Qos_BufferAllocationProfile_QueueWatcher {
+	t.Helper()
+	w := &oc.Qos_BufferAllocationProfile_QueueWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_BufferAllocationProfile_Queue{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_BufferAllocationProfile_Queue)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -613,7 +734,7 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_QueuePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_BufferAllocationProfile_Queue) bool) *oc.Qos_BufferAllocationProfile_QueueWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_QueuePath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_QueuePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue to the batch object.
@@ -635,7 +756,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -689,10 +810,10 @@ func watch_Qos_BufferAllocationProfile_Queue_DedicatedBufferPath(t testing.TB, n
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_DedicatedBufferPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_DedicatedBufferPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -745,6 +866,34 @@ func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny) Collect(t tes
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_DedicatedBufferPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -752,7 +901,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_DedicatedBufferPath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer to the batch object.
@@ -788,7 +937,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath) Lookup
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dynamic-limit-scaling-factor with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath) Get(t testing.TB) int32 {
 	t.Helper()
@@ -842,10 +991,10 @@ func watch_Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath(t tes
 	t.Helper()
 	w := &oc.Int32Watcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt32)
 		w.LastVal = val
@@ -898,6 +1047,34 @@ func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPathAny) Col
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt32) bool) *oc.Int32Watcher {
+	t.Helper()
+	w := &oc.Int32Watcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dynamic-limit-scaling-factor with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -905,7 +1082,7 @@ func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPathAny) Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt32) bool) *oc.Int32Watcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dynamic-limit-scaling-factor to the batch object.
@@ -941,7 +1118,7 @@ func (n *Qos_BufferAllocationProfile_Queue_NamePath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -995,10 +1172,10 @@ func watch_Qos_BufferAllocationProfile_Queue_NamePath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1051,6 +1228,34 @@ func (n *Qos_BufferAllocationProfile_Queue_NamePathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1058,7 +1263,7 @@ func (n *Qos_BufferAllocationProfile_Queue_NamePathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_NamePath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/name to the batch object.
@@ -1094,7 +1299,7 @@ func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/shared-buffer-limit-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath) Get(t testing.TB) oc.E_Qos_SHARED_BUFFER_LIMIT_TYPE {
 	t.Helper()
@@ -1148,10 +1353,10 @@ func watch_Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath(t testing
 	t.Helper()
 	w := &oc.E_Qos_SHARED_BUFFER_LIMIT_TYPEWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Qos_SHARED_BUFFER_LIMIT_TYPE)
 		w.LastVal = val
@@ -1204,6 +1409,34 @@ func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePathAny) Collect
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Qos_SHARED_BUFFER_LIMIT_TYPE) bool) *oc.E_Qos_SHARED_BUFFER_LIMIT_TYPEWatcher {
+	t.Helper()
+	w := &oc.E_Qos_SHARED_BUFFER_LIMIT_TYPEWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Qos_SHARED_BUFFER_LIMIT_TYPE)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/shared-buffer-limit-type with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1211,7 +1444,7 @@ func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePathAny) Collect
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Qos_SHARED_BUFFER_LIMIT_TYPE) bool) *oc.E_Qos_SHARED_BUFFER_LIMIT_TYPEWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_SharedBufferLimitTypePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/shared-buffer-limit-type to the batch object.
@@ -1247,7 +1480,7 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1301,10 +1534,10 @@ func watch_Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath(t testi
 	t.Helper()
 	w := &oc.Uint32Watcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint32)
 		w.LastVal = val
@@ -1357,6 +1590,34 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny) Colle
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1364,7 +1625,7 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny) Colle
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit to the batch object.
@@ -1400,7 +1661,7 @@ func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/use-shared-buffer with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1454,10 +1715,10 @@ func watch_Qos_BufferAllocationProfile_Queue_UseSharedBufferPath(t testing.TB, n
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Qos_BufferAllocationProfile_Queue{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", gs, queryPath, true, false)
-		return convertQos_BufferAllocationProfile_Queue_UseSharedBufferPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_BufferAllocationProfile_Queue_UseSharedBufferPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -1510,6 +1771,34 @@ func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPathAny) Collect(t tes
 	return c
 }
 
+func watch_Qos_BufferAllocationProfile_Queue_UseSharedBufferPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Qos_BufferAllocationProfile_Queue{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_BufferAllocationProfile_Queue{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_BufferAllocationProfile_Queue", structs[pre], queryPath, true, false)
+			qv := convertQos_BufferAllocationProfile_Queue_UseSharedBufferPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/use-shared-buffer with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1517,7 +1806,7 @@ func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_BufferAllocationProfile_Queue_UseSharedBufferPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Qos_BufferAllocationProfile_Queue_UseSharedBufferPath(t, n, timeout, predicate)
+	return watch_Qos_BufferAllocationProfile_Queue_UseSharedBufferPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/use-shared-buffer to the batch object.
@@ -1555,7 +1844,7 @@ func (n *Qos_ClassifierPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifier {
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_ClassifierPath) Get(t testing.TB) *oc.Qos_Classifier {
 	t.Helper()
@@ -1617,12 +1906,13 @@ func watch_Qos_ClassifierPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.Qos_ClassifierWatcher{}
 	gs := &oc.Qos_Classifier{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier{
+		qv := (&oc.QualifiedQos_Classifier{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier)
 		w.LastVal = val
@@ -1675,6 +1965,36 @@ func (n *Qos_ClassifierPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Qos_ClassifierPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier) bool) *oc.Qos_ClassifierWatcher {
+	t.Helper()
+	w := &oc.Qos_ClassifierWatcher{}
+	structs := map[string]*oc.Qos_Classifier{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1682,7 +2002,7 @@ func (n *Qos_ClassifierPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_ClassifierPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier) bool) *oc.Qos_ClassifierWatcher {
 	t.Helper()
-	return watch_Qos_ClassifierPath(t, n, timeout, predicate)
+	return watch_Qos_ClassifierPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier to the batch object.
@@ -1704,7 +2024,7 @@ func (n *Qos_Classifier_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1758,10 +2078,10 @@ func watch_Qos_Classifier_NamePath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_Classifier{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier", gs, queryPath, true, false)
-		return convertQos_Classifier_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Classifier_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -1814,6 +2134,34 @@ func (n *Qos_Classifier_NamePathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Qos_Classifier_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_Classifier{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier", structs[pre], queryPath, true, false)
+			qv := convertQos_Classifier_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1821,7 +2169,7 @@ func (n *Qos_Classifier_NamePathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_NamePath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/state/name to the batch object.
@@ -1859,7 +2207,7 @@ func (n *Qos_Classifier_TermPath) Lookup(t testing.TB) *oc.QualifiedQos_Classifi
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_TermPath) Get(t testing.TB) *oc.Qos_Classifier_Term {
 	t.Helper()
@@ -1921,12 +2269,13 @@ func watch_Qos_Classifier_TermPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.Qos_Classifier_TermWatcher{}
 	gs := &oc.Qos_Classifier_Term{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term{
+		qv := (&oc.QualifiedQos_Classifier_Term{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term)
 		w.LastVal = val
@@ -1979,6 +2328,36 @@ func (n *Qos_Classifier_TermPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Qos_Classifier_TermPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term) bool) *oc.Qos_Classifier_TermWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_TermWatcher{}
+	structs := map[string]*oc.Qos_Classifier_Term{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier_Term{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1986,7 +2365,7 @@ func (n *Qos_Classifier_TermPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_TermPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term) bool) *oc.Qos_Classifier_TermWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_TermPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_TermPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term to the batch object.
@@ -2010,7 +2389,7 @@ func (n *Qos_Classifier_Term_ActionsPath) Lookup(t testing.TB) *oc.QualifiedQos_
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_ActionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions {
 	t.Helper()
@@ -2072,12 +2451,13 @@ func watch_Qos_Classifier_Term_ActionsPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Qos_Classifier_Term_ActionsWatcher{}
 	gs := &oc.Qos_Classifier_Term_Actions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Actions{
+		qv := (&oc.QualifiedQos_Classifier_Term_Actions{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions)
 		w.LastVal = val
@@ -2130,6 +2510,36 @@ func (n *Qos_Classifier_Term_ActionsPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Qos_Classifier_Term_ActionsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions) bool) *oc.Qos_Classifier_Term_ActionsWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_ActionsWatcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier_Term_Actions{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2137,7 +2547,7 @@ func (n *Qos_Classifier_Term_ActionsPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_ActionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions) bool) *oc.Qos_Classifier_Term_ActionsWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_ActionsPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_ActionsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions to the batch object.
@@ -2161,7 +2571,7 @@ func (n *Qos_Classifier_Term_Actions_RemarkPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_RemarkPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Actions_Remark {
 	t.Helper()
@@ -2223,12 +2633,13 @@ func watch_Qos_Classifier_Term_Actions_RemarkPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Qos_Classifier_Term_Actions_RemarkWatcher{}
 	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
+		qv := (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions_Remark)
 		w.LastVal = val
@@ -2281,6 +2692,36 @@ func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_Qos_Classifier_Term_Actions_RemarkPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool) *oc.Qos_Classifier_Term_Actions_RemarkWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Actions_RemarkWatcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions_Remark{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions_Remark{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier_Term_Actions_Remark{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Actions_Remark)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2288,7 +2729,7 @@ func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Actions_RemarkPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Actions_Remark) bool) *oc.Qos_Classifier_Term_Actions_RemarkWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_RemarkPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Actions_RemarkPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark to the batch object.
@@ -2310,7 +2751,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2364,10 +2805,10 @@ func watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPath(t testing.TB, n ygot.
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -2420,6 +2861,34 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Collect(t testing.T
 	return c
 }
 
+func watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions_Remark{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions_Remark{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", structs[pre], queryPath, true, false)
+			qv := convertQos_Classifier_Term_Actions_Remark_SetDot1PPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2427,7 +2896,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Collect(t testing.T
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Actions_Remark_SetDot1PPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dot1p to the batch object.
@@ -2463,7 +2932,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2517,10 +2986,10 @@ func watch_Qos_Classifier_Term_Actions_Remark_SetDscpPath(t testing.TB, n ygot.P
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -2573,6 +3042,34 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Collect(t testing.TB
 	return c
 }
 
+func watch_Qos_Classifier_Term_Actions_Remark_SetDscpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions_Remark{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions_Remark{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", structs[pre], queryPath, true, false)
+			qv := convertQos_Classifier_Term_Actions_Remark_SetDscpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2580,7 +3077,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Collect(t testing.TB
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Actions_Remark_SetDscpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetDscpPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Actions_Remark_SetDscpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-dscp to the batch object.
@@ -2616,7 +3113,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -2670,10 +3167,10 @@ func watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Qos_Classifier_Term_Actions_Remark{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -2726,6 +3223,34 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions_Remark{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions_Remark{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions_Remark", structs[pre], queryPath, true, false)
+			qv := convertQos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2733,7 +3258,7 @@ func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Actions_Remark_SetMplsTcPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/remark/state/set-mpls-tc to the batch object.
@@ -2769,7 +3294,7 @@ func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Actions_TargetGroupPath) Get(t testing.TB) string {
 	t.Helper()
@@ -2823,10 +3348,10 @@ func watch_Qos_Classifier_Term_Actions_TargetGroupPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Qos_Classifier_Term_Actions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Actions", gs, queryPath, true, false)
-		return convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -2879,6 +3404,34 @@ func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Qos_Classifier_Term_Actions_TargetGroupPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Actions{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Actions{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Actions", structs[pre], queryPath, true, false)
+			qv := convertQos_Classifier_Term_Actions_TargetGroupPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2886,7 +3439,7 @@ func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Actions_TargetGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Actions_TargetGroupPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Actions_TargetGroupPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/actions/state/target-group to the batch object.
@@ -2924,7 +3477,7 @@ func (n *Qos_Classifier_Term_ConditionsPath) Lookup(t testing.TB) *oc.QualifiedQ
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_ConditionsPath) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions {
 	t.Helper()
@@ -2986,12 +3539,13 @@ func watch_Qos_Classifier_Term_ConditionsPath(t testing.TB, n ygot.PathStruct, d
 	t.Helper()
 	w := &oc.Qos_Classifier_Term_ConditionsWatcher{}
 	gs := &oc.Qos_Classifier_Term_Conditions{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Conditions{
+		qv := (&oc.QualifiedQos_Classifier_Term_Conditions{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions)
 		w.LastVal = val
@@ -3044,6 +3598,36 @@ func (n *Qos_Classifier_Term_ConditionsPathAny) Collect(t testing.TB, duration t
 	return c
 }
 
+func watch_Qos_Classifier_Term_ConditionsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions) bool) *oc.Qos_Classifier_Term_ConditionsWatcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_ConditionsWatcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Conditions{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Conditions{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Conditions", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier_Term_Conditions{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3051,7 +3635,7 @@ func (n *Qos_Classifier_Term_ConditionsPathAny) Collect(t testing.TB, duration t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_ConditionsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions) bool) *oc.Qos_Classifier_Term_ConditionsWatcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_ConditionsPath(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_ConditionsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions to the batch object.
@@ -3075,7 +3659,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Qos_Classifier_Term_Conditions_Ipv4Path) Get(t testing.TB) *oc.Qos_Classifier_Term_Conditions_Ipv4 {
 	t.Helper()
@@ -3137,12 +3721,13 @@ func watch_Qos_Classifier_Term_Conditions_Ipv4Path(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.Qos_Classifier_Term_Conditions_Ipv4Watcher{}
 	gs := &oc.Qos_Classifier_Term_Conditions_Ipv4{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", gs, queryPath, false, false)
-		return (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
+		qv := (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4)
 		w.LastVal = val
@@ -3195,6 +3780,36 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Qos_Classifier_Term_Conditions_Ipv4PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4Watcher {
+	t.Helper()
+	w := &oc.Qos_Classifier_Term_Conditions_Ipv4Watcher{}
+	structs := map[string]*oc.Qos_Classifier_Term_Conditions_Ipv4{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Qos_Classifier_Term_Conditions_Ipv4{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Qos_Classifier_Term_Conditions_Ipv4", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedQos_Classifier_Term_Conditions_Ipv4{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedQos_Classifier_Term_Conditions_Ipv4)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3202,7 +3817,7 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedQos_Classifier_Term_Conditions_Ipv4) bool) *oc.Qos_Classifier_Term_Conditions_Ipv4Watcher {
 	t.Helper()
-	return watch_Qos_Classifier_Term_Conditions_Ipv4Path(t, n, timeout, predicate)
+	return watch_Qos_Classifier_Term_Conditions_Ipv4PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 to the batch object.

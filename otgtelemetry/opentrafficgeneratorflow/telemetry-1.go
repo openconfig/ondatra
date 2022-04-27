@@ -29,7 +29,7 @@ func (n *Flow_Counters_OutPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
 }
 
 // Get fetches the value at /open-traffic-generator-flow/flows/flow/state/counters/out-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_Counters_OutPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Flow_Counters_OutPktsPath(t testing.TB, n ygot.PathStruct, duration t
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Flow_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_Counters", gs, queryPath, true, false)
-		return convertFlow_Counters_OutPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_Counters_OutPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Flow_Counters_OutPktsPathAny) Collect(t testing.TB, duration time.Durat
 	return c
 }
 
+func watch_Flow_Counters_OutPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Flow_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_Counters", structs[pre], queryPath, true, false)
+			qv := convertFlow_Counters_OutPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-flow/flows/flow/state/counters/out-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Flow_Counters_OutPktsPathAny) Collect(t testing.TB, duration time.Durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_Counters_OutPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Flow_Counters_OutPktsPath(t, n, timeout, predicate)
+	return watch_Flow_Counters_OutPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-flow/flows/flow/state/counters/out-pkts to the batch object.
@@ -182,7 +210,7 @@ func (n *Flow_InFrameRatePath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
 }
 
 // Get fetches the value at /open-traffic-generator-flow/flows/flow/state/in-frame-rate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_InFrameRatePath) Get(t testing.TB) float32 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Flow_InFrameRatePath(t testing.TB, n ygot.PathStruct, duration time.D
 	t.Helper()
 	w := &oc.Float32Watcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_InFrameRatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_InFrameRatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat32)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Flow_InFrameRatePathAny) Collect(t testing.TB, duration time.Duration) 
 	return c
 }
 
+func watch_Flow_InFrameRatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_InFrameRatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-flow/flows/flow/state/in-frame-rate with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Flow_InFrameRatePathAny) Collect(t testing.TB, duration time.Duration) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_InFrameRatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
 	t.Helper()
-	return watch_Flow_InFrameRatePath(t, n, timeout, predicate)
+	return watch_Flow_InFrameRatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-flow/flows/flow/state/in-frame-rate to the batch object.
@@ -335,7 +391,7 @@ func (n *Flow_InRatePath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
 }
 
 // Get fetches the value at /open-traffic-generator-flow/flows/flow/state/in-rate with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_InRatePath) Get(t testing.TB) float32 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Flow_InRatePath(t testing.TB, n ygot.PathStruct, duration time.Durati
 	t.Helper()
 	w := &oc.Float32Watcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_InRatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_InRatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat32)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Flow_InRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 	return c
 }
 
+func watch_Flow_InRatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_InRatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-flow/flows/flow/state/in-rate with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Flow_InRatePathAny) Collect(t testing.TB, duration time.Duration) *oc.C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_InRatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
 	t.Helper()
-	return watch_Flow_InRatePath(t, n, timeout, predicate)
+	return watch_Flow_InRatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-flow/flows/flow/state/in-rate to the batch object.
@@ -488,7 +572,7 @@ func (n *Flow_LossPctPath) Lookup(t testing.TB) *oc.QualifiedFloat32 {
 }
 
 // Get fetches the value at /open-traffic-generator-flow/flows/flow/state/loss-pct with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_LossPctPath) Get(t testing.TB) float32 {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Flow_LossPctPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.Float32Watcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_LossPctPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_LossPctPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat32)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Flow_LossPctPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Flow_LossPctPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
+	t.Helper()
+	w := &oc.Float32Watcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_LossPctPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-flow/flows/flow/state/loss-pct with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Flow_LossPctPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_LossPctPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat32) bool) *oc.Float32Watcher {
 	t.Helper()
-	return watch_Flow_LossPctPath(t, n, timeout, predicate)
+	return watch_Flow_LossPctPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-flow/flows/flow/state/loss-pct to the batch object.
@@ -641,7 +753,7 @@ func (n *Flow_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /open-traffic-generator-flow/flows/flow/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_Flow_NamePath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *Flow_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_Flow_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-flow/flows/flow/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *Flow_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_NamePath(t, n, timeout, predicate)
+	return watch_Flow_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-flow/flows/flow/state/name to the batch object.

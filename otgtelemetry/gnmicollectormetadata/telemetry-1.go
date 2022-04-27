@@ -29,7 +29,7 @@ func (n *Meta_SyncPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/sync with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_SyncPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Meta_SyncPath(t testing.TB, n ygot.PathStruct, duration time.Duration
 	t.Helper()
 	w := &oc.BoolWatcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_SyncPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_SyncPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedBool)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Meta_SyncPathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 	return c
 }
 
+func watch_Meta_SyncPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_SyncPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/sync with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Meta_SyncPathAny) Collect(t testing.TB, duration time.Duration) *oc.Col
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_SyncPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
 	t.Helper()
-	return watch_Meta_SyncPath(t, n, timeout, predicate)
+	return watch_Meta_SyncPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/sync to the batch object.
@@ -182,7 +210,7 @@ func (n *Meta_TargetLeavesAddedPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesAdded with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesAddedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Meta_TargetLeavesAddedPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesAddedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesAddedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Meta_TargetLeavesAddedPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Meta_TargetLeavesAddedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesAddedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesAdded with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Meta_TargetLeavesAddedPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesAddedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesAddedPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesAddedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesAdded to the batch object.
@@ -335,7 +391,7 @@ func (n *Meta_TargetLeavesDeletedPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesDeleted with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesDeletedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_Meta_TargetLeavesDeletedPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesDeletedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesDeletedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *Meta_TargetLeavesDeletedPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_Meta_TargetLeavesDeletedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesDeletedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesDeleted with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *Meta_TargetLeavesDeletedPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesDeletedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesDeletedPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesDeletedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesDeleted to the batch object.
@@ -488,7 +572,7 @@ func (n *Meta_TargetLeavesEmptyPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesEmpty with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesEmptyPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_Meta_TargetLeavesEmptyPath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesEmptyPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesEmptyPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *Meta_TargetLeavesEmptyPathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Meta_TargetLeavesEmptyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesEmptyPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesEmpty with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *Meta_TargetLeavesEmptyPathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesEmptyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesEmptyPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesEmptyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesEmpty to the batch object.
@@ -641,7 +753,7 @@ func (n *Meta_TargetLeavesPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeaves with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_Meta_TargetLeavesPath(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *Meta_TargetLeavesPathAny) Collect(t testing.TB, duration time.Duration)
 	return c
 }
 
+func watch_Meta_TargetLeavesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeaves with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *Meta_TargetLeavesPathAny) Collect(t testing.TB, duration time.Duration)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeaves to the batch object.
@@ -794,7 +934,7 @@ func (n *Meta_TargetLeavesStalePath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesStale with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesStalePath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -848,10 +988,10 @@ func watch_Meta_TargetLeavesStalePath(t testing.TB, n ygot.PathStruct, duration 
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesStalePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesStalePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -904,6 +1044,34 @@ func (n *Meta_TargetLeavesStalePathAny) Collect(t testing.TB, duration time.Dura
 	return c
 }
 
+func watch_Meta_TargetLeavesStalePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesStalePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesStale with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -911,7 +1079,7 @@ func (n *Meta_TargetLeavesStalePathAny) Collect(t testing.TB, duration time.Dura
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesStalePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesStalePath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesStalePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesStale to the batch object.
@@ -947,7 +1115,7 @@ func (n *Meta_TargetLeavesSuppressedPath) Lookup(t testing.TB) *oc.QualifiedInt6
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesSuppressed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesSuppressedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -1001,10 +1169,10 @@ func watch_Meta_TargetLeavesSuppressedPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesSuppressedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesSuppressedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -1057,6 +1225,34 @@ func (n *Meta_TargetLeavesSuppressedPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Meta_TargetLeavesSuppressedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesSuppressedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesSuppressed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1064,7 +1260,7 @@ func (n *Meta_TargetLeavesSuppressedPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesSuppressedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesSuppressedPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesSuppressedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesSuppressed to the batch object.
@@ -1100,7 +1296,7 @@ func (n *Meta_TargetLeavesUpdatedPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/targetLeavesUpdated with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_TargetLeavesUpdatedPath) Get(t testing.TB) int64 {
 	t.Helper()
@@ -1154,10 +1350,10 @@ func watch_Meta_TargetLeavesUpdatedPath(t testing.TB, n ygot.PathStruct, duratio
 	t.Helper()
 	w := &oc.Int64Watcher{}
 	gs := &oc.Meta{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Meta", gs, queryPath, true, false)
-		return convertMeta_TargetLeavesUpdatedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertMeta_TargetLeavesUpdatedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedInt64)
 		w.LastVal = val
@@ -1210,6 +1406,34 @@ func (n *Meta_TargetLeavesUpdatedPathAny) Collect(t testing.TB, duration time.Du
 	return c
 }
 
+func watch_Meta_TargetLeavesUpdatedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
+	t.Helper()
+	w := &oc.Int64Watcher{}
+	structs := map[string]*oc.Meta{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Meta{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Meta", structs[pre], queryPath, true, false)
+			qv := convertMeta_TargetLeavesUpdatedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInt64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /gnmi-collector-metadata/meta/targetLeavesUpdated with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1217,7 +1441,7 @@ func (n *Meta_TargetLeavesUpdatedPathAny) Collect(t testing.TB, duration time.Du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Meta_TargetLeavesUpdatedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInt64) bool) *oc.Int64Watcher {
 	t.Helper()
-	return watch_Meta_TargetLeavesUpdatedPath(t, n, timeout, predicate)
+	return watch_Meta_TargetLeavesUpdatedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /gnmi-collector-metadata/meta/targetLeavesUpdated to the batch object.

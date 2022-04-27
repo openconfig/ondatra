@@ -483,7 +483,7 @@ func (n *{{ .PathStructName }}) Lookup(t testing.TB) *{{ $QualifiedGoTypeName }}
 }
 
 // Get fetches the value at {{ .YANGPath }} with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *{{ .PathStructName }}) Get(t testing.TB) {{ .GoType.GoTypeName }} {
 	t.Helper()
@@ -563,15 +563,16 @@ func watch_{{ .PathStructName }}(t testing.TB, n ygot.PathStruct, duration time.
 	t.Helper()
 	w := &{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher{}
 	gs := &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
-	w.W = genutil.MustWatch(t, n, nil, duration, {{ .GoType.IsLeaf }}, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, {{ .GoType.IsLeaf }}, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, {{ .SchemaStructPkgAccessor }}GetSchema(), "{{ .GoStructTypeName }}", gs, queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
 		{{- if .GoType.IsLeaf }}
-		return convert{{ .PathStructName }}(t, md, gs), nil
+		return []genutil.QualifiedValue{convert{{ .PathStructName }}(t, md, gs)}, nil
 		{{- else }}
-		return (&{{ $QualifiedGoTypeName }}{
+		qv := (&{{ $QualifiedGoTypeName }}{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 		{{- end }}
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
@@ -627,6 +628,40 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_{{ .PathStructName }}{{ .WildcardSuffix }}(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher {
+	t.Helper()
+	w := &{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher{}
+	structs := map[string]*{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
+	w.W = genutil.MustWatch(t, n, nil, duration, {{ .GoType.IsLeaf }}, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &{{ .SchemaStructPkgAccessor }}{{ .GoStructTypeName }}{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], {{ .SchemaStructPkgAccessor }}GetSchema(), "{{ .GoStructTypeName }}", structs[pre], queryPath, {{ .GoType.IsLeaf }}, {{ .PreferShadowPath }})
+			{{- if .GoType.IsLeaf }}
+			qv := convert{{ .PathStructName }}(t, md, structs[pre])
+			{{- else }}
+			qv := (&{{ $QualifiedGoTypeName }}{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			{{- end }}
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*{{ $QualifiedGoTypeName }})
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at {{ .YANGPath }} with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -634,7 +669,7 @@ func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *{{ .PathStructName }}{{ .WildcardSuffix }}) Watch(t testing.TB, timeout time.Duration, predicate func(val *{{ $QualifiedGoTypeName }}) bool) *{{ .SchemaStructPkgAccessor }}{{ .GoType.TransformedGoTypeName }}Watcher {
 	t.Helper()
-	return watch_{{ .PathStructName }}(t, n, timeout, predicate)
+	return watch_{{ .PathStructName }}{{ .WildcardSuffix }}(t, n, timeout, predicate)
 }
 
 // Batch adds {{ .YANGPath }} to the batch object.

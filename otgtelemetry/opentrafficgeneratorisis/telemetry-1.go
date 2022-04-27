@@ -29,7 +29,7 @@ func (n *IsisRouter_Counters_Level1_OutLspPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-lsp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level1_OutLspPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_IsisRouter_Counters_Level1_OutLspPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level1{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level1", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level1_OutLspPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level1_OutLspPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *IsisRouter_Counters_Level1_OutLspPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_IsisRouter_Counters_Level1_OutLspPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level1{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level1{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level1", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level1_OutLspPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-lsp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *IsisRouter_Counters_Level1_OutLspPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level1_OutLspPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level1_OutLspPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level1_OutLspPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-lsp to the batch object.
@@ -182,7 +210,7 @@ func (n *IsisRouter_Counters_Level1_OutP2PHellosPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-p2p-hellos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level1_OutP2PHellosPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_IsisRouter_Counters_Level1_OutP2PHellosPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level1{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level1", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level1_OutP2PHellosPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level1_OutP2PHellosPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *IsisRouter_Counters_Level1_OutP2PHellosPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_IsisRouter_Counters_Level1_OutP2PHellosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level1{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level1{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level1", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level1_OutP2PHellosPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-p2p-hellos with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *IsisRouter_Counters_Level1_OutP2PHellosPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level1_OutP2PHellosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level1_OutP2PHellosPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level1_OutP2PHellosPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-p2p-hellos to the batch object.
@@ -335,7 +391,7 @@ func (n *IsisRouter_Counters_Level1_OutPsnpPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-psnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level1_OutPsnpPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_IsisRouter_Counters_Level1_OutPsnpPath(t testing.TB, n ygot.PathStruc
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level1{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level1", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level1_OutPsnpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level1_OutPsnpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *IsisRouter_Counters_Level1_OutPsnpPathAny) Collect(t testing.TB, durati
 	return c
 }
 
+func watch_IsisRouter_Counters_Level1_OutPsnpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level1{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level1{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level1", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level1_OutPsnpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-psnp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *IsisRouter_Counters_Level1_OutPsnpPathAny) Collect(t testing.TB, durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level1_OutPsnpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level1_OutPsnpPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level1_OutPsnpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/out-psnp to the batch object.
@@ -488,7 +572,7 @@ func (n *IsisRouter_Counters_Level1_SessionsFlapPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-flap with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level1_SessionsFlapPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_IsisRouter_Counters_Level1_SessionsFlapPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level1{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level1", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level1_SessionsFlapPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level1_SessionsFlapPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *IsisRouter_Counters_Level1_SessionsFlapPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_IsisRouter_Counters_Level1_SessionsFlapPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level1{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level1{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level1", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level1_SessionsFlapPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-flap with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *IsisRouter_Counters_Level1_SessionsFlapPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level1_SessionsFlapPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level1_SessionsFlapPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level1_SessionsFlapPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-flap to the batch object.
@@ -641,7 +753,7 @@ func (n *IsisRouter_Counters_Level1_SessionsUpPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-up with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level1_SessionsUpPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_IsisRouter_Counters_Level1_SessionsUpPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level1{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level1", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level1_SessionsUpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level1_SessionsUpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *IsisRouter_Counters_Level1_SessionsUpPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_IsisRouter_Counters_Level1_SessionsUpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level1{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level1{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level1", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level1_SessionsUpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-up with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *IsisRouter_Counters_Level1_SessionsUpPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level1_SessionsUpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level1_SessionsUpPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level1_SessionsUpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level1/sessions-up to the batch object.
@@ -796,7 +936,7 @@ func (n *IsisRouter_Counters_Level2Path) Lookup(t testing.TB) *oc.QualifiedIsisR
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2Path) Get(t testing.TB) *oc.IsisRouter_Counters_Level2 {
 	t.Helper()
@@ -858,12 +998,13 @@ func watch_IsisRouter_Counters_Level2Path(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.IsisRouter_Counters_Level2Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, false, false)
-		return (&oc.QualifiedIsisRouter_Counters_Level2{
+		qv := (&oc.QualifiedIsisRouter_Counters_Level2{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedIsisRouter_Counters_Level2)
 		w.LastVal = val
@@ -916,6 +1057,36 @@ func (n *IsisRouter_Counters_Level2PathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedIsisRouter_Counters_Level2) bool) *oc.IsisRouter_Counters_Level2Watcher {
+	t.Helper()
+	w := &oc.IsisRouter_Counters_Level2Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedIsisRouter_Counters_Level2{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedIsisRouter_Counters_Level2)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -923,7 +1094,7 @@ func (n *IsisRouter_Counters_Level2PathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedIsisRouter_Counters_Level2) bool) *oc.IsisRouter_Counters_Level2Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2Path(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2 to the batch object.
@@ -945,7 +1116,7 @@ func (n *IsisRouter_Counters_Level2_DatabaseSizePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/database-size with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2_DatabaseSizePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -999,10 +1170,10 @@ func watch_IsisRouter_Counters_Level2_DatabaseSizePath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level2_DatabaseSizePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level2_DatabaseSizePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1055,6 +1226,34 @@ func (n *IsisRouter_Counters_Level2_DatabaseSizePathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2_DatabaseSizePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level2_DatabaseSizePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/database-size with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1261,7 @@ func (n *IsisRouter_Counters_Level2_DatabaseSizePathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2_DatabaseSizePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2_DatabaseSizePath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2_DatabaseSizePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/database-size to the batch object.
@@ -1098,7 +1297,7 @@ func (n *IsisRouter_Counters_Level2_InBcastHellosPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-bcast-hellos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2_InBcastHellosPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1152,10 +1351,10 @@ func watch_IsisRouter_Counters_Level2_InBcastHellosPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level2_InBcastHellosPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level2_InBcastHellosPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1208,6 +1407,34 @@ func (n *IsisRouter_Counters_Level2_InBcastHellosPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2_InBcastHellosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level2_InBcastHellosPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-bcast-hellos with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1442,7 @@ func (n *IsisRouter_Counters_Level2_InBcastHellosPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2_InBcastHellosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2_InBcastHellosPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2_InBcastHellosPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-bcast-hellos to the batch object.
@@ -1251,7 +1478,7 @@ func (n *IsisRouter_Counters_Level2_InCsnpPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-csnp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2_InCsnpPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1305,10 +1532,10 @@ func watch_IsisRouter_Counters_Level2_InCsnpPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level2_InCsnpPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level2_InCsnpPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1361,6 +1588,34 @@ func (n *IsisRouter_Counters_Level2_InCsnpPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2_InCsnpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level2_InCsnpPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-csnp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1623,7 @@ func (n *IsisRouter_Counters_Level2_InCsnpPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2_InCsnpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2_InCsnpPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2_InCsnpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-csnp to the batch object.
@@ -1404,7 +1659,7 @@ func (n *IsisRouter_Counters_Level2_InLspPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-lsp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2_InLspPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1458,10 +1713,10 @@ func watch_IsisRouter_Counters_Level2_InLspPath(t testing.TB, n ygot.PathStruct,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level2_InLspPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level2_InLspPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1514,6 +1769,34 @@ func (n *IsisRouter_Counters_Level2_InLspPathAny) Collect(t testing.TB, duration
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2_InLspPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level2_InLspPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-lsp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +1804,7 @@ func (n *IsisRouter_Counters_Level2_InLspPathAny) Collect(t testing.TB, duration
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2_InLspPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2_InLspPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2_InLspPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-lsp to the batch object.
@@ -1557,7 +1840,7 @@ func (n *IsisRouter_Counters_Level2_InP2PHellosPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-p2p-hellos with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *IsisRouter_Counters_Level2_InP2PHellosPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1611,10 +1894,10 @@ func watch_IsisRouter_Counters_Level2_InP2PHellosPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.IsisRouter_Counters_Level2{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "IsisRouter_Counters_Level2", gs, queryPath, true, false)
-		return convertIsisRouter_Counters_Level2_InP2PHellosPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertIsisRouter_Counters_Level2_InP2PHellosPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1667,6 +1950,34 @@ func (n *IsisRouter_Counters_Level2_InP2PHellosPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_IsisRouter_Counters_Level2_InP2PHellosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.IsisRouter_Counters_Level2{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.IsisRouter_Counters_Level2{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "IsisRouter_Counters_Level2", structs[pre], queryPath, true, false)
+			qv := convertIsisRouter_Counters_Level2_InP2PHellosPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-p2p-hellos with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +1985,7 @@ func (n *IsisRouter_Counters_Level2_InP2PHellosPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *IsisRouter_Counters_Level2_InP2PHellosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_IsisRouter_Counters_Level2_InP2PHellosPath(t, n, timeout, predicate)
+	return watch_IsisRouter_Counters_Level2_InP2PHellosPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-isis/isis-routers/isis-router/state/counters/level2/in-p2p-hellos to the batch object.

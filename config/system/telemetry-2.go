@@ -30,7 +30,7 @@ func (n *System_Dns_HostEntryPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns_
 }
 
 // Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_HostEntryPath) Get(t testing.TB) *oc.System_Dns_HostEntry {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *System_Dns_HostEntry_AliasPath) Lookup(t testing.TB) *oc.QualifiedStrin
 }
 
 // Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/alias with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_HostEntry_AliasPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *System_Dns_HostEntry_HostnamePath) Lookup(t testing.TB) *oc.QualifiedSt
 }
 
 // Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/hostname with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_HostEntry_HostnamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *System_Dns_HostEntry_Ipv4AddressPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_HostEntry_Ipv4AddressPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -422,7 +422,7 @@ func (n *System_Dns_HostEntry_Ipv6AddressPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_HostEntry_Ipv6AddressPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -523,7 +523,7 @@ func (n *System_Dns_SearchPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
 }
 
 // Get fetches the value at /openconfig-system/system/dns/config/search with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_SearchPath) Get(t testing.TB) []string {
 	t.Helper()
@@ -626,7 +626,7 @@ func (n *System_Dns_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns_Ser
 }
 
 // Get fetches the value at /openconfig-system/system/dns/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_ServerPath) Get(t testing.TB) *oc.System_Dns_Server {
 	t.Helper()
@@ -715,7 +715,7 @@ func (n *System_Dns_Server_AddressPath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/dns/servers/server/config/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -818,7 +818,7 @@ func (n *System_Dns_Server_PortPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/dns/servers/server/config/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Dns_Server_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -919,7 +919,7 @@ func (n *System_DomainNamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/domain-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_DomainNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1020,7 +1020,7 @@ func (n *System_HostnamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/hostname with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_HostnamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1123,7 +1123,7 @@ func (n *System_LicensePath) Lookup(t testing.TB) *oc.QualifiedSystem_License {
 }
 
 // Get fetches the value at /openconfig-system/system/license with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LicensePath) Get(t testing.TB) *oc.System_License {
 	t.Helper()
@@ -1214,7 +1214,7 @@ func (n *System_License_LicensePath) Lookup(t testing.TB) *oc.QualifiedSystem_Li
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_LicensePath) Get(t testing.TB) *oc.System_License_License {
 	t.Helper()
@@ -1305,7 +1305,7 @@ func (n *System_License_License_ActivePath) Lookup(t testing.TB) *oc.QualifiedBo
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/config/active with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_ActivePath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1406,7 +1406,7 @@ func (n *System_License_License_LicenseDataPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/config/license-data with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_LicenseDataPath) Get(t testing.TB) oc.System_License_License_LicenseData_Union {
 	t.Helper()
@@ -1507,7 +1507,7 @@ func (n *System_License_License_LicenseIdPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/license/licenses/license/config/license-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_License_License_LicenseIdPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1610,7 +1610,7 @@ func (n *System_LoggingPath) Lookup(t testing.TB) *oc.QualifiedSystem_Logging {
 }
 
 // Get fetches the value at /openconfig-system/system/logging with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LoggingPath) Get(t testing.TB) *oc.System_Logging {
 	t.Helper()
@@ -1701,7 +1701,7 @@ func (n *System_Logging_ConsolePath) Lookup(t testing.TB) *oc.QualifiedSystem_Lo
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_ConsolePath) Get(t testing.TB) *oc.System_Logging_Console {
 	t.Helper()
@@ -1792,7 +1792,7 @@ func (n *System_Logging_Console_SelectorPath) Lookup(t testing.TB) *oc.Qualified
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_SelectorPath) Get(t testing.TB) *oc.System_Logging_Console_Selector {
 	t.Helper()
@@ -1881,7 +1881,7 @@ func (n *System_Logging_Console_Selector_FacilityPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/facility with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
 	t.Helper()
@@ -1982,7 +1982,7 @@ func (n *System_Logging_Console_Selector_SeverityPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_Console_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -2085,7 +2085,7 @@ func (n *System_Logging_RemoteServerPath) Lookup(t testing.TB) *oc.QualifiedSyst
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServerPath) Get(t testing.TB) *oc.System_Logging_RemoteServer {
 	t.Helper()

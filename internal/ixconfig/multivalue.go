@@ -113,8 +113,16 @@ func MultivalueIntList(vals ...int) *Multivalue {
 	return &Multivalue{Pattern: String("valueList"), ValueList: mv}
 }
 
+// MultivalueUintIncCounter returns an incrementing Multivalue with the given
+// start/step uint values.
+func MultivalueUintIncCounter(start, step uint32) *Multivalue {
+	return MultivalueStrIncCounter(
+		strconv.FormatUint(uint64(start), 10),
+		strconv.FormatUint(uint64(step), 10))
+}
+
 // MultivalueStrIncCounter returns an incrementing Multivalue with the given
-// start/step values.
+// start/step string values.
 func MultivalueStrIncCounter(start, step string) *Multivalue {
 	return &Multivalue{
 		Pattern: String("counter"),

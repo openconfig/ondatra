@@ -456,7 +456,7 @@ func (n *ModelPath) Lookup(t testing.TB) *QualifiedModel {
 }
 
 // Get fetches the value at /openconfig-withlist/model with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *ModelPath) Get(t testing.TB) *Model {
 	t.Helper()
@@ -518,12 +518,13 @@ func watch_ModelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, pr
 	t.Helper()
 	w := &ModelWatcher{}
 	gs := &Model{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model", gs, queryPath, false, false)
-		return (&QualifiedModel{
+		qv := (&QualifiedModel{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedModel)
 		w.LastVal = val
@@ -576,6 +577,36 @@ func (n *ModelPathAny) Collect(t testing.TB, duration time.Duration) *Collection
 	return c
 }
 
+func watch_ModelPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel) bool) *ModelWatcher {
+	t.Helper()
+	w := &ModelWatcher{}
+	structs := map[string]*Model{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model", structs[pre], queryPath, false, false)
+			qv := (&QualifiedModel{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -583,7 +614,7 @@ func (n *ModelPathAny) Collect(t testing.TB, duration time.Duration) *Collection
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *ModelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel) bool) *ModelWatcher {
 	t.Helper()
-	return watch_ModelPath(t, n, timeout, predicate)
+	return watch_ModelPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model to the batch object.
@@ -607,7 +638,7 @@ func (n *Model_MultiKeyPath) Lookup(t testing.TB) *QualifiedModel_MultiKey {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
 	t.Helper()
@@ -669,12 +700,13 @@ func watch_Model_MultiKeyPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &Model_MultiKeyWatcher{}
 	gs := &Model_MultiKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, false, false)
-		return (&QualifiedModel_MultiKey{
+		qv := (&QualifiedModel_MultiKey{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedModel_MultiKey)
 		w.LastVal = val
@@ -727,6 +759,36 @@ func (n *Model_MultiKeyPathAny) Collect(t testing.TB, duration time.Duration) *C
 	return c
 }
 
+func watch_Model_MultiKeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel_MultiKey) bool) *Model_MultiKeyWatcher {
+	t.Helper()
+	w := &Model_MultiKeyWatcher{}
+	structs := map[string]*Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model_MultiKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model_MultiKey", structs[pre], queryPath, false, false)
+			qv := (&QualifiedModel_MultiKey{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel_MultiKey)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -734,7 +796,7 @@ func (n *Model_MultiKeyPathAny) Collect(t testing.TB, duration time.Duration) *C
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Model_MultiKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_MultiKey) bool) *Model_MultiKeyWatcher {
 	t.Helper()
-	return watch_Model_MultiKeyPath(t, n, timeout, predicate)
+	return watch_Model_MultiKeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model/b/multi-key to the batch object.
@@ -756,7 +818,7 @@ func (n *Model_MultiKey_Key1Path) Lookup(t testing.TB) *QualifiedUint32 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key/state/key1 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -810,10 +872,10 @@ func watch_Model_MultiKey_Key1Path(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &Uint32Watcher{}
 	gs := &Model_MultiKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, true, false)
-		return convertModel_MultiKey_Key1Path(t, md, gs), nil
+		return []genutil.QualifiedValue{convertModel_MultiKey_Key1Path(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedUint32)
 		w.LastVal = val
@@ -866,6 +928,34 @@ func (n *Model_MultiKey_Key1PathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Model_MultiKey_Key1PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
+	t.Helper()
+	w := &Uint32Watcher{}
+	structs := map[string]*Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model_MultiKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model_MultiKey", structs[pre], queryPath, true, false)
+			qv := convertModel_MultiKey_Key1Path(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key1 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -873,7 +963,7 @@ func (n *Model_MultiKey_Key1PathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Model_MultiKey_Key1PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return watch_Model_MultiKey_Key1Path(t, n, timeout, predicate)
+	return watch_Model_MultiKey_Key1PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model/b/multi-key/state/key1 to the batch object.
@@ -909,7 +999,7 @@ func (n *Model_MultiKey_Key2Path) Lookup(t testing.TB) *QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key/state/key2 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -963,10 +1053,10 @@ func watch_Model_MultiKey_Key2Path(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &Uint64Watcher{}
 	gs := &Model_MultiKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_MultiKey", gs, queryPath, true, false)
-		return convertModel_MultiKey_Key2Path(t, md, gs), nil
+		return []genutil.QualifiedValue{convertModel_MultiKey_Key2Path(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedUint64)
 		w.LastVal = val
@@ -1019,6 +1109,34 @@ func (n *Model_MultiKey_Key2PathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Model_MultiKey_Key2PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint64) bool) *Uint64Watcher {
+	t.Helper()
+	w := &Uint64Watcher{}
+	structs := map[string]*Model_MultiKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model_MultiKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model_MultiKey", structs[pre], queryPath, true, false)
+			qv := convertModel_MultiKey_Key2Path(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model/b/multi-key/state/key2 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1026,7 +1144,7 @@ func (n *Model_MultiKey_Key2PathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Model_MultiKey_Key2PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint64) bool) *Uint64Watcher {
 	t.Helper()
-	return watch_Model_MultiKey_Key2Path(t, n, timeout, predicate)
+	return watch_Model_MultiKey_Key2PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model/b/multi-key/state/key2 to the batch object.
@@ -1064,7 +1182,7 @@ func (n *Model_SingleKeyPath) Lookup(t testing.TB) *QualifiedModel_SingleKey {
 }
 
 // Get fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
 	t.Helper()
@@ -1126,12 +1244,13 @@ func watch_Model_SingleKeyPath(t testing.TB, n ygot.PathStruct, duration time.Du
 	t.Helper()
 	w := &Model_SingleKeyWatcher{}
 	gs := &Model_SingleKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_SingleKey", gs, queryPath, false, false)
-		return (&QualifiedModel_SingleKey{
+		qv := (&QualifiedModel_SingleKey{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedModel_SingleKey)
 		w.LastVal = val
@@ -1184,6 +1303,36 @@ func (n *Model_SingleKeyPathAny) Collect(t testing.TB, duration time.Duration) *
 	return c
 }
 
+func watch_Model_SingleKeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedModel_SingleKey) bool) *Model_SingleKeyWatcher {
+	t.Helper()
+	w := &Model_SingleKeyWatcher{}
+	structs := map[string]*Model_SingleKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model_SingleKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model_SingleKey", structs[pre], queryPath, false, false)
+			qv := (&QualifiedModel_SingleKey{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedModel_SingleKey)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1191,7 +1340,7 @@ func (n *Model_SingleKeyPathAny) Collect(t testing.TB, duration time.Duration) *
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Model_SingleKeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedModel_SingleKey) bool) *Model_SingleKeyWatcher {
 	t.Helper()
-	return watch_Model_SingleKeyPath(t, n, timeout, predicate)
+	return watch_Model_SingleKeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model/a/single-key to the batch object.
@@ -1213,7 +1362,7 @@ func (n *Model_SingleKey_KeyPath) Lookup(t testing.TB) *QualifiedUint32 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/a/single-key/state/key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1267,10 +1416,10 @@ func watch_Model_SingleKey_KeyPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &Uint32Watcher{}
 	gs := &Model_SingleKey{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Model_SingleKey", gs, queryPath, true, false)
-		return convertModel_SingleKey_KeyPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertModel_SingleKey_KeyPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedUint32)
 		w.LastVal = val
@@ -1323,6 +1472,34 @@ func (n *Model_SingleKey_KeyPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Model_SingleKey_KeyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
+	t.Helper()
+	w := &Uint32Watcher{}
+	structs := map[string]*Model_SingleKey{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &Model_SingleKey{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], GetSchema(), "Model_SingleKey", structs[pre], queryPath, true, false)
+			qv := convertModel_SingleKey_KeyPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-withlist/model/a/single-key/state/key with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1330,7 +1507,7 @@ func (n *Model_SingleKey_KeyPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Model_SingleKey_KeyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *QualifiedUint32) bool) *Uint32Watcher {
 	t.Helper()
-	return watch_Model_SingleKey_KeyPath(t, n, timeout, predicate)
+	return watch_Model_SingleKey_KeyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-withlist/model/a/single-key/state/key to the batch object.
@@ -1368,7 +1545,7 @@ func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 }
 
 // Get fetches the value at / with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()
@@ -1397,12 +1574,13 @@ func watch_RootPath(t testing.TB, n ygot.PathStruct, duration time.Duration, pre
 	t.Helper()
 	w := &RootWatcher{}
 	gs := &Root{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), "Root", gs, queryPath, false, false)
-		return (&QualifiedRoot{
+		qv := (&QualifiedRoot{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedRoot)
 		w.LastVal = val

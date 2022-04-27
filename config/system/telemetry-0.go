@@ -30,7 +30,7 @@ func (n *SystemPath) Lookup(t testing.TB) *oc.QualifiedSystem {
 }
 
 // Get fetches the value at /openconfig-system/system with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *SystemPath) Get(t testing.TB) *oc.System {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *System_AaaPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa {
 }
 
 // Get fetches the value at /openconfig-system/system/aaa with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_AaaPath) Get(t testing.TB) *oc.System_Aaa {
 	t.Helper()
@@ -212,7 +212,7 @@ func (n *System_Aaa_AccountingPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AccountingPath) Get(t testing.TB) *oc.System_Aaa_Accounting {
 	t.Helper()
@@ -301,7 +301,7 @@ func (n *System_Aaa_Accounting_AccountingMethodPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/config/accounting-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_AccountingMethodPath) Get(t testing.TB) []oc.System_Aaa_Accounting_AccountingMethod_Union {
 	t.Helper()
@@ -404,7 +404,7 @@ func (n *System_Aaa_Accounting_EventPath) Lookup(t testing.TB) *oc.QualifiedSyst
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_EventPath) Get(t testing.TB) *oc.System_Aaa_Accounting_Event {
 	t.Helper()
@@ -493,7 +493,7 @@ func (n *System_Aaa_Accounting_Event_EventTypePath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event/config/event-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_Event_EventTypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_ACCOUNTING_EVENT_TYPE {
 	t.Helper()
@@ -594,7 +594,7 @@ func (n *System_Aaa_Accounting_Event_RecordPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event/config/record with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_Event_RecordPath) Get(t testing.TB) oc.E_Event_Record {
 	t.Helper()
@@ -697,7 +697,7 @@ func (n *System_Aaa_AuthenticationPath) Lookup(t testing.TB) *oc.QualifiedSystem
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AuthenticationPath) Get(t testing.TB) *oc.System_Aaa_Authentication {
 	t.Helper()
@@ -788,7 +788,7 @@ func (n *System_Aaa_Authentication_AdminUserPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUserPath) Get(t testing.TB) *oc.System_Aaa_Authentication_AdminUser {
 	t.Helper()
@@ -877,7 +877,7 @@ func (n *System_Aaa_Authentication_AdminUser_AdminPasswordHashedPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user/config/admin-password-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUser_AdminPasswordHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -978,7 +978,7 @@ func (n *System_Aaa_Authentication_AdminUser_AdminPasswordPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user/config/admin-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUser_AdminPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1079,7 +1079,7 @@ func (n *System_Aaa_Authentication_AuthenticationMethodPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/config/authentication-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AuthenticationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authentication_AuthenticationMethod_Union {
 	t.Helper()
@@ -1182,7 +1182,7 @@ func (n *System_Aaa_Authentication_UserPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_UserPath) Get(t testing.TB) *oc.System_Aaa_Authentication_User {
 	t.Helper()
@@ -1271,7 +1271,7 @@ func (n *System_Aaa_Authentication_User_PasswordHashedPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_PasswordHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1372,7 +1372,7 @@ func (n *System_Aaa_Authentication_User_PasswordPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_PasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1473,7 +1473,7 @@ func (n *System_Aaa_Authentication_User_RolePath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/role with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_RolePath) Get(t testing.TB) oc.System_Aaa_Authentication_User_Role_Union {
 	t.Helper()
@@ -1574,7 +1574,7 @@ func (n *System_Aaa_Authentication_User_SshKeyPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_SshKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1675,7 +1675,7 @@ func (n *System_Aaa_Authentication_User_UsernamePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/username with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_UsernamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1778,7 +1778,7 @@ func (n *System_Aaa_AuthorizationPath) Lookup(t testing.TB) *oc.QualifiedSystem_
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AuthorizationPath) Get(t testing.TB) *oc.System_Aaa_Authorization {
 	t.Helper()
@@ -1867,7 +1867,7 @@ func (n *System_Aaa_Authorization_AuthorizationMethodPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/config/authorization-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_AuthorizationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authorization_AuthorizationMethod_Union {
 	t.Helper()
@@ -1970,7 +1970,7 @@ func (n *System_Aaa_Authorization_EventPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_EventPath) Get(t testing.TB) *oc.System_Aaa_Authorization_Event {
 	t.Helper()
@@ -2059,7 +2059,7 @@ func (n *System_Aaa_Authorization_Event_EventTypePath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/events/event/config/event-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_Event_EventTypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
 	t.Helper()

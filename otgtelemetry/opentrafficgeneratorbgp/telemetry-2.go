@@ -29,7 +29,7 @@ func (n *BgpPeer_Counters_OutRouteWithdrawPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-route-withdraw with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *BgpPeer_Counters_OutRouteWithdrawPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_BgpPeer_Counters_OutRouteWithdrawPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.BgpPeer_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "BgpPeer_Counters", gs, queryPath, true, false)
-		return convertBgpPeer_Counters_OutRouteWithdrawPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertBgpPeer_Counters_OutRouteWithdrawPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *BgpPeer_Counters_OutRouteWithdrawPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_BgpPeer_Counters_OutRouteWithdrawPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.BgpPeer_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.BgpPeer_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "BgpPeer_Counters", structs[pre], queryPath, true, false)
+			qv := convertBgpPeer_Counters_OutRouteWithdrawPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-route-withdraw with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *BgpPeer_Counters_OutRouteWithdrawPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *BgpPeer_Counters_OutRouteWithdrawPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_BgpPeer_Counters_OutRouteWithdrawPath(t, n, timeout, predicate)
+	return watch_BgpPeer_Counters_OutRouteWithdrawPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-route-withdraw to the batch object.
@@ -182,7 +210,7 @@ func (n *BgpPeer_Counters_OutRoutesPath) Lookup(t testing.TB) *oc.QualifiedUint6
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-routes with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *BgpPeer_Counters_OutRoutesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_BgpPeer_Counters_OutRoutesPath(t testing.TB, n ygot.PathStruct, durat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.BgpPeer_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "BgpPeer_Counters", gs, queryPath, true, false)
-		return convertBgpPeer_Counters_OutRoutesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertBgpPeer_Counters_OutRoutesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *BgpPeer_Counters_OutRoutesPathAny) Collect(t testing.TB, duration time.
 	return c
 }
 
+func watch_BgpPeer_Counters_OutRoutesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.BgpPeer_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.BgpPeer_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "BgpPeer_Counters", structs[pre], queryPath, true, false)
+			qv := convertBgpPeer_Counters_OutRoutesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-routes with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *BgpPeer_Counters_OutRoutesPathAny) Collect(t testing.TB, duration time.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *BgpPeer_Counters_OutRoutesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_BgpPeer_Counters_OutRoutesPath(t, n, timeout, predicate)
+	return watch_BgpPeer_Counters_OutRoutesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-routes to the batch object.
@@ -335,7 +391,7 @@ func (n *BgpPeer_Counters_OutUpdatesPath) Lookup(t testing.TB) *oc.QualifiedUint
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-updates with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *BgpPeer_Counters_OutUpdatesPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +445,10 @@ func watch_BgpPeer_Counters_OutUpdatesPath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.BgpPeer_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "BgpPeer_Counters", gs, queryPath, true, false)
-		return convertBgpPeer_Counters_OutUpdatesPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertBgpPeer_Counters_OutUpdatesPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +501,34 @@ func (n *BgpPeer_Counters_OutUpdatesPathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_BgpPeer_Counters_OutUpdatesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.BgpPeer_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.BgpPeer_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "BgpPeer_Counters", structs[pre], queryPath, true, false)
+			qv := convertBgpPeer_Counters_OutUpdatesPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-updates with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +536,7 @@ func (n *BgpPeer_Counters_OutUpdatesPathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *BgpPeer_Counters_OutUpdatesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_BgpPeer_Counters_OutUpdatesPath(t, n, timeout, predicate)
+	return watch_BgpPeer_Counters_OutUpdatesPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/out-updates to the batch object.
@@ -488,7 +572,7 @@ func (n *BgpPeer_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *BgpPeer_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -542,10 +626,10 @@ func watch_BgpPeer_NamePath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.BgpPeer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "BgpPeer", gs, queryPath, true, false)
-		return convertBgpPeer_NamePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertBgpPeer_NamePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -598,6 +682,34 @@ func (n *BgpPeer_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_BgpPeer_NamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.BgpPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.BgpPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "BgpPeer", structs[pre], queryPath, true, false)
+			qv := convertBgpPeer_NamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/name with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +717,7 @@ func (n *BgpPeer_NamePathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *BgpPeer_NamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_BgpPeer_NamePath(t, n, timeout, predicate)
+	return watch_BgpPeer_NamePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/name to the batch object.
@@ -641,7 +753,7 @@ func (n *BgpPeer_SessionStatePath) Lookup(t testing.TB) *oc.QualifiedE_BgpPeer_S
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/session-state with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *BgpPeer_SessionStatePath) Get(t testing.TB) oc.E_BgpPeer_SessionState {
 	t.Helper()
@@ -695,10 +807,10 @@ func watch_BgpPeer_SessionStatePath(t testing.TB, n ygot.PathStruct, duration ti
 	t.Helper()
 	w := &oc.E_BgpPeer_SessionStateWatcher{}
 	gs := &oc.BgpPeer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "BgpPeer", gs, queryPath, true, false)
-		return convertBgpPeer_SessionStatePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertBgpPeer_SessionStatePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_BgpPeer_SessionState)
 		w.LastVal = val
@@ -751,6 +863,34 @@ func (n *BgpPeer_SessionStatePathAny) Collect(t testing.TB, duration time.Durati
 	return c
 }
 
+func watch_BgpPeer_SessionStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_BgpPeer_SessionState) bool) *oc.E_BgpPeer_SessionStateWatcher {
+	t.Helper()
+	w := &oc.E_BgpPeer_SessionStateWatcher{}
+	structs := map[string]*oc.BgpPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.BgpPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "BgpPeer", structs[pre], queryPath, true, false)
+			qv := convertBgpPeer_SessionStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_BgpPeer_SessionState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/session-state with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -758,7 +898,7 @@ func (n *BgpPeer_SessionStatePathAny) Collect(t testing.TB, duration time.Durati
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *BgpPeer_SessionStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_BgpPeer_SessionState) bool) *oc.E_BgpPeer_SessionStateWatcher {
 	t.Helper()
-	return watch_BgpPeer_SessionStatePath(t, n, timeout, predicate)
+	return watch_BgpPeer_SessionStatePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/session-state to the batch object.

@@ -16,11 +16,13 @@ package ixgnmi
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
+	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/pkg/errors"
 )
 
 func parseRow(r ixweb.StatRow, nameKey string, strKeys []string, intKeys []string, floatKeys []string) (map[string]*uint64, map[string]*float32, error) {
@@ -69,9 +71,9 @@ func parseRow(r ixweb.StatRow, nameKey string, strKeys []string, intKeys []strin
 }
 
 type portRow struct {
-	portName, lineSpeed, linkState                string
-	framesTx, framesRx, bytesTx, bytesRx, crcErrs *uint64
-	txRate, rxRate                                *float32
+	PortName, LineSpeed, LinkState                string
+	FramesTx, FramesRx, BytesTx, BytesRx, CRCErrs *uint64
+	TxRate, RxRate                                *float32
 }
 
 func (r *portRow) String() string {
@@ -102,28 +104,28 @@ func parsePortStats(t ixweb.StatTable) ([]*portRow, error) {
 			return nil, err
 		}
 		portRows = append(portRows, &portRow{
-			portName:  row[nameKey],
-			lineSpeed: row[lineSpeedKey],
-			linkState: row[linkStateKey],
-			framesTx:  intVals[framesTxKey],
-			framesRx:  intVals[framesRxKey],
-			bytesTx:   intVals[bytesTxKey],
-			bytesRx:   intVals[bytesRxKey],
-			crcErrs:   intVals[crcErrsKey],
-			txRate:    floatVals[txRateKey],
-			rxRate:    floatVals[rxRateKey],
+			PortName:  row[nameKey],
+			LineSpeed: row[lineSpeedKey],
+			LinkState: row[linkStateKey],
+			FramesTx:  intVals[framesTxKey],
+			FramesRx:  intVals[framesRxKey],
+			BytesTx:   intVals[bytesTxKey],
+			BytesRx:   intVals[bytesRxKey],
+			CRCErrs:   intVals[crcErrsKey],
+			TxRate:    floatVals[txRateKey],
+			RxRate:    floatVals[rxRateKey],
 		})
 	}
 	return portRows, nil
 }
 
 type portCPURow struct {
-	portName                         string
-	totalMemory, freeMemory, cpuLoad *uint64
+	PortName                         string
+	TotalMemory, FreeMemory, CPULoad *uint64
 }
 
 func (r *portCPURow) String() string {
-	return fmt.Sprintf("%+v", *r)
+	return rowString(r)
 }
 
 func parsePortCPUStats(t ixweb.StatTable) ([]*portCPURow, error) {
@@ -144,25 +146,25 @@ func parsePortCPUStats(t ixweb.StatTable) ([]*portCPURow, error) {
 			return nil, err
 		}
 		portCPURows = append(portCPURows, &portCPURow{
-			portName:    row[portNameKey],
-			totalMemory: intVals[totalMemKey],
-			freeMemory:  intVals[freeMemKey],
-			cpuLoad:     intVals[cpuLoadKey],
+			PortName:    row[portNameKey],
+			TotalMemory: intVals[totalMemKey],
+			FreeMemory:  intVals[freeMemKey],
+			CPULoad:     intVals[cpuLoadKey],
 		})
 	}
 	return portCPURows, nil
 }
 
 type flowRow struct {
-	trafficItem                                       string
-	rxBytes, txFrames, rxFrames, mplsLabel, vlanID    *uint64
-	lossPct, txRate, rxRate, txFrameRate, rxFrameRate *float32
+	TrafficItem                                       string
+	RxBytes, TxFrames, RxFrames, MPLSLabel, VLANID    *uint64
+	LossPct, TxRate, RxRate, TxFrameRate, RxFrameRate *float32
 	// Optional ingress-tracking fields.
-	rxPort, txPort, srcIPv4, dstIPv4, srcIPv6, dstIPv6 string
+	RxPort, TxPort, SrcIPv4, DstIPv4, SrcIPv6, DstIPv6 string
 }
 
 func (r *flowRow) String() string {
-	return fmt.Sprintf("%+v", *r)
+	return rowString(r)
 }
 
 func parseFlowStats(t ixweb.StatTable) ([]*flowRow, error) {
@@ -206,36 +208,36 @@ func parseFlowStatsHelp(t ixweb.StatTable, overrideNameKey string) ([]*flowRow, 
 			return nil, err
 		}
 		flowRows = append(flowRows, &flowRow{
-			trafficItem: row[trafficItemKey],
-			rxBytes:     intVals[rxBytesKey],
-			txFrames:    intVals[txFramesKey],
-			rxFrames:    intVals[rxFramesKey],
-			lossPct:     floatVals[lossPctKey],
-			txRate:      floatVals[txRateKey],
-			rxRate:      floatVals[rxRateKey],
-			txFrameRate: floatVals[txFrameRateKey],
-			rxFrameRate: floatVals[rxFrameRateKey],
+			TrafficItem: row[trafficItemKey],
+			RxBytes:     intVals[rxBytesKey],
+			TxFrames:    intVals[txFramesKey],
+			RxFrames:    intVals[rxFramesKey],
+			LossPct:     floatVals[lossPctKey],
+			TxRate:      floatVals[txRateKey],
+			RxRate:      floatVals[rxRateKey],
+			TxFrameRate: floatVals[txFrameRateKey],
+			RxFrameRate: floatVals[rxFrameRateKey],
 			// Optional ingress tracking fields.
-			rxPort:    row[rxPortKey],
-			txPort:    row[txPortKey],
-			mplsLabel: intVals[mplsLabelKey],
-			srcIPv4:   row[srcIPv4Key],
-			dstIPv4:   row[dstIPv4Key],
-			srcIPv6:   row[srcIPv6Key],
-			dstIPv6:   row[dstIPv6Key],
-			vlanID:    intVals[vlanIDKey],
+			RxPort:    row[rxPortKey],
+			TxPort:    row[txPortKey],
+			MPLSLabel: intVals[mplsLabelKey],
+			SrcIPv4:   row[srcIPv4Key],
+			DstIPv4:   row[dstIPv4Key],
+			SrcIPv6:   row[srcIPv6Key],
+			DstIPv6:   row[dstIPv6Key],
+			VLANID:    intVals[vlanIDKey],
 		})
 	}
 	return flowRows, nil
 }
 
 type egressRow struct {
-	*flowRow
 	filter string
+	*flowRow
 }
 
 func (r *egressRow) String() string {
-	return fmt.Sprintf("%+v", *r)
+	return fmt.Sprintf("{Filter:%s, FlowRow:%s}", r.filter, r.flowRow)
 }
 
 func parseEgressStats(t ixweb.StatTable) ([]*egressRow, error) {
@@ -252,4 +254,21 @@ func parseEgressStats(t ixweb.StatTable) ([]*egressRow, error) {
 		})
 	}
 	return egressRows, nil
+}
+
+func rowString(row interface{}) string {
+	var fields []string
+	val := reflect.ValueOf(row).Elem()
+	for i := 0; i < val.NumField(); i++ {
+		fieldName := val.Type().Field(i).Name
+		var valStr string
+		if fieldVal := val.Field(i); !fieldVal.IsZero() {
+			if fieldVal.Type().Kind() == reflect.Pointer {
+				fieldVal = fieldVal.Elem()
+			}
+			valStr = fmt.Sprintf("%v", fieldVal.Interface())
+		}
+		fields = append(fields, fmt.Sprintf("%s:%s", fieldName, valStr))
+	}
+	return fmt.Sprintf("{%s}", strings.Join(fields, ", "))
 }
